@@ -4,12 +4,13 @@ import './ImageCarousel.css'
 
 function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [nextIndex, setNextIndex] = useState(null)
   const navigate = useNavigate()
 
   const slides = [
     {
       id: 0,
-      image: '/images/destinations/water-blue-hero.webp',
+      image: '/images/destinations/tour-packages-travel-view.webp',
       title: 'Welcome to Honeywell Travel',
       subtitle: '#Live the Experience',
       location: 'Worldwide'
@@ -44,17 +45,31 @@ function ImageCarousel() {
     }
   ]
 
-  // Rotate slides every 8 seconds on all devices
+  // Keep the welcome slide longer as the primary first impression
+  const getSlideDuration = (index) => (index === 0 ? 9000 : 7000)
+
+  // Smoothly rotate slides with a crossfade transition
   useEffect(() => {
-    if (slides.length <= 1) return
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % slides.length)
-    }, 8000)
-    return () => clearInterval(interval)
-  }, [slides.length])
+    if (slides.length <= 1 || nextIndex !== null) return
+    const timeout = setTimeout(() => {
+      setNextIndex((currentIndex + 1) % slides.length)
+    }, getSlideDuration(currentIndex))
+    return () => clearTimeout(timeout)
+  }, [currentIndex, nextIndex, slides.length])
+
+  useEffect(() => {
+    if (nextIndex === null) return
+    const transitionTimeout = setTimeout(() => {
+      setCurrentIndex(nextIndex)
+      setNextIndex(null)
+    }, 900)
+    return () => clearTimeout(transitionTimeout)
+  }, [nextIndex])
 
   const current = slides[currentIndex]
   const currentImage = current?.image ? `url(${current.image})` : null
+  const incoming = nextIndex !== null ? slides[nextIndex] : current
+  const incomingImage = incoming?.image ? `url(${incoming.image})` : null
 
   // If the hero ever has scrollable overflow, pass wheel to the page so only the main scrollbar is used
   const handleWheel = (e) => {
@@ -67,9 +82,14 @@ function ImageCarousel() {
   return (
     <section className="hero-section" aria-label="Hero" onWheel={handleWheel}>
       <div
-        className="hero-bg-single"
+        className="hero-bg-single hero-bg-base"
         aria-hidden="true"
         style={{ backgroundImage: currentImage || undefined }}
+      />
+      <div
+        className={`hero-bg-single hero-bg-fade${nextIndex !== null ? ' is-visible' : ''}`}
+        aria-hidden="true"
+        style={{ backgroundImage: incomingImage || undefined }}
       />
       <div className="hero-overlay" aria-hidden="true" />
       <div className={`hero-content${currentIndex === 0 ? ' hero-content--welcome' : ''}`}>

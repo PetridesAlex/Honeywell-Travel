@@ -14,12 +14,12 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0a1929 0%, #1a3a5a 50%, #0a1929 100%);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
   color: white;
-  padding: 5.5rem 1.5rem 3rem;
+  padding: 6.5rem 1.5rem 4rem;
 }
 
 .cruises-hero-overlay {
@@ -42,6 +42,9 @@
   z-index: 2;
   max-width: 800px;
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cruises-hero-icon {
@@ -79,14 +82,16 @@
   opacity: 0.9;
   font-weight: 300;
   letter-spacing: 0.02em;
+  max-width: 680px;
+  margin: 0;
 }
 
 .cruises-hero-cta {
-  margin-top: 1.75rem;
+  margin-top: 2rem;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.9rem 1.9rem;
+  padding: 0.9rem 1.7rem;
   border-radius: 999px;
   border: 1px solid rgba(248, 250, 252, 0.9);
   background:
@@ -99,6 +104,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
+  align-self: center;
   box-shadow:
     0 10px 26px rgba(15, 23, 42, 0.8),
     0 0 0 1px rgba(148, 163, 184, 0.6);
@@ -1283,7 +1289,8 @@
 
 @media (max-width: 768px) {
   .cruises-hero {
-    height: 300px;
+    min-height: 70vh;
+    padding: 6rem 1rem 3rem;
   }
 
   .cruises-hero h1 {
@@ -1292,6 +1299,12 @@
 
   .cruises-hero p {
     font-size: 1rem;
+  }
+
+  .cruises-hero-cta {
+    margin-top: 1.5rem;
+    width: min(100%, 320px);
+    justify-content: center;
   }
 
   .cruises-container {
