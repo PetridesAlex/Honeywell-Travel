@@ -1354,12 +1354,13 @@
   padding: 0.75rem 1rem 0.75rem 1.25rem;
   min-height: 44px;
   box-sizing: border-box;
-  color: rgba(255, 255, 255, 0.95);
+  color: #f8fafc;
   text-decoration: none;
-  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, padding 0.22s ease;
+  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, padding 0.22s ease, filter 0.22s ease;
   position: relative;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   border-radius: 999px;
   margin: 0.12rem 0.55rem;
   -webkit-tap-highlight-color: rgba(227, 30, 36, 0.2);
@@ -1373,21 +1374,41 @@
 }
 
 .mobile-dropdown-item:hover {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.14), rgba(148, 163, 184, 0.18));
-  color: #fff;
+  background:
+    linear-gradient(125deg, rgba(255, 255, 255, 0.12), rgba(227, 30, 36, 0.14)),
+    radial-gradient(circle at 8% 50%, rgba(227, 30, 36, 0.2), transparent 50%);
+  color: #ffffff;
   padding-left: 1.5rem;
   transform: translateX(4px);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.65);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.7), 0 0 0 1px rgba(248, 250, 252, 0.2) inset;
+  filter: saturate(1.08);
+}
+
+.mobile-dropdown-item:focus-visible {
+  outline: none;
+  background:
+    linear-gradient(125deg, rgba(255, 255, 255, 0.12), rgba(227, 30, 36, 0.14)),
+    radial-gradient(circle at 8% 50%, rgba(227, 30, 36, 0.2), transparent 50%);
+  color: #ffffff;
+  box-shadow:
+    0 0 0 2px rgba(227, 30, 36, 0.55),
+    0 8px 20px rgba(2, 6, 23, 0.7);
+}
+
+.mobile-dropdown-item:active {
+  transform: translateX(2px) scale(0.995);
 }
 
 .mobile-dropdown-item .dropdown-item-icon {
   opacity: 0.9;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(226, 232, 240, 0.78);
   font-size: 0.75rem;
+  transition: color 0.22s ease, transform 0.22s ease;
 }
 
 .mobile-dropdown-item:hover .dropdown-item-icon {
-  color: #E31E24;
+  color: #fda4af;
+  transform: translateX(1px);
 }
 
 /* Language switcher inside mobile menu */
