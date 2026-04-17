@@ -185,3 +185,19 @@ textarea {
     -moz-osx-font-smoothing: auto;
   }
 }
+
+/* Home route: scrolling happens on documentElement (html) only — no nested scrollports */
+html.route-home {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+html.route-home body,
+html.route-home #root,
+html.route-home .preloader,
+html.route-home .preloader__content,
+html.route-home .app,
+html.route-home main.main-content {
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}

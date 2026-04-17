@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
 import ImageCarousel from '../components/ImageCarousel'
 import CircularGallery from '../components/CircularGallery'
@@ -13,6 +13,14 @@ import './Home.css'
 
 function Home() {
   const [sharedBackground, setSharedBackground] = useState('/images/destinations/main-page-sea.webp')
+
+  useEffect(() => {
+    document.documentElement.classList.add('route-home')
+    return () => {
+      document.documentElement.classList.remove('route-home')
+    }
+  }, [])
+
   return (
     <>
       <SEO 
