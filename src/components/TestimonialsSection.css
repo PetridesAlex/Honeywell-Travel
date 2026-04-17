@@ -121,7 +121,8 @@
 
 .testimonials-marquee-track {
   will-change: transform;
-  transition: transform 0.08s linear;
+  /* rAF sets transform each frame — no transition so motion stays sharp */
+  transition: none;
 }
 
 .review-card {

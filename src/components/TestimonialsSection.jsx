@@ -142,10 +142,11 @@ function TestimonialsSection() {
     const columnRefs = [marqueeCol1Ref, marqueeCol2Ref, marqueeCol3Ref]
     const offsets = [0, 0, 0]
     const directions = [1, 1, 1]
-    const speeds = [0.2, 0.24, 0.18]
+    /* px per frame @ ~60fps — higher = faster vertical marquee */
+    const speeds = [0.42, 0.5, 0.38]
     let mobileOffset = 0
     let mobileDirection = 1
-    const mobileSpeed = 0.2
+    const mobileSpeed = 0.42
 
     const animate = () => {
       const mobileEl = mobileMarqueeRef.current
