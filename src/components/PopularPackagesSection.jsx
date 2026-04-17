@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
-import PackageCard from './PackageCard'
+import { getEnglishPackageTitle } from '../utils/packageTranslations'
+import ModalCards from './ModalCards'
 import './PopularPackagesSection.css'
 
 const popularCategories = [
@@ -13,6 +15,7 @@ const popularCategories = [
 
 const PACKAGE_ROTATION_MS = 8000
 const CATEGORY_ROTATION_MS = 14000
+const VISIBLE_PACKAGES_COUNT = 6
 
 const categoryToSlug = (category) =>
   category.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '')
@@ -32,6 +35,7 @@ function getLeadPrice(pkg) {
 }
 
 function PopularPackagesSection() {
+  const { i18n } = useTranslation()
   const [selectedCategory, setSelectedCategory] = useState(popularCategories[0].value)
   const [rotationIndex, setRotationIndex] = useState(0)
 
@@ -46,7 +50,7 @@ function PopularPackagesSection() {
   }, [selectedCategory])
 
   useEffect(() => {
-    if (allPackagesForCategory.length <= 3) return
+    if (allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return
     const interval = setInterval(() => {
       setRotationIndex((prev) => (prev + 1) % allPackagesForCategory.length)
     }, PACKAGE_ROTATION_MS)
@@ -65,22 +69,44 @@ function PopularPackagesSection() {
   }, [])
 
   const packagesForCategory = useMemo(() => {
-    if (allPackagesForCategory.length <= 3) return allPackagesForCategory
+    if (allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return allPackagesForCategory
     const visible = []
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < VISIBLE_PACKAGES_COUNT; i += 1) {
       visible.push(allPackagesForCategory[(rotationIndex + i) % allPackagesForCategory.length])
     }
     return visible
   }, [allPackagesForCategory, rotationIndex])
 
+  const modalCards = useMemo(
+    () =>
+      packagesForCategory.map((pkg) => {
+        const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
+        const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
+        const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0] || ''
+        const isGroup = (pkg.packageType || 'individual') === 'group'
+
+        return {
+          id: String(pkg.id),
+          imageUrl,
+          title: pkg.title,
+          secondaryTitle: hasAlternateTitle ? englishTitle : '',
+          description: pkg.description,
+          gradientColor: isGroup ? '#0d5c2e' : '#c41230',
+          destination: pkg.destination,
+          category: pkg.category,
+          duration: pkg.duration,
+          supplier: pkg.supplier || '',
+          packageType: isGroup ? 'group' : 'individual',
+          price: getLeadPrice(pkg),
+          link: `/packages/${pkg.id}/details`
+        }
+      }),
+    [packagesForCategory, i18n]
+  )
+
   return (
     <section className="popular-packages-section" aria-label="Popular packages">
       <div className="popular-packages-container">
-        <div className="popular-packages-header">
-          <h2>Popular Packages</h2>
-          <p>Explore available packages by travel category and book what fits your clients fastest.</p>
-        </div>
-
         <div className="popular-category-chips" role="tablist" aria-label="Popular package categories">
           {popularCategories.map((cat) => (
             <button
@@ -99,11 +125,12 @@ function PopularPackagesSection() {
           ))}
         </div>
 
-        <div className="popular-packages-grid">
-          {packagesForCategory.map((pkg) => (
-            <PackageCard key={pkg.id} package={pkg} />
-          ))}
-        </div>
+        <ModalCards
+          cards={modalCards}
+          className="popular-packages-modal-cards"
+          animationSpeed="normal"
+          showCloseButton={false}
+        />
 
         <div className="popular-packages-actions">
           <Link to={`/tour-category/${categoryToSlug(selectedCategory)}/`} className="popular-packages-link">

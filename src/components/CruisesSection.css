@@ -18,13 +18,29 @@
 }
 
 .cruises-title {
-  font-size: 3rem;
-  font-weight: 800;
-  color: #1a1a2e;
   margin: 0 0 1rem 0;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  line-height: 1.2;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.4vw, 3.35rem);
+  font-weight: 800;
+  color: #7f1d1d !important;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75), 0 6px 18px rgba(127, 29, 29, 0.2);
+  position: relative;
+  padding-bottom: 0.62rem;
+}
+
+.cruises-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c41230 0%, #e31e24 100%);
+  box-shadow: 0 3px 10px rgba(196, 18, 48, 0.24);
 }
 
 .cruises-subtitle {
@@ -158,10 +174,6 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .cruises-title {
-    font-size: 2.4rem;
-  }
-
   .cruises-subtitle {
     font-size: 1.05rem;
   }
@@ -183,10 +195,6 @@
 
   .cruises-header {
     margin-bottom: 1.6rem;
-  }
-
-  .cruises-title {
-    font-size: 1.8rem;
   }
 
   .cruises-subtitle {

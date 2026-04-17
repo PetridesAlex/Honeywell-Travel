@@ -23,7 +23,7 @@ function Home() {
       <div className="home-page">
       <ImageCarousel />
       <div style={{ position: 'relative', margin: 0 }}>
-        <CircularGallery textColor="#ffffff" borderRadius={0.05} />
+        <CircularGallery />
       </div>
       <div className="unified-sections-wrapper">
         <div className="search-tour-shared-background">

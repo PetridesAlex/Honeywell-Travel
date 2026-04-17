@@ -27,7 +27,7 @@ function PackageCard({ package: pkg }) {
   }
 
   const displayPrice = getCheapestPrice()
-  const imageUrl = pkg.details?.thumbnailImage || pkg.details?.coverImage || pkg.details?.gallery?.[0]
+  const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0]
   const isGroup = (pkg.packageType || 'individual') === 'group'
   const resetScrollTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })

@@ -71,16 +71,8 @@ function ImageCarousel() {
   const incoming = nextIndex !== null ? slides[nextIndex] : current
   const incomingImage = incoming?.image ? `url(${incoming.image})` : null
 
-  // If the hero ever has scrollable overflow, pass wheel to the page so only the main scrollbar is used
-  const handleWheel = (e) => {
-    const el = e.currentTarget
-    if (el.scrollHeight <= el.clientHeight) return // no overflow, let event bubble to document
-    e.preventDefault()
-    window.scrollBy(0, e.deltaY)
-  }
-
   return (
-    <section className="hero-section" aria-label="Hero" onWheel={handleWheel}>
+    <section className="hero-section" aria-label="Hero">
       <div
         className="hero-bg-single hero-bg-base"
         aria-hidden="true"

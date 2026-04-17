@@ -93,7 +93,7 @@ function PackageFullDetail() {
       <div className="package-full-page">
         <div className="package-full-container">
           <h1>Package Not Found</h1>
-          <Link to="/packages" className="back-link">← Back to Packages</Link>
+          <Link to="/packages" className="back-link">Back to packages</Link>
         </div>
       </div>
     )
@@ -201,18 +201,17 @@ function PackageFullDetail() {
         url={packageUrl}
         type="product"
       />
-      <div 
-        className="package-full-hero"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div 
-          className="package-full-hero-overlay" 
-          style={{ 
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%), url(${heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }} 
+      <div className="package-full-hero">
+        <img
+          className="package-full-hero-image"
+          src={heroImage}
+          alt=""
+          decoding="async"
+          fetchPriority="high"
+          loading="eager"
+          aria-hidden="true"
         />
+        <div className="package-full-hero-overlay" aria-hidden="true" />
         <div className="package-full-hero-content">
           <h1>
             {translatedTitle}

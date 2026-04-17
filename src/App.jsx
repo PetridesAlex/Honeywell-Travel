@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './i18n/config' // Initialize i18n
 import Header from './components/Header'
-import AppLoader from './components/AppLoader'
+import Preloader from './components/Preloader'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import FloatingContactDock from './components/FloatingContactDock'
 import Home from './pages/Home'
 import Blog from './pages/Blog'
 import Gallery from './pages/Gallery'
@@ -29,7 +30,6 @@ import FlightTicketsDestination from './pages/FlightTicketsDestination'
 import './App.css'
 
 const MIN_LOADER_MS = 1800
-const LOADER_EXIT_MS = 650
 
 function AppContent() {
   return (
@@ -81,7 +81,6 @@ function AppContent() {
 
 function App() {
   const [loading, setLoading] = useState(true)
-  const [loaderExiting, setLoaderExiting] = useState(false)
 
   useEffect(() => {
     // Safety cleanup in case old cursor styling class remains after HMR.
@@ -97,7 +96,6 @@ function App() {
     const maybeStartExit = () => {
       if (!isMounted || !minDurationDone || !pageReady) return
       setLoading(false)
-      setLoaderExiting(true)
     }
 
     const minDurationTimer = setTimeout(() => {
@@ -123,21 +121,21 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    if (!loaderExiting) return
-    const t = setTimeout(() => setLoaderExiting(false), LOADER_EXIT_MS)
-    return () => clearTimeout(t)
-  }, [loaderExiting])
-
-  const showLoader = loading || loaderExiting
-
   return (
     <Router>
-      {showLoader && <AppLoader exiting={loaderExiting} />}
       <ScrollToTop />
-      <div className="app">
-        <AppContent />
-      </div>
+      <Preloader
+        loading={loading}
+        variant="stairs"
+        duration={2800}
+        loadingText="#LIVE THE EXPERIENCE WITH HONEYWELL TRAVEL"
+        position="fixed"
+      >
+        <div className="app">
+          <AppContent />
+          <FloatingContactDock />
+        </div>
+      </Preloader>
     </Router>
   )
 }

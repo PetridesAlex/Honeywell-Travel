@@ -1,7 +1,9 @@
-import { useState, useEffect, useLayoutEffect } from 'react'
+import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getPackagesByFilter, travelPackages } from '../data/packages'
-import PackageCard from '../components/PackageCard'
+import { getEnglishPackageTitle } from '../utils/packageTranslations'
+import ModalCards from '../components/ModalCards'
 import SEO from '../components/SEO'
 import './Packages.css'
 
@@ -35,7 +37,22 @@ const slugToCategory = (slug) => {
   return slugCategoryMap[slug] || null
 }
 
+function getLeadPrice(pkg) {
+  if (pkg.details?.hotels?.length) {
+    let lowestDouble = Infinity
+    for (const hotel of pkg.details.hotels) {
+      const price = hotel?.prices?.double
+      if (typeof price === 'number' && price > 0 && price < lowestDouble) {
+        lowestDouble = price
+      }
+    }
+    if (lowestDouble !== Infinity) return lowestDouble
+  }
+  return typeof pkg.price === 'number' ? pkg.price : Number.MAX_SAFE_INTEGER
+}
+
 function Packages() {
+  const { i18n } = useTranslation()
   const { slug } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const [filteredPackages, setFilteredPackages] = useState(travelPackages)
@@ -168,6 +185,33 @@ function Packages() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFilteredPackages(filtered)
   }, [category, destination, minPrice, maxPrice, departureMonth, travelType])
+
+  const modalCards = useMemo(
+    () =>
+      filteredPackages.map((pkg) => {
+        const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
+        const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
+        const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0] || ''
+        const isGroup = (pkg.packageType || 'individual') === 'group'
+
+        return {
+          id: String(pkg.id),
+          imageUrl,
+          title: pkg.title,
+          secondaryTitle: hasAlternateTitle ? englishTitle : '',
+          description: pkg.description,
+          gradientColor: isGroup ? '#0d5c2e' : '#c41230',
+          destination: pkg.destination,
+          category: pkg.category,
+          duration: pkg.duration,
+          supplier: pkg.supplier || '',
+          packageType: isGroup ? 'group' : 'individual',
+          price: getLeadPrice(pkg),
+          link: `/packages/${pkg.id}/details`
+        }
+      }),
+    [filteredPackages, i18n]
+  )
 
   const applyFilters = (nextCategory, nextDestination) => {
     const filtered = getPackagesByFilter(nextCategory, nextDestination)
@@ -317,11 +361,12 @@ function Packages() {
           </div>
 
           {filteredPackages.length > 0 ? (
-            <div className="packages-grid">
-              {filteredPackages.map((pkg) => (
-                <PackageCard key={pkg.id} package={pkg} />
-              ))}
-            </div>
+            <ModalCards
+              cards={modalCards}
+              className="packages-modal-cards"
+              animationSpeed="normal"
+              showCloseButton={false}
+            />
           ) : (
             <div className="no-results">
               <div className="no-results-icon">🔍</div>

@@ -6742,7 +6742,7 @@ export const travelPackages = [
           name: 'Sinaia Hotel – Sinaia',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/hotels/bucharest-hotel.png',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Sinaia Hotel, Sinaia, Romania',
           prices: {
             double: 849,
@@ -6756,7 +6756,7 @@ export const travelPackages = [
           name: 'Sinaia Hotel – Sinaia',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/hotels/bucharest-hotel.png',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Sinaia Hotel, Sinaia, Romania',
           prices: {
             double: 849,
@@ -6770,7 +6770,7 @@ export const travelPackages = [
           name: 'Sinaia Hotel – Sinaia',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/hotels/bucharest-hotel.png',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Sinaia Hotel, Sinaia, Romania',
           prices: {
             double: 849,
@@ -10408,294 +10408,6 @@ export const travelPackages = [
     }
   },
   {
-    id: 37,
-    title: 'ΜΠΑΝΓΚΟΚ – ΠΑΤΑΓΙΑ – ΖΟΥΓΚΛΑ ΤΑΪΛΑΝΔΗΣ',
-    destination: 'Thailand',
-    category: 'Summer Packages',
-    price: 2135,
-    duration: '11 days / 9 nights',
-    description: 'Discover the vibrant culture of Bangkok, explore the floating markets, visit ancient Ayutthaya, experience the jungle of Khao Yai National Park, and relax in the beach resort of Pattaya.',
-    longDescription: 'Μια ολοκληρωμένη περιήγηση στην Ταϊλάνδη: από την πολύχρωμη Μπανγκόκ και τις πλωτές αγορές, στην ιστορική Αγιουτάγια, τη ζούγκλα του Εθνικού Πάρκου Κάο Γιάι και την παραθαλάσσια Πατάγια. Εξερευνήστε βουδιστικούς ναούς, παραδοσιακές αγορές, άγρια φύση και εξωτικές παραλίες.',
-    image: '🇹🇭',
-    featured: true,
-    packageType: 'group',
-    details: {
-      departureDate: '24/07, 07/08, 14/08, 21/08',
-      departureFrom: 'Larnaca',
-      destinationFull: 'Bangkok, Khao Yai, Pattaya, Thailand',
-      monthAvailability: 'July, August',
-      roomType: 'Standard Room',
-      boardBasis: 'Bed & Breakfast',
-      airline: 'Gulf Air',
-      includedLuggage: '1 checked bag 23kg + 1 hand luggage 6kg',
-      coverImage: '/images/thailand/thailand-boat.webp',
-      flights: [
-        {
-          direction: 'Departure',
-          date: '24/07, 07/08, 14/08, 21/08',
-          route: 'Larnaca (LCA) → Bahrain (BAH)',
-          flight: 'GF 945',
-          time: '16:45 → 19:50',
-          luggage: '1 checked bag 23kg'
-        },
-        {
-          direction: 'Departure',
-          date: '24/07, 07/08, 14/08, 21/08',
-          route: 'Bahrain (BAH) → Bangkok (BKK)',
-          flight: 'GF 152',
-          time: '22:45 → 09:55 (+1)',
-          luggage: '1 checked bag 23kg'
-        },
-        {
-          direction: 'Return',
-          date: '24/07, 07/08, 14/08, 21/08',
-          route: 'Bangkok (BKK) → Bahrain (BAH)',
-          flight: 'GF 153',
-          time: '20:15 → 22:55',
-          luggage: '1 checked bag 23kg'
-        },
-        {
-          direction: 'Return',
-          date: '24/07, 07/08, 14/08, 21/08',
-          route: 'Bahrain (BAH) → Larnaca (LCA)',
-          flight: 'GF 946',
-          time: '01:20 → 04:55',
-          luggage: '1 checked bag 23kg'
-        }
-      ],
-      hotels: [
-        // Period 1: 24/07 - €2,135 double
-        {
-          name: 'Bangkok Hotel',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/bangkok-hotel.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2135,
-            single: 2385
-          },
-          departureDate: '24/07',
-          packagePrice: 4270,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: 'Khao Yai Jungle Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/khao-yai-resort.webp',
-          location: 'Khao Yai National Park, Thailand',
-          prices: {
-            double: 2135,
-            single: 2385
-          },
-          departureDate: '24/07',
-          packagePrice: 4270,
-          boardBasis: 'Bed & Breakfast + Dinner',
-          nights: 2
-        },
-        {
-          name: 'Pattaya Beach Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/pattaya-resort.webp',
-          location: 'Pattaya Beach Resort, Pattaya, Thailand',
-          prices: {
-            double: 2135,
-            single: 2385
-          },
-          departureDate: '24/07',
-          packagePrice: 4270,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        // Period 2: 07/08, 14/08, 21/08 - €2,165 double
-        {
-          name: 'Bangkok Hotel',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/bangkok-hotel.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '07/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: 'Khao Yai Jungle Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/khao-yai-resort.webp',
-          location: 'Khao Yai National Park, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '07/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast + Dinner',
-          nights: 2
-        },
-        {
-          name: 'Pattaya Beach Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/pattaya-resort.webp',
-          location: 'Pattaya Beach Resort, Pattaya, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '07/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        {
-          name: 'Bangkok Hotel',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/bangkok-hotel.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '14/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: 'Khao Yai Jungle Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/khao-yai-resort.webp',
-          location: 'Khao Yai National Park, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '14/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast + Dinner',
-          nights: 2
-        },
-        {
-          name: 'Pattaya Beach Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/pattaya-resort.webp',
-          location: 'Pattaya Beach Resort, Pattaya, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '14/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        {
-          name: 'Bangkok Hotel',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/bangkok-hotel.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '21/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: 'Khao Yai Jungle Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/khao-yai-resort.webp',
-          location: 'Khao Yai National Park, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '21/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast + Dinner',
-          nights: 2
-        },
-        {
-          name: 'Pattaya Beach Resort',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/hotels/pattaya-resort.webp',
-          location: 'Pattaya Beach Resort, Pattaya, Thailand',
-          prices: {
-            double: 2165,
-            single: 2425
-          },
-          departureDate: '21/08',
-          packagePrice: 4330,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        }
-      ],
-      included: [
-        'Αεροπορικά εισιτήρια Λάρνακα – Μπαχρέιν – Μπανγκόκ – Μπαχρέιν – Λάρνακα με Gulf Air',
-        'Φόροι αεροδρομίων',
-        'Διαμονή σε επιλεγμένα ξενοδοχεία 4★ με πρόγευμα',
-        'Μεταφορές, εκδρομές & περιηγήσεις όπως αναφέρονται στο πρόγραμμα',
-        'Νυχτερινή κρουαζιέρα με δείπνο στον ποταμό Chao Phraya',
-        '2 δείπνα σε τοπικά εστιατόρια (όπως στο πρόγραμμα)',
-        'Τοπικός αγγλόφωνος ξεναγός',
-        'Ελληνόφωνος συνοδός του γραφείου σε όλο το ταξίδι',
-        'Εισιτήρια εισόδων όπου χρειάζεται (όπως στο πρόγραμμα)',
-        'Μία αποσκευή 23kg + μία χειραποσκευή 6kg ανά άτομο',
-        'Υπηρεσίες των τοπικών αντιπροσώπων'
-      ],
-      notIncluded: [
-        'Ποτά στα δείπνα',
-        'Οτιδήποτε δεν αναφέρεται ρητά ως περιλαμβανόμενο ή αναφέρεται ως προαιρετικό / προτεινόμενο'
-      ],
-      cancellationPolicy: 'Μέχρι 45 μέρες πριν: €50 ανά άτομο (λειτουργικά έξοδα). 45–30 μέρες πριν: παρακράτηση 30%. 30–21 μέρες πριν: παρακράτηση 50%. Από 21 μέρες έως την αναχώρηση: παρακράτηση 100%. Σε περίπτωση no-show: 100% της συνολικής τιμής.',
-      termsAndConditions: [
-        'Οι τιμές των πακέτων δεν αλλάζουν κατά τη στιγμή της κράτησης',
-        'Με την κράτηση απαιτείται προκαταβολή 30% της αξίας του πακέτου',
-        'Εξόφληση περίπου 21 μέρες πριν την αναχώρηση',
-        'Διαμονή: Μπανγκόκ (4 νύχτες), Κάο Γιάι (2 νύχτες), Πατάγια (2 νύχτες)',
-        'Διατροφή: Πρόγευμα καθημερινά (Bed & Breakfast)',
-        'Όλοι οι ταξιδιώτες πρέπει να συμπληρώσουν ηλεκτρονικά την Ψηφιακή Κάρτα Άφιξης Ταϊλάνδης (TDAC): https://tdac.immigration.go.th/arrival-card/#/home',
-        'Μέχρι 45 μέρες πριν: €50 ανά άτομο (λειτουργικά έξοδα)',
-        '45–30 μέρες πριν: παρακράτηση 30%',
-        '30–21 μέρες πριν: παρακράτηση 50%',
-        'Από 21 μέρες έως την αναχώρηση: παρακράτηση 100%',
-        'Σε περίπτωση no-show: 100% της συνολικής τιμής'
-      ],
-      program: {
-        introduction: 'ΜΠΑΝΓΚΟΚ – ΠΑΤΑΓΙΑ – ΖΟΥΓΚΛΑ ΤΑΪΛΑΝΔΗΣ\n\nΜια ολοκληρωμένη περιήγηση στην Ταϊλάνδη: από την πολύχρωμη Μπανγκόκ και τις πλωτές αγορές, στην ιστορική Αγιουτάγια, τη ζούγκλα του Εθνικού Πάρκου Κάο Γιάι και την παραθαλάσσια Πατάγια. Εξερευνήστε βουδιστικούς ναούς, παραδοσιακές αγορές, άγρια φύση και εξωτικές παραλίες.',
-        day1_2: '1η – 2η Μέρα: Λάρνακα – Μπαχρέιν – Μπανγκόκ\n\nΑναχώρηση από Λάρνακα με ενδιάμεση στάση στο Μπαχρέιν και άφιξη την επόμενη ημέρα στην Μπανγκόκ, την πολύχρωμη πρωτεύουσα της Ταϊλάνδης.\n\nΜεταφορά στο ξενοδοχείο, τακτοποίηση στα δωμάτια και χρόνος ελεύθερος (ανάλογα με την ώρα άφιξης) για ξεκούραση ή μια πρώτη βόλτα στην πόλη.\n\n🔸 Προαιρετικά το βράδυ:\nΕπίσκεψη στον ουρανοξύστη Baiyoke Sky – δείπνο μπουφέ στον 76ο όροφο ή ανάβαση στον 84ο όροφο με περιστρεφόμενη πλατφόρμα και 360° θέα της φωτισμένης Μπανγκόκ.\n\nΔιανυκτέρευση στην Μπανγκόκ.',
-        day3: '3η Μέρα: Μπανγκόκ – Βουδιστικοί Ναοί & Chinatown\n\nΠρωινό και αναχώρηση για ξενάγηση στην «Πόλη των Αγγέλων»:\n\n• Επίσκεψη στον επιβλητικό Wat Arun (Ναός της Αυγής) στις όχθες του Chao Phraya\n• Επίσκεψη στον Wat Pho με τον γιγάντιο Ξαπλωτό Βούδα (45μ., καλυμμένο με φύλλα χρυσού)\n• Περιήγηση στην ιστορική και πολυσύχναστη Chinatown\n• Επίσκεψη στην εντυπωσιακή Αγορά Λουλουδιών – μια αυθεντική εικόνα της τοπικής καθημερινότητας\n\nΕπιστροφή στο ξενοδοχείο και ελεύθερος χρόνος.\nΔιανυκτέρευση στην Μπανγκόκ.',
-        day4: '4η Μέρα: Μπανγκόκ – Ελεύθερος Χρόνος & Κρουαζιέρα στον ποταμό Chao Phraya\n\nΠρωινό στο ξενοδοχείο.\n\n🔸 Πρωί:\nΕλεύθερος χρόνος για βόλτα σε υπαίθριες αγορές, δοκιμή street food (pad thai, καρύδα, εξωτικά φρούτα κ.ά.) και αγορές.\n\n🔸 Απόγευμα / Βράδυ:\nΚρουαζιέρα στον ποταμό Chao Phraya – τον «ποταμό των βασιλιάδων»:\n• Θέα σε παραδοσιακά σπίτια πάνω στο νερό\n• Σύγχρονα κτίρια & πολυτελή ξενοδοχεία\n• Χρυσοί ναοί & κανάλια\n• Το εντυπωσιακό skyline της Μπανγκόκ\n\nΠεριλαμβάνεται νυχτερινή κρουαζιέρα με δείπνο στον Chao Phraya.\n\nΕπιστροφή στο ξενοδοχείο.\nΔιανυκτέρευση στην Μπανγκόκ.',
-        day5: '5η Μέρα: Πλωτή Αγορά Damnoen Saduak & Αγορά του Τρένου Maeklong\n\nΜετά το πρωινό, αναχώρηση για ολοήμερη εμπειρία σε δύο από τις πιο ιδιαίτερες αγορές της Ταϊλάνδης:\n\n1️⃣ Πλωτή Αγορά Damnoen Saduak\n• Διαδρομή ~100 χλμ δυτικά της Μπανγκόκ\n• Επιβίβαση σε παραδοσιακές βάρκες\n• Πλωτή διαδρομή ανάμεσα σε βάρκες γεμάτες φρούτα, λαχανικά, τοπικές λιχουδιές & χειροτεχνήματα\n• Αυθεντική εικόνα παραδοσιακής ταϊλανδέζικης αγοράς πάνω στο νερό\n\n2️⃣ Αγορά του Τρένου (Maeklong Railway Market)\n• Αγορά «πάνω στις ράγες»\n• Οι έμποροι μαζεύουν γρήγορα τέντες και πάγκους όταν περνά το τρένο\n• Μοναδικό, εντυπωσιακό θέαμα – από τις πιο φωτογραφημένες αγορές στον κόσμο\n\nΕπιστροφή στο ξενοδοχείο στην Μπανγκόκ και χρόνος για ξεκούραση.\nΔιανυκτέρευση στην Μπανγκόκ.',
-        day6: '6η Μέρα: Μπανγκόκ – Αγιουτάγια – Εθνικό Πάρκο Κάο Γιάι\n\nΠρωινό και αναχώρηση για την ιστορική πόλη Αγιουτάγια:\n\n• Πρώην πρωτεύουσα του Βασιλείου του Σιάμ (ιδρύθηκε το 1350)\n• Εντυπωσιακοί ναοί & ερείπια βασιλικών ανακτόρων\n• Prang (πύργοι-λειψανοθήκες), κανάλια & υδραυλικά έργα\n• Αρχαιολογικός χώρος υπό την προστασία της UNESCO\n\nΜετά την ξενάγηση, συνεχίζουμε προς την περιοχή του Εθνικού Πάρκου Κάο Γιάι.\n\nΆφιξη, τακτοποίηση στο ξενοδοχείο μέσα στη φύση.\nΔείπνο & διανυκτέρευση στο Κάο Γιάι.',
-        day7: '7η Μέρα: Εθνικό Πάρκο Κάο Γιάι – Ζούγκλα Ταϊλάνδης\n\nΠρωινό και ημέρα αφιερωμένη στην εξερεύνηση της ζούγκλας:\n\nΤο Εθνικό Πάρκο Κάο Γιάι (2.206 τ.χλμ.) είναι από τους σημαντικότερους βιότοπους της Νοτιοανατολικής Ασίας.\n\nΦιλοξενεί περισσότερα από 350 είδη σπάνιων πουλιών και πλούσια άγρια ζωή:\n• Ασιατικοί ελέφαντες\n• μαϊμούδες, ελάφια\n• (και πιο βαθιά στη ζούγκλα, ίχνη από τίγρεις)\n\nΠεζοπορικές διαδρομές, θέα σε καταρράκτες, τροπική βλάστηση και μοναδικό φυσικό τοπίο.\n\n🔸 Προαιρετικά (τοπική οργάνωση / έξτρα κόστος):\n• Jungle tour με τοπικό οδηγό\n• Παρατήρηση άγριας ζωής\n• Rafting σε ποτάμι\n• Νυχτερινό σαφάρι\n\nΤο βράδυ, η ζούγκλα προσφέρει μια μαγική, ήρεμη και ταυτόχρονα μυστηριώδη ατμόσφαιρα.\n\nΔείπνο & διανυκτέρευση στο Κάο Γιάι.',
-        day8: '8η Μέρα: Κάο Γιάι – Πατάγια\n\nΠρωινό και αναχώρηση για την Πατάγια, ένα από τα πιο γνωστά παραθαλάσσια θέρετρα της Ταϊλάνδης:\n\n• Εντυπωσιακός κόλπος σε σχήμα μισοφέγγαρου\n• Σύγχρονα κτίρια, πολυτελή ξενοδοχεία & ζωντανή παραλιακή ζώνη\n• Θαλάσσια σπορ, οργανωμένες παραλίες, εμπορικά κέντρα & πλωτές αγορές\n\nΆφιξη στην Πατάγια, τακτοποίηση στο ξενοδοχείο και ελεύθερος χρόνος για πρώτη γνωριμία με την πόλη.\n\nΔιανυκτέρευση στην Πατάγια.',
-        day9: '9η Μέρα: Πατάγια – Ελεύθερη Ημέρα\n\nΗμέρα ελεύθερη στην Πατάγια για να την απολαύσετε όπως εσείς επιθυμείτε:\n\nΠροτάσεις:\n• Περίπατος κατά μήκος της παραλίας\n• Επίσκεψη στο Sanctuary of Truth (επιβλητικό ξύλινο μνημείο)\n• Θέα στο Pratumnak Hill Viewpoint\n• Προαιρετική εκδρομή στο νησί Koh Larn για μπάνιο σε εξωτικές παραλίες\n• Επίσκεψη στο Pattaya Floating Market\n• Προαιρετική επίσκεψη στον θεαματικό βοτανικό κήπο Nong Nooch\n• Χρόνος για ψώνια, spa & μασάζ ή απλή χαλάρωση\n\nΤο βράδυ, μπορείτε να απολαύσετε την έντονη νυχτερινή ζωή της Πατάγιας.\n\nΔιανυκτέρευση στην Πατάγια.',
-        day10_11: '10η – 11η Μέρα: Πατάγια – Μπανγκόκ – Μπαχρέιν – Λάρνακα\n\nΠρωινό και ελεύθερος χρόνος στην Πατάγια για τελευταίες βόλτες ή αγορές.\n\nΑναχώρηση οδικώς για το αεροδρόμιο της Μπανγκόκ.\n\nΠτήση Μπανγκόκ – Μπαχρέιν – Λάρνακα με Gulf Air.\n\nΆφιξη στη Λάρνακα (11η μέρα) γεμάτοι εικόνες, εμπειρίες και αξέχαστες αναμνήσεις από την Ταϊλάνδη.'
-      },
-      gallery: [
-        '/images/thailand/thailand-boat.webp'
-      ]
-    }
-  },
-  {
     id: 38,
     title: 'ΜΠΑΝΓΚΟΚ – ΠΑΤΑΓΙΑ – ΖΟΥΓΚΛΑ ΤΑΪΛΑΝΔΗΣ',
     destination: 'Thailand',
@@ -10984,279 +10696,6 @@ export const travelPackages = [
     }
   },
   {
-    id: 39,
-    title: 'ΜΠΑΝΓΚΟΚ / ΠΟΥΚΕΤ / ΝΗΣΙ JAMES BOND',
-    destination: 'Thailand',
-    category: 'Summer Packages',
-    price: 2369,
-    duration: '10 days / 7 nights',
-    description: 'Experience tropical beaches, jungle adventures, and exotic excursions in Phuket and Bangkok. Visit James Bond Island, explore floating markets, and discover the vibrant culture of Thailand.',
-    longDescription: 'Μια ολοκληρωμένη περιήγηση στο Πουκέτ και την Μπανγκόκ: τροπικές παραλίες, ζούγκλα, κρουαζιέρα στο διάσημο νησί James Bond, βουδιστικοί ναοί, πλωτές αγορές και εξωτικές εκδρομές. Απολαύστε 5 νύχτες στο Πουκέτ και 2 νύχτες στην Μπανγκόκ.',
-    image: '🇹🇭',
-    featured: true,
-    packageType: 'group',
-    details: {
-      departureDate: '20/07, 10/08, 17/08, 14/09, 19/10',
-      departureFrom: 'Larnaca',
-      destinationFull: 'Phuket, Bangkok, James Bond Island, Thailand',
-      monthAvailability: 'July, August, September, October',
-      roomType: 'Standard Room',
-      boardBasis: 'Bed & Breakfast',
-      airline: 'Emirates',
-      includedLuggage: '1 checked bag 30kg + 1 hand luggage 7kg (Emirates), 1 checked bag 23kg + 1 hand luggage 7kg (domestic)',
-      thumbnailImage: '/images/thailand/thailand-jame-bond.webp',
-      coverImage: '/images/thailand/thailand-jame-bond.webp',
-      flights: [
-        {
-          direction: 'Departure',
-          date: '20/07, 10/08, 17/08, 14/09, 19/10',
-          route: 'Larnaca (LCA) → Dubai (DXB)',
-          flight: 'EK 110',
-          time: '20:10 → 01:05 (+1)',
-          luggage: '1 checked bag 30kg'
-        },
-        {
-          direction: 'Departure',
-          date: '20/07, 10/08, 17/08, 14/09, 19/10',
-          route: 'Dubai (DXB) → Phuket (HKT)',
-          flight: 'EK 378',
-          time: '02:30 → 12:00',
-          luggage: '1 checked bag 30kg'
-        },
-        {
-          direction: 'Domestic',
-          date: '20/07, 10/08, 17/08, 14/09, 19/10',
-          route: 'Phuket (HKT) → Bangkok (BKK)',
-          flight: 'TBA',
-          time: 'TBA',
-          luggage: '1 checked bag 23kg'
-        },
-        {
-          direction: 'Return',
-          date: '20/07, 10/08, 17/08, 14/09, 19/10',
-          route: 'Bangkok (BKK) → Dubai (DXB)',
-          flight: 'EK 371',
-          time: '03:40 → 06:50',
-          luggage: '1 checked bag 30kg'
-        },
-        {
-          direction: 'Return',
-          date: '20/07, 10/08, 17/08, 14/09, 19/10',
-          route: 'Dubai (DXB) → Larnaca (LCA)',
-          flight: 'EK 109',
-          time: '08:00 → 11:10',
-          luggage: '1 checked bag 30kg'
-        }
-      ],
-      hotels: [
-        // Period 1: 20/07 - €2,369 double
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Phuket Beach Resort, Phuket, Thailand',
-          prices: {
-            double: 2369,
-            single: 2739
-          },
-          departureDate: '20/07',
-          packagePrice: 4738,
-          boardBasis: 'Bed & Breakfast',
-          nights: 5
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2369,
-            single: 2739
-          },
-          departureDate: '20/07',
-          packagePrice: 4738,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        // Period 2: 10/08, 17/08 - €2,399 double
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Phuket Beach Resort, Phuket, Thailand',
-          prices: {
-            double: 2399,
-            single: 2789
-          },
-          departureDate: '10/08',
-          packagePrice: 4798,
-          boardBasis: 'Bed & Breakfast',
-          nights: 5
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2399,
-            single: 2789
-          },
-          departureDate: '10/08',
-          packagePrice: 4798,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Phuket Beach Resort, Phuket, Thailand',
-          prices: {
-            double: 2399,
-            single: 2789
-          },
-          departureDate: '17/08',
-          packagePrice: 4798,
-          boardBasis: 'Bed & Breakfast',
-          nights: 5
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2399,
-            single: 2789
-          },
-          departureDate: '17/08',
-          packagePrice: 4798,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        // Period 3: 14/09, 19/10 - €2,279 double
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Phuket Beach Resort, Phuket, Thailand',
-          prices: {
-            double: 2279,
-            single: 2689
-          },
-          departureDate: '14/09',
-          packagePrice: 4558,
-          boardBasis: 'Bed & Breakfast',
-          nights: 5
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2279,
-            single: 2689
-          },
-          departureDate: '14/09',
-          packagePrice: 4558,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Phuket Beach Resort, Phuket, Thailand',
-          prices: {
-            double: 2279,
-            single: 2689
-          },
-          departureDate: '19/10',
-          packagePrice: 4558,
-          boardBasis: 'Bed & Breakfast',
-          nights: 5
-        },
-        {
-          name: '4★ Hotels - Phuket / Bangkok',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/thailand/thailand-hotel-boat.webp',
-          location: 'Bangkok Hotel, Bangkok, Thailand',
-          prices: {
-            double: 2279,
-            single: 2689
-          },
-          departureDate: '19/10',
-          packagePrice: 4558,
-          boardBasis: 'Bed & Breakfast',
-          nights: 2
-        }
-      ],
-      included: [
-        'Αεροπορικά εισιτήρια Λάρνακα – Ντουμπάι – Πουκέτ & Μπανγκόκ – Ντουμπάι – Λάρνακα με Emirates Airlines',
-        'Αεροπορικό εισιτήριο Πουκέτ – Μπανγκόκ',
-        'Φόροι αεροδρομίων & επίναυλοι καυσίμων',
-        'Διαμονή σε ξενοδοχεία 4★ με πρόγευμα',
-        'Μεταφορές, εκδρομές & περιηγήσεις όπως στο πρόγραμμα',
-        '2 γεύματα όπως αναφέρονται στο πρόγραμμα',
-        'Βόλτα με παραδοσιακές σχεδίες από μπαμπού (bamboo rafting)',
-        'Κρουαζιέρα στο νησί James Bond στον κόλπο Phang Nga',
-        'Τοπικός αγγλόφωνος ξεναγός στις εκδρομές',
-        'Ελληνόφωνος συνοδός του γραφείου από Κύπρο',
-        'Εισιτήρια εισόδων όπου χρειάζεται',
-        'Πτήσεις Emirates: 1 αποσκευή 30kg + 1 χειραποσκευή 7kg',
-        'Εσωτερική πτήση: 1 αποσκευή 23kg + 1 χειραποσκευή 7kg',
-        'Υπηρεσίες τοπικών αντιπροσώπων'
-      ],
-      notIncluded: [
-        'Αχθοφορικά & φιλοδωρήματα',
-        'Ποτά στα γεύματα',
-        'Οτιδήποτε δεν αναφέρεται ρητά ως περιλαμβανόμενο ή αναφέρεται ως προαιρετικό / προτεινόμενο',
-        'Προαιρετική κρουαζιέρα στα νησιά Πι Πι (περίπου €70 το άτομο)',
-        'Προαιρετική εκδρομή σε πλωτή αγορά & αγορά τρένου'
-      ],
-      cancellationPolicy: 'Μέχρι 45 μέρες πριν την άφιξη: παρακράτηση €100 ανά άτομο για λειτουργικά έξοδα. Από 45 έως 30 μέρες πριν: παρακράτηση 30% της συνολικής τιμής. Από 30 έως 21 μέρες πριν: παρακράτηση 50% της συνολικής τιμής. Από 21 μέρες έως την ημέρα άφιξης: παρακράτηση 100% της συνολικής τιμής. Σε περίπτωση μη εμφάνισης (no-show): παρακράτηση 100% της συνολικής τιμής.',
-      termsAndConditions: [
-        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης',
-        'Με την κράτηση απαιτείται προκαταβολή 30% της αξίας του πακέτου',
-        'Εξόφληση περίπου 21 μέρες πριν την αναχώρηση',
-        'Διαμονή: Πουκέτ (5 νύχτες), Μπανγκόκ (2 νύχτες)',
-        'Διατροφή: Πρόγευμα καθημερινά (Bed & Breakfast)',
-        'Όλοι οι ταξιδιώτες πρέπει να συμπληρώσουν ηλεκτρονικά την Ψηφιακή Κάρτα Άφιξης Ταϊλάνδης (TDAC): https://tdac.immigration.go.th/arrival-card/#/home',
-        'Μέχρι 45 μέρες πριν την άφιξη: παρακράτηση €100 ανά άτομο για λειτουργικά έξοδα',
-        'Από 45 έως 30 μέρες πριν: παρακράτηση 30% της συνολικής τιμής',
-        'Από 30 έως 21 μέρες πριν: παρακράτηση 50% της συνολικής τιμής',
-        'Από 21 μέρες έως την ημέρα άφιξης: παρακράτηση 100% της συνολικής τιμής',
-        'Σε περίπτωση μη εμφάνισης (no-show): παρακράτηση 100% της συνολικής τιμής'
-      ],
-      program: {
-        introduction: 'ΜΠΑΝΓΚΟΚ / ΠΟΥΚΕΤ / ΝΗΣΙ JAMES BOND\n\nΜια ολοκληρωμένη περιήγηση στο Πουκέτ και την Μπανγκόκ: τροπικές παραλίες, ζούγκλα, κρουαζιέρα στο διάσημο νησί James Bond, βουδιστικοί ναοί, πλωτές αγορές και εξωτικές εκδρομές. Απολαύστε 5 νύχτες στο Πουκέτ και 2 νύχτες στην Μπανγκόκ.',
-        day1_2: '1η – 2η Μέρα: Λάρνακα – Ντουμπάι – Πουκέτ\n\nΑναχώρηση από Λάρνακα με ενδιάμεση στάση στο Ντουμπάι και άφιξη την επόμενη ημέρα στο Πουκέτ, το πιο κοσμοπολίτικο νησί της Ταϊλάνδης.\n\nΥποδοχή από τον αρχηγό, μεταφορά στο ξενοδοχείο και τακτοποίηση στα δωμάτια.\n\nΕλεύθερος χρόνος για ξεκούραση, πρώτη βόλτα ή δείπνο με ταϊλανδέζικες γεύσεις.\n\nΔιανυκτέρευση στο Πουκέτ.',
-        day3: '3η Μέρα: Πουκέτ – Ξενάγηση Πόλης & Ζούγκλα\n\nΜετά το πρόγευμα:\n\n• Επίσκεψη στον σημαντικότερο ναό του νησιού Wat Chalong\n• Ανάβαση στους λόφους Nakkerd για τον επιβλητικό Big Buddha με μοναδική πανοραμική θέα\n• Περιήγηση στην Παλιά Πόλη Πουκέτ με σινοπορτογαλική αρχιτεκτονική και γραφικά στενά\n\nΣτη συνέχεια κατευθυνόμαστε προς την καταπράσινη περιοχή Phang Nga:\n\n• Επίσκεψη στο Monkey Cave Temple – ναός μέσα σε σπηλιά, με ελεύθερους πιθήκους\n• Bamboo rafting σε ήρεμα τροπικά ποτάμια με παραδοσιακές σχεδίες από μπαμπού\n• Σύντομη πεζοπορία μέσα στη ζούγκλα και στάση σε καταρράκτη για ξεκούραση & φωτογραφίες\n• Παραδοσιακό ταϊλανδέζικο γεύμα σε τοπικό εστιατόριο\n\nΕπιστροφή στο ξενοδοχείο.\nΔιανυκτέρευση στο Πουκέτ.',
-        day4: '4η Μέρα: Κρουαζιέρα στον κόλπο Phang Nga – Νησί James Bond – Koh Panyi – Naka\n\nΠρόγευμα και αναχώρηση για την προβλήτα. Ελαφρύ ταϊλανδέζικο πρωινό και επιβίβαση στο σκάφος.\n\nΚρουαζιέρα στον εντυπωσιακό κόλπο Phang Nga μέσα στο Εθνικό Πάρκο, ανάμεσα σε:\n• τροπικά νησάκια\n• επιβλητικούς ασβεστολιθικούς βράχους που υψώνονται από τη θάλασσα\n\nΣτη διάρκεια της εκδρομής:\n\n• Κανό σε κρυφές λιμνοθάλασσες & θαλάσσιες «σπηλιές»\n• Στάση στο ειδυλλιακό νησί Hong\n• Επίσκεψη στο διάσημο James Bond Island, γνωστό από την ταινία «Ο άνθρωπος με το χρυσό πιστόλι»\n• Στάση στο πλωτό χωριό Koh Panyi, χτισμένο πάνω σε πασσάλους – παραδοσιακό γεύμα σε τοπικό εστιατόριο\n• Χρόνος για χαλάρωση, κολύμπι & θαλάσσιες δραστηριότητες στο νησί Naka\n\nΕπιστροφή στην προβλήτα και μεταφορά στο ξενοδοχείο.\nΔιανυκτέρευση στο Πουκέτ.',
-        day5: '5η Μέρα: Πουκέτ – Ελεύθερη Μέρα (Προαιρετική κρουαζιέρα στα νησιά Πι Πι)\n\nΗμέρα ελεύθερη για να απολαύσετε το Πουκέτ με τον δικό σας ρυθμό:\n\n• Χαλάρωση στην παραλία ή στην πισίνα\n• Επίσκεψη σε night markets, δοκιμή street food & αγορές\n• Παραδοσιακό ταϊλανδέζικο μασάζ\n\n🔸 Προαιρετικά (έξτρα κόστος – ενδεικτικά €70/άτομο):\nΟλοήμερη κρουαζιέρα στα νησιά Πι Πι με γεύμα:\n• Επίσκεψη στη Maya Bay (The Beach – Leonardo DiCaprio)\n• Στάσεις σε Viking Caves & Bamboo Island για κολύμπι & snorkeling\n• Επίσκεψη στη Monkey Beach με τις φιλικές μαϊμούδες\n\nΔιανυκτέρευση στο Πουκέτ.',
-        day6: '6η Μέρα: Πουκέτ – Ελεύθερη Μέρα / Προαιρετικές Δραστηριότητες\n\nΕλεύθερη ημέρα για:\n\n• Απόλαυση των παραλίων (Karon, Kata, Patong κ.ά.)\n• Επιπλέον θαλάσσιες εκδρομές (Coral Island, Similan για καταδύσεις)\n• Δραστηριότητες περιπέτειας (ATV στη ζούγκλα, zipline στο Hanuman World)\n• Βραδινή διασκέδαση, δείπνο & shows (π.χ. Siam Niramit, Phuket Fantasea)\n\nΔιανυκτέρευση στο Πουκέτ.',
-        day7: '7η Μέρα: Πουκέτ – Μπανγκόκ\n\nΠρωινό και μεταφορά στο αεροδρόμιο Πουκέτ για την πτήση προς Μπανγκόκ.\n\nΆφιξη στην πρωτεύουσα, υποδοχή από τους αντιπροσώπους και μεταφορά στο ξενοδοχείο.\n\nΤακτοποίηση στα δωμάτια και ελεύθερος χρόνος για πρώτη γνωριμία με την «Βενετία της Ανατολής»:\n• Βόλτες σε κανάλια & παραποτάμους\n• Εμπορικά κέντρα και night markets\n• Δείπνο σε τοπικό εστιατόριο με αυθεντική ταϊλανδέζικη κουζίνα\n\nΔιανυκτέρευση στην Μπανγκόκ.',
-        day8: '8η Μέρα: Μπανγκόκ – Βουδιστικοί Ναοί & Chinatown\n\nΜετά το πρόγευμα, πανοραμική και πολιτιστική ξενάγηση:\n\n• Επίσκεψη στον Wat Arun (Ναός της Αυγής) στις όχθες του Chao Phraya\n• Επίσκεψη στον Wat Pho με τον γιγάντιο Ξαπλωτό Βούδα (45μ., καλυμμένος με φύλλα χρυσού)\n• Περιήγηση στη ζωντανή και πολύχρωμη Chinatown\n• Επίσκεψη στην Αγορά Λουλουδιών, γεμάτη χρώματα & αρώματα\n\nΕπιστροφή στο ξενοδοχείο και χρόνος ελεύθερος για αγορές, βόλτες ή έξοδο.\nΔιανυκτέρευση στην Μπανγκόκ.',
-        day9_10: '9η – 10η Μέρα: Μπανγκόκ – (Προαιρετική Πλωτή Αγορά & Αγορά Τρένου) – Ντουμπάι – Λάρνακα\n\nΠρωινό και ελεύθερη μέρα στην Μπανγκόκ. Check-out γύρω στις 11:00–12:00, με δυνατότητα φύλαξης αποσκευών στο ξενοδοχείο.\n\n🔸 Προαιρετικά:\nΕκδρομή στην πλωτή αγορά Damnoen Saduak & στην Αγορά του Τρένου Maeklong:\n• Παραδοσιακές μακρόστενες βάρκες ανάμεσα σε βάρκες γεμάτες φρούτα, λαχανικά & τοπικά εδέσματα\n• Αυθεντική εικόνα παραδοσιακής πλωτής αγοράς\n• Στάση στην διάσημη Railway Market, όπου το τρένο περνά κυριολεκτικά μέσα από την αγορά\n\nΕπιστροφή στην Μπανγκόκ. Το βράδυ/λίγο μετά τα μεσάνυχτα μεταφορά στο αεροδρόμιο για την πτήση Μπανγκόκ – Ντουμπάι – Λάρνακα.\n\nΆφιξη στη Λάρνακα, γεμάτοι εμπειρίες από ένα πλήρες ταξίδι σε Πουκέτ & Μπανγκόκ.'
-      },
-      gallery: [
-        '/images/thailand/thailand-jame-bond.webp'
-      ]
-    }
-  },
-  {
     id: 40,
     title: 'ΜΠΑΝΓΚΟΚ / ΠΟΥΚΕΤ / ΝΗΣΙ JAMES BOND',
     destination: 'Thailand',
@@ -11526,237 +10965,6 @@ export const travelPackages = [
       },
       gallery: [
         '/images/thailand/thailand-jame-bond.webp'
-      ]
-    }
-  },
-  {
-    id: 41,
-    title: 'ΜΠΑΛΙ – 10 Μέρες',
-    destination: 'Indonesia',
-    category: 'Summer Packages',
-    price: 2325,
-    duration: '10 days / 7 nights',
-    description: 'Experience the "Island of the Gods" with 5★ accommodation in Bali and Ubud. Discover ancient temples, rice terraces, traditional arts, and the spiritual heart of Indonesia.',
-    longDescription: 'Μια μαγευτική περιήγηση στο Μπαλί, το «Νησί των Θεών». Απολαύστε 4 νύχτες στο Μπαλί και 3 νύχτες στο Ουμπούντ, με 5★ διαμονή. Εξερευνήστε αρχαίους ναούς, αναβαθμίδες ρυζιού, παραδοσιακές τέχνες και το πνευματικό κέντρο της Ινδονησίας.',
-    image: '🇮🇩',
-    featured: true,
-    packageType: 'group',
-    details: {
-      departureDate: '09/06, 21/07, 18/08, 08/09',
-      departureFrom: 'Larnaca',
-      destinationFull: 'Bali, Ubud, Indonesia',
-      monthAvailability: 'June, July, August, September',
-      roomType: 'Standard Room',
-      boardBasis: 'Bed & Breakfast',
-      airline: 'Emirates',
-      includedLuggage: '1 checked bag 30kg + 1 hand luggage 7kg',
-      thumbnailImage: '/images/bali/bali-rocks.webp',
-      coverImage: '/images/bali/bali-hero.webp',
-      flights: [
-        {
-          direction: 'Departure',
-          date: '09/06, 21/07, 18/08, 08/09',
-          route: 'Larnaca (LCA) → Dubai (DXB)',
-          flight: 'EK 110',
-          time: '20:25 → 00:50 (+1)',
-          luggage: '1 checked bag 30kg'
-        },
-        {
-          direction: 'Departure',
-          date: '09/06, 21/07, 18/08, 08/09',
-          route: 'Dubai (DXB) → Denpasar Bali (DPS)',
-          flight: 'EK 368',
-          time: '03:10 → 16:35',
-          luggage: '1 checked bag 30kg'
-        },
-        {
-          direction: 'Return',
-          date: '09/06, 21/07, 18/08, 08/09',
-          route: 'Denpasar Bali (DPS) → Dubai (DXB)',
-          flight: 'EK 399',
-          time: '00:35 → 05:35',
-          luggage: '1 checked bag 30kg'
-        },
-        {
-          direction: 'Return',
-          date: '09/06, 21/07, 18/08, 08/09',
-          route: 'Dubai (DXB) → Larnaca (LCA)',
-          flight: 'EK 109',
-          time: '07:55 → 10:40',
-          luggage: '1 checked bag 30kg'
-        }
-      ],
-      hotels: [
-        // Period 1: 09/06, 08/09 - €2,325 double
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/bali/bali-hotel.webp',
-          location: 'Bali 5★ Resort, Bali, Indonesia',
-          prices: {
-            double: 2325,
-            single: 2759
-          },
-          departureDate: '09/06',
-          packagePrice: 4650,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/hotels/ubud-resort.webp',
-          location: 'Ubud 5★ Resort, Ubud, Indonesia',
-          prices: {
-            double: 2325,
-            single: 2759
-          },
-          departureDate: '09/06',
-          packagePrice: 4650,
-          boardBasis: 'Bed & Breakfast',
-          nights: 3
-        },
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/bali/bali-hotel.webp',
-          location: 'Bali 5★ Resort, Bali, Indonesia',
-          prices: {
-            double: 2325,
-            single: 2759
-          },
-          departureDate: '08/09',
-          packagePrice: 4650,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/hotels/ubud-resort.webp',
-          location: 'Ubud 5★ Resort, Ubud, Indonesia',
-          prices: {
-            double: 2325,
-            single: 2759
-          },
-          departureDate: '08/09',
-          packagePrice: 4650,
-          boardBasis: 'Bed & Breakfast',
-          nights: 3
-        },
-        // Period 2: 21/07 - €2,695 double
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/bali/bali-hotel.webp',
-          location: 'Bali 5★ Resort, Bali, Indonesia',
-          prices: {
-            double: 2695,
-            single: 3239
-          },
-          departureDate: '21/07',
-          packagePrice: 5390,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/hotels/ubud-resort.webp',
-          location: 'Ubud 5★ Resort, Ubud, Indonesia',
-          prices: {
-            double: 2695,
-            single: 3239
-          },
-          departureDate: '21/07',
-          packagePrice: 5390,
-          boardBasis: 'Bed & Breakfast',
-          nights: 3
-        },
-        // Period 3: 18/08 - €2,855 double
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/bali/bali-hotel.webp',
-          location: 'Bali 5★ Resort, Bali, Indonesia',
-          prices: {
-            double: 2855,
-            single: 3395
-          },
-          departureDate: '18/08',
-          packagePrice: 5710,
-          boardBasis: 'Bed & Breakfast',
-          nights: 4
-        },
-        {
-          name: '5★ Resorts - Bali / Ubud',
-          stars: 5,
-          roomType: 'Standard Room',
-          image: '/images/hotels/ubud-resort.webp',
-          location: 'Ubud 5★ Resort, Ubud, Indonesia',
-          prices: {
-            double: 2855,
-            single: 3395
-          },
-          departureDate: '18/08',
-          packagePrice: 5710,
-          boardBasis: 'Bed & Breakfast',
-          nights: 3
-        }
-      ],
-      included: [
-        'Αεροπορικό εισιτήριο Λάρνακα – Ντουμπάι – Denpasar – Ντουμπάι – Λάρνακα με Emirates Airlines',
-        'Φόροι αεροδρομίων & επίναυλοι καυσίμων',
-        '4 διανυκτερεύσεις στο Μπαλί (5⭐) με πρόγευμα',
-        '3 διανυκτερεύσεις στο Ουμπούντ (5⭐) με πρόγευμα',
-        '2 γεύματα όπως στο πρόγραμμα',
-        'Όλες οι μεταφορές, εκδρομές & ξεναγήσεις όπως αναφέρονται',
-        'Τοπικοί αγγλόφωνοι ξεναγοί',
-        'Τουριστικός φόρος Μπαλί',
-        'Εισιτήρια εισόδων σε χώρους επισκέψεων',
-        '1 αποσκευή 30kg + 1 χειραποσκευή 7kg ανά άτομο',
-        'Υπηρεσίες τοπικών αντιπροσώπων'
-      ],
-      notIncluded: [
-        'Ποτά στα γεύματα',
-        'Αχθοφορικά & φιλοδωρήματα',
-        'Έκδοση βίζας κατά την άφιξη (περίπου 30 USD)',
-        'Οτιδήποτε δεν αναφέρεται ρητά ως περιλαμβανόμενο ή αναφέρεται ως προαιρετικό / προτεινόμενο'
-      ],
-      cancellationPolicy: 'Μέχρι 45 ημέρες πριν την άφιξη: €50 ανά άτομο. 45–30 ημέρες πριν: 30% της συνολικής τιμής. 30–21 ημέρες πριν: 50% της συνολικής τιμής. 21–0 ημέρες πριν: 100% της συνολικής τιμής. Σε περίπτωση μη εμφάνισης (no-show): 100% της συνολικής τιμής.',
-      termsAndConditions: [
-        'Οι τιμές δεν αλλάζουν κατά την ώρα της κράτησης',
-        'Προκαταβολή 30% με την κράτηση',
-        'Εξόφληση περίπου 21 μέρες πριν την αναχώρηση',
-        'Διαμονή: Μπαλί (4 νύχτες), Ουμπούντ (3 νύχτες)',
-        'Διατροφή: Πρόγευμα καθημερινά (Bed & Breakfast)',
-        'Έκδοση βίζας κατά την άφιξη (περίπου 30 USD)',
-        'Μέχρι 45 ημέρες πριν την άφιξη: €50 ανά άτομο',
-        '45–30 ημέρες πριν: 30% της συνολικής τιμής',
-        '30–21 ημέρες πριν: 50% της συνολικής τιμής',
-        '21–0 ημέρες πριν: 100% της συνολικής τιμής',
-        'Σε περίπτωση μη εμφάνισης (no-show): 100% της συνολικής τιμής'
-      ],
-      program: {
-        introduction: 'ΜΠΑΛΙ – 10 Μέρες\n\nΜια μαγευτική περιήγηση στο Μπαλί, το «Νησί των Θεών». Απολαύστε 4 νύχτες στο Μπαλί και 3 νύχτες στο Ουμπούντ, με 5★ διαμονή. Εξερευνήστε αρχαίους ναούς, αναβαθμίδες ρυζιού, παραδοσιακές τέχνες και το πνευματικό κέντρο της Ινδονησίας.',
-        day1_2: '1η – 2η Μέρα: Λάρνακα – Ντουμπάι – Μπαλί\n\nΣυνάντηση στο αεροδρόμιο Λάρνακας και αναχώρηση για Μπαλί με ενδιάμεση αλλαγή αεροσκάφους στο Ντουμπάι.\n\nΆφιξη τη 2η ημέρα στο εξωτικό Μπαλί, υποδοχή από τους τοπικούς μας συνεργάτες και μεταφορά στο ξενοδοχείο.\n\nΤακτοποίηση & ελεύθερος χρόνος για ξεκούραση.\n\nΔιανυκτέρευση στο Μπαλί.',
-        day3: '3η Μέρα: Μπαλί – Ελεύθερη Ημέρα\n\nΠρόγευμα & ελεύθερος χρόνος.\n\nΕνδεικτικά μπορείτε να:\n• Χαλαρώσετε σε παραλία / πισίνα\n• Επισκεφθείτε τοπικές αγορές & καταστήματα με χειροποίητα αντικείμενα\n• Απολαύσετε μασάζ & θεραπείες ευεξίας\n\nΤο βράδυ:\n• Κοκτέιλ & δείπνο σε Κούτα / παραθαλάσσια εστιατόρια με ηλιοβασίλεμα.\n\nΔιανυκτέρευση στο Μπαλί.',
-        day4: '4η Μέρα: Μπαλί – Μενγκουί – Ulun Danu – Tanah Lot\n\nΜετά το πρωινό:\n\n• Επίσκεψη στο Mengwi και στον βασιλικό ναό Taman Ayun (17ος αιώνας) με τάφρους & κήπους\n• Συνέχεια στον ναό Ulun Danu στη λίμνη Beratan, μέσα σε κρατήρα παλιού ηφαιστείου\n• Γεύμα σε τοπικό εστιατόριο\n• Επίσκεψη στον διάσημο ναό Tanah Lot, χτισμένο πάνω σε βράχο μέσα στη θάλασσα – ιδανικό σημείο για ηλιοβασίλεμα\n\nΕπιστροφή στο ξενοδοχείο.\nΔιανυκτέρευση στο Μπαλί.',
-        day5: '5η Μέρα: Μπαλί – Ελεύθερη Ημέρα\n\nΠρόγευμα και μέρα ελεύθερη για:\n\n• Χαλάρωση στο θέρετρο\n• Χρήση spa & εγκαταστάσεων\n• Βόλτες & αγορές\n\nΒράδυ με προτάσεις για δείπνο σε παραλιακά εστιατόρια.\n\nΔιανυκτέρευση στο Μπαλί.',
-        day6: '6η Μέρα: Μπαλί – Τοχπάτι – Batuan – Mas – Ουμπούντ\n\nΠρόγευμα & αναχώρηση για Ουμπούντ.\n\nΣτη διαδρομή:\n\n• Tohpati – παραδοσιακή τέχνη batik (υφάσματα)\n• Batuan – χωριό με παραδοσιακή ζωγραφική\n• Mas – διεθνώς γνωστό για τα ξυλόγλυπτα\n\nΆφιξη στο Ουμπούντ, μεταφορά & τακτοποίηση στο ξενοδοχείο.\n\nΔιανυκτέρευση στο Ουμπούντ.',
-        day7: '7η Μέρα: Ουμπούντ – Δάσος των Πιθήκων – Ubud Palace – Tegalalang – Goa Gajah\n\nΜετά το πρόγευμα:\n\n• Επίσκεψη στο Ιερό Δάσος των Πιθήκων (Monkey Forest)\n• Επίσκεψη στο Ubud Royal Palace\n• Βόλτα & αγορές στην παραδοσιακή Ubud Market\n• Στάση στις διάσημες αναβαθμίδες ρυζιού Tegalalang Rice Terraces\n• Γεύμα σε τοπικό εστιατόριο\n• Επίσκεψη στο Goa Gajah (Σπηλιά του Ελέφαντα)\n\nΕπιστροφή στο ξενοδοχείο.\nΔιανυκτέρευση στο Ουμπούντ.',
-        day8: '8η Μέρα: Ουμπούντ – Ελεύθερη Ημέρα\n\nΠρόγευμα & ελεύθερη ημέρα στο πνευματικό περιβάλλον του Ουμπούντ.\n\nΠροαιρετικά:\n• Rafting στον ποταμό Ayung\n• Μαθήματα γιόγκα\n• Τελετουργίες spa\n• Ή ελεύθερος χρόνος για αγορές & χαλαρές βόλτες.\n\nΔιανυκτέρευση στο Ουμπούντ.',
-        day9_10: '9η – 10η Μέρα: Ουμπούντ – Ντουμπάι – Λάρνακα\n\nΠρόγευμα & χρόνος ελεύθερος.\n\nCheck-out το μεσημέρι & φύλαξη αποσκευών στο ξενοδοχείο\n\nΠροαιρετικό μασάζ ή spa πριν την αναχώρηση\n\nΑργά το απόγευμα μεταφορά στο αεροδρόμιο για την πτήση Denpasar – Dubai – Larnaca.\n\nΆφιξη στη Λάρνακα την 10η ημέρα.'
-      },
-      gallery: [
-        '/images/bali/bali-hero.webp'
       ]
     }
   },
@@ -18896,6 +18104,1232 @@ export const travelPackages = [
         day8: '19 Μαΐου – Αναχώρηση\n\nΜεταφορά στο αεροδρόμιο νωρίς το πρωί και πτήση επιστροφής στη Λάρνακα, γεμάτες αναμνήσεις από την καρδιά της Σκανδιναβίας.'
       }
     }
+  },
+  {
+    id: 302,
+    title: 'ΜΑΛΤΑ - 5 Μέρες',
+    destination: 'Malta',
+    category: 'Summer Packages',
+    price: 975,
+    duration: '5 Μέρες',
+    description: 'Καλοκαιρινό πακέτο 5 ημερών στη Μάλτα με επιλογές 4* και 5* ξενοδοχείων.',
+    longDescription: 'Πακέτο 5 ημερών για Μάλτα με διαμονή σε επιλεγμένα 4* και 5* ξενοδοχεία με Bed & Breakfast και αναχωρήσεις Ιούλιο και Αύγουστο.',
+    image: '🇲🇹',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '08/07, 15/07, 22/07, 05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Malta',
+      monthAvailability: 'July - August',
+      roomType: 'Economy / Standard / Classic / Superior',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage: 'Μία αποσκευή μέχρι 25 κιλά και μία χειραποσκευή μέχρι 7 κιλά.',
+      coverImage: '/images/malta-package/malta-hero-cover.webp',
+      thumbnailImage: '/images/malta-package/malta-thumbnail-one.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '08/07, 15/07, 22/07, 05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+          route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Luqa International (MLA), Malta, Malta',
+          flight: 'EK 109',
+          time: '12:15 → 14:00',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '08/07, 15/07, 22/07, 05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+          route: 'Luqa International (MLA), Malta, Malta → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'EK 110',
+          time: '15:30 → 18:55',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Preluna Hotel & Spa - Malta',
+          stars: 4,
+          roomType: 'Economy Room',
+          image: '/images/malta-package/Preluna-spa-malta.webp',
+          location: '124 Tower Road, Sliema, Malta, 1605, Malta',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 975, single: 1119, child1: 795 },
+          packagePrice: 1950,
+          departureDate: '08/07, 15/07, 22/07',
+          nights: 4
+        },
+        {
+          name: 'Preluna Hotel & Spa - Malta',
+          stars: 4,
+          roomType: 'Economy Room',
+          image: '/images/malta-package/Preluna-spa-malta.webp',
+          location: '124 Tower Road, Sliema, Malta, 1605, Malta',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 995, single: 1139, child1: 795 },
+          packagePrice: 1990,
+          departureDate: '05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+          nights: 4
+        },
+        {
+          name: 'Mercure Hotel - Malta',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/malta-package/Mercure Hotel - Malta.webp',
+          location: "Qaliet Street St. Julian's, 3257, Malta, Malta",
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1059, single: 1475, child1: 619 },
+          packagePrice: 2118,
+          departureDate: '08/07, 15/07, 22/07',
+          nights: 4
+        },
+        {
+          name: 'Mercure Hotel - Malta',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/malta-package/Mercure Hotel - Malta.webp',
+          location: "Qaliet Street St. Julian's, 3257, Malta, Malta",
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1079, single: 1495, child1: 619 },
+          packagePrice: 2158,
+          departureDate: '05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+          nights: 4
+        },
+        {
+          name: 'Intercontinental Hotel & Resort - Malta',
+          stars: 5,
+          roomType: 'Classic Room',
+          image: '/images/malta-package/Intercontinental-malta.webp',
+          location: "St George's Bay, St Julian’s, 3310, Malta, Malta",
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1275, single: 1919, child1: 619, child2: 619 },
+          packagePrice: 2550,
+          departureDate: '08/07, 15/07, 22/07',
+          nights: 4
+        },
+        {
+          name: 'Intercontinental Hotel & Resort - Malta',
+          stars: 5,
+          roomType: 'Classic Room',
+          image: '/images/malta-package/Intercontinental-malta.webp',
+          location: "St George's Bay, St Julian’s, 3310, Malta, Malta",
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1295, single: 1939, child1: 619, child2: 619 },
+          packagePrice: 2590,
+          departureDate: '05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+          nights: 4
+        },
+        {
+          name: 'Malta Marriott Hotel & Spa - Malta',
+          stars: 5,
+          roomType: 'Superior Room',
+          image: '/images/malta-package/Malta-marriot-hotel.webp',
+          location: "39 Main Street, Balluta Bay, St. Julian's, Malta, STJ1017, Malta, Malta",
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1359, single: 1975, child1: 619, child2: 619 },
+          packagePrice: 2718,
+          departureDate: '08/07, 15/07, 22/07',
+          nights: 4
+        },
+        {
+          name: 'Malta Marriott Hotel & Spa - Malta',
+          stars: 5,
+          roomType: 'Superior Room',
+          image: '/images/malta-package/Malta-marriot-hotel.webp',
+          location: "39 Main Street, Balluta Bay, St. Julian's, Malta, STJ1017, Malta, Malta",
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1379, single: 1995, child1: 619, child2: 619 },
+          packagePrice: 2758,
+          departureDate: '05/08, 09/08, 12/08, 16/08, 19/08, 23/08',
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Μάλτα - Λάρνακα με Emirates.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τέσσερα βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα, με πολυτελή πούλμαν.',
+        'Εισιτήρια εισόδου στο Mediterraneo Marine Park, Playmobil, Χωριό του Πόπαϋ και το Esplora.',
+        'Τοπικός Ελληνόφωνος Ξεναγός κατά τη διάρκεια της Πανοραμικής εκδρομής.',
+        'Τοπικός Ελληνόφωνος Συνοδός κατά τη διάρκεια των επισκέψεων στα πάρκα.',
+        'Μία αποσκευή μέχρι 25 κιλά και μια χειραποσκευή μέχρι 7 κιλά.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Δικαιώματα εισόδων στους τόπους επισκέψεων.',
+        'Τοπικός φόρος του ξενοδοχείου (€0,50 ανά άτομο ανά βράδυ), πληρώνεται επιτόπου.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      note: 'Το πρόγραμμα ενδέχεται να πραγματοποιηθεί με διαφορετική σειρά αλλά με παροχή όλων των υπηρεσιών.\n\nΑπαιτείται έγκυρη προκράτηση για συμμετοχή στα προγράμματα με τα δελφίνια.',
+      cancellationPolicy: 'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: {
+        introduction: '1η Μέρα: Λάρνακα - Μάλτα\n\nΑναχώρηση από το αεροδρόμιο της Λάρνακας με προορισμό το νησί των Ιπποτών, τη μαγευτική Μάλτα. Άφιξη στο αεροδρόμιο και μεταφορά στο ξενοδοχείο. Τακτοποίηση στα δωμάτια και χρόνος ελεύθερος για μια πρώτη γνωριμία με το νησί. Διανυκτέρευση.',
+        day2: '2η Μέρα: Χωριό του Πόπαϋ - Mediterraneo Marine Park\n\nΜετά το πρόγευμα, αναχώρηση για το γραφικό ψαροχώρι του Πόπαϋ, ένα υπαίθριο μουσείο και θεματικό πάρκο που δημιουργήθηκε ως σκηνικό της ομώνυμης ταινίας. Σήμερα αποτελεί έναν υπέροχο χώρο ψυχαγωγίας για όλη την οικογένεια, όπου μπορείτε να επισκεφθείτε τα πολύχρωμα ξύλινα σπιτάκια, να παρακολουθήσετε παραστάσεις και να συμμετάσχετε σε οργανωμένες δραστηριότητες. Γεύμα (προαιρετικό). Στη συνέχεια, επίσκεψη στο Mediterraneo Marine Park, το μοναδικό θαλάσσιο πάρκο της Μάλτας. Μια φανταστική και αξέχαστη εμπειρία, όπου θα έχετε την ευκαιρία να δείτε από κοντά τα μαγευτικά ρινοδέλφινα, θαλάσσια λιοντάρια, εξωτικά πουλιά, ερπετά και άλλα. Το αποκορύφωμα της επίσκεψης είναι η δυνατότητα να αγγίξετε ή ακόμη και να κολυμπήσετε με τα δελφίνια (προαιρετικά), μια πραγματικά μοναδική εμπειρία ζωής που δεν πρέπει να χάσετε. Επιστροφή στο ξενοδοχείο. Διανυκτέρευση.',
+        day3: '3η Μέρα: Κέντρο Επιστήμης Esplora - Πανοραμική Ξενάγηση της Μάλτας\n\nΜετά το πρόγευμα μεταφορά στη γραφική πόλη Καλκάρα για επίσκεψη στο διαδραστικό επιστημονικό κέντρο Esplora. Με περισσότερα από 200 εσωτερικά και εξωτερικά εκθέματα και πρακτικά εργαστήρια, μικροί και μεγάλοι ανακαλύπτουν πως η επιστήμη δεν είναι μόνο χρήσιμη στην καθημερινότητά μας αλλά και συναρπαστικά διασκεδαστική. Στη συνέχεια ακολουθεί πανοραμική ξενάγηση της Μάλτας, μια διαδρομή μέσα από το πανέμορφο τοπίο του νησιού. Ξεκινάμε με την πανοραμική θέα γύρω από τις οχυρώσεις της Βαλέτα και τα εντυπωσιακά τείχη που την περιβάλλουν. Έπειτα περνάμε από το ιστορικό σύμπλεγμα των Τριών Πόλεων, Σένγκλεα - Κοσπίκουα - Βιτοριόσα, όπου πρωτοεγκαταστάθηκε το Τάγμα των Ιπποτών του Αγίου Ιωάννη. Η διαδρομή συνεχίζεται προς το παραδοσιακό ψαροχώρι Μαρσασλόκκ, γνωστό για τα πολύχρωμα ψαροκάικα, και στο εντυπωσιακό Μπλέ Παράθυρο με τα κρυστάλλινα νερά και τους απόκρημνους βράχους. Ακολουθεί στάση στον λόφο Ραμπάτ και στο χωριό Μόστα, όπου δεσπόζει η περίφημη εκκλησία της Κοιμήσεως της Θεοτόκου, με τον τρίτο μεγαλύτερο θόλο στην Ευρώπη. Επιστροφή στο ξενοδοχείο. Διανυκτέρευση.',
+        day4: '4η Μέρα: Μάλτα\n\nΠρόγευμα και ημέρα ελεύθερη για να την αξιοποιήσετε όπως εσείς επιθυμείτε. Σας προτείνουμε μια επίσκεψη στο Εθνικό Ενυδρείο της Μάλτας, το οποίο διαθέτει 41 θεματικές δεξαμενές σχεδιασμένες να αναπαριστούν το θαλάσσιο περιβάλλον της Μεσογείου. Θα έχετε την ευκαιρία να δείτε από κοντά μεσογειακά ψάρια της θάλασσας της Μάλτας, καρχαρίες, σαλάχια και πολλά ακόμη εντυπωσιακά θαλάσσια είδη. Εναλλακτικά, μπορείτε να πραγματοποιήσετε εκδρομή στο γραφικό νησί Γκόζο, γνωστό για το αυθεντικό του χρώμα, τα ήρεμα τοπία και τα παραδοσιακά χωριά του. Για όσους επιθυμούν μια πιο χαλαρή εμπειρία, προτείνεται μια μίνι κρουαζιέρα γύρω από τις ακτές της Μάλτας, με στάσεις για φωτογραφίες στα εντυπωσιακά βράχια και τα γαλαζοπράσινα νερά ή να επιλέξετε το flying experience όπου θα έχετε την ευκαιρία να ζήσετε μια μοναδική εμπειρία πτήσης και να αισθανθείτε σαν να πετάτε πάνω από τη Μάλτα. Διανυκτέρευση.',
+        day5: '5η Μέρα: Μάλτα - Playmobil - Λάρνακα\n\nΠρόγευμα και αναχώρηση για το πάρκο διασκέδασης Playmobil. Το ιδανικό μέρος για οικογένειες και παιδιά. Το πάρκο διαθέτει διάφορες θεματικές περιοχές όπως οι Πειρατές, η Αστυνομία και οι Ιππότες, όπου τα παιδιά μπορούν να παίξουν με τα κλασικά παιχνίδια της Playmobil και να εξερευνήσουν διαδραστικές ενότητες. Τα παιδιά θα έχουν την ευκαιρία να ζήσουν μοναδικές εμπειρίες και να αγοράσουν τα αγαπημένα τους Playmobil από το κατάστημα που υπάρχει στο πάρκο. Χρόνος για φαγητό (προαιρετικό), και στη συνέχεια μεταφορά στο αεροδρόμιο για την πτήση της επιστροφής.'
+      },
+      gallery: [
+        '/images/malta-package/malta-hero-cover.webp',
+        '/images/malta-package/malta-thumbnail-one.webp',
+        '/images/malta-package/Preluna-spa-malta.webp',
+        '/images/malta-package/Mercure Hotel - Malta.webp',
+        '/images/malta-package/Intercontinental-malta.webp',
+        '/images/malta-package/Malta-marriot-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 303,
+    title: 'ΜΑΔΡΙΤΗ / ΤΟΛΕΔΟ - 5 Μέρες',
+    destination: 'Spain',
+    category: 'Summer Packages',
+    price: 989,
+    duration: '5 Μέρες',
+    description: 'Καλοκαιρινό πακέτο 5 ημερών σε Μαδρίτη / Τολέδο με διαμονή σε ξενοδοχείο 4* με πρόγευμα.',
+    longDescription: 'Απολαύστε 5 μέρες σε Μαδρίτη / Τολέδο με διαμονή σε 4* ξενοδοχείο και επιλεγμένες αναχωρήσεις από Ιούνιο μέχρι Οκτώβριο.',
+    image: '🇪🇸',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '28/06, 01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 12/08, 19/08, 26/08, 02/09, 16/09, 30/09, 08/10',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Madrid / Toledo, Spain',
+      monthAvailability: 'June - October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Sky Express',
+      includedLuggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής.',
+      coverImage: '/images/madrid-package/madrid-cover-one.webp',
+      thumbnailImage: '/images/madrid-package/madrid-thumbnail.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '28/06, 01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 12/08, 19/08, 26/08, 02/09, 16/09, 30/09, 08/10',
+          route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Athens Int E Venizelos (ATH), Athens, Greece',
+          flight: 'GQ 607',
+          time: '07:00 → 08:45',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '28/06, 01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 12/08, 19/08, 26/08, 02/09, 16/09, 30/09, 08/10',
+          route: 'Athens Int E Venizelos (ATH), Athens, Greece → Barajas (MAD), Madrid, Spain',
+          flight: 'GQ 920',
+          time: '10:30 → 13:15',
+          message: 'Ώρα αναμονής στην Αθήνα για την επόμενη πτήση.',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '28/06, 01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 12/08, 19/08, 26/08, 02/09, 16/09, 30/09, 08/10',
+          route: 'Barajas (MAD), Madrid, Spain → Athens Int E Venizelos (ATH), Athens, Greece',
+          flight: 'GQ 921',
+          time: '14:15 → 18:45',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '28/06, 01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 12/08, 19/08, 26/08, 02/09, 16/09, 30/09, 08/10',
+          route: 'Athens Int E Venizelos (ATH), Athens, Greece → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'GQ 606',
+          time: '21:55 → 23:40',
+          message: 'Ώρα αναμονής στην Αθήνα για την επόμενη πτήση.',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/madrid-package/hotel-in-madrid.webp',
+          location: 'Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1089, single: 1399, child1: 1039 },
+          packagePrice: 2178,
+          departureDate: '28/06, 30/09',
+          nights: 4
+        },
+        {
+          name: '4* Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/madrid-package/hotel-in-madrid.webp',
+          location: 'Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1029, single: 1329, child1: 979 },
+          packagePrice: 2058,
+          departureDate: '01/07, 08/07, 15/07',
+          nights: 4
+        },
+        {
+          name: '4* Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/madrid-package/hotel-in-madrid.webp',
+          location: 'Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 989, single: 1255, child1: 949 },
+          packagePrice: 1978,
+          departureDate: '22/07',
+          nights: 4
+        },
+        {
+          name: '4* Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/madrid-package/hotel-in-madrid.webp',
+          location: 'Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1059, single: 1379, child1: 1015 },
+          packagePrice: 2118,
+          departureDate: '29/07, 05/08, 12/08, 19/08, 26/08, 02/09, 16/09',
+          nights: 4
+        },
+        {
+          name: '4* Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/madrid-package/hotel-in-madrid.webp',
+          location: 'Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1289, single: 1785, child1: 1219 },
+          packagePrice: 2578,
+          departureDate: '08/10',
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Αθήνα - Μαδρίτη - Αθήνα - Λάρνακα με πτήσεις της Sky Express.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε κεντρικά ξενοδοχεία 4* με πρόγευμα τύπου μπουφέ.',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        'Τοπικοί ελληνόφωνοι ξεναγοί κατά τη διάρκεια των ξεναγήσεων.',
+        'Έμπειρος Ελληνόφωνος Αρχηγός / συνοδός.',
+        'Μια αποσκευή 23κιλών και μια χειραποσκευή 8κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Εισιτήρια εισόδους στους χώρους επισκέψεων.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.',
+        'Προαιρετικό - Πάρκο Warner Bros – 75 ευρώ το άτομο. Περιλαμβάνεται μεταφορά και εισιτήριο εισόδου. (Ελάχιστη συμμετοχή 20 άτομα).'
+      ],
+      note: 'Οι τιμές και η διαθεσιμότητα υπόκεινται σε επιβεβαίωση κατά την κράτηση.',
+      cancellationPolicy: 'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωση των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.'
+      ],
+      program: {
+        introduction: 'Διανυκτερεύσεις: Μαδρίτη (4)',
+        day1: '1η Μέρα: Λάρνακα - Αθήνα - Μαδρίτη\n\nΣυγκέντρωση στο αεροδρόμιο Λάρνακας και αναχώρηση για τη Μαδρίτη με ενδιάμεση στάση στην Αθήνα. Άφιξη στην ισπανική πρωτεύουσα, υποδοχή από τον αρχηγό της εκδρομής και μεταφορά στο ξενοδοχείο. Τακτοποίηση στα δωμάτια και ελεύθερος χρόνος για μια πρώτη γνωριμία με τη ζωντανή ατμόσφαιρα της πόλης. Σας προτείνουμε έναν χαλαρό περίπατο στην Πουέρτα ντελ Σολ και την Πλάθα Μαγιόρ, δύο από τα πιο χαρακτηριστικά και πολυσύχναστα σημεία της Μαδρίτης, όπου θα νιώσετε από την πρώτη στιγμή τον παλμό της μαδριλένικης ζωής. Εναλλακτικά, μπορείτε να περπατήσετε κατά μήκος της Γκραν Βία, της εντυπωσιακής κεντρικής λεωφόρου με τα ιστορικά κτίρια, τα καταστήματα, τα θέατρα και τις καφετέριες που σφύζουν από ζωή. Όσοι επιθυμείτε κάτι πιο ήρεμο, μπορείτε να απολαύσετε μια βόλτα στο Πάρκο Ρετίρο, την πράσινη όαση της πόλης, με τις λίμνες, τους κήπους και τα υπέροχα μονοπάτια του. Για μια πιο γαστρονομική εμπειρία, προτείνουμε επίσκεψη στη σκεπαστή αγορά Μερκάδο ντε Σαν Μιγκέλ, όπου θα έχετε την ευκαιρία να δοκιμάσετε αυθεντικές τοπικές γεύσεις και ποιοτικά τάπας, όπως συνηθίζουν οι Ισπανοί. Διανυκτέρευση στη Μαδρίτη.',
+        day2: '2η Μέρα: Μαδρίτη (πανοραμική ξενάγηση)\n\nΠρόγευμα στο ξενοδοχείο και αρχίζουμε την πανοραμική ξενάγησή μας στη Μαδρίτη, μια πόλη γεμάτη ιστορία, τέχνη και ζωντάνια. Πρώτη μας στάση η κεντρική πλατεία Πουέρτα ντελ Σολ, το «χιλιομετρικό μηδέν» της Ισπανίας, από όπου ξεκινούν συμβολικά όλοι οι δρόμοι της χώρας. Σε πολύ κοντινή απόσταση βρίσκεται η Πλάθα Μαγιόρ, μια από τις πιο εντυπωσιακές πλατείες της πόλης, περιτριγυρισμένη από τριώροφα ιστορικά κτήρια με τα χαρακτηριστικά 237 μπαλκόνια που βλέπουν στην πλατεία. Θα περάσουμε επίσης από την παραδοσιακή σκεπαστή αγορά Μερκάδο Σαν Μιγκέλ, γνωστή για τις εκλεκτές γκουρμέ γεύσεις της, ποιοτικά προϊόντα και αυθεντική μαδριλένικη ατμόσφαιρα. Η περιήγησή μας συνεχίζεται με θέα σε σημαντικά κυβερνητικά κτήρια, ανάμεσα στα οποία και η Βουλή των Ισπανών. Στη συνέχεια θα δούμε το περίφημο Μουσείο Πράδο, τη σπουδαιότερη πινακοθήκη της Ισπανίας, με αριστουργήματα μεγάλων ζωγράφων όπως οι Γκόγια, Βελάσκεθ, Πικάσο, Νταλί, Μιρό και πολλοί άλλοι. Η πανοραμική μας εικόνα της πόλης ολοκληρώνεται με τον ιστορικό σιδηροδρομικό σταθμό Ατότσα, ένα εντυπωσιακό αρχιτεκτονικό στολίδι και σημαντικό συγκοινωνιακό κόμβο της Μαδρίτης. Επιστροφή στο ξενοδοχείο και ελεύθερος χρόνος. Το βράδυ σας προτείνουμε, προαιρετικά, να παρακολουθήσετε μία παράσταση μουσικής και φλαμένκο, για να γνωρίσετε από κοντά τον αυθεντικό ρυθμό και το πάθος της ισπανικής παράδοσης.',
+        day3: '3η Μέρα: Μαδρίτη - Τολέδο\n\nΜετά το πρωινό, αναχώρηση για το μεσαιωνικό Τολέδο στην Καστίλη-Λα Μάντσα, την πόλη όπου έζησε και μεγαλούργησε ο Ελ Γκρέκο τα περισσότερα χρόνια της ζωής του. Χτισμένο αμφιθεατρικά πάνω στον ποταμό Τάγο, το Τολέδο είναι από τις πιο εντυπωσιακές ιστορικές πόλεις της Ισπανίας. Από τον 11ο έως τον 16ο αιώνα υπήρξε πρωτεύουσα της ισπανικής αυτοκρατορίας και ισχυρό πνευματικό και πολιτιστικό κέντρο, ενώ ήταν φημισμένο και για την παραγωγή των καλύτερων σπαθιών στη Δύση. Σήμερα ολόκληρη η πόλη έχει ενταχθεί στα Μνημεία Παγκόσμιας Πολιτιστικής Κληρονομιάς της ΟΥΝΕΣΚΟ και μοιάζει με ζωντανό μουσείο αρχιτεκτονικής. Θα γνωρίσουμε τη μαυριτανική όψη της πόλης που διατηρείται άρτια, τα δαιδαλώδη σοκάκια και τις ιστορικές γειτονιές που συνδυάζουν χριστιανικά, εβραϊκά και αραβικά στοιχεία. Ανάμεσα στα σημαντικότερα αξιοθέατα ξεχωρίζει ο επιβλητικός γοτθικός Καθεδρικός Ναός (1493), χτισμένος πάνω στα θεμέλια παλαιότερου ναού του 6ου αιώνα, με σπουδαία έργα τέχνης, ανάμεσά τους δημιουργίες των Γκόγια και Ελ Γκρέκο. Θα δούμε επίσης το περίφημο οχυρό του Αλκάθαρ, ένα μνημειακό τετράγωνο οικοδόμημα με πύργους σε κάθε γωνία, που δεσπόζει στον λόφο πάνω από την πόλη και αποτελεί σύμβολό της. Στη συνέχεια, προαιρετικά, μπορείτε να επισκεφθείτε το Μουσείο Ελ Γκρέκο, που άνοιξε το 1911 στην εβραϊκή συνοικία. Αποτελείται από δύο κτίρια – ένα σπίτι του 16ου αιώνα με αυλή και έναν κήπο, καθώς και ένα κτίριο των αρχών του 20ού αιώνα που φιλοξενεί τον εκθεσιακό χώρο. Το παλαιό σπίτι έχει αναμορφωθεί με βάση τα σχέδια της κατοικίας του καλλιτέχνη, η οποία δεν υπάρχει πια. Το Τολέδο συνδέεται και με τη λογοτεχνία, καθώς αναφέρεται στον Δον Κιχώτη του Θερβάντες. Για τον εορτασμό των 400 ετών από την έκδοση του πρώτου τόμου του έργου, έχουν δημιουργηθεί δύο διαδρομές που ακολουθούν τα βήματα του μυθιστορηματικού ήρωα, προσφέροντας μια ξεχωριστή εμπειρία περιήγησης. Μετά το τέλος της ξενάγησής μας, ελεύθερος χρόνος για βόλτα και φωτογραφίες και στη συνέχεια αναχώρηση για την επιστροφή μας στη Μαδρίτη. Διανυκτέρευση.',
+        day4: '4η Μέρα: Μαδρίτη - Πάρκο Warner Bros (προαιρετικό)\n\nΜετά το πρόγευμα όσοι θα λάβουν μέρος προαιρετικά, αναχώρηση για το εντυπωσιακό Πάρκε Γουόρνερ Μαδρίτης, ένα από τα κορυφαία θεματικά πάρκα της Ευρώπης, αφιερωμένο στον κινηματογραφικό κόσμο της Γουόρνερ Μπρος, στους υπερήρωες της Ντι-Σι Κόμικς και στους αγαπημένους ήρωες των Λούνι Τουνς, όπου θα περάσουμε μια ολόκληρη μέρα γεμάτη δράση και διασκέδαση· το πάρκο χωρίζεται σε πέντε θεματικές ζώνες: το Χόλιγουντ Μπουλεβάρ με σκηνικά που θυμίζουν το παλιό Χόλιγουντ και κινηματογραφική ατμόσφαιρα, τον Κόσμο των Υπερηρώων Ντι-Σι με δυναμικά τρενάκια και ατραξιόν όπως ο Σούπερμαν: Η Ατραξιόν του Ατσαλιού και το Μπάτμαν: Άρκχαμ Άσαϊλουμ, το Καρτούν Βίλατζ ιδανικό για οικογένειες με πολύχρωμες διαδρομές και ήρωες των Λούνι Τουνς, τα Στούντιος Κινηματογραφικού Κόσμου με σκηνικά στούντιο, καθημερινά θεάματα κασκαντέρ και θεματικές παραστάσεις, και την Περιοχή της Άγριας Δύσης με ξύλινα σκηνικά, γουέστερν διαδρομές και δροσερές νερο-ατραξιόν· ελεύθερος χρόνος για παιχνίδια, παρελάσεις χαρακτήρων, θεάματα, αγορές και φαγητό στα θεματικά εστιατόρια, και αργά το απόγευμα αναχώρηση και επιστροφή στο ξενοδοχείο στη Μαδρίτη για διανυκτέρευση.',
+        day5: '5η Μέρα: Μαδρίτη - Αθήνα - Λάρνακα\n\nΜετά το πρόγευμα, μεταφορά στο αεροδρόμιο της Μαδρίτης για την πτήση επιστροφής μας προς Λάρνακα, με ενδιάμεση αλλαγή αεροσκάφους στην Αθήνα. Άφιξη στο αεροδρόμιο Λάρνακας το βράδυ, γεμάτοι όμορφες εικόνες και αναμνήσεις από το ταξίδι μας.'
+      },
+      gallery: ['/images/madrid-package/madrid-cover-one.webp']
+    }
+  },
+  {
+    id: 304,
+    title: 'ΒΑΡΚΕΛΩΝΗ\n5 Μέρες',
+    destination: 'Spain',
+    category: 'Summer Packages',
+    price: 989,
+    duration: '5 Μέρες',
+    description: 'Καλοκαιρινό πακέτο 5 ημερών στη Βαρκελώνη με διαμονή σε 4* ξενοδοχεία και εκδρομή στο Μοντσεράτ.',
+    longDescription: 'Απολαύστε 5 μέρες στη Βαρκελώνη με πανοραμική ξενάγηση, ελεύθερη ημέρα στην πόλη και επίσκεψη στο Μοντσεράτ.',
+    image: '🇪🇸',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 19/08, 26/08',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Barcelona, Spain',
+      monthAvailability: 'July - August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής.',
+      coverImage: '/images/barcelona-package/barcelona-cover-one.webp',
+      thumbnailImage: '/images/barcelona-package/barcelona-thumbnail.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 19/08, 26/08',
+          route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Barcelona Intl. Airport (BCN), Barcelona, Spain',
+          flight: 'CY 322',
+          time: '07:00 → 10:30',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '01/07, 08/07, 15/07, 22/07, 29/07, 05/08, 19/08, 26/08',
+          route: 'Barcelona Intl. Airport (BCN), Barcelona, Spain → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'CY 323',
+          time: '11:30 → 16:20',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'ApartHotel Atenea - Barcelona',
+          stars: 4,
+          roomType: 'Family Room for 4 Pax',
+          image: '/images/barcelona-package/ApartHotel-tenea .webp',
+          location: 'Joan Güell, 207-211, Barcelona, 08028, Barcelona, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1095, triple: 1095, child1: 1065, child2: 1065 },
+          packagePrice: 2190,
+          departureDate: '01/07, 08/07, 22/07, 05/08, 19/08, 26/08',
+          nights: 4
+        },
+        {
+          name: 'ApartHotel Atenea - Barcelona',
+          stars: 4,
+          roomType: 'Family Room for 4 Pax',
+          image: '/images/barcelona-package/ApartHotel-tenea .webp',
+          location: 'Joan Güell, 207-211, Barcelona, 08028, Barcelona, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1125, triple: 1125, child1: 1085, child2: 1085 },
+          packagePrice: 2250,
+          departureDate: '15/07, 29/07, 12/08',
+          nights: 4
+        },
+        {
+          name: 'Hcc Regente Hotel - Barcelona',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/barcelona-package/Hcc-regente-hotel.webp',
+          location: 'Rambla Catalunya, 76, Barcelona, 08008, Barcelona, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1165, single: 1475, child1: 999 },
+          packagePrice: 2330,
+          departureDate: '15/07, 29/07, 12/08',
+          nights: 4
+        },
+        {
+          name: 'Catalonia Atenas Hotel - Barcelona',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/barcelona-package/Catalonia-atenas-hotel.webp',
+          location: 'Avenida Meridiana, 151, Sant Martí, 08026, Barcelona, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1135, single: 1539, child1: 1095 },
+          packagePrice: 2270,
+          departureDate: '01/07, 08/07, 22/07, 05/08, 19/08, 26/08',
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Βαρκελώνη – Λάρνακα με πτήσεις της Cyprus Airways.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε ξενοδοχεία ή διαμερίσματα 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές, περιηγήσεις, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα.',
+        'Έμπειρος τοπικός ελληνόφωνος αρχηγός / συνοδός.',
+        'Εισιτήριο εισόδου στη Μοντσεράτ.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων σε προαιρετικά αξιοθέατα/εκδρομές.',
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ό,τι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      note: 'Το πρόγραμμα ενδέχεται να πραγματοποιηθεί με διαφορετική σειρά αλλά με παροχή όλων των υπηρεσιών.',
+      cancellationPolicy: 'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: {
+        introduction: 'Διανυκτερεύσεις: Βαρκελώνη (4)',
+        day1: '1η Μέρα: Λάρνακα - Βαρκελώνη\n\nΒαρκελώνη! Μία από τις πιο κοσμοπολίτικες και γοητευτικές πόλεις της Ισπανίας. Η μοναδική αρχιτεκτονική της, η πλούσια καλλιτεχνική κληρονομιά, τα ιστορικά μνημεία και η αστείρευτη ζωντάνια της την καθιστούν ένα πραγματικό στολίδι της Καταλονίας. Αναχώρηση από το αεροδρόμιο Λάρνακας με απευθείας πτήση της Cyprus Airways προς Βαρκελώνη. Άφιξη, υποδοχή και μεταφορά στο ξενοδοχείο. Τακτοποίηση στα δωμάτια και χρόνος ελεύθερος για μια πρώτη γνωριμία με την πόλη ή ξεκούραση. Διανυκτέρευση.',
+        day2: '2η Μέρα: Βαρκελώνη (Πανοραμική ξενάγηση)\n\nΠρόγευμα και αναχώρηση για την πανοραμική μας ξενάγηση σε μία πόλη που συνδυάζει αρμονικά ιστορία, τέχνη και σύγχρονη ζωή. Η περιήγησή μας ξεκινά από την εντυπωσιακή Plaza España, μία από τις σημαντικότερες πλατείες της πόλης. Συνεχίζουμε προς τον λόφο Montjuïc, όπου θα δούμε τις Ολυμπιακές εγκαταστάσεις του 1992 και θα απολαύσουμε μοναδική πανοραμική θέα προς την πόλη και το λιμάνι. Κατηφορίζοντας, περνάμε από το Passeig de Colón και κατευθυνόμαστε προς την παραθαλάσσια συνοικία Barceloneta, γνωστή για τις παραλίες και τις παραδοσιακές ψαροταβέρνες της. Στη συνέχεια κάνουμε στάση σε ένα από τα κορυφαία σύμβολα της Βαρκελώνης, τη μοναδική Sagrada Familia, το αριστούργημα του Αντόνι Γκαουντί. Η ξενάγηση ολοκληρώνεται στην καρδιά της παλιάς πόλης, το ιστορικό Barri Gòtic, με τα μεσαιωνικά σοκάκια και τις γραφικές πλατείες, καθώς και την εκκλησία της Παναγίας της Θάλασσας (Santa Maria del Mar). Το απόγευμα ελεύθερο για βόλτες, καφέ ή αγορές. Διανυκτέρευση.',
+        day3: '3η Μέρα: Βαρκελώνη (μέρα ελεύθερη)\n\nΠρωινό στο ξενοδοχείο και ημέρα ελεύθερη για να ανακαλύψετε τη μαγευτική Βαρκελώνη με τον δικό σας ρυθμό. Μπορείτε να επισκεφθείτε εμβληματικά αξιοθέατα της πόλης, όπως τη διάσημη Sagrada Familia, το εντυπωσιακό Park Güell ή να περπατήσετε στον ζωντανό πεζόδρομο της La Rambla, απολαμβάνοντας την ατμόσφαιρα της πόλης. Για τους λάτρεις της τέχνης, προτείνεται επίσκεψη στο Μουσείο Πικάσο ή στο Ίδρυμα Joan Miró, ενώ όσοι προτιμούν χαλαρούς ρυθμούς μπορούν να απολαύσουν μια βόλτα στη γραφική συνοικία El Born ή στη γοητευτική Γοτθική Συνοικία (Barri Gòtic). Εναλλακτικά, μπορείτε να κατευθυνθείτε προς την παραλία της Barceloneta για στιγμές χαλάρωσης δίπλα στη θάλασσα ή να κάνετε αγορές στην περιοχή του Passeig de Gràcia, όπου βρίσκονται και τα περίφημα έργα του Γκαουντί, Casa Batlló και La Pedrera.',
+        day4: '4η Μέρα: Βαρκελώνη – Μοντσεράτ\n\nΠρωινό και ακολουθεί επίσκεψη στο επιβλητικό Μονσεράτ, έναν τόπο μοναδικής φυσικής ομορφιάς και βαθιάς πνευματικότητας. Το βουνό Μονσεράτ ξεχωρίζει για τους εντυπωσιακούς, παράξενους βραχώδεις σχηματισμούς του, που μοιάζουν σαν να έχουν σμιλευτεί από καλλιτέχνη της φύσης. Με απόκρημνες όψεις και κορυφές που θυμίζουν μεσαιωνικό φρούριο, το τοπίο είναι πραγματικά συγκλονιστικό και απόκοσμο, προσφέροντας υπέροχες εικόνες για φωτογραφίες και στιγμές απόλυτης ηρεμίας. Σε αυτό το μαγευτικό φυσικό σκηνικό είναι χτισμένο το φημισμένο Μοναστήρι του Μονσεράτ (Abadia de Montserrat), ένα από τα σημαντικότερα προσκυνήματα και αξιοθέατα της Ισπανίας. Το μοναστήρι χρονολογείται από τον 11ο αιώνα και αποτελεί σύμβολο πίστης, πολιτισμού και ιστορίας για ολόκληρη την περιοχή. Σήμερα φιλοξενεί μια κοινότητα περίπου 80 Βενεδικτίνων μοναχών, οι οποίοι ζουν αφιερωμένοι σε μια ζωή προσευχής, φιλοξενίας και καθημερινής εργασίας. Παράλληλα, το Μονσεράτ διατηρεί ενεργό και σημαντικό πνευματικό και πολιτιστικό έργο, με δράσεις όπως η έκδοση βιβλίων και περιοδικών, καθώς και η μελέτη της θεολογίας. Κατά την επίσκεψή σας θα έχετε χρόνο να περιηγηθείτε στους χώρους του μοναστηριού, να απολαύσετε τη μοναδική ατμόσφαιρα του τόπου, καθώς και την υπέροχη θέα προς την καταλανική ύπαιθρο. Επιστροφή το μεσημέρι στη Βαρκελώνη, γεμάτοι εικόνες και εμπειρίες από έναν από τους πιο ιδιαίτερους και εμβληματικούς προορισμούς της Ισπανίας.',
+        day5: '5η Μέρα: Βαρκελώνη - Λάρνακα\n\nΠρόγευμα και μεταφορά στο αεροδρόμιο για την πτήση επιστροφής στη Λάρνακα. Η εκδρομή ολοκληρώνεται, αφήνοντας υπέροχες αναμνήσεις και την υπόσχεση ότι θα ξαναγυρίσουμε!'
+      },
+      gallery: ['/images/barcelona-package/barcelona-cover-one.webp']
+    }
+  },
+  {
+    id: 305,
+    title: 'ΛΙΜΝΕΣ ΒΟΡΕΙΑΣ ΙΤΑΛΙΑΣ / ΕΛΒΕΤΙΚΕΣ ΑΛΠΕΙΣ – 5 Μέρες',
+    destination: 'Italy',
+    category: 'Summer Packages',
+    price: 1099,
+    duration: '5 days / 4 nights',
+    description:
+      'Ομαδικό ταξίδι στις λίμνες της Βόρειας Ιταλίας και τις Ελβετικές Άλπεις: Μιλάνο, Λίμνη Κόμο, Λουγκάνο, Στρέζα, Ζερμάτ και κρουαζιέρα στα νησιά Μπορομέ.',
+    longDescription:
+      'Five-day escorted tour from Larnaca to Milan and Lake Maggiore, with visits to Lake Como and Lugano, an alpine train excursion to Zermatt with views of the Matterhorn, and a cruise to the Borromean Islands. Stays in 4-star hotels in Milan and Stresa with bed and breakfast.',
+    image: '🇮🇹',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '12/07, 23/08, 26/07, 02/08, 09/08, 16/08',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Milan, Lake Como, Lugano, Stresa, Zermatt, Italy & Switzerland',
+      monthAvailability: 'July, August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+      coverImage: '/images/swiss-italy-package/italy-swiss-lakes-cover.webp',
+      thumbnailImage: '/images/swiss-italy-package/milan-swiss-thumbnail-.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '12/07, 23/08, 26/07, 02/08, 09/08, 16/08',
+          route:
+            'Larnaca International Airport (LCA), Larnaca, Cyprus → Malpensa (MXP), Milan, Italy',
+          flight: 'CY 342',
+          time: '14:10 → 17:00',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '12/07, 23/08, 26/07, 02/08, 09/08, 16/08',
+          route:
+            'Malpensa (MXP), Milan, Italy → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'CY 343',
+          time: '18:00 → 22:30',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotels – Milan / Stresa',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/swiss-italy-package/milan-stresa-hotel.webp',
+          location: 'Milan & Stresa, Italy',
+          prices: {
+            double: 1099,
+            single: 1249,
+            child1: 1049
+          },
+          departureDate: '12/07',
+          packagePrice: 2198
+        },
+        {
+          name: '4* Hotels – Milan / Stresa',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/swiss-italy-package/milan-stresa-hotel.webp',
+          location: 'Milan & Stresa, Italy',
+          prices: {
+            double: 1099,
+            single: 1249,
+            child1: 1049
+          },
+          departureDate: '23/08',
+          packagePrice: 2198
+        },
+        {
+          name: '4* Hotels – Milan / Stresa',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/swiss-italy-package/milan-stresa-hotel.webp',
+          location: 'Milan & Stresa, Italy',
+          prices: {
+            double: 1129,
+            single: 1279,
+            child1: 1069
+          },
+          departureDate: '26/07',
+          packagePrice: 2258
+        },
+        {
+          name: '4* Hotels – Milan / Stresa',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/swiss-italy-package/milan-stresa-hotel.webp',
+          location: 'Milan & Stresa, Italy',
+          prices: {
+            double: 1129,
+            single: 1279,
+            child1: 1069
+          },
+          departureDate: '02/08',
+          packagePrice: 2258
+        },
+        {
+          name: '4* Hotels – Milan / Stresa',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/swiss-italy-package/milan-stresa-hotel.webp',
+          location: 'Milan & Stresa, Italy',
+          prices: {
+            double: 1129,
+            single: 1279,
+            child1: 1069
+          },
+          departureDate: '09/08',
+          packagePrice: 2258
+        },
+        {
+          name: '4* Hotels – Milan / Stresa',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/swiss-italy-package/milan-stresa-hotel.webp',
+          location: 'Milan & Stresa, Italy',
+          prices: {
+            double: 1129,
+            single: 1279,
+            child1: 1069
+          },
+          departureDate: '16/08',
+          packagePrice: 2258
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Μιλάνο – Λάρνακα με πτήσεις της Cyprus Airways',
+        'Φόροι αεροδρομίων',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα',
+        'Εισιτήριο τρένου στο Ζερμάτ',
+        'Κρουαζιέρα στα Νησιά Μπορομέ',
+        'Αρχηγός/Συνοδός του γραφείου μας',
+        'Τοπικός φόρος διαμονής',
+        'Διόδια και στάθμευση των λεωφορείων καθώς και τις ειδικές εισόδους σε όλες τις πόλεις',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Εισιτήρια εισόδων στους χώρους επισκέψεων',
+        'Φαγητό στην πτήση',
+        'Ό,τι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: {
+        introduction:
+          'ΛΙΜΝΕΣ ΒΟΡΕΙΑΣ ΙΤΑΛΙΑΣ / ΕΛΒΕΤΙΚΕΣ ΑΛΠΕΙΣ – 5 Μέρες\n\nΔιανυκτερεύσεις: Μιλάνο (2), Στρέζα (2).\n\nΜαγευτικό ταξίδι από τη Λάρνακα στο κοσμοπολίτικο Μιλάνο, στις λίμνες της Βόρειας Ιταλίας (Κόμο, Ματζόρε), στο κομψό Λουγκάνο και στις Ελβετικές Άλπεις με το Ζερμάτ και το Μάτερχορν· ολοκληρώνεται με κρουαζιέρα στα νησιά Μπορομέ.',
+        day1:
+          '1η μέρα: Λάρνακα – Μιλάνο\n\nΣυγκέντρωση στο αεροδρόμιο της Λάρνακας και αναχώρηση με απευθείας πτήση για το κοσμοπολίτικο Μιλάνο, την αδιαμφισβήτητη πρωτεύουσα της μόδας, του design και της ιταλικής φινέτσας. Άφιξη σε μία από τις πιο δυναμικές και κομψές πόλεις της Ευρώπης, όπου το σύγχρονο στυλ συνδυάζεται αρμονικά με την πλούσια ιστορία και την εντυπωσιακή αρχιτεκτονική. Μεταφορά στο ξενοδοχείο μας και τακτοποίηση στα δωμάτια. Αφού ξεκουραστείτε μπορείτε να απολαύσετε μια πρώτη γνωριμία με την πόλη, περπατώντας στα κομψά της δρομάκια και νιώθοντας τον παλμό της ιταλικής καθημερινότητας. Για το βράδυ σας προτείνουμε μια βόλτα στην εντυπωσιακή Piazza Duomo, όπου ο φωτισμένος Καθεδρικός Ναός δημιουργεί μια μαγευτική ατμόσφαιρα. Μπορείτε να περπατήσετε στη φημισμένη Galleria Vittorio Emanuele II, να απολαύσετε έναν ιταλικό espresso ή aperitivo σε κάποιο από τα ιστορικά καφέ, ή να δειπνήσετε σε παραδοσιακή trattoria δοκιμάζοντας αυθεντική ιταλική πίτσα ή φρέσκα ζυμαρικά. Εναλλακτικά, για όσους επιθυμούν κάτι πιο μοντέρνο, η περιοχή Navigli με τα γραφικά κανάλια προσφέρει υπέροχη βραδινή ατμόσφαιρα, με πολλά wine bars και εστιατόρια, ιδανικά για ένα χαλαρό πρώτο βράδυ στο Μιλάνο.',
+        day2:
+          '2η μέρα: Μιλάνο (ξενάγηση)\n\nΠρωινό και ακολουθεί περιήγηση στο ιστορικό κέντρο της πόλης. Κατά τη διάρκειά της θα θαυμάσουμε τον επιβλητικό Καθεδρικό Ναό (Duomo), αριστούργημα γοτθικής αρχιτεκτονικής και σύμβολο της πόλης, με τα εντυπωσιακά μαρμάρινα αγάλματα και τις περίτεχνες λεπτομέρειες. Στη συνέχεια θα περάσουμε από την περίφημη σκεπαστή στοά Galleria Vittorio Emanuele II, με τη γυάλινη οροφή και τα εντυπωσιακά ψηφιδωτά δάπεδα, ένα από τα παλαιότερα και κομψότερα εμπορικά κέντρα της Ευρώπης. Η περιήγησή μας θα συνεχιστεί στο νεοκλασικό Θέατρο της Σκάλας του Μιλάνου (La Scala), έναν από τους σημαντικότερους ναούς της όπερας παγκοσμίως, καθώς και στο μουσείο του, όπου φιλοξενούνται σπάνια εκθέματα και αντικείμενα από την ένδοξη μουσική του ιστορία. Θα ακολουθήσει χρόνος ελεύθερος για βόλτες, καφέ και αγορές, ώστε να απολαύσετε τον παλμό της πόλης, να περιηγηθείτε στα κομψά καταστήματα και να ζήσετε την αυθεντική μιλανέζικη ατμόσφαιρα.',
+        day3:
+          '3η μέρα: Μιλάνο – Λίμνη Κόμο - Λουγκάνο - Στρέζα\n\nΜετά το πρωινό αναχωρούμε από το Μιλάνο με κατεύθυνση προς τη μαγευτική περιοχή των λιμνών της Βόρειας Ιταλίας. Πρώτη μας στάση η ειδυλλιακή Λίμνη Κόμο, ένας από τους πιο ρομαντικούς και κοσμοπολίτικους προορισμούς της Ιταλίας. Στην πόλη του Κόμο θα περιηγηθούμε στην όμορφη προκυμαία και στο ιστορικό κέντρο, όπου δεσπόζει ο επιβλητικός Καθεδρικός Ναός (Duomo). Χρόνος ελεύθερος για βόλτα, καφέ ή – προαιρετικά – μια σύντομη κρουαζιέρα στα γαλήνια νερά της λίμνης με θέα τις καταπράσινες πλαγιές και τις πολυτελείς βίλες. Συνεχίζουμε προς το κομψό Λουγκάνο, χτισμένο αμφιθεατρικά στις όχθες της ομώνυμης λίμνης, ανάμεσα στις επιβλητικές Άλπεις. Θα περπατήσουμε στο καλαίσθητο ιστορικό κέντρο με τις στοές και τις αριστοκρατικές πλατείες, ενώ θα δούμε και τον Καθεδρικό Ναό του San Lorenzo. Χρόνος για χαλαρή βόλτα στην παραλιακή promenade και για να απολαύσετε την ελβετική φινέτσα της πόλης. Αργά το απόγευμα αναχωρούμε για τη ρομαντική Στρέζα, στις όχθες της λίμνης Ματζόρε. Άφιξη και τακτοποίηση στο ξενοδοχείο μας. Διανυκτέρευση.',
+        day4:
+          '4η μέρα: Στρέζα - Αλπικό Τρένο για Ζερμάτ\n\nΠρωινό και αναχωρούμε για μια μοναδική ολοήμερη εκδρομή στις Ελβετικές Άλπεις, με προορισμό το κοσμοπολίτικο Ζερμάτ. Ακολουθώντας μια ειδυλλιακή, καταπράσινη διαδρομή μέσα από κοιλάδες και ορεινά τοπία, περνάμε τα σύνορα με την Ελβετία και φτάνουμε στην πόλη Τάες, όπου θα επιβιβαστούμε στο γραφικό αλπικό τρένο με κατεύθυνση το Ζερμάτ. Κατά τη διάρκεια της ανηφορικής διαδρομής, το τοπίο γίνεται όλο και πιο εντυπωσιακό, με πυκνά δάση, ορεινά ρυάκια και απότομες βουνοπλαγιές να συνθέτουν ένα σκηνικό αλπικής γοητείας. Με την άφιξή μας στο Ζερμάτ, ένα από τα πιο φημισμένα θέρετρα των Άλπεων, θα περιηγηθούμε στα γραφικά δρομάκια του χωριού, ανάμεσα σε ξύλινα σαλέ, μικρές μπουτίκ, καφέ και κομψά καταστήματα. Κυρίαρχη στο τοπίο είναι η θέα προς το επιβλητικό Μάτερχορν, το θρυλικό βουνό–σύμβολο της Ελβετίας, που με την χαρακτηριστική τριγωνική κορυφή του δεσπόζει πάνω από την κοιλάδα. Θα έχουμε χρόνο για να απολαύσουμε τον καθαρό αέρα των Άλπεων, να χαλαρώσουμε σε κάποιο από τα παραδοσιακά καφέ και –φυσικά– να δοκιμάσουμε αυθεντική ελβετική ζεστή σοκολάτα. Αργότερα, θα επιβιβαστούμε ξανά στο τρένο για το Τάες και από εκεί οδικώς θα επιστρέψουμε στη Στρέζα. Άφιξη στο ξενοδοχείο και χρόνος για ξεκούραση.',
+        day5:
+          '5η Μέρα: Στρέζα - Κρουαζιέρα Νησιά Μπορομέ – Μιλάνο - Λάρνακα\n\nΜετά το πρωινό επιβιβαζόμαστε σε πλοιάριο για μια μαγευτική κρουαζιέρα στα περίφημα Νησιά Μπορομέ, το στολίδι της Λίμνης Ματζόρε. Πρώτη μας στάση η εντυπωσιακή Isola Bella, το πιο φημισμένο από τα νησιά, που δεσπόζει σαν πλωτό παλάτι πάνω στα νερά της λίμνης. Θα δούμε το μεγαλοπρεπές μπαρόκ παλάτι της οικογένειας Μπορομέο και θα περιηγηθούμε στους μοναδικούς βαθμιδωτούς κήπους του, που αποτελούν αριστούργημα ιταλικής αρχιτεκτονικής τοπίου, με εξωτικά φυτά, αγάλματα και πανοραμική θέα στη λίμνη. Στη συνέχεια κατευθυνόμαστε προς τη γραφική Isola dei Pescatori (Νησί των Ψαράδων), το πιο αυθεντικό και παραδοσιακό από τα νησιά. Με τα στενά λιθόστρωτα σοκάκια, τα μικρά ψαροκάικα και τα παραδοσιακά σπίτια, διατηρεί τον χαρακτήρα ενός παλιού ψαροχωριού. Εδώ θα έχουμε ελεύθερο χρόνο για περίπατο και για να απολαύσουμε γεύμα σε κάποια από τις τοπικές trattorie με φρέσκο ψάρι και θέα τα γαλήνια νερά της λίμνης. Μετά την ολοκλήρωση της κρουαζιέρας επιστρέφουμε στη Στρέζα και αναχωρούμε για το αεροδρόμιο του Μιλάνου για την πτήση επιστροφής μας προς Λάρνακα. Επιστροφή γεμάτοι μοναδικές εικόνες, αριστοκρατική ατμόσφαιρα και όμορφες αναμνήσεις από ένα ταξίδι στις μαγευτικές λίμνες της Βόρειας Ιταλίας.'
+      },
+      gallery: [
+        '/images/swiss-italy-package/italy-swiss-lakes-cover.webp',
+        '/images/swiss-italy-package/milan-stresa-hotel.webp',
+        '/images/swiss-italy-package/milan-swiss-thumbnail-.webp'
+      ]
+    }
+  },
+  {
+    id: 306,
+    title: 'ΠΑΡΙΣΙ / ΝΟΡΜΑΝΔΙΑ / ΣΑΙΝΤ ΜΑΛΟ – 6 Μέρες',
+    destination: 'France',
+    category: 'Summer Packages',
+    price: 1295,
+    duration: '6 days / 5 nights',
+    description:
+      'Ομαδικό ταξίδι στο Παρίσι, τη Νορμανδία και τη Σαιν Μαλό, με ξενάγηση στο Καέν, εκδρομή στο Μον Σαιν Μισέλ, Ρουέν και κρουαζιέρα στον Σηκουάνα.',
+    longDescription:
+      'Six-day escorted tour from Larnaca: fly to Paris, continue to Caen for three nights, explore Saint-Malo and Mont Saint-Michel, visit Rouen, then two nights in Paris with a panoramic city tour and Seine cruise (Bateaux Mouches). Accommodation in selected 3* and 4* hotels in Caen and Paris with bed and breakfast.',
+    image: '🇫🇷',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '09/09, 30/09, 23/10',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Paris, Caen, Saint-Malo, Mont Saint-Michel, Rouen, France',
+      monthAvailability: 'September, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
+      coverImage: '/images/destinations/paris-hero.webp',
+      thumbnailImage: '/images/destinations/paris-disneyland.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '09/09, 30/09, 23/10',
+          route:
+            'Larnaca International Airport (LCA), Larnaca, Cyprus → Charles de Gaulle (CDG), Paris, France',
+          flight: 'CY 380',
+          time: '08:00 → 11:40',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '09/09, 30/09, 23/10',
+          route:
+            'Charles de Gaulle (CDG), Paris, France → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'CY 381',
+          time: '12:40 → 17:50',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '3* & 4* Hotels – Caen / Paris',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/destinations/paris-hotel.webp',
+          location: 'Caen & Paris, France',
+          prices: {
+            double: 1295,
+            single: 1655,
+            child1: 1195
+          },
+          departureDate: '09/09',
+          packagePrice: 2590,
+          nights: 5
+        },
+        {
+          name: '3* & 4* Hotels – Caen / Paris',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/destinations/paris-hotel.webp',
+          location: 'Caen & Paris, France',
+          prices: {
+            double: 1295,
+            single: 1655,
+            child1: 1195
+          },
+          departureDate: '30/09',
+          packagePrice: 2590,
+          nights: 5
+        },
+        {
+          name: '3* & 4* Hotels – Caen / Paris',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/destinations/paris-hotel.webp',
+          location: 'Caen & Paris, France',
+          prices: {
+            double: 1295,
+            single: 1655,
+            child1: 1195
+          },
+          departureDate: '23/10',
+          packagePrice: 2590,
+          nights: 5
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Παρίσι – Λάρνακα με πτήσεις της Cyprus Airways',
+        'Φόροι αεροδρομίων',
+        'Διαμονή για 5 βράδια σε ξενοδοχεία 3* και 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές, περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα',
+        'Μίας ώρας κρουαζιέρα στο Σηκουάνα',
+        'Τοπικός έμπειρος ελληνόφωνος αρχηγός / ξεναγός',
+        'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
+        'Δημοτικός φόρος του ξενοδοχείου στο Παρίσι',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Φαγητό και ποτό στην πτήση',
+        'Δικαιώματα εισόδων προαιρετικά',
+        'Οτιδήποτε δεν αναφέρεται στα περιλαμβανόμενα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: {
+        introduction:
+          'ΠΑΡΙΣΙ / ΝΟΡΜΑΝΔΙΑ / ΣΑΙΝΤ ΜΑΛΟ – 6 Μέρες\n\nΔιανυκτερεύσεις: Καέν (3), Παρίσι (2).\n\nΑπό τη γαλλική πρωτεύουσα και την κρουαζιέρα στον Σηκουάνα, στη Νορμανδία του Γουλιέλμου του Κατακτητή, τη Σαιν Μαλό και το Μον Σαιν Μισέλ, μέχρι τη μεσαιωνική Ρουέν — ένα συμπαγές ταξίδι γεμάτο ιστορία, αρχιτεκτονική και παριζιάνικη ατμόσφαιρα.',
+        day1:
+          '1η Μέρα: Λάρνακα - Παρίσι - Καέν\n\nΣυγκέντρωση στο αεροδρόμιο Λάρνακας και αναχώρηση για Παρίσι. Άφιξη στη γαλλική πρωτεύουσα, παραλαβή από τον αρχηγό μας και άμεση αναχώρηση οδικώς για τη Νορμανδία και την πόλη Καέν, μία από τις σημαντικότερες ιστορικές πόλεις της περιοχής. Κατά τη διαδρομή θα απολαύσουμε όμορφες εικόνες της γαλλικής υπαίθρου, με τα χαρακτηριστικά χωριά, τα καταπράσινα τοπία και τις απέραντες καλλιέργειες που προϊδεάζουν για την ατμόσφαιρα της Νορμανδίας. Άφιξη στο Καέν, τακτοποίηση στο ξενοδοχείο και ελεύθερος χρόνος για ξεκούραση ή μια πρώτη χαλαρή βόλτα στο κέντρο της πόλης. Διανυκτέρευση.',
+        day2:
+          '2η Μέρα: Καέν (ξενάγηση)\n\nΜετά το πρόγευμα ξεκινάμε την ξενάγησή μας στο ιστορικό Καέν, μια πόλη άρρηκτα δεμένη με τον Γουλιέλμο τον Κατακτητή και την ταραγμένη ιστορία της Νορμανδίας. Θα περιηγηθούμε στο κέντρο της πόλης, όπου τα μεσαιωνικά και κλασικά κτίρια συνυπάρχουν αρμονικά με τη σύγχρονη ζωή, και θα γνωρίσουμε τα σημαντικότερα αξιοθέατα της περιοχής. Ανάμεσά τους ξεχωρίζει το επιβλητικό Κάστρο της Καέν, ένα από τα μεγαλύτερα οχυρά της Ευρώπης, που δεσπόζει πάνω από την πόλη και προσφέρει πανοραμική θέα. Θα περάσουμε επίσης από το φημισμένο Αβαείο των Ανδρών, αριστούργημα ρομανικής αρχιτεκτονικής και τόπο ταφής του Γουλιέλμου, καθώς και από το Αβαείο των Γυναικών, εξίσου εντυπωσιακό μνημείο με σπουδαία ιστορική σημασία. Η βόλτα μας συνεχίζεται στα γραφικά δρομάκια της παλιάς πόλης, με τις πλατείες, τα καφέ και τα μικρά μαγαζιά που δίνουν στο Καέν τη ζεστή, νορμανδική του ατμόσφαιρα. Προαιρετικά, να επισκεφθείτε το Μνημείο της Ειρήνης, ένα από τα σημαντικότερα μουσεία της Γαλλίας αφιερωμένο στον Β΄ Παγκόσμιο Πόλεμο και την Απόβαση στη Νορμανδία. Επιστροφή στο ξενοδοχείο και ελεύθερος χρόνος για χαλάρωση ή προσωπικές περιηγήσεις. Διανυκτέρευση στο Καέν.',
+        day3:
+          '3η Μέρα: Καέν – Σαίντ Μαλό – Μόντ Σαίντ Μισιέλ\n\nΜετά το πρόγευμα αναχωρούμε από την Καέν και κατευθυνόμαστε προς τις βόρειες ακτές της Βρετάνης για να γνωρίσουμε τη θρυλική Saint-Malo, μια πόλη-φρούριο με ναυτική ιστορία και έντονο χαρακτήρα. Άφιξη και περίπατος στα επιβλητικά τείχη της παλιάς πόλης (Intra-Muros), στα στενά με τα γρανιτένια σπίτια και στις πλατείες που μοσχοβολούν θαλασσινό αέρα και κρεπ. Ο χρόνος εδώ είναι ιδανικός για να απολαύσετε τη θέα στον Ατλαντικό, να φωτογραφίσετε τα κάστρα και τις προμαχώνες και να νιώσετε την ατμόσφαιρα των παλιών κουρσάρων που έκαναν τη Saint-Malo διάσημη. Στη συνέχεια συνεχίζουμε για ένα από τα πιο εμβληματικά αξιοθέατα της Γαλλίας, το Mont Saint-Michel: το μαγευτικό νησάκι-βράχο που αναδύεται μέσα από τους παλιρροϊκούς κόλπους, σαν σκηνικό παραμυθιού. Θα περιηγηθούμε στα λιθόστρωτα ανηφορικά δρομάκια, ανάμεσα σε μικρά μαγαζάκια και παραδοσιακές κρεπερί, μέχρι να φτάσουμε στο εντυπωσιακό αβαείο στην κορυφή, από όπου η θέα στον κόλπο είναι πραγματικά καθηλωτική. Χρόνος ελεύθερος για εξερεύνηση και φωτογραφίες, πριν πάρουμε τον δρόμο της επιστροφής για το ξενοδοχείο μας, γεμάτοι εικόνες από δύο από τα πιο ατμοσφαιρικά μέρη της Βόρειας Γαλλίας. Διανυκτέρευση στο Καέν.',
+        day4:
+          '4η Μέρα: Καέν - Ρουέν - Παρίσι\n\nΜετά το πρόγευμα αφήνουμε την Καέν και αναχωρούμε για τη Ρουέν, την ιστορική πρωτεύουσα της άνω Νορμανδίας, μια πόλη-κόσμημα με μεσαιωνικό χαρακτήρα και πλούσια πολιτιστική κληρονομιά. Άφιξη και περίπατος στο κέντρο, όπου τα ξύλινα σπιτάκια με τις χαρακτηριστικές προσόψεις, τα λιθόστρωτα σοκάκια και οι γραφικές πλατείες δημιουργούν ατμόσφαιρα άλλης εποχής. Θα δούμε τον επιβλητικό γοτθικό Καθεδρικό της Παναγίας της Ρουέν, ένα από τα σπουδαιότερα μνημεία της Γαλλίας, καθώς και την παλιά αγορά και τα σημεία που συνδέονται με την ιστορία της Ζαν ντ\'Αρκ, που σημάδεψε την πόλη. Χρόνος ελεύθερος για καφέ και φωτογραφίες, πριν συνεχίσουμε οδικώς για το Παρίσι. Άφιξη στη γαλλική πρωτεύουσα, μεταφορά και τακτοποίηση στο ξενοδοχείο, με το υπόλοιπο της ημέρας ελεύθερο για μια πρώτη βραδινή βόλτα στην «Πόλη του Φωτός». Διανυκτέρευση.',
+        day5:
+          '5η Μέρα: Παρίσι (ξενάγηση) - Κρουαζιέρα Σηκουάνα\n\nΜετά το πρωινό αναχωρούμε για το κέντρο της πόλης ώστε να απολαύσουμε την πανοραμική μας γνωριμία με τα πιο εμβληματικά σημεία του Παρισιού. Πρώτη μας στάση στο Τροκαντερό, από όπου θα έχουμε την καλύτερη θέα για φωτογραφίες του Πύργου του Άιφελ, του απόλυτου συμβόλου της πόλης και ενός από τα πιο αναγνωρίσιμα μνημεία στον κόσμο. Συνεχίζουμε προς την Αψίδα του Θριάμβου και τη λαμπερή Λεωφόρο των Ηλυσίων Πεδίων, τον πιο διάσημο παριζιάνικο άξονα που συνδέεται άμεσα με την ιστορία και την περηφάνια της Γαλλικής Δημοκρατίας. Καθώς προχωρούμε, βλέπουμε τα μεγαλόπρεπα Γκραν Παλαί και Πτι Παλαί, το εντυπωσιακό Μέγαρο των Απομάχων, το Υπουργείο Εξωτερικών και το Γαλλικό Κοινοβούλιο, πριν περάσουμε από την Place de la Concorde με την ιστορική της αίγλη και συνεχίσουμε προς την αριστοκρατική Place Vendôme και το θρυλικό ξενοδοχείο Ritz. Η διαδρομή μας μας οδηγεί στην επιβλητική Όπερα Γκαρνιέ, στο Μουσείο του Λούβρου και στην Πον Νεφ, την παλαιότερη γέφυρα του Παρισιού, ενώ διασχίζουμε το νησάκι Σιτέ, την καρδιά της πόλης όπου ουσιαστικά γεννήθηκε το Παρίσι, για να δούμε εξωτερικά την Παναγία των Παρισίων. Συνεχίζουμε με το Καρτιέ Λατέν, τη Σορβόνη και τους κήπους του Λουξεμβούργου, περνάμε από το Πάνθεον, την πλατεία του Αγίου Σουλπικίου και τη Σχολή Καλών Τεχνών, ολοκληρώνοντας έτσι μια περιήγηση γεμάτη εικόνες, ιστορία και παριζιάνικη ατμόσφαιρα. Ακολούθως επιβιβαζόμαστε στα γνωστά Bateaux Mouches για μια περίπου μία ώρα κρουαζιέρα στον Σηκουάνα, που μας χαρίζει την πόλη από μια εντελώς διαφορετική, ρομαντική οπτική, περνώντας κάτω από γέφυρες και δίπλα στα πιο διάσημα μνημεία της. Η υπόλοιπη ημέρα είναι ελεύθερη για προσωπικές βόλτες, μουσεία ή αγορές. Διανυκτέρευση στο Παρίσι.',
+        day6:
+          '6η Μέρα: Παρίσι - Λάρνακα\n\nΠρόγευμα στο ξενοδοχείο και στη συνέχεια μεταφορά στο αεροδρόμιο του Παρισιού για την πτήση επιστροφής μας στη Λάρνακα. Μπορεί το ταξίδι αυτό να μην είναι μεγάλο σε διάρκεια, όμως είναι γεμάτο εικόνες και εμπειρίες που μένουν — από τη ρομαντική λάμψη του Παρισιού μέχρι τη γαλήνια, ιστορική αύρα της Νορμανδίας.'
+      },
+      gallery: ['/images/destinations/paris-hero.webp', '/images/destinations/paris-disneyland.webp']
+    }
+  },
+  {
+    id: 307,
+    title: 'ΣΟΥΗΔΙΑ / ΦΙΝΛΑΝΔΙΑ / ΕΣΘΟΝΙΑ – 8 Μέρες',
+    destination: 'Europe',
+    category: 'Summer Packages',
+    price: 1325,
+    duration: '8 days / 7 nights',
+    description:
+      'Ομαδικό ταξίδι στη Στοκχόλμη, διανυκτέρευση εν πλώ προς Ελσίνκι, ξενάγηση και ελεύθερες μέρες στη Φινλανδία, πλεύση και ξενάγηση στο Ταλίν της Εσθονίας, με επιστροφή μέσω Βαρσοβίας.',
+    longDescription:
+      'Eight-day escorted tour: Stockholm (3 nights), overnight ferry to Helsinki (2 nights), ferry to Tallinn (1 night), with guided tours and free time. Return flights Tallinn–Warsaw–Larnaca. 4-star hotels in Stockholm, Helsinki and Tallinn, bed and breakfast.',
+    image: '🇸🇪',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '07/08, 14/08',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Stockholm, Helsinki, Tallinn (Sweden, Finland, Estonia)',
+      monthAvailability: 'August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'LOT (via Warsaw)',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών (LOT)',
+      coverImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      thumbnailImage: '/images/sweden-estonia-finland-package/estonia-finland-sweden-cover.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '07/08, 14/08',
+          route:
+            'Larnaca International Airport (LCA), Larnaca, Cyprus → F. Chopin (WAW), Warsaw, Poland',
+          flight: 'LO 172',
+          time: '16:05 → 18:40',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '07/08, 14/08',
+          route:
+            'F. Chopin (WAW), Warsaw, Poland → Arlanda (ARN), Stockholm, Sweden',
+          flight: 'LO 455',
+          time: '20:35 → 22:20 (μετά στάση ~1h55 στη Βαρσοβία)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '07/08, 14/08',
+          route:
+            'Lennart Meri (TLL), Tallinn, Estonia → F. Chopin (WAW), Warsaw, Poland',
+          flight: 'LO 790',
+          time: '08:55 → 09:35',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '07/08, 14/08',
+          route:
+            'F. Chopin (WAW), Warsaw, Poland → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'LO 171',
+          time: '10:40 → 15:05 (μετά στάση ~1h05 στη Βαρσοβία)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotels – Stockholm / Helsinki / Tallinn',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp',
+          location: 'Stockholm, Helsinki & Tallinn',
+          prices: {
+            double: 1429,
+            single: 1919,
+            child1: 1179
+          },
+          departureDate: '07/08',
+          packagePrice: 2858,
+          nights: 7
+        },
+        {
+          name: '4* Hotels – Stockholm / Helsinki / Tallinn',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp',
+          location: 'Stockholm, Helsinki & Tallinn',
+          prices: {
+            double: 1325,
+            single: 1865,
+            child1: 1045
+          },
+          departureDate: '14/08',
+          packagePrice: 2650,
+          nights: 7
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Βαρσοβία - Στοκχόλμη και Ταλίν - Βαρσοβία - Λάρνακα με πτήσεις της LOT',
+        'Φόροι αεροδρομίων',
+        'Έξι διανυκτερεύσεις σε ξενοδοχεία 4* με πρωινό',
+        'Διαμονή για ένα βράδυ σε δίκλινες εσωτερικές καμπίνες στο πλοίο από Στοκχόλμη - Ελσίνκι',
+        'Εισιτήριο φέρρυ μπόουτ Ελσίνκι - Ταλίν',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα',
+        'Τοπικοί αγγλόφωνοι ή ελληνόφωνοι ξεναγοί',
+        'Ελληνόφωνος αρχηγός/συνοδός',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων προαιρετικά',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν'
+      ],
+      program: {
+        introduction:
+          'ΣΟΥΗΔΙΑ / ΦΙΝΛΑΝΔΙΑ / ΕΣΘΟΝΙΑ – 8 Μέρες\n\nΔιανυκτερεύσεις: Στοκχόλμη (3), Εν πλώ (1), Ελσίνκι (2), Ταλίν (1).\n\nΈνα ταξίδι στις πρωτεύουσες της Βαλτικής και του Βορρά: από τη «Βενετία του Βορρά» και το σουηδικό αρχιπέλαγος, στη «Κόρη της Βαλτικής» και το μεσαιωνικό Ταλίν, με διανυκτέρευση στη θάλασσα ανάμεσα στις δύο χώρες.',
+        day1:
+          '1η Μέρα: Λάρνακα - Βαρσοβία - Στοκχόλμη\n\nΣυγκέντρωση στο αεροδρόμιο Λάρνακας και αναχώρηση για τη Στοκχόλμη με ενδιάμεση στάση στη Βαρσοβία. Άφιξη στη σουηδική πρωτεύουσα αργά το βράδυ και μεταφορά στο ξενοδοχείο μας. Τακτοποίηση στα δωμάτια και διανυκτέρευση. Η Στοκχόλμη είναι από τις πιο όμορφες, ζωντανές και κοσμοπολίτικες πρωτεύουσες του ευρωπαϊκού Βορρά, χτισμένη πάνω σε νησιά και κανάλια. Η Παλιά Πόλη της, το Gamla Stan, αποτελεί το παλαιότερο και πιο γραφικό κομμάτι της πόλης, με καλοδιατηρημένα κτίρια, στενά δρομάκια, μικρά καταστήματα και παραδοσιακά εστιατόρια, δημιουργώντας μια μοναδική ατμόσφαιρα που θα έχουμε την ευκαιρία να γνωρίσουμε τις επόμενες ημέρες.',
+        day2:
+          '2η Μέρα: Στοκχόλμη (ξενάγηση)\n\nΠρωινό και ακολουθεί ξενάγηση στη Στοκχόλμη, τη λεγόμενη «Βενετία του Βορρά». Η πόλη είναι χτισμένη πάνω σε 14 νησιά, ενωμένα μεταξύ τους με δεκάδες γέφυρες, ενώ το περίφημο αρχιπέλαγός της αριθμεί πάνω από 30.000 μικρά και μεγάλα νησιά, δημιουργώντας ένα φυσικό σκηνικό μοναδικό στον κόσμο. Κατά τη διάρκεια της περιήγησής μας θα γνωρίσουμε τα σημαντικότερα σημεία της πόλης ανάμεσα τους το Βασιλικό Παλάτι, η Μητρόπολη (Storkyrkan), το Κοινοβούλιο και το Βασιλικό Θέατρο. Προαιρετικά, μπορείτε να επισκεφθείτε το επιβλητικό Δημαρχείο της Στοκχόλμης, ένα από τα πιο χαρακτηριστικά κτίρια της πόλης, όπου πραγματοποιείται κάθε χρόνο το επίσημο δείπνο των βραβείων Νόμπελ. Ιδιαίτερη εντύπωση προκαλεί η περίφημη Χρυσή Αίθουσα με τα εντυπωσιακά χρυσά μωσαϊκά. Στον ελεύθερο χρόνο σας μπορείτε να επισκεφθείτε το μουσείο «Βάσα», όπου εκτίθεται το ομώνυμο πολεμικό πλοίο του 17ου αιώνα, που ανασύρθηκε σχεδόν άθικτο από τον βυθό μετά από περισσότερα από 300 χρόνια.',
+        day3:
+          '3η Μέρα: Στοκχόλμη\n\nΜετά το πρωινό, η ημέρα είναι ελεύθερη για να απολαύσετε τη Στοκχόλμη με τον δικό σας ρυθμό. Σας προτείνουμε να επισκεφθείτε το όμορφο νησί Djurgården, έναν από τους πιο αγαπημένους χώρους αναψυχής των κατοίκων της πόλης, ιδανικό για έναν χαλαρό περίπατο μέσα στη φύση. Εκεί μπορείτε να επισκεφθείτε το διαδραστικό Μουσείο ABBA, αφιερωμένο στο διάσημο σουηδικό συγκρότημα, καθώς και το υπαίθριο μουσείο Skansen, όπου παρουσιάζεται η παραδοσιακή σουηδική ζωή και αρχιτεκτονική. Για μια διαφορετική εμπειρία, μπορείτε να επισκεφθείτε το SkyView, μια εντυπωσιακή γυάλινη κατασκευή που ανεβαίνει στην οροφή του Avicii Arena και προσφέρει πανοραμική θέα της πόλης από ύψος περίπου 130 μέτρων. Για όσους αγαπούν τις αγορές και τη σύγχρονη πλευρά της πόλης, προτείνεται μια βόλτα στον εμπορικό δρόμο Drottninggatan ή στις κομψές γειτονιές Östermalm και Södermalm, που φημίζονται για τα καταστήματα, τις γκαλερί και τα όμορφα καφέ τους. Εναλλακτικά, μπορείτε να απολαύσετε μια κρουαζιέρα στα κανάλια της Στοκχόλμης, θαυμάζοντας την πόλη από μια διαφορετική οπτική, καθώς είναι χτισμένη πάνω σε πολλά νησιά και περιβάλλεται από εντυπωσιακά φυσικά τοπία.',
+        day4:
+          '4η Μέρα: Στοκχόλμη - Εν πλώ - Ελσίνκι\n\nΜετά το πρόγευμα, η ημέρα είναι ελεύθερη για να απολαύσετε τη Στοκχόλμη με τους δικούς σας ρυθμούς. Μπορείτε να κάνετε μια τελευταία βόλτα στο κέντρο, να επισκεφτείτε κάποιο μουσείο ή απλώς να χαλαρώσετε σε ένα από τα όμορφα καφέ της πόλης. Το απόγευμα μεταφερόμαστε στο λιμάνι και επιβιβαζόμαστε στο πλοίο για την ολονύχτια πλεύση μας προς το Ελσίνκι. Καθώς αφήνουμε τη Σουηδική πρωτεύουσα πίσω μας, αρχίζει να ξεδιπλώνεται μπροστά στα μάτια μας ένα από τα πιο μαγευτικά τοπία του ταξιδιού: το πλοίο, διασχίζοντας τα ήρεμα νερά της Βαλτικής Θάλασσας, περνά ανάμεσα από τα περίπου 30.000 καταπράσινα νησάκια που σχηματίζουν το ξακουστό Σουηδικό Αρχιπέλαγος.',
+        day5:
+          '5η Μέρα: Ελσίνκι (ξενάγηση)\n\nΠρόγευμα στο πλοίο και άφιξη στο Ελσίνκι, την πρωτεύουσα της Φινλανδίας, που χαϊδευτικά αποκαλείται «Η Κόρη της Βαλτικής». Η πόλη απλώνεται στην άκρη μιας χερσονήσου και περιβάλλεται από ένα εντυπωσιακό αρχιπέλαγος με 315 νησιά. Καταπράσινη, φωτεινή και κομψή, συνδυάζει αρμονικά τα επιβλητικά νεοκλασικά κτίρια με τη σύγχρονη αρχιτεκτονική, τις φαρδιές λεωφόρους, τις ανοιχτές πλατείες και τα καλοδιατηρημένα πάρκα της. Κατά τη διάρκεια της ξενάγησής μας θα γνωρίσουμε τα σημαντικότερα αξιοθέατα της πόλης: θα δούμε τα παγοθραυστικά του φινλανδικού στόλου, το Προεδρικό Μέγαρο, τον ορθόδοξο ναό Ουσπένσκι, καθώς και την εντυπωσιακή Πλατεία της Γερουσίας με τον Καθεδρικό Ναό του Αγίου Νικολάου. Θα περάσουμε επίσης από το Ολυμπιακό Στάδιο, το κτίριο της Όπερας, τα ναυπηγεία της πόλης, το μνημείο του μεγάλου συνθέτη Σιμπέλιους και την περίφημη «Εκκλησία των Βράχων», ένα μοναδικό αρχιτεκτονικό έργο σμιλεμένο μέσα στο φυσικό βράχο. Μεταφορά στο ξενοδοχείο και παραλαβή δωματίων. Το απόγευμα είναι ελεύθερο για να απολαύσετε την πόλη όπως εσείς θέλετε. Μπορείτε να επισκεφτείτε κάποιο από τα αξιόλογα μουσεία της, όπως το σύγχρονο μουσείο μοντέρνας τέχνης Kiasma ή το Εθνικό Μουσείο Φινλανδίας, ή να κάνετε αγορές στο Stockmann, το μεγαλύτερο και πιο εντυπωσιακό πολυκατάστημα της Σκανδιναβίας.',
+        day6:
+          '6η Μέρα: Ελσίνκι\n\nΜετά το πρωινό, η ημέρα είναι ελεύθερη για να απολαύσετε το Ελσίνκι. Μπορείτε να επισκεφθείτε το νησί Suomenlinna, ένα εντυπωσιακό θαλάσσιο φρούριο του 18ου αιώνα και Μνημείο Παγκόσμιας Κληρονομιάς της UNESCO. Το νησί βρίσκεται σε μικρή απόσταση με το πλοιάριο από το κέντρο της πόλης και αποτελεί ιδανικό προορισμό για περίπατο ανάμεσα σε ιστορικά κτίρια, μουσεία και όμορφα θαλάσσια τοπία. Για όσους θέλουν να γνωρίσουν τη σύγχρονη πλευρά της πόλης, προτείνεται μια βόλτα στην περιοχή Design District Helsinki, γνωστή για τα καταστήματα φινλανδικού design, τις γκαλερί και τα ιδιαίτερα καφέ της. Μια ακόμη αυθεντική εμπειρία είναι η επίσκεψη σε μια παραδοσιακή φινλανδική σάουνα, όπως η δημοφιλής Löyly, που βρίσκεται δίπλα στη θάλασσα και συνδυάζει μοντέρνα αρχιτεκτονική με την τοπική παράδοση. Εναλλακτικά, μπορείτε να απολαύσετε έναν χαλαρό περίπατο στο παραθαλάσσιο πάρκο Kaivopuisto, με όμορφη θέα στο αρχιπέλαγος του Ελσίνκι, ή να εξερευνήσετε τα καφέ, τα εστιατόρια και τις αγορές της πόλης.',
+        day7:
+          '7η Μέρα: Ελσίνκι - Εν πλώ - Ταλίν (ξενάγηση)\n\nΜετά το πρωινό μας, μεταφερόμαστε στο λιμάνι και επιβιβαζόμαστε στο πλοίο για μια όμορφη πλεύση προς την πρωτεύουσα της Εσθονίας, το Ταλίν. Κατά τη διάρκεια του ταξιδιού απολαμβάνουμε τη θέα της Βαλτικής Θάλασσας και χαλαρώνουμε στους άνετους χώρους του πλοίου, προετοιμάζοντας τις εικόνες που μας περιμένουν στον επόμενο μας σταθμό. Άφιξη στο Ταλίν, μεταφορά στο ξενοδοχείο και τακτοποίηση στα δωμάτια. Το απόγευμα ακολουθεί η περιπατητική μας ξενάγηση στην παλιά μεσαιωνική πόλη. Θα περπατήσουμε στα πλακόστρωτα σοκάκια της, ανάμεσα σε καλοδιατηρημένα τείχη, γοτθικές εκκλησίες και γραφικούς πυργίσκους. Η κεντρική πλατεία με τα πολύχρωμα σπίτια των παλιών εμπόρων δημιουργεί μια μοναδική ατμόσφαιρα και σίγουρα θα μας εντυπωσιάσει. Θα δούμε τον καθεδρικό ναό του Αλεξάντερ Νιέφσκυ και έπειτα θα μεταφερθούμε στον λόφο Τομπέα, για να επισκεφθούμε τον μεσαιωνικό Καθεδρικό Ναό της Παρθένου Μαρίας (13ος αι.), που υπήρξε ιστορικά η εκκλησία της εσθονικής ελίτ των Γερμανών ευγενών. Από το σημείο αυτό θα απολαύσουμε πανοραμική θέα της πόλης. Επιστροφή στο ξενοδοχείο. Διανυκτέρευση.',
+        day8:
+          '8η Μέρα: Ταλίν - Βαρσοβία - Λάρνακα\n\nΠρόγευμα (breakfast box) και αναχώρηση για το αεροδρόμιο του Ταλίν. Επιβίβαση στην πτήση επιστροφής για Λάρνακα με ενδιάμεση στάση στη Βαρσοβία. Άφιξη στη Λάρνακα γεμάτοι εικόνες και εμπειρίες από το αξέχαστο ταξίδι μας στις πρωτεύουσες της Βαλτικής.'
+      },
+      gallery: [
+        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+        '/images/sweden-estonia-finland-package/estonia-finland-sweden-cover.webp',
+        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 308,
+    title: 'ΑΥΘΕΝΤΙΚΗ ΣΙΚΕΛΙΑ – 6 Μέρες',
+    destination: 'Italy',
+    category: 'Summer Packages',
+    price: 1329,
+    duration: '6 Μέρες',
+    description:
+      'Ομαδικό ταξίδι στη Σικελία με διανυκτερεύσεις σε 4* ξενοδοχεία στο Παλέρμο και την Κατάνια, πρόγευμα, ξεναγήσεις και ελεύθερο χρόνο στις δύο μεγάλες πόλεις του νησιού.',
+    longDescription:
+      'Six-day escorted tour of Sicily with stays in 4-star hotels in Palermo and Catania, bed and breakfast, guided introductions and time to explore UNESCO-listed quarters, markets and coastal scenery.',
+    image: '🇮🇹',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '18/07, 08/08, 15/08, 22/08',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Palermo & Catania, Sicily, Italy',
+      monthAvailability: 'July – August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines (via Athens)',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών (Aegean Airlines)',
+      coverImage: '/images/sicily-package/sicily-cover-one.webp',
+      thumbnailImage: '/images/sicily-package/sicily-thumbnail-one.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '18/07, 08/08, 15/08, 22/08',
+          route:
+            'Larnaca International Airport (LCA), Larnaca, Cyprus → Athens Int. E. Venizelos (ATH), Athens, Greece',
+          flight: 'A3 907',
+          time: '13:00 → 14:45',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '18/07, 08/08, 15/08, 22/08',
+          route:
+            'Athens Int. E. Venizelos (ATH), Athens, Greece → Punta Raisi (PMO), Palermo, Italy',
+          flight: 'A3 678',
+          time: '17:00 → 17:45 (μετά στάση ~2h15 στην Αθήνα)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '18/07, 08/08, 15/08, 22/08',
+          route:
+            'Fontanarossa (CTA), Catania, Italy → Athens Int. E. Venizelos (ATH), Athens, Greece',
+          flight: 'A3 673',
+          time: '19:10 → 21:40',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '18/07, 08/08, 15/08, 22/08',
+          route:
+            'Athens Int. E. Venizelos (ATH), Athens, Greece → Larnaca International Airport (LCA), Larnaca, Cyprus',
+          flight: 'A3 910',
+          time:
+            '23:55 → 01:20+1 (μετά στάση ~2h15 στην Αθήνα · άφιξη Λάρνακα την επόμενη ημέρα τοπική ώρα)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotels – Palermo / Catania',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/sicily-package/hotel-palermo-catania.webp',
+          location: 'Palermo & Catania, Sicily, Italy',
+          prices: {
+            double: 1329,
+            single: 1589,
+            child1: 1225
+          },
+          departureDate: '18/07',
+          packagePrice: 2658,
+          nights: 5
+        },
+        {
+          name: '4* Hotels – Palermo / Catania',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/sicily-package/hotel-palermo-catania.webp',
+          location: 'Palermo & Catania, Sicily, Italy',
+          prices: {
+            double: 1359,
+            single: 1619,
+            child1: 1255
+          },
+          departureDate: '08/08, 15/08, 22/08',
+          packagePrice: 2718,
+          nights: 5
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Αθήνα - Παλέρμο & Κατάνια – Αθήνα - Λάρνακα με πτήσεις της Aegean Airlines',
+        'Φόροι αεροδρομίων',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα',
+        'Διόδια και στάθμευση των λεωφορείων καθώς και τις ειδικές εισόδους σε όλες τις πόλεις',
+        'Τοπικός φόρος διαμονής',
+        'Αρχηγός / συνοδός του γραφείου μας',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Είσοδοι στους χώρους επισκέψεων',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν'
+      ],
+      program: {
+        introduction:
+          'ΑΥΘΕΝΤΙΚΗ ΣΙΚΕΛΙΑ – 6 Μέρες\n\nΔιανυκτερεύσεις: Παλέρμο και Κατάνια σε ξενοδοχεία 4* με πρόγευμα. Το πρόγραμμα ενδέχεται να πραγματοποιηθεί με διαφορετική σειρά ημερών, διατηρώντας όλες τις παροχές.',
+        day1:
+          '1η Μέρα: Λάρνακα – Παλέρμο\n\nΣυγκέντρωση στο αεροδρόμιο Λάρνακας και πτήση προς τη Σικελία. Άφιξη στο Παλέρμο, μεταφορά και τακτοποίηση στο ξενοδοχείο. Το απόγευμα χρόνος ελεύθερος για μια πρώτη βόλτα στην πρωτεύουσα της Σικελίας: η πολύχρωμη αγορά Vucciria, η Καθολική και η Αραβο-Νορμανδική κληρονομιά της πόλης. Διανυκτέρευση στο Παλέρμο.',
+        day2:
+          '2η Μέρα: Παλέρμο (ξενάγηση)\n\nΜετά το πρωινό, περιήγηση στα σημαντικότερα σημεία του ιστορικού κέντρου: η Καθεδρική, το Παλάτι των Νορμανδών με τους εκπληκτικούς Βυζαντινούς ψηφιδωτούς του Παλατινού Παρεκκλησίου, η Πλατεία Πρετόρια και η γειτονιά Κάλσα. Χρόνος ελεύθερος για γεύμα και αγορές. Διανυκτέρευση στο Παλέρμο.',
+        day3:
+          '3η Μέρα: Παλέρμο – Μονρεάλε – Κατάνια\n\nΑναχώρηση για το Μονρεάλε και επίσκεψη στον επιβλητικό Καθεδρικό με τα χρυσά ψηφιδωτά. Στη συνέχεια οδική μετάβαση στην Κατάνια, στους πρόποδες της Αίτνας. Τακτοποίηση στο ξενοδοχείο και ελεύθερο βράδυ στη ζωντανή πόλη της μπαρόκ και της σικελικής κουζίνας. Διανυκτέρευση στην Κατάνια.',
+        day4:
+          '4η Μέρα: Κατάνια – Ταορμίνα (ή περιοχή Αίτνας)\n\nΜετά το πρωινό, εκδρομή προς την Ταορμίνα: το αρχαίο θέατρο με θέα στη θάλασσα και το Ίονιο, το περίφημο Κόρσο Ούμπερτο και χρόνος για καφέ με θέα. Επιστροφή στην Κατάνια. Διανυκτέρευση.',
+        day5:
+          '5η Μέρα: Συρακούσες ή μέρα ελεύθερη\n\nΠροαιρετική ολοήμερη εκδρομή στις Συρακούσες (Νέα και Παλιά Πόλη, νησί Ορτίγια) ή ελεύθερη ημέρα στην Κατάνια για αγορές, φαγητό και βόλτα στην Piazza Duomo με τον ελεφάντινο σιντριβάνι. Διανυκτέρευση στην Κατάνια.',
+        day6:
+          '6η Μέρα: Κατάνια – Λάρνακα\n\nΠρόγευμα, μεταφορά στο αεροδρόμιο και πτήση επιστροφής στη Λάρνακα, με τις καλύτερες εικόνες από τη Σικελία.'
+      },
+      gallery: [
+        '/images/sicily-package/sicily-cover-one.webp',
+        '/images/sicily-package/sicily-thumbnail-one.webp',
+        '/images/sicily-package/hotel-palermo-catania.webp'
+      ]
+    }
+  },
+  {
+    id: 309,
+    title: 'ΒΙΕΝΝΗ / FAMILY PLAN – 5 Μέρες',
+    destination: 'Austria',
+    category: 'Summer Packages',
+    price: 995,
+    duration: '5 Μέρες',
+    description:
+      'Οικογενειακό καλοκαιρινό πακέτο στη Βιέννη με διαμονή σε ξενοδοχείο 4*, πρόγευμα και χρόνο για να ανακαλύψετε την αυτοκρατορική πρωτεύουσα της Αυστρίας.',
+    longDescription:
+      'Five-day family-friendly stay in Vienna at a 4-star hotel with bed and breakfast. Ideal for exploring palaces, parks, museums and the city’s café culture at your own pace.',
+    image: '🇦🇹',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '15/07, 19/08, 22/07, 29/07, 05/08, 12/08',
+      departureFrom: 'Larnaca',
+      destinationFull: 'Vienna, Austria',
+      monthAvailability: 'July – August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Austrian Airlines',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών (Austrian Airlines)',
+      coverImage: '/images/vienna-package/vienna-cover-one.webp',
+      thumbnailImage: '/images/vienna-package/vienna-family-boat.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '15/07, 19/08, 22/07, 29/07, 05/08, 12/08',
+          route:
+            'Larnaca International Airport (LCA), Cyprus → Vienna International Airport (VIE), Austria',
+          flight: 'OS 796',
+          time: '17:10 → 19:30',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '15/07, 19/08, 22/07, 29/07, 05/08, 12/08',
+          route:
+            'Vienna International Airport (VIE), Austria → Larnaca International Airport (LCA), Cyprus',
+          flight: 'OS 795',
+          time: '12:20 → 16:20',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotel – Vienna',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/vienna-package/hotel-vienna.webp',
+          location: 'Vienna, Austria',
+          prices: {
+            double: 995,
+            single: 1259,
+            child1: 935,
+            child2: 935
+          },
+          departureDate: '15/07, 19/08',
+          packagePrice: 1990,
+          nights: 4
+        },
+        {
+          name: '4* Hotel – Vienna',
+          stars: 4,
+          roomType: 'Standard Room',
+          boardBasis: 'Bed and Breakfast',
+          image: '/images/vienna-package/hotel-vienna.webp',
+          location: 'Vienna, Austria',
+          prices: {
+            double: 1069,
+            single: 1289,
+            child1: 955,
+            child2: 955
+          },
+          departureDate: '22/07, 29/07, 05/08, 12/08',
+          packagePrice: 2138,
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Βιέννη - Λάρνακα με Αυστριακές Αερογραμμές',
+        'Φόροι αεροδρομίων',
+        'Τέσσερις διανυκτερεύσεις στην Βιέννη σε ξενοδοχείο 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές, περιηγήσεις όπως αναφέρονται στο πρόγραμμα με πολυτελή πούλμαν',
+        'Εισιτήριο εισόδου για το Σπίτι της Μουσικής',
+        'Εισιτήριο κρουαζιέρας',
+        'Ελληνόφωνας ξεναγός την μέρα της ξενάγησης',
+        'Ελληνόφωνος αρχηγός / συνοδός',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα',
+        'Φαγητό στη πτήση',
+        'Εισιτήρια εισόδων εκτός αυτών που αναφέρονται στα περιλαμβάνονται',
+        'Ό,τι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης (αεροπορικής εταιρείας, αναφορά από την ημερομηνία άφιξης): Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Πολιτική ακύρωσης αεροπορικής εταιρείας (αναφορά από την ημερομηνία άφιξης): Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν',
+        'Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν'
+      ],
+      program: {
+        introduction: 'ΒΙΕΝΝΗ / FAMILY PLAN – 5 Μέρες\n\nΔιανυκτερεύσεις: Βιέννη (4)',
+        day1:
+          '1η Μέρα: Λάρνακα - Βιέννη\n\nΘεωρείται δικαίως η πρωτεύουσα της μουσικής, αλλά και μια πόλη που μοιάζει να έχει ξεπηδήσει από τις σελίδες ενός παραμυθιού. Η Βιέννη, η γενέτειρα του σπουδαίου συνθέτη Φραντς Σούμπερτ και του παγκοσμίως γνωστού ψυχαναλυτή Σίγκμουντ Φρόιντ, παραμένει ένας προορισμός γεμάτος μαγεία για μικρούς και μεγάλους. Αριστοκρατική, ρομαντική αλλά ταυτόχρονα ζωντανή και φιλική προς τις οικογένειες, η Βιέννη μας προσκαλεί να την ανακαλύψουμε μέσα από τα εντυπωσιακά της παλάτια, τα διαδραστικά μουσεία, τις γλυκές γεύσεις της και την ξεχωριστή της ατμόσφαιρα που γοητεύει κάθε ηλικία. Αναχώρηση από το αεροδρόμιο Λάρνακας με απευθείας πτήση των Αυστριακών Αερογραμμών. Άφιξη στη Βιέννη και υποδοχή από την αρχηγό της εκδρομής, η οποία θα σας συνοδεύσει καθ\' όλη τη διάρκεια του ταξιδιού σας. Μεταφορά στο ξενοδοχείο και τακτοποίηση στα δωμάτια. Διανυκτέρευση.',
+        day2:
+          '2η Μέρα: Βιέννη – Πανοραμική ξενάγηση - Σπίτι της Μουσικής\n\nΠρόγευμα και αναχώρηση για την πρώτη γνωριμία μας με τη Βιέννη, μια πόλη γεμάτη αυτοκρατορική αίγλη και πολιτισμό. Πρώτη μας στάση το επιβλητικό παλάτι Belvedere, ένα από τα πιο όμορφα μπαρόκ συγκροτήματα στην Ευρώπη, που θυμίζει σκηνικό από ταινία εποχής. Χτισμένο ανάμεσα σε καταπράσινους κήπους και σιντριβάνια, το Belvedere προσφέρει μοναδική θέα στην πόλη και είναι ιδανικό για χαλαρή βόλτα και οικογενειακές φωτογραφίες. Αφού απολαύσουμε την εξωτερική όψη και την ατμόσφαιρα του ιστορικού αυτού χώρου, κατευθυνόμαστε προς το ιστορικό κέντρο της Βιέννης για μια ευχάριστη περιπατητική ξενάγηση. Η βόλτα μας ξεκινάει από τα ανάκτορα Hofburg, το παλιό χειμερινό παλάτι των Αψβούργων. Θα θαυμάσουμε εξωτερικά το τεράστιο σύμπλεγμα που περιλαμβάνει τα αυτοκρατορικά διαμερίσματα, μουσεία, παρεκκλήσια, τη Χειμερινή Σχολή Ιππασίας και την εντυπωσιακή Αυστριακή Εθνική Βιβλιοθήκη. Περπατώντας προς το κέντρο, θα περάσουμε από την περίφημη Κρατική Όπερα της Βιέννης – ένα από τα σημαντικότερα λυρικά θέατρα στον κόσμο, καθώς και από την Rathausplatz, την πλατεία του Δημαρχείου, που φιλοξενεί το νεογοτθικό κτίριο του Rathaus, έδρα του δημάρχου της πόλης. Περνώντας από την Ελληνική συνοικία και την Ορθόδοξη Εκκλησία της Αγίας Τριάδος, φτάνουμε ως τον εντυπωσιακό Καθεδρικό Ναό του Αγίου Στεφάνου, ένα από τα σημαντικότερα γοτθικά μνημεία στην Ευρώπη και χαρακτηριστικό σύμβολο της πόλης. Ελεύθερος χρόνος στο κέντρο της πόλης για βόλτα, παγωτό, ψώνια ή φαγητό. Το απόγευμα, επισκεπτόμαστε το εντυπωσιακό Haus der Musik, ένα διαδραστικό μουσικό μουσείο που προσφέρει μια ξεχωριστή εμπειρία για όλη την οικογένεια. Σε έναν χώρο γεμάτο τεχνολογία και φαντασία, τα παιδιά έχουν τη δυνατότητα να πειραματιστούν με ήχους, να διευθύνουν εικονική ορχήστρα, να μάθουν πώς γεννιούνται οι μελωδίες και να γνωρίσουν τη ζωή και το έργο των μεγάλων Αυστριακών συνθετών όπως ο Μότσαρτ και ο Μπετόβεν, μέσα από διαδραστικά παιχνίδια και έξυπνες παρουσιάσεις. Επιστροφή στο ξενοδοχείο. Διανυκτέρευση.',
+        day3:
+          '3η Μέρα: Βιέννη - Ανάκτορο Σενμπρούν - Ζωολογικός Κήπος - Πάρκο Πράτερ\n\nΠρόγευμα και αναχώρηση για το θρυλικό Ανάκτορο Σενμπρούν, την καλοκαιρινή κατοικία των Αψβούργων και ένα από τα πιο εντυπωσιακά μνημεία μπαρόκ αρχιτεκτονικής σε ολόκληρη την Ευρώπη. Το παλάτι Σενμπρούν μαγεύει κάθε επισκέπτη με τους υπέροχους συμμετρικούς του κήπους, τα σιντριβάνια, τις αλέες και την εξωτερική του μεγαλοπρέπεια, ενώ η ιστορία του ξετυλίγεται σε κάθε του γωνιά, θυμίζοντας παραμύθι. Ο περίπατος στους βασιλικούς κήπους, ανάμεσα σε λαβύρινθους και ανθισμένες δεντροστοιχίες, προσφέρει μοναδικές εικόνες και στιγμές ξεγνοιασιάς για μικρούς και μεγάλους. Στη συνέχεια με τα πόδια θα κατευθυνθούμε προς τον περίφημο Ζωολογικό Κήπο του Σενμπρούν – τον παλαιότερο ζωολογικό κήπο στον κόσμο – που φιλοξενεί περισσότερα από 700 είδη ζώων. Τα παιδιά θα ενθουσιαστούν με τα πάντα – από τα χαριτωμένα Panda και τους πιγκουίνους, μέχρι τις τίγρεις, τους ελέφαντες και τα τροπικά πτηνά, σε έναν χώρο φροντισμένο, εκπαιδευτικό και απολαυστικό για όλη την οικογένεια. Επιστροφή στο ξενοδοχείο για ξεκούραση. Το απόγευμα προαιρετικά μπορείτε να επισκεφθείτε το πιο αγαπημένο καλοκαιρινό σημείο ψυχαγωγίας της Βιέννης – το Πράτερ. Πρόκειται για ένα μεγάλο πάρκο αναψυχής με αμέτρητα παιχνίδια, λούνα παρκ, που προσφέρει διασκέδαση για όλες τις ηλικίες. Ξεχωριστή εμπειρία αποτελεί η βόλτα με τον Γιγαντιαίο Τροχό της Βιέννης, το απόλυτο σύμβολο του Πράτερ και ένα από τα πιο ιστορικά αξιοθέατα της πόλης. Η αργή, πανοραμική περιστροφή του τροχού προσφέρει μοναδική θέα στην καταπράσινη Βιέννη από ψηλά και είναι μια εμπειρία που θα μείνει αξέχαστη σε μικρούς και μεγάλους. Επιστροφή στο ξενοδοχείο. Διανυκτέρευση.',
+        day4:
+          '4η Μέρα: Βιέννη - Κρουαζιέρα Δούναβη - Μουσείο Φυσικής Ιστορίας (προαιρετικό)\n\nΠρόγευμα και αναχώρηση για μια ξεχωριστή εμπειρία στον Δούναβη – μια χαλαρωτική κρουαζιέρα στον μεγάλο ευρωπαϊκό ποταμό που διατρέχει τη Βιέννη και χαρίζει μοναδικές εικόνες της πόλης από μια εντελώς διαφορετική οπτική. Κατά τη διάρκεια της διαδρομής, θα έχουμε την ευκαιρία να απολαύσουμε την ηρεμία του ποταμού, να δούμε από μακριά τον εντυπωσιακό Πύργο του Δούναβη, τις γέφυρες της πόλης, το νησί Donauinsel και τις σύγχρονες γειτονιές με την ιδιαίτερη αρχιτεκτονική τους. Μετά την κρουαζιέρα, χρόνος ελεύθερος για φαγητό στο κέντρο της πόλης ή για έναν καφέ στα παραδοσιακά βιεννέζικα καφέ, δοκιμάζοντας τη φημισμένη Sacher Torte. Το απόγευμα προαιρετικά μπορείτε να επισκεφθείτε έναν από τους πιο εντυπωσιακούς και αγαπητούς πολιτιστικούς χώρους της Βιέννης: το Μουσείο Φυσικής Ιστορίας. Πρόκειται για ένα από τα σημαντικότερα μουσεία του είδους στην Ευρώπη, με πάνω από 30 εκατομμύρια εκθέματα και αίθουσες που ξεδιπλώνουν την ιστορία του φυσικού κόσμου με τρόπο συναρπαστικό και εκπαιδευτικό. Τα παιδιά ενθουσιάζονται με τους σκελετούς δεινοσαύρων, τους μετεωρίτες, τα απολιθώματα και τις ψηφιακές προβολές, ενώ οι γονείς απολαμβάνουν την επιστημονική πληρότητα και την αρχιτεκτονική του ιστορικού κτιρίου. Επιστροφή στο ξενοδοχείο. Διανυκτέρευση.',
+        day5:
+          '5η Μέρα: Βιέννη - Λάρνακα\n\nΠρωινό στο ξενοδοχείο και στη συνέχεια μεταφορά στο αεροδρόμιο για να πάρουμε την πτήση της επιστροφής μας προς τη Λάρνακα, έχοντας στις αποσκευές μας όμορφες αναμνήσεις από τη μαγευτική Βιέννη και τις μοναδικές εικόνες της Αυστρίας.'
+      },
+      gallery: [
+        '/images/vienna-package/vienna-cover-one.webp',
+        '/images/vienna-package/vienna-family-boat.webp',
+        '/images/vienna-package/hotel-vienna.webp'
+      ]
+    }
   }
 ]
 
@@ -18905,7 +19339,7 @@ const visiblePackages = () => travelPackages.filter(pkg => !pkg.hidden)
 // Map search dropdown regions to package destination values (so "Asia" shows Thailand, Japan, etc.)
 export const REGION_DESTINATIONS = {
   Greece: ['Greece'],
-  Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom'],
+  Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Austria', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom', 'Malta'],
   Asia: ['Thailand', 'Indonesia', 'India', 'Japan', 'South Korea', 'China', 'Bali', 'Asia'],
   'Middle East': ['Middle East', 'UAE', 'Egypt'],
   America: ['America', 'United States', 'Argentina, Brazil', 'Peru'],

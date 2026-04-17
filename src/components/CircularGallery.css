@@ -1,96 +1,50 @@
 .circular-gallery {
   width: 100%;
   overflow: hidden;
-  cursor: default;
   position: relative;
-  background: #ffffff;
   margin: 0;
-  padding: 2rem 0;
+  padding: 3.25rem 0 2.5rem;
+  background:
+    radial-gradient(circle at 14% 14%, rgba(227, 30, 36, 0.11), transparent 34%),
+    radial-gradient(circle at 88% 78%, rgba(9, 72, 126, 0.14), transparent 42%),
+    linear-gradient(180deg, #f9fbfe 0%, #eef3f9 100%);
 }
 
-/* Static grid – no horizontal scroll, so touch scrolling works normally on mobile */
-.circular-gallery-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1.25rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  list-style: none;
+.circular-gallery-topline {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #cb1d23;
+  margin-bottom: 0.5rem;
 }
 
-.circular-gallery-item {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--border-radius, 5%);
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  position: relative;
-}
-
-.circular-gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: inherit;
-  position: absolute;
-  inset: 0;
-}
-
-.circular-gallery-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  padding: 1.25rem 1.5rem 1.5rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-  border-radius: 0 0 var(--border-radius, 5%) var(--border-radius, 5%);
-  display: flex;
-  align-items: flex-end;
-}
-
-.circular-gallery-overlay h3 {
+.circular-gallery-title {
   margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #111a2d;
+  font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+  font-weight: 800;
 }
 
-
-@media (min-width: 640px) {
-  .circular-gallery-container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media (min-width: 900px) {
-  .circular-gallery-container {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
-  }
+.circular-gallery-subtitle {
+  max-width: 760px;
+  margin: 0.8rem auto 1.9rem;
+  text-align: center;
+  color: #445068;
+  font-size: clamp(0.9rem, 1.5vw, 1.04rem);
+  line-height: 1.65;
+  padding: 0 1.2rem;
 }
 
 @media (max-width: 768px) {
-  .circular-gallery-overlay {
-    padding: 1rem;
+  .circular-gallery {
+    padding: 2.3rem 0 1.9rem;
   }
 
-  .circular-gallery-overlay h3 {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .circular-gallery-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding: 0 1rem;
-  }
-
-  .circular-gallery-overlay h3 {
-    font-size: 0.9rem;
+  .circular-gallery-subtitle {
+    margin-bottom: 1.25rem;
   }
 }
 

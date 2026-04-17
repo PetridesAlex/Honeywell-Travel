@@ -23,17 +23,17 @@
 }
 
 .tour-packages-section .section-title {
-  font-family: var(--font-serif);
-  font-size: 3.25rem;
-  font-weight: 600;
-  color: #1a1a2e !important;
   margin: 0 0 1.25rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.4vw, 3.35rem);
+  font-weight: 800;
+  color: #7f1d1d !important;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75), 0 6px 18px rgba(127, 29, 29, 0.2);
   position: relative;
   display: inline-block;
-  letter-spacing: 0.03em;
-  text-transform: none;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding-bottom: 1.25rem;
+  padding-bottom: 0.62rem;
 }
 
 .tour-packages-section .section-title::after {
@@ -42,10 +42,11 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 72px;
+  width: 3rem;
   height: 3px;
-  background: linear-gradient(90deg, #E31E24 0%, #C41230 50%, #E31E24 100%);
-  border-radius: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c41230 0%, #e31e24 100%);
+  box-shadow: 0 3px 10px rgba(196, 18, 48, 0.24);
 }
 
 .tour-packages-section .section-subtitle {
@@ -308,10 +309,6 @@
     transform: none; /* No scale on hover for mobile */
   }
 
-  .tour-packages-section .section-title {
-    font-size: 2.5rem;
-  }
-
   .tour-packages-section .section-subtitle {
     font-size: 1.15rem;
     padding: 0.9rem 0 0.9rem 1.25rem;
@@ -402,10 +399,6 @@
 
   .tour-packages-container {
     padding: 0 0.75rem;
-  }
-
-  .tour-packages-section .section-title {
-    font-size: 2rem;
   }
 
   .tour-packages-section .section-subtitle {

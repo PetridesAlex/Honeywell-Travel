@@ -17,19 +17,21 @@
 }
 
 .stats-rewards-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a2e;
   margin: 0 auto;
   text-align: center;
-  letter-spacing: -0.02em;
-  padding-bottom: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.4vw, 3.35rem);
+  font-weight: 800;
+  color: #7f1d1d !important;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75), 0 6px 18px rgba(127, 29, 29, 0.2);
   position: relative;
+  padding-bottom: 0.62rem;
   display: inline-block;
   width: auto;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--font-serif);
 }
 
 .stats-rewards-title::after {
@@ -38,10 +40,11 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 64px;
-  height: 4px;
-  background: linear-gradient(90deg, #E31E24 0%, #C41230 50%, #E31E24 100%);
-  border-radius: 4px;
+  width: 3rem;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c41230 0%, #e31e24 100%);
+  box-shadow: 0 3px 10px rgba(196, 18, 48, 0.24);
 }
 
 .stats-rewards-subtitle {
@@ -132,15 +135,6 @@
 @media (max-width: 768px) {
   .stats-rewards-section {
     padding: 3rem 0 4rem 0;
-  }
-
-  .stats-rewards-title {
-    font-size: 2rem;
-  }
-
-  .stats-rewards-title::after {
-    width: 48px;
-    height: 3px;
   }
 
   .stats-rewards-subtitle {

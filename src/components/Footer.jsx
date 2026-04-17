@@ -92,6 +92,13 @@ function Footer() {
         <div className="footer-section">
           <h3>Newsletter</h3>
           <p>Subscribe to get updates on special offers</p>
+          <Link to="/" className="footer-newsletter-logo-link" aria-label="Honeywell Travel home">
+            <img
+              src="/images/icons/honeywell-travel-logo.webp"
+              alt="Honeywell Travel"
+              className="footer-newsletter-logo"
+            />
+          </Link>
           <form 
             className="newsletter-form"
             onSubmit={(e) => {

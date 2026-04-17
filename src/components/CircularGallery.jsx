@@ -1,6 +1,7 @@
+import ParallaxCards from './ParallaxCards'
 import './CircularGallery.css'
 
-function CircularGallery({ textColor = '#ffffff', borderRadius = 0.05 }) {
+function CircularGallery() {
   const images = [
     { id: 1, src: '/images/destinations/iceland.webp', title: 'Iceland' },
     { id: 2, src: '/images/destinations/thailand.webp', title: 'Thailand' },
@@ -15,30 +16,23 @@ function CircularGallery({ textColor = '#ffffff', borderRadius = 0.05 }) {
   ]
 
   return (
-    <div
-      className="circular-gallery"
-      style={{
-        '--text-color': textColor,
-        '--border-radius': `${borderRadius * 100}%`
-      }}
-    >
-      <div className="circular-gallery-container">
-        {images.map((image) => (
-          <div key={image.id} className="circular-gallery-item">
-            <img
-              src={image.src}
-              alt={image.title}
-              onError={(e) => {
-                e.target.style.background = 'linear-gradient(135deg, #E31E24 0%, #C41230 100%)'
-                e.target.style.display = 'block'
-              }}
-            />
-            <div className="circular-gallery-overlay">
-              <h3 style={{ color: textColor }}>{image.title}</h3>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="circular-gallery">
+      <div className="circular-gallery-topline">Explore Worldwide</div>
+      <h2 className="circular-gallery-title">Signature Destinations</h2>
+      <p className="circular-gallery-subtitle">
+        Move your cursor through the gallery and click a card to focus on each destination.
+      </p>
+
+      <ParallaxCards
+        images={images}
+        cardCount={10}
+        perspective={2200}
+        mouseSensitivity={3.8}
+        animationDuration={1}
+        enableDepthFog={false}
+        enableMagneticAttraction
+        magneticStrength={54}
+      />
     </div>
   )
 }

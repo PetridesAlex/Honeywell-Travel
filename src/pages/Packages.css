@@ -37,6 +37,7 @@
 }
 
 .packages-hero-title {
+  color: #ffffff !important;
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -281,6 +282,17 @@
   align-items: stretch;
 }
 
+.packages-modal-cards {
+  width: 100%;
+}
+
+.packages-modal-cards .modal-cards-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
 /* Ensure package cards on Packages page never clip content */
 .packages-results .packages-grid .package-card {
   height: auto;
@@ -421,6 +433,12 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .packages-modal-cards .modal-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 100%;
+    gap: 1.5rem;
+  }
+
   .packages-hero-title {
     font-size: 2rem;
   }
@@ -437,6 +455,10 @@
 
 @media (max-width: 768px) {
   .packages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .packages-modal-cards .modal-cards-grid {
     grid-template-columns: 1fr;
   }
 
