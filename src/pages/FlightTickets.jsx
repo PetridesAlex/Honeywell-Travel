@@ -16,28 +16,32 @@ function FlightTickets() {
 
           <div className="flight-destinations-grid">
             {destinations.map((item) => (
-              <article className="flight-destination-card" key={item.destinationSlug}>
+              <Link
+                key={item.destinationSlug}
+                to={`/flight-tickets/${item.destinationSlug}`}
+                className="flight-destination-card"
+                aria-label={`${item.destination} flight tickets from €${item.fromPrice}`}
+              >
                 <div
                   className="flight-destination-image"
-                  style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.35)), url("${item.image}")` }}
-                  role="img"
-                  aria-label={`${item.destination} destination`}
+                  style={{ backgroundImage: `url("${item.image}")` }}
+                  aria-hidden="true"
                 />
-                <div className="flight-destination-content">
-                  <h3>{item.destination}</h3>
-                  <p>From EUR {item.fromPrice}</p>
-                  <span>{item.offersCount} επιλογές πτήσεων</span>
-                  <Link to={`/flight-tickets/${item.destinationSlug}`} className="flight-tickets-btn">
-                    Book Now
-                  </Link>
+                <div className="flight-destination-shade" aria-hidden="true" />
+                <span className="flight-destination-type-badge">Flights</span>
+                <div className="flight-destination-overlay">
+                  <span className="flight-destination-chip">Flight deals</span>
+                  <h3 className="flight-destination-title">{item.destination}</h3>
+                  <div className="flight-destination-meta">
+                    <span>{item.offersCount} επιλογές πτήσεων</span>
+                  </div>
+                  <div className="flight-destination-footer">
+                    <span className="flight-destination-price">From €{item.fromPrice}</span>
+                    <span className="flight-destination-cta">Book Now</span>
+                  </div>
                 </div>
-              </article>
+              </Link>
             ))}
-          </div>
-
-          <div className="flight-tickets-actions">
-            <a href="tel:+35725828848" className="flight-tickets-btn flight-tickets-btn--secondary">Call Us</a>
-            <a href="mailto:info@honeywelltravel.com.cy" className="flight-tickets-btn flight-tickets-btn--secondary">Email Us</a>
           </div>
         </div>
       </section>

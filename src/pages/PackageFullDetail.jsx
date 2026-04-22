@@ -282,9 +282,12 @@ function PackageFullDetail() {
                 <div className="price-header">
                   <div className="price-thumb">
                     {(details.thumbnailImage || details.coverImage || gallery[0]) ? (
-                      <div
-                        className="price-thumb-image"
-                        style={{ backgroundImage: `url(${details.thumbnailImage || details.coverImage || gallery[0]})` }}
+                      <img
+                        src={details.thumbnailImage || details.coverImage || gallery[0]}
+                        alt=""
+                        className="price-thumb-img"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <span className="price-thumb-placeholder">{pkg.image}</span>
