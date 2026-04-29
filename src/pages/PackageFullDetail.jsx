@@ -55,6 +55,65 @@ const getAirlineLogo = (airlineName) => {
   return AIRLINE_LOGO[first] || null
 }
 
+const PackageFlightsSection = ({ details }) => {
+  if (!details.flights?.length) return null
+  return (
+    <div className="details-section">
+      <h3 className="details-section-title details-section-title-flights">
+        {getAirlineLogo(details.airline) ? (
+          <img src={getAirlineLogo(details.airline)} alt="" className="airline-logo" />
+        ) : (
+          <span className="icon-badge flights">✈️</span>
+        )}
+        Flights — {details.airline || 'Sky Express'}
+      </h3>
+      <div className="flights-container">
+        {details.flights.map((flight, index) => (
+          <div key={index} className="flight-card">
+            <div className="flight-header">
+              <span className="flight-direction">
+                {flight.direction === 'Departure' ? '🛫 Departure' : '🛬 Return'}
+              </span>
+            </div>
+            <div className="flight-details">
+              <div className="flight-route">
+                <strong>{flight.route || `${flight.direction}`}</strong>
+              </div>
+              <div className="flight-info">
+                <div className="flight-info-row">
+                  <span className="flight-label">Flight:</span>
+                  <span className="flight-value">{flight.flight}</span>
+                </div>
+                <div className="flight-info-row">
+                  <span className="flight-label">Time:</span>
+                  <span className="flight-value">{flight.time}</span>
+                </div>
+                <div className="flight-info-row">
+                  <span className="flight-label">Luggage:</span>
+                  <span className="flight-value">{flight.luggage}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const CancellationPolicyBody = ({ policy }) => {
+  if (!policy) return null
+  if (typeof policy === 'string' && policy.includes('\n')) {
+    return policy
+      .split('\n')
+      .filter(Boolean)
+      .map((paragraph, i) => (
+        <p key={i} className="section-text">{paragraph}</p>
+      ))
+  }
+  return <p className="section-text">{policy}</p>
+}
+
 function PackageFullDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -302,17 +361,30 @@ function PackageFullDetail() {
                         const priceIntroParas = paragraphs.filter(
                           p => !p.trim().startsWith('ΑΝΑΧΩΡΗΣΕΙΣ') && !p.trim().startsWith('Πτήσεις')
                         )
+                        const lineClass = (raw, index) => {
+                          const t = raw.trim()
+                          const parts = ['section-text', 'price-intro-line']
+                          if (index === 0) parts.push('price-intro-line--title')
+                          else if (t.startsWith('Διανυκτερεύσεις')) parts.push('price-intro-line--stays')
+                          else if (t.startsWith('Αναχωρήσεις')) parts.push('price-intro-line--departures')
+                          else if (t.startsWith('Δωμάτιο')) parts.push('price-intro-line--room')
+                          else if (t.startsWith('Τιμές') || t.includes('€')) parts.push('price-intro-line--pricing')
+                          else if (t.startsWith('ΞΕΝΟΔΟΧΕΙΑ')) parts.push('price-intro-line--hotels')
+                          return parts.join(' ')
+                        }
                         return priceIntroParas.length > 0 ? (
                           priceIntroParas.map((para, idx) => (
-                            <p key={idx} className="section-text">{para.trim()}</p>
+                            <p key={idx} className={lineClass(para, idx)}>{para.trim()}</p>
                           ))
                         ) : (
-                          <p className="section-text">{introText.trim()}</p>
+                          <p className="section-text price-intro-line price-intro-line--title">{introText.trim()}</p>
                         )
                       })()
                     ) : null}
                   </div>
                 </div>
+
+                <PackageFlightsSection details={details} />
 
                 {details.hotels && details.hotels.length > 0 ? (
                   <>
@@ -583,6 +655,18 @@ function PackageFullDetail() {
                     Add room types and rates for this package in the data file.
                   </p>
                 )}
+
+                {details.cancellationPolicy ? (
+                  <div className="details-section price-tab-cancellation-wrap">
+                    <h3 className="details-section-title">
+                      <span className="icon-badge cancellation">⚠️</span>
+                      Cancellation Policy
+                    </h3>
+                    <div className="cancellation-policy">
+                      <CancellationPolicyBody policy={details.cancellationPolicy} />
+                    </div>
+                  </div>
+                ) : null}
               </section>
             )}
 
@@ -915,48 +999,7 @@ function PackageFullDetail() {
                 </div>
 
                 {/* Flights */}
-                {details.flights && details.flights.length > 0 && (
-                  <div className="details-section">
-                    <h3 className="details-section-title details-section-title-flights">
-                      {getAirlineLogo(details.airline) ? (
-                        <img src={getAirlineLogo(details.airline)} alt="" className="airline-logo" />
-                      ) : (
-                        <span className="icon-badge flights">✈️</span>
-                      )}
-                      Flights — {details.airline || 'Sky Express'}
-                    </h3>
-                    <div className="flights-container">
-                      {details.flights.map((flight, index) => (
-                        <div key={index} className="flight-card">
-                          <div className="flight-header">
-                            <span className="flight-direction">
-                              {flight.direction === 'Departure' ? '🛫 Departure' : '🛬 Return'}
-                            </span>
-                          </div>
-                          <div className="flight-details">
-                            <div className="flight-route">
-                              <strong>{flight.route || `${flight.direction}`}</strong>
-                            </div>
-                            <div className="flight-info">
-                              <div className="flight-info-row">
-                                <span className="flight-label">Flight:</span>
-                                <span className="flight-value">{flight.flight}</span>
-                              </div>
-                              <div className="flight-info-row">
-                                <span className="flight-label">Time:</span>
-                                <span className="flight-value">{flight.time}</span>
-                              </div>
-                              <div className="flight-info-row">
-                                <span className="flight-label">Luggage:</span>
-                                <span className="flight-value">{flight.luggage}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <PackageFlightsSection details={details} />
 
                 {/* Terms & Conditions */}
                 {details.termsAndConditions && details.termsAndConditions.length > 0 && (
@@ -1005,13 +1048,7 @@ function PackageFullDetail() {
                   </h3>
                   {details.cancellationPolicy ? (
                     <div className="cancellation-policy">
-                      {typeof details.cancellationPolicy === 'string' && details.cancellationPolicy.includes('\n') ? (
-                        details.cancellationPolicy.split('\n').filter(Boolean).map((paragraph, i) => (
-                          <p key={i} className="section-text">{paragraph}</p>
-                        ))
-                      ) : (
-                        <p className="section-text">{details.cancellationPolicy}</p>
-                      )}
+                      <CancellationPolicyBody policy={details.cancellationPolicy} />
                     </div>
                   ) : (
                     <p className="section-text muted">
