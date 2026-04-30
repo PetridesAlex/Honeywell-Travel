@@ -719,8 +719,8 @@ function PackageFullDetail() {
                   </div>
                 ) : details.program ? (
                   <div className="program-content">
-                    {details.program.introduction && pkg.id !== 100 && (() => {
-                      const introText = details.program.introduction
+                    {(details.program.programNarrative || details.program.introduction) && pkg.id !== 100 && (() => {
+                      const introText = details.program.programNarrative || details.program.introduction
                       // Split by double newlines to create paragraphs
                       const paragraphs = introText.split(/\n\n+/).filter(p => p.trim())
                       // Check if first paragraph is a title (contains dashes and is short)
