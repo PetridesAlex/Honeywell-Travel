@@ -13,6 +13,15 @@ const categoryToSlug = (category) => {
     .replace(/[^a-z0-9-]/g, '')
 }
 
+/** Desktop vs mobile Holiday Types link modifiers for featured rows. */
+const holidayTypesLinkClass = (item, mode) => {
+  const base = mode === 'mobile' ? 'mobile-dropdown-item' : 'dropdown-item'
+  if (item === 'Summer Packages') return `${base} ${base}--summer-primary`
+  if (item === 'Summer Packages to Greece') return `${base} ${base}--summer-secondary`
+  if (item === 'Exotic Packages') return `${base} ${base}--exotic-premium`
+  return `${base} ${base}--holiday-caps`
+}
+
 function Header() {
   const { t } = useTranslation()
   const [activeDropdown, setActiveDropdown] = useState(null) // desktop dropdowns
@@ -21,17 +30,17 @@ function Header() {
   const [activeMobileDropdown, setActiveMobileDropdown] = useState(null)
 
   const holidayTypes = [
-    'Easter Packages',
     'Summer Packages',
     'Summer Packages to Greece',
+    'Music & Sports',
+    'Exotic Packages',
+    'Easter Packages',
     'Autumn Packages',
     'Winter Packages',
     'Christmas Packages',
     'Green Monday Packages',
     'Cruises',
     'City Breaks',
-    'Exotic Packages',
-    'Music & Sports',
     'Mary Specials Trips'
   ]
 
@@ -161,7 +170,7 @@ function Header() {
                   <Link 
                     key={index} 
                     to={item === 'Cruises' ? '/cruises/' : `/tour-category/${categoryToSlug(item)}/`}
-                    className="dropdown-item"
+                    className={holidayTypesLinkClass(item, 'desktop')}
                     onClick={() => {
                       window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
                       if (document.documentElement) document.documentElement.scrollTop = 0
@@ -377,7 +386,7 @@ function Header() {
                   <Link 
                     key={index} 
                     to={item === 'Cruises' ? '/cruises/' : `/tour-category/${categoryToSlug(item)}/`}
-                    className="mobile-dropdown-item"
+                    className={holidayTypesLinkClass(item, 'mobile')}
                     onClick={() => {
                       window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
                       if (document.documentElement) document.documentElement.scrollTop = 0
