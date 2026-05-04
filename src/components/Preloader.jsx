@@ -11,7 +11,7 @@ function Preloader({
   variant = 'stairs',
   position = 'fixed',
   duration = 2500,
-  loadingText = '#LIVE THE EXPERIENCE WITH HONEYWELL TRAVEL',
+  loadingLines = ['LIVE THE EXPERIENCE', 'HONEYWELL TRAVEL'],
   onComplete,
   children,
   className = '',
@@ -84,38 +84,72 @@ function Preloader({
     }
   }, [loading, duration, onComplete, showPreloader, variant])
 
-  const words = loadingText.split(' ')
+  const line1Words = loadingLines[0]?.split(/\s+/).filter(Boolean) ?? []
+  const line2Words = loadingLines[1]?.split(/\s+/).filter(Boolean) ?? []
 
   const renderText = () => (
     <div className="preloader__text-wrap" aria-hidden="true">
       <motion.div
         className="preloader__brand"
-        initial={{ opacity: 0, y: -10, scale: 0.92 }}
-        animate={hideText ? { opacity: 0, y: -8, scale: 0.92 } : { opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: hideText ? 0.25 : 0.65, ease: [0.65, 0, 0.35, 1] }}
+        initial={{ opacity: 0, y: -16, scale: 0.88 }}
+        animate={hideText ? { opacity: 0, y: -10, scale: 0.92 } : { opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: hideText ? 0.28 : 0.75, ease: [0.65, 0, 0.35, 1] }}
       >
-        <img
-          src="/images/icons/honeywell-travel-logo.webp"
-          alt="Honeywell Travel"
-          className="preloader__brand-logo"
-        />
+        <span className="preloader__brand-aura" aria-hidden="true" />
+        <span className="preloader__brand-aura preloader__brand-aura--glow" aria-hidden="true" />
+        <span className="preloader__brand-logo-wrap">
+          <img
+            src="/images/icons/honeywell-travel-logo.webp"
+            alt="Honeywell Travel"
+            className="preloader__brand-logo"
+          />
+        </span>
       </motion.div>
-      <div className="preloader__text-row">
-      {words.map((word, index) => (
-        <motion.span
-          key={`${word}-${index}`}
-          initial={{ opacity: 0, filter: 'blur(8px)', y: 8 }}
-          animate={hideText ? { opacity: 0, filter: 'blur(8px)', y: 8 } : { opacity: 1, filter: 'blur(0px)', y: 0 }}
-          transition={{
-            duration: hideText ? 0.25 : 0.6,
-            delay: hideText ? 0 : index * 0.045,
-            ease: [0.65, 0, 0.35, 1],
-          }}
-          className="preloader__text-word"
-        >
-          {word}
-        </motion.span>
-      ))}
+      <div className="preloader__text-columns">
+        <div className="preloader__text-line preloader__text-line--tagline">
+          {line1Words.map((word, i) => {
+            const index = i
+            return (
+              <motion.span
+                key={`l1-${word}-${i}`}
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 12 }}
+                animate={
+                  hideText ? { opacity: 0, filter: 'blur(10px)', y: 12 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
+                }
+                transition={{
+                  duration: hideText ? 0.25 : 0.62,
+                  delay: hideText ? 0 : index * 0.05,
+                  ease: [0.65, 0, 0.35, 1],
+                }}
+                className="preloader__text-word"
+              >
+                {word}
+              </motion.span>
+            )
+          })}
+        </div>
+        <div className="preloader__text-line preloader__text-line--brand">
+          {line2Words.map((word, i) => {
+            const index = line1Words.length + i
+            return (
+              <motion.span
+                key={`l2-${word}-${i}`}
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 14 }}
+                animate={
+                  hideText ? { opacity: 0, filter: 'blur(10px)', y: 14 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
+                }
+                transition={{
+                  duration: hideText ? 0.25 : 0.62,
+                  delay: hideText ? 0 : index * 0.05,
+                  ease: [0.65, 0, 0.35, 1],
+                }}
+                className="preloader__text-word preloader__text-word--brand"
+              >
+                {word}
+              </motion.span>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

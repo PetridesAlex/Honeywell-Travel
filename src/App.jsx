@@ -128,7 +128,7 @@ function App() {
         loading={loading}
         variant="stairs"
         duration={2800}
-        loadingText="#LIVE THE EXPERIENCE WITH HONEYWELL TRAVEL"
+        loadingLines={['LIVE THE EXPERIENCE', 'HONEYWELL TRAVEL']}
         position="fixed"
       >
         <div className="app">

@@ -24,7 +24,7 @@ function LanguageSwitcher() {
         onClick={() => changeLanguage('el')}
         aria-label="Switch to Greek"
       >
-        EL
+        GR
       </button>
     </div>
   )
