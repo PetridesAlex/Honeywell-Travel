@@ -73,17 +73,18 @@ function ImageCarousel() {
 
   return (
     <section className="hero-section" aria-label="Hero">
-      <div
-        className="hero-bg-single hero-bg-base"
-        aria-hidden="true"
-        style={{ backgroundImage: currentImage || undefined }}
-      />
-      <div
-        className={`hero-bg-single hero-bg-fade${nextIndex !== null ? ' is-visible' : ''}`}
-        aria-hidden="true"
-        style={{ backgroundImage: incomingImage || undefined }}
-      />
-      <div className="hero-overlay" aria-hidden="true" />
+      {/* Media clipped here so the section never acts as a nested scroll/overscroll boundary */}
+      <div className="hero-section__media" aria-hidden="true">
+        <div
+          className="hero-bg-single hero-bg-base"
+          style={{ backgroundImage: currentImage || undefined }}
+        />
+        <div
+          className={`hero-bg-single hero-bg-fade${nextIndex !== null ? ' is-visible' : ''}`}
+          style={{ backgroundImage: incomingImage || undefined }}
+        />
+        <div className="hero-overlay" />
+      </div>
       <div className={`hero-content${currentIndex === 0 ? ' hero-content--welcome' : ''}`}>
         <div className="hero-text-wrap">
           <h2 className="hero-title">{current?.title}</h2>

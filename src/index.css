@@ -12,12 +12,12 @@ img,
   -ms-interpolation-mode: bicubic;
 }
 
-/* One normal scrollbar for the whole site – smooth and easy to use; touch-friendly on mobile */
+/* One scroll root: document (html) only — no nested full-page scrollports on body/#root/.app */
 html {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: auto;
@@ -97,6 +97,15 @@ body::-webkit-scrollbar,
   -webkit-overflow-scrolling: touch;
 }
 
+/* Never let wrappers become vertical scroll containers — avoids double scroll with html */
+.preloader,
+.preloader__content,
+.app,
+.main-content {
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
 .app,
 .main-content {
   -webkit-overflow-scrolling: touch;
@@ -145,7 +154,7 @@ textarea {
     scroll-behavior: smooth;
     min-height: -webkit-fill-available;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -186,10 +195,10 @@ textarea {
   }
 }
 
-/* Home route: scrolling happens on documentElement (html) only — no nested scrollports */
+/* Home route: reinforce single scroll root (same as global; kept for clarity / future home-only tweaks) */
 html.route-home {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 html.route-home body,

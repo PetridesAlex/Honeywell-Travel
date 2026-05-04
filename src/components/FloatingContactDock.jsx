@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import './FloatingContactDock.css'
 
 const CONTACT_ACTIONS = [
@@ -48,27 +49,90 @@ const CONTACT_ACTIONS = [
   },
 ]
 
+const PANEL_ID = 'floating-contact-dock-panel'
+
 function FloatingContactDock() {
+  const [open, setOpen] = useState(false)
+  const navRef = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const onPointerDown = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('touchstart', onPointerDown, { passive: true })
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('touchstart', onPointerDown)
+    }
+  }, [open])
+
   return (
-    <nav className="floating-contact-dock" aria-label="Quick contact links">
-      <div className="floating-contact-dock__glow" aria-hidden="true" />
-      <div className="floating-contact-dock__label">Connect with Honeywell Travel</div>
-      <div className="floating-contact-dock__actions">
-        {CONTACT_ACTIONS.map((action) => (
-          <a
-            key={action.id}
-            href={action.href}
-            className="floating-contact-dock__action"
-            target={action.external ? '_blank' : undefined}
-            rel={action.external ? 'noopener noreferrer' : undefined}
-            aria-label={action.ariaLabel ?? action.label}
-            title={action.title ?? action.label}
-          >
-            {action.icon}
-            <span>{action.label}</span>
-          </a>
-        ))}
+    <nav
+      ref={navRef}
+      className={`floating-contact-dock${open ? ' floating-contact-dock--open' : ''}`}
+      aria-label="Quick contact links"
+    >
+      <div
+        id={PANEL_ID}
+        className="floating-contact-dock__panel"
+        role="region"
+        aria-label="Contact options"
+        hidden={!open}
+      >
+        <div className="floating-contact-dock__glow" aria-hidden="true" />
+        <div className="floating-contact-dock__label">Connect with Honeywell Travel</div>
+        <div className="floating-contact-dock__actions">
+          {CONTACT_ACTIONS.map((action) => (
+            <a
+              key={action.id}
+              href={action.href}
+              className="floating-contact-dock__action"
+              target={action.external ? '_blank' : undefined}
+              rel={action.external ? 'noopener noreferrer' : undefined}
+              aria-label={action.ariaLabel ?? action.label}
+              title={action.title ?? action.label}
+              onClick={() => setOpen(false)}
+            >
+              {action.icon}
+              <span>{action.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
+
+      <button
+        type="button"
+        className="floating-contact-dock__toggle"
+        aria-expanded={open}
+        aria-controls={PANEL_ID}
+        aria-label={open ? 'Close contact menu' : 'Open contact menu'}
+        onClick={() => setOpen((v) => !v)}
+        title={open ? 'Close contact menu' : 'Open contact menu'}
+      >
+        <span className="floating-contact-dock__toggle-icon floating-contact-dock__toggle-icon--open" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
+          </svg>
+        </span>
+        <span className="floating-contact-dock__toggle-icon floating-contact-dock__toggle-icon--close" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+            <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+          </svg>
+        </span>
+      </button>
     </nav>
   )
 }
