@@ -55,8 +55,37 @@ const getAirlineLogo = (airlineName) => {
   return AIRLINE_LOGO[first] || null
 }
 
+const getDepartureDates = (details) => {
+  const rawDates = [
+    ...(Array.isArray(details.departureDates) ? details.departureDates : []),
+    ...(Array.isArray(details.hotels)
+      ? details.hotels.map((hotel) => hotel?.departureDate).filter(Boolean)
+      : []),
+    ...(Array.isArray(details.flights)
+      ? details.flights.map((flight) => flight?.date).filter(Boolean)
+      : []),
+  ]
+
+  const normalized = new Map()
+  rawDates.forEach((value) => {
+    const parts = String(value)
+      .split(/[,\n;]+/)
+      .map((part) => part.trim())
+      .filter(Boolean)
+
+    parts.forEach((date) => {
+      if (!date || date === '—' || date === '-') return
+      const key = date.toLowerCase()
+      if (!normalized.has(key)) normalized.set(key, date)
+    })
+  })
+
+  return [...normalized.values()]
+}
+
 const PackageFlightsSection = ({ details }) => {
   if (!details.flights?.length) return null
+  const departureDates = getDepartureDates(details)
   return (
     <div className="details-section">
       <h3 className="details-section-title details-section-title-flights">
@@ -67,6 +96,18 @@ const PackageFlightsSection = ({ details }) => {
         )}
         Flights — {details.airline || 'Sky Express'}
       </h3>
+      {departureDates.length > 0 && (
+        <div className="flights-departures" aria-label="Package departure dates">
+          <p className="flights-departures__label">Departure Dates</p>
+          <div className="flights-departures__list">
+            {departureDates.map((date) => (
+              <span key={date} className="flights-departures__item">
+                {date}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="flights-container">
         {details.flights.map((flight, index) => (
           <div key={index} className="flight-card">
@@ -331,6 +372,12 @@ function PackageFullDetail() {
                 onClick={() => setActiveTab('details')}
               >
                 {t('package.packageDetails')}
+              </button>
+              <button
+                className={`full-tab ${activeTab === 'flights' ? 'active' : ''}`}
+                onClick={() => setActiveTab('flights')}
+              >
+                Flights
               </button>
             </div>
 
@@ -1056,6 +1103,20 @@ function PackageFullDetail() {
                     </p>
                   )}
                 </div>
+              </section>
+            )}
+
+            {/* FLIGHTS TAB */}
+            {activeTab === 'flights' && (
+              <section className="full-section">
+                <h2>Flights</h2>
+                {details.flights?.length ? (
+                  <PackageFlightsSection details={details} />
+                ) : (
+                  <p className="section-text muted">
+                    Flight information will be available here.
+                  </p>
+                )}
               </section>
             )}
 
