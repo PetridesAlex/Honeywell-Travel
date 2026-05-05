@@ -32,9 +32,6 @@ function Preloader({
   const STAIR_EXIT_STAGGER = 0.078
   const STAIR_FULL_EXIT_S = (STAIR_COUNT - 1) * STAIR_EXIT_STAGGER + STAIR_RISE_S
   const STAIR_RISE_MS = Math.ceil(STAIR_FULL_EXIT_S * 1000) + 100
-  /** Entrance: wave up from below. */
-  const STAIR_ENTER_S = 0.62
-  const STAIR_ENTER_STAGGER = 0.065
 
   useEffect(() => {
     let hideTimer
@@ -185,11 +182,11 @@ function Preloader({
           <motion.div
             key={`stair-${index}`}
             className="preloader__stair"
-            initial={{ y: '100%' }}
+            initial={{ y: '0%' }}
             animate={stairsRaised ? { y: '-100%' } : { y: '0%' }}
             transition={{
-              duration: stairsRaised ? STAIR_RISE_S : STAIR_ENTER_S,
-              delay: stairsRaised ? index * STAIR_EXIT_STAGGER : index * STAIR_ENTER_STAGGER,
+              duration: stairsRaised ? STAIR_RISE_S : 0,
+              delay: stairsRaised ? index * STAIR_EXIT_STAGGER : 0,
               ease: stairEase,
             }}
           />
