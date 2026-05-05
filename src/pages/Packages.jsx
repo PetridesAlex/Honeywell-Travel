@@ -2,6 +2,7 @@ import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByFilter, travelPackages } from '../data/packages'
+import { packageCardImageUrl } from '../utils/packageCardImage'
 import { getEnglishPackageTitle } from '../utils/packageTranslations'
 import ModalCards from '../components/ModalCards'
 import SEO from '../components/SEO'
@@ -191,7 +192,7 @@ function Packages() {
       filteredPackages.map((pkg) => {
         const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
         const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
-        const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0] || ''
+        const imageUrl = packageCardImageUrl(pkg)
         const isGroup = (pkg.packageType || 'individual') === 'group'
 
         return {

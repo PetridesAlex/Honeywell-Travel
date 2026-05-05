@@ -3,6 +3,7 @@
     "reserve": "Κράτηση",
     "continue": "Συνέχεια",
     "readMore": "Διαβάστε Περισσότερα",
+    "showLess": "Λιγότερα",
     "bookNow": "Κράτηση Τώρα",
     "viewDetails": "Προβολή Λεπτομερειών",
     "contact": "Επικοινωνία",
@@ -53,7 +54,16 @@
     "child2": "Παιδί 2",
     "double": "Δίκλινο",
     "single": "Μονόκλινο",
-    "triple": "Τρίκλινο"
+    "triple": "Τρίκλινο",
+    "starRatingAria": "{{count}} από 5 αστέρια",
+    "priceTabDestinationLabel": "Προορισμός",
+    "priceBreakdownTitle": "Τιμή για την επιλογή σας",
+    "priceBreakdownTotal": "Σύνολο",
+    "child1ToggleHint": "Συμπερίληψη παιδιού 1 στην προσφορά",
+    "child2CycleHint": "Πατήστε για παιδιά (τιμή 2)· έως 4, μετά επανεκκίνηση",
+    "childPriceStepperHint": "Χρησιμοποιήστε − και + για τον αριθμό παιδιών στην προσφορά.",
+    "decreaseCount": "Μείωση",
+    "increaseCount": "Αύξηση"
   },
   "footer": {
     "newsletter": "Ενημερωτικό Δελτίο",

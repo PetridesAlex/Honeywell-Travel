@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import './ModalCards.css'
+import { FALLBACK_PACKAGE_CARD_IMAGE } from '../utils/packageCardImage'
 
 const ANIMATION_SPEEDS = {
   slow: { duration: 0.62, springStiffness: 205, springDamping: 25 },
@@ -99,9 +100,13 @@ function ModalCards({
           >
             <motion.img
               layoutId={`image-${card.id}`}
-              src={card.imageUrl}
+              src={card.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
               alt={card.title}
               className="modal-card-image"
+              onError={(e) => {
+                const el = e.currentTarget
+                if (!el.src.includes('patra1.webp')) el.src = FALLBACK_PACKAGE_CARD_IMAGE
+              }}
             />
             <div className="modal-card-shade" />
             <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
@@ -171,9 +176,13 @@ function ModalCards({
                     <div className="modal-cards-hero">
                       <motion.img
                         layoutId={`image-${selectedCard.id}`}
-                        src={selectedCard.imageUrl}
+                        src={selectedCard.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
                         alt={selectedCard.title}
                         className="modal-cards-hero-image"
+                        onError={(e) => {
+                          const el = e.currentTarget
+                          if (!el.src.includes('patra1.webp')) el.src = FALLBACK_PACKAGE_CARD_IMAGE
+                        }}
                       />
                       <div className="modal-cards-hero-shade" />
                       <span className={`modal-card-type modal-card-type--${selectedCard.packageType || 'individual'}`}>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
+import { packageCardImageUrl } from '../utils/packageCardImage'
 import { getEnglishPackageTitle } from '../utils/packageTranslations'
 import ModalCards from './ModalCards'
 import './PopularPackagesSection.css'
@@ -82,7 +83,7 @@ function PopularPackagesSection() {
       packagesForCategory.map((pkg) => {
         const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
         const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
-        const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0] || ''
+        const imageUrl = packageCardImageUrl(pkg)
         const isGroup = (pkg.packageType || 'individual') === 'group'
 
         return {

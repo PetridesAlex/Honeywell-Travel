@@ -7,6 +7,20 @@ import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
 import SEO from '../components/SEO'
 import './PackageFullDetail.css'
 
+const PackageBackChevron = () => (
+  <span className="package-back-nav__icon" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M15 18L9 12l6-6"
+        stroke="currentColor"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </span>
+)
+
 // Helper function to format program text with proper paragraphs
 const formatProgramText = (text) => {
   if (!text) return []
@@ -26,6 +40,131 @@ const extractTitle = (text) => {
   }
   return null
 }
+
+/** Split day copy into prose + bullet segments (• from CMS). */
+const ITINERARY_BULLET_SPLIT = /\s*•\s*/
+
+const parseItineraryDescription = (raw) => {
+  if (!raw || typeof raw !== 'string') return [{ type: 'prose', text: '' }]
+  const trimmed = raw.trim()
+  if (!trimmed.includes('•')) {
+    return [{ type: 'prose', text: trimmed }]
+  }
+
+  const blocks = trimmed.split(/\n\n+/).map((b) => b.trim()).filter(Boolean)
+  const segments = []
+
+  for (const block of blocks) {
+    const lines = block.split('\n').map((l) => l.trim()).filter((l) => l.length > 0)
+    const proseBuffer = []
+    const listBuffer = []
+
+    const flushProse = () => {
+      if (proseBuffer.length) {
+        segments.push({ type: 'prose', text: proseBuffer.join('\n') })
+        proseBuffer.length = 0
+      }
+    }
+    const flushList = () => {
+      if (listBuffer.length) {
+        segments.push({ type: 'list', items: [...listBuffer] })
+        listBuffer.length = 0
+      }
+    }
+
+    for (const line of lines) {
+      const bulletOnly = /^•\s*(.+)$/.exec(line)
+      if (bulletOnly) {
+        flushProse()
+        listBuffer.push(bulletOnly[1])
+        continue
+      }
+      if (line.includes('•')) {
+        const parts = line.split(ITINERARY_BULLET_SPLIT).map((p) => p.trim()).filter(Boolean)
+        if (parts.length <= 1) {
+          proseBuffer.push(line)
+          continue
+        }
+        flushList()
+        proseBuffer.push(parts[0])
+        flushProse()
+        listBuffer.push(...parts.slice(1))
+        continue
+      }
+      flushList()
+      proseBuffer.push(line)
+    }
+    flushProse()
+    flushList()
+  }
+
+  return segments.length ? segments : [{ type: 'prose', text: trimmed }]
+}
+
+const ItineraryDescription = ({ text }) => {
+  const segments = parseItineraryDescription(text)
+  return (
+    <div className="itinerary-description">
+      {segments.map((seg, idx) =>
+        seg.type === 'prose' ? (
+          <p
+            key={`p-${idx}`}
+            className="itinerary-description__prose"
+            style={seg.text.includes('\n') ? { whiteSpace: 'pre-line' } : undefined}
+          >
+            {seg.text}
+          </p>
+        ) : (
+          <ul key={`ul-${idx}`} className="itinerary-bullet-list">
+            {seg.items.map((item, j) => (
+              <li key={j} className="itinerary-bullet-item">
+                <span className="itinerary-bullet-marker" aria-hidden="true" />
+                <span className="itinerary-bullet-text">{item}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      )}
+    </div>
+  )
+}
+
+/** Single line for Price tab hero: where the trip goes (not full program copy). */
+const getPriceTabDestinationLine = (details, pkg, translatedTitle) => {
+  const df = details.destinationFull?.trim()
+  if (df) return df
+  const titleFromIntro = extractTitle(details.program?.introduction)
+  if (titleFromIntro) return titleFromIntro.replace(/\s+/g, ' ')
+  const ld = pkg.longDescription?.trim()
+  if (ld) {
+    const first = ld.split(/\n+/)[0].trim()
+    if (first.length <= 200) return first
+    return `${first.slice(0, 197)}…`
+  }
+  return translatedTitle?.trim() || ''
+}
+
+/** Short lines in program copy that act like subheads (e.g. Rhodes “Αξίζει να δείτε…”) — not full body paragraphs */
+const isProgramInlineHeading = (raw) => {
+  const t = raw.trim()
+  if (!t || t.startsWith('•') || t.startsWith('–') || t.startsWith('-')) return false
+  if (t.length > 125) return false
+  const words = t.split(/\s+/).filter(Boolean)
+  if (words.length < 2 || words.length > 14) return false
+  const colonIdx = t.indexOf(':')
+  if (colonIdx !== -1 && t.slice(colonIdx + 1).trim().length > 28) return false
+  if (/\.\s+[Α-ΩA-ZΆΈΉΊΌΎΏ]/.test(t)) return false
+  const letters = t.replace(/[^a-zA-ZΑ-Ωα-ωάέήίόύώΆΈΉΊΌΎΏ]/g, '')
+  if (letters.length >= 8) {
+    const upper = t.replace(/[^A-ZΑ-ΩΆΈΉΊΌΎΏ]/g, '')
+    if (upper.length / letters.length >= 0.72) return true
+  }
+  if (words.length <= 12 && !/\.\s/.test(t)) return true
+  return false
+}
+
+const programParagraphClass = (text) =>
+  isProgramInlineHeading(text) ? 'section-text program-text-subheading' : 'section-text'
 
 // Map airline names (as in package details.airline) to logo paths
 const AIRLINE_LOGO = {
@@ -55,9 +194,41 @@ const getAirlineLogo = (airlineName) => {
   return AIRLINE_LOGO[first] || null
 }
 
+/** Parse DD/MM or DD/MM/YYYY for chronological sorting (Cyprus/Romanian-style dates in package data). */
+const parseDepartureSortKey = (s) => {
+  const m = String(s)
+    .trim()
+    .match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/)
+  if (!m) return null
+  const day = parseInt(m[1], 10)
+  const month = parseInt(m[2], 10)
+  let year = m[3] ? parseInt(m[3], 10) : new Date().getFullYear()
+  if (year < 100) year += 2000
+  if (month < 1 || month > 12 || day < 1 || day > 31) return null
+  return new Date(year, month - 1, day).getTime()
+}
+
+const sortDepartureDateStrings = (dates) => {
+  const copy = [...dates]
+  copy.sort((a, b) => {
+    const ta = parseDepartureSortKey(a)
+    const tb = parseDepartureSortKey(b)
+    if (ta != null && tb != null) return ta - tb
+    if (ta != null) return -1
+    if (tb != null) return 1
+    return String(a).localeCompare(String(b), 'el')
+  })
+  return copy
+}
+
+/**
+ * All departure date tokens for this package: package-level strings, hotel rows, flights, etc.
+ * Includes `details.departureDate` (singular) when present — many packages use it instead of `departureDates[]`.
+ */
 const getDepartureDates = (details) => {
   const rawDates = [
     ...(Array.isArray(details.departureDates) ? details.departureDates : []),
+    ...(details.departureDate && typeof details.departureDate === 'string' ? [details.departureDate] : []),
     ...(Array.isArray(details.hotels)
       ? details.hotels.map((hotel) => hotel?.departureDate).filter(Boolean)
       : []),
@@ -80,7 +251,42 @@ const getDepartureDates = (details) => {
     })
   })
 
-  return [...normalized.values()]
+  return sortDepartureDateStrings([...normalized.values()])
+}
+
+/**
+ * Price tab: one block per departure. Union of canonical dates + hotel rows; synthesize a row from the first
+ * variant when the CMS lists a date on package/flights but omitted a duplicate hotel entry.
+ */
+const alignHotelVariantsToDepartures = (variants, details, baseHotel) => {
+  const fromCanonical = getDepartureDates(details)
+  const unionKeys = new Map()
+  fromCanonical.forEach((d) => unionKeys.set(d.toLowerCase(), d))
+  variants.forEach((v) => {
+    const d = typeof v.departureDate === 'string' ? v.departureDate.trim() : ''
+    if (d && d !== '—' && d !== '-') unionKeys.set(d.toLowerCase(), d)
+  })
+  const ordered = sortDepartureDateStrings([...unionKeys.values()])
+  if (ordered.length === 0) return variants
+
+  const byKey = new Map()
+  variants.forEach((v) => {
+    const d = typeof v.departureDate === 'string' ? v.departureDate.trim() : ''
+    if (d) {
+      const k = d.toLowerCase()
+      if (!byKey.has(k)) byKey.set(k, v)
+    }
+  })
+
+  const template = variants[0] || baseHotel
+  return ordered.map((dateStr) => {
+    const k = dateStr.toLowerCase()
+    if (byKey.has(k)) return byKey.get(k)
+    return {
+      ...template,
+      departureDate: dateStr,
+    }
+  })
 }
 
 const PackageFlightsSection = ({ details }) => {
@@ -109,34 +315,42 @@ const PackageFlightsSection = ({ details }) => {
         </div>
       )}
       <div className="flights-container">
-        {details.flights.map((flight, index) => (
-          <div key={index} className="flight-card">
-            <div className="flight-header">
-              <span className="flight-direction">
-                {flight.direction === 'Departure' ? '🛫 Departure' : '🛬 Return'}
-              </span>
-            </div>
-            <div className="flight-details">
-              <div className="flight-route">
-                <strong>{flight.route || `${flight.direction}`}</strong>
+        {details.flights.map((flight, index) => {
+          const isReturn = flight.direction === 'Return'
+          return (
+            <div
+              key={index}
+              className={`flight-card ${isReturn ? 'flight-card--return' : 'flight-card--departure'}`}
+              style={{ animationDelay: `${0.06 + index * 0.08}s` }}
+            >
+              <div className="flight-card__accent" aria-hidden="true" />
+              <div className="flight-header">
+                <span className="flight-direction">
+                  {isReturn ? '🛬 Return' : '🛫 Departure'}
+                </span>
               </div>
-              <div className="flight-info">
-                <div className="flight-info-row">
-                  <span className="flight-label">Flight:</span>
-                  <span className="flight-value">{flight.flight}</span>
+              <div className="flight-details">
+                <div className="flight-route">
+                  <strong>{flight.route || `${flight.direction}`}</strong>
                 </div>
-                <div className="flight-info-row">
-                  <span className="flight-label">Time:</span>
-                  <span className="flight-value">{flight.time}</span>
-                </div>
-                <div className="flight-info-row">
-                  <span className="flight-label">Luggage:</span>
-                  <span className="flight-value">{flight.luggage}</span>
+                <div className="flight-info">
+                  <div className="flight-info-row">
+                    <span className="flight-label">Flight</span>
+                    <span className="flight-value">{flight.flight}</span>
+                  </div>
+                  <div className="flight-info-row">
+                    <span className="flight-label">Time</span>
+                    <span className="flight-value flight-value--time">{flight.time}</span>
+                  </div>
+                  <div className="flight-info-row">
+                    <span className="flight-label">Luggage</span>
+                    <span className="flight-value">{flight.luggage}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
@@ -193,7 +407,10 @@ function PackageFullDetail() {
       <div className="package-full-page">
         <div className="package-full-container">
           <h1>Package Not Found</h1>
-          <Link to="/packages" className="back-link">Back to packages</Link>
+          <Link to="/packages" className="package-back-nav">
+            <PackageBackChevron />
+            <span className="package-back-nav__label">Back to packages</span>
+          </Link>
         </div>
       </div>
     )
@@ -201,6 +418,7 @@ function PackageFullDetail() {
 
       const details = pkg.details || {}
       const gallery = details.gallery || []
+      const priceTabDestination = getPriceTabDestinationLine(details, pkg, translatedTitle)
 
       // From price = lowest double room price per person across all hotels
       const getCheapestPrice = (pkg) => {
@@ -267,6 +485,60 @@ function PackageFullDetail() {
     }
     
     return total || 0
+  }
+
+  /** Line items for room + children; total matches calculateRoomPrice. */
+  const buildPackagePriceBreakdown = (hotel, selection, tr) => {
+    const lines = []
+    if (selection.roomType === 'single' && hotel.prices?.single != null) {
+      const amount = hotel.prices.single * selection.adults
+      lines.push({
+        key: 'single',
+        label: `${tr('package.single')} × ${selection.adults}`,
+        amount,
+      })
+    } else if (selection.roomType === 'double' && hotel.prices?.double != null) {
+      const amount = hotel.prices.double * selection.adults
+      lines.push({
+        key: 'double',
+        label: `${tr('package.double')} × ${selection.adults}`,
+        amount,
+      })
+    } else if (selection.roomType === 'triple' && hotel.prices?.triple != null) {
+      let amount = hotel.prices.triple * Math.min(selection.adults, 3)
+      if (selection.adults > 3) {
+        amount += hotel.prices.double * (selection.adults - 3)
+      }
+      lines.push({
+        key: 'triple',
+        label: `${tr('package.triple')} (${selection.adults} ${selection.adults !== 1 ? tr('package.adults') : tr('package.adult')})`,
+        amount,
+      })
+    } else if (hotel.prices?.double != null) {
+      const amount = hotel.prices.double * selection.adults
+      lines.push({
+        key: 'room',
+        label: `${tr('package.double')} × ${selection.adults}`,
+        amount,
+      })
+    }
+    if (selection.children > 0 && hotel.prices?.child1 != null) {
+      const n = Math.min(selection.children, 1)
+      lines.push({
+        key: 'c1',
+        label: tr('package.child1'),
+        amount: hotel.prices.child1 * n,
+      })
+    }
+    if (selection.children2 > 0 && hotel.prices?.child2 != null) {
+      lines.push({
+        key: 'c2',
+        label: `${tr('package.child2')} × ${selection.children2}`,
+        amount: hotel.prices.child2 * selection.children2,
+      })
+    }
+    const total = lines.reduce((sum, row) => sum + row.amount, 0)
+    return { lines, total }
   }
 
   const updateHotelSelection = (hotelIndex, field, value) => {
@@ -339,7 +611,7 @@ function PackageFullDetail() {
       <div className="package-full-container">
         <button
           type="button"
-          className="back-link"
+          className="package-back-nav"
           onClick={() => {
             if (window.history.length > 1) {
               navigate(-1)
@@ -348,7 +620,8 @@ function PackageFullDetail() {
             }
           }}
         >
-          {t('package.backToOverview')}
+          <PackageBackChevron />
+          <span className="package-back-nav__label">{t('package.backToOverview')}</span>
         </button>
 
         <div className="layout-grid">
@@ -385,53 +658,28 @@ function PackageFullDetail() {
             {activeTab === 'price' && (
               <section className="full-section">
                 <h2>{t('package.pricesAndAccommodation')}</h2>
-                <div className="price-header">
+                <div className="price-header price-header--destination-hero">
                   <div className="price-thumb">
                     {(details.thumbnailImage || details.coverImage || gallery[0]) ? (
                       <img
                         src={details.thumbnailImage || details.coverImage || gallery[0]}
-                        alt=""
+                        alt={priceTabDestination || translatedTitle || ''}
                         className="price-thumb-img"
                         loading="lazy"
                         decoding="async"
+                        sizes="(min-width: 900px) min(92vw, 1200px), 100vw"
                       />
                     ) : (
                       <span className="price-thumb-placeholder">{pkg.image}</span>
                     )}
                   </div>
-                  <div className="price-intro">
-                    {details.program?.introduction ? (
-                      (() => {
-                        const introText = details.program.introduction
-                        const paragraphs = introText.split(/\n\n+/).filter(p => p.trim())
-                        // In price header show only descriptive intro; exclude departures and flights lines (they stay in Program tab)
-                        const priceIntroParas = paragraphs.filter(
-                          p => !p.trim().startsWith('ΑΝΑΧΩΡΗΣΕΙΣ') && !p.trim().startsWith('Πτήσεις')
-                        )
-                        const lineClass = (raw, index) => {
-                          const t = raw.trim()
-                          const parts = ['section-text', 'price-intro-line']
-                          if (index === 0) parts.push('price-intro-line--title')
-                          else if (t.startsWith('Διανυκτερεύσεις')) parts.push('price-intro-line--stays')
-                          else if (t.startsWith('Αναχωρήσεις')) parts.push('price-intro-line--departures')
-                          else if (t.startsWith('Δωμάτιο')) parts.push('price-intro-line--room')
-                          else if (t.startsWith('Τιμές') || t.includes('€')) parts.push('price-intro-line--pricing')
-                          else if (t.startsWith('ΞΕΝΟΔΟΧΕΙΑ')) parts.push('price-intro-line--hotels')
-                          return parts.join(' ')
-                        }
-                        return priceIntroParas.length > 0 ? (
-                          priceIntroParas.map((para, idx) => (
-                            <p key={idx} className={lineClass(para, idx)}>{para.trim()}</p>
-                          ))
-                        ) : (
-                          <p className="section-text price-intro-line price-intro-line--title">{introText.trim()}</p>
-                        )
-                      })()
-                    ) : null}
-                  </div>
+                  {priceTabDestination ? (
+                    <div className="price-intro price-intro--destination">
+                      <p className="price-destination-eyebrow">{t('package.priceTabDestinationLabel')}</p>
+                      <p className="price-destination-name">{priceTabDestination}</p>
+                    </div>
+                  ) : null}
                 </div>
-
-                <PackageFlightsSection details={details} />
 
                 {details.hotels && details.hotels.length > 0 ? (
                   <>
@@ -473,16 +721,11 @@ function PackageFullDetail() {
                           seenDepartureDates.add(normalizedDate)
                           return true
                         })
+                        const displayHotelVariants = alignHotelVariantsToDepartures(uniqueHotelVariants, details, baseHotel)
                         // Create a unique key for this hotel group
                         const hotelKey = `hotel-${groupIndex}`
-                        const currentSelection = hotelSelections[hotelKey] || { 
-                          roomType: 'double', 
-                          adults: 2, 
-                          children: 0, 
-                          children2: 0,
-                          selectedDateIndex: 0
-                        }
-                        
+                        const hotelStarCount = Math.min(5, Math.max(0, baseHotel.stars ?? 3))
+
                         // Same layout for all hotel cards: left = hotel info, right = one variant block per departure
                         return (
                             <div key={hotelKey} className="hotel-single-layout">
@@ -493,43 +736,21 @@ function PackageFullDetail() {
                                   ) : (
                                     <div className="hotel-image-placeholder"><span className="image-text">INSERT IMAGE HERE</span></div>
                                   )}
-                                  <div className="hotel-stars-overlay">
-                                    {'★'.repeat(baseHotel.stars || 3)}{'☆'.repeat(5 - (baseHotel.stars || 3))}
+                                  <div
+                                    className="hotel-stars-overlay"
+                                    role="img"
+                                    aria-label={t('package.starRatingAria', { count: hotelStarCount })}
+                                  >
+                                    {Array.from({ length: hotelStarCount }, (_, i) => (
+                                      <span key={`star-filled-${i}`} className="hotel-stars-overlay__star hotel-stars-overlay__star--filled" aria-hidden="true">★</span>
+                                    ))}
+                                    {Array.from({ length: 5 - hotelStarCount }, (_, i) => (
+                                      <span key={`star-empty-${i}`} className="hotel-stars-overlay__star hotel-stars-overlay__star--empty" aria-hidden="true">☆</span>
+                                    ))}
                                   </div>
                                 </div>
                                 {baseHotel.name ? <h3 className="hotel-single-title">{baseHotel.name}</h3> : null}
                                 {baseHotel.location && <p className="hotel-single-location">{baseHotel.location}</p>}
-                                <div className="hotel-single-guests">
-                                  <label className="section-label">{t('package.guests')}</label>
-                                  <div className="guest-selector-vertical">
-                                    <span className="guest-type">{t('package.adults')}:</span>
-                                    <div className="guest-controls-vertical">
-                                      <button type="button" className="guest-btn-vertical" onClick={() => currentSelection.adults > 1 && updateHotelSelection(hotelKey, 'adults', currentSelection.adults - 1)} disabled={currentSelection.adults <= 1} aria-label="Decrease adults">−</button>
-                                      <span className="guest-count-vertical">{currentSelection.adults}</span>
-                                      <button type="button" className="guest-btn-vertical" onClick={() => currentSelection.adults < 8 && updateHotelSelection(hotelKey, 'adults', currentSelection.adults + 1)}>+</button>
-                                    </div>
-                                  </div>
-                                  {(hotelVariants[0]?.prices?.child1 != null) && (
-                                    <div className="guest-selector-vertical">
-                                      <span className="guest-type">{t('package.child1')}:</span>
-                                      <div className="guest-controls-vertical">
-                                        <button type="button" className="guest-btn-vertical" onClick={() => currentSelection.children > 0 && updateHotelSelection(hotelKey, 'children', currentSelection.children - 1)} disabled={currentSelection.children <= 0}>−</button>
-                                        <span className="guest-count-vertical">{currentSelection.children}</span>
-                                        <button type="button" className="guest-btn-vertical" onClick={() => updateHotelSelection(hotelKey, 'children', currentSelection.children + 1)}>+</button>
-                                      </div>
-                                    </div>
-                                  )}
-                                  {(hotelVariants[0]?.prices?.child2 != null) && (
-                                    <div className="guest-selector-vertical">
-                                      <span className="guest-type">{t('package.child2')}:</span>
-                                      <div className="guest-controls-vertical">
-                                        <button type="button" className="guest-btn-vertical" onClick={() => currentSelection.children2 > 0 && updateHotelSelection(hotelKey, 'children2', currentSelection.children2 - 1)} disabled={currentSelection.children2 <= 0}>−</button>
-                                        <span className="guest-count-vertical">{currentSelection.children2}</span>
-                                        <button type="button" className="guest-btn-vertical" onClick={() => currentSelection.children2 < 4 && updateHotelSelection(hotelKey, 'children2', currentSelection.children2 + 1)}>+</button>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
                               </div>
                               <div className="hotel-single-right">
                                 {pkg.id === 201 && groupIndex > 0 ? (
@@ -540,27 +761,30 @@ function PackageFullDetail() {
                                     </p>
                                   </div>
                                 ) : (
-                                  uniqueHotelVariants.map((variant, variantIdx) => {
-                                    // Each variant has completely independent selection
-                                    const variantKey = `${hotelKey}-variant-${variantIdx}`
-                                    const variantSelectionData = hotelSelections[variantKey]
-                                    // Only use stored selection if it exists, otherwise no selection (for display)
-                                    const variantSelection = variantSelectionData || {
-                                      roomType: null, // null means no selection yet
-                                      adults: 2,
-                                      children: 0,
-                                      children2: 0
+                                  displayHotelVariants.map((variant, variantIdx) => {
+                                    const depSlug =
+                                      typeof variant.departureDate === 'string' && variant.departureDate.trim()
+                                        ? variant.departureDate.trim().toLowerCase().replace(/\s+/g, '').replace(/\//g, '-')
+                                        : `idx-${variantIdx}`
+                                    const variantKey = `${hotelKey}-variant-${depSlug}`
+                                    const variantRoomState = hotelSelections[variantKey] || {}
+                                    const hotelGuestState = hotelSelections[hotelKey] || {}
+                                    const variantSelection = {
+                                      roomType: variantRoomState.roomType ?? null,
+                                      adults: hotelGuestState.adults ?? variantRoomState.adults ?? 2,
+                                      children: hotelGuestState.children ?? variantRoomState.children ?? 0,
+                                      children2: hotelGuestState.children2 ?? variantRoomState.children2 ?? 0,
                                     }
-                                    // For price calculation, default to 'double' if no selection
-                                    const selectionForPrice = variantSelectionData || {
-                                      roomType: 'double',
-                                      adults: 2,
-                                      children: 0,
-                                      children2: 0
+                                    const selectionForPrice = {
+                                      roomType: variantRoomState.roomType ?? 'double',
+                                      adults: hotelGuestState.adults ?? variantRoomState.adults ?? 2,
+                                      children: hotelGuestState.children ?? variantRoomState.children ?? 0,
+                                      children2: hotelGuestState.children2 ?? variantRoomState.children2 ?? 0,
                                     }
                                     const variantTotal = calculateRoomPrice(variant, selectionForPrice)
+                                    const priceBreakdown = buildPackagePriceBreakdown(variant, selectionForPrice, t)
                                     return (
-                                      <div key={variantIdx} className="hotel-variant-block">
+                                      <div key={variantKey} className="hotel-variant-block">
                                         <div className="hotel-variant-date-badge">
                                           <span className="hotel-variant-date-label">{t('package.departureDate')}</span>
                                           <span className="hotel-variant-date-value">{variant.departureDate}</span>
@@ -584,20 +808,21 @@ function PackageFullDetail() {
                                                 type="button"
                                                 className={`hotel-variant-price-cell ${variantSelection.roomType === 'double' ? 'selected' : ''}`}
                                                 onClick={() => {
-                                                  if (variant.prices?.double != null) {
-                                                    // Update only this specific variant's selection
-                                                    const currentAdults = variantSelection.adults || 2
-                                                    const newAdults = currentAdults < 2 ? 2 : currentAdults
-                                                    setHotelSelections(prev => ({
+                                                  if (variant.prices?.double == null) return
+                                                  setHotelSelections((prev) => {
+                                                    const hg = prev[hotelKey] || {}
+                                                    const adults = Math.max(hg.adults ?? 2, 2)
+                                                    return {
                                                       ...prev,
-                                                      [variantKey]: {
-                                                        roomType: 'double',
-                                                        adults: newAdults,
-                                                        children: variantSelection.children || 0,
-                                                        children2: variantSelection.children2 || 0
-                                                      }
-                                                    }))
-                                                  }
+                                                      [variantKey]: { ...prev[variantKey], roomType: 'double' },
+                                                      [hotelKey]: {
+                                                        ...hg,
+                                                        adults,
+                                                        children: hg.children ?? 0,
+                                                        children2: hg.children2 ?? 0,
+                                                      },
+                                                    }
+                                                  })
                                                 }}
                                                 disabled={variant.prices?.double == null}
                                                 title="Click to select Double room (2 adults)"
@@ -609,18 +834,20 @@ function PackageFullDetail() {
                                                 type="button"
                                                 className={`hotel-variant-price-cell ${variantSelection.roomType === 'single' ? 'selected' : ''}`}
                                                 onClick={() => {
-                                                  if (variant.prices?.single != null) {
-                                                    // Update only this specific variant's selection
-                                                    setHotelSelections(prev => ({
+                                                  if (variant.prices?.single == null) return
+                                                  setHotelSelections((prev) => {
+                                                    const hg = prev[hotelKey] || {}
+                                                    return {
                                                       ...prev,
-                                                      [variantKey]: {
-                                                        roomType: 'single',
+                                                      [variantKey]: { ...prev[variantKey], roomType: 'single' },
+                                                      [hotelKey]: {
+                                                        ...hg,
                                                         adults: 1,
-                                                        children: variantSelection.children || 0,
-                                                        children2: variantSelection.children2 || 0
-                                                      }
-                                                    }))
-                                                  }
+                                                        children: hg.children ?? 0,
+                                                        children2: hg.children2 ?? 0,
+                                                      },
+                                                    }
+                                                  })
                                                 }}
                                                 disabled={variant.prices?.single == null}
                                                 title="Click to select Single room (1 adult)"
@@ -633,15 +860,20 @@ function PackageFullDetail() {
                                                   type="button"
                                                   className={`hotel-variant-price-cell ${variantSelection.roomType === 'triple' ? 'selected' : ''}`}
                                                   onClick={() => {
-                                                    setHotelSelections(prev => ({
-                                                      ...prev,
-                                                      [variantKey]: {
-                                                        roomType: 'triple',
-                                                        adults: Math.max(variantSelection.adults || 2, 3),
-                                                        children: variantSelection.children || 0,
-                                                        children2: variantSelection.children2 || 0
+                                                    setHotelSelections((prev) => {
+                                                      const hg = prev[hotelKey] || {}
+                                                      const adults = Math.max(hg.adults ?? 2, 3)
+                                                      return {
+                                                        ...prev,
+                                                        [variantKey]: { ...prev[variantKey], roomType: 'triple' },
+                                                        [hotelKey]: {
+                                                          ...hg,
+                                                          adults,
+                                                          children: hg.children ?? 0,
+                                                          children2: hg.children2 ?? 0,
+                                                        },
                                                       }
-                                                    }))
+                                                    })
                                                   }}
                                                   title="Click to select Triple room (3 adults)"
                                                 >
@@ -650,18 +882,105 @@ function PackageFullDetail() {
                                                 </button>
                                               )}
                                               {variant.prices?.child1 != null && (
-                                                <div className="hotel-variant-price-cell">
+                                                <div
+                                                  className={`hotel-variant-price-cell hotel-variant-price-cell--child-stepper ${(selectionForPrice.children ?? 0) >= 1 ? 'selected' : ''}`}
+                                                  title={t('package.childPriceStepperHint')}
+                                                >
                                                   <span className="hotel-variant-price-label">{t('package.child1')}</span>
                                                   <span className="hotel-variant-price-value">€{variant.prices.child1}</span>
+                                                  <div className="hotel-variant-child-stepper" role="group" aria-label={t('package.child1')}>
+                                                    <button
+                                                      type="button"
+                                                      className="hotel-variant-child-stepper-btn"
+                                                      disabled={(selectionForPrice.children ?? 0) <= 0}
+                                                      aria-label={t('package.decreaseCount')}
+                                                      onClick={() => {
+                                                        setHotelSelections((prev) => {
+                                                          const hg = prev[hotelKey] || {}
+                                                          return { ...prev, [hotelKey]: { ...hg, children: 0 } }
+                                                        })
+                                                      }}
+                                                    >
+                                                      −
+                                                    </button>
+                                                    <span className="hotel-variant-child-stepper-count" aria-live="polite">{selectionForPrice.children}</span>
+                                                    <button
+                                                      type="button"
+                                                      className="hotel-variant-child-stepper-btn"
+                                                      disabled={(selectionForPrice.children ?? 0) >= 1}
+                                                      aria-label={t('package.increaseCount')}
+                                                      onClick={() => {
+                                                        setHotelSelections((prev) => {
+                                                          const hg = prev[hotelKey] || {}
+                                                          return { ...prev, [hotelKey]: { ...hg, children: 1 } }
+                                                        })
+                                                      }}
+                                                    >
+                                                      +
+                                                    </button>
+                                                  </div>
                                                 </div>
                                               )}
                                               {variant.prices?.child2 != null && (
-                                                <div className="hotel-variant-price-cell">
+                                                <div
+                                                  className={`hotel-variant-price-cell hotel-variant-price-cell--child-stepper ${(selectionForPrice.children2 ?? 0) > 0 ? 'selected' : ''}`}
+                                                  title={t('package.childPriceStepperHint')}
+                                                >
                                                   <span className="hotel-variant-price-label">{t('package.child2')}</span>
                                                   <span className="hotel-variant-price-value">€{variant.prices.child2}</span>
+                                                  <div className="hotel-variant-child-stepper" role="group" aria-label={t('package.child2')}>
+                                                    <button
+                                                      type="button"
+                                                      className="hotel-variant-child-stepper-btn"
+                                                      disabled={(selectionForPrice.children2 ?? 0) <= 0}
+                                                      aria-label={t('package.decreaseCount')}
+                                                      onClick={() => {
+                                                        setHotelSelections((prev) => {
+                                                          const hg = prev[hotelKey] || {}
+                                                          const c2 = Math.max(0, (hg.children2 ?? 0) - 1)
+                                                          return { ...prev, [hotelKey]: { ...hg, children2: c2 } }
+                                                        })
+                                                      }}
+                                                    >
+                                                      −
+                                                    </button>
+                                                    <span className="hotel-variant-child-stepper-count" aria-live="polite">{selectionForPrice.children2}</span>
+                                                    <button
+                                                      type="button"
+                                                      className="hotel-variant-child-stepper-btn"
+                                                      disabled={(selectionForPrice.children2 ?? 0) >= 4}
+                                                      aria-label={t('package.increaseCount')}
+                                                      onClick={() => {
+                                                        setHotelSelections((prev) => {
+                                                          const hg = prev[hotelKey] || {}
+                                                          const c2 = Math.min(4, (hg.children2 ?? 0) + 1)
+                                                          return { ...prev, [hotelKey]: { ...hg, children2: c2 } }
+                                                        })
+                                                      }}
+                                                    >
+                                                      +
+                                                    </button>
+                                                  </div>
                                                 </div>
                                               )}
                                             </div>
+                                            {priceBreakdown.lines.length > 0 ? (
+                                              <div className="hotel-variant-price-breakdown" aria-live="polite">
+                                                <p className="hotel-variant-price-breakdown-title">{t('package.priceBreakdownTitle')}</p>
+                                                <ul className="hotel-variant-price-breakdown-list">
+                                                  {priceBreakdown.lines.map((row) => (
+                                                    <li key={row.key} className="hotel-variant-price-breakdown-row">
+                                                      <span>{row.label}</span>
+                                                      <span>€{row.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                                                    </li>
+                                                  ))}
+                                                </ul>
+                                                <div className="hotel-variant-price-breakdown-total">
+                                                  <span>{t('package.priceBreakdownTotal')}</span>
+                                                  <strong>€{priceBreakdown.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>
+                                                </div>
+                                              </div>
+                                            ) : null}
                                           </div>
                                         </div>
                                         <button
@@ -745,7 +1064,7 @@ function PackageFullDetail() {
                             <span className="itinerary-day">{day.day}</span>
                             <h3 className="itinerary-title">{day.title}</h3>
                           </div>
-                          <p className="itinerary-description">{day.description}</p>
+                          <ItineraryDescription text={day.description} />
                           {day.image && (
                             <div 
                               className="itinerary-image"
@@ -786,7 +1105,7 @@ function PackageFullDetail() {
                                 const t = para.trim()
                                 const isBoldHeading = t === 'Η ριβιέρα της Ηπείρου' || t === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
                                 return (
-                                  <p key={idx} className="section-text">
+                                  <p key={idx} className={programParagraphClass(t)}>
                                     {isBoldHeading ? <strong>{t}</strong> : t}
                                   </p>
                                 )
@@ -797,7 +1116,7 @@ function PackageFullDetail() {
                                 const t = para.trim()
                                 const isBoldHeading = t === 'Η ριβιέρα της Ηπείρου' || t === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
                                 return (
-                                  <p key={idx} className="section-text">
+                                  <p key={idx} className={programParagraphClass(t)}>
                                     {isBoldHeading ? <strong>{t}</strong> : t}
                                   </p>
                                 )
@@ -828,9 +1147,7 @@ function PackageFullDetail() {
                                   <span className="itinerary-day">{dayNum}η Μέρα</span>
                                   <h3 className="itinerary-title">{title || `${dayNum}η Μέρα`}</h3>
                                 </div>
-                                <p className="itinerary-description" style={description.includes('\n\n') ? { whiteSpace: 'pre-line' } : undefined}>
-                                  {description}
-                                </p>
+                                <ItineraryDescription text={description} />
                               </li>
                             )
                           })}
@@ -842,7 +1159,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Ηράκλειο: πόλη θαλασσινή, γεμάτη ζωή και ιστορία</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.heraklionCity).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -852,7 +1169,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Οι Ενετοί στον μόλο</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.venetians).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -862,7 +1179,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Τα τείχη της παλιάς πόλης: μεταίχμιο του σήμερα και του χθες</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.walls).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -872,7 +1189,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Η «μυθική» Κνωσός</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.knossos).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -882,7 +1199,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Αρχαιολογικό Μουσείο Ηρακλείου: «πανόραμα» Μινωικής Κρήτης</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.museum).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -892,7 +1209,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Cretaquarium: υδάτινη κιβωτός της Μεσογείου</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.cretaquarium).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -902,7 +1219,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Πανδαισία γεύσεων και απολαύσεων</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.food).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -912,7 +1229,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Αναρίθμητες επιλογές διαμονής</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.accommodation).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -922,7 +1239,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Παραλίες με χαρακτήρα και ομορφιά</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.beaches).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -932,7 +1249,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Το Μουσείο Φυσικής Ιστορίας: πλούσιο, δραστήριο, διασκεδαστικό</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.naturalHistory).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -942,7 +1259,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Ιστορικό Μουσείο Κρήτης: η Κρήτη της ιστορίας</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.historicalMuseum).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -952,7 +1269,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Στην καρδιά της πόλης</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.cityCenter).map((para, idx) => (
-                            <p key={idx} className="section-text">{para}</p>
+                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
                           ))}
                         </div>
                       </div>
@@ -966,7 +1283,7 @@ function PackageFullDetail() {
                           {title && <h3 className="program-heading">{title}</h3>}
                           <div className="program-text">
                             {contentParas.map((para, idx) => (
-                              <p key={idx} className="section-text">{para}</p>
+                              <p key={idx} className={programParagraphClass(para)}>{para}</p>
                             ))}
                           </div>
                         </div>
@@ -981,7 +1298,7 @@ function PackageFullDetail() {
                           {title && <h3 className="program-heading">{title}</h3>}
                           <div className="program-text">
                             {contentParas.map((para, idx) => (
-                              <p key={idx} className="section-text">{para}</p>
+                              <p key={idx} className={programParagraphClass(para)}>{para}</p>
                             ))}
                           </div>
                         </div>
@@ -1045,9 +1362,6 @@ function PackageFullDetail() {
                   )}
                 </div>
 
-                {/* Flights */}
-                <PackageFlightsSection details={details} />
-
                 {/* Terms & Conditions */}
                 {details.termsAndConditions && details.termsAndConditions.length > 0 && (
                   <div className="details-section">
@@ -1070,18 +1384,7 @@ function PackageFullDetail() {
                       <span className="icon-badge hotel-stay">🏨</span>
                       Hotel Stay
                     </h3>
-                    <div style={{ 
-                      padding: '1.25rem 1.5rem', 
-                      marginTop: '0.5rem',
-                      background: '#eff6ff', 
-                      border: '1px solid #bfdbfe', 
-                      borderLeft: '4px solid #3b82f6', 
-                      borderRadius: '8px',
-                      fontSize: '0.95rem',
-                      color: '#1e40af',
-                      lineHeight: '1.8',
-                      whiteSpace: 'pre-line'
-                    }}>
+                    <div className="hotel-stay-note-box">
                       {details.hotelStayNote}
                     </div>
                   </div>

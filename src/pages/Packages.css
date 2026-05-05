@@ -60,64 +60,132 @@
   padding: 2rem 1.5rem 4rem;
 }
 
-/* Category Chips – filter bar below hero */
+/* Category Chips – premium filter panel below hero */
 .category-chips-wrapper {
-  max-width: 1280px;
-  margin: -2rem auto 0;
-  padding: 1.6rem 1.6rem 1.9rem;
-  background: linear-gradient(180deg, #ffffff 0%, #fdf7f8 100%);
-  border-radius: 16px;
-  box-shadow: 0 10px 34px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(196, 18, 48, 0.14);
+  max-width: min(1280px, calc(100% - 2rem));
+  margin: -2.25rem auto 0;
+  padding: 1.85rem 2rem 2.1rem;
   position: relative;
   z-index: 2;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background:
+    radial-gradient(ellipse 85% 100% at 50% -35%, rgba(196, 18, 48, 0.09), transparent 55%),
+    linear-gradient(172deg, #ffffff 0%, #fafbfc 42%, #f1f5f9 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.98) inset,
+    0 22px 52px rgba(15, 23, 42, 0.08),
+    0 8px 22px rgba(15, 23, 42, 0.05);
+}
+
+.category-chips-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(196, 18, 48, 0.55) 22%,
+    rgba(212, 175, 55, 0.65) 50%,
+    rgba(196, 18, 48, 0.55) 78%,
+    transparent 100%
+  );
+  opacity: 0.92;
+  pointer-events: none;
 }
 
 .category-chips-wrapper .section-subtitle {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #9f1239;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin: 0 0 1.1rem;
+  position: relative;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: #0f172a;
+  margin: 0 0 1.45rem;
+  padding-bottom: 0.9rem;
   text-align: center;
+  line-height: 1.25;
+}
+
+.category-chips-wrapper .section-subtitle::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 3px;
+  margin: 0.75rem auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, #c41230 35%, #d97706 65%, transparent);
+  opacity: 0.9;
 }
 
 .category-chips {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.6rem;
+  align-items: center;
+  gap: 0.65rem;
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .category-chip {
-  border: 1px solid rgba(196, 18, 48, 0.18);
-  border-radius: 999px;
-  padding: 0.52rem 1.05rem;
-  font-size: 0.84rem;
+  font-family: var(--font-sans);
+  border: 1px solid rgba(226, 232, 240, 0.98);
+  border-radius: 12px;
+  padding: 0.58rem 1.2rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  letter-spacing: 0.015em;
   color: #334155;
   cursor: pointer;
-  transition: border-color 0.22s ease, background 0.22s ease, color 0.22s ease, transform 0.2s ease, box-shadow 0.22s ease;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 14px rgba(15, 23, 42, 0.05);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.28s cubic-bezier(0.34, 1.15, 0.64, 1),
+    box-shadow 0.28s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .category-chip:hover:not(.active) {
-  background: linear-gradient(180deg, #fff5f7 0%, #ffe9ee 100%);
-  border-color: rgba(196, 18, 48, 0.38);
-  color: #881337;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(196, 18, 48, 0.15);
+  background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);
+  border-color: rgba(196, 18, 48, 0.28);
+  color: #9f1239;
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 22px rgba(196, 18, 48, 0.12),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.category-chip:focus-visible {
+  outline: 2px solid rgba(196, 18, 48, 0.45);
+  outline-offset: 3px;
 }
 
 .category-chip.active {
-  background: linear-gradient(135deg, #C41230 0%, #E31E24 100%);
-  color: white;
-  border-color: #C41230;
-  box-shadow: 0 6px 16px rgba(196, 18, 48, 0.32);
+  background: linear-gradient(148deg, #881337 0%, #c41230 42%, #b91c1c 100%);
+  color: #fefce8;
+  border-color: rgba(196, 18, 48, 0.85);
+  box-shadow:
+    0 0 0 2px rgba(212, 175, 55, 0.45),
+    0 12px 30px rgba(159, 18, 57, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.category-chip.active:hover {
+  background: linear-gradient(148deg, #7f132f 0%, #b01028 42%, #a01824 100%);
+  color: #ffffff;
 }
 
 /* Decorative Separator */

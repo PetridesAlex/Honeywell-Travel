@@ -3,6 +3,7 @@
     "reserve": "Reserve",
     "continue": "Continue",
     "readMore": "Read More",
+    "showLess": "Show less",
     "bookNow": "Book Now",
     "viewDetails": "View Details",
     "contact": "Contact",
@@ -53,7 +54,16 @@
     "child2": "Child 2",
     "double": "Double",
     "single": "Single",
-    "triple": "Triple"
+    "triple": "Triple",
+    "starRatingAria": "{{count}} out of 5 stars",
+    "priceTabDestinationLabel": "Destination",
+    "priceBreakdownTitle": "Price for your selection",
+    "priceBreakdownTotal": "Total",
+    "child1ToggleHint": "Include child 1 in the quote",
+    "child2CycleHint": "Tap to add children (price tier 2); tap again up to 4, then off",
+    "childPriceStepperHint": "Use − and + to change how many children are included in the quote.",
+    "decreaseCount": "Decrease",
+    "increaseCount": "Increase"
   },
   "footer": {
     "newsletter": "Newsletter",
