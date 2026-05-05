@@ -22,7 +22,18 @@
 .preloader__stair {
   height: 100%;
   flex: 1;
+  min-width: 0;
   background: linear-gradient(160deg, #05070d 0%, #0a1425 50%, #070c16 100%);
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
+  will-change: transform;
+}
+
+.preloader__stair:nth-child(odd) {
+  filter: brightness(1.06);
+}
+
+.preloader__stair:nth-child(even) {
+  filter: brightness(0.94);
 }
 
 .preloader__panel {
@@ -33,8 +44,9 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(140% 120% at 15% 5%, rgba(14, 165, 233, 0.22) 0%, transparent 55%),
-    radial-gradient(120% 100% at 85% 10%, rgba(196, 18, 48, 0.2) 0%, transparent 60%);
+    radial-gradient(140% 120% at 15% 5%, rgba(14, 165, 233, 0.38) 0%, transparent 52%),
+    radial-gradient(120% 100% at 85% 10%, rgba(196, 18, 48, 0.34) 0%, transparent 58%),
+    radial-gradient(90% 80% at 50% 100%, rgba(244, 63, 94, 0.12) 0%, transparent 45%);
   pointer-events: none;
 }
 
@@ -74,8 +86,8 @@
     radial-gradient(closest-side, rgba(248, 50, 70, 0.7) 0%, rgba(196, 18, 48, 0.4) 40%, transparent 78%),
     radial-gradient(100% 100% at 25% 45%, rgba(56, 189, 248, 0.55) 0%, rgba(14, 165, 233, 0.25) 45%, transparent 70%),
     radial-gradient(100% 100% at 78% 55%, rgba(14, 165, 233, 0.45) 0%, transparent 58%);
-  filter: blur(22px);
-  animation: preloaderLogoAura 4s ease-in-out infinite;
+  filter: blur(26px);
+  animation: preloaderLogoAura 2.85s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -86,9 +98,9 @@
   background:
     radial-gradient(closest-side, rgba(255, 255, 255, 0.55) 0%, rgba(255, 180, 190, 0.65) 32%, rgba(244, 63, 94, 0.45) 55%, transparent 78%),
     radial-gradient(closest-side at 60% 40%, rgba(125, 211, 252, 0.5) 0%, transparent 62%);
-  filter: blur(14px);
+  filter: blur(16px);
   mix-blend-mode: screen;
-  animation: preloaderLogoAuraBright 3.2s ease-in-out infinite;
+  animation: preloaderLogoAuraBright 2.35s ease-in-out infinite;
   opacity: 0.95;
 }
 
@@ -96,7 +108,7 @@
   position: relative;
   z-index: 2;
   display: block;
-  animation: preloaderLogoDrift 8s ease-in-out infinite;
+  animation: preloaderLogoDrift 5.5s ease-in-out infinite;
   will-change: transform;
 }
 
@@ -106,13 +118,13 @@
   object-fit: contain;
   display: block;
   filter:
-    drop-shadow(0 0 28px rgba(255, 90, 100, 0.55))
-    drop-shadow(0 0 48px rgba(227, 30, 36, 0.45))
-    drop-shadow(0 10px 32px rgba(196, 18, 48, 0.55))
-    drop-shadow(0 2px 8px rgba(6, 182, 212, 0.35));
+    drop-shadow(0 0 32px rgba(255, 90, 100, 0.62))
+    drop-shadow(0 0 56px rgba(227, 30, 36, 0.52))
+    drop-shadow(0 12px 36px rgba(196, 18, 48, 0.62))
+    drop-shadow(0 2px 12px rgba(6, 182, 212, 0.42));
   animation:
-    preloaderLogoPulse 2.4s ease-in-out infinite,
-    preloaderLogoGlow 4.5s ease-in-out infinite;
+    preloaderLogoPulse 1.85s ease-in-out infinite,
+    preloaderLogoGlow 3.15s ease-in-out infinite;
   will-change: transform, filter;
 }
 
@@ -133,8 +145,7 @@
 }
 
 .preloader__text-line--tagline {
-  padding-bottom: 0.15em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 0;
 }
 
 .preloader__text-word {
@@ -153,7 +164,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: preloaderTextShimmer 3.2s ease-in-out infinite;
+  animation: preloaderTextShimmer 2.35s ease-in-out infinite;
 }
 
 .preloader__text-word--brand {
@@ -169,7 +180,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: preloaderTextShimmer 3.4s ease-in-out infinite 0.15s;
+  animation: preloaderTextShimmer 2.45s ease-in-out infinite 0.12s;
 }
 
 .preloader__percentage {
@@ -218,27 +229,27 @@
 
 @keyframes preloaderLogoAura {
   0%, 100% {
-    opacity: 0.88;
+    opacity: 0.82;
     transform: scale(1);
   }
-  40% {
+  38% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
-  60% {
-    opacity: 0.94;
-    transform: scale(1.05);
+  62% {
+    opacity: 0.9;
+    transform: scale(1.08);
   }
 }
 
 @keyframes preloaderLogoAuraBright {
   0%, 100% {
-    opacity: 0.85;
+    opacity: 0.78;
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(1.06);
+    transform: scale(1.14);
   }
 }
 
@@ -247,24 +258,24 @@
     transform: scale(1) translateZ(0);
   }
   45% {
-    transform: scale(1.065) translateZ(0);
+    transform: scale(1.1) translateZ(0);
   }
 }
 
 @keyframes preloaderLogoGlow {
   0%, 100% {
     filter:
-      drop-shadow(0 0 28px rgba(255, 90, 100, 0.55))
-      drop-shadow(0 0 48px rgba(227, 30, 36, 0.45))
-      drop-shadow(0 10px 32px rgba(196, 18, 48, 0.55))
-      drop-shadow(0 2px 8px rgba(6, 182, 212, 0.35));
+      drop-shadow(0 0 32px rgba(255, 90, 100, 0.62))
+      drop-shadow(0 0 56px rgba(227, 30, 36, 0.52))
+      drop-shadow(0 12px 36px rgba(196, 18, 48, 0.62))
+      drop-shadow(0 2px 12px rgba(6, 182, 212, 0.42));
   }
   50% {
     filter:
-      drop-shadow(0 0 42px rgba(255, 120, 130, 0.75))
-      drop-shadow(0 0 72px rgba(227, 30, 36, 0.65))
-      drop-shadow(0 14px 40px rgba(196, 18, 48, 0.7))
-      drop-shadow(0 0 24px rgba(6, 182, 212, 0.55));
+      drop-shadow(0 0 52px rgba(255, 140, 150, 0.88))
+      drop-shadow(0 0 92px rgba(227, 30, 36, 0.78))
+      drop-shadow(0 18px 52px rgba(196, 18, 48, 0.82))
+      drop-shadow(0 0 36px rgba(34, 211, 238, 0.65));
   }
 }
 
@@ -273,10 +284,10 @@
     transform: translateY(0) rotate(0deg);
   }
   33% {
-    transform: translateY(-4px) rotate(-0.6deg);
+    transform: translateY(-10px) rotate(-1.15deg);
   }
   66% {
-    transform: translateY(2px) rotate(0.5deg);
+    transform: translateY(5px) rotate(0.95deg);
   }
 }
 
@@ -285,7 +296,7 @@
     filter: brightness(1) saturate(1);
   }
   50% {
-    filter: brightness(1.15) saturate(1.12);
+    filter: brightness(1.38) saturate(1.28);
   }
 }
 

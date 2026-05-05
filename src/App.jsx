@@ -29,7 +29,8 @@ import FlightTickets from './pages/FlightTickets'
 import FlightTicketsDestination from './pages/FlightTicketsDestination'
 import './App.css'
 
-const MIN_LOADER_MS = 1800
+/** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
+const MIN_LOADER_MS = 6000
 
 function AppContent() {
   return (
@@ -127,7 +128,7 @@ function App() {
       <Preloader
         loading={loading}
         variant="stairs"
-        duration={2800}
+        duration={6000}
         loadingLines={['LIVE THE EXPERIENCE', 'HONEYWELL TRAVEL']}
         position="fixed"
       >

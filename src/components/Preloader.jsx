@@ -20,19 +20,33 @@ function Preloader({
   const [progress, setProgress] = useState(loading ? 0 : 100)
   const [showPreloader, setShowPreloader] = useState(loading)
   const [hideText, setHideText] = useState(!loading)
+  /** Stairs variant: columns exit one-by-one when loading completes. */
+  const [stairsRaised, setStairsRaised] = useState(false)
   const rafRef = useRef(null)
-  const textHiddenRef = useRef(false)
+  const exitStartedRef = useRef(false)
+
+  const STAIR_COUNT = 10
+  /** Duration of each column’s upward exit (after its stagger starts). */
+  const STAIR_RISE_S = 0.72
+  /** Exit order: left → right, one stair after another. */
+  const STAIR_EXIT_STAGGER = 0.078
+  const STAIR_FULL_EXIT_S = (STAIR_COUNT - 1) * STAIR_EXIT_STAGGER + STAIR_RISE_S
+  const STAIR_RISE_MS = Math.ceil(STAIR_FULL_EXIT_S * 1000) + 100
+  /** Entrance: wave up from below. */
+  const STAIR_ENTER_S = 0.62
+  const STAIR_ENTER_STAGGER = 0.065
 
   useEffect(() => {
     let hideTimer
     let doneTimer
 
     if (loading) {
+      exitStartedRef.current = false
       const startTime = Date.now()
       let active = true
-      textHiddenRef.current = false
       setShowPreloader(true)
       setHideText(false)
+      setStairsRaised(false)
       setProgress(0)
 
       const tick = () => {
@@ -48,11 +62,6 @@ function Preloader({
         next = Math.min(next, 99)
         setProgress(next)
 
-        if (next >= 96 && !textHiddenRef.current) {
-          textHiddenRef.current = true
-          setHideText(true)
-        }
-
         rafRef.current = requestAnimationFrame(tick)
       }
 
@@ -64,17 +73,28 @@ function Preloader({
       }
     }
 
-    if (showPreloader) {
+    if (!loading && showPreloader && !exitStartedRef.current) {
+      exitStartedRef.current = true
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
       setProgress(100)
       setHideText(true)
 
-      hideTimer = setTimeout(() => {
-        setShowPreloader(false)
-        doneTimer = setTimeout(() => {
-          if (onComplete) onComplete()
-        }, 700)
-      }, variant === 'percentage' ? 1300 : 450)
+      if (variant === 'stairs') {
+        setStairsRaised(true)
+        hideTimer = setTimeout(() => {
+          setShowPreloader(false)
+          doneTimer = setTimeout(() => {
+            if (onComplete) onComplete()
+          }, 700)
+        }, STAIR_RISE_MS)
+      } else {
+        hideTimer = setTimeout(() => {
+          setShowPreloader(false)
+          doneTimer = setTimeout(() => {
+            if (onComplete) onComplete()
+          }, 700)
+        }, variant === 'percentage' ? 1300 : 450)
+      }
     }
 
     return () => {
@@ -87,13 +107,15 @@ function Preloader({
   const line1Words = loadingLines[0]?.split(/\s+/).filter(Boolean) ?? []
   const line2Words = loadingLines[1]?.split(/\s+/).filter(Boolean) ?? []
 
+  const textExitDuration = variant === 'stairs' ? STAIR_FULL_EXIT_S : 0.28
+
   const renderText = () => (
     <div className="preloader__text-wrap" aria-hidden="true">
       <motion.div
         className="preloader__brand"
         initial={{ opacity: 0, y: -16, scale: 0.88 }}
         animate={hideText ? { opacity: 0, y: -10, scale: 0.92 } : { opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: hideText ? 0.28 : 0.75, ease: [0.65, 0, 0.35, 1] }}
+        transition={{ duration: hideText ? textExitDuration : 0.75, ease: [0.65, 0, 0.35, 1] }}
       >
         <span className="preloader__brand-aura" aria-hidden="true" />
         <span className="preloader__brand-aura preloader__brand-aura--glow" aria-hidden="true" />
@@ -117,7 +139,7 @@ function Preloader({
                   hideText ? { opacity: 0, filter: 'blur(10px)', y: 12 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
                 }
                 transition={{
-                  duration: hideText ? 0.25 : 0.62,
+                  duration: hideText ? textExitDuration : 0.62,
                   delay: hideText ? 0 : index * 0.05,
                   ease: [0.65, 0, 0.35, 1],
                 }}
@@ -139,7 +161,7 @@ function Preloader({
                   hideText ? { opacity: 0, filter: 'blur(10px)', y: 14 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
                 }
                 transition={{
-                  duration: hideText ? 0.25 : 0.62,
+                  duration: hideText ? textExitDuration : 0.62,
                   delay: hideText ? 0 : index * 0.05,
                   ease: [0.65, 0, 0.35, 1],
                 }}
@@ -155,20 +177,20 @@ function Preloader({
   )
 
   const renderStairs = () => {
-    const stairs = Array.from({ length: 10 })
+    const stairs = Array.from({ length: STAIR_COUNT })
+    const stairEase = [0.65, 0, 0.35, 1]
     return (
       <div className={cx('preloader__panel', position === 'fixed' ? 'preloader__panel--fixed' : 'preloader__panel--absolute')} style={{ zIndex }}>
         {stairs.map((_, index) => (
           <motion.div
             key={`stair-${index}`}
             className="preloader__stair"
-            initial={{ y: '0%' }}
-            animate={{ y: '0%' }}
-            exit={{ y: '-100%' }}
+            initial={{ y: '100%' }}
+            animate={stairsRaised ? { y: '-100%' } : { y: '0%' }}
             transition={{
-              duration: 0.52,
-              delay: index * 0.055,
-              ease: [0.65, 0, 0.35, 1],
+              duration: stairsRaised ? STAIR_RISE_S : STAIR_ENTER_S,
+              delay: stairsRaised ? index * STAIR_EXIT_STAGGER : index * STAIR_ENTER_STAGGER,
+              ease: stairEase,
             }}
           />
         ))}
@@ -230,7 +252,8 @@ function Preloader({
           </div>
         )}
       </AnimatePresence>
-      <div className={cx('preloader__content', showPreloader && 'preloader__content--hidden')}>
+      {/* Unhide as soon as loading finishes so stairs reveal the live site underneath (same moment). */}
+      <div className={cx('preloader__content', loading && 'preloader__content--hidden')}>
         {children}
       </div>
     </div>
