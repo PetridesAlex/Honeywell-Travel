@@ -330,7 +330,14 @@ const PackageFlightsSection = ({ details }) => {
                 </span>
               </div>
               <div className="flight-details">
-                <div className="flight-route">
+                <div
+                  className="flight-route"
+                  style={
+                    typeof flight.route === 'string' && flight.route.includes('\n')
+                      ? { whiteSpace: 'pre-line' }
+                      : undefined
+                  }
+                >
                   <strong>{flight.route || `${flight.direction}`}</strong>
                 </div>
                 <div className="flight-info">
@@ -342,11 +349,22 @@ const PackageFlightsSection = ({ details }) => {
                     <span className="flight-label">Time</span>
                     <span className="flight-value flight-value--time">{flight.time}</span>
                   </div>
+                  {flight.stops != null && flight.stops !== '' ? (
+                    <div className="flight-info-row">
+                      <span className="flight-label">Στάσεις</span>
+                      <span className="flight-value">{flight.stops}</span>
+                    </div>
+                  ) : null}
                   <div className="flight-info-row">
                     <span className="flight-label">Luggage</span>
                     <span className="flight-value">{flight.luggage}</span>
                   </div>
                 </div>
+                {flight.note ? (
+                  <p className="section-text flight-card-note" style={{ marginTop: '0.75rem', marginBottom: 0 }}>
+                    {flight.note}
+                  </p>
+                ) : null}
               </div>
             </div>
           )
