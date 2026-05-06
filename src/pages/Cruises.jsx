@@ -5,6 +5,7 @@ import PackageCard from '../components/PackageCard'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import './Cruises.css'
 
 const cruisePackagesData = [
@@ -2475,6 +2476,21 @@ function Cruises() {
                 }
 
                 try {
+                  const { error: leadError } = await createLead({
+                    full_name: cruiseEnquiryForm.name || 'Not provided',
+                    phone: cruiseEnquiryForm.phone || '',
+                    email: cruiseEnquiryForm.email || '',
+                    destination: cruiseLineLabel,
+                    travel_dates: '',
+                    number_of_travelers: '',
+                    budget: '',
+                    message: messageLines || 'No additional message.',
+                    source: 'Cruise Form'
+                  })
+                  if (leadError) {
+                    console.error('Cruise enquiry lead insert failed:', leadError)
+                  }
+
                   await sendEmail(EMAIL_TEMPLATES.CRUISE, templateParams)
                   setCruiseEnquirySent(true)
                   setCruiseEnquiryForm({ cruiseLine: '', name: '', email: '', phone: '', message: '' })

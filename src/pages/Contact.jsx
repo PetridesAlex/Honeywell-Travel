@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import './Contact.css'
 
 function Contact() {
@@ -37,6 +38,21 @@ function Contact() {
     }
 
     try {
+      const { error: leadError } = await createLead({
+        full_name: formData.name,
+        phone: formData.phone || '',
+        email: formData.email,
+        destination: '',
+        travel_dates: '',
+        number_of_travelers: '',
+        budget: '',
+        message: formData.message,
+        source: 'Contact Form'
+      })
+      if (leadError) {
+        console.error('Contact form lead insert failed:', leadError)
+      }
+
       await sendEmail(EMAIL_TEMPLATES.CONTACT, templateParams)
       setStatus({ type: 'success', message: 'Request sent successfully ✅' })
       setFormData({ name: '', email: '', phone: '', message: '' })

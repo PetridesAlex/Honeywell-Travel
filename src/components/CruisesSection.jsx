@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import './CruisesSection.css'
 
 function CruisesSection() {
@@ -58,6 +59,21 @@ function CruisesSection() {
     }
 
     try {
+      const { error: leadError } = await createLead({
+        full_name: form.name || 'Not provided',
+        phone: '',
+        email: form.email || '',
+        destination: form.city || '',
+        travel_dates: [form.checkIn, form.checkOut].filter(Boolean).join(' - '),
+        number_of_travelers: '',
+        budget: '',
+        message,
+        source: 'Website'
+      })
+      if (leadError) {
+        console.error('Hotel quote lead insert failed:', leadError)
+      }
+
       await sendEmail(EMAIL_TEMPLATES.HOTEL, templateParams)
       setSent(true)
     } catch (err) {

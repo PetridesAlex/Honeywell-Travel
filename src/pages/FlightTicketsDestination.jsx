@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getOffersByDestination } from '../data/flightTickets'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import './FlightTickets.css'
 
 function FlightTicketsDestination() {
@@ -93,8 +94,24 @@ function FlightTicketsDestination() {
       group_size: ''
     }
 
-    sendEmail(EMAIL_TEMPLATES.OTHER, templateParams)
-      .then(() => {
+    Promise.all([
+      createLead({
+        full_name: fullName,
+        phone: bookingForm.contactNumber.trim(),
+        email: emailValue,
+        destination: offer.destination,
+        travel_dates: `${departure.departureDate} - ${departure.returnDate}`,
+        number_of_travelers: '',
+        budget: departure.price ? String(departure.price) : '',
+        message,
+        source: 'Book Online'
+      }),
+      sendEmail(EMAIL_TEMPLATES.OTHER, templateParams)
+    ])
+      .then(([leadResult]) => {
+        if (leadResult?.error) {
+          console.error('Flight booking lead insert failed:', leadResult.error)
+        }
         closeBookingForm()
         window.alert('Ευχαριστούμε! Το αίτημα κράτησης στάλθηκε με επιτυχία και θα επικοινωνήσουμε μαζί σας.')
       })

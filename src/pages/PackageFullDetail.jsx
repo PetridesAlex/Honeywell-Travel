@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { getPackageById, travelPackages } from '../data/packages'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import SEO from '../components/SEO'
 import './PackageFullDetail.css'
 
@@ -1788,6 +1789,21 @@ This reservation request was submitted through the Honeywell Travel website.
                       }
 
                       try {
+                        const { error: leadError } = await createLead({
+                          full_name: reserveFormData.name || '',
+                          phone: reserveFormData.phone || '',
+                          email: reserveFormData.email || '',
+                          destination: pkg.title || '',
+                          travel_dates: reserveFormData.departureDate || '',
+                          number_of_travelers: peopleStr,
+                          budget: String(totalPrice || ''),
+                          message: emailBody,
+                          source: 'Package Form'
+                        })
+                        if (leadError) {
+                          console.error('Package reservation lead insert failed:', leadError)
+                        }
+
                         await sendEmail(EMAIL_TEMPLATES.PACKAGE, templateParams)
                         setReserveToast({ type: 'success', message: 'Request sent successfully ✅' })
                         setShowReserveModal(false)

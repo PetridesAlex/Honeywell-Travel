@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import './DmcCyprus.css'
 
 const BRAND_RED = '#c41230'
@@ -110,6 +111,21 @@ function DmcCyprus() {
     }
 
     try {
+      const { error: leadError } = await createLead({
+        full_name: formData.contactPerson,
+        phone: '',
+        email: formData.email,
+        destination: 'Cyprus DMC',
+        travel_dates: formData.travelDates,
+        number_of_travelers: formData.groupSize,
+        budget: '',
+        message,
+        source: 'Website'
+      })
+      if (leadError) {
+        console.error('DMC lead insert failed:', leadError)
+      }
+
       await sendEmail(EMAIL_TEMPLATES.DMC, templateParams)
       setStatus({ type: 'success', text: 'Request sent successfully. Our DMC team will be in touch.' })
       setFormData({

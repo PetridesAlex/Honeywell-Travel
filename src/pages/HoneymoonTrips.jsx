@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
+import { createLead } from '../lib/leads'
 import './HoneymoonTrips.css'
 
 const HONEYMOON_DESTINATIONS = [
@@ -152,7 +153,7 @@ function HoneymoonTrips() {
     setHeroRequest((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleHeroRequestSubmit = (e) => {
+  const handleHeroRequestSubmit = async (e) => {
     e.preventDefault()
     const { name, surname, startDate, endDate, destination } = heroRequest
 
@@ -166,13 +167,21 @@ function HoneymoonTrips() {
       return
     }
 
-    console.log('Honeymoon hero request submitted:', {
-      name: name.trim(),
-      surname: surname.trim(),
-      startDate,
-      endDate,
-      destination
+    const fullName = `${name.trim()} ${surname.trim()}`.trim()
+    const { error: leadError } = await createLead({
+      full_name: fullName,
+      phone: '',
+      email: '',
+      destination,
+      travel_dates: `${startDate} - ${endDate}`,
+      number_of_travelers: '',
+      budget: '',
+      message: 'Honeymoon hero request',
+      source: 'Website'
     })
+    if (leadError) {
+      console.error('Honeymoon hero lead insert failed:', leadError)
+    }
 
     alert('Thank you! Your honeymoon request has been sent.')
     setHeroRequest({
@@ -183,6 +192,55 @@ function HoneymoonTrips() {
       destination: ''
     })
     setShowHeroForm(false)
+  }
+
+  const handleMainRequestSubmit = async (e) => {
+    e.preventDefault()
+    if (!fullName.trim()) {
+      alert('Please enter your full name.')
+      return
+    }
+    if (!email.trim()) {
+      alert('Please enter your email address.')
+      return
+    }
+    if (!selectedDestination || !HONEYMOON_DESTINATIONS.includes(selectedDestination)) {
+      alert('Please select a valid destination from the list.')
+      return
+    }
+    if (!phoneNumber.trim()) {
+      alert('Please enter your phone number.')
+      return
+    }
+    if (!message.trim()) {
+      alert('Please tell us what you would like to plan.')
+      return
+    }
+
+    const fullPhoneNumber = `${countryCode}${phoneNumber.trim()}`
+    const { error: leadError } = await createLead({
+      full_name: fullName.trim(),
+      phone: fullPhoneNumber,
+      email: email.trim(),
+      destination: selectedDestination,
+      travel_dates: '',
+      number_of_travelers: '',
+      budget: '',
+      message: message.trim(),
+      source: 'Website'
+    })
+    if (leadError) {
+      console.error('Honeymoon request lead insert failed:', leadError)
+    }
+
+    alert('Thank you for your request! We will contact you soon.')
+    setFullName('')
+    setEmail('')
+    setDestinationSearch('')
+    setSelectedDestination('')
+    setPhoneNumber('')
+    setMessage('')
+    setCountryCode('+357')
   }
 
   return (
@@ -391,46 +449,7 @@ function HoneymoonTrips() {
             </div>
             <form
             className="honeymoon-request-form"
-            onSubmit={(e) => {
-              e.preventDefault()
-              if (!fullName.trim()) {
-                alert('Please enter your full name.')
-                return
-              }
-              if (!email.trim()) {
-                alert('Please enter your email address.')
-                return
-              }
-              if (!selectedDestination || !HONEYMOON_DESTINATIONS.includes(selectedDestination)) {
-                alert('Please select a valid destination from the list.')
-                return
-              }
-              if (!phoneNumber.trim()) {
-                alert('Please enter your phone number.')
-                return
-              }
-              if (!message.trim()) {
-                alert('Please tell us what you would like to plan.')
-                return
-              }
-              const fullPhoneNumber = `${countryCode}${phoneNumber.trim()}`
-              console.log('Form submitted:', {
-                fullName: fullName.trim(),
-                email: email.trim(),
-                destination: selectedDestination,
-                phone: fullPhoneNumber,
-                message: message.trim()
-              })
-              alert('Thank you for your request! We will contact you soon.')
-              // Reset form
-              setFullName('')
-              setEmail('')
-              setDestinationSearch('')
-              setSelectedDestination('')
-              setPhoneNumber('')
-              setMessage('')
-              setCountryCode('+357')
-            }}
+            onSubmit={handleMainRequestSubmit}
           >
             <div className="form-row">
               <label>

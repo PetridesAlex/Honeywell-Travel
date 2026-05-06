@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEO from '../components/SEO'
 import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import { createLead } from '../lib/leads'
 import './BuildYourTrip.css'
 
 function BuildYourTrip() {
@@ -64,6 +65,21 @@ function BuildYourTrip() {
     }
 
     try {
+      const { error: leadError } = await createLead({
+        full_name: form.name || 'Not provided',
+        phone: form.phone || '',
+        email: form.email || '',
+        destination: form.destination || '',
+        travel_dates: travelDates,
+        number_of_travelers: form.travelers || '',
+        budget: '',
+        message: buildMessage(),
+        source: 'Website'
+      })
+      if (leadError) {
+        console.error('Build Your Trip lead insert failed:', leadError)
+      }
+
       await sendEmail(EMAIL_TEMPLATES.CONTACT, templateParams)
       setStatus({ type: 'success', message: 'Request sent successfully. We’ll get back to you soon.' })
       setForm({

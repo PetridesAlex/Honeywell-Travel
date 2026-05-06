@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './i18n/config' // Initialize i18n
 import Header from './components/Header'
@@ -27,12 +27,29 @@ import OurWorld from './pages/OurWorld'
 import BlogPostDetail from './pages/BlogPostDetail'
 import FlightTickets from './pages/FlightTickets'
 import FlightTicketsDestination from './pages/FlightTicketsDestination'
+import Leads from './pages/admin/Leads'
+import Login from './pages/admin/Login'
 import './App.css'
 
 /** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
 const MIN_LOADER_MS = 6000
 
 function AppContent() {
+  const location = useLocation()
+  const isAdminRoute = location.pathname.startsWith('/admin')
+
+  if (isAdminRoute) {
+    return (
+      <main className="main-content">
+        <Routes>
+          <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/leads" element={<Leads />} />
+          <Route path="/admin/*" element={<Navigate to="/admin/login" replace />} />
+        </Routes>
+      </main>
+    )
+  }
+
   return (
     <>
       <Header />
