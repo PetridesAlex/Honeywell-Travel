@@ -445,19 +445,36 @@ function PackageFullDetail() {
       const details = pkg.details || {}
       const gallery = details.gallery || []
       const priceTabDestination = getPriceTabDestinationLine(details, pkg, translatedTitle)
-      const hotelFilterOptions = useMemo(() => {
-        if (!Array.isArray(details.hotels) || details.hotels.length === 0) {
-          return { hotels: [], departures: [] }
-        }
-
-        const hotels = [...new Set(details.hotels.map((hotel) => hotel?.name).filter(Boolean))]
+      const filteredHotelsForDeparture = useMemo(() => {
+        if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
+        const source = selectedDepartureFilter
+          ? details.hotels.filter((hotel) => hotel?.departureDate === selectedDepartureFilter)
+          : details.hotels
+        return [...new Set(source.map((hotel) => hotel?.name).filter(Boolean))]
           .sort((a, b) => a.localeCompare(b, 'el'))
-        const departures = sortDepartureDateStrings(
-          [...new Set(details.hotels.map((hotel) => hotel?.departureDate).filter(Boolean))]
-        )
+      }, [details.hotels, selectedDepartureFilter])
 
-        return { hotels, departures }
-      }, [details.hotels])
+      const filteredDeparturesForHotel = useMemo(() => {
+        if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
+        const source = selectedHotelFilter
+          ? details.hotels.filter((hotel) => hotel?.name === selectedHotelFilter)
+          : details.hotels
+        return sortDepartureDateStrings(
+          [...new Set(source.map((hotel) => hotel?.departureDate).filter(Boolean))]
+        )
+      }, [details.hotels, selectedHotelFilter])
+
+      useEffect(() => {
+        if (selectedHotelFilter && !filteredHotelsForDeparture.includes(selectedHotelFilter)) {
+          setSelectedHotelFilter('')
+        }
+      }, [selectedHotelFilter, filteredHotelsForDeparture])
+
+      useEffect(() => {
+        if (selectedDepartureFilter && !filteredDeparturesForHotel.includes(selectedDepartureFilter)) {
+          setSelectedDepartureFilter('')
+        }
+      }, [selectedDepartureFilter, filteredDeparturesForHotel])
 
       // From price = lowest double room price per person across all hotels
       const getCheapestPrice = (pkg) => {
@@ -747,7 +764,7 @@ function PackageFullDetail() {
                           onChange={(e) => setSelectedDepartureFilter(e.target.value)}
                         >
                           <option value="">All Departure Dates</option>
-                          {hotelFilterOptions.departures.map((date) => (
+                          {filteredDeparturesForHotel.map((date) => (
                             <option key={date} value={date}>{date}</option>
                           ))}
                         </select>
@@ -760,7 +777,7 @@ function PackageFullDetail() {
                           onChange={(e) => setSelectedHotelFilter(e.target.value)}
                         >
                           <option value="">All Hotels</option>
-                          {hotelFilterOptions.hotels.map((hotelName) => (
+                          {filteredHotelsForDeparture.map((hotelName) => (
                             <option key={hotelName} value={hotelName}>{hotelName}</option>
                           ))}
                         </select>
@@ -828,7 +845,11 @@ function PackageFullDetail() {
                           seenDepartureDates.add(normalizedDate)
                           return true
                         })
-                        const displayHotelVariants = alignHotelVariantsToDepartures(uniqueHotelVariants, details, baseHotel)
+                        const alignedHotelVariants = alignHotelVariantsToDepartures(uniqueHotelVariants, details, baseHotel)
+                        const displayHotelVariants = selectedDepartureFilter
+                          ? alignedHotelVariants.filter((variant) => variant?.departureDate === selectedDepartureFilter)
+                          : alignedHotelVariants
+                        if (displayHotelVariants.length === 0) return null
                         // Create a unique key for this hotel group
                         const hotelKey = `hotel-${groupIndex}`
                         const hotelStarCount = Math.min(5, Math.max(0, baseHotel.stars ?? 3))
