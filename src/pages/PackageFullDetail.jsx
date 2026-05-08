@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getPackageById, travelPackages } from '../data/packages'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
@@ -409,10 +409,17 @@ function PackageFullDetail() {
   })
   const [reserveSending, setReserveSending] = useState(false)
   const [reserveToast, setReserveToast] = useState(null) // { type: 'success' | 'error', message }
+  const [selectedDepartureFilter, setSelectedDepartureFilter] = useState('')
+  const [selectedHotelFilter, setSelectedHotelFilter] = useState('')
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setBookHotelKey('')
+  }, [id])
+
+  useEffect(() => {
+    setSelectedDepartureFilter('')
+    setSelectedHotelFilter('')
   }, [id])
 
   useEffect(() => {
@@ -438,6 +445,19 @@ function PackageFullDetail() {
       const details = pkg.details || {}
       const gallery = details.gallery || []
       const priceTabDestination = getPriceTabDestinationLine(details, pkg, translatedTitle)
+      const hotelFilterOptions = useMemo(() => {
+        if (!Array.isArray(details.hotels) || details.hotels.length === 0) {
+          return { hotels: [], departures: [] }
+        }
+
+        const hotels = [...new Set(details.hotels.map((hotel) => hotel?.name).filter(Boolean))]
+          .sort((a, b) => a.localeCompare(b, 'el'))
+        const departures = sortDepartureDateStrings(
+          [...new Set(details.hotels.map((hotel) => hotel?.departureDate).filter(Boolean))]
+        )
+
+        return { hotels, departures }
+      }, [details.hotels])
 
       // From price = lowest double room price per person across all hotels
       const getCheapestPrice = (pkg) => {
@@ -491,6 +511,12 @@ function PackageFullDetail() {
         const extraAdults = selection.adults - 3
         total += hotel.prices.double * extraAdults
       }
+    } else if (selection.roomType === 'quadruple' && hotel.prices.quadruple) {
+      total = hotel.prices.quadruple * Math.min(selection.adults, 4)
+      if (selection.adults > 4) {
+        const extraAdults = selection.adults - 4
+        total += hotel.prices.double * extraAdults
+      }
     } else if (hotel.prices.double) {
       total = hotel.prices.double * selection.adults
     }
@@ -531,6 +557,16 @@ function PackageFullDetail() {
       lines.push({
         key: 'triple',
         label: `${tr('package.triple')} (${selection.adults} ${selection.adults !== 1 ? tr('package.adults') : tr('package.adult')})`,
+        amount,
+      })
+    } else if (selection.roomType === 'quadruple' && hotel.prices?.quadruple != null) {
+      let amount = hotel.prices.quadruple * Math.min(selection.adults, 4)
+      if (selection.adults > 4) {
+        amount += hotel.prices.double * (selection.adults - 4)
+      }
+      lines.push({
+        key: 'quadruple',
+        label: `Quadruple (${selection.adults} ${selection.adults !== 1 ? tr('package.adults') : tr('package.adult')})`,
         amount,
       })
     } else if (hotel.prices?.double != null) {
@@ -702,6 +738,46 @@ function PackageFullDetail() {
 
                 {details.hotels && details.hotels.length > 0 ? (
                   <>
+                    <div className="hotel-filters">
+                      <div className="hotel-filter-field">
+                        <label htmlFor="departure-filter">{t('package.departureDate')}</label>
+                        <select
+                          id="departure-filter"
+                          value={selectedDepartureFilter}
+                          onChange={(e) => setSelectedDepartureFilter(e.target.value)}
+                        >
+                          <option value="">All Departure Dates</option>
+                          {hotelFilterOptions.departures.map((date) => (
+                            <option key={date} value={date}>{date}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="hotel-filter-field">
+                        <label htmlFor="hotel-filter">{t('package.hotel')}</label>
+                        <select
+                          id="hotel-filter"
+                          value={selectedHotelFilter}
+                          onChange={(e) => setSelectedHotelFilter(e.target.value)}
+                        >
+                          <option value="">All Hotels</option>
+                          {hotelFilterOptions.hotels.map((hotelName) => (
+                            <option key={hotelName} value={hotelName}>{hotelName}</option>
+                          ))}
+                        </select>
+                      </div>
+                      {(selectedDepartureFilter || selectedHotelFilter) ? (
+                        <button
+                          type="button"
+                          className="hotel-filter-reset"
+                          onClick={() => {
+                            setSelectedDepartureFilter('')
+                            setSelectedHotelFilter('')
+                          }}
+                        >
+                          Clear Filters
+                        </button>
+                      ) : null}
+                    </div>
                     {(() => {
                       const uniqueNames = [...new Set(details.hotels.map(h => h.name))]
                       const isSingleHotel = uniqueNames.length === 1
@@ -724,7 +800,19 @@ function PackageFullDetail() {
                         }
                         groupedHotels[hotel.name].push({ ...hotel, originalIndex: idx })
                       })
-                      const groupEntries = Object.entries(groupedHotels)
+                      const groupEntries = Object.entries(groupedHotels).filter(([hotelName, variants]) => {
+                        const hotelPass = !selectedHotelFilter || hotelName === selectedHotelFilter
+                        const datePass = !selectedDepartureFilter || variants.some((variant) => variant.departureDate === selectedDepartureFilter)
+                        return hotelPass && datePass
+                      })
+
+                      if (groupEntries.length === 0) {
+                        return (
+                          <p className="section-text muted">
+                            No hotels found for the selected filters.
+                          </p>
+                        )
+                      }
 
                       // One card per hotel group; same layout for all (left = hotel info, right = variant blocks)
                       return groupEntries.map(([, hotelVariants], groupIndex) => {
@@ -898,6 +986,32 @@ function PackageFullDetail() {
                                                 >
                                                   <span className="hotel-variant-price-label">{t('package.triple')}</span>
                                                   <span className="hotel-variant-price-value">€{variant.prices.triple}</span>
+                                                </button>
+                                              )}
+                                              {variant.prices?.quadruple != null && (
+                                                <button
+                                                  type="button"
+                                                  className={`hotel-variant-price-cell ${variantSelection.roomType === 'quadruple' ? 'selected' : ''}`}
+                                                  onClick={() => {
+                                                    setHotelSelections((prev) => {
+                                                      const hg = prev[hotelKey] || {}
+                                                      const adults = Math.max(hg.adults ?? 2, 4)
+                                                      return {
+                                                        ...prev,
+                                                        [variantKey]: { ...prev[variantKey], roomType: 'quadruple' },
+                                                        [hotelKey]: {
+                                                          ...hg,
+                                                          adults,
+                                                          children: hg.children ?? 0,
+                                                          children2: hg.children2 ?? 0,
+                                                        },
+                                                      }
+                                                    })
+                                                  }}
+                                                  title="Click to select Quadruple room (4 adults)"
+                                                >
+                                                  <span className="hotel-variant-price-label">Quadruple</span>
+                                                  <span className="hotel-variant-price-value">€{variant.prices.quadruple}</span>
                                                 </button>
                                               )}
                                               {variant.prices?.child1 != null && (

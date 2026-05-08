@@ -1655,6 +1655,91 @@
   margin-top: 1.5rem;
 }
 
+.hotel-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 1rem;
+  align-items: end;
+  margin: 0.85rem 0 1.2rem;
+  padding: 1rem;
+  border: 1px solid rgba(180, 16, 39, 0.2);
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hotel-filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hotel-filter-field label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7f1d1d;
+}
+
+.hotel-filter-field select {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
+}
+
+.hotel-filter-field select:hover {
+  border-color: rgba(196, 18, 48, 0.45);
+}
+
+.hotel-filter-field select:focus {
+  outline: none;
+  border-color: rgba(196, 18, 48, 0.75);
+  box-shadow:
+    0 0 0 3px rgba(244, 63, 94, 0.15),
+    0 6px 20px rgba(127, 29, 29, 0.12);
+  transform: translateY(-1px);
+}
+
+.hotel-filter-reset {
+  justify-self: start;
+  border: 1px solid rgba(127, 29, 29, 0.35);
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  color: #7f1d1d;
+  border-radius: 11px;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  transition: all 0.2s ease;
+}
+
+.hotel-filter-reset:hover {
+  background: linear-gradient(180deg, #fff1f2, #ffe4e6);
+  border-color: rgba(127, 29, 29, 0.5);
+  transform: translateY(-1px);
+}
+
+.hotel-filter-reset:focus-visible {
+  outline: 2px solid rgba(196, 18, 48, 0.5);
+  outline-offset: 2px;
+}
+
 .hotel-card {
   background: white;
   border-radius: 12px;
@@ -2604,6 +2689,10 @@
 }
 
 @media (max-width: 768px) {
+  .hotel-filters {
+    grid-template-columns: 1fr;
+  }
+
   .hotels-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
