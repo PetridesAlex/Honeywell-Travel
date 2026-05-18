@@ -7937,7 +7937,7 @@ export const travelPackages = [
     title: 'ΣΤΑ ΜΟΝΟΠΑΤΙΑ ΤΟΥ ΠΟΝΤΟΥ & ΤΗΣ ΠΟΛΗΣ',
     destination: 'Turkey',
     category: 'Summer Packages',
-    price: 1595,
+    price: 1625,
     duration: '8 days / 7 nights',
     description: 'Explore the historic paths of Pontus and Istanbul: Sakarya, Samsun, Trabzon, and Constantinople. A journey through Byzantine history, Pontic culture, and the Black Sea coast.',
     longDescription: 'Στα μονοπάτια του Πόντου & της Πόλης: μια ολοκληρωμένη περιήγηση στις ιστορικές περιοχές του Πόντου (Σαγγάρια, Σαμψούντα, Κερασούντα, Τραπεζούντα) και την Κωνσταντινούπολη. Εξερευνήστε βυζαντινά μνημεία, παραθαλάσσια τοπία και την πλούσια πολιτιστική κληρονομιά της περιοχής.',
@@ -7945,35 +7945,58 @@ export const travelPackages = [
     featured: true,
     packageType: 'group',
     details: {
-      departureDate: '15/07, 22/07, 29/07, 05/08, 12/08, 26/08',
+      departureDate: '29/07, 05/08, 12/08',
       departureFrom: 'Larnaca',
-      destinationFull: 'Sakarya, Samsun, Trabzon, Istanbul, Turkey',
+      destinationFull: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey',
       monthAvailability: 'July, August',
       roomType: 'Standard Room',
-      boardBasis: 'Bed & Breakfast + 5 Dinners',
+      boardBasis: 'Bed & Breakfast',
       airline: 'Aegean Airlines / Turkish Airlines',
       includedLuggage: '1 checked bag 23kg + 1 hand luggage 8kg (international), 1 checked bag 20kg + 1 hand luggage 8kg (domestic)',
       coverImage: '/images/Constandinopole/turkey-hero.webp',
       flights: [
         {
           direction: 'Departure',
-          date: '15/07, 22/07, 29/07, 05/08, 12/08, 26/08',
-          route: 'Larnaca (LCA) → Athens (ATH)',
-          flight: 'A3 903',
-          time: '10:15 → 12:00',
-          luggage: '1 checked bag 23kg'
-        },
-        {
-          direction: 'Departure',
-          date: '15/07, 22/07, 29/07, 05/08, 12/08, 26/08',
-          route: 'Athens (ATH) → Istanbul (IST)',
-          flight: 'A3 992',
-          time: '13:00 → 14:45',
-          luggage: '1 checked bag 23kg'
+          date: '29/07, 05/08, 12/08',
+          route: 'Larnaca (LCA) → Istanbul (IST)',
+          stops: 'Athens (ATH)',
+          luggage: '1 checked bag 23kg',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '10:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '12:00',
+              flight: 'A3 903',
+              luggage: '1 checked bag 23kg'
+            },
+            {
+              type: 'connection',
+              text: 'Connection time for next flight'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '13:00',
+              toCode: 'IST',
+              toName: 'Ataturk',
+              toCity: 'Istanbul, Turkey',
+              arrive: '14:45',
+              flight: 'A3 992',
+              luggage: '1 checked bag 23kg'
+            }
+          ]
         },
         {
           direction: 'Domestic',
-          date: '15/07, 22/07, 29/07, 05/08, 12/08, 26/08',
+          date: '29/07, 05/08, 12/08',
           route: 'Trabzon (TZX) → Istanbul (IST)',
           flight: 'Turkish Airlines',
           time: 'TBA',
@@ -7981,29 +8004,49 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '15/07, 22/07, 29/07, 05/08, 12/08, 26/08',
-          route: 'Istanbul (IST) → Athens (ATH)',
-          flight: 'A3 995',
-          time: '20:50 → 22:20',
-          luggage: '1 checked bag 23kg'
-        },
-        {
-          direction: 'Return',
-          date: '15/07, 22/07, 29/07, 05/08, 12/08, 26/08',
-          route: 'Athens (ATH) → Larnaca (LCA)',
-          flight: 'A3 910',
-          time: '23:45 → 01:20 (+1)',
-          luggage: '1 checked bag 23kg'
+          date: '29/07, 05/08, 12/08',
+          route: 'Istanbul (IST) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: '1 checked bag 23kg',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'IST',
+              fromName: 'Ataturk',
+              fromCity: 'Istanbul, Turkey',
+              depart: '20:55',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '22:25',
+              flight: 'A3 995',
+              luggage: '1 checked bag 23kg'
+            },
+            {
+              type: 'connection',
+              text: 'Connection time for next flight'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '23:45',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '01:20',
+              flight: 'A3 910',
+              luggage: '1 checked bag 23kg',
+              note: 'This flight arrives the next day'
+            }
+          ]
         }
       ],
       hotels: [
-        // One entry per departure date – no duplicates
-        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 4, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast + Dinner', prices: { double: 1595, single: 1935, child1: 1265 }, departureDate: '15/07', packagePrice: 3190 },
-        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 4, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast + Dinner', prices: { double: 1595, single: 1935, child1: 1265 }, departureDate: '26/08', packagePrice: 3190 },
-        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 4, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast + Dinner', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '22/07', packagePrice: 3250 },
-        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 4, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast + Dinner', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '29/07', packagePrice: 3250 },
-        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 4, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast + Dinner', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '05/08', packagePrice: 3250 },
-        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 4, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast + Dinner', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '12/08', packagePrice: 3250 }
+        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 5, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '29/07', packagePrice: 3250, nights: 7 },
+        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 5, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '05/08', packagePrice: 3250, nights: 7 },
+        { name: '4* & 5* Hotels Sakarya / Samsun / Trabzon / Constantinople', stars: 5, roomType: 'Standard Room', image: '/images/Constandinopole/turkey-primary-hotel.webp', location: 'Sakarya, Samsun, Trabzon, Constantinople, Turkey', boardBasis: 'Bed & Breakfast', prices: { double: 1625, single: 1975, child1: 1285 }, departureDate: '12/08', packagePrice: 3250, nights: 7 }
       ],
       included: [
         'Αεροπορικά εισιτήρια Λάρνακα – Αθήνα – Κωνσταντινούπολη – Αθήνα – Λάρνακα (Aegean Airlines)',

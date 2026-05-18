@@ -290,6 +290,42 @@ const alignHotelVariantsToDepartures = (variants, details, baseHotel) => {
   })
 }
 
+const FlightLegSegment = ({ leg }) => (
+  <div className="flight-leg">
+    <div className="flight-leg__endpoint">
+      <span className="flight-leg__time">{leg.depart}</span>
+      <strong className="flight-leg__airport">
+        {leg.fromName} ({leg.fromCode})
+      </strong>
+      <span className="flight-leg__city">{leg.fromCity}</span>
+    </div>
+    <div className="flight-leg__connector" aria-hidden="true">
+      <span className="flight-leg__connector-line" />
+      <span className="flight-leg__connector-flight">{leg.flight}</span>
+    </div>
+    <div className="flight-leg__endpoint flight-leg__endpoint--arrive">
+      <span className="flight-leg__time">{leg.arrive}</span>
+      <strong className="flight-leg__airport">
+        {leg.toName} ({leg.toCode})
+      </strong>
+      <span className="flight-leg__city">{leg.toCity}</span>
+    </div>
+    <div className="flight-leg__meta">
+      <span className="flight-leg__meta-item">
+        <span className="flight-label">Flight</span>
+        <span className="flight-value">{leg.flight}</span>
+      </span>
+      {leg.luggage ? (
+        <span className="flight-leg__meta-item">
+          <span className="flight-label">Luggage</span>
+          <span className="flight-value">{leg.luggage}</span>
+        </span>
+      ) : null}
+    </div>
+    {leg.note ? <p className="flight-leg__note">{leg.note}</p> : null}
+  </div>
+)
+
 const PackageFlightsSection = ({ details }) => {
   if (!details.flights?.length) return null
   const departureDates = getDepartureDates(details)
@@ -318,17 +354,22 @@ const PackageFlightsSection = ({ details }) => {
       <div className="flights-container">
         {details.flights.map((flight, index) => {
           const isReturn = flight.direction === 'Return'
+          const isDomestic = flight.direction === 'Domestic'
+          const hasLegs = Array.isArray(flight.legs) && flight.legs.length > 0
+          const directionLabel = isReturn
+            ? '🛬 Return'
+            : isDomestic
+              ? '✈️ Domestic'
+              : '🛫 Departure'
           return (
             <div
               key={index}
-              className={`flight-card ${isReturn ? 'flight-card--return' : 'flight-card--departure'}`}
+              className={`flight-card ${isReturn ? 'flight-card--return' : 'flight-card--departure'}${isDomestic ? ' flight-card--domestic' : ''}`}
               style={{ animationDelay: `${0.06 + index * 0.08}s` }}
             >
               <div className="flight-card__accent" aria-hidden="true" />
               <div className="flight-header">
-                <span className="flight-direction">
-                  {isReturn ? '🛬 Return' : '🛫 Departure'}
-                </span>
+                <span className="flight-direction">{directionLabel}</span>
               </div>
               <div className="flight-details">
                 <div
@@ -341,26 +382,66 @@ const PackageFlightsSection = ({ details }) => {
                 >
                   <strong>{flight.route || `${flight.direction}`}</strong>
                 </div>
-                <div className="flight-info">
-                  <div className="flight-info-row">
-                    <span className="flight-label">Flight</span>
-                    <span className="flight-value">{flight.flight}</span>
-                  </div>
-                  <div className="flight-info-row">
-                    <span className="flight-label">Time</span>
-                    <span className="flight-value flight-value--time">{flight.time}</span>
-                  </div>
-                  {flight.stops != null && flight.stops !== '' ? (
-                    <div className="flight-info-row">
-                      <span className="flight-label">Στάσεις</span>
-                      <span className="flight-value">{flight.stops}</span>
+                {hasLegs ? (
+                  <>
+                    {flight.stops != null && flight.stops !== '' ? (
+                      <div className="flight-info flight-info--summary">
+                        <div className="flight-info-row">
+                          <span className="flight-label">Στάσεις</span>
+                          <span className="flight-value">{flight.stops}</span>
+                        </div>
+                        {flight.luggage ? (
+                          <div className="flight-info-row">
+                            <span className="flight-label">Luggage</span>
+                            <span className="flight-value">{flight.luggage}</span>
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : null}
+                    <div className="flight-legs">
+                      {flight.legs.map((leg, legIndex) => {
+                        if (leg.type === 'connection') {
+                          return (
+                            <p key={legIndex} className="flight-connection">
+                              {leg.text}
+                            </p>
+                          )
+                        }
+                        if (leg.type === 'segment') {
+                          return <FlightLegSegment key={legIndex} leg={leg} />
+                        }
+                        return null
+                      })}
                     </div>
-                  ) : null}
-                  <div className="flight-info-row">
-                    <span className="flight-label">Luggage</span>
-                    <span className="flight-value">{flight.luggage}</span>
+                  </>
+                ) : (
+                  <div className="flight-info">
+                    {flight.flight ? (
+                      <div className="flight-info-row">
+                        <span className="flight-label">Flight</span>
+                        <span className="flight-value">{flight.flight}</span>
+                      </div>
+                    ) : null}
+                    {flight.time ? (
+                      <div className="flight-info-row">
+                        <span className="flight-label">Time</span>
+                        <span className="flight-value flight-value--time">{flight.time}</span>
+                      </div>
+                    ) : null}
+                    {flight.stops != null && flight.stops !== '' ? (
+                      <div className="flight-info-row">
+                        <span className="flight-label">Στάσεις</span>
+                        <span className="flight-value">{flight.stops}</span>
+                      </div>
+                    ) : null}
+                    {flight.luggage ? (
+                      <div className="flight-info-row">
+                        <span className="flight-label">Luggage</span>
+                        <span className="flight-value">{flight.luggage}</span>
+                      </div>
+                    ) : null}
                   </div>
-                </div>
+                )}
                 {flight.note ? (
                   <p className="section-text flight-card-note" style={{ marginTop: '0.75rem', marginBottom: 0 }}>
                     {flight.note}
