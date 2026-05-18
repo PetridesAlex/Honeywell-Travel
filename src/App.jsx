@@ -27,6 +27,7 @@ import OurWorld from './pages/OurWorld'
 import BlogPostDetail from './pages/BlogPostDetail'
 import FlightTickets from './pages/FlightTickets'
 import FlightTicketsDestination from './pages/FlightTicketsDestination'
+import TermsAndConditions from './pages/TermsAndConditions'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
 import './App.css'
@@ -90,6 +91,8 @@ function AppContent() {
           <Route path="/build-your-trip/" element={<BuildYourTrip />} />
           <Route path="/car-hire" element={<div className="page-placeholder"><h1>Car Hire</h1><p>Coming soon...</p></div>} />
           <Route path="/insurance" element={<div className="page-placeholder"><h1>Insurance</h1><p>Coming soon...</p></div>} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/terms-and-conditions/" element={<TermsAndConditions />} />
         </Routes>
         <Footer />
       </main>

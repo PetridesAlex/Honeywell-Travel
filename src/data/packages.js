@@ -14316,7 +14316,7 @@ export const travelPackages = [
     featured: true,
     packageType: 'group',
     details: {
-      departureDate: '01/07',
+      departureDate: '01/07, 08/07, 15/07, 22/07, 05/08, 12/08, 19/08',
       departureFrom: 'Larnaca',
       destinationFull: 'Panorama Portugal',
       monthAvailability: 'July - August',
@@ -14329,7 +14329,7 @@ export const travelPackages = [
       flights: [
         {
           direction: 'Departure',
-          date: '—',
+          date: '01/07, 08/07, 15/07, 22/07, 05/08, 12/08, 19/08',
           route: 'Larnaca International Airport (LCA) → Athens Int E Venizelos (ATH)',
           flight: 'A3 905',
           time: '15:45 → 17:30',
@@ -14337,24 +14337,24 @@ export const travelPackages = [
         },
         {
           direction: 'Departure',
-          date: '—',
-          route: 'Athens Int E Venizelos (ATH) → Airport (LIS)',
+          date: '01/07, 08/07, 15/07, 22/07, 05/08, 12/08, 19/08',
+          route: 'Athens Int E Venizelos (ATH) → Lisbon (LIS)',
           flight: 'A3 722',
           time: '20:05 → 22:45',
           luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
         },
         {
           direction: 'Return',
-          date: '—',
-          route: 'Airport (LIS) → Athens Int E Venizelos (ATH)',
+          date: '01/07, 08/07, 15/07, 22/07, 05/08, 12/08, 19/08',
+          route: 'Lisbon (LIS) → Athens Int E Venizelos (ATH)',
           flight: 'A3 723',
           time: '23:50 → 05:45',
-          message: 'Αυτή η πτήση φθάνει την επόμενη μέρα',
+          note: 'Αυτή η πτήση φθάνει την επόμενη μέρα',
           luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
         },
         {
           direction: 'Return',
-          date: '—',
+          date: '01/07, 08/07, 15/07, 22/07, 05/08, 12/08, 19/08',
           route: 'Athens Int E Venizelos (ATH) → Larnaca International Airport (LCA)',
           flight: 'A3 902',
           time: '07:45 → 09:20',
@@ -14381,8 +14381,8 @@ export const travelPackages = [
           image: '/images/portugal/portugal-round-trip-hotel.webp',
           location: 'Lisbon, Portugal',
           boardBasis: 'Bed & Breakfast',
-          prices: { double: 1565, single: 2089, child1: 1089 },
-          packagePrice: 3130,
+          prices: { double: 1595, single: 2119, child1: 1119 },
+          packagePrice: 3190,
           departureDate: '08/07',
           nights: 7
         },
@@ -14393,8 +14393,8 @@ export const travelPackages = [
           image: '/images/portugal/portugal-round-trip-hotel.webp',
           location: 'Lisbon, Portugal',
           boardBasis: 'Bed & Breakfast',
-          prices: { double: 1595, single: 2119, child1: 1119 },
-          packagePrice: 3190,
+          prices: { double: 1639, single: 2165, child1: 1165 },
+          packagePrice: 3278,
           departureDate: '15/07',
           nights: 7
         },
@@ -14405,8 +14405,8 @@ export const travelPackages = [
           image: '/images/portugal/portugal-round-trip-hotel.webp',
           location: 'Lisbon, Portugal',
           boardBasis: 'Bed & Breakfast',
-          prices: { double: 1595, single: 2119, child1: 1119 },
-          packagePrice: 3190,
+          prices: { double: 1639, single: 2165, child1: 1165 },
+          packagePrice: 3278,
           departureDate: '22/07',
           nights: 7
         },
@@ -14417,20 +14417,8 @@ export const travelPackages = [
           image: '/images/portugal/portugal-round-trip-hotel.webp',
           location: 'Lisbon, Portugal',
           boardBasis: 'Bed & Breakfast',
-          prices: { double: 1595, single: 2119, child1: 1119 },
-          packagePrice: 3190,
-          departureDate: '29/07',
-          nights: 7
-        },
-        {
-          name: '4* Hotel - Lisbon / Coimbra / Porto',
-          stars: 4,
-          roomType: 'Standard Room',
-          image: '/images/portugal/portugal-round-trip-hotel.webp',
-          location: 'Lisbon, Portugal',
-          boardBasis: 'Bed & Breakfast',
-          prices: { double: 1595, single: 2119, child1: 1119 },
-          packagePrice: 3190,
+          prices: { double: 1639, single: 2165, child1: 1165 },
+          packagePrice: 3278,
           departureDate: '05/08',
           nights: 7
         },
@@ -14441,8 +14429,8 @@ export const travelPackages = [
           image: '/images/portugal/portugal-round-trip-hotel.webp',
           location: 'Lisbon, Portugal',
           boardBasis: 'Bed & Breakfast',
-          prices: { double: 1595, single: 2119, child1: 1119 },
-          packagePrice: 3190,
+          prices: { double: 1639, single: 2165, child1: 1165 },
+          packagePrice: 3278,
           departureDate: '12/08',
           nights: 7
         },
@@ -14453,8 +14441,8 @@ export const travelPackages = [
           image: '/images/portugal/portugal-round-trip-hotel.webp',
           location: 'Lisbon, Portugal',
           boardBasis: 'Bed & Breakfast',
-          prices: { double: 1595, single: 2119, child1: 1119 },
-          packagePrice: 3190,
+          prices: { double: 1639, single: 2165, child1: 1165 },
+          packagePrice: 3278,
           departureDate: '19/08',
           nights: 7
         }

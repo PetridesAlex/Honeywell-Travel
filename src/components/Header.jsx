@@ -255,6 +255,19 @@ function Header() {
                   <span className="dropdown-item-icon">→</span>
                   {t('header.insurance')}
                 </a>
+                <Link
+                  to="/terms-and-conditions/"
+                  className="dropdown-item"
+                  onClick={() => {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+                    if (document.documentElement) document.documentElement.scrollTop = 0
+                    if (document.body) document.body.scrollTop = 0
+                    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0)
+                  }}
+                >
+                  <span className="dropdown-item-icon">→</span>
+                  {t('header.termsAndConditions')}
+                </Link>
               </div>
             )}
           </div>
@@ -456,6 +469,9 @@ function Header() {
           >
             {t('header.insurance')}
           </a>
+          <Link to="/terms-and-conditions/" className="mobile-link" onClick={closeMobileMenu}>
+            {t('header.termsAndConditions')}
+          </Link>
           <Link to="/contact/" className="mobile-link" onClick={closeMobileMenu}>{t('header.contact')}</Link>
           
           <LanguageSwitcher />
