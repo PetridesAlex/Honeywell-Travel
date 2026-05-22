@@ -49,14 +49,48 @@ export function buildAnalytics(leads) {
 
   const leadsPerDay = Object.entries(seriesMap).map(([date, count]) => ({ date, count }))
 
+  const bySource = {}
+  leads.forEach((item) => {
+    const key = item.source || 'Unknown'
+    bySource[key] = (bySource[key] || 0) + 1
+  })
+  const sourceBreakdown = Object.entries(bySource)
+    .sort((a, b) => b[1] - a[1])
+    .map(([source, count]) => ({ source, count, percent: total > 0 ? ((count / total) * 100).toFixed(1) : '0' }))
+
+  const byTripType = {}
+  leads.forEach((item) => {
+    const key = item.trip_type || 'Not set'
+    byTripType[key] = (byTripType[key] || 0) + 1
+  })
+  const tripTypeBreakdown = Object.entries(byTripType)
+    .sort((a, b) => b[1] - a[1])
+    .map(([tripType, count]) => ({ tripType, count }))
+
+  const pipelineFunnel = ['New', 'Contacted', 'Quoted', 'Confirmed', 'Lost'].map((status) => ({
+    status,
+    count: leads.filter((item) => (item.status || 'New') === status).length
+  }))
+
+  const quotedPlus = leads.filter((item) =>
+    ['Quoted', 'Confirmed'].includes(item.status || '')
+  ).length
+  const quoteToBookRate = quotedPlus > 0
+    ? ((confirmed / quotedPlus) * 100).toFixed(1)
+    : '0.0'
+
   return {
     conversionRate,
+    quoteToBookRate,
     leadsToday,
     leadsThisWeek,
     topDestinations,
     totalPipelineValue,
     confirmedRevenue,
     lostRevenue,
-    leadsPerDay
+    leadsPerDay,
+    sourceBreakdown,
+    tripTypeBreakdown,
+    pipelineFunnel
   }
 }

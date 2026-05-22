@@ -1,12 +1,74 @@
 import { supabase } from '../../../lib/supabase'
 
 const unsupportedColumns = new Set()
-const optionalColumns = ['deal_value']
+const optionalColumns = [
+  'deal_value',
+  'first_name',
+  'last_name',
+  'trip_type',
+  'priority',
+  'package_interest',
+  'client_id',
+  'follow_up_date'
+]
+let clientsJoinSupported = true
+
+const LEAD_DATE_FIELDS = new Set(['follow_up_date'])
+
+const LEAD_PAYLOAD_KEYS = [
+  'first_name',
+  'last_name',
+  'full_name',
+  'phone',
+  'email',
+  'destination',
+  'travel_dates',
+  'number_of_travelers',
+  'trip_type',
+  'priority',
+  'package_interest',
+  'budget',
+  'deal_value',
+  'message',
+  'source',
+  'status',
+  'notes',
+  'follow_up_date',
+  'assigned_agent',
+  'client_id'
+]
 
 function stripNullish(payload) {
   return Object.fromEntries(
     Object.entries(payload).filter(([, value]) => value !== undefined)
   )
+}
+
+function normalizeDateField(value) {
+  const trimmed = String(value ?? '').trim()
+  if (!trimmed) return null
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return null
+  return trimmed
+}
+
+export function sanitizeLeadPayload(raw = {}) {
+  const payload = {}
+
+  LEAD_PAYLOAD_KEYS.forEach((key) => {
+    if (!(key in raw)) return
+
+    let value = raw[key]
+
+    if (LEAD_DATE_FIELDS.has(key)) {
+      value = normalizeDateField(value)
+    } else if (value === '') {
+      value = key === 'deal_value' ? 0 : key === 'message' || key === 'notes' ? '' : null
+    }
+
+    if (value !== undefined) payload[key] = value
+  })
+
+  return stripNullish(payload)
 }
 
 function getMissingColumn(error) {
@@ -33,7 +95,7 @@ function removeUnsupported(payload) {
 }
 
 async function insertWithFallback(payload) {
-  const cleanPayload = removeUnsupported(stripNullish(payload))
+  const cleanPayload = removeUnsupported(sanitizeLeadPayload(payload))
   const { data, error } = await supabase
     .from('leads')
     .insert(cleanPayload)
@@ -65,7 +127,7 @@ async function insertWithFallback(payload) {
 }
 
 async function updateWithFallback(id, payload) {
-  const cleanPayload = removeUnsupported(stripNullish(payload))
+  const cleanPayload = removeUnsupported(sanitizeLeadPayload(payload))
   const { data, error } = await supabase
     .from('leads')
     .update(cleanPayload)
@@ -98,6 +160,22 @@ async function updateWithFallback(id, payload) {
 }
 
 export async function fetchLeads() {
+  if (clientsJoinSupported) {
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*, client:clients(*)')
+      .order('created_at', { ascending: false })
+
+    if (!error) return { data: data || [], error: null }
+
+    const message = `${error?.message || ''} ${error?.details || ''}`
+    if (message.includes('client') || error?.code === 'PGRST200' || error?.code === '42703') {
+      clientsJoinSupported = false
+    } else {
+      return { data: [], error }
+    }
+  }
+
   const { data, error } = await supabase
     .from('leads')
     .select('*')

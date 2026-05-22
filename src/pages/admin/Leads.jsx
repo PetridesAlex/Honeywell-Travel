@@ -1,17 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
-import SummaryCards from './components/SummaryCards'
+import AdminLayout from './components/AdminLayout'
 import LeadsTable from './components/LeadsTable'
 import LeadFormModal from './components/LeadFormModal'
+import ClientFormModal from './components/ClientFormModal'
+import { createClient, findOrCreateClientFromLead, updateClient } from './api/clientsApi'
 import ConfirmDialog from './components/ConfirmDialog'
 import LeadDetailsDrawer from './components/LeadDetailsDrawer'
 import ToastHost from './components/ToastHost'
-import LeadsPerDayChart from './components/LeadsPerDayChart'
 import EmailTemplatePicker from './components/EmailTemplatePicker'
+import { buildLeadPayload, leadDisplayName, parseLeadName } from './utils/leadName'
+import { exportLeadsToCsv } from './utils/exportLeads'
 import { EMPTY_LEAD, SOURCE_OPTIONS, STATUS_OPTIONS } from './constants'
 import { addLeadActivity, fetchLeadActivities } from './api/activitiesApi'
-import { buildAnalytics } from './api/analyticsApi'
 import {
   createLead,
   deleteLead,
@@ -24,16 +25,15 @@ import {
 import './Leads.css'
 
 function Leads() {
-  const navigate = useNavigate()
   const [leads, setLeads] = useState([])
   const [loading, setLoading] = useState(true)
-  const [checkingAuth, setCheckingAuth] = useState(true)
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('All')
   const [sourceFilter, setSourceFilter] = useState('All')
   const [agentFilter, setAgentFilter] = useState('All')
   const [myLeadsOnly, setMyLeadsOnly] = useState(false)
+  const [quickFilter, setQuickFilter] = useState('all')
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedLead, setSelectedLead] = useState(null)
   const [modalSaveError, setModalSaveError] = useState('')
@@ -45,6 +45,10 @@ function Leads() {
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [deleteTarget, setDeleteTarget] = useState(null)
+  const [clientModalOpen, setClientModalOpen] = useState(false)
+  const [clientModalTarget, setClientModalTarget] = useState(null)
+  const [clientSaving, setClientSaving] = useState(false)
+  const [clientSaveError, setClientSaveError] = useState('')
 
   const pushToast = (message, type = 'info') => {
     const id = crypto.randomUUID()
@@ -74,17 +78,7 @@ function Leads() {
   }
 
   useEffect(() => {
-    const checkAndLoad = async () => {
-      const { data, error: sessionError } = await supabase.auth.getSession()
-      if (sessionError || !data?.session) {
-        navigate('/admin/login', { replace: true })
-        return
-      }
-      setCheckingAuth(false)
-      loadLeads()
-    }
-
-    checkAndLoad()
+    loadLeads()
 
     const channel = supabase
       .channel('admin-leads-realtime')
@@ -98,7 +92,7 @@ function Leads() {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [navigate])
+  }, [])
 
   useEffect(() => {
     const bootstrap = async () => {
@@ -112,10 +106,17 @@ function Leads() {
 
   const filteredLeads = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase()
+    const today = new Date()
+    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    const tomorrow = new Date(todayMidnight)
+    tomorrow.setDate(tomorrow.getDate() + 1)
 
     return leads.filter(lead => {
+      const { first_name, last_name, full_name } = parseLeadName(lead)
       const matchesSearch = !normalizedSearch || [
-        lead.full_name,
+        first_name,
+        last_name,
+        full_name,
         lead.phone,
         lead.email,
         lead.destination
@@ -126,41 +127,52 @@ function Leads() {
       const matchesAgent = agentFilter === 'All' || (lead.assigned_agent || '') === agentFilter
       const matchesMine = !myLeadsOnly || (lead.assigned_agent || '') === (currentUser?.email || currentUser?.id || '')
 
-      return matchesSearch && matchesStatus && matchesSource && matchesAgent && matchesMine
+      let matchesQuick = true
+      if (quickFilter === 'followups_today') {
+        matchesQuick = Boolean(
+          lead.follow_up_date &&
+          new Date(lead.follow_up_date) >= todayMidnight &&
+          new Date(lead.follow_up_date) < tomorrow
+        )
+      } else if (quickFilter === 'overdue') {
+        matchesQuick = Boolean(lead.follow_up_date && new Date(lead.follow_up_date) < todayMidnight)
+      } else if (quickFilter === 'followups_due') {
+        matchesQuick = Boolean(
+          lead.follow_up_date &&
+          new Date(lead.follow_up_date) <= todayMidnight
+        )
+      }
+
+      return matchesSearch && matchesStatus && matchesSource && matchesAgent && matchesMine && matchesQuick
     })
-  }, [leads, searchTerm, statusFilter, sourceFilter, agentFilter, myLeadsOnly, currentUser])
+  }, [leads, searchTerm, statusFilter, sourceFilter, agentFilter, myLeadsOnly, quickFilter, currentUser])
 
-  const stats = useMemo(() => {
-    const countByStatus = (value) => leads.filter(lead => (lead.status || 'New') === value).length
-    const today = new Date()
-    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate())
-    const tomorrow = new Date(todayMidnight)
-    tomorrow.setDate(tomorrow.getDate() + 1)
+  const hasActiveFilters =
+    Boolean(searchTerm.trim()) ||
+    statusFilter !== 'All' ||
+    sourceFilter !== 'All' ||
+    agentFilter !== 'All' ||
+    myLeadsOnly ||
+    quickFilter !== 'all'
 
-    const followUpsDue = leads.filter(lead => {
-      if (!lead.follow_up_date) return false
-      const followDate = new Date(lead.follow_up_date)
-      const followMidnight = new Date(followDate.getFullYear(), followDate.getMonth(), followDate.getDate())
-      return followMidnight <= todayMidnight
-    }).length
+  const clearFilters = () => {
+    setSearchTerm('')
+    setStatusFilter('All')
+    setSourceFilter('All')
+    setAgentFilter('All')
+    setMyLeadsOnly(false)
+    setQuickFilter('all')
+  }
 
-    const followUpsToday = leads.filter(lead => lead.follow_up_date && new Date(lead.follow_up_date) >= todayMidnight && new Date(lead.follow_up_date) < tomorrow).length
-    const overdueFollowUps = leads.filter(lead => lead.follow_up_date && new Date(lead.follow_up_date) < todayMidnight).length
-    const analytics = buildAnalytics(leads)
+  const handleStatusFilter = (status) => {
+    setStatusFilter(status)
+    setQuickFilter('all')
+  }
 
-    return {
-      total: leads.length,
-      newCount: countByStatus('New'),
-      contacted: countByStatus('Contacted'),
-      quoted: countByStatus('Quoted'),
-      confirmed: countByStatus('Confirmed'),
-      lost: countByStatus('Lost'),
-      followUpsDue,
-      followUpsToday,
-      overdueFollowUps,
-      ...analytics
-    }
-  }, [leads])
+  const handleQuickFilter = (filter) => {
+    setQuickFilter((prev) => (prev === filter ? 'all' : filter))
+    if (filter !== 'all') setStatusFilter('All')
+  }
 
   const openCreateModal = () => {
     setModalSaveError('')
@@ -184,10 +196,36 @@ function Leads() {
     setSaving(true)
     setModalSaveError('')
 
-    const payload = {
+    const payload = buildLeadPayload({
       ...EMPTY_LEAD,
       ...form,
       follow_up_date: form.follow_up_date || null
+    })
+
+    if (!payload.first_name || !payload.last_name) {
+      setModalSaveError('Please enter both name and surname.')
+      setSaving(false)
+      return
+    }
+
+    if (!payload.email) {
+      setModalSaveError('Please enter an email address.')
+      setSaving(false)
+      return
+    }
+
+    const { data: client, error: clientError } = await findOrCreateClientFromLead({
+      first_name: payload.first_name,
+      last_name: payload.last_name,
+      email: payload.email,
+      phone: payload.phone,
+      client_id: selectedLead?.client_id || payload.client_id
+    })
+
+    if (clientError) {
+      console.warn('Client profile link skipped:', clientError.message)
+    } else if (client?.id) {
+      payload.client_id = client.id
     }
 
     const { data, error: saveError } = selectedLead?.id
@@ -202,8 +240,10 @@ function Leads() {
       return
     }
 
+    const enriched = client ? { ...data, client } : data
+
     if (selectedLead?.id) {
-      setLeads(prev => prev.map(item => item.id === selectedLead.id ? data : item))
+      setLeads(prev => prev.map(item => (item.id === selectedLead.id ? enriched : item)))
       await addLeadActivity({
         leadId: selectedLead.id,
         type: 'updated',
@@ -211,7 +251,7 @@ function Leads() {
         metadata: { status: payload.status }
       })
     } else {
-      setLeads(prev => [data, ...prev])
+      setLeads(prev => [enriched, ...prev])
       await addLeadActivity({
         leadId: data.id,
         type: 'created',
@@ -256,14 +296,29 @@ function Leads() {
 
   const saveDrawerLead = async (id, payload) => {
     const current = leads.find(item => item.id === id)
-    const { data, error: saveError } = await updateLead(id, payload)
+    const merged = { ...current, ...payload }
+    const { data: client, error: clientError } = await findOrCreateClientFromLead({
+      first_name: merged.first_name,
+      last_name: merged.last_name,
+      email: merged.email,
+      phone: merged.phone,
+      client_id: merged.client_id
+    })
+    if (clientError) {
+      console.warn('Client profile link skipped:', clientError.message)
+    } else if (client?.id) {
+      merged.client_id = client.id
+    }
+
+    const { data, error: saveError } = await updateLead(id, merged)
     if (saveError) {
       setError(saveError.message)
       pushToast('Failed to save lead changes', 'error')
       return
     }
-    setLeads(prev => prev.map(item => (item.id === id ? { ...item, ...data } : item)))
-    if (drawerLead?.id === id) setDrawerLead(prev => ({ ...prev, ...data }))
+    const enriched = client ? { ...data, client } : data
+    setLeads(prev => prev.map(item => (item.id === id ? enriched : item)))
+    if (drawerLead?.id === id) setDrawerLead(enriched)
     if (current?.status !== payload.status) {
       await addLeadActivity({ leadId: id, type: 'status_updated', description: `Status changed to ${payload.status}`, metadata: { from: current?.status, to: payload.status } })
     } else {
@@ -297,22 +352,6 @@ function Leads() {
     }
   }
 
-  const renderTopDestinations = () => (
-    <section className="crm-top-destinations">
-      <h3>Top Destinations</h3>
-      <div className="crm-destination-list">
-        {stats.topDestinations?.length
-          ? stats.topDestinations.map(item => (
-            <div key={item.destination} className="crm-destination-item">
-              <span>{item.destination}</span>
-              <strong>{item.count}</strong>
-            </div>
-          ))
-          : <p className="crm-muted">No destination data yet.</p>}
-      </div>
-    </section>
-  )
-
   const emailPicker = drawerLead ? (
     <EmailTemplatePicker
       lead={drawerLead}
@@ -323,6 +362,66 @@ function Leads() {
   const handleLogCall = (lead) => logAction(lead.id, 'called', 'Call action opened', {})
   const handleLogWhatsapp = (lead) => logAction(lead.id, 'whatsapp_opened', 'WhatsApp action opened', {})
   const handleLogEmailTemplate = (lead, template) => logAction(lead.id, 'email_sent', `Email template used: ${template}`, { template })
+
+  const openClientModal = (lead) => {
+    const names = parseLeadName(lead)
+    const client = lead?.client || {
+      ...names,
+      email: lead?.email,
+      phone: lead?.phone
+    }
+    setClientSaveError('')
+    setClientModalTarget({ leadId: lead.id, client })
+    setClientModalOpen(true)
+  }
+
+  const handleSaveClient = async (form) => {
+    if (!clientModalTarget) return
+    setClientSaving(true)
+    setClientSaveError('')
+
+    const lead = leads.find((item) => item.id === clientModalTarget.leadId)
+    const existingClient = clientModalTarget.client
+
+    let clientRecord = existingClient
+    if (existingClient?.id) {
+      const { data, error: updateError } = await updateClient(existingClient.id, form)
+      if (updateError) {
+        setClientSaveError(updateError.message)
+        setClientSaving(false)
+        return
+      }
+      clientRecord = data
+    } else {
+      const { data: created, error: createError } = await createClient(form)
+      if (createError) {
+        setClientSaveError(createError.message)
+        setClientSaving(false)
+        return
+      }
+      clientRecord = created
+      if (lead?.id && clientRecord?.id) {
+        const { data: linked } = await updateLead(lead.id, { client_id: clientRecord.id })
+        if (linked) clientRecord = { ...clientRecord }
+      }
+    }
+
+    if (lead?.id) {
+      setLeads((prev) =>
+        prev.map((item) =>
+          item.id === lead.id ? { ...item, client_id: clientRecord.id, client: clientRecord } : item
+        )
+      )
+      if (drawerLead?.id === lead.id) {
+        setDrawerLead((prev) => ({ ...prev, client_id: clientRecord.id, client: clientRecord }))
+      }
+    }
+
+    setClientSaving(false)
+    setClientModalOpen(false)
+    setClientModalTarget(null)
+    pushToast('Client profile saved', 'success')
+  }
 
   const leadsForTable = filteredLeads.map(item => ({
     ...item,
@@ -350,83 +449,163 @@ function Leads() {
 
   const myAgentKey = currentUser?.email || currentUser?.id || ''
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    navigate('/admin/login', { replace: true })
-  }
-
-  if (checkingAuth) {
-    return (
-      <div className="crm-page">
-        <div className="crm-state">Checking session...</div>
-      </div>
-    )
-  }
-
   return (
-    <div className="crm-page">
-      <header className="crm-header">
-        <div>
-          <p className="crm-eyebrow">Honeywell Travel Admin</p>
-          <h1>Leads CRM</h1>
-          <p className="crm-muted">Track enquiries, follow-ups, and conversions in one place.</p>
+    <AdminLayout
+      title="Leads"
+      subtitle="Manage all enquiries — name, surname, and email are saved for every lead."
+      actions={
+        <>
+          <button
+            type="button"
+            className="crm-btn crm-btn-ghost crm-btn--dark"
+            onClick={() => exportLeadsToCsv(filteredLeads)}
+            disabled={!filteredLeads.length}
+          >
+            Export CSV
+          </button>
+          <button type="button" className="crm-btn crm-btn-ghost crm-btn--dark" onClick={loadLeads}>
+            Refresh
+          </button>
+          <button type="button" className="crm-btn crm-btn-primary" onClick={openCreateModal}>
+            + Add Lead
+          </button>
+        </>
+      }
+    >
+      <section className="crm-workspace">
+        <div className="crm-workspace__head">
+          <div>
+            <h2 className="crm-workspace__title">Lead inbox</h2>
+            <p className="crm-workspace__subtitle">
+              {filteredLeads.length} of {leads.length} leads shown
+              {hasActiveFilters ? ' · filters active' : ''}
+            </p>
+          </div>
+          {hasActiveFilters ? (
+            <button type="button" className="crm-btn crm-btn-ghost" onClick={clearFilters}>
+              Clear filters
+            </button>
+          ) : null}
         </div>
-        <div className="crm-header-actions">
-          <button className="crm-btn crm-btn-primary" onClick={openCreateModal}>+ Add Lead</button>
-          <button className="crm-btn crm-btn-ghost" onClick={handleSignOut}>Sign out</button>
-        </div>
-      </header>
 
-      <SummaryCards stats={stats} />
-      <div className="crm-insight-grid">
-        <LeadsPerDayChart data={stats.leadsPerDay || []} />
-        {renderTopDestinations()}
-      </div>
+        <section className="crm-filters-panel">
+          <div className="crm-filter-chips" role="toolbar" aria-label="Quick filters">
+            <button
+              type="button"
+              className={`crm-chip${quickFilter === 'all' && statusFilter === 'All' ? ' crm-chip--active' : ''}`}
+              onClick={() => {
+                setQuickFilter('all')
+                setStatusFilter('All')
+              }}
+            >
+              All leads
+            </button>
+            {STATUS_OPTIONS.map((status) => (
+              <button
+                key={status}
+                type="button"
+                className={`crm-chip crm-chip--${status.toLowerCase()}${statusFilter === status ? ' crm-chip--active' : ''}`}
+                onClick={() => handleStatusFilter(statusFilter === status ? 'All' : status)}
+              >
+                {status}
+              </button>
+            ))}
+            <button
+              type="button"
+              className={`crm-chip crm-chip--alert${quickFilter === 'followups_today' ? ' crm-chip--active' : ''}`}
+              onClick={() => handleQuickFilter('followups_today')}
+            >
+              Follow-up today
+            </button>
+            <button
+              type="button"
+              className={`crm-chip crm-chip--danger${quickFilter === 'overdue' ? ' crm-chip--active' : ''}`}
+              onClick={() => handleQuickFilter('overdue')}
+            >
+              Overdue
+            </button>
+            <button
+              type="button"
+              className={`crm-chip${myLeadsOnly ? ' crm-chip--active' : ''}`}
+              onClick={() => setMyLeadsOnly((prev) => !prev)}
+              disabled={!myAgentKey}
+            >
+              My leads
+            </button>
+          </div>
 
-      <section className="crm-toolbar">
-        <input
-          placeholder="Search by name, phone, email, destination"
-          value={searchTerm}
-          onChange={event => setSearchTerm(event.target.value)}
-        />
-        <select value={statusFilter} onChange={event => setStatusFilter(event.target.value)}>
-          <option value="All">All Statuses</option>
-          {STATUS_OPTIONS.map(option => <option key={option} value={option}>{option}</option>)}
-        </select>
-        <select value={sourceFilter} onChange={event => setSourceFilter(event.target.value)}>
-          <option value="All">All Sources</option>
-          {SOURCE_OPTIONS.map(option => <option key={option} value={option}>{option}</option>)}
-        </select>
-        <select value={agentFilter} onChange={event => setAgentFilter(event.target.value)}>
-          <option value="All">All Agents</option>
-          {agentOptions.map(agent => <option key={agent.id} value={agent.id}>{agent.label}</option>)}
-        </select>
-        <label className="crm-toggle">
-          <input
-            type="checkbox"
-            checked={myLeadsOnly}
-            onChange={event => setMyLeadsOnly(event.target.checked)}
-            disabled={!myAgentKey}
+          <div className="crm-filters-grid">
+            <label className="crm-filter-field crm-filter-field--search">
+              <span>Search</span>
+              <input
+                type="search"
+                placeholder="Name, phone, email, destination…"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+            </label>
+            <label className="crm-filter-field">
+              <span>Status</span>
+              <select
+                value={statusFilter}
+                onChange={(event) => {
+                  setStatusFilter(event.target.value)
+                  setQuickFilter('all')
+                }}
+              >
+                <option value="All">All statuses</option>
+                {STATUS_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="crm-filter-field">
+              <span>Source</span>
+              <select value={sourceFilter} onChange={(event) => setSourceFilter(event.target.value)}>
+                <option value="All">All sources</option>
+                {SOURCE_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="crm-filter-field">
+              <span>Assigned agent</span>
+              <select value={agentFilter} onChange={(event) => setAgentFilter(event.target.value)}>
+                <option value="All">All agents</option>
+                {agentOptions.map((agent) => (
+                  <option key={agent.id} value={agent.id}>
+                    {agent.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </section>
+
+        {loading ? <div className="crm-state">Loading leads...</div> : null}
+        {!loading && error ? <div className="crm-state crm-state-error">Error: {error}</div> : null}
+        {!loading && !error && leads.length === 0 ? (
+          <div className="crm-state">No leads found yet. Add your first lead.</div>
+        ) : null}
+        {!loading && !error && leads.length > 0 && filteredLeads.length === 0 ? (
+          <div className="crm-state">No leads match your filters. Try clearing filters or broadening your search.</div>
+        ) : null}
+        {!loading && !error && filteredLeads.length > 0 ? (
+          <LeadsTable
+            leads={leadsForTable}
+            onEdit={openEditModal}
+            onDelete={setDeleteTarget}
+            onRowOpen={openDrawer}
+            onLogCall={handleLogCall}
+            onLogWhatsapp={handleLogWhatsapp}
+            onLogEmailTemplate={handleLogEmailTemplate}
           />
-          <span>My Leads</span>
-        </label>
-        <button className="crm-btn crm-btn-ghost" onClick={loadLeads}>Refresh</button>
+        ) : null}
       </section>
-
-      {loading ? <div className="crm-state">Loading leads...</div> : null}
-      {!loading && error ? <div className="crm-state crm-state-error">Error: {error}</div> : null}
-      {!loading && !error && leads.length === 0 ? <div className="crm-state">No leads found yet. Add your first lead.</div> : null}
-      {!loading && !error && leads.length > 0 ? (
-        <LeadsTable
-          leads={leadsForTable}
-          onEdit={openEditModal}
-          onDelete={setDeleteTarget}
-          onRowOpen={openDrawer}
-          onLogCall={handleLogCall}
-          onLogWhatsapp={handleLogWhatsapp}
-          onLogEmailTemplate={handleLogEmailTemplate}
-        />
-      ) : null}
 
       <LeadFormModal
         open={modalOpen}
@@ -440,7 +619,7 @@ function Leads() {
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         title="Delete lead?"
-        description={deleteTarget ? `This will permanently delete ${deleteTarget.full_name}.` : ''}
+        description={deleteTarget ? `This will permanently delete ${leadDisplayName(deleteTarget)}.` : ''}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={handleDeleteLead}
         confirming={deleting}
@@ -456,11 +635,24 @@ function Leads() {
         onMarkDone={handleMarkFollowUpDone}
         onLogCall={handleLogCall}
         onLogWhatsapp={handleLogWhatsapp}
+        onEditClient={() => drawerLead && openClientModal(drawerLead)}
         emailTemplatePicker={emailPicker}
       />
 
+      <ClientFormModal
+        open={clientModalOpen}
+        initialClient={clientModalTarget?.client}
+        onClose={() => {
+          setClientModalOpen(false)
+          setClientModalTarget(null)
+        }}
+        onSave={handleSaveClient}
+        saving={clientSaving}
+        saveError={clientSaveError}
+      />
+
       <ToastHost toasts={toasts} onDismiss={dismissToast} />
-    </div>
+    </AdminLayout>
   )
 }
 

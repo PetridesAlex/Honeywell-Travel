@@ -1,0 +1,241 @@
+/* Honeywell Travel CRM — navy blue + red (aligned with public site header) */
+
+.crm-page {
+  --hw-navy: #153a63;
+  --hw-navy-deep: #0f2d4a;
+  --hw-navy-mid: #1e4d7b;
+  --hw-navy-light: #2a5f8f;
+  --hw-red: #b51234;
+  --hw-red-bright: #d31736;
+  --hw-red-strong: #ff4d6d;
+  --hw-red-dark: #5f0b1f;
+  --hw-sky: #dceef8;
+  --hw-surface: #edf4fb;
+  --hw-border: #c5d9ec;
+  --hw-sidebar-logo: 7rem;
+}
+
+.crm-page {
+  background: linear-gradient(165deg, var(--hw-surface) 0%, #e8f0f8 45%, #f1f5f9 100%);
+}
+
+/* —— Sidebar —— */
+.crm-sidebar--premium {
+  background: linear-gradient(
+    180deg,
+    var(--hw-navy-deep) 0%,
+    var(--hw-navy) 38%,
+    var(--hw-navy-mid) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 0 0 1px rgba(15, 45, 74, 0.35),
+    0 20px 40px rgba(15, 45, 74, 0.35),
+    0 8px 20px rgba(181, 18, 52, 0.12);
+}
+
+.crm-sidebar__brand::before {
+  background: radial-gradient(ellipse 120% 80% at 100% 0%, rgba(211, 23, 54, 0.28), transparent 55%);
+}
+
+.crm-sidebar__eyebrow {
+  color: #ff2d55 !important;
+  -webkit-text-fill-color: #ff2d55;
+  font-weight: 900;
+  font-stretch: condensed;
+  -webkit-text-stroke: 0.4px rgba(95, 11, 31, 0.55);
+  text-shadow:
+    0 0 28px rgba(255, 45, 85, 0.7),
+    0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.crm-sidebar__logo--brand {
+  width: var(--hw-sidebar-logo);
+  height: var(--hw-sidebar-logo);
+  padding: 0.5rem;
+  font-size: 0;
+  letter-spacing: 0;
+  background: #ffffff;
+  border: 3px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.32),
+    0 0 0 2px rgba(211, 23, 54, 0.35),
+    0 0 24px rgba(255, 77, 109, 0.2);
+}
+
+.crm-sidebar__logo--brand img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.crm-nav-link--active {
+  background: #eff6ff;
+  color: var(--hw-navy);
+}
+
+.crm-nav-link--active.crm-nav-link--clients .crm-nav-link__icon-wrap {
+  background: linear-gradient(135deg, var(--hw-navy-light), var(--hw-navy));
+  border-color: #93c5fd;
+}
+
+.crm-nav-link--active.crm-nav-link--team .crm-nav-link__icon-wrap {
+  background: linear-gradient(135deg, var(--hw-red-bright), var(--hw-red));
+  border-color: #fca5a5;
+}
+
+/* —— Page header band —— */
+.crm-header {
+  background: linear-gradient(
+    135deg,
+    var(--hw-navy-deep) 0%,
+    var(--hw-navy) 42%,
+    var(--hw-navy-mid) 78%,
+    var(--hw-red-dark) 100%
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 20px 40px rgba(21, 58, 99, 0.28);
+}
+
+/* —— Buttons —— */
+.crm-btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--hw-red-dark) 0%,
+    var(--hw-red) 45%,
+    var(--hw-red-bright) 100%
+  );
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(181, 18, 52, 0.32);
+}
+
+.crm-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 8px 20px rgba(181, 18, 52, 0.4);
+}
+
+.crm-btn--dark.crm-btn-primary {
+  background: linear-gradient(135deg, var(--hw-red), var(--hw-red-bright));
+}
+
+.crm-btn--team-add,
+.crm-btn--team-save {
+  background: linear-gradient(135deg, var(--hw-navy), var(--hw-navy-light)) !important;
+  box-shadow: 0 6px 16px rgba(21, 58, 99, 0.28) !important;
+}
+
+.crm-btn--team-add:hover,
+.crm-btn--team-save:hover {
+  filter: brightness(1.05);
+}
+
+/* —— Tables & workspace accents —— */
+.crm-table thead {
+  background: linear-gradient(180deg, var(--hw-navy) 0%, var(--hw-navy-mid) 100%);
+}
+
+.crm-table--clients thead {
+  background: linear-gradient(180deg, var(--hw-navy-deep) 0%, var(--hw-navy) 100%);
+}
+
+.crm-workspace {
+  border-color: var(--hw-border);
+  box-shadow: 0 8px 28px rgba(21, 58, 99, 0.08);
+}
+
+.crm-filter-chip--active,
+.crm-pipeline-tab--active {
+  background: var(--hw-navy);
+  border-color: var(--hw-navy);
+}
+
+.crm-link,
+.crm-table a.crm-link {
+  color: var(--hw-navy);
+}
+
+.crm-link:hover {
+  color: var(--hw-red);
+}
+
+/* —— KPI / stats —— */
+.crm-stat-card__value {
+  color: var(--hw-navy);
+}
+
+.crm-chart-bar {
+  background: linear-gradient(180deg, var(--hw-red-bright), var(--hw-navy));
+}
+
+/* —— Modals —— */
+.crm-modal__hero {
+  background: linear-gradient(135deg, var(--hw-navy) 0%, var(--hw-navy-mid) 55%, var(--hw-red-dark) 100%);
+}
+
+.crm-modal__hero--corporate {
+  background: linear-gradient(135deg, var(--hw-navy-deep) 0%, var(--hw-navy) 50%, #92400e 100%);
+}
+
+/* —— Client profile hero —— */
+.crm-client-hero {
+  background: linear-gradient(
+    135deg,
+    var(--hw-navy-deep) 0%,
+    var(--hw-navy) 50%,
+    var(--hw-navy-mid) 78%,
+    var(--hw-red-dark) 100%
+  );
+}
+
+.crm-client-hero__badge--vip {
+  background: rgba(211, 23, 54, 0.22);
+  border-color: rgba(252, 165, 165, 0.45);
+  color: #fecaca;
+}
+
+/* —— Financials panel —— */
+.crm-workspace--financials {
+  border-color: var(--hw-border);
+  background: linear-gradient(180deg, #fff 0%, var(--hw-surface) 100%);
+  box-shadow: 0 8px 24px rgba(21, 58, 99, 0.08);
+}
+
+.crm-fin-head__icon {
+  background: linear-gradient(135deg, var(--hw-navy), var(--hw-navy-mid));
+  border-color: #93c5fd;
+}
+
+.crm-fin-summary__value--positive,
+.crm-fin-total--positive {
+  color: var(--hw-navy);
+}
+
+/* —— Team announcements —— */
+.crm-announce--update .crm-announce__accent {
+  background: linear-gradient(180deg, var(--hw-red-bright), var(--hw-red));
+}
+
+.crm-announce--news .crm-announce__accent {
+  background: linear-gradient(180deg, var(--hw-navy-light), var(--hw-navy));
+}
+
+.crm-announce-cat--update {
+  background: rgba(181, 18, 52, 0.1);
+  color: var(--hw-red);
+  border-color: rgba(181, 18, 52, 0.25);
+}
+
+.crm-announce-cat--news {
+  background: rgba(21, 58, 99, 0.1);
+  color: var(--hw-navy);
+  border-color: rgba(21, 58, 99, 0.22);
+}
+
+/* —— Sign out / footer —— */
+.crm-sidebar--premium .crm-sidebar__signout:hover {
+  background: rgba(181, 18, 52, 0.28);
+  border-color: rgba(252, 165, 165, 0.35);
+  color: #fff;
+}

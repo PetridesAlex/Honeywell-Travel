@@ -1,5 +1,7 @@
 import React from 'react'
 import EmailTemplatePicker from './EmailTemplatePicker'
+import PassportStatusBadge from './PassportStatusBadge'
+import { leadDisplayName, parseLeadName } from '../utils/leadName'
 
 function normalizePhone(phone = '') {
   return phone.replace(/[^\d+]/g, '')
@@ -29,9 +31,12 @@ function LeadsTable({ leads, onEdit, onDelete, onRowOpen, onLogCall, onLogWhatsa
         <thead>
           <tr>
             <th>Name</th>
-            <th>Phone</th>
+            <th>Surname</th>
             <th>Email</th>
+            <th>Trip</th>
             <th>Destination</th>
+            <th>Priority</th>
+            <th>Passport</th>
             <th>Status</th>
             <th>Follow-up</th>
             <th>Created</th>
@@ -42,15 +47,31 @@ function LeadsTable({ leads, onEdit, onDelete, onRowOpen, onLogCall, onLogWhatsa
         <tbody>
           {leads.map(lead => {
             const phone = normalizePhone(lead.phone)
+            const { first_name, last_name } = parseLeadName(lead)
             return (
               <tr key={lead.id} className={lead.__isNew ? 'crm-row-new' : ''} onClick={() => onRowOpen(lead)}>
                 <td>
-                  <strong>{lead.full_name}</strong>
+                  <strong>{first_name || '—'}</strong>
                   {lead.notes ? <p className="crm-note-preview">{lead.notes}</p> : null}
                 </td>
-                <td>{lead.phone || '-'}</td>
-                <td>{lead.email || '-'}</td>
-                <td>{lead.destination || '-'}</td>
+                <td>{last_name || '—'}</td>
+                <td>{lead.email || '—'}</td>
+                <td>{lead.trip_type || '—'}</td>
+                <td>{lead.destination || '—'}</td>
+                <td>
+                  {lead.priority && lead.priority !== 'Normal' ? (
+                    <span className={`crm-priority crm-priority--${lead.priority.toLowerCase()}`}>{lead.priority}</span>
+                  ) : (
+                    '—'
+                  )}
+                </td>
+                <td>
+                  {lead.client ? (
+                    <PassportStatusBadge expiresOn={lead.client.date_of_expiry} compact />
+                  ) : (
+                    '—'
+                  )}
+                </td>
                 <td><span className={`crm-status crm-status-${(lead.status || 'new').toLowerCase()}`}>{lead.status || 'New'}</span></td>
                 <td className={getFollowUpClass(lead.follow_up_date)}>
                   {lead.follow_up_date ? new Date(lead.follow_up_date).toLocaleDateString() : '-'}
@@ -62,7 +83,7 @@ function LeadsTable({ leads, onEdit, onDelete, onRowOpen, onLogCall, onLogWhatsa
                     <EmailTemplatePicker lead={lead} onLog={(template) => onLogEmailTemplate(lead, template)} />
                     <a
                       className="crm-link-btn"
-                      href={phone ? `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(`Hello ${lead.full_name || ''}, thank you for your interest in ${lead.destination || 'our travel packages'}. We will prepare your offer shortly.`)}` : undefined}
+                      href={phone ? `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(`Hello ${leadDisplayName(lead)}, thank you for your interest in ${lead.destination || 'our travel packages'}. We will prepare your offer shortly.`)}` : undefined}
                       target="_blank"
                       rel="noreferrer"
                       onClick={(e) => { e.stopPropagation(); onLogWhatsapp(lead) }}

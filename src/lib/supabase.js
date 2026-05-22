@@ -74,6 +74,35 @@ if (!isConfigured) {
   console.warn('Supabase client is running in fallback mode because environment variables are missing.')
 }
 
+export const isSupabaseConfigured = isConfigured
+
 export const supabase = isConfigured
-  ? createClient(supabaseUrl, supabaseKey)
+  ? createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+      },
+    })
   : createMockSupabase()
+
+/** Map Supabase auth errors to clearer admin login messages. */
+export function getAdminAuthErrorMessage(error) {
+  if (!error?.message) return 'Login failed. Please try again.'
+  const msg = error.message.toLowerCase()
+
+  if (msg.includes('invalid login credentials') || msg.includes('invalid credentials')) {
+    return (
+      'Invalid email or password. This account must exist in your Supabase project ' +
+      '(Authentication → Users). Create the user there or reset the password, then try again.'
+    )
+  }
+  if (msg.includes('email not confirmed')) {
+    return 'Email not confirmed. In Supabase, confirm the user or disable email confirmation for admin accounts.'
+  }
+  if (msg.includes('not configured')) {
+    return error.message
+  }
+
+  return error.message
+}

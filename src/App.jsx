@@ -28,8 +28,16 @@ import BlogPostDetail from './pages/BlogPostDetail'
 import FlightTickets from './pages/FlightTickets'
 import FlightTicketsDestination from './pages/FlightTicketsDestination'
 import TermsAndConditions from './pages/TermsAndConditions'
+import ClientProfile from './pages/admin/ClientProfile'
+import Clients from './pages/admin/Clients'
+import CorporateGroups from './pages/admin/CorporateGroups'
+import Dashboard from './pages/admin/Dashboard'
+import FollowUps from './pages/admin/FollowUps'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
+import Pipeline from './pages/admin/Pipeline'
+import Reports from './pages/admin/Reports'
+import Team from './pages/admin/Team'
 import './App.css'
 
 /** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
@@ -44,8 +52,17 @@ function AppContent() {
       <main className="main-content">
         <Routes>
           <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/team" element={<Team />} />
+          <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
+          <Route path="/admin/clients" element={<Clients />} />
+          <Route path="/admin/clients/:id" element={<ClientProfile />} />
           <Route path="/admin/leads" element={<Leads />} />
-          <Route path="/admin/*" element={<Navigate to="/admin/login" replace />} />
+          <Route path="/admin/pipeline" element={<Pipeline />} />
+          <Route path="/admin/follow-ups" element={<FollowUps />} />
+          <Route path="/admin/reports" element={<Reports />} />
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
         </Routes>
       </main>
     )
