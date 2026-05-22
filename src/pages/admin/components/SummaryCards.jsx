@@ -52,7 +52,9 @@ function SummaryCards({ stats, activeStatus, activeQuickFilter, onStatusClick, o
     <div className="crm-summary-sections">
       {SECTIONS.map((section) => (
         <section key={section.id} className="crm-summary-section">
-          <h2 className="crm-summary-section__title">{section.title}</h2>
+          <h2 className={`crm-summary-section__title crm-summary-section__title--${section.id}`}>
+            {section.title}
+          </h2>
           <div className="crm-summary-grid">
             {section.cards.map((card) => {
               const isStatusActive = card.filter && activeStatus === card.filter

@@ -55,9 +55,12 @@ Otherwise run these migrations in the Supabase SQL editor:
 - `supabase/migrations/20260525_client_financial_records.sql` — **Client accounting** (invoices, receipts, sell/net/margin)
 - `supabase/migrations/20260526_team_hub.sql` — **Team hub** (shared tasks, messages, news)
 - `supabase/migrations/20260527_team_task_types.sql` — **Task types** (check-in, payment deadlines on `team_tasks`)
+- `supabase/migrations/20260528_team_update_media.sql` — **Team post** `image_url` and `link_url`
 - **Corporate not loading?** Run once: `supabase/fix_corporate_groups.sql` (table + RLS + API grants), then verify: `node scripts/test-corporate-groups-api.mjs`
 - **Accounting not loading?** Run once: `supabase/fix_client_financials.sql`
 - **Team hub not loading?** Run once: `supabase/fix_team_hub.sql`
+- **Team post images / links?** Run once: `supabase/fix_team_update_media.sql` (columns + `team-media` storage bucket)
+- **"Bucket not found" when uploading an image?** You did not create Storage yet. Run `fix_team_update_media.sql`, or in Supabase go to **Storage** → **New bucket** → name `team-media` → enable **Public bucket**, then add the policies from that SQL file. Until then, paste the image address into **Image URL** (not Link URL) and leave Upload empty.
 - **Deadline types / check-in tasks?** Run once: `supabase/fix_team_task_types.sql`
 
 ## Troubleshooting

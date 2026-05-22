@@ -249,17 +249,21 @@ function Team() {
       }
     >
       <section className="crm-workspace crm-workspace--team">
-        <div className="crm-team-tabs">
+        <div className="crm-team-tabs" role="tablist" aria-label="Team hub views">
           <button
             type="button"
-            className={tab === 'tasks' ? 'crm-team-tabs__btn crm-team-tabs__btn--active' : 'crm-team-tabs__btn'}
+            role="tab"
+            aria-selected={tab === 'tasks'}
+            className={`crm-team-tabs__btn crm-team-tabs__btn--tasks${tab === 'tasks' ? ' crm-team-tabs__btn--active' : ''}`}
             onClick={() => setTab('tasks')}
           >
             Tasks &amp; to-do
           </button>
           <button
             type="button"
-            className={tab === 'updates' ? 'crm-team-tabs__btn crm-team-tabs__btn--active' : 'crm-team-tabs__btn'}
+            role="tab"
+            aria-selected={tab === 'updates'}
+            className={`crm-team-tabs__btn crm-team-tabs__btn--updates${tab === 'updates' ? ' crm-team-tabs__btn--active' : ''}`}
             onClick={() => setTab('updates')}
           >
             News &amp; updates
@@ -271,13 +275,14 @@ function Team() {
 
         {!loading && !error && tab === 'tasks' ? (
           <>
-            <div className="crm-filter-chips">
+            <div className="crm-filter-chips crm-filter-chips--team" role="toolbar" aria-label="Task filters">
               {TASK_FILTERS.map((f) => (
                 <button
                   key={f.id}
                   type="button"
-                  className={`crm-chip crm-chip--counted${taskFilter === f.id ? ' crm-chip--active' : ''}${f.id === 'overdue' && taskFilterCounts.overdue > 0 ? ' crm-chip--alert' : ''}`}
+                  className={`crm-chip crm-chip--counted crm-chip--filter-${f.id}${taskFilter === f.id ? ' crm-chip--active' : ''}${f.id === 'overdue' && taskFilterCounts.overdue > 0 ? ' crm-chip--alert' : ''}`}
                   onClick={() => setTaskFilter(f.id)}
+                  aria-pressed={taskFilter === f.id}
                   aria-label={`${f.label}, ${taskFilterCounts[f.id]} tasks`}
                 >
                   <span className="crm-chip__label">{f.label}</span>

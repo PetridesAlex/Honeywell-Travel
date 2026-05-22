@@ -55,13 +55,67 @@ function formatTeamTaskError(error) {
 }
 
 function buildUpdatePayload(raw = {}) {
+  const imageUrl = (raw.image_url || '').trim()
+  const linkUrl = (raw.link_url || '').trim()
   return {
     title: (raw.title || '').trim(),
     body: (raw.body || '').trim(),
     category: raw.category || 'update',
     pinned: Boolean(raw.pinned),
+    image_url: imageUrl || null,
+    link_url: linkUrl || null,
     updated_at: new Date().toISOString()
   }
+}
+
+const TEAM_MEDIA_BUCKET = 'team-media'
+
+function formatTeamUpdateError(error) {
+  const msg = error?.message || ''
+  if (
+    msg.includes('image_url') ||
+    msg.includes('link_url') ||
+    (msg.includes('column') && msg.includes('team_updates'))
+  ) {
+    return {
+      message:
+        'Database is missing image_url/link_url on team_updates. Run supabase/fix_team_update_media.sql in the SQL Editor, then try again.'
+    }
+  }
+  return error
+}
+
+export async function uploadTeamUpdateImage(file) {
+  if (!file) return { url: null, error: { message: 'No file selected.' } }
+  if (!file.type?.startsWith('image/')) {
+    return { url: null, error: { message: 'Please choose an image file (JPEG, PNG, WebP, or GIF).' } }
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    return { url: null, error: { message: 'Image must be 5 MB or smaller.' } }
+  }
+
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg'
+  const path = `updates/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+
+  const { error: uploadError } = await supabase.storage
+    .from(TEAM_MEDIA_BUCKET)
+    .upload(path, file, { cacheControl: '3600', upsert: false })
+
+  if (uploadError) {
+    const msg = uploadError.message || ''
+    const bucketMissing = /bucket not found/i.test(msg)
+    return {
+      url: null,
+      error: {
+        message: bucketMissing
+          ? 'Storage bucket "team-media" is not set up yet. In Supabase → SQL Editor, run the full script supabase/fix_team_update_media.sql (or create a public bucket named team-media under Storage). You can also paste an image URL in the Image field without uploading.'
+          : msg || 'Upload failed. Paste an image URL instead, or run supabase/fix_team_update_media.sql.'
+      }
+    }
+  }
+
+  const { data } = supabase.storage.from(TEAM_MEDIA_BUCKET).getPublicUrl(path)
+  return { url: data?.publicUrl || null, error: null }
 }
 
 function joinSelectError(error) {
@@ -241,7 +295,7 @@ export async function createTeamUpdate(payload) {
     .insert({ ...clean, ...author })
     .select()
     .single()
-  return { data, error }
+  return { data, error: formatTeamUpdateError(error) }
 }
 
 export async function updateTeamUpdate(id, payload) {
@@ -252,7 +306,7 @@ export async function updateTeamUpdate(id, payload) {
     .eq('id', id)
     .select()
     .single()
-  return { data, error }
+  return { data, error: formatTeamUpdateError(error) }
 }
 
 export async function deleteTeamUpdate(id) {

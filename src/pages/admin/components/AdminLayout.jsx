@@ -118,27 +118,22 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
       <div className="crm-shell">
         <aside className="crm-sidebar crm-sidebar--premium">
           <div className="crm-sidebar__brand">
-            <div className="crm-sidebar__brand-mark">
-              <div className="crm-sidebar__logo crm-sidebar__logo--brand">
-                <img
-                  src="/images/icons/honeywell-travel-logo.webp"
-                  alt="Honeywell Travel"
-                  width={96}
-                  height={96}
-                />
+            <div className="crm-sidebar__brand-logo">
+              <img
+                src="/images/icons/honeywell-travel-logo.webp"
+                alt="Honeywell Travel"
+                width={280}
+                height={72}
+                className="crm-sidebar__brand-logo-img"
+              />
+            </div>
+            <p className="crm-sidebar__brand-tagline">CRM Workspace</p>
+            {welcomeName ? (
+              <div className="crm-sidebar__brand-user">
+                <span className="crm-sidebar__brand-user-label">Welcome back</span>
+                <span className="crm-sidebar__brand-user-name">{welcomeName}</span>
               </div>
-              <span className="crm-sidebar__brand-rule" aria-hidden="true" />
-            </div>
-            <div className="crm-sidebar__brand-text">
-              <p className="crm-sidebar__eyebrow">Honeywell Travel</p>
-              <h1 className="crm-sidebar__title">CRM Workspace</h1>
-              {welcomeName ? (
-                <p className="crm-sidebar__welcome">
-                  <span className="crm-sidebar__welcome-label">Welcome back</span>
-                  <span className="crm-sidebar__welcome-name">{welcomeName}</span>
-                </p>
-              ) : null}
-            </div>
+            ) : null}
           </div>
 
           <p className="crm-sidebar__section">Menu</p>

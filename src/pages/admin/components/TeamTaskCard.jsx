@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { CalendarClock, ChevronDown, MessageSquare, User } from 'lucide-react'
+import { CalendarClock, ChevronDown, MessageSquare, Pencil, Trash2, User } from 'lucide-react'
 import {
   addTaskComment,
   deleteTaskComment,
@@ -184,40 +184,47 @@ function TeamTaskCard({
         <div className="crm-team-task__panel">
           <div className="crm-team-task__panel-toolbar">
             <label className="crm-team-task__status-label">
-              <span>Status</span>
-              <select
-                className="crm-team-task__status-select"
-                value={task.status}
-                onChange={(e) => onStatusChange(task, e.target.value)}
-                aria-label="Change task status"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <option value="todo">To do</option>
-                <option value="in_progress">In progress</option>
-                <option value="done">Done</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
+              <span className="crm-team-task__status-label-text">Status</span>
+              <span className="crm-team-task__status-wrap">
+                <select
+                  className={`crm-team-task__status-select crm-team-task__status-select--${task.status}`}
+                  value={task.status}
+                  onChange={(e) => onStatusChange(task, e.target.value)}
+                  aria-label="Change task status"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <option value="todo">To do</option>
+                  <option value="in_progress">In progress</option>
+                  <option value="done">Done</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <ChevronDown size={14} className="crm-team-task__status-chevron" aria-hidden />
+              </span>
             </label>
-            <button
-              type="button"
-              className="crm-link-btn"
-              onClick={(e) => {
-                e.stopPropagation()
-                onEdit(task)
-              }}
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              className="crm-btn crm-btn-danger crm-btn--small"
-              onClick={(e) => {
-                e.stopPropagation()
-                onDelete(task)
-              }}
-            >
-              Delete
-            </button>
+            <div className="crm-team-task__toolbar-actions">
+              <button
+                type="button"
+                className="crm-team-task__action crm-team-task__action--edit"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onEdit(task)
+                }}
+              >
+                <Pencil size={15} aria-hidden />
+                <span>Edit</span>
+              </button>
+              <button
+                type="button"
+                className="crm-team-task__action crm-team-task__action--delete"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onDelete(task)
+                }}
+              >
+                <Trash2 size={15} aria-hidden />
+                <span>Delete</span>
+              </button>
+            </div>
           </div>
 
           {task.description ? (
@@ -273,9 +280,11 @@ function TeamTaskCard({
               onClick={() => setThreadOpen((v) => !v)}
               aria-expanded={threadOpen}
             >
-              <MessageSquare size={18} aria-hidden />
-              <span>Team discussion</span>
-              <em>{messageCountLabel(messageCount)}</em>
+              <span className="crm-team-task__thread-icon" aria-hidden="true">
+                <MessageSquare size={17} strokeWidth={2.25} />
+              </span>
+              <span className="crm-team-task__thread-label">Team discussion</span>
+              <em className="crm-team-task__thread-meta">{messageCountLabel(messageCount)}</em>
               <ChevronDown
                 size={18}
                 className={`crm-team-task__cover-chevron${threadOpen ? ' crm-team-task__cover-chevron--open' : ''}`}
@@ -334,7 +343,11 @@ function TeamTaskCard({
                       onChange={(e) => setCommentText(e.target.value)}
                     />
                   </label>
-                  <button disabled={posting} type="submit" className="crm-btn crm-btn-primary crm-btn--small">
+                  <button
+                    disabled={posting}
+                    type="submit"
+                    className="crm-btn crm-btn-primary crm-btn--small crm-team-comment-form__send"
+                  >
                     {posting ? 'Sending…' : 'Send'}
                   </button>
                 </form>

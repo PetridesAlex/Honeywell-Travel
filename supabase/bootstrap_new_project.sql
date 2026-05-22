@@ -143,6 +143,8 @@ create table if not exists public.team_updates (
   body text not null default '',
   category text not null default 'update',
   pinned boolean not null default false,
+  image_url text,
+  link_url text,
   created_by_id uuid,
   created_by_name text not null default 'Agent',
   created_at timestamptz not null default now(),

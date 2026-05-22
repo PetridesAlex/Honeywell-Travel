@@ -101,6 +101,10 @@ begin
   end if;
 end $$;
 
+alter table public.team_updates
+  add column if not exists image_url text,
+  add column if not exists link_url text;
+
 grant select, insert, update, delete on table public.team_tasks to authenticated;
 grant select, insert, update, delete on table public.team_updates to authenticated;
 grant select, insert, delete on table public.team_task_comments to authenticated;

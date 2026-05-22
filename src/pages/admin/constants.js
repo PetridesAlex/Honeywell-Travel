@@ -135,7 +135,9 @@ export const EMPTY_TEAM_UPDATE = {
   title: '',
   body: '',
   category: 'update',
-  pinned: false
+  pinned: false,
+  image_url: '',
+  link_url: ''
 }
 
 export const ADMIN_NAV = [

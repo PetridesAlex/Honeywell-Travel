@@ -10,13 +10,165 @@
   --hw-red-strong: #ff4d6d;
   --hw-red-dark: #5f0b1f;
   --hw-sky: #dceef8;
-  --hw-surface: #edf4fb;
-  --hw-border: #c5d9ec;
-  --hw-sidebar-logo: 7rem;
+  --hw-surface: #d8e6f2;
+  --hw-surface-elevated: rgba(255, 255, 255, 0.82);
+  --hw-surface-card: linear-gradient(
+    158deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(244, 249, 253, 0.97) 55%,
+    rgba(232, 241, 250, 0.95) 100%
+  );
+  --hw-border: rgba(167, 198, 224, 0.75);
+  --hw-border-strong: rgba(124, 164, 201, 0.55);
+  --hw-shadow-soft: 0 14px 42px rgba(15, 45, 74, 0.11);
+  --hw-shadow-panel: 0 1px 0 rgba(255, 255, 255, 0.75) inset, 0 12px 36px rgba(15, 45, 74, 0.1);
+  --hw-sidebar-logo-max-width: min(100%, 16.75rem);
+  --hw-sidebar-logo-max-height: 4.25rem;
+}
+
+/* Premium CRM canvas — replaces flat white */
+.main-content:has(.crm-page) {
+  background: #c8d9e8;
 }
 
 .crm-page {
-  background: linear-gradient(165deg, var(--hw-surface) 0%, #e8f0f8 45%, #f1f5f9 100%);
+  background:
+    radial-gradient(ellipse 90% 55% at 8% -5%, rgba(21, 58, 99, 0.2), transparent 58%),
+    radial-gradient(ellipse 70% 45% at 96% 4%, rgba(181, 18, 52, 0.1), transparent 52%),
+    radial-gradient(ellipse 80% 50% at 50% 108%, rgba(42, 95, 143, 0.14), transparent 55%),
+    linear-gradient(168deg, #c5d8e8 0%, #d2e2ef 32%, #dceaf3 58%, #e6eff7 100%);
+}
+
+.crm-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, #000 0%, transparent 92%);
+}
+
+.crm-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.crm-page .crm-shell,
+.crm-page .crm-shell__main {
+  position: relative;
+  z-index: 1;
+}
+
+.crm-page .crm-workspace {
+  background: var(--hw-surface-card);
+  border: 1px solid var(--hw-border);
+  box-shadow: var(--hw-shadow-panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.crm-page .crm-profile-block {
+  border: 1px solid var(--hw-border);
+  background: var(--hw-surface-card);
+  box-shadow: var(--hw-shadow-soft);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.crm-page .crm-profile-block--contact {
+  border-color: rgba(147, 197, 253, 0.65);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.96) 0%, rgba(239, 246, 255, 0.98) 100%);
+}
+
+.crm-page .crm-profile-block--passport {
+  border-color: rgba(134, 239, 172, 0.55);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 253, 244, 0.98) 100%);
+}
+
+.crm-page .crm-profile-block--notes {
+  border-color: rgba(216, 180, 254, 0.55);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.96) 0%, rgba(250, 245, 255, 0.98) 100%);
+}
+
+.crm-page .crm-profile-block--passport.crm-profile-block--expiring_soon {
+  border-color: rgba(252, 211, 77, 0.65);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 251, 235, 0.98) 100%);
+}
+
+.crm-page .crm-profile-block--passport.crm-profile-block--expired {
+  border-color: rgba(252, 165, 165, 0.65);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.96) 0%, rgba(254, 242, 242, 0.98) 100%);
+}
+
+.crm-page .crm-summary-section,
+.crm-page .crm-table-wrap--clients,
+.crm-page .crm-table-wrap--financials {
+  background: var(--hw-surface-card);
+  border-color: var(--hw-border);
+  box-shadow: var(--hw-shadow-soft);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.crm-page .crm-summary-card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.75) 0%, rgba(237, 244, 251, 0.9) 100%);
+  border-color: var(--hw-border);
+}
+
+.crm-page .crm-table tbody tr {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.crm-page .crm-table tbody tr:hover {
+  background: rgba(239, 246, 255, 0.85);
+}
+
+.crm-page .crm-fin-summary__card {
+  border-color: var(--hw-border);
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.9) 0%, rgba(237, 244, 251, 0.95) 100%);
+  box-shadow: 0 4px 16px rgba(15, 45, 74, 0.06);
+}
+
+.crm-modal-backdrop--premium {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(21, 58, 99, 0.35), transparent 70%),
+    rgba(8, 18, 32, 0.72);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+}
+
+.crm-modal--lead {
+  border: 1px solid rgba(197, 217, 236, 0.9);
+  background: linear-gradient(180deg, rgba(248, 251, 254, 0.98) 0%, rgba(225, 236, 246, 0.98) 100%);
+  box-shadow:
+    0 0 0 1px rgba(15, 45, 74, 0.08),
+    0 40px 80px rgba(8, 18, 32, 0.35),
+    0 12px 32px rgba(21, 58, 99, 0.18);
+}
+
+.crm-modal--financial .crm-modal__body {
+  background: linear-gradient(180deg, rgba(244, 249, 253, 0.6) 0%, rgba(232, 240, 248, 0.85) 100%);
+}
+
+.crm-modal__hero--financial {
+  background: linear-gradient(
+    128deg,
+    var(--hw-navy-deep) 0%,
+    var(--hw-navy) 38%,
+    var(--hw-navy-mid) 72%,
+    var(--hw-red-dark) 100%
+  );
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.crm-modal__section--financial {
+  border-color: rgba(167, 198, 224, 0.65);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.92) 0%, rgba(237, 244, 251, 0.96) 100%);
 }
 
 /* —— Sidebar —— */
@@ -38,36 +190,12 @@
   background: radial-gradient(ellipse 120% 80% at 100% 0%, rgba(211, 23, 54, 0.28), transparent 55%);
 }
 
-.crm-sidebar__eyebrow {
-  color: #ff2d55 !important;
-  -webkit-text-fill-color: #ff2d55;
-  font-weight: 900;
-  font-stretch: condensed;
-  -webkit-text-stroke: 0.4px rgba(95, 11, 31, 0.55);
-  text-shadow:
-    0 0 28px rgba(255, 45, 85, 0.7),
-    0 2px 6px rgba(0, 0, 0, 0.45);
+.crm-sidebar__brand-logo {
+  max-width: var(--hw-sidebar-logo-max-width);
 }
 
-.crm-sidebar__logo--brand {
-  width: var(--hw-sidebar-logo);
-  height: var(--hw-sidebar-logo);
-  padding: 0.5rem;
-  font-size: 0;
-  letter-spacing: 0;
-  background: #ffffff;
-  border: 3px solid rgba(255, 255, 255, 0.55);
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.32),
-    0 0 0 2px rgba(211, 23, 54, 0.35),
-    0 0 24px rgba(255, 77, 109, 0.2);
-}
-
-.crm-sidebar__logo--brand img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+.crm-sidebar__brand-logo-img {
+  max-height: var(--hw-sidebar-logo-max-height);
 }
 
 .crm-nav-link--active {
@@ -196,10 +324,15 @@
 }
 
 /* —— Financials panel —— */
-.crm-workspace--financials {
-  border-color: var(--hw-border);
-  background: linear-gradient(180deg, #fff 0%, var(--hw-surface) 100%);
-  box-shadow: 0 8px 24px rgba(21, 58, 99, 0.08);
+.crm-page .crm-workspace--financials {
+  border-color: var(--hw-border-strong);
+  background: linear-gradient(
+    158deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(237, 244, 251, 0.97) 48%,
+    rgba(220, 234, 246, 0.95) 100%
+  );
+  box-shadow: var(--hw-shadow-panel);
 }
 
 .crm-fin-head__icon {

@@ -1,4 +1,4 @@
-import { Bell, Megaphone, Newspaper, Pencil, Pin, ScrollText, Trash2 } from 'lucide-react'
+import { Bell, ExternalLink, Megaphone, Newspaper, Pencil, Pin, ScrollText, Trash2 } from 'lucide-react'
 import {
   authorInitials,
   formatTeamDateTime,
@@ -26,12 +26,12 @@ function TeamUpdateCard({ update, onEdit, onDelete }) {
         <header className="crm-announce__header">
           <div className="crm-announce__labels">
             <span className={updateCategoryClass(update.category)}>
-              <Icon size={13} aria-hidden />
+              <Icon size={14} strokeWidth={2.25} aria-hidden />
               {label}
             </span>
             {update.pinned ? (
               <span className="crm-announce__pin">
-                <Pin size={12} aria-hidden />
+                <Pin size={12} strokeWidth={2.5} aria-hidden />
                 Featured
               </span>
             ) : null}
@@ -41,28 +41,46 @@ function TeamUpdateCard({ update, onEdit, onDelete }) {
               type="button"
               className="crm-announce__tool"
               onClick={() => onEdit(update)}
-              title="Edit announcement"
+              aria-label="Edit announcement"
             >
-              <Pencil size={15} aria-hidden />
-              <span>Edit</span>
+              <Pencil size={16} aria-hidden />
             </button>
             <button
               type="button"
               className="crm-announce__tool crm-announce__tool--danger"
               onClick={() => onDelete(update)}
-              title="Delete announcement"
+              aria-label="Delete announcement"
             >
-              <Trash2 size={15} aria-hidden />
-              <span>Delete</span>
+              <Trash2 size={16} aria-hidden />
             </button>
           </div>
         </header>
 
         <h3 className="crm-announce__title">{update.title}</h3>
 
-        <div className="crm-announce__body">
-          <p>{update.body}</p>
-        </div>
+        {update.image_url ? (
+          <div className="crm-announce__media">
+            <img src={update.image_url} alt="" loading="lazy" />
+          </div>
+        ) : null}
+
+        {update.link_url ? (
+          <a
+            href={update.link_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="crm-announce__link"
+          >
+            <ExternalLink size={14} aria-hidden />
+            View link
+          </a>
+        ) : null}
+
+        {update.body ? (
+          <div className="crm-announce__body">
+            <p>{update.body}</p>
+          </div>
+        ) : null}
 
         <footer className="crm-announce__footer">
           <span className="crm-announce__avatar" aria-hidden="true">
