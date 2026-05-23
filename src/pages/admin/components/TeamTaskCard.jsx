@@ -24,12 +24,6 @@ import {
   taskTypeClass
 } from '../utils/team'
 
-function messageCountLabel(count) {
-  if (!count) return 'No messages'
-  if (count === 1) return '1 message'
-  return `${count} messages`
-}
-
 function truncateText(text, max = 100) {
   const t = String(text || '').trim()
   if (t.length <= max) return t
@@ -46,7 +40,6 @@ function TeamTaskCard({
   defaultOpen = false
 }) {
   const [open, setOpen] = useState(compact || defaultOpen)
-  const [threadOpen, setThreadOpen] = useState(false)
   const [comments, setComments] = useState([])
   const [messageCount, setMessageCount] = useState(0)
   const [latestPreview, setLatestPreview] = useState(null)
@@ -79,8 +72,8 @@ function TeamTaskCard({
   }, [task.id, compact])
 
   useEffect(() => {
-    if (open && threadOpen && !compact) loadComments()
-  }, [open, threadOpen, task.id, compact])
+    if (open && !compact) loadComments()
+  }, [open, task.id, compact])
 
   const handleAddComment = async (e) => {
     e.preventDefault()
@@ -96,13 +89,7 @@ function TeamTaskCard({
     }
   }
 
-  const handleToggleOpen = () => {
-    setOpen((v) => {
-      const next = !v
-      if (next && hasMessages) setThreadOpen(true)
-      return next
-    })
-  }
+  const handleToggleOpen = () => setOpen((v) => !v)
 
   const hasMessages = messageCount > 0
   const isMine = task.assigned_to && currentAgent && task.assigned_to === currentAgent
@@ -114,7 +101,7 @@ function TeamTaskCard({
   const coverSnippet =
     truncateText(latestPreview?.body, 72) ||
     truncateText(task.description, 72) ||
-    'Tap to view details and team discussion'
+    'Tap to open chat'
 
   if (compact) {
     return (
@@ -137,241 +124,221 @@ function TeamTaskCard({
       <div className="crm-team-task__accent" aria-hidden="true" />
 
       <div className="crm-team-task__main">
-      <button
-        type="button"
-        className="crm-team-task__cover"
-        onClick={handleToggleOpen}
-        aria-expanded={open}
-      >
-        <span className="crm-team-task__cover-avatar" aria-hidden="true">
-          {authorInitials(coverAvatarName)}
-        </span>
+        <button
+          type="button"
+          className="crm-team-task__cover"
+          onClick={handleToggleOpen}
+          aria-expanded={open}
+        >
+          <span className="crm-team-task__cover-avatar" aria-hidden="true">
+            {authorInitials(coverAvatarName)}
+          </span>
 
-        <span className="crm-team-task__cover-main">
-          <span className="crm-team-task__cover-top">
-            <span className={taskTypeClass(task.task_type)}>{getTaskTypeLabel(task.task_type)}</span>
-            {dueStatus && dueLabel && task.due_date ? (
-              <span className={`crm-team-task__due crm-team-task__due--cover ${dueDateClass(dueStatus)}`}>
-                <CalendarClock size={12} aria-hidden />
-                {dueLabel}
+          <span className="crm-team-task__cover-main">
+            <span className="crm-team-task__cover-top">
+              <span className={taskTypeClass(task.task_type)}>{getTaskTypeLabel(task.task_type)}</span>
+              {dueStatus && dueLabel && task.due_date ? (
+                <span className={`crm-team-task__due crm-team-task__due--cover ${dueDateClass(dueStatus)}`}>
+                  <CalendarClock size={12} aria-hidden />
+                  {dueLabel}
+                </span>
+              ) : null}
+            </span>
+            <span className="crm-team-task__cover-title">{task.title}</span>
+            <span className="crm-team-task__cover-snippet">{coverSnippet}</span>
+            <span className="crm-team-task__cover-meta">
+              <span className={taskStatusClass(task.status)}>{getTaskStatusLabel(task.status)}</span>
+              {customerName ? <span className="crm-team-task__cover-customer">{customerName}</span> : null}
+            </span>
+          </span>
+
+          <span className="crm-team-task__cover-aside">
+            {hasMessages ? (
+              <span className="crm-team-task__cover-messages">
+                <MessageSquare size={14} aria-hidden />
+                {messageCount}
               </span>
             ) : null}
+            <ChevronDown
+              size={20}
+              className={`crm-team-task__cover-chevron${open ? ' crm-team-task__cover-chevron--open' : ''}`}
+              aria-hidden
+            />
           </span>
-          <span className="crm-team-task__cover-title">{task.title}</span>
-          <span className="crm-team-task__cover-snippet">{coverSnippet}</span>
-          <span className="crm-team-task__cover-meta">
-            <span className={taskStatusClass(task.status)}>{getTaskStatusLabel(task.status)}</span>
-            {customerName ? <span className="crm-team-task__cover-customer">{customerName}</span> : null}
-          </span>
-        </span>
+        </button>
 
-        <span className="crm-team-task__cover-aside">
-          {hasMessages ? (
-            <span className="crm-team-task__cover-messages">
-              <MessageSquare size={14} aria-hidden />
-              {messageCount}
-            </span>
-          ) : null}
-          <ChevronDown
-            size={20}
-            className={`crm-team-task__cover-chevron${open ? ' crm-team-task__cover-chevron--open' : ''}`}
-            aria-hidden
-          />
-        </span>
-      </button>
-
-      {open ? (
-        <div className="crm-team-task__panel">
-          <div className="crm-team-task__panel-toolbar">
-            <label className="crm-team-task__status-label">
-              <span className="crm-team-task__status-label-text">Status</span>
-              <span className="crm-team-task__status-wrap">
-                <select
-                  className={`crm-team-task__status-select crm-team-task__status-select--${task.status}`}
-                  value={task.status}
-                  onChange={(e) => onStatusChange(task, e.target.value)}
-                  aria-label="Change task status"
-                  onClick={(e) => e.stopPropagation()}
+        {open ? (
+          <div className="crm-team-task__panel crm-team-task__panel--messenger">
+            <div className="crm-team-task__messenger-header">
+              <label className="crm-team-task__status-label">
+                <span className="crm-team-task__status-label-text">Status</span>
+                <span className="crm-team-task__status-wrap">
+                  <select
+                    className={`crm-team-task__status-select crm-team-task__status-select--${task.status}`}
+                    value={task.status}
+                    onChange={(e) => onStatusChange(task, e.target.value)}
+                    aria-label="Change task status"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option value="todo">To do</option>
+                    <option value="in_progress">In progress</option>
+                    <option value="done">Done</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <ChevronDown size={14} className="crm-team-task__status-chevron" aria-hidden />
+                </span>
+              </label>
+              <div className="crm-team-task__toolbar-actions">
+                <button
+                  type="button"
+                  className="crm-team-task__action crm-team-task__action--edit"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onEdit(task)
+                  }}
+                  aria-label="Edit task"
                 >
-                  <option value="todo">To do</option>
-                  <option value="in_progress">In progress</option>
-                  <option value="done">Done</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-                <ChevronDown size={14} className="crm-team-task__status-chevron" aria-hidden />
-              </span>
-            </label>
-            <div className="crm-team-task__toolbar-actions">
-              <button
-                type="button"
-                className="crm-team-task__action crm-team-task__action--edit"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onEdit(task)
-                }}
-              >
-                <Pencil size={15} aria-hidden />
-                <span>Edit</span>
-              </button>
-              <button
-                type="button"
-                className="crm-team-task__action crm-team-task__action--delete"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onDelete(task)
-                }}
-              >
-                <Trash2 size={15} aria-hidden />
-                <span>Delete</span>
-              </button>
+                  <Pencil size={15} aria-hidden />
+                  <span>Edit</span>
+                </button>
+                <button
+                  type="button"
+                  className="crm-team-task__action crm-team-task__action--delete"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onDelete(task)
+                  }}
+                  aria-label="Delete task"
+                >
+                  <Trash2 size={15} aria-hidden />
+                  <span>Delete</span>
+                </button>
+              </div>
             </div>
-          </div>
 
-          {task.description ? (
-            <div className="crm-team-task__notes">
-              <p className="crm-team-task__notes-label">Notes</p>
-              <p className="crm-team-task__desc">{task.description}</p>
-            </div>
-          ) : null}
-
-          <ul className="crm-team-task__facts">
-            {customerName && task.client_id ? (
-              <li>
-                <span className="crm-team-task__fact-label">Customer</span>
+            <div className="crm-team-task__meta-bar">
+              {customerName && task.client_id ? (
                 <Link
                   to={`/admin/clients/${task.client_id}`}
-                  className="crm-team-task__fact-value crm-team-task__client-link"
+                  className="crm-team-meta-chip crm-team-meta-chip--link"
                 >
                   {customerName}
                 </Link>
-              </li>
-            ) : null}
-            <li>
-              <span className="crm-team-task__fact-label">Assigned to</span>
-              <span className="crm-team-task__fact-value">
-                {task.assigned_to ? (
-                  <>
-                    <User size={14} aria-hidden />
-                    {task.assigned_to}
-                  </>
-                ) : (
-                  'Anyone on the team'
-                )}
+              ) : null}
+              <span className="crm-team-meta-chip">
+                <User size={13} aria-hidden />
+                {task.assigned_to || 'Anyone'}
               </span>
-            </li>
-            <li>
-              <span className="crm-team-task__fact-label">Priority</span>
-              <span className="crm-team-task__fact-value">
+              <span className={`crm-team-meta-chip ${taskPriorityClass(task.priority)}`}>
                 {getTaskPriorityLabel(task.priority)}
               </span>
-            </li>
-            <li>
-              <span className="crm-team-task__fact-label">Deadline</span>
-              <span className="crm-team-task__fact-value">
-                {task.due_date ? formatTeamDate(task.due_date) : 'Not set'}
-              </span>
-            </li>
-          </ul>
+              {task.due_date ? (
+                <span className={`crm-team-meta-chip ${dueDateClass(dueStatus)}`}>
+                  <CalendarClock size={13} aria-hidden />
+                  {formatTeamDate(task.due_date)}
+                </span>
+              ) : (
+                <span className="crm-team-meta-chip crm-team-meta-chip--muted">No deadline</span>
+              )}
+            </div>
 
-          <div className="crm-team-task__thread">
-            <button
-              type="button"
-              className={`crm-team-task__thread-toggle${threadOpen ? ' crm-team-task__thread-toggle--open' : ''}${hasMessages ? ' crm-team-task__thread-toggle--active' : ''}`}
-              onClick={() => setThreadOpen((v) => !v)}
-              aria-expanded={threadOpen}
-            >
-              <span className="crm-team-task__thread-icon" aria-hidden="true">
-                <MessageSquare size={17} strokeWidth={2.25} />
-              </span>
-              <span className="crm-team-task__thread-label">Team discussion</span>
-              <em className="crm-team-task__thread-meta">{messageCountLabel(messageCount)}</em>
-              <ChevronDown
-                size={18}
-                className={`crm-team-task__cover-chevron${threadOpen ? ' crm-team-task__cover-chevron--open' : ''}`}
-                aria-hidden
-              />
-            </button>
+            <div className="crm-team-task__messenger-body">
+              {task.description ? (
+                <div className="crm-team-msg crm-team-msg--pinned">
+                  <span className="crm-team-msg__pin-icon" aria-hidden="true">
+                    <MessageSquare size={14} />
+                  </span>
+                  <div className="crm-team-msg__bubble crm-team-msg__bubble--pinned">
+                    <span className="crm-team-msg__sender">Task notes</span>
+                    <p className="crm-team-msg__text">{task.description}</p>
+                  </div>
+                </div>
+              ) : null}
 
-            {threadOpen ? (
-              <div className="crm-team-task__thread-panel">
-                {loadingComments ? (
-                  <p className="crm-team-task__comments-hint">Loading messages…</p>
-                ) : null}
-                {!loadingComments && comments.length === 0 ? (
-                  <p className="crm-team-task__comments-hint">
-                    Start the conversation — check-in updates, payment reminders, or handover notes.
-                  </p>
-                ) : null}
-                <ul className="crm-team-comment-list">
-                  {comments.map((c) => (
-                    <li key={c.id} className="crm-team-comment">
-                      <span className="crm-team-comment__avatar" aria-hidden="true">
-                        {authorInitials(c.created_by_name)}
-                      </span>
+              {loadingComments ? (
+                <p className="crm-team-task__comments-hint">Loading messages…</p>
+              ) : null}
+
+              {!loadingComments && comments.length === 0 && !task.description ? (
+                <p className="crm-team-task__comments-hint crm-team-task__comments-hint--empty">
+                  No messages yet. Say hello to the team.
+                </p>
+              ) : null}
+
+              <ul className="crm-team-comment-list crm-team-comment-list--messenger">
+                {comments.map((c) => {
+                  const isOwn = Boolean(currentAgent && c.created_by_name === currentAgent)
+                  return (
+                    <li
+                      key={c.id}
+                      className={`crm-team-comment crm-team-comment--messenger${isOwn ? ' crm-team-comment--mine' : ' crm-team-comment--theirs'}`}
+                    >
+                      {!isOwn ? (
+                        <span className="crm-team-comment__avatar" aria-hidden="true">
+                          {authorInitials(c.created_by_name)}
+                        </span>
+                      ) : null}
                       <div className="crm-team-comment__bubble">
                         <div className="crm-team-comment__head">
                           <strong>{c.created_by_name}</strong>
                           <time>{formatTeamDateTime(c.created_at)}</time>
-                          <button
-                            type="button"
-                            className="crm-link-btn crm-link-btn--danger"
-                            onClick={async () => {
-                              await deleteTaskComment(c.id)
-                              setComments((prev) => {
-                                const next = prev.filter((x) => x.id !== c.id)
-                                setMessageCount(next.length)
-                                setLatestPreview(next.length ? next[next.length - 1] : null)
-                                return next
-                              })
-                            }}
-                          >
-                            Remove
-                          </button>
+                          {isOwn ? (
+                            <button
+                              type="button"
+                              className="crm-team-comment__remove"
+                              onClick={async () => {
+                                await deleteTaskComment(c.id)
+                                setComments((prev) => {
+                                  const next = prev.filter((x) => x.id !== c.id)
+                                  setMessageCount(next.length)
+                                  setLatestPreview(next.length ? next[next.length - 1] : null)
+                                  return next
+                                })
+                              }}
+                            >
+                              Remove
+                            </button>
+                          ) : null}
                         </div>
                         <p className="crm-team-comment__body">{c.body}</p>
                       </div>
+                      {isOwn ? (
+                        <span className="crm-team-comment__avatar crm-team-comment__avatar--mine" aria-hidden="true">
+                          {authorInitials(c.created_by_name)}
+                        </span>
+                      ) : null}
                     </li>
-                  ))}
-                </ul>
-                <form className="crm-team-comment-form" onSubmit={handleAddComment}>
-                  <label className="crm-team-comment-form__label">
-                    <span>Message the team</span>
-                    <textarea
-                      rows={2}
-                      placeholder="Write an update…"
-                      value={commentText}
-                      onChange={(e) => setCommentText(e.target.value)}
-                    />
-                  </label>
-                  <button
-                    disabled={posting}
-                    type="submit"
-                    className="crm-btn crm-btn-primary crm-btn--small crm-team-comment-form__send"
-                  >
-                    {posting ? 'Sending…' : 'Send'}
-                  </button>
-                </form>
-              </div>
-            ) : null}
+                  )
+                })}
+              </ul>
+            </div>
 
-            {!threadOpen && hasMessages && latestPreview ? (
-              <button
-                type="button"
-                className="crm-team-task__comments-preview"
-                onClick={() => setThreadOpen(true)}
-              >
-                <span className="crm-team-task__comments-avatar" aria-hidden="true">
-                  {authorInitials(latestPreview.created_by_name)}
-                </span>
-                <span className="crm-team-task__comments-preview-quote">
-                  <strong>{latestPreview.created_by_name}</strong>
-                  {truncateText(latestPreview.body, 120)}
-                </span>
-              </button>
-            ) : null}
+            <form className="crm-team-messenger-compose" onSubmit={handleAddComment}>
+              <div className="crm-team-messenger-compose__wrap">
+                <textarea
+                  rows={1}
+                  placeholder="Write a message…"
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault()
+                      if (commentText.trim() && !posting) handleAddComment(e)
+                    }
+                  }}
+                  aria-label="Message the team"
+                />
+                <button
+                  disabled={posting || !commentText.trim()}
+                  type="submit"
+                  className="crm-team-messenger-compose__send"
+                >
+                  {posting ? '…' : 'Send'}
+                </button>
+              </div>
+            </form>
           </div>
-        </div>
-      ) : null}
+        ) : null}
       </div>
     </article>
   )

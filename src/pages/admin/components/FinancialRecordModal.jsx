@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { EMPTY_FINANCIAL_RECORD } from '../constants'
 import {
   CURRENCY_OPTIONS,
@@ -11,6 +12,23 @@ import {
 
 function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave, saving, saveError }) {
   const [form, setForm] = useState(EMPTY_FINANCIAL_RECORD)
+
+  useEffect(() => {
+    if (!open) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [open, onClose])
 
   useEffect(() => {
     if (initialRecord) {
@@ -45,7 +63,7 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
     onSave(form)
   }
 
-  return (
+  return createPortal(
     <div className="crm-modal-backdrop crm-modal-backdrop--premium" onClick={onClose} role="presentation">
       <div
         className="crm-modal crm-modal--lead crm-modal--financial"
@@ -243,7 +261,8 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
           </button>
         </footer>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
