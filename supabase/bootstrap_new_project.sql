@@ -41,6 +41,8 @@ create table if not exists public.clients (
   date_of_issue date,
   date_of_expiry date,
   notes text,
+  client_type text not null default 'individual',
+  corporate_group_id bigint,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

@@ -30,3 +30,10 @@ export const PASSPORT_STATUS_LABELS = {
   expired: 'Expired',
   missing: 'No passport on file'
 }
+
+export const PASSPORT_STATUS_SHORT_LABELS = {
+  valid: 'Valid',
+  expiring_soon: 'Expiring',
+  expired: 'Expired',
+  missing: 'Missing'
+}

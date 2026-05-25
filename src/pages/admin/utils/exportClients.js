@@ -1,11 +1,15 @@
+import { getClientTypeLabel } from './clients'
+
 function escapeCsv(value) {
   const text = String(value ?? '')
   if (/[",\n]/.test(text)) return `"${text.replace(/"/g, '""')}"`
   return text
 }
 
-export function exportClientsToCsv(clients, filename = 'honeywell-clients.csv') {
+export function exportClientsToCsv(clients, groupNameById = {}, filename = 'honeywell-clients.csv') {
   const headers = [
+    'Category',
+    'Corporate partner',
     'Name',
     'Surname',
     'Email',
@@ -21,6 +25,8 @@ export function exportClientsToCsv(clients, filename = 'honeywell-clients.csv') 
 
   const rows = clients.map((client) =>
     [
+      getClientTypeLabel(client.client_type),
+      groupNameById[client.corporate_group_id] || '',
       client.first_name,
       client.last_name,
       client.email,

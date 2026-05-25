@@ -31,12 +31,15 @@ import TermsAndConditions from './pages/TermsAndConditions'
 import ClientProfile from './pages/admin/ClientProfile'
 import Clients from './pages/admin/Clients'
 import CorporateGroups from './pages/admin/CorporateGroups'
+import CorporateServiceContacts from './pages/admin/CorporateServiceContacts'
+import PackageCalculator from './pages/admin/PackageCalculator'
 import Dashboard from './pages/admin/Dashboard'
 import FollowUps from './pages/admin/FollowUps'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
 import Pipeline from './pages/admin/Pipeline'
 import Reports from './pages/admin/Reports'
+import GiftVouchers from './pages/admin/GiftVouchers'
 import Team from './pages/admin/Team'
 import './App.css'
 
@@ -53,8 +56,11 @@ function AppContent() {
         <Routes>
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
           <Route path="/admin/team" element={<Team />} />
           <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
+          <Route path="/admin/package-calculator" element={<PackageCalculator />} />
+          <Route path="/admin/corporate-contacts" element={<CorporateServiceContacts />} />
           <Route path="/admin/clients" element={<Clients />} />
           <Route path="/admin/clients/:id" element={<ClientProfile />} />
           <Route path="/admin/leads" element={<Leads />} />

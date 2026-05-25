@@ -57,7 +57,9 @@ export const EMPTY_CLIENT = {
   date_of_issue: '',
   date_of_expiry: '',
   date_of_birth: '',
-  notes: ''
+  notes: '',
+  client_type: 'individual',
+  corporate_group_id: ''
 }
 
 export const CORPORATE_STATUS_OPTIONS = ['Active', 'Prospect', 'On hold', 'Inactive']
@@ -91,6 +93,34 @@ export const EMPTY_CORPORATE_GROUP = {
   notes: ''
 }
 
+export const CORPORATE_SERVICE_CATEGORIES = [
+  'DMC & Destination',
+  'Hotel & Resort',
+  'Airline & Flights',
+  'Transfer & Transport',
+  'Insurance',
+  'Cruise & Ferry',
+  'Excursion & Activity',
+  'Corporate Client',
+  'Government & Embassy',
+  'Other'
+]
+
+export const EMPTY_CORPORATE_SERVICE_CONTACT = {
+  organization: '',
+  contact_name: '',
+  job_title: '',
+  category: 'DMC & Destination',
+  status: 'Active',
+  email: '',
+  phone: '',
+  mobile: '',
+  city: '',
+  country: 'Cyprus',
+  website: '',
+  notes: ''
+}
+
 export const EMPTY_TEAM_TASK = {
   title: '',
   description: '',
@@ -105,29 +135,49 @@ export const EMPTY_TEAM_TASK = {
 
 export const TEAM_TASK_QUICK_TEMPLATES = [
   {
+    id: 'checkin_finalize',
     task_type: 'check_in',
     title: 'Finalize check-in process',
-    priority: 'high'
+    subtitle: 'Complete airline check-in before the client departs',
+    descriptionHint: 'Airline, flight number, online check-in link, seat selection, baggage…',
+    priority: 'high',
+    daysOffset: 2
   },
   {
+    id: 'checkin_departure',
     task_type: 'check_in',
     title: 'Customer check-in / departure',
-    priority: 'normal'
+    subtitle: 'Day-of-travel reminder for the whole team',
+    descriptionHint: 'Departure time, airport, terminal, transfer details, emergency contact…',
+    priority: 'normal',
+    daysOffset: 0
   },
   {
+    id: 'payment_balance',
     task_type: 'payment',
     title: 'Payment due — collect balance',
-    priority: 'high'
+    subtitle: 'Chase outstanding invoice or deposit before travel',
+    descriptionHint: 'Amount due, invoice ref, payment method, due date agreed with client…',
+    priority: 'high',
+    daysOffset: 3
   },
   {
+    id: 'documents_send',
     task_type: 'documents',
     title: 'Send travel documents to client',
-    priority: 'normal'
+    subtitle: 'Tickets, vouchers, insurance, and itinerary pack',
+    descriptionHint: 'E-tickets, hotel vouchers, insurance policy, day-by-day itinerary…',
+    priority: 'normal',
+    daysOffset: 5
   },
   {
+    id: 'passport_verify',
     task_type: 'passport',
     title: 'Verify passport / ID before travel',
-    priority: 'high'
+    subtitle: 'Confirm validity, visas, and name match on booking',
+    descriptionHint: 'Passport expiry, visa requirements, name spelling vs booking, scan on file…',
+    priority: 'high',
+    daysOffset: 14
   }
 ]
 
@@ -140,10 +190,24 @@ export const EMPTY_TEAM_UPDATE = {
   link_url: ''
 }
 
+export const EMPTY_PACKAGE_QUOTE = {
+  title: '',
+  client_name: '',
+  destination: '',
+  trip_type: 'Package Holiday',
+  pax: 2,
+  currency: 'EUR',
+  target_margin_percent: 15,
+  notes: ''
+}
+
 export const ADMIN_NAV = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
   { to: '/admin/team', label: 'Team hub', icon: 'team', badgeKey: 'teamTasks' },
+  { to: '/admin/gift-vouchers', label: '🎁 Gift Vouchers', icon: 'vouchers' },
+  { to: '/admin/package-calculator', label: 'Package Calculator', icon: 'calculator', highlight: true },
   { to: '/admin/corporate-groups', label: 'Corporate', icon: 'corporate', highlight: true },
+  { to: '/admin/corporate-contacts', label: 'Corp. Services List', icon: 'corpContacts', highlight: true },
   { to: '/admin/clients', label: 'Clients', icon: 'clients' },
   { to: '/admin/leads', label: 'Leads', icon: 'leads' },
   { to: '/admin/pipeline', label: 'Pipeline', icon: 'pipeline' },

@@ -1,43 +1,22 @@
-const SECTIONS = [
-  {
-    id: 'overview',
-    title: 'Overview',
-    cards: [
-      { label: 'Total Leads', valueKey: 'total', filter: 'All' },
-      { label: 'Leads Today', valueKey: 'leadsToday' },
-      { label: 'Leads This Week', valueKey: 'leadsThisWeek' },
-    ],
-  },
-  {
-    id: 'pipeline',
-    title: 'Pipeline',
-    cards: [
-      { label: 'New', valueKey: 'newCount', filter: 'New', tone: 'new' },
-      { label: 'Contacted', valueKey: 'contacted', filter: 'Contacted', tone: 'contacted' },
-      { label: 'Quoted', valueKey: 'quoted', filter: 'Quoted', tone: 'quoted' },
-      { label: 'Confirmed', valueKey: 'confirmed', filter: 'Confirmed', tone: 'confirmed' },
-      { label: 'Lost', valueKey: 'lost', filter: 'Lost', tone: 'lost' },
-    ],
-  },
-  {
-    id: 'followups',
-    title: 'Follow-ups',
-    cards: [
-      { label: 'Due Today', valueKey: 'followUpsToday', quickFilter: 'followups_today' },
-      { label: 'Overdue', valueKey: 'overdueFollowUps', quickFilter: 'overdue' },
-      { label: 'All Due', valueKey: 'followUpsDue', quickFilter: 'followups_due' },
-    ],
-  },
-  {
-    id: 'revenue',
-    title: 'Revenue',
-    cards: [
-      { label: 'Conversion', valueKey: 'conversionRate', format: 'percent' },
-      { label: 'Pipeline Value', valueKey: 'totalPipelineValue', format: 'currency' },
-      { label: 'Confirmed', valueKey: 'confirmedRevenue', format: 'currency' },
-      { label: 'Lost', valueKey: 'lostRevenue', format: 'currency' },
-    ],
-  },
+const PIPELINE = [
+  { label: 'New', valueKey: 'newCount', filter: 'New', tone: 'new' },
+  { label: 'Contacted', valueKey: 'contacted', filter: 'Contacted', tone: 'contacted' },
+  { label: 'Quoted', valueKey: 'quoted', filter: 'Quoted', tone: 'quoted' },
+  { label: 'Confirmed', valueKey: 'confirmed', filter: 'Confirmed', tone: 'confirmed' },
+  { label: 'Lost', valueKey: 'lost', filter: 'Lost', tone: 'lost' }
+]
+
+const FOLLOWUPS = [
+  { label: 'Due today', valueKey: 'followUpsToday', quickFilter: 'followups_today' },
+  { label: 'Overdue', valueKey: 'overdueFollowUps', quickFilter: 'overdue' },
+  { label: 'All due', valueKey: 'followUpsDue', quickFilter: 'followups_due' }
+]
+
+const REVENUE = [
+  { label: 'Conversion', valueKey: 'conversionRate', format: 'percent' },
+  { label: 'Pipeline value', valueKey: 'totalPipelineValue', format: 'currency' },
+  { label: 'Confirmed', valueKey: 'confirmedRevenue', format: 'currency' },
+  { label: 'Lost', valueKey: 'lostRevenue', format: 'currency' }
 ]
 
 function formatValue(stats, card) {
@@ -47,61 +26,101 @@ function formatValue(stats, card) {
   return raw ?? 0
 }
 
+function MetricPill({ card, stats, activeStatus, activeQuickFilter, onStatusClick, onQuickFilterClick }) {
+  const isStatusActive = card.filter && activeStatus === card.filter
+  const isQuickActive = card.quickFilter && activeQuickFilter === card.quickFilter
+  const isInteractive = Boolean(card.filter || card.quickFilter)
+  const className = [
+    'crm-dash-metric',
+    card.tone ? `crm-dash-metric--${card.tone}` : '',
+    isInteractive ? 'crm-dash-metric--clickable' : '',
+    isStatusActive || isQuickActive ? 'crm-dash-metric--active' : ''
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  const handleClick = () => {
+    if (card.filter) onStatusClick?.(card.filter)
+    if (card.quickFilter) onQuickFilterClick?.(card.quickFilter)
+  }
+
+  return (
+    <article
+      className={className}
+      onClick={isInteractive ? handleClick : undefined}
+      onKeyDown={
+        isInteractive
+          ? (event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                handleClick()
+              }
+            }
+          : undefined
+      }
+      role={isInteractive ? 'button' : undefined}
+      tabIndex={isInteractive ? 0 : undefined}
+    >
+      <span className="crm-dash-metric__label">{card.label}</span>
+      <strong className="crm-dash-metric__value">{formatValue(stats, card)}</strong>
+    </article>
+  )
+}
+
 function SummaryCards({ stats, activeStatus, activeQuickFilter, onStatusClick, onQuickFilterClick }) {
   return (
-    <div className="crm-summary-sections">
-      {SECTIONS.map((section) => (
-        <section key={section.id} className="crm-summary-section">
-          <h2 className={`crm-summary-section__title crm-summary-section__title--${section.id}`}>
-            {section.title}
-          </h2>
-          <div className="crm-summary-grid">
-            {section.cards.map((card) => {
-              const isStatusActive = card.filter && activeStatus === card.filter
-              const isQuickActive = card.quickFilter && activeQuickFilter === card.quickFilter
-              const isInteractive = Boolean(card.filter || card.quickFilter)
-              const className = [
-                'crm-summary-card',
-                card.tone ? `crm-summary-card--${card.tone}` : '',
-                isInteractive ? 'crm-summary-card--clickable' : '',
-                isStatusActive || isQuickActive ? 'crm-summary-card--active' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')
+    <div className="crm-dash-metrics">
+      <section className="crm-dash-panel crm-dash-panel--pipeline-metrics">
+        <header className="crm-dash-panel__head">
+          <h3>Pipeline stages</h3>
+          <p>Click a stage to filter leads</p>
+        </header>
+        <div className="crm-dash-metrics__row">
+          {PIPELINE.map((card) => (
+            <MetricPill
+              key={card.label}
+              card={card}
+              stats={stats}
+              activeStatus={activeStatus}
+              activeQuickFilter={activeQuickFilter}
+              onStatusClick={onStatusClick}
+              onQuickFilterClick={onQuickFilterClick}
+            />
+          ))}
+        </div>
+      </section>
 
-              const handleClick = () => {
-                if (card.filter) onStatusClick?.(card.filter)
-                if (card.quickFilter) onQuickFilterClick?.(card.quickFilter)
-              }
+      <section className="crm-dash-panel crm-dash-panel--followups-metrics">
+        <header className="crm-dash-panel__head">
+          <h3>Follow-ups</h3>
+          <p>Stay on top of client contact</p>
+        </header>
+        <div className="crm-dash-metrics__row crm-dash-metrics__row--3">
+          {FOLLOWUPS.map((card) => (
+            <MetricPill
+              key={card.label}
+              card={card}
+              stats={stats}
+              activeStatus={activeStatus}
+              activeQuickFilter={activeQuickFilter}
+              onStatusClick={onStatusClick}
+              onQuickFilterClick={onQuickFilterClick}
+            />
+          ))}
+        </div>
+      </section>
 
-              return (
-                <article
-                  key={card.label}
-                  className={className}
-                  onClick={isInteractive ? handleClick : undefined}
-                  onKeyDown={
-                    isInteractive
-                      ? (event) => {
-                          if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault()
-                            handleClick()
-                          }
-                        }
-                      : undefined
-                  }
-                  role={isInteractive ? 'button' : undefined}
-                  tabIndex={isInteractive ? 0 : undefined}
-                  aria-pressed={isStatusActive || isQuickActive ? true : undefined}
-                >
-                  <p className="crm-summary-label">{card.label}</p>
-                  <h3 className="crm-summary-value">{formatValue(stats, card)}</h3>
-                  {isInteractive ? <span className="crm-summary-hint">Click to filter</span> : null}
-                </article>
-              )
-            })}
-          </div>
-        </section>
-      ))}
+      <section className="crm-dash-panel crm-dash-panel--revenue-metrics">
+        <header className="crm-dash-panel__head">
+          <h3>Revenue snapshot</h3>
+          <p>Deal value across your funnel</p>
+        </header>
+        <div className="crm-dash-metrics__row crm-dash-metrics__row--4">
+          {REVENUE.map((card) => (
+            <MetricPill key={card.label} card={card} stats={stats} />
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

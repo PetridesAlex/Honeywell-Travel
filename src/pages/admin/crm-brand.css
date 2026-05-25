@@ -198,6 +198,21 @@
   max-height: var(--hw-sidebar-logo-max-height);
 }
 
+.crm-sidebar--premium .crm-sidebar__brand-user {
+  border-color: rgba(255, 255, 255, 0.22);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 48%, rgba(211, 23, 54, 0.08) 100%);
+}
+
+.crm-sidebar--premium .crm-sidebar__brand-user-name {
+  background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+}
+
 .crm-nav-link--active {
   background: #eff6ff;
   color: var(--hw-navy);
@@ -216,15 +231,16 @@
 /* —— Page header band —— */
 .crm-header {
   background: linear-gradient(
-    135deg,
+    128deg,
     var(--hw-navy-deep) 0%,
-    var(--hw-navy) 42%,
-    var(--hw-navy-mid) 78%,
-    var(--hw-red-dark) 100%
+    var(--hw-navy) 28%,
+    var(--hw-navy-mid) 62%,
+    #3d1528 100%
   );
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.12) inset,
-    0 20px 40px rgba(21, 58, 99, 0.28);
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 24px 48px rgba(15, 35, 52, 0.22),
+    0 8px 20px rgba(181, 18, 52, 0.08);
 }
 
 /* —— Buttons —— */

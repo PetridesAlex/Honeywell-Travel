@@ -30,7 +30,7 @@ function Pipeline() {
   return (
     <AdminLayout
       title="Sales pipeline"
-      subtitle="Drag enquiries through New → Contacted → Quoted → Confirmed. Update status on each card."
+      subtitle="Live kanban board — move enquiries through each stage with smooth status updates."
       actions={
         <button type="button" className="crm-btn crm-btn-ghost crm-btn--dark" onClick={reload}>
           Refresh

@@ -5,8 +5,10 @@ import ClientFormModal from './components/ClientFormModal'
 import {
   fetchClientById,
   fetchLeadsForClient,
-  updateClient
+  updateClient,
+  friendlyClientSaveError
 } from './api/clientsApi'
+import { fetchCorporateGroupById } from './api/groupsApi'
 import ClientProfileHeader from './components/ClientProfileHeader'
 import ClientProfileDetails from './components/ClientProfileDetails'
 import ClientFinancials from './components/ClientFinancials'
@@ -17,6 +19,7 @@ function ClientProfile() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [client, setClient] = useState(null)
+  const [groupName, setGroupName] = useState('')
   const [leads, setLeads] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -34,6 +37,12 @@ function ClientProfile() {
       return
     }
     setClient(clientData)
+    if (clientData?.corporate_group_id) {
+      const { data: groupData } = await fetchCorporateGroupById(clientData.corporate_group_id)
+      setGroupName(groupData?.company_name || '')
+    } else {
+      setGroupName('')
+    }
     const { data: leadData } = await fetchLeadsForClient(id)
     setLeads(leadData || [])
     setLoading(false)
@@ -48,11 +57,17 @@ function ClientProfile() {
     setSaveError('')
     const { data, error: saveErr } = await updateClient(id, form)
     if (saveErr) {
-      setSaveError(saveErr.message)
+      setSaveError(friendlyClientSaveError(saveErr.message))
       setSaving(false)
       return
     }
     setClient(data)
+    if (data?.corporate_group_id) {
+      const { data: groupData } = await fetchCorporateGroupById(data.corporate_group_id)
+      setGroupName(groupData?.company_name || '')
+    } else {
+      setGroupName('')
+    }
     setSaving(false)
     setModalOpen(false)
   }
@@ -84,6 +99,7 @@ function ClientProfile() {
         <ClientProfileHeader
           client={client}
           leadsCount={leads.length}
+          groupName={groupName}
           onEdit={() => setModalOpen(true)}
         />
       }

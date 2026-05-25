@@ -3,9 +3,6 @@ import { createPortal } from 'react-dom'
 import { EMPTY_FINANCIAL_RECORD } from '../constants'
 import {
   CURRENCY_OPTIONS,
-  FINANCIAL_RECORD_TYPES,
-  PAYMENT_METHOD_OPTIONS,
-  PAYMENT_STATUS_OPTIONS,
   computeMargin,
   formatMoney
 } from '../utils/financials'
@@ -73,9 +70,11 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
       >
         <header className="crm-modal__hero crm-modal__hero--financial">
           <div className="crm-modal__hero-text">
-            <p className="crm-modal__eyebrow">{isEdit ? 'Accounting record' : 'New record'}</p>
-            <h3>{isEdit ? 'Edit invoice / receipt' : 'Add invoice or receipt'}</h3>
-            <p className="crm-modal__subtitle">Sell price, net cost, margin, and payments for your accountant.</p>
+            <p className="crm-modal__eyebrow">{isEdit ? 'Invoice' : 'Debit — new invoice'}</p>
+            <h3>{isEdit ? 'Edit invoice' : 'Create invoice'}</h3>
+            <p className="crm-modal__subtitle">
+              Issues a debit to the client account. Record receipts separately to reduce the balance.
+            </p>
           </div>
           <button type="button" className="crm-modal__close" onClick={onClose} aria-label="Close">
             <span aria-hidden="true">×</span>
@@ -103,22 +102,20 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
             </div>
 
             <div className="crm-form-grid crm-form-grid--modal">
-              <label className="crm-field">
-                <span className="crm-field__label">Record type</span>
-                <select value={form.record_type} onChange={(e) => handleChange('record_type', e.target.value)}>
-                  {FINANCIAL_RECORD_TYPES.map((t) => (
-                    <option key={t.id} value={t.id}>{t.label}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="crm-field">
-                <span className="crm-field__label">Invoice / receipt no.</span>
-                <input
-                  value={form.reference_no || ''}
-                  onChange={(e) => handleChange('reference_no', e.target.value)}
-                  placeholder="e.g. INV-2026-0142"
-                />
-              </label>
+              {!isEdit ? (
+                <p className="crm-form-full crm-fin-modal-hint">
+                  Invoice number is generated automatically. Payment is recorded via <strong>Record receipt</strong>.
+                </p>
+              ) : (
+                <label className="crm-field">
+                  <span className="crm-field__label">Invoice no.</span>
+                  <input
+                    value={form.reference_no || ''}
+                    onChange={(e) => handleChange('reference_no', e.target.value)}
+                    readOnly
+                  />
+                </label>
+              )}
               <label className="crm-field crm-form-full">
                 <span className="crm-field__label">Description *</span>
                 <input
@@ -149,42 +146,10 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
                 />
               </label>
               <label className="crm-field">
-                <span className="crm-field__label">Amount received</span>
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={form.amount_received}
-                  onChange={(e) => handleChange('amount_received', e.target.value)}
-                />
-              </label>
-              <label className="crm-field">
                 <span className="crm-field__label">Currency</span>
                 <select value={form.currency} onChange={(e) => handleChange('currency', e.target.value)}>
                   {CURRENCY_OPTIONS.map((c) => (
                     <option key={c} value={c}>{c}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="crm-field">
-                <span className="crm-field__label">Payment status</span>
-                <select
-                  value={form.payment_status}
-                  onChange={(e) => handleChange('payment_status', e.target.value)}
-                >
-                  {PAYMENT_STATUS_OPTIONS.map((s) => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="crm-field">
-                <span className="crm-field__label">Payment method</span>
-                <select
-                  value={form.payment_method || ''}
-                  onChange={(e) => handleChange('payment_method', e.target.value)}
-                >
-                  {PAYMENT_METHOD_OPTIONS.map((m) => (
-                    <option key={m} value={m}>{m}</option>
                   ))}
                 </select>
               </label>
@@ -210,14 +175,6 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
                   type="date"
                   value={form.due_date || ''}
                   onChange={(e) => handleChange('due_date', e.target.value)}
-                />
-              </label>
-              <label className="crm-field">
-                <span className="crm-field__label">Paid date</span>
-                <input
-                  type="date"
-                  value={form.paid_date || ''}
-                  onChange={(e) => handleChange('paid_date', e.target.value)}
                 />
               </label>
               {leads.length > 0 ? (
@@ -257,7 +214,7 @@ function FinancialRecordModal({ open, initialRecord, leads = [], onClose, onSave
             form="financial-modal-form"
             className="crm-btn crm-btn--modal-primary crm-btn--financial-save"
           >
-            {saving ? 'Saving…' : isEdit ? 'Save record' : 'Add record'}
+            {saving ? 'Saving…' : isEdit ? 'Save invoice' : 'Create invoice'}
           </button>
         </footer>
       </div>

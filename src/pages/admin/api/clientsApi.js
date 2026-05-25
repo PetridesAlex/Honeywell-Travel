@@ -1,5 +1,6 @@
 import { supabase } from '../../../lib/supabase'
 import { parseLeadName } from '../utils/leadName'
+import { normalizeClientType } from '../utils/clients'
 
 const CLIENT_COLUMNS = [
   'first_name',
@@ -11,7 +12,9 @@ const CLIENT_COLUMNS = [
   'passport_number',
   'date_of_issue',
   'date_of_expiry',
-  'notes'
+  'notes',
+  'client_type',
+  'corporate_group_id'
 ]
 
 const unsupportedColumns = new Set()
@@ -25,14 +28,30 @@ function stripNullish(payload) {
 function getMissingColumn(error) {
   const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
   const patterns = [
-    /column ["']?([a-zA-Z0-9_]+)["']?/i,
-    /Could not find the ['"]([a-zA-Z0-9_]+)['"] column/i
+    /Could not find the ['"]([a-zA-Z0-9_]+)['"] column/i,
+    /column ['"]([a-zA-Z0-9_]+)['"] of relation/i,
+    /column ['"]([a-zA-Z0-9_]+)['"] does not exist/i
   ]
   for (const pattern of patterns) {
     const match = message.match(pattern)
     if (match?.[1]) return match[1]
   }
   return null
+}
+
+export function clientSaveNeedsCategoryMigration() {
+  return unsupportedColumns.has('client_type') || unsupportedColumns.has('corporate_group_id')
+}
+
+export function friendlyClientSaveError(message) {
+  const text = String(message || '')
+  if (/client_type|corporate_group_id|schema cache/i.test(text)) {
+    return (
+      'Database update required: run supabase/fix_client_categories.sql in the Supabase SQL Editor, ' +
+      'then refresh this page and save again.'
+    )
+  }
+  return text
 }
 
 function removeUnsupported(payload) {
@@ -52,6 +71,13 @@ function normalizePhone(phone) {
 }
 
 function buildClientPayload(raw = {}) {
+  const clientType = normalizeClientType(raw.client_type)
+  const groupIdRaw = raw.corporate_group_id
+  const corporateGroupId =
+    clientType === 'group' && groupIdRaw !== '' && groupIdRaw != null
+      ? Number(groupIdRaw)
+      : null
+
   return stripNullish({
     first_name: (raw.first_name || '').trim(),
     last_name: (raw.last_name || '').trim(),
@@ -62,7 +88,9 @@ function buildClientPayload(raw = {}) {
     passport_number: (raw.passport_number || '').trim() || null,
     date_of_issue: raw.date_of_issue || null,
     date_of_expiry: raw.date_of_expiry || null,
-    notes: (raw.notes || '').trim() || null
+    notes: (raw.notes || '').trim() || null,
+    client_type: clientType,
+    corporate_group_id: Number.isFinite(corporateGroupId) ? corporateGroupId : null
   })
 }
 

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowUpRight, MapPin } from 'lucide-react'
 import AdminLayout from './components/AdminLayout'
+import DashboardHero from './components/DashboardHero'
 import SummaryCards from './components/SummaryCards'
 import LeadsPerDayChart from './components/LeadsPerDayChart'
 import PipelineFunnel from './components/PipelineFunnel'
@@ -10,7 +12,7 @@ import UpcomingDeadlines from './components/UpcomingDeadlines'
 import { buildAnalytics } from './api/analyticsApi'
 import { markFollowUpDone } from './api/leadsApi'
 import { addLeadActivity } from './api/activitiesApi'
-import { fetchClientsWithExpiringPassports } from './api/clientsApi'
+import { fetchClients, fetchClientsWithExpiringPassports } from './api/clientsApi'
 import { fetchOverdueTasksCount } from './api/teamApi'
 import { useAdminLeads } from './hooks/useAdminLeads'
 import { parseLeadName } from './utils/leadName'
@@ -21,19 +23,25 @@ function Dashboard() {
   const { leads, setLeads, loading, error, reload } = useAdminLeads()
   const [passportCounts, setPassportCounts] = useState({ expiring: 0, expired: 0 })
   const [overdueDeadlines, setOverdueDeadlines] = useState(0)
+  const [clientCount, setClientCount] = useState(0)
 
   useEffect(() => {
-    const loadPassportCounts = async () => {
-      const { data } = await fetchClientsWithExpiringPassports(90)
-      if (data) {
+    const loadExtras = async () => {
+      const [passportRes, clientsRes, overdueRes] = await Promise.all([
+        fetchClientsWithExpiringPassports(90),
+        fetchClients(),
+        fetchOverdueTasksCount()
+      ])
+      if (passportRes.data) {
         setPassportCounts({
-          expiring: data.expiring.length,
-          expired: data.expired.length
+          expiring: passportRes.data.expiring.length,
+          expired: passportRes.data.expired.length
         })
       }
+      if (!clientsRes.error) setClientCount(clientsRes.data?.length || 0)
+      if (!overdueRes.error) setOverdueDeadlines(overdueRes.count)
     }
-    loadPassportCounts()
-    fetchOverdueTasksCount().then(({ count }) => setOverdueDeadlines(count))
+    loadExtras()
   }, [loading])
 
   const stats = useMemo(() => {
@@ -75,9 +83,11 @@ function Dashboard() {
     }
   }, [leads])
 
-  const recentLeads = useMemo(() => leads.slice(0, 12), [leads])
+  const recentLeads = useMemo(() => leads.slice(0, 10), [leads])
   const followUpCounts = useMemo(() => countFollowUps(leads), [leads])
   const todayFollowUps = useMemo(() => filterFollowUps(leads, 'today').slice(0, 5), [leads])
+  const topDestinations = stats.topDestinations || []
+
   const handleMarkDone = async (id) => {
     const { data } = await markFollowUpDone(id)
     if (data) {
@@ -94,7 +104,7 @@ function Dashboard() {
   return (
     <AdminLayout
       title="Dashboard"
-      subtitle="Your travel agency command centre — pipeline, follow-ups, and new enquiries."
+      subtitle="Your travel agency command centre — leads, pipeline, clients, revenue, and team in one view."
       actions={
         <>
           <button type="button" className="crm-btn crm-btn-ghost crm-btn--dark" onClick={reload}>
@@ -106,59 +116,72 @@ function Dashboard() {
         </>
       }
     >
-      <div className="crm-quick-actions">
-        <Link to="/admin/follow-ups" className="crm-quick-card">
-          <span>Follow-ups due</span>
-          <strong>{followUpCounts.today + followUpCounts.overdue}</strong>
-          <small>{followUpCounts.overdue} overdue</small>
-        </Link>
-        <Link to="/admin/pipeline" className="crm-quick-card">
-          <span>Open pipeline</span>
-          <strong>{stats.quoted + stats.confirmed}</strong>
-          <small>Quoted + confirmed</small>
-        </Link>
-        <Link to="/admin/reports" className="crm-quick-card">
-          <span>Confirmed revenue</span>
-          <strong>€{Math.round(stats.confirmedRevenue || 0).toLocaleString()}</strong>
-          <small>View full reports</small>
-        </Link>
-        <Link to="/admin/clients?filter=expiring_soon" className="crm-quick-card">
-          <span>Passports expiring</span>
-          <strong>{passportCounts.expiring}</strong>
-          <small>Within 90 days</small>
-        </Link>
-        <Link to="/admin/clients?filter=expired" className="crm-quick-card crm-quick-card--alert">
-          <span>Expired passports</span>
-          <strong>{passportCounts.expired}</strong>
-          <small>Needs renewal</small>
-        </Link>
-        <Link to="/admin/team" className={`crm-quick-card${overdueDeadlines > 0 ? ' crm-quick-card--alert' : ''}`}>
-          <span>Overdue deadlines</span>
-          <strong>{overdueDeadlines}</strong>
-          <small>Check-ins &amp; tasks</small>
-        </Link>
-      </div>
+      <DashboardHero
+        stats={stats}
+        followUpCounts={followUpCounts}
+        passportCounts={passportCounts}
+        overdueDeadlines={overdueDeadlines}
+        clientCount={clientCount}
+      />
 
       <UpcomingDeadlines />
 
-      <div className="crm-dashboard">
-        <SummaryCards stats={stats} />
-
-        <div className="crm-insight-grid crm-insight-grid--3">
-          <section className="crm-chart-card">
-            <h3>Sales funnel</h3>
+      <div className="crm-dashboard crm-dashboard--premium">
+        <div className="crm-dash-bento">
+          <section className="crm-dash-panel crm-dash-panel--funnel">
+            <header className="crm-dash-panel__head">
+              <div>
+                <h3>Sales funnel</h3>
+                <p>Where enquiries sit in your booking journey</p>
+              </div>
+              <Link to="/admin/pipeline" className="crm-dash-panel__link">
+                Open pipeline <ArrowUpRight size={14} aria-hidden />
+              </Link>
+            </header>
             <PipelineFunnel funnel={stats.pipelineFunnel || []} />
           </section>
+
           <LeadsPerDayChart data={stats.leadsPerDay || []} />
-          <section className="crm-chart-card">
-            <h3>Leads by channel</h3>
+
+          <section className="crm-dash-panel crm-dash-panel--sources">
+            <header className="crm-dash-panel__head">
+              <div>
+                <h3>Lead channels</h3>
+                <p>Where new business is coming from</p>
+              </div>
+            </header>
             <SourceBreakdown items={stats.sourceBreakdown || []} />
           </section>
+
+          <section className="crm-dash-panel crm-dash-panel--destinations">
+            <header className="crm-dash-panel__head">
+              <div>
+                <h3>Top destinations</h3>
+                <p>Most requested travel destinations</p>
+              </div>
+            </header>
+            {topDestinations.length === 0 ? (
+              <p className="crm-muted-inline">Destination data will appear as leads come in.</p>
+            ) : (
+              <ul className="crm-dash-destinations">
+                {topDestinations.map((item, index) => (
+                  <li key={item.destination} className="crm-dash-destinations__item">
+                    <span className="crm-dash-destinations__rank">{index + 1}</span>
+                    <MapPin size={14} aria-hidden />
+                    <span className="crm-dash-destinations__name">{item.destination}</span>
+                    <strong>{item.count}</strong>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
         </div>
+
+        <SummaryCards stats={stats} />
       </div>
 
       {todayFollowUps.length > 0 ? (
-        <section className="crm-workspace">
+        <section className="crm-workspace crm-workspace--premium">
           <div className="crm-workspace__head">
             <div>
               <h2 className="crm-workspace__title">Today&apos;s follow-ups</h2>
@@ -172,34 +195,30 @@ function Dashboard() {
         </section>
       ) : null}
 
-      <section className="crm-workspace">
+      <section className="crm-workspace crm-workspace--premium">
         <div className="crm-workspace__head">
           <div>
             <h2 className="crm-workspace__title">Recent leads</h2>
-            <p className="crm-workspace__subtitle">
-              Latest enquiries with name, surname, and email saved to your database.
-            </p>
+            <p className="crm-workspace__subtitle">Latest enquiries landing in your CRM.</p>
           </div>
           <Link to="/admin/leads" className="crm-btn crm-btn-ghost crm-btn--dark">
             View all leads
           </Link>
         </div>
 
-        {loading ? <div className="crm-state">Loading dashboard...</div> : null}
+        {loading ? <div className="crm-state">Loading dashboard…</div> : null}
         {!loading && error ? <div className="crm-state crm-state-error">Error: {error}</div> : null}
         {!loading && !error && recentLeads.length === 0 ? (
           <div className="crm-state">
-            No leads yet.{' '}
-            <Link to="/admin/leads">Add your first lead</Link>.
+            No leads yet. <Link to="/admin/leads">Add your first lead</Link>.
           </div>
         ) : null}
         {!loading && !error && recentLeads.length > 0 ? (
-          <div className="crm-table-wrap">
-            <table className="crm-table">
+          <div className="crm-table-wrap crm-table-wrap--premium">
+            <table className="crm-table crm-table--premium">
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Surname</th>
                   <th>Email</th>
                   <th>Status</th>
                   <th>Source</th>
@@ -209,10 +228,12 @@ function Dashboard() {
               <tbody>
                 {recentLeads.map((lead) => {
                   const { first_name, last_name } = parseLeadName(lead)
+                  const fullName = [first_name, last_name].filter(Boolean).join(' ') || '—'
                   return (
                     <tr key={lead.id}>
-                      <td>{first_name || '—'}</td>
-                      <td>{last_name || '—'}</td>
+                      <td>
+                        <strong>{fullName}</strong>
+                      </td>
                       <td>{lead.email || '—'}</td>
                       <td>
                         <span className={`crm-status crm-status-${(lead.status || 'new').toLowerCase()}`}>

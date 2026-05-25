@@ -3,6 +3,7 @@ import { ArrowLeft, Pencil } from 'lucide-react'
 import PassportStatusBadge from './PassportStatusBadge'
 import ComposeEmailActions from './ComposeEmailActions'
 import { CRM_SENDER_EMAIL } from '../constants'
+import { clientTypeClass, getClientTypeLabel } from '../utils/clients'
 
 function clientInitials(client) {
   const first = (client.first_name || '').trim().charAt(0)
@@ -14,7 +15,7 @@ function clientFullName(client) {
   return [client.first_name, client.last_name].filter(Boolean).join(' ').trim() || 'Unnamed client'
 }
 
-function ClientProfileHeader({ client, leadsCount = 0, onEdit }) {
+function ClientProfileHeader({ client, leadsCount = 0, groupName = '', onEdit }) {
   const name = clientFullName(client)
 
   return (
@@ -36,6 +37,10 @@ function ClientProfileHeader({ client, leadsCount = 0, onEdit }) {
               Passport details, contact information, and linked enquiries.
             </p>
             <div className="crm-profile-header__meta">
+              <span className={clientTypeClass(client.client_type)}>{getClientTypeLabel(client.client_type)}</span>
+              {groupName ? (
+                <span className="crm-profile-header__chip crm-profile-header__chip--group">{groupName}</span>
+              ) : null}
               <PassportStatusBadge expiresOn={client.date_of_expiry} compact />
               <span className="crm-profile-header__chip">
                 {leadsCount} linked {leadsCount === 1 ? 'lead' : 'leads'}

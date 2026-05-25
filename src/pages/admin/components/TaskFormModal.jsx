@@ -1,10 +1,51 @@
 import { useEffect, useMemo, useState } from 'react'
+import {
+  CalendarCheck,
+  Check,
+  CreditCard,
+  FileText,
+  IdCard,
+  Plane,
+  Sparkles,
+  X
+} from 'lucide-react'
 import { EMPTY_TEAM_TASK, TEAM_TASK_QUICK_TEMPLATES } from '../constants'
 import {
+  getTaskPriorityLabel,
+  getTaskTypeLabel,
+  taskTypeClass,
   TEAM_TASK_PRIORITY_OPTIONS,
   TEAM_TASK_STATUS_OPTIONS,
   TEAM_TASK_TYPE_OPTIONS
 } from '../utils/team'
+
+const TEMPLATE_ICONS = {
+  checkin_finalize: CalendarCheck,
+  checkin_departure: Plane,
+  payment_balance: CreditCard,
+  documents_send: FileText,
+  passport_verify: IdCard
+}
+
+function formatSuggestedDate(daysOffset) {
+  const d = new Date()
+  d.setHours(0, 0, 0, 0)
+  d.setDate(d.getDate() + daysOffset)
+  return d.toISOString().slice(0, 10)
+}
+
+function formatPreviewDate(value) {
+  if (!value) return 'Pick a date below'
+  try {
+    return new Date(`${value}T12:00:00`).toLocaleDateString(undefined, {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short'
+    })
+  } catch {
+    return value
+  }
+}
 
 function TaskFormModal({
   open,
@@ -22,6 +63,7 @@ function TaskFormModal({
   saveError
 }) {
   const [form, setForm] = useState(EMPTY_TEAM_TASK)
+  const [selectedTemplateId, setSelectedTemplateId] = useState('')
 
   useEffect(() => {
     if (initialTask) {
@@ -34,6 +76,7 @@ function TaskFormModal({
         lead_id: initialTask.lead_id ?? '',
         assigned_to: initialTask.assigned_to || ''
       })
+      setSelectedTemplateId('')
       return
     }
     setForm({
@@ -43,6 +86,7 @@ function TaskFormModal({
       task_type: defaultTaskType || 'general',
       assigned_to: defaultAssignedTo || ''
     })
+    setSelectedTemplateId('')
   }, [initialTask, open, defaultClientId, defaultLeadId, defaultTaskType, defaultAssignedTo])
 
   const clientOptions = useMemo(() => {
@@ -67,18 +111,57 @@ function TaskFormModal({
     }))
   }, [leads, form.client_id])
 
+  const selectedTemplate = useMemo(
+    () => TEAM_TASK_QUICK_TEMPLATES.find((t) => t.id === selectedTemplateId) || null,
+    [selectedTemplateId]
+  )
+
   if (!open) return null
 
-  const handleChange = (key, value) => setForm((prev) => ({ ...prev, [key]: value }))
+  const handleChange = (key, value) => {
+    setForm((prev) => ({ ...prev, [key]: value }))
+    if (key === 'title' || key === 'task_type') {
+      setSelectedTemplateId('')
+    }
+  }
+
   const isEdit = Boolean(initialTask?.id)
   const isClientDeadline = Boolean(defaultClientId || form.client_id)
 
   const applyTemplate = (template) => {
+    const isActive = selectedTemplateId === template.id
+    if (isActive) {
+      setSelectedTemplateId('')
+      setForm((prev) => ({
+        ...EMPTY_TEAM_TASK,
+        client_id: prev.client_id,
+        lead_id: prev.lead_id,
+        assigned_to: prev.assigned_to,
+        status: prev.status
+      }))
+      return
+    }
+
+    setSelectedTemplateId(template.id)
     setForm((prev) => ({
       ...prev,
       task_type: template.task_type,
       title: template.title,
-      priority: template.priority || prev.priority
+      priority: template.priority || prev.priority,
+      description: template.descriptionHint || '',
+      due_date:
+        template.daysOffset != null ? formatSuggestedDate(template.daysOffset) : prev.due_date
+    }))
+  }
+
+  const clearTemplate = () => {
+    setSelectedTemplateId('')
+    setForm((prev) => ({
+      ...EMPTY_TEAM_TASK,
+      client_id: prev.client_id,
+      lead_id: prev.lead_id,
+      assigned_to: prev.assigned_to,
+      status: prev.status
     }))
   }
 
@@ -106,21 +189,80 @@ function TaskFormModal({
           className="crm-modal__body"
         >
           {!isEdit ? (
-            <div className="crm-deadline-templates">
-              <span className="crm-deadline-templates__label">Quick add</span>
-              <div className="crm-deadline-templates__chips">
-                {TEAM_TASK_QUICK_TEMPLATES.map((t) => (
-                  <button
-                    key={t.title}
-                    type="button"
-                    className="crm-chip crm-chip--template"
-                    onClick={() => applyTemplate(t)}
-                  >
-                    {t.title}
+            <section className="crm-deadline-picker" aria-label="Quick start templates">
+              <div className="crm-deadline-picker__head">
+                <div className="crm-deadline-picker__intro">
+                  <span className="crm-deadline-picker__intro-icon" aria-hidden="true">
+                    <Sparkles size={18} strokeWidth={2.2} />
+                  </span>
+                  <div>
+                    <h4 className="crm-deadline-picker__title">Quick start templates</h4>
+                    <p className="crm-deadline-picker__hint">
+                      Tap a card to auto-fill type, title, notes, and a suggested deadline — then tweak anything below.
+                    </p>
+                  </div>
+                </div>
+                {selectedTemplateId ? (
+                  <button type="button" className="crm-deadline-picker__clear" onClick={clearTemplate}>
+                    <X size={14} aria-hidden />
+                    Clear
                   </button>
-                ))}
+                ) : null}
               </div>
-            </div>
+
+              <div className="crm-deadline-picker__grid">
+                {TEAM_TASK_QUICK_TEMPLATES.map((template) => {
+                  const Icon = TEMPLATE_ICONS[template.id] || CalendarCheck
+                  const isActive = selectedTemplateId === template.id
+                  return (
+                    <button
+                      key={template.id}
+                      type="button"
+                      className={`crm-deadline-picker__card crm-deadline-picker__card--${template.task_type}${isActive ? ' crm-deadline-picker__card--active' : ''}`}
+                      onClick={() => applyTemplate(template)}
+                      aria-pressed={isActive}
+                    >
+                      <span className="crm-deadline-picker__icon-wrap" aria-hidden="true">
+                        <Icon size={18} strokeWidth={2.1} />
+                      </span>
+                      <span className={`crm-deadline-picker__type ${taskTypeClass(template.task_type)}`}>
+                        {getTaskTypeLabel(template.task_type)}
+                      </span>
+                      <strong className="crm-deadline-picker__card-title">{template.title}</strong>
+                      <span className="crm-deadline-picker__card-sub">{template.subtitle}</span>
+                      <span className="crm-deadline-picker__card-meta">
+                        {template.daysOffset === 0
+                          ? 'Due today'
+                          : template.daysOffset === 1
+                            ? 'Due tomorrow'
+                            : `Suggested in ${template.daysOffset} days`}
+                        · {getTaskPriorityLabel(template.priority)}
+                      </span>
+                      {isActive ? (
+                        <span className="crm-deadline-picker__check" aria-hidden="true">
+                          <Check size={14} strokeWidth={3} />
+                        </span>
+                      ) : null}
+                    </button>
+                  )
+                })}
+              </div>
+
+              {selectedTemplate ? (
+                <div className="crm-deadline-picker__preview" role="status">
+                  <span className="crm-deadline-picker__preview-label">Ready to save</span>
+                  <p className="crm-deadline-picker__preview-copy">
+                    <strong>{form.title}</strong>
+                    <span>
+                      {getTaskTypeLabel(form.task_type)} · {formatPreviewDate(form.due_date)} ·{' '}
+                      {getTaskPriorityLabel(form.priority)} priority
+                    </span>
+                  </p>
+                </div>
+              ) : (
+                <p className="crm-deadline-picker__empty">Or skip templates and fill in the form manually below.</p>
+              )}
+            </section>
           ) : null}
 
           <div className="crm-form-grid crm-form-grid--modal">
@@ -214,5 +356,6 @@ function TaskFormModal({
     </div>
   )
 }
+
 
 export default TaskFormModal

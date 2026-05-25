@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import {
   BarChart3,
   Building2,
   CalendarClock,
+  ContactRound,
   Kanban,
   LayoutDashboard,
+  Calculator,
   ClipboardList,
+  Gift,
   LogOut,
   UserCircle,
   Users
@@ -23,16 +26,32 @@ import '../Leads.css'
 const ICONS = {
   dashboard: LayoutDashboard,
   corporate: Building2,
+  corpContacts: ContactRound,
   clients: UserCircle,
   leads: Users,
   pipeline: Kanban,
   followups: CalendarClock,
   reports: BarChart3,
-  team: ClipboardList
+  team: ClipboardList,
+  vouchers: Gift,
+  calculator: Calculator
+}
+
+function adminInitials(name) {
+  const parts = String(name || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+  if (parts.length >= 2) {
+    return `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase()
+  }
+  const single = parts[0] || '?'
+  return single.slice(0, 2).toUpperCase()
 }
 
 function AdminLayout({ title, subtitle, actions, header, children }) {
   const navigate = useNavigate()
+  const location = useLocation()
   const [checkingAuth, setCheckingAuth] = useState(true)
   const [followUpBadge, setFollowUpBadge] = useState(0)
   const [passportBadge, setPassportBadge] = useState(0)
@@ -100,6 +119,15 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
     [followUpBadge, passportBadge, teamTaskBadge]
   )
 
+  const currentNav = useMemo(() => {
+    const path = location.pathname
+    return [...ADMIN_NAV]
+      .sort((a, b) => b.to.length - a.to.length)
+      .find((item) => path === item.to || path.startsWith(`${item.to}/`))
+  }, [location.pathname])
+
+  const PageIcon = currentNav ? ICONS[currentNav.icon] : LayoutDashboard
+
   const handleSignOut = async () => {
     await supabase.auth.signOut()
     navigate('/admin/login', { replace: true })
@@ -130,8 +158,13 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
             <p className="crm-sidebar__brand-tagline">CRM Workspace</p>
             {welcomeName ? (
               <div className="crm-sidebar__brand-user">
-                <span className="crm-sidebar__brand-user-label">Welcome back</span>
-                <span className="crm-sidebar__brand-user-name">{welcomeName}</span>
+                <span className="crm-sidebar__brand-user-avatar" aria-hidden="true">
+                  {adminInitials(welcomeName)}
+                </span>
+                <div className="crm-sidebar__brand-user-copy">
+                  <span className="crm-sidebar__brand-user-label">Welcome back</span>
+                  <span className="crm-sidebar__brand-user-name">{welcomeName}</span>
+                </div>
               </div>
             ) : null}
           </div>
@@ -166,12 +199,29 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
 
         <div className="crm-shell__main">
           {header ?? (
-            <header className="crm-header">
-              <div className="crm-header__main">
-                <h1>{title}</h1>
-                {subtitle ? <p className="crm-muted crm-header__subtitle">{subtitle}</p> : null}
+            <header className="crm-header crm-header--premium">
+              <div className="crm-header__mesh" aria-hidden="true" />
+              <div className="crm-header__glow crm-header__glow--gold" aria-hidden="true" />
+              <div className="crm-header__glow crm-header__glow--red" aria-hidden="true" />
+
+              <div className="crm-header__inner">
+                <div className="crm-header__main">
+                  <p className="crm-header__eyebrow">Honeywell Travel · CRM workspace</p>
+                  <div className="crm-header__title-row">
+                    <span className="crm-header__page-icon" aria-hidden="true">
+                      <PageIcon size={22} strokeWidth={1.85} />
+                    </span>
+                    <h1 className="crm-header__title">{title}</h1>
+                  </div>
+                  {subtitle ? <p className="crm-header__subtitle">{subtitle}</p> : null}
+                </div>
+
+                {actions ? (
+                  <div className="crm-header-actions">
+                    <div className="crm-header-actions__toolbar">{actions}</div>
+                  </div>
+                ) : null}
               </div>
-              {actions ? <div className="crm-header-actions">{actions}</div> : null}
             </header>
           )}
           {children}

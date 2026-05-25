@@ -1,6 +1,6 @@
 export const FINANCIAL_RECORD_TYPES = [
-  { id: 'invoice', label: 'Invoice (issued to client)' },
-  { id: 'receipt', label: 'Receipt (payment received)' },
+  { id: 'invoice', label: 'Invoice (debit — client owes)' },
+  { id: 'receipt', label: 'Receipt (credit — payment received)' },
   { id: 'booking', label: 'Booking / package' }
 ]
 
@@ -48,12 +48,50 @@ export function computeOutstanding(sellPrice, amountReceived) {
   return Math.max(0, parseMoney(sellPrice) - parseMoney(amountReceived))
 }
 
+export function sumPayments(payments = []) {
+  return payments.reduce((sum, p) => sum + parseMoney(p.amount), 0)
+}
+
+export function derivePaymentStatus(record, payments = []) {
+  const sell = parseMoney(record?.sell_price)
+  const received = sumPayments(payments)
+  if (sell <= 0 && received <= 0) return record?.payment_status || 'pending'
+  if (received >= sell && sell > 0) return 'paid'
+  if (received > 0) return 'partial'
+  const due = record?.due_date ? new Date(record.due_date) : null
+  if (due && due < new Date() && received < sell) return 'overdue'
+  return 'pending'
+}
+
+export function computeAccountBalance(ledgerEntries = []) {
+  return ledgerEntries.reduce((balance, row) => {
+    const amount = parseMoney(row.amount)
+    if (row.entry_type === 'debit') return balance + amount
+    if (row.entry_type === 'credit') return balance - amount
+    return balance
+  }, 0)
+}
+
+export function summarizeLedger(ledgerEntries = []) {
+  const totals = ledgerEntries.reduce(
+    (acc, row) => {
+      const amount = parseMoney(row.amount)
+      if (row.entry_type === 'debit') acc.totalDebit += amount
+      if (row.entry_type === 'credit') acc.totalCredit += amount
+      return acc
+    },
+    { totalDebit: 0, totalCredit: 0 }
+  )
+  totals.balance = totals.totalDebit - totals.totalCredit
+  return totals
+}
+
 export function summarizeFinancialRecords(records = [], currency = 'EUR') {
   const totals = records.reduce(
     (acc, row) => {
       const sell = parseMoney(row.sell_price)
       const net = parseMoney(row.net_price)
-      const received = parseMoney(row.amount_received)
+      const received = parseMoney(row.amount_received ?? sumPayments(row.payments))
       const margin = parseMoney(row.margin ?? sell - net)
       acc.totalSell += sell
       acc.totalNet += net
@@ -72,10 +110,23 @@ export function summarizeFinancialRecords(records = [], currency = 'EUR') {
     }
   )
 
-  totals.marginPercent =
-    totals.totalSell > 0 ? (totals.totalMargin / totals.totalSell) * 100 : 0
+  totals.marginPercent = totals.totalSell > 0 ? (totals.totalMargin / totals.totalSell) * 100 : 0
 
   return totals
+}
+
+export function generateAccountNumber(clientId) {
+  return `HW-CL-${String(clientId).padStart(5, '0')}`
+}
+
+export function generateInvoiceReference(existingCount = 0) {
+  const year = new Date().getFullYear()
+  return `INV-${year}-${String(existingCount + 1).padStart(4, '0')}`
+}
+
+export function generateReceiptReference(existingCount = 0) {
+  const year = new Date().getFullYear()
+  return `REC-${year}-${String(existingCount + 1).padStart(4, '0')}`
 }
 
 export function paymentStatusClass(status) {
@@ -85,4 +136,21 @@ export function paymentStatusClass(status) {
 
 export function recordTypeLabel(type) {
   return FINANCIAL_RECORD_TYPES.find((t) => t.id === type)?.label || type || 'Record'
+}
+
+export function ledgerEntryLabel(type) {
+  return type === 'debit' ? 'Debit (invoice)' : 'Credit (receipt)'
+}
+
+export function formatShortDate(value) {
+  if (!value) return '—'
+  try {
+    return new Date(value).toLocaleDateString(undefined, {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    })
+  } catch {
+    return '—'
+  }
 }

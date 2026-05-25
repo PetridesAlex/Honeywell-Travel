@@ -60,6 +60,7 @@ Otherwise run these migrations in the Supabase SQL editor:
 - **Accounting not loading?** Run once: `supabase/fix_client_financials.sql`
 - **Team hub not loading?** Run once: `supabase/fix_team_hub.sql`
 - **Team post images / links?** Run once: `supabase/fix_team_update_media.sql` (columns + `team-media` storage bucket)
+- **Client categories (Individual / Group)?** Run once: `supabase/fix_client_categories.sql` — fixes `Could not find the 'client_type' column` when saving clients
 - **"Bucket not found" when uploading an image?** You did not create Storage yet. Run `fix_team_update_media.sql`, or in Supabase go to **Storage** → **New bucket** → name `team-media` → enable **Public bucket**, then add the policies from that SQL file. Until then, paste the image address into **Image URL** (not Link URL) and leave Upload empty.
 - **Deadline types / check-in tasks?** Run once: `supabase/fix_team_task_types.sql`
 
@@ -152,3 +153,15 @@ Open **Team hub** in the sidebar:
 - Pin important posts to the top
 
 Run `supabase/fix_team_hub.sql` once if you see a missing-table error.
+
+### Gift Vouchers
+
+Open **🎁 Gift Vouchers** in the sidebar for the full voucher workspace:
+
+- **Dashboard** — active vouchers, revenue, unpaid balances, expiries
+- **Create Voucher** — honeymoon/birthday templates, receiver account, group contributors
+- **Voucher Accounts** — receiver profiles with voucher history
+- **Voucher Payments** — payment timeline and who still owes
+- **Voucher Reports** — export-style summary by type and status
+
+Run `supabase/fix_gift_vouchers.sql` once if you see a missing-table error.
