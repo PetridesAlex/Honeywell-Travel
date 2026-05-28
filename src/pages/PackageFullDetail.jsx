@@ -1909,6 +1909,7 @@ function PackageFullDetail() {
             <button className="modal-close-btn" onClick={() => setShowReserveModal(false)}>×</button>
             
             <div className="modal-header">
+              <p className="modal-eyebrow">Honeywell Travel</p>
               <h2>Reservation Request</h2>
               <p className="modal-subtitle">Please provide your contact information to complete your reservation</p>
             </div>
@@ -1926,7 +1927,9 @@ function PackageFullDetail() {
               return (
                 <>
                   <div className="reservation-summary">
-                    <h3 className="summary-title">Your Selection</h3>
+                    <div className="reservation-summary-header">
+                      <h3 className="summary-title">Your Selection</h3>
+                    </div>
                     <div className="summary-content">
                       <div className="summary-item">
                         <span className="summary-label">Package</span>
@@ -1947,8 +1950,8 @@ function PackageFullDetail() {
                         <span className="summary-value">
                           {selection.roomType.charAt(0).toUpperCase() + selection.roomType.slice(1)}
                           {selectedHotel && selectedHotel.prices && selectedHotel.prices[selection.roomType] && (
-                            <span style={{ fontSize: '0.85rem', color: '#6b7280', marginLeft: '0.5rem', fontWeight: '400' }}>
-                              (€{selectedHotel.prices[selection.roomType]}/person)
+                            <span className="summary-value-note">
+                              €{selectedHotel.prices[selection.roomType]}/person
                             </span>
                           )}
                         </span>

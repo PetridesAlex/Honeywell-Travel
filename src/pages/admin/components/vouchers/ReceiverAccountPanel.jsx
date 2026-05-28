@@ -411,7 +411,7 @@ function ReceiverAccountPanel({
               </p>
               <button
                 type="button"
-                className="crm-btn crm-btn-ghost crm-btn--sm"
+                className="crm-btn crm-btn-primary crm-btn--sm crm-receiver-account__open-details"
                 onClick={() => onOpenVoucher?.(primaryVoucher)}
               >
                 <ExternalLink size={14} aria-hidden />

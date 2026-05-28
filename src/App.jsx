@@ -32,6 +32,7 @@ import ClientProfile from './pages/admin/ClientProfile'
 import Clients from './pages/admin/Clients'
 import CorporateGroups from './pages/admin/CorporateGroups'
 import CorporateServiceContacts from './pages/admin/CorporateServiceContacts'
+import ServicesDashboard from './pages/admin/ServicesDashboard'
 import PackageCalculator from './pages/admin/PackageCalculator'
 import Dashboard from './pages/admin/Dashboard'
 import FollowUps from './pages/admin/FollowUps'
@@ -60,6 +61,7 @@ function AppContent() {
           <Route path="/admin/signup" element={<Signup />} />
           <Route path="/admin/forgot-password" element={<ForgotPassword />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/services-hub" element={<ServicesDashboard />} />
           <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
           <Route path="/admin/team" element={<Team />} />
           <Route path="/admin/corporate-groups" element={<CorporateGroups />} />

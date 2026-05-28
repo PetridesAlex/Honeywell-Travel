@@ -15,8 +15,11 @@ function clientFullName(client) {
   return [client.first_name, client.last_name].filter(Boolean).join(' ').trim() || 'Unnamed client'
 }
 
-function ClientProfileHeader({ client, leadsCount = 0, groupName = '', onEdit }) {
+function ClientProfileHeader({ client, leadsCount = 0, travelStats = null, groupName = '', onEdit }) {
   const name = clientFullName(client)
+  const lifetimeTrips = travelStats?.lifetimeTrips ?? 0
+  const tripsThisYear = travelStats?.tripsThisYear ?? 0
+  const currentYear = travelStats?.currentYear ?? new Date().getFullYear()
 
   return (
     <header className="crm-profile-header">
@@ -44,6 +47,12 @@ function ClientProfileHeader({ client, leadsCount = 0, groupName = '', onEdit })
               <PassportStatusBadge expiresOn={client.date_of_expiry} compact />
               <span className="crm-profile-header__chip">
                 {leadsCount} linked {leadsCount === 1 ? 'lead' : 'leads'}
+              </span>
+              <span className="crm-profile-header__chip crm-profile-header__chip--travel">
+                {lifetimeTrips} Honeywell {lifetimeTrips === 1 ? 'trip' : 'trips'}
+              </span>
+              <span className="crm-profile-header__chip crm-profile-header__chip--travel-year">
+                {tripsThisYear} in {currentYear}
               </span>
               <span className="crm-profile-header__chip">ID #{client.id}</span>
               {client.email ? (

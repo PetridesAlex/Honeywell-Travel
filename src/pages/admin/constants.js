@@ -121,6 +121,14 @@ export const EMPTY_CORPORATE_SERVICE_CONTACT = {
   notes: ''
 }
 
+export const EMPTY_SERVICE_PROFILE = {
+  company_name: '',
+  contact_name: '',
+  email: '',
+  phone: '',
+  country: 'Cyprus'
+}
+
 export const EMPTY_TEAM_TASK = {
   title: '',
   description: '',
@@ -203,6 +211,7 @@ export const EMPTY_PACKAGE_QUOTE = {
 
 export const ADMIN_NAV = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
+  { to: '/admin/services-hub', label: 'Services Hub', icon: 'servicesHub', highlight: true },
   { to: '/admin/team', label: 'Team hub', icon: 'team', badgeKey: 'teamTasks' },
   { to: '/admin/gift-vouchers', label: '🎁 Gift Vouchers', icon: 'vouchers' },
   { to: '/admin/package-calculator', label: 'Package Calculator', icon: 'calculator', highlight: true },

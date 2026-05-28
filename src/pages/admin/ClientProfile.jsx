@@ -13,7 +13,9 @@ import ClientProfileHeader from './components/ClientProfileHeader'
 import ClientProfileDetails from './components/ClientProfileDetails'
 import ClientFinancials from './components/ClientFinancials'
 import ClientDeadlines from './components/ClientDeadlines'
+import ClientTravelHistory from './components/ClientTravelHistory'
 import './Leads.css'
+import { getClientTravelStats } from './utils/clientTrips'
 
 function ClientProfile() {
   const { id } = useParams()
@@ -92,6 +94,7 @@ function ClientProfile() {
   }
 
   const clientName = [client.first_name, client.last_name].filter(Boolean).join(' ').trim()
+  const travelStats = getClientTravelStats(leads)
 
   return (
     <AdminLayout
@@ -99,6 +102,7 @@ function ClientProfile() {
         <ClientProfileHeader
           client={client}
           leadsCount={leads.length}
+          travelStats={travelStats}
           groupName={groupName}
           onEdit={() => setModalOpen(true)}
         />
@@ -108,6 +112,8 @@ function ClientProfile() {
         <section className="crm-workspace crm-workspace--profile-details">
           <ClientProfileDetails client={client} clientName={clientName} />
         </section>
+
+        <ClientTravelHistory leads={leads} />
 
         <ClientFinancials clientId={client.id} leads={leads} />
 

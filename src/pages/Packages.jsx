@@ -280,17 +280,16 @@ function Packages() {
         {/* Results Section */}
         <div className="packages-results">
           <div className="results-header">
-            <h2 className="results-title">
-              {category !== 'Any' ? (
-                <>
-                  {category} - {filteredPackages.length} {filteredPackages.length === 1 ? 'Package' : 'Packages'} Found
-                </>
-              ) : (
-                <>
-                  {filteredPackages.length} {filteredPackages.length === 1 ? 'Package' : 'Packages'} Found
-                </>
-              )}
-            </h2>
+            <div className="results-title-block">
+              <h2 className="results-title">
+                <span className="results-title-category">
+                  {category !== 'Any' ? category : 'All Packages'}
+                </span>
+                <span className="results-title-count" aria-label={`${filteredPackages.length} packages found`}>
+                  {filteredPackages.length} {filteredPackages.length === 1 ? 'package' : 'packages'} found
+                </span>
+              </h2>
+            </div>
             {(category !== 'Any' || destination !== 'Any' || minPrice || maxPrice || departureMonth !== 'Any' || travelType !== 'Any') && (
               <div className="active-filters">
                 {category !== 'Any' && (

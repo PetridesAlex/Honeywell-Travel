@@ -149,24 +149,30 @@ function VoucherDetailModal({ open, voucher, onClose, onUpdated }) {
 
   return createPortal(
     <>
-      <div className="crm-modal-backdrop crm-modal-backdrop--voucher" onClick={onClose} aria-hidden="true" />
-      <div className="crm-modal crm-modal--voucher" role="dialog" aria-modal="true" aria-labelledby="voucher-detail-title">
-        <header className="crm-modal__header crm-modal__header--voucher">
-          <div>
-            <p className="crm-voucher-detail__eyebrow">
-              {getVoucherTypeEmoji(voucher.voucher_type)} {voucher.voucher_code}
-            </p>
-            <h2 id="voucher-detail-title" className="crm-modal__title">
-              {voucher.voucher_title}
-            </h2>
-            <span className={voucherStatusClass(voucher.status)}>{voucherStatusLabel(voucher.status)}</span>
-          </div>
-          <button type="button" className="crm-modal__close" onClick={onClose} aria-label="Close">
-            <X size={20} />
-          </button>
-        </header>
+      <div className="crm-modal-backdrop crm-modal-backdrop--voucher" onClick={onClose} role="presentation">
+        <div
+          className="crm-modal crm-modal--voucher"
+          onClick={(event) => event.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="voucher-detail-title"
+        >
+          <header className="crm-modal__header crm-modal__header--voucher">
+            <div className="crm-modal__header-copy">
+              <p className="crm-voucher-detail__eyebrow">
+                {getVoucherTypeEmoji(voucher.voucher_type)} {voucher.voucher_code}
+              </p>
+              <h2 id="voucher-detail-title" className="crm-modal__title">
+                {voucher.voucher_title}
+              </h2>
+              <span className={voucherStatusClass(voucher.status)}>{voucherStatusLabel(voucher.status)}</span>
+            </div>
+            <button type="button" className="crm-modal__close crm-modal__close--voucher" onClick={onClose} aria-label="Close">
+              <X size={20} />
+            </button>
+          </header>
 
-        <div className="crm-modal__body crm-voucher-detail">
+          <div className="crm-modal__body crm-voucher-detail">
           {error ? <p className="crm-state crm-state-error">{error}</p> : null}
 
           <section className="crm-voucher-detail__grid">
@@ -239,7 +245,7 @@ function VoucherDetailModal({ open, voucher, onClose, onUpdated }) {
                 Add sender
               </button>
             </div>
-            <div className="crm-table-wrap">
+            <div className="crm-table-wrap crm-table-wrap--vouchers">
               <table className="crm-table crm-table--vouchers">
                 <thead>
                   <tr>
@@ -368,18 +374,31 @@ function VoucherDetailModal({ open, voucher, onClose, onUpdated }) {
               ))}
             </ol>
           </section>
+          </div>
         </div>
       </div>
 
       {senderForm ? (
-        <div className="crm-modal crm-modal--nested crm-modal--sender" role="dialog" aria-modal="true">
-          <header className="crm-modal__header">
-            <h3>{senderForm.id ? 'Edit contributor' : 'Add contributor'}</h3>
-            <button type="button" className="crm-modal__close" onClick={() => setSenderForm(null)} aria-label="Close">
-              <X size={18} />
-            </button>
-          </header>
-          <div className="crm-modal__body">
+        <div
+          className="crm-modal-backdrop crm-modal-backdrop--voucher crm-modal-backdrop--nested"
+          onClick={() => setSenderForm(null)}
+          role="presentation"
+        >
+          <div
+            className="crm-modal crm-modal--nested crm-modal--sender"
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <header className="crm-modal__header crm-modal__header--voucher">
+              <div className="crm-modal__header-copy">
+                <h3 className="crm-modal__title">{senderForm.id ? 'Edit contributor' : 'Add contributor'}</h3>
+              </div>
+              <button type="button" className="crm-modal__close crm-modal__close--voucher" onClick={() => setSenderForm(null)} aria-label="Close">
+                <X size={18} />
+              </button>
+            </header>
+            <div className="crm-modal__body">
             <div className="crm-form-grid">
               <label className="crm-field">
                 <span>Full name</span>
@@ -471,6 +490,7 @@ function VoucherDetailModal({ open, voucher, onClose, onUpdated }) {
               <button type="button" className="crm-btn crm-btn-primary" disabled={saving} onClick={handleSaveSender}>
                 Save contributor
               </button>
+            </div>
             </div>
           </div>
         </div>

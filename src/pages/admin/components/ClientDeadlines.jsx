@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CalendarClock, Plus } from 'lucide-react'
 import TaskFormModal from './TaskFormModal'
@@ -13,7 +13,7 @@ import {
 } from '../api/teamApi'
 import { supabase } from '../../../lib/supabase'
 import { getAdminDisplayName } from '../utils/adminUser'
-import { isTaskOpen } from '../utils/team'
+import { formatTeamDate, isTaskOpen } from '../utils/team'
 
 function ClientDeadlines({ clientId, clientName, leads = [] }) {
   const [tasks, setTasks] = useState([])
@@ -26,6 +26,11 @@ function ClientDeadlines({ clientId, clientName, leads = [] }) {
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
   const [clients, setClients] = useState([])
+  const [showCheckInPicker, setShowCheckInPicker] = useState(false)
+  const [checkInDate, setCheckInDate] = useState('')
+  const [quickSaving, setQuickSaving] = useState(false)
+  const [quickError, setQuickError] = useState('')
+  const [newlyAddedId, setNewlyAddedId] = useState(null)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -59,6 +64,56 @@ function ClientDeadlines({ clientId, clientName, leads = [] }) {
   }, [])
 
   const [pendingType, setPendingType] = useState('check_in')
+
+  const feedTasks = useMemo(() => {
+    return [...tasks].sort((a, b) => {
+      const aTime = a.created_at ? new Date(a.created_at).getTime() : 0
+      const bTime = b.created_at ? new Date(b.created_at).getTime() : 0
+      if (aTime !== bTime) return bTime - aTime
+      return (b.due_date || '').localeCompare(a.due_date || '')
+    })
+  }, [tasks])
+
+  const openCheckInPicker = () => {
+    setQuickError('')
+    setShowCheckInPicker(true)
+  }
+
+  const handleQuickCheckIn = async (event) => {
+    event.preventDefault()
+    if (!checkInDate) {
+      setQuickError('Please choose a check-in date.')
+      return
+    }
+
+    setQuickSaving(true)
+    setQuickError('')
+    const label = clientName || 'this client'
+    const formattedDate = formatTeamDate(checkInDate)
+    const payload = {
+      title: `Check-in reminder — ${formattedDate}`,
+      description: `Check-in for ${label} on ${formattedDate}.`,
+      status: 'todo',
+      priority: 'high',
+      task_type: 'check_in',
+      due_date: checkInDate,
+      client_id: clientId,
+      assigned_to: currentAgent
+    }
+
+    const { data, error: saveErr } = await createTeamTask(payload)
+    if (saveErr) {
+      setQuickError(saveErr.message)
+      setQuickSaving(false)
+      return
+    }
+
+    setTasks((prev) => [data, ...prev])
+    setNewlyAddedId(data.id)
+    setCheckInDate('')
+    setShowCheckInPicker(false)
+    setQuickSaving(false)
+  }
 
   const openCreate = (taskType = 'check_in') => {
     setSaveError('')
@@ -130,14 +185,14 @@ function ClientDeadlines({ clientId, clientName, leads = [] }) {
             Deadlines &amp; check-ins
           </h2>
           <p className="crm-workspace__subtitle">
-            Set dates for check-in, payments, and documents for {clientName || 'this client'} — all agents can see them on Team hub.
+            Pick a check-in date to add a reminder for {clientName || 'this client'}. Team messages appear below like a chat feed.
           </p>
         </div>
         <div className="crm-deadline-actions">
           <button
             type="button"
             className="crm-btn crm-btn-primary crm-btn--small"
-            onClick={() => openCreate('check_in')}
+            onClick={openCheckInPicker}
           >
             <Plus size={15} aria-hidden />
             Check-in deadline
@@ -148,12 +203,46 @@ function ClientDeadlines({ clientId, clientName, leads = [] }) {
         </div>
       </div>
 
+      {showCheckInPicker ? (
+        <form className="crm-checkin-quick" onSubmit={handleQuickCheckIn}>
+          <div className="crm-checkin-quick__copy">
+            <strong>Add check-in reminder</strong>
+            <span>Choose a date — it will appear in the feed below for the whole team.</span>
+          </div>
+          <label className="crm-checkin-quick__field">
+            <span className="crm-checkin-quick__label">Check-in date</span>
+            <input
+              type="date"
+              value={checkInDate}
+              onChange={(event) => setCheckInDate(event.target.value)}
+              required
+            />
+          </label>
+          <div className="crm-checkin-quick__actions">
+            <button type="submit" className="crm-btn crm-btn-primary crm-btn--small" disabled={quickSaving}>
+              {quickSaving ? 'Saving…' : 'Add reminder'}
+            </button>
+            <button
+              type="button"
+              className="crm-btn crm-btn-ghost crm-btn--dark crm-btn--small"
+              onClick={() => {
+                setShowCheckInPicker(false)
+                setQuickError('')
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+          {quickError ? <p className="crm-checkin-quick__error">{quickError}</p> : null}
+        </form>
+      ) : null}
+
       {loading ? <div className="crm-state">Loading deadlines…</div> : null}
       {!loading && error ? <div className="crm-state crm-state-error">{error}</div> : null}
 
       {!loading && !error && tasks.length === 0 ? (
         <div className="crm-state crm-deadline-empty">
-          No deadlines yet. Add a check-in date so the team remembers when to finalize travel.
+          No reminders yet. Click <strong>Check-in deadline</strong>, pick a date, and add it to the feed.
         </div>
       ) : null}
 
@@ -163,8 +252,8 @@ function ClientDeadlines({ clientId, clientName, leads = [] }) {
             {openCount} open · {tasks.length} total — also on{' '}
             <Link to="/admin/team">Team hub</Link>
           </p>
-          <div className="crm-team-task-list crm-team-task-list--compact">
-            {tasks.map((task) => (
+          <div className="crm-team-task-list crm-team-task-list--client-feed">
+            {feedTasks.map((task) => (
               <TeamTaskCard
                 key={task.id}
                 task={task}
@@ -172,7 +261,7 @@ function ClientDeadlines({ clientId, clientName, leads = [] }) {
                 onEdit={openEdit}
                 onDelete={handleDelete}
                 onStatusChange={handleStatusChange}
-                compact
+                defaultOpen={task.id === newlyAddedId}
               />
             ))}
           </div>

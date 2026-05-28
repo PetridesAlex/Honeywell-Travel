@@ -1,24 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Building2, Download, Mail, RefreshCw, Trash2, UserRound, Users } from 'lucide-react'
+import { Building2, Download, RefreshCw, UserRound, Users } from 'lucide-react'
 import AdminLayout from './components/AdminLayout'
 import ClientFormModal from './components/ClientFormModal'
-import PassportStatusBadge from './components/PassportStatusBadge'
-import ComposeEmailActions from './components/ComposeEmailActions'
-import { createClient, deleteClient, fetchClients, updateClient, friendlyClientSaveError } from './api/clientsApi'
+import { createClient, fetchClients, updateClient, friendlyClientSaveError } from './api/clientsApi'
 import { fetchCorporateGroups } from './api/groupsApi'
 import { exportClientsToCsv } from './utils/exportClients'
 import {
-  CLIENT_TYPE_OPTIONS,
-  clientMatchesCategory,
-  clientTypeClass,
   countClientsByType,
   getClientTypeLabel,
+  clientMatchesCategory,
   normalizeClientType
 } from './utils/clients'
-import { getPassportStatus, maskPassportNumber } from './utils/passport'
-import { getComposeLinks } from './utils/composeEmail'
-import { useAdminLeads } from './hooks/useAdminLeads'
+import { getPassportStatus } from './utils/passport'
 import './Leads.css'
 
 function clientInitials(client) {
@@ -29,10 +23,6 @@ function clientInitials(client) {
 
 function clientFullName(client) {
   return [client.first_name, client.last_name].filter(Boolean).join(' ').trim() || 'Unnamed client'
-}
-
-function TableEmpty({ children = '—' }) {
-  return <span className="crm-table-empty">{children}</span>
 }
 
 const CATEGORY_FILTERS = [
@@ -50,7 +40,6 @@ const PASSPORT_FILTERS = [
 
 function Clients() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { leads, reload: reloadLeads } = useAdminLeads(false)
   const [clients, setClients] = useState([])
   const [groups, setGroups] = useState([])
   const [loading, setLoading] = useState(true)
@@ -63,7 +52,6 @@ function Clients() {
   const [defaultClientType, setDefaultClientType] = useState('individual')
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
-  const [updatingCategoryId, setUpdatingCategoryId] = useState(null)
 
   const loadClients = async () => {
     setLoading(true)
@@ -84,7 +72,6 @@ function Clients() {
 
   useEffect(() => {
     loadClients()
-    reloadLeads()
   }, [])
 
   useEffect(() => {
@@ -107,14 +94,6 @@ function Clients() {
   }, [groups])
 
   const categoryCounts = useMemo(() => countClientsByType(clients), [clients])
-
-  const leadCountByClient = useMemo(() => {
-    const map = {}
-    leads.forEach((lead) => {
-      if (lead.client_id) map[lead.client_id] = (map[lead.client_id] || 0) + 1
-    })
-    return map
-  }, [leads])
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase()
@@ -182,36 +161,6 @@ function Clients() {
     setSelectedClient(null)
   }
 
-  const handleCategoryChange = async (client, nextType) => {
-    const normalized = normalizeClientType(nextType)
-    if (normalizeClientType(client.client_type) === normalized) return
-
-    setUpdatingCategoryId(client.id)
-    const payload = {
-      ...client,
-      client_type: normalized,
-      corporate_group_id: normalized === 'group' ? client.corporate_group_id || '' : ''
-    }
-    const { data, error: updateError } = await updateClient(client.id, payload)
-    setUpdatingCategoryId(null)
-
-    if (updateError) {
-      setError(updateError.message)
-      return
-    }
-    if (data) setClients((prev) => prev.map((item) => (item.id === client.id ? data : item)))
-  }
-
-  const handleDelete = async (client) => {
-    if (!window.confirm(`Delete profile for ${client.first_name} ${client.last_name}?`)) return
-    const { error: deleteError } = await deleteClient(client.id)
-    if (deleteError) {
-      setError(deleteError.message)
-      return
-    }
-    setClients((prev) => prev.filter((item) => item.id !== client.id))
-  }
-
   return (
     <AdminLayout
       title="Clients"
@@ -240,7 +189,7 @@ function Clients() {
       <section className="crm-workspace crm-workspace--clients">
         <div className="crm-clients-toolbar">
           <p className="crm-clients-toolbar__hint">
-            <strong>Categories</strong> filter the list below. Use the table to view profiles or change a client&apos;s type.
+            <strong>{filtered.length}</strong> client{filtered.length === 1 ? '' : 's'} shown. Click a profile to open full details.
           </p>
           <div className="crm-clients-toolbar__actions">
             <button
@@ -333,134 +282,27 @@ function Clients() {
         ) : null}
 
         {!loading && !error && filtered.length > 0 ? (
-          <div className="crm-table-wrap crm-table-wrap--clients">
-            <table className="crm-table crm-table--clients">
-              <thead>
-                <tr>
-                  <th>Client</th>
-                  <th>Category</th>
-                  <th>Contact</th>
-                  <th>Nationality</th>
-                  <th>Passport</th>
-                  <th>Expiry</th>
-                  <th>Passport status</th>
-                  <th className="crm-table--clients__col-leads">Leads</th>
-                  <th className="crm-table--clients__col-actions">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((client) => {
-                  const name = clientFullName(client)
-                  const leadCount = leadCountByClient[client.id] || 0
-                  const passportStatus = getPassportStatus(client.date_of_expiry)
-                  const mailto = client.email
-                    ? getComposeLinks({ to: client.email, recipientName: name }).mailto
-                    : null
-                  const groupName = groupNameById[client.corporate_group_id]
-                  const typeKey = normalizeClientType(client.client_type)
+          <div className="crm-client-profile-grid" role="list" aria-label="Client profiles">
+            {filtered.map((client) => {
+              const name = clientFullName(client)
+              const passportStatus = getPassportStatus(client.date_of_expiry)
+              const typeKey = normalizeClientType(client.client_type)
 
-                  return (
-                    <tr key={client.id} className={`crm-client-row crm-client-row--${passportStatus} crm-client-row--${typeKey}`}>
-                      <td className="crm-client-row__identity-cell">
-                        <Link to={`/admin/clients/${client.id}`} className="crm-client-row__identity">
-                          <span className="crm-client-row__avatar" aria-hidden="true">
-                            {clientInitials(client)}
-                          </span>
-                          <span className="crm-client-row__name-block">
-                            <span className="crm-client-row__name">{name}</span>
-                            <span className="crm-client-row__id">Profile #{client.id}</span>
-                            {groupName ? (
-                              <span className="crm-client-row__group-name">{groupName}</span>
-                            ) : null}
-                          </span>
-                        </Link>
-                      </td>
-                      <td className="crm-client-row__category-cell">
-                        <select
-                          className={`crm-client-category-select ${clientTypeClass(client.client_type)}`}
-                          value={typeKey}
-                          disabled={updatingCategoryId === client.id}
-                          onChange={(e) => handleCategoryChange(client, e.target.value)}
-                          aria-label={`Category for ${name}`}
-                        >
-                          {CLIENT_TYPE_OPTIONS.map((option) => (
-                            <option key={option.id} value={option.id}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                      <td className="crm-client-row__contact-cell">
-                        {client.email ? (
-                          <a className="crm-client-row__email" href={mailto}>
-                            <Mail size={14} aria-hidden />
-                            {client.email}
-                          </a>
-                        ) : (
-                          <TableEmpty>No email</TableEmpty>
-                        )}
-                        {client.phone ? (
-                          <span className="crm-client-row__phone">{client.phone}</span>
-                        ) : null}
-                      </td>
-                      <td>{client.nationality ? <span>{client.nationality}</span> : <TableEmpty />}</td>
-                      <td className="crm-client-row__passport-cell">
-                        {client.passport_number ? (
-                          <code className="crm-client-row__passport">{maskPassportNumber(client.passport_number)}</code>
-                        ) : (
-                          <TableEmpty>Not on file</TableEmpty>
-                        )}
-                      </td>
-                      <td className="crm-client-row__expiry-cell">
-                        {client.date_of_expiry ? (
-                          <time dateTime={client.date_of_expiry}>
-                            {new Date(client.date_of_expiry).toLocaleDateString(undefined, {
-                              day: 'numeric',
-                              month: 'short',
-                              year: 'numeric'
-                            })}
-                          </time>
-                        ) : (
-                          <TableEmpty />
-                        )}
-                      </td>
-                      <td>
-                        <PassportStatusBadge expiresOn={client.date_of_expiry} compact />
-                      </td>
-                      <td className="crm-client-row__leads-cell">
-                        <span
-                          className={`crm-client-row__leads-pill${leadCount > 0 ? ' crm-client-row__leads-pill--active' : ''}`}
-                        >
-                          {leadCount}
-                        </span>
-                      </td>
-                      <td className="crm-client-row__actions-cell">
-                        <div className="crm-client-row__actions">
-                          <ComposeEmailActions to={client.email} recipientName={name} variant="compact" />
-                          <Link
-                            to={`/admin/clients/${client.id}`}
-                            className="crm-client-row__action crm-client-row__action--view"
-                            title="View profile"
-                          >
-                            <UserRound size={15} aria-hidden />
-                            <span>View</span>
-                          </Link>
-                          <button
-                            type="button"
-                            className="crm-client-row__action crm-client-row__action--delete"
-                            onClick={() => handleDelete(client)}
-                            title="Delete client"
-                          >
-                            <Trash2 size={15} aria-hidden />
-                            <span>Delete</span>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+              return (
+                <Link
+                  key={client.id}
+                  to={`/admin/clients/${client.id}`}
+                  className={`crm-client-profile-card crm-client-profile-card--${passportStatus} crm-client-profile-card--${typeKey}`}
+                  role="listitem"
+                  title={`Open profile for ${name}`}
+                >
+                  <span className="crm-client-profile-card__avatar" aria-hidden="true">
+                    {clientInitials(client)}
+                  </span>
+                  <span className="crm-client-profile-card__name">{name}</span>
+                </Link>
+              )
+            })}
           </div>
         ) : null}
       </section>

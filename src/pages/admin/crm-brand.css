@@ -58,6 +58,16 @@
   z-index: 1;
 }
 
+.crm-page h1,
+.crm-page h2 {
+  font-family: inherit;
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 1.35;
+}
+
 .crm-page .crm-shell,
 .crm-page .crm-shell__main {
   position: relative;

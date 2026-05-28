@@ -6,8 +6,10 @@ import {
   CalendarClock,
   ContactRound,
   Kanban,
+  Layers,
   LayoutDashboard,
   Calculator,
+  ChevronRight,
   ClipboardList,
   Gift,
   LogOut,
@@ -25,6 +27,7 @@ import '../Leads.css'
 
 const ICONS = {
   dashboard: LayoutDashboard,
+  servicesHub: Layers,
   corporate: Building2,
   corpContacts: ContactRound,
   clients: UserCircle,
@@ -171,19 +174,23 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
 
           <p className="crm-sidebar__section">Menu</p>
           <nav className="crm-sidebar__nav" aria-label="Admin navigation">
-            {navItems.map(({ to, label, Icon, badge, icon, highlight }) => (
+            {navItems.map(({ to, label, Icon, badge, icon, highlight }, index) => (
               <NavLink
                 key={to}
                 to={to}
                 className={({ isActive }) =>
                   `crm-nav-link crm-nav-link--${icon}${highlight ? ' crm-nav-link--featured' : ''}${isActive ? ' crm-nav-link--active' : ''}`
                 }
+                style={{ '--nav-index': index }}
               >
+                <span className="crm-nav-link__indicator" aria-hidden="true" />
+                <span className="crm-nav-link__glow" aria-hidden="true" />
                 <span className="crm-nav-link__icon-wrap">
                   <Icon size={18} strokeWidth={2.2} aria-hidden />
                 </span>
                 <span className="crm-nav-link__label">{label}</span>
                 {badge > 0 ? <em className="crm-nav-badge">{badge > 99 ? '99+' : badge}</em> : null}
+                <ChevronRight className="crm-nav-link__chevron" size={16} strokeWidth={2.25} aria-hidden />
               </NavLink>
             ))}
           </nav>
@@ -209,7 +216,7 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
                   <p className="crm-header__eyebrow">Honeywell Travel · CRM workspace</p>
                   <div className="crm-header__title-row">
                     <span className="crm-header__page-icon" aria-hidden="true">
-                      <PageIcon size={22} strokeWidth={1.85} />
+                      <PageIcon size={24} strokeWidth={1.85} />
                     </span>
                     <h1 className="crm-header__title">{title}</h1>
                   </div>

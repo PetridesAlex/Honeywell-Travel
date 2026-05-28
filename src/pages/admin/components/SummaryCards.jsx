@@ -12,18 +12,8 @@ const FOLLOWUPS = [
   { label: 'All due', valueKey: 'followUpsDue', quickFilter: 'followups_due' }
 ]
 
-const REVENUE = [
-  { label: 'Conversion', valueKey: 'conversionRate', format: 'percent' },
-  { label: 'Pipeline value', valueKey: 'totalPipelineValue', format: 'currency' },
-  { label: 'Confirmed', valueKey: 'confirmedRevenue', format: 'currency' },
-  { label: 'Lost', valueKey: 'lostRevenue', format: 'currency' }
-]
-
 function formatValue(stats, card) {
-  const raw = stats[card.valueKey]
-  if (card.format === 'percent') return `${raw}%`
-  if (card.format === 'currency') return `€${Math.round(raw || 0).toLocaleString()}`
-  return raw ?? 0
+  return stats[card.valueKey] ?? 0
 }
 
 function MetricPill({ card, stats, activeStatus, activeQuickFilter, onStatusClick, onQuickFilterClick }) {
@@ -106,18 +96,6 @@ function SummaryCards({ stats, activeStatus, activeQuickFilter, onStatusClick, o
               onStatusClick={onStatusClick}
               onQuickFilterClick={onQuickFilterClick}
             />
-          ))}
-        </div>
-      </section>
-
-      <section className="crm-dash-panel crm-dash-panel--revenue-metrics">
-        <header className="crm-dash-panel__head">
-          <h3>Revenue snapshot</h3>
-          <p>Deal value across your funnel</p>
-        </header>
-        <div className="crm-dash-metrics__row crm-dash-metrics__row--4">
-          {REVENUE.map((card) => (
-            <MetricPill key={card.label} card={card} stats={stats} />
           ))}
         </div>
       </section>

@@ -137,7 +137,7 @@ This newsletter subscription was submitted through the Honeywell Travel website 
       </div>
 
       <div className="footer-bottom">
-        <p>Honeywell Travel | Copyright 2024 All Rights Reserved</p>
+        <p>Honeywell Travel | Copyright 2026 All Rights Reserved</p>
         <div className="footer-bottom-content">
           <div className="footer-social-icons">
             <a 

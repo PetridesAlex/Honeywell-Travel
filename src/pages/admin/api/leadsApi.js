@@ -9,11 +9,12 @@ const optionalColumns = [
   'priority',
   'package_interest',
   'client_id',
-  'follow_up_date'
+  'follow_up_date',
+  'trip_completed_date'
 ]
 let clientsJoinSupported = true
 
-const LEAD_DATE_FIELDS = new Set(['follow_up_date'])
+const LEAD_DATE_FIELDS = new Set(['follow_up_date', 'trip_completed_date'])
 
 const LEAD_PAYLOAD_KEYS = [
   'first_name',
@@ -35,7 +36,8 @@ const LEAD_PAYLOAD_KEYS = [
   'notes',
   'follow_up_date',
   'assigned_agent',
-  'client_id'
+  'client_id',
+  'trip_completed_date'
 ]
 
 function stripNullish(payload) {
@@ -183,12 +185,20 @@ export async function fetchLeads() {
   return { data: data || [], error }
 }
 
+function enrichConfirmedTripPayload(payload = {}) {
+  const next = { ...payload }
+  if (next.status === 'Confirmed' && !next.trip_completed_date) {
+    next.trip_completed_date = new Date().toISOString().slice(0, 10)
+  }
+  return next
+}
+
 export async function createLead(payload) {
-  return insertWithFallback(payload)
+  return insertWithFallback(enrichConfirmedTripPayload(payload))
 }
 
 export async function updateLead(id, payload) {
-  return updateWithFallback(id, payload)
+  return updateWithFallback(enrichConfirmedTripPayload(payload))
 }
 
 export async function deleteLead(id) {

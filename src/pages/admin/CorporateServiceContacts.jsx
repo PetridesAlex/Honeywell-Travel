@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   Building2,
   ContactRound,
@@ -27,44 +28,25 @@ import {
   updateCorporateServiceContact
 } from './api/corporateContactsApi'
 import { CORPORATE_SERVICE_CATEGORIES } from './constants'
+import {
+  buildServiceCategoryCounts,
+  getServiceCategoryMeta,
+  serviceCategoryBadgeClass,
+  serviceContactInitials
+} from './utils/serviceCategories'
 import './Leads.css'
-
-const CATEGORY_META = {
-  'DMC & Destination': { icon: MapPin, tone: 'gold' },
-  'Hotel & Resort': { icon: Building2, tone: 'navy' },
-  'Airline & Flights': { icon: Plane, tone: 'sky' },
-  'Transfer & Transport': { icon: Globe, tone: 'purple' },
-  Insurance: { icon: Shield, tone: 'green' },
-  'Cruise & Ferry': { icon: Ship, tone: 'teal' },
-  'Excursion & Activity': { icon: Umbrella, tone: 'orange' },
-  'Corporate Client': { icon: Users, tone: 'red' },
-  'Government & Embassy': { icon: Landmark, tone: 'slate' },
-  Other: { icon: Sparkles, tone: 'gray' }
-}
 
 function statusBadgeClass(status) {
   const key = (status || 'Active').toLowerCase().replace(/\s+/g, '_')
   return `crm-corp-status crm-corp-status--${key}`
 }
 
-function categoryBadgeClass(category) {
-  const key = (category || 'other').toLowerCase().replace(/[^a-z0-9]+/g, '_')
-  return `crm-svc-cat crm-svc-cat--${key}`
-}
-
-function contactInitials(contact) {
-  const name = (contact.contact_name || contact.organization || '?').trim()
-  const parts = name.split(/\s+/).filter(Boolean)
-  if (parts.length >= 2) return `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase()
-  return name.slice(0, 2).toUpperCase()
-}
-
 function ContactAvatar({ contact, size = 'md' }) {
-  const meta = CATEGORY_META[contact.category] || CATEGORY_META.Other
+  const meta = getServiceCategoryMeta(contact.category)
   const Icon = meta.icon
   return (
     <span className={`crm-svc-avatar crm-svc-avatar--${size} crm-svc-avatar--${meta.tone}`} aria-hidden="true">
-      <span className="crm-svc-avatar__letters">{contactInitials(contact)}</span>
+      <span className="crm-svc-avatar__letters">{serviceContactInitials(contact)}</span>
       <span className="crm-svc-avatar__badge">
         <Icon size={10} strokeWidth={2.5} />
       </span>
@@ -135,7 +117,7 @@ function CorpContactsHero({ contacts, counts, filter, onFilter, onAdd, onOpenCon
               </span>
             </button>
             {CORPORATE_SERVICE_CATEGORIES.map((cat) => {
-              const meta = CATEGORY_META[cat] || CATEGORY_META.Other
+              const meta = getServiceCategoryMeta(cat)
               const Icon = meta.icon
               return (
                 <button
@@ -192,7 +174,7 @@ function CorpContactsHero({ contacts, counts, filter, onFilter, onAdd, onOpenCon
                       <strong>{contact.contact_name || contact.organization}</strong>
                       <span>{contact.organization}</span>
                     </span>
-                    <span className={categoryBadgeClass(contact.category)}>{contact.category.split(' ')[0]}</span>
+                    <span className={serviceCategoryBadgeClass(contact.category)}>{contact.category.split(' ')[0]}</span>
                   </button>
                   <button
                     type="button"
@@ -214,11 +196,12 @@ function CorpContactsHero({ contacts, counts, filter, onFilter, onAdd, onOpenCon
 }
 
 function CorporateServiceContacts() {
+  const location = useLocation()
   const [contacts, setContacts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState(location.state?.filter || 'all')
   const [modalOpen, setModalOpen] = useState(false)
   const [selected, setSelected] = useState(null)
   const [saving, setSaving] = useState(false)
@@ -242,13 +225,11 @@ function CorporateServiceContacts() {
     load()
   }, [])
 
-  const counts = useMemo(() => {
-    const map = { all: contacts.length }
-    CORPORATE_SERVICE_CATEGORIES.forEach((cat) => {
-      map[cat] = contacts.filter((c) => c.category === cat).length
-    })
-    return map
-  }, [contacts])
+  useEffect(() => {
+    if (location.state?.filter) setFilter(location.state.filter)
+  }, [location.state?.filter])
+
+  const counts = useMemo(() => buildServiceCategoryCounts(contacts), [contacts])
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase()
@@ -416,7 +397,7 @@ function CorporateServiceContacts() {
         {!loading && !error && filtered.length > 0 && view === 'list' ? (
           <ul className="crm-svc-list">
             {filtered.map((contact) => {
-              const meta = CATEGORY_META[contact.category] || CATEGORY_META.Other
+              const meta = getServiceCategoryMeta(contact.category)
               const CatIcon = meta.icon
               return (
                 <li key={contact.id} className="crm-svc-list__item">
@@ -488,7 +469,7 @@ function CorporateServiceContacts() {
                       {contact.job_title ? ` · ${contact.job_title}` : ''}
                     </p>
                   </div>
-                  <span className={categoryBadgeClass(contact.category)}>{contact.category}</span>
+                  <span className={serviceCategoryBadgeClass(contact.category)}>{contact.category}</span>
                 </div>
                 <dl className="crm-corp-card__details">
                   <div>
@@ -554,7 +535,7 @@ function CorporateServiceContacts() {
                       </div>
                     </td>
                     <td>{contact.organization}</td>
-                    <td><span className={categoryBadgeClass(contact.category)}>{contact.category}</span></td>
+                    <td><span className={serviceCategoryBadgeClass(contact.category)}>{contact.category}</span></td>
                     <td>{contact.email || '—'}</td>
                     <td>{contact.phone || contact.mobile || '—'}</td>
                     <td>{[contact.city, contact.country].filter(Boolean).join(', ') || '—'}</td>
