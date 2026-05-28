@@ -60,6 +60,8 @@ function createMockSupabase() {
       getSession: async () => ({ data: { session: null }, error: buildConfigError() }),
       getUser: async () => ({ data: { user: null }, error: buildConfigError() }),
       signInWithPassword: async () => ({ data: null, error: buildConfigError() }),
+      signUp: async () => ({ data: null, error: buildConfigError() }),
+      resetPasswordForEmail: async () => ({ data: null, error: buildConfigError() }),
       signOut: async () => ({ error: null })
     },
     channel() {

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { CRM_ADMIN_LOGIN_EMAIL, CRM_SENDER_EMAIL } from './constants'
 import { getAdminAuthErrorMessage, isSupabaseConfigured, supabase } from '../../lib/supabase'
 import './Login.css'
@@ -12,12 +13,15 @@ const syncInputValue = (setter) => (event) => {
 
 function Login() {
   const navigate = useNavigate()
+  const captchaRef = useRef(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [checkingSession, setCheckingSession] = useState(true)
   const [error, setError] = useState('')
+  const [captchaToken, setCaptchaToken] = useState('')
+  const hCaptchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY
 
   useEffect(() => {
     const checkSession = async () => {
@@ -51,6 +55,12 @@ function Login() {
       return
     }
 
+    if (!hCaptchaSiteKey) {
+      setError('Admin login is unavailable: missing VITE_HCAPTCHA_SITE_KEY in your environment.')
+      setLoading(false)
+      return
+    }
+
     const form = event.currentTarget
     const formData = new FormData(form)
     const emailInput = form.querySelector('#admin-email')
@@ -70,16 +80,27 @@ function Login() {
       return
     }
 
+    if (!captchaToken) {
+      setError('Please complete the security check before continuing.')
+      setLoading(false)
+      return
+    }
+
     setEmail(emailValue)
     setPassword(passwordValue)
 
     const { data, error: signInError } = await supabase.auth.signInWithPassword({
       email: emailValue,
       password: passwordValue,
+      options: {
+        captchaToken,
+      },
     })
 
     if (signInError) {
       setError(getAdminAuthErrorMessage(signInError))
+      captchaRef.current?.resetCaptcha()
+      setCaptchaToken('')
       setLoading(false)
       return
     }
@@ -187,6 +208,16 @@ function Login() {
                   </button>
                 </div>
 
+                <div className="admin-auth-captcha-wrap">
+                  <HCaptcha
+                    sitekey={hCaptchaSiteKey ?? ''}
+                    onVerify={setCaptchaToken}
+                    onExpire={() => setCaptchaToken('')}
+                    onError={() => setCaptchaToken('')}
+                    ref={captchaRef}
+                  />
+                </div>
+
                 {error ? <p className="admin-auth-error">{error}</p> : null}
 
                 <button type="submit" className="admin-auth-submit" disabled={loading}>
@@ -199,6 +230,15 @@ function Login() {
               Sign in with <strong>{CRM_ADMIN_LOGIN_EMAIL}</strong>. Customer emails send from{' '}
               <strong>{CRM_SENDER_EMAIL}</strong> via Outlook.
             </p>
+
+            <div className="admin-auth-links">
+              <Link to="/admin/forgot-password" className="admin-auth-back">
+                Forgot password?
+              </Link>
+              <Link to="/admin/signup" className="admin-auth-back">
+                Create admin account
+              </Link>
+            </div>
 
             <div className="admin-auth-footer">
               <Link to="/" className="admin-auth-back">

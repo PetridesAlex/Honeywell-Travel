@@ -37,6 +37,8 @@ import Dashboard from './pages/admin/Dashboard'
 import FollowUps from './pages/admin/FollowUps'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
+import Signup from './pages/admin/Signup'
+import ForgotPassword from './pages/admin/ForgotPassword'
 import Pipeline from './pages/admin/Pipeline'
 import Reports from './pages/admin/Reports'
 import GiftVouchers from './pages/admin/GiftVouchers'
@@ -55,6 +57,8 @@ function AppContent() {
       <main className="main-content">
         <Routes>
           <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/signup" element={<Signup />} />
+          <Route path="/admin/forgot-password" element={<ForgotPassword />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
           <Route path="/admin/team" element={<Team />} />
