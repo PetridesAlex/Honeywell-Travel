@@ -1,7 +1,29 @@
+import { useEffect, useRef, useState } from 'react'
 import ParallaxCards from './ParallaxCards'
 import './CircularGallery.css'
 
 function CircularGallery() {
+  const headerRef = useRef(null)
+  const [headerVisible, setHeaderVisible] = useState(false)
+
+  useEffect(() => {
+    const node = headerRef.current
+    if (!node) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -40px 0px' }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
   const images = [
     { id: 1, src: '/images/destinations/iceland.webp', title: 'Iceland' },
     { id: 2, src: '/images/destinations/thailand.webp', title: 'Thailand' },
@@ -17,11 +39,18 @@ function CircularGallery() {
 
   return (
     <div className="circular-gallery">
-      <div className="circular-gallery-topline">Explore Worldwide</div>
-      <h2 className="circular-gallery-title">Signature Destinations</h2>
-      <p className="circular-gallery-subtitle">
-        Move your cursor through the gallery and click a card to focus on each destination.
-      </p>
+      <div
+        ref={headerRef}
+        className={`circular-gallery-header${headerVisible ? ' circular-gallery-header--visible' : ''}`}
+      >
+        <div className="circular-gallery-topline">
+          <span className="circular-gallery-topline__text">Explore Worldwide</span>
+        </div>
+        <h2 className="circular-gallery-title">Signature Destinations</h2>
+        <p className="circular-gallery-subtitle">
+          Move your cursor through the gallery and click a card to focus on each destination.
+        </p>
+      </div>
 
       <ParallaxCards
         images={images}
