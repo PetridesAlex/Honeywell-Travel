@@ -6,8 +6,10 @@ import {
   fetchClientById,
   fetchLeadsForClient,
   updateClient,
+  deleteClient,
   friendlyClientSaveError
 } from './api/clientsApi'
+import ConfirmDialog from './components/ConfirmDialog'
 import { fetchCorporateGroupById } from './api/groupsApi'
 import ClientProfileHeader from './components/ClientProfileHeader'
 import ClientProfileDetails from './components/ClientProfileDetails'
@@ -28,6 +30,9 @@ function ClientProfile() {
   const [modalOpen, setModalOpen] = useState(false)
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
 
   const load = async () => {
     setLoading(true)
@@ -74,6 +79,18 @@ function ClientProfile() {
     setModalOpen(false)
   }
 
+  const handleDeleteClient = async () => {
+    setDeleting(true)
+    setDeleteError('')
+    const { error: deleteErr } = await deleteClient(id)
+    if (deleteErr) {
+      setDeleteError(deleteErr.message)
+      setDeleting(false)
+      return
+    }
+    navigate('/admin/clients')
+  }
+
   if (loading) {
     return (
       <AdminLayout title="Client profile" subtitle="Loading...">
@@ -105,9 +122,17 @@ function ClientProfile() {
           travelStats={travelStats}
           groupName={groupName}
           onEdit={() => setModalOpen(true)}
+          onDelete={() => {
+            setDeleteError('')
+            setDeleteOpen(true)
+          }}
         />
       }
     >
+      {deleteError ? (
+        <div className="crm-state crm-state-error" role="alert">{deleteError}</div>
+      ) : null}
+
       <div className="crm-profile-grid">
         <section className="crm-workspace crm-workspace--profile-details">
           <ClientProfileDetails client={client} clientName={clientName} />
@@ -171,6 +196,28 @@ function ClientProfile() {
         onSave={handleSave}
         saving={saving}
         saveError={saveError}
+      />
+
+      <ConfirmDialog
+        open={deleteOpen}
+        title="Are you sure you want to delete this contact?"
+        description={
+          clientName
+            ? `${clientName} will be permanently removed.${
+                leads.length > 0
+                  ? ` ${leads.length} linked ${leads.length === 1 ? 'lead will' : 'leads will'} stay in the system but will no longer be linked to this contact.`
+                  : ''
+              } Financial records for this contact will also be deleted. This cannot be undone.`
+            : 'This contact will be permanently removed along with their financial records. This cannot be undone.'
+        }
+        onCancel={() => {
+          setDeleteOpen(false)
+          setDeleteError('')
+        }}
+        onConfirm={handleDeleteClient}
+        confirming={deleting}
+        confirmLabel="Yes, delete contact"
+        eyebrow="Delete contact"
       />
     </AdminLayout>
   )

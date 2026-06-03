@@ -332,6 +332,17 @@
   background: linear-gradient(135deg, var(--hw-navy-deep) 0%, var(--hw-navy) 50%, #92400e 100%);
 }
 
+.crm-modal__hero--confirm {
+  background: linear-gradient(
+    128deg,
+    var(--hw-navy-deep) 0%,
+    var(--hw-navy) 38%,
+    var(--hw-navy-mid) 72%,
+    var(--hw-red-dark) 100%
+  );
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
 /* —— Client profile hero —— */
 .crm-client-hero {
   background: linear-gradient(

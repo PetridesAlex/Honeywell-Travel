@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Mail } from 'lucide-react'
+import { Globe, Mail } from 'lucide-react'
 import { CRM_SENDER_EMAIL } from '../constants'
 import { getComposeLinks, openMailtoCompose, openOutlookWebCompose } from '../utils/composeEmail'
 
@@ -34,6 +34,16 @@ function ComposeEmailActions({
     if (variant === 'header') {
       return (
         <p className="crm-compose-email crm-compose-email--header-disabled">No email on file for this client.</p>
+      )
+    }
+    if (variant === 'card') {
+      return (
+        <div className="crm-compose-email crm-compose-email--card crm-compose-email--card-disabled">
+          <div className="crm-compose-email__card-head">
+            <span className="crm-compose-email__card-label">Reply to client</span>
+          </div>
+          <p className="crm-compose-email__card-empty">No email on file for this client.</p>
+        </div>
       )
     }
     return (
@@ -94,6 +104,41 @@ function ComposeEmailActions({
             rel="noreferrer"
             title={`${fromHint} (Outlook Web)`}
           >
+            Outlook Web
+          </a>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'card') {
+    return (
+      <div className="crm-compose-email crm-compose-email--card">
+        <div className="crm-compose-email__card-head">
+          <span className="crm-compose-email__card-label">Reply to client</span>
+          <span className="crm-compose-email__card-from" title={fromHint}>
+            From <strong>{CRM_SENDER_EMAIL}</strong>
+          </span>
+        </div>
+        <div className="crm-compose-email__card-actions">
+          <a
+            className="crm-compose-email__card-btn crm-compose-email__card-btn--primary"
+            href={links.mailto}
+            onClick={handleMailto}
+            title={fromHint}
+          >
+            <Mail size={16} aria-hidden />
+            Send email
+          </a>
+          <a
+            className="crm-compose-email__card-btn crm-compose-email__card-btn--outlook"
+            href={links.outlookWeb}
+            onClick={handleOutlookWeb}
+            target="_blank"
+            rel="noreferrer"
+            title={`${fromHint} (Outlook Web)`}
+          >
+            <Globe size={16} aria-hidden />
             Outlook Web
           </a>
         </div>

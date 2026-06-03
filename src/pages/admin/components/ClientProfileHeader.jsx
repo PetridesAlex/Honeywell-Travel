@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Pencil } from 'lucide-react'
+import { ArrowLeft, Pencil, Trash2 } from 'lucide-react'
 import PassportStatusBadge from './PassportStatusBadge'
 import ComposeEmailActions from './ComposeEmailActions'
 import { CRM_SENDER_EMAIL } from '../constants'
@@ -15,7 +15,7 @@ function clientFullName(client) {
   return [client.first_name, client.last_name].filter(Boolean).join(' ').trim() || 'Unnamed client'
 }
 
-function ClientProfileHeader({ client, leadsCount = 0, travelStats = null, groupName = '', onEdit }) {
+function ClientProfileHeader({ client, leadsCount = 0, travelStats = null, groupName = '', onEdit, onDelete }) {
   const name = clientFullName(client)
   const lifetimeTrips = travelStats?.lifetimeTrips ?? 0
   const tripsThisYear = travelStats?.tripsThisYear ?? 0
@@ -76,6 +76,12 @@ function ClientProfileHeader({ client, leadsCount = 0, travelStats = null, group
             <Pencil size={16} aria-hidden />
             Edit profile
           </button>
+          {onDelete ? (
+            <button type="button" className="crm-profile-header__delete" onClick={onDelete}>
+              <Trash2 size={16} aria-hidden />
+              Delete client
+            </button>
+          ) : null}
         </aside>
       </div>
     </header>

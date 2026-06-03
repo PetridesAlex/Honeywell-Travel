@@ -1262,6 +1262,30 @@
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
 }
 
+.crm-profile-header__delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(180, 35, 35, 0.35);
+  transition: background 120ms ease, transform 120ms ease;
+}
+
+.crm-profile-header__delete:hover {
+  background: rgba(180, 35, 35, 0.55);
+  transform: translateY(-1px);
+}
+
 .crm-compose-email--header .crm-compose-email__header-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3809,6 +3833,145 @@ a.crm-btn.crm-btn-primary {
   width: min(480px, 100%);
 }
 
+.crm-modal-backdrop--confirm {
+  animation: crm-confirm-backdrop-in 220ms ease;
+}
+
+@keyframes crm-confirm-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.crm-modal--confirm {
+  width: min(520px, 100%);
+  max-height: min(88dvh, 640px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 22px;
+  margin: auto;
+  flex-shrink: 0;
+  border: 1px solid rgba(197, 217, 236, 0.9);
+  background: linear-gradient(180deg, rgba(248, 251, 254, 0.98) 0%, rgba(225, 236, 246, 0.98) 100%);
+  box-shadow:
+    0 0 0 1px rgba(15, 45, 74, 0.08),
+    0 40px 80px rgba(8, 18, 32, 0.38),
+    0 12px 32px rgba(21, 58, 99, 0.2);
+  animation: crm-confirm-modal-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes crm-confirm-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.crm-modal__hero--confirm {
+  background: linear-gradient(
+    128deg,
+    #0a1628 0%,
+    #0f2844 38%,
+    #153a63 72%,
+    #7f1d1d 100%
+  );
+}
+
+.crm-modal__hero--confirm-danger::before {
+  background:
+    radial-gradient(ellipse 90% 120% at 100% 0%, rgba(211, 23, 54, 0.38), transparent 58%),
+    radial-gradient(ellipse 55% 70% at 0% 100%, rgba(59, 130, 246, 0.1), transparent 50%);
+}
+
+.crm-modal__eyebrow--confirm {
+  color: rgba(252, 211, 77, 0.92);
+}
+
+.crm-confirm__title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.crm-confirm__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(252, 165, 165, 0.45);
+  background: rgba(211, 23, 54, 0.22);
+  color: #fecaca;
+  box-shadow: 0 8px 20px rgba(127, 29, 29, 0.28);
+}
+
+.crm-modal__hero--confirm .crm-confirm__title-row h3 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding-top: 0.15rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.42rem);
+  line-height: 1.35;
+}
+
+.crm-confirm__body {
+  padding: 1.35rem 1.65rem 1.1rem;
+  background: linear-gradient(180deg, rgba(244, 249, 253, 0.55) 0%, rgba(232, 240, 248, 0.9) 100%);
+}
+
+.crm-confirm__description {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(167, 198, 224, 0.55);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.94) 0%, rgba(237, 244, 251, 0.98) 100%);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #334155;
+  box-shadow: 0 2px 10px rgba(15, 35, 52, 0.04);
+}
+
+.crm-confirm__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.65rem 1.35rem;
+  border-top: 1px solid rgba(167, 198, 224, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(237, 244, 251, 0.95) 100%);
+}
+
+.crm-confirm__btn-confirm {
+  background: linear-gradient(135deg, #5f0b1f 0%, #b51234 48%, #d31736 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 20px rgba(181, 18, 52, 0.34);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.crm-confirm__btn-confirm:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(181, 18, 52, 0.4);
+}
+
+.crm-confirm__btn-confirm:disabled {
+  opacity: 0.65;
+}
+
 .crm-modal-header {
   display: flex;
   justify-content: space-between;
@@ -5550,12 +5713,171 @@ a.crm-btn.crm-btn-primary {
 }
 
 .crm-client-card__actions {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 0.65rem;
   margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(167, 198, 224, 0.45);
+}
+
+.crm-compose-email--card {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(167, 198, 224, 0.55);
+  background: linear-gradient(158deg, rgba(255, 255, 255, 0.96) 0%, rgba(237, 244, 251, 0.98) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 4px 14px rgba(15, 35, 52, 0.05);
+}
+
+.crm-compose-email__card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+}
+
+.crm-compose-email__card-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.crm-compose-email__card-from {
+  font-size: 0.72rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+.crm-compose-email__card-from strong {
+  color: #153a63;
+  font-weight: 700;
+}
+
+.crm-compose-email__card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.crm-compose-email__card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 12px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.crm-compose-email__card-btn:hover {
+  transform: translateY(-1px);
+}
+
+.crm-compose-email__card-btn--primary {
+  color: #fff;
+  background: linear-gradient(135deg, #0f2844 0%, #153a63 55%, #1e4a7a 100%);
+  border-color: rgba(21, 58, 99, 0.35);
+  box-shadow: 0 6px 16px rgba(15, 40, 68, 0.22);
+}
+
+.crm-compose-email__card-btn--primary:hover {
+  box-shadow: 0 8px 20px rgba(15, 40, 68, 0.28);
+}
+
+.crm-compose-email__card-btn--outlook {
+  color: #0f4c81;
+  background: linear-gradient(180deg, #fff 0%, #f0f9ff 100%);
+  border-color: rgba(125, 211, 252, 0.75);
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.08);
+}
+
+.crm-compose-email__card-btn--outlook:hover {
+  background: linear-gradient(180deg, #fff 0%, #e0f2fe 100%);
+  border-color: #38bdf8;
+}
+
+.crm-compose-email--card-disabled {
+  opacity: 0.92;
+}
+
+.crm-compose-email__card-empty {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.crm-client-card__actions-secondary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.5rem;
+}
+
+.crm-client-card__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid #d6dee8;
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  color: #153a63;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 35, 52, 0.05);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.crm-client-card__action-btn:hover {
+  transform: translateY(-1px);
+  border-color: #94a3b8;
+  background: linear-gradient(180deg, #fff 0%, #f1f5f9 100%);
+  box-shadow: 0 4px 12px rgba(15, 35, 52, 0.08);
+  text-decoration: none;
+}
+
+.crm-client-card__action-btn--edit {
+  color: #0f172a;
+  border-color: rgba(147, 197, 253, 0.65);
+  background: linear-gradient(180deg, #fff 0%, #eff6ff 100%);
+}
+
+.crm-client-card__action-btn--edit:hover {
+  border-color: #60a5fa;
+  background: linear-gradient(180deg, #fff 0%, #dbeafe 100%);
+}
+
+.crm-drawer__client-wrap .crm-client-card__actions {
+  margin-top: 0.85rem;
   padding-top: 0.85rem;
-  border-top: 1px solid #e8edf3;
+}
+
+.crm-drawer__client-wrap .crm-compose-email__card-actions {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 520px) {
+  .crm-compose-email__card-actions,
+  .crm-client-card__actions-secondary {
+    grid-template-columns: 1fr;
+  }
 }
 
 .crm-passport-badge {

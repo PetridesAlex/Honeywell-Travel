@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowUpRight, Pencil } from 'lucide-react'
 import PassportStatusBadge from './PassportStatusBadge'
 import ComposeEmailActions from './ComposeEmailActions'
 import { maskPassportNumber } from '../utils/passport'
@@ -175,16 +176,23 @@ function ClientProfileCard({ client, liveFields, enquiryPreview, live = false, o
           to={profile.email}
           recipientName={name}
           destination={enquiryPreview?.destination}
+          variant="card"
         />
-        {client?.id ? (
-          <Link to={`/admin/clients/${client.id}`} className="crm-link-btn">
-            Open full profile
-          </Link>
-        ) : null}
-        {onEdit ? (
-          <button type="button" className="crm-btn crm-btn-ghost crm-btn--dark" onClick={onEdit}>
-            {linked ? 'Edit passport' : 'Create / link client'}
-          </button>
+        {client?.id || onEdit ? (
+          <div className="crm-client-card__actions-secondary">
+            {client?.id ? (
+              <Link to={`/admin/clients/${client.id}`} className="crm-client-card__action-btn">
+                <ArrowUpRight size={16} aria-hidden />
+                Open full profile
+              </Link>
+            ) : null}
+            {onEdit ? (
+              <button type="button" className="crm-client-card__action-btn crm-client-card__action-btn--edit" onClick={onEdit}>
+                <Pencil size={16} aria-hidden />
+                {linked ? 'Edit passport' : 'Create / link client'}
+              </button>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </section>
