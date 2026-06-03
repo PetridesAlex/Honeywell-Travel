@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
-import { CRM_ADMIN_LOGIN_EMAIL, CRM_SENDER_EMAIL } from './constants'
 import { getAdminAuthErrorMessage, isSupabaseConfigured, supabase } from '../../lib/supabase'
 import './Login.css'
 
@@ -130,7 +129,11 @@ function Login() {
             <span className="admin-auth-visual-orb admin-auth-visual-orb--3" />
           </div>
           <div className="admin-auth-visual-content">
-            <p className="admin-auth-visual-welcome">Welcome back</p>
+            <p className="admin-auth-visual-welcome">
+              <span className="admin-auth-visual-welcome__line" aria-hidden="true" />
+              <span className="admin-auth-visual-welcome__text">Welcome back</span>
+              <span className="admin-auth-visual-welcome__line" aria-hidden="true" />
+            </p>
             <div className="admin-auth-visual-brand">
               <span className="admin-auth-visual-mark">
                 <img
@@ -141,11 +144,7 @@ function Login() {
               </span>
               <span className="admin-auth-visual-name">Honeywell Travel</span>
             </div>
-            <p className="admin-auth-visual-tagline">
-              Your premium travel
-              <br />
-              CRM &amp; leads hub
-            </p>
+            <p className="admin-auth-visual-tagline">Your premium travel hub</p>
           </div>
         </div>
 
@@ -173,7 +172,7 @@ function Login() {
                   value={email}
                   onChange={syncInputValue(setEmail)}
                   onInput={syncInputValue(setEmail)}
-                  placeholder={CRM_ADMIN_LOGIN_EMAIL}
+                  placeholder="Email"
                   required
                   autoComplete="email"
                   aria-label="Email"
@@ -225,20 +224,6 @@ function Login() {
                 </button>
               </form>
             )}
-
-            <p className="admin-auth-email-hint">
-              Sign in with <strong>{CRM_ADMIN_LOGIN_EMAIL}</strong>. Customer emails send from{' '}
-              <strong>{CRM_SENDER_EMAIL}</strong> via Outlook.
-            </p>
-
-            <div className="admin-auth-links">
-              <Link to="/admin/forgot-password" className="admin-auth-back">
-                Forgot password?
-              </Link>
-              <Link to="/admin/signup" className="admin-auth-back">
-                Create admin account
-              </Link>
-            </div>
 
             <div className="admin-auth-footer">
               <Link to="/" className="admin-auth-back">

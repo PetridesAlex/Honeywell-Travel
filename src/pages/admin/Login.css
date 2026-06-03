@@ -155,17 +155,36 @@
 }
 
 .admin-auth-visual-welcome {
-  margin: 0 0 0.5rem;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #153a63;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(21, 58, 99, 0.12);
-  box-shadow: 0 4px 14px rgba(21, 58, 99, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.admin-auth-visual-welcome__line {
+  width: 2.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(21, 58, 99, 0.35));
+  flex-shrink: 0;
+}
+
+.admin-auth-visual-welcome__line:last-child {
+  background: linear-gradient(90deg, rgba(21, 58, 99, 0.35), transparent);
+}
+
+.admin-auth-visual-welcome__text {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: rgba(21, 58, 99, 0.72);
+  white-space: nowrap;
 }
 
 .admin-auth-visual-brand {
