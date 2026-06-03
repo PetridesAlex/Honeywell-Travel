@@ -33,23 +33,60 @@ create index if not exists idx_package_quote_lines_quote on public.package_quote
 alter table public.package_quotes enable row level security;
 alter table public.package_quote_lines enable row level security;
 
-create policy "Authenticated can read package_quotes"
-  on public.package_quotes for select to authenticated using (true);
-create policy "Authenticated can insert package_quotes"
-  on public.package_quotes for insert to authenticated with check (true);
-create policy "Authenticated can update package_quotes"
-  on public.package_quotes for update to authenticated using (true) with check (true);
-create policy "Authenticated can delete package_quotes"
-  on public.package_quotes for delete to authenticated using (true);
+do $$
+begin
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quotes' and policyname = 'Authenticated can read package_quotes'
+  ) then
+    create policy "Authenticated can read package_quotes"
+      on public.package_quotes for select to authenticated using (true);
+  end if;
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quotes' and policyname = 'Authenticated can insert package_quotes'
+  ) then
+    create policy "Authenticated can insert package_quotes"
+      on public.package_quotes for insert to authenticated with check (true);
+  end if;
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quotes' and policyname = 'Authenticated can update package_quotes'
+  ) then
+    create policy "Authenticated can update package_quotes"
+      on public.package_quotes for update to authenticated using (true) with check (true);
+  end if;
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quotes' and policyname = 'Authenticated can delete package_quotes'
+  ) then
+    create policy "Authenticated can delete package_quotes"
+      on public.package_quotes for delete to authenticated using (true);
+  end if;
 
-create policy "Authenticated can read package_quote_lines"
-  on public.package_quote_lines for select to authenticated using (true);
-create policy "Authenticated can insert package_quote_lines"
-  on public.package_quote_lines for insert to authenticated with check (true);
-create policy "Authenticated can update package_quote_lines"
-  on public.package_quote_lines for update to authenticated using (true) with check (true);
-create policy "Authenticated can delete package_quote_lines"
-  on public.package_quote_lines for delete to authenticated using (true);
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quote_lines' and policyname = 'Authenticated can read package_quote_lines'
+  ) then
+    create policy "Authenticated can read package_quote_lines"
+      on public.package_quote_lines for select to authenticated using (true);
+  end if;
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quote_lines' and policyname = 'Authenticated can insert package_quote_lines'
+  ) then
+    create policy "Authenticated can insert package_quote_lines"
+      on public.package_quote_lines for insert to authenticated with check (true);
+  end if;
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quote_lines' and policyname = 'Authenticated can update package_quote_lines'
+  ) then
+    create policy "Authenticated can update package_quote_lines"
+      on public.package_quote_lines for update to authenticated using (true) with check (true);
+  end if;
+  if not exists (
+    select 1 from pg_policies where tablename = 'package_quote_lines' and policyname = 'Authenticated can delete package_quote_lines'
+  ) then
+    create policy "Authenticated can delete package_quote_lines"
+      on public.package_quote_lines for delete to authenticated using (true);
+  end if;
+end $$;
 
 grant select, insert, update, delete on table public.package_quotes to authenticated;
 grant select, insert, update, delete on table public.package_quote_lines to authenticated;
+
+notify pgrst, 'reload schema';

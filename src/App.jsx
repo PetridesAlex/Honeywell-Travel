@@ -44,6 +44,8 @@ import Pipeline from './pages/admin/Pipeline'
 import Reports from './pages/admin/Reports'
 import GiftVouchers from './pages/admin/GiftVouchers'
 import Team from './pages/admin/Team'
+import GroupBookings from './pages/admin/GroupBookings'
+import GroupBookingDetail from './pages/admin/GroupBookingDetail'
 import './App.css'
 
 /** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
@@ -64,6 +66,8 @@ function AppContent() {
           <Route path="/admin/services-hub" element={<ServicesDashboard />} />
           <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
           <Route path="/admin/team" element={<Team />} />
+          <Route path="/admin/group-bookings" element={<GroupBookings />} />
+          <Route path="/admin/group-bookings/:id" element={<GroupBookingDetail />} />
           <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
           <Route path="/admin/package-calculator" element={<PackageCalculator />} />
           <Route path="/admin/corporate-contacts" element={<CorporateServiceContacts />} />

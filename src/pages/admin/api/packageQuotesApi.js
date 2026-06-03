@@ -1,11 +1,27 @@
 import { supabase } from '../../../lib/supabase'
 
+export const PACKAGE_QUOTES_SETUP_HINT =
+  'Open Supabase → SQL Editor → New query → paste the contents of supabase/fix_package_quotes.sql → Run. Then click “Check again” on this page.'
+
+export function isPackageQuotesSchemaMissing(error) {
+  if (!error) return false
+  const msg = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`.toLowerCase()
+  return (
+    msg.includes('package_quote') &&
+    (msg.includes('schema cache') ||
+      msg.includes('does not exist') ||
+      msg.includes('could not find') ||
+      msg.includes('relation') ||
+      error?.code === '42P01' ||
+      error?.code === 'PGRST205')
+  )
+}
+
 function formatError(error) {
-  const msg = error?.message || 'Request failed'
-  if (msg.includes('package_quote')) {
-    return `${msg} — run supabase/fix_package_quotes.sql in Supabase SQL editor.`
+  if (isPackageQuotesSchemaMissing(error)) {
+    return 'Package calculator tables are not set up in Supabase yet.'
   }
-  return msg
+  return error?.message || 'Request failed'
 }
 
 function buildQuotePayload(raw = {}) {
@@ -42,7 +58,14 @@ export async function fetchPackageQuotes() {
     .select('id, title, client_name, destination, trip_type, pax, currency, target_margin_percent, notes, created_at, updated_at')
     .order('updated_at', { ascending: false })
 
-  return { data: data || [], error: error ? { message: formatError(error) } : null }
+  if (error) {
+    return {
+      data: [],
+      error: { message: formatError(error), schemaMissing: isPackageQuotesSchemaMissing(error) }
+    }
+  }
+
+  return { data: data || [], error: null, schemaMissing: false }
 }
 
 export async function fetchPackageQuote(id) {
@@ -50,9 +73,18 @@ export async function fetchPackageQuote(id) {
     .from('package_quotes')
     .select('*, lines:package_quote_lines(*)')
     .eq('id', id)
-    .single()
+    .maybeSingle()
 
-  if (error) return { data: null, error: { message: formatError(error) } }
+  if (error) {
+    return {
+      data: null,
+      error: { message: formatError(error), schemaMissing: isPackageQuotesSchemaMissing(error) }
+    }
+  }
+
+  if (!data) {
+    return { data: null, error: { message: 'Package not found.' } }
+  }
 
   const quote = {
     ...data,
@@ -67,18 +99,33 @@ export async function savePackageQuote(quote, lines = []) {
 
   if (quoteId) {
     const { error: updateError } = await supabase.from('package_quotes').update(payload).eq('id', quoteId)
-    if (updateError) return { data: null, error: { message: formatError(updateError) } }
+    if (updateError) {
+      return {
+        data: null,
+        error: { message: formatError(updateError), schemaMissing: isPackageQuotesSchemaMissing(updateError) }
+      }
+    }
 
     const { error: deleteError } = await supabase.from('package_quote_lines').delete().eq('quote_id', quoteId)
-    if (deleteError) return { data: null, error: { message: formatError(deleteError) } }
+    if (deleteError) {
+      return {
+        data: null,
+        error: { message: formatError(deleteError), schemaMissing: isPackageQuotesSchemaMissing(deleteError) }
+      }
+    }
   } else {
-    const { data: created, error: createError } = await supabase
-      .from('package_quotes')
-      .insert(payload)
-      .select()
-      .single()
-    if (createError) return { data: null, error: { message: formatError(createError) } }
-    quoteId = created.id
+    const { data: rows, error: createError } = await supabase.from('package_quotes').insert(payload).select()
+    const created = Array.isArray(rows) ? rows[0] : rows
+    if (createError) {
+      return {
+        data: null,
+        error: { message: formatError(createError), schemaMissing: isPackageQuotesSchemaMissing(createError) }
+      }
+    }
+    quoteId = created?.id
+    if (!quoteId) {
+      return { data: null, error: { message: 'Could not create package.' } }
+    }
   }
 
   const lineRows = lines
@@ -87,7 +134,12 @@ export async function savePackageQuote(quote, lines = []) {
 
   if (lineRows.length) {
     const { error: linesError } = await supabase.from('package_quote_lines').insert(lineRows)
-    if (linesError) return { data: null, error: { message: formatError(linesError) } }
+    if (linesError) {
+      return {
+        data: null,
+        error: { message: formatError(linesError), schemaMissing: isPackageQuotesSchemaMissing(linesError) }
+      }
+    }
   }
 
   return fetchPackageQuote(quoteId)
@@ -99,5 +151,7 @@ function parseMoneyLine(line) {
 
 export async function deletePackageQuote(id) {
   const { error } = await supabase.from('package_quotes').delete().eq('id', id)
-  return { error: error ? { message: formatError(error) } : null }
+  return {
+    error: error ? { message: formatError(error), schemaMissing: isPackageQuotesSchemaMissing(error) } : null
+  }
 }

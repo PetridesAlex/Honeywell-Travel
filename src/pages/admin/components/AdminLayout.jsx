@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   Calculator,
   ChevronRight,
+  Ship,
   ClipboardList,
   Gift,
   LogOut,
@@ -37,7 +38,8 @@ const ICONS = {
   reports: BarChart3,
   team: ClipboardList,
   vouchers: Gift,
-  calculator: Calculator
+  calculator: Calculator,
+  groupBookings: Ship
 }
 
 function adminInitials(name) {

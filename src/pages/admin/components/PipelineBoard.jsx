@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, LayoutGroup, motion } from 'motion/react'
 import {
   ArrowUpRight,
   CalendarDays,
@@ -10,7 +10,7 @@ import {
   BadgeCheck,
   Ban
 } from 'lucide-react'
-import { STATUS_OPTIONS } from '../constants'
+import { STATUS_OPTIONS, leadIdsMatch, normalizeLeadStatus } from '../constants'
 import { leadDisplayName, parseLeadName } from '../utils/leadName'
 
 const COLUMN_META = {
@@ -85,14 +85,15 @@ const columnVariants = {
   })
 }
 
-function PipelineBoard({ leads, onStatusChange }) {
+function PipelineBoard({ leads, onStatusChange, updatingId = null }) {
   const columns = STATUS_OPTIONS.map((status) => ({
     status,
     meta: COLUMN_META[status] || { slug: status.toLowerCase(), icon: Sparkles, hint: '' },
-    items: leads.filter((lead) => (lead.status || 'New') === status)
+    items: leads.filter((lead) => normalizeLeadStatus(lead.status) === status)
   }))
 
   return (
+    <LayoutGroup id="crm-pipeline-board">
     <div className="crm-pipeline crm-pipeline--premium">
       {columns.map((column, columnIndex) => {
         const Icon = column.meta.icon
@@ -148,16 +149,20 @@ function PipelineBoard({ leads, onStatusChange }) {
                   column.items.map((lead, cardIndex) => {
                     const name = leadDisplayName(lead)
                     const deal = formatDealValue(lead.deal_value)
+                    const leadStatus = normalizeLeadStatus(lead.status)
+                    const isUpdating = leadIdsMatch(updatingId, lead.id)
 
                     return (
                       <motion.article
                         key={lead.id}
                         layout
+                        layoutId={`pipeline-lead-${lead.id}`}
                         custom={cardIndex}
                         variants={cardVariants}
                         initial="hidden"
                         animate="show"
                         exit="exit"
+                        transition={{ layout: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
                         whileHover={{ y: -3, transition: { duration: 0.18 } }}
                         className={`crm-pipeline-card crm-pipeline-card--${slug}${lead.priority && lead.priority !== 'Normal' ? ` crm-pipeline-card--${lead.priority.toLowerCase()}` : ''}`}
                       >
@@ -198,8 +203,16 @@ function PipelineBoard({ leads, onStatusChange }) {
                           <label className="crm-pipeline-card__status">
                             <span className="sr-only">Move lead</span>
                             <select
-                              value={lead.status || 'New'}
-                              onChange={(event) => onStatusChange(lead, event.target.value)}
+                              value={leadStatus}
+                              disabled={isUpdating}
+                              onChange={(event) => {
+                                event.stopPropagation()
+                                const nextStatus = event.target.value
+                                if (nextStatus !== leadStatus) {
+                                  onStatusChange(lead, nextStatus)
+                                }
+                              }}
+                              onClick={(event) => event.stopPropagation()}
                               aria-label={`Update status for ${name}`}
                             >
                               {STATUS_OPTIONS.map((status) => (
@@ -224,6 +237,7 @@ function PipelineBoard({ leads, onStatusChange }) {
         )
       })}
     </div>
+    </LayoutGroup>
   )
 }
 

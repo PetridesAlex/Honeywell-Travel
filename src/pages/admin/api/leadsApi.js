@@ -98,13 +98,11 @@ function removeUnsupported(payload) {
 
 async function insertWithFallback(payload) {
   const cleanPayload = removeUnsupported(sanitizeLeadPayload(payload))
-  const { data, error } = await supabase
-    .from('leads')
-    .insert(cleanPayload)
-    .select()
-    .single()
+  const { data: rows, error } = await supabase.from('leads').insert(cleanPayload).select()
+  let data = Array.isArray(rows) ? rows[0] : rows
+  let insertError = error
 
-  const missingColumn = getMissingColumn(error)
+  const missingColumn = getMissingColumn(insertError)
   if (missingColumn && missingColumn in cleanPayload) {
     unsupportedColumns.add(missingColumn)
     const fallbackPayload = { ...cleanPayload }
@@ -112,7 +110,7 @@ async function insertWithFallback(payload) {
     return insertWithFallback(fallbackPayload)
   }
 
-  if (error?.code === 'PGRST204') {
+  if (insertError?.code === 'PGRST204') {
     const fallbackPayload = { ...cleanPayload }
     let removedAny = false
     optionalColumns.forEach(column => {
@@ -125,17 +123,23 @@ async function insertWithFallback(payload) {
     if (removedAny) return insertWithFallback(fallbackPayload)
   }
 
-  return { data, error }
+  return { data, error: insertError }
 }
 
 async function updateWithFallback(id, payload) {
   const cleanPayload = removeUnsupported(sanitizeLeadPayload(payload))
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('leads')
     .update(cleanPayload)
     .eq('id', id)
     .select()
-    .single()
+    .maybeSingle()
+
+  if (!error && !data) {
+    const refreshed = await supabase.from('leads').select('*').eq('id', id).maybeSingle()
+    data = refreshed.data
+    error = refreshed.error
+  }
 
   const missingColumn = getMissingColumn(error)
   if (missingColumn && missingColumn in cleanPayload) {
@@ -161,6 +165,28 @@ async function updateWithFallback(id, payload) {
   return { data, error }
 }
 
+function shouldFallbackLeadsClientJoin(error) {
+  if (!error) return false
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`.toLowerCase()
+  return (
+    message.includes('client') ||
+    message.includes('relationship') ||
+    message.includes('coerce') ||
+    message.includes('single json') ||
+    error?.code === 'PGRST200' ||
+    error?.code === 'PGRST116' ||
+    error?.code === '42703'
+  )
+}
+
+async function fetchLeadsPlain() {
+  const { data, error } = await supabase
+    .from('leads')
+    .select('*')
+    .order('created_at', { ascending: false })
+  return { data: data || [], error }
+}
+
 export async function fetchLeads() {
   if (clientsJoinSupported) {
     const { data, error } = await supabase
@@ -170,19 +196,15 @@ export async function fetchLeads() {
 
     if (!error) return { data: data || [], error: null }
 
-    const message = `${error?.message || ''} ${error?.details || ''}`
-    if (message.includes('client') || error?.code === 'PGRST200' || error?.code === '42703') {
+    if (shouldFallbackLeadsClientJoin(error)) {
       clientsJoinSupported = false
-    } else {
-      return { data: [], error }
+      return fetchLeadsPlain()
     }
+
+    return { data: [], error }
   }
 
-  const { data, error } = await supabase
-    .from('leads')
-    .select('*')
-    .order('created_at', { ascending: false })
-  return { data: data || [], error }
+  return fetchLeadsPlain()
 }
 
 function enrichConfirmedTripPayload(payload = {}) {
@@ -198,7 +220,18 @@ export async function createLead(payload) {
 }
 
 export async function updateLead(id, payload) {
-  return updateWithFallback(enrichConfirmedTripPayload(payload))
+  const enriched = enrichConfirmedTripPayload(payload)
+  const result = await updateWithFallback(id, enriched)
+  if (result.error) return result
+
+  return {
+    data: {
+      ...(result.data || {}),
+      id: result.data?.id ?? id,
+      ...enriched
+    },
+    error: null
+  }
 }
 
 export async function deleteLead(id) {

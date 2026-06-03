@@ -16,6 +16,20 @@ export const CRM_ADMIN_LOGIN_EMAIL = (
 
 export const STATUS_OPTIONS = ['New', 'Contacted', 'Quoted', 'Confirmed', 'Lost']
 
+/** Map stored status values to a pipeline column id (case-insensitive). */
+export function normalizeLeadStatus(status) {
+  const value = String(status ?? 'New').trim()
+  if (!value) return 'New'
+  const found = STATUS_OPTIONS.find((option) => option.toLowerCase() === value.toLowerCase())
+  return found || 'New'
+}
+
+/** Compare Supabase lead ids whether number or string. */
+export function leadIdsMatch(a, b) {
+  if (a == null || b == null) return false
+  return String(a) === String(b)
+}
+
 export const TRIP_TYPE_OPTIONS = [
   'Package Holiday',
   'Cruise',
@@ -209,8 +223,30 @@ export const EMPTY_PACKAGE_QUOTE = {
   notes: ''
 }
 
+export const TRAVEL_GROUP_TYPES = [
+  { id: 'group_booking', label: 'Group booking' },
+  { id: 'cruise', label: 'Cruise' },
+  { id: 'school', label: 'School trip' },
+  { id: 'corporate', label: 'Corporate travel' },
+  { id: 'incentive', label: 'Incentive group' }
+]
+
+export const TRAVEL_GROUP_STATUSES = ['Planning', 'Confirmed', 'In progress', 'Completed', 'Cancelled']
+
+export const EMPTY_TRAVEL_GROUP = {
+  group_name: '',
+  group_type: 'group_booking',
+  departure_date: '',
+  return_date: '',
+  destination: '',
+  supplier: '',
+  status: 'Planning',
+  notes: ''
+}
+
 export const ADMIN_NAV = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
+  { to: '/admin/group-bookings', label: 'Group bookings', icon: 'groupBookings', highlight: true },
   { to: '/admin/services-hub', label: 'Services Hub', icon: 'servicesHub', highlight: true },
   { to: '/admin/team', label: 'Team hub', icon: 'team', badgeKey: 'teamTasks' },
   { to: '/admin/gift-vouchers', label: '🎁 Gift Vouchers', icon: 'vouchers' },

@@ -3,6 +3,7 @@ import { Calculator, FilePlus, FolderOpen, MapPin, Save, Sparkles, Trash2, UserR
 import AdminLayout from './components/AdminLayout'
 import PackageCalculatorSheet from './components/PackageCalculatorSheet'
 import {
+  PACKAGE_QUOTES_SETUP_HINT,
   deletePackageQuote,
   fetchPackageQuote,
   fetchPackageQuotes,
@@ -60,6 +61,7 @@ function PackageCalculator() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [dbReady, setDbReady] = useState(true)
+  const [schemaMissing, setSchemaMissing] = useState(false)
 
   const totals = useMemo(() => summarizePackageLines(lines, quote.currency), [lines, quote.currency])
   const perPerson = useMemo(() => perPersonTotals(totals, quote.pax), [totals, quote.pax])
@@ -67,9 +69,10 @@ function PackageCalculator() {
   const loadQuotes = useCallback(async () => {
     setLoading(true)
     setError('')
-    const { data, error: fetchError } = await fetchPackageQuotes()
+    const { data, error: fetchError, schemaMissing: missing } = await fetchPackageQuotes()
     if (fetchError) {
       setDbReady(false)
+      setSchemaMissing(Boolean(missing))
       setQuotes([])
       const draft = loadLocalDraft()
       if (draft) {
@@ -79,7 +82,9 @@ function PackageCalculator() {
       setError(fetchError.message)
     } else {
       setDbReady(true)
+      setSchemaMissing(false)
       setQuotes(data)
+      setError('')
     }
     setLoading(false)
   }, [])
@@ -234,15 +239,42 @@ function PackageCalculator() {
     >
       <section className="crm-workspace crm-workspace--package-calc">
         {!dbReady || error ? (
-          <div className="crm-pkg-notice">
-            {!dbReady ? (
+          <div className="crm-pkg-notice" role="alert">
+            {schemaMissing ? (
+              <>
+                <p>
+                  <strong>Cloud save needs a one-time database setup.</strong> Your worksheet still works locally — drafts
+                  are saved in this browser until Supabase is ready.
+                </p>
+                <ol className="crm-pkg-notice__steps">
+                  <li>
+                    Open your <strong>Supabase Dashboard</strong> → <strong>SQL Editor</strong> → <strong>New query</strong>
+                  </li>
+                  <li>
+                    Copy all of <code>supabase/fix_package_quotes.sql</code> from this project and paste it into the editor
+                  </li>
+                  <li>
+                    Click <strong>Run</strong>, then return here and click <strong>Check again</strong>
+                  </li>
+                </ol>
+                <p className="crm-pkg-notice__hint">{PACKAGE_QUOTES_SETUP_HINT}</p>
+                <button type="button" className="crm-btn crm-btn-primary crm-btn--small" onClick={loadQuotes}>
+                  Check again
+                </button>
+              </>
+            ) : !dbReady ? (
               <p>
-                <strong>Local mode.</strong> Run <code>supabase/fix_package_quotes.sql</code> in Supabase to save packages
-                to the cloud. Drafts are kept in this browser until then.
+                <strong>Local mode.</strong> Packages are stored in this browser only. Fix the connection or database setup,
+                then use Check again.
               </p>
             ) : null}
-            {error && dbReady ? <p>{error}</p> : null}
-            {error && !dbReady ? <p className="crm-pkg-notice__sub">{error}</p> : null}
+            {error && !schemaMissing ? <p className="crm-pkg-notice__sub">{error}</p> : null}
+            {error && schemaMissing ? <p className="crm-pkg-notice__sub">{error}</p> : null}
+            {!schemaMissing && !dbReady ? (
+              <button type="button" className="crm-btn crm-btn--dark crm-btn--small" onClick={loadQuotes}>
+                Check again
+              </button>
+            ) : null}
           </div>
         ) : null}
 

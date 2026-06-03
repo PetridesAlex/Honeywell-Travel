@@ -1,5 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import { fetchLeads } from '../api/leadsApi'
+import { normalizeLeadStatus } from '../constants'
+
+function normalizeLeadsList(rows = []) {
+  return rows.map((lead) => ({
+    ...lead,
+    status: normalizeLeadStatus(lead.status)
+  }))
+}
 
 export function useAdminLeads(autoLoad = true) {
   const [leads, setLeads] = useState([])
@@ -14,7 +22,7 @@ export function useAdminLeads(autoLoad = true) {
       setError(queryError.message)
       setLeads([])
     } else {
-      setLeads(data || [])
+      setLeads(normalizeLeadsList(data))
     }
     setLoading(false)
     return { data: data || [], error: queryError }

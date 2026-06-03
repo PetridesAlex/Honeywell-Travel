@@ -11,7 +11,7 @@ import ToastHost from './components/ToastHost'
 import EmailTemplatePicker from './components/EmailTemplatePicker'
 import { buildLeadPayload, leadDisplayName, parseLeadName } from './utils/leadName'
 import { exportLeadsToCsv } from './utils/exportLeads'
-import { EMPTY_LEAD, SOURCE_OPTIONS, STATUS_OPTIONS } from './constants'
+import { EMPTY_LEAD, SOURCE_OPTIONS, STATUS_OPTIONS, normalizeLeadStatus } from './constants'
 import { addLeadActivity, fetchLeadActivities } from './api/activitiesApi'
 import {
   createLead,
@@ -73,7 +73,7 @@ function Leads() {
       return
     }
 
-    setLeads(data || [])
+    setLeads((data || []).map((lead) => ({ ...lead, status: normalizeLeadStatus(lead.status) })))
     setLoading(false)
   }
 
@@ -587,7 +587,15 @@ function Leads() {
         </section>
 
         {loading ? <div className="crm-state">Loading leads...</div> : null}
-        {!loading && error ? <div className="crm-state crm-state-error">Error: {error}</div> : null}
+        {!loading && error ? (
+          <div className="crm-state crm-state-error" role="alert">
+            <strong>Could not load leads</strong>
+            <p>{error}</p>
+            <button type="button" className="crm-btn crm-btn--dark crm-btn--small" onClick={loadLeads}>
+              Try again
+            </button>
+          </div>
+        ) : null}
         {!loading && !error && leads.length === 0 ? (
           <div className="crm-state">No leads found yet. Add your first lead.</div>
         ) : null}

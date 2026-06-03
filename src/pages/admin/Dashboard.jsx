@@ -9,6 +9,8 @@ import PipelineFunnel from './components/PipelineFunnel'
 import SourceBreakdown from './components/SourceBreakdown'
 import FollowUpList from './components/FollowUpList'
 import UpcomingDeadlines from './components/UpcomingDeadlines'
+import GroupBookingsDashboardPanel from './components/GroupBookingsDashboardPanel'
+import './passenger-import.css'
 import { buildAnalytics } from './api/analyticsApi'
 import { markFollowUpDone } from './api/leadsApi'
 import { addLeadActivity } from './api/activitiesApi'
@@ -125,6 +127,8 @@ function Dashboard() {
       />
 
       <UpcomingDeadlines />
+
+      <GroupBookingsDashboardPanel />
 
       <div className="crm-dashboard crm-dashboard--premium">
         <div className="crm-dash-bento">
