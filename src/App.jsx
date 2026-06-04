@@ -38,6 +38,9 @@ import Dashboard from './pages/admin/Dashboard'
 import FollowUps from './pages/admin/FollowUps'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
+import AdminGuestRoute from './pages/admin/components/AdminGuestRoute'
+import AdminProtectedRoute from './pages/admin/components/AdminProtectedRoute'
+import { ADMIN_DASHBOARD_PATH, ADMIN_LOGIN_PATH } from './lib/adminAuth'
 import Pipeline from './pages/admin/Pipeline'
 import Reports from './pages/admin/Reports'
 import GiftVouchers from './pages/admin/GiftVouchers'
@@ -57,26 +60,35 @@ function AppContent() {
     return (
       <main className="main-content">
         <Routes>
-          <Route path="/admin/login" element={<Login />} />
-          <Route path="/admin/signup" element={<Navigate to="/admin/login" replace />} />
-          <Route path="/admin/forgot-password" element={<Navigate to="/admin/login" replace />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/services-hub" element={<ServicesDashboard />} />
-          <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
-          <Route path="/admin/team" element={<Team />} />
-          <Route path="/admin/group-bookings" element={<GroupBookings />} />
-          <Route path="/admin/group-bookings/:id" element={<GroupBookingDetail />} />
-          <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
-          <Route path="/admin/package-calculator" element={<PackageCalculator />} />
-          <Route path="/admin/corporate-contacts" element={<CorporateServiceContacts />} />
-          <Route path="/admin/clients" element={<Clients />} />
-          <Route path="/admin/clients/:id" element={<ClientProfile />} />
-          <Route path="/admin/leads" element={<Leads />} />
-          <Route path="/admin/pipeline" element={<Pipeline />} />
-          <Route path="/admin/follow-ups" element={<FollowUps />} />
-          <Route path="/admin/reports" element={<Reports />} />
-          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
+          <Route
+            path="/admin/login"
+            element={
+              <AdminGuestRoute>
+                <Login />
+              </AdminGuestRoute>
+            }
+          />
+          <Route path="/admin/signup" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
+          <Route path="/admin/forgot-password" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
+          <Route element={<AdminProtectedRoute />}>
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/services-hub" element={<ServicesDashboard />} />
+            <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
+            <Route path="/admin/team" element={<Team />} />
+            <Route path="/admin/group-bookings" element={<GroupBookings />} />
+            <Route path="/admin/group-bookings/:id" element={<GroupBookingDetail />} />
+            <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
+            <Route path="/admin/package-calculator" element={<PackageCalculator />} />
+            <Route path="/admin/corporate-contacts" element={<CorporateServiceContacts />} />
+            <Route path="/admin/clients" element={<Clients />} />
+            <Route path="/admin/clients/:id" element={<ClientProfile />} />
+            <Route path="/admin/leads" element={<Leads />} />
+            <Route path="/admin/pipeline" element={<Pipeline />} />
+            <Route path="/admin/follow-ups" element={<FollowUps />} />
+            <Route path="/admin/reports" element={<Reports />} />
+            <Route path="/admin" element={<Navigate to={ADMIN_DASHBOARD_PATH} replace />} />
+          </Route>
+          <Route path="/admin/*" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
         </Routes>
       </main>
     )

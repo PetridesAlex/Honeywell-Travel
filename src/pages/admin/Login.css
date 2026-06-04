@@ -409,7 +409,16 @@
   border: 1px solid rgba(74, 222, 128, 0.24);
 }
 
+.admin-auth-muted--intro {
+  margin: 0 0 1.1rem;
+  max-width: 20rem;
+}
+
 .admin-auth-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   width: 100%;
   margin-top: 0.35rem;
   padding: 0.95rem 1.25rem;

@@ -60,9 +60,11 @@ function createMockSupabase() {
       getSession: async () => ({ data: { session: null }, error: buildConfigError() }),
       getUser: async () => ({ data: { user: null }, error: buildConfigError() }),
       signInWithPassword: async () => ({ data: null, error: buildConfigError() }),
+      signInWithOtp: async () => ({ data: null, error: buildConfigError() }),
       signUp: async () => ({ data: null, error: buildConfigError() }),
       resetPasswordForEmail: async () => ({ data: null, error: buildConfigError() }),
-      signOut: async () => ({ error: null })
+      signOut: async () => ({ error: null }),
+      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } })
     },
     channel() {
       return channelObj
@@ -88,19 +90,16 @@ export const supabase = isConfigured
     })
   : createMockSupabase()
 
-/** Map Supabase auth errors to clearer admin login messages. */
+/** Map Supabase auth errors to clearer admin login messages (legacy helpers). */
 export function getAdminAuthErrorMessage(error) {
   if (!error?.message) return 'Login failed. Please try again.'
   const msg = error.message.toLowerCase()
 
   if (msg.includes('invalid login credentials') || msg.includes('invalid credentials')) {
-    return (
-      'Invalid email or password. This account must exist in your Supabase project ' +
-      '(Authentication → Users). Create the user there or reset the password, then try again.'
-    )
+    return 'Invalid email or password.'
   }
   if (msg.includes('email not confirmed')) {
-    return 'Email not confirmed. In Supabase, confirm the user or disable email confirmation for admin accounts.'
+    return 'Email not confirmed. Confirm the user in Supabase Authentication → Users.'
   }
   if (msg.includes('not configured')) {
     return error.message

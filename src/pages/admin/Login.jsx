@@ -1,9 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
+import { ArrowLeft, Mail } from 'lucide-react'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
-import { getAdminAuthErrorMessage, isSupabaseConfigured, supabase } from '../../lib/supabase'
+import {
+  ADMIN_MAGIC_LINK_SUCCESS_MESSAGE,
+  getMagicLinkErrorMessage,
+  sendAdminMagicLink
+} from '../../lib/adminAuth'
+import { isSupabaseConfigured } from '../../lib/supabase'
 import './Login.css'
 
 const syncInputValue = (setter) => (event) => {
@@ -11,40 +16,19 @@ const syncInputValue = (setter) => (event) => {
 }
 
 function Login() {
-  const navigate = useNavigate()
   const captchaRef = useRef(null)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [checkingSession, setCheckingSession] = useState(true)
-  const [error, setError] = useState('')
-  const [captchaToken, setCaptchaToken] = useState('')
   const hCaptchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY
-
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data, error: sessionError } = await supabase.auth.getSession()
-      if (sessionError) {
-        setError('Unable to verify session. Please try again.')
-        setCheckingSession(false)
-        return
-      }
-
-      if (data?.session) {
-        navigate('/admin/dashboard', { replace: true })
-        return
-      }
-      setCheckingSession(false)
-    }
-
-    checkSession()
-  }, [navigate])
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const [captchaToken, setCaptchaToken] = useState('')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     setLoading(true)
     setError('')
+    setSuccess('')
 
     if (!isSupabaseConfigured) {
       setError(
@@ -60,21 +44,9 @@ function Login() {
       return
     }
 
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    const emailInput = form.querySelector('#admin-email')
-    const passwordInput = form.querySelector('#admin-password')
-    const emailValue = String(
-      formData.get('email') ?? emailInput?.value ?? email
-    )
-      .trim()
-      .toLowerCase()
-    const passwordValue = String(
-      formData.get('password') ?? passwordInput?.value ?? password
-    )
-
-    if (!emailValue || !passwordValue) {
-      setError('Please enter your email and password.')
+    const emailValue = String(email).trim().toLowerCase()
+    if (!emailValue) {
+      setError('Please enter your email address.')
       setLoading(false)
       return
     }
@@ -86,31 +58,19 @@ function Login() {
     }
 
     setEmail(emailValue)
-    setPassword(passwordValue)
 
-    const { data, error: signInError } = await supabase.auth.signInWithPassword({
-      email: emailValue,
-      password: passwordValue,
-      options: {
-        captchaToken,
-      },
-    })
+    const { error: otpError } = await sendAdminMagicLink(emailValue, captchaToken)
 
-    if (signInError) {
-      setError(getAdminAuthErrorMessage(signInError))
+    if (otpError) {
+      setError(getMagicLinkErrorMessage(otpError))
       captchaRef.current?.resetCaptcha()
       setCaptchaToken('')
       setLoading(false)
       return
     }
 
-    if (!data?.session) {
-      setError('Sign in did not create a session. Please try again.')
-      setLoading(false)
-      return
-    }
-
-    navigate('/admin/dashboard', { replace: true })
+    setSuccess(ADMIN_MAGIC_LINK_SUCCESS_MESSAGE)
+    setLoading(false)
   }
 
   return (
@@ -121,7 +81,6 @@ function Login() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Left — brand & visual */}
         <div className="admin-auth-visual-col">
           <div className="admin-auth-visual-art" aria-hidden="true">
             <span className="admin-auth-visual-orb admin-auth-visual-orb--1" />
@@ -148,7 +107,6 @@ function Login() {
           </div>
         </div>
 
-        {/* Right — sign in */}
         <div className="admin-auth-form-col">
           <div className="admin-auth-form-inner">
             <motion.h1
@@ -159,71 +117,57 @@ function Login() {
             >
               Sign in
             </motion.h1>
+            <p className="admin-auth-muted admin-auth-muted--intro">
+              Enter your work email and we will send you a secure one-time login link.
+            </p>
 
-            {checkingSession ? (
-              <p className="admin-auth-muted">Checking session...</p>
-            ) : (
-              <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>
-                <input
-                  id="admin-email"
-                  name="email"
-                  type="email"
-                  className="admin-auth-input"
-                  value={email}
-                  onChange={syncInputValue(setEmail)}
-                  onInput={syncInputValue(setEmail)}
-                  placeholder="Email"
-                  required
-                  autoComplete="email"
-                  aria-label="Email"
+            <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>
+              <input
+                id="admin-email"
+                name="email"
+                type="email"
+                className="admin-auth-input"
+                value={email}
+                onChange={syncInputValue(setEmail)}
+                onInput={syncInputValue(setEmail)}
+                placeholder="Email"
+                required
+                autoComplete="email"
+                aria-label="Email"
+                disabled={loading || Boolean(success)}
+              />
+
+              <div className="admin-auth-captcha-wrap">
+                <HCaptcha
+                  sitekey={hCaptchaSiteKey}
+                  onVerify={setCaptchaToken}
+                  onExpire={() => setCaptchaToken('')}
+                  onError={() => setCaptchaToken('')}
+                  ref={captchaRef}
                 />
+              </div>
 
-                <div className="admin-auth-password-wrap">
-                  <input
-                    id="admin-password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    className="admin-auth-input"
-                    value={password}
-                    onChange={syncInputValue(setPassword)}
-                    onInput={syncInputValue(setPassword)}
-                    placeholder="Password"
-                    required
-                    autoComplete="current-password"
-                    aria-label="Password"
-                    spellCheck={false}
-                    autoCorrect="off"
-                    autoCapitalize="off"
-                  />
-                  <button
-                    type="button"
-                    className="admin-auth-password-toggle"
-                    tabIndex={-1}
-                    onMouseDown={(event) => event.preventDefault()}
-                    onClick={() => setShowPassword((prev) => !prev)}
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
+              {error ? (
+                <p className="admin-auth-error" role="alert">
+                  {error}
+                </p>
+              ) : null}
 
-                <div className="admin-auth-captcha-wrap">
-                  <HCaptcha
-                    sitekey={hCaptchaSiteKey ?? ''}
-                    onVerify={setCaptchaToken}
-                    onExpire={() => setCaptchaToken('')}
-                    onError={() => setCaptchaToken('')}
-                    ref={captchaRef}
-                  />
-                </div>
+              {success ? (
+                <p className="admin-auth-success" role="status">
+                  {success}
+                </p>
+              ) : null}
 
-                {error ? <p className="admin-auth-error">{error}</p> : null}
-
-                <button type="submit" className="admin-auth-submit" disabled={loading}>
-                  {loading ? 'Signing in...' : 'Sign in'}
-                </button>
-              </form>
-            )}
+              <button
+                type="submit"
+                className="admin-auth-submit"
+                disabled={loading || Boolean(success)}
+              >
+                <Mail size={18} aria-hidden />
+                {loading ? 'Sending link…' : 'Send Login Link'}
+              </button>
+            </form>
 
             <div className="admin-auth-footer">
               <Link to="/" className="admin-auth-back">

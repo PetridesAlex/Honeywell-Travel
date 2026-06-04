@@ -18,6 +18,7 @@ import {
   Users
 } from 'lucide-react'
 import { fetchClientsWithExpiringPassports } from '../api/clientsApi'
+import { signOutAdmin } from '../../../lib/adminAuth'
 import { supabase } from '../../../lib/supabase'
 import { ADMIN_NAV } from '../constants'
 import { fetchLeads } from '../api/leadsApi'
@@ -64,24 +65,24 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
   const [welcomeName, setWelcomeName] = useState(null)
 
   useEffect(() => {
-    const checkSession = async () => {
-      const { data, error } = await supabase.auth.getSession()
-      if (error || !data?.session) {
-        navigate('/admin/login', { replace: true })
-        return
+    const loadUser = async () => {
+      const { data } = await supabase.auth.getSession()
+      if (data?.session?.user) {
+        setWelcomeName(getAdminDisplayName(data.session.user))
       }
-      const { data: userData } = await supabase.auth.getUser()
-      setWelcomeName(getAdminDisplayName(userData?.user))
       setCheckingAuth(false)
     }
 
-    checkSession()
+    loadUser()
 
     const {
       data: { subscription }
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         setWelcomeName(null)
+        if (event === 'SIGNED_OUT') {
+          navigate('/admin/login', { replace: true })
+        }
         return
       }
       setWelcomeName(getAdminDisplayName(session.user))
@@ -134,7 +135,7 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
   const PageIcon = currentNav ? ICONS[currentNav.icon] : LayoutDashboard
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut()
+    await signOutAdmin()
     navigate('/admin/login', { replace: true })
   }
 
