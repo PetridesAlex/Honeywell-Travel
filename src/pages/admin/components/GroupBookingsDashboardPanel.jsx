@@ -22,17 +22,23 @@ function GroupBookingsDashboardPanel() {
 
   return (
     <section className="crm-dash-panel crm-dash-panel--groups">
-      <header className="crm-dash-panel__head">
-        <div>
-          <h3>
-            <Ship size={18} aria-hidden style={{ verticalAlign: '-3px', marginRight: 6 }} />
-            Group bookings &amp; passengers
-          </h3>
-          <p>Import rosters from Excel — no fixed template required</p>
+      <header className="crm-dash-panel__head crm-dash-panel__head--groups-premium">
+        <div className="crm-dash-panel__head-copy">
+          <p className="crm-dash-panel__eyebrow crm-dash-panel__eyebrow--groups">Group travel operations</p>
+          <div className="crm-dash-panel__title-row">
+            <span className="crm-dash-panel__title-icon crm-dash-panel__title-icon--groups" aria-hidden="true">
+              <Ship size={17} strokeWidth={2.25} />
+            </span>
+            <h3>Group bookings &amp; passenger rosters</h3>
+          </div>
+          <p className="crm-dash-panel__subtitle">
+            Manage tour folders, import traveller lists, and monitor departure readiness from one
+            workspace.
+          </p>
         </div>
-        <Link to="/admin/group-bookings" className="crm-btn crm-btn-ghost crm-btn--dark crm-btn--small">
+        <Link to="/admin/group-bookings" className="crm-dash-panel__link crm-dash-panel__link--groups">
+          View module
           <ArrowUpRight size={14} aria-hidden />
-          Open
         </Link>
       </header>
       <div className="crm-dash-group-metrics">

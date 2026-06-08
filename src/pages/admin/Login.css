@@ -457,6 +457,66 @@
   font-weight: 600;
 }
 
+.admin-auth-paste {
+  margin-top: 1.35rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-auth-paste__title {
+  margin: 0 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.admin-auth-paste__hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.admin-auth-paste__form {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.admin-auth-input--paste {
+  font-size: 0.78rem;
+}
+
+.admin-auth-submit--paste {
+  background: linear-gradient(135deg, rgba(21, 58, 99, 0.95) 0%, rgba(30, 74, 120, 0.95) 100%);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+}
+
+.admin-auth-dev-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+.admin-auth-dev-preview {
+  font-weight: 600;
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+.admin-auth-dev-preview:hover {
+  color: #bfdbfe;
+  text-decoration: underline;
+}
+
+.admin-auth-dev-hint code {
+  font-size: 0.7rem;
+  color: #bfdbfe;
+}
+
 .admin-auth-footer {
   margin-top: 1rem;
   text-align: center;

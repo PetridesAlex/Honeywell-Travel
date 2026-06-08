@@ -35,6 +35,7 @@ import CorporateServiceContacts from './pages/admin/CorporateServiceContacts'
 import ServicesDashboard from './pages/admin/ServicesDashboard'
 import PackageCalculator from './pages/admin/PackageCalculator'
 import Dashboard from './pages/admin/Dashboard'
+import AdminIndexRedirect from './pages/admin/components/AdminIndexRedirect'
 import FollowUps from './pages/admin/FollowUps'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
@@ -50,7 +51,16 @@ import GroupBookingDetail from './pages/admin/GroupBookingDetail'
 import './App.css'
 
 /** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
-const MIN_LOADER_MS = 6000
+function getMinLoaderMs() {
+  if (
+    import.meta.env.DEV &&
+    typeof window !== 'undefined' &&
+    window.location.pathname.startsWith('/admin')
+  ) {
+    return 400
+  }
+  return 6000
+}
 
 function AppContent() {
   const location = useLocation()
@@ -86,7 +96,7 @@ function AppContent() {
             <Route path="/admin/pipeline" element={<Pipeline />} />
             <Route path="/admin/follow-ups" element={<FollowUps />} />
             <Route path="/admin/reports" element={<Reports />} />
-            <Route path="/admin" element={<Navigate to={ADMIN_DASHBOARD_PATH} replace />} />
+            <Route path="/admin" element={<AdminIndexRedirect />} />
           </Route>
           <Route path="/admin/*" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
         </Routes>
@@ -165,7 +175,7 @@ function App() {
     const minDurationTimer = setTimeout(() => {
       minDurationDone = true
       maybeStartExit()
-    }, MIN_LOADER_MS)
+    }, getMinLoaderMs())
 
     const handleReady = () => {
       pageReady = true

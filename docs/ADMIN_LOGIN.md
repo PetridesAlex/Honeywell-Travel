@@ -58,6 +58,35 @@ Unknown emails see: **You are not authorized to access this CRM.**
 | Email not received | Check spam; verify SMTP / Supabase email limits |
 | Supabase is not configured | Set `VITE_SUPABASE_*` in hosting env |
 
-## 6. Protected routes
+## 6. Design the CRM in Cursor (local dev only)
+
+When editing the CRM in **Cursor / localhost**, you do not need to open the live `www` site.
+
+### Option A — Design preview (fastest, no email)
+
+1. Run `npm run dev`
+2. Open **http://localhost:5173/admin/dashboard?preview=dev**
+   — or on the login page click **Layout preview only (no login)**
+3. Use the sidebar to browse Group bookings, Gift Vouchers, Package Calculator, etc.
+4. All links stay on `localhost` with `?preview=dev`
+
+This mode is **dev-only** — it does not work on the production Vercel build.
+
+### Option B — Real login in Cursor (your account + saved clients)
+
+1. In Supabase → **Authentication → URL Configuration**, add:
+   - `http://localhost:5173/**`
+   - `http://localhost:5173/admin/dashboard`
+2. Run `npm run dev` and open **http://localhost:5173/admin/login** in Cursor (not www)
+3. **Send Login Link** with your staff email
+4. In Outlook: **right-click the button → Copy link** (do not click — that opens Safari)
+5. On the login page, paste into **Open login link in Cursor** → **Open in Cursor & sign in**
+6. Dashboard opens logged in as you, with real CRM data — make live edits in Cursor
+
+**Important:** Clicking the email link opens your default browser (Safari), not Cursor. The session stays in that browser. You must **copy** the link and paste it into Cursor. After success, the sidebar shows **Welcome back — [your name]**, not **Design preview**.
+
+Production magic links still go to `https://www.honeywelltravel.com.cy/admin/dashboard`.
+
+## 7. Protected routes
 
 All `/admin/*` routes except `/admin/login` require a valid Supabase session. Unauthenticated users are redirected to `/admin/login`.

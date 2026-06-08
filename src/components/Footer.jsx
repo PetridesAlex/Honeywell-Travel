@@ -87,7 +87,6 @@ function Footer() {
           <Link to="/honeywell-travel-gallery/">Gallery</Link>
           <Link to="/our-blog/">Blog</Link>
           <Link to="/contact/">Contact</Link>
-          <Link to="/admin/login" className="crm-login-link" aria-label="Agent Login">Agent Login</Link>
         </div>
 
         <div className="footer-section">

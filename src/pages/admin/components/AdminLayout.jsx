@@ -18,7 +18,11 @@ import {
   Users
 } from 'lucide-react'
 import { fetchClientsWithExpiringPassports } from '../api/clientsApi'
-import { signOutAdmin } from '../../../lib/adminAuth'
+import {
+  hasAuthCallbackInUrl,
+  shouldUseCrmDesignPreview,
+  signOutAdmin
+} from '../../../lib/adminAuth'
 import { supabase } from '../../../lib/supabase'
 import { ADMIN_NAV } from '../constants'
 import { fetchLeads } from '../api/leadsApi'
@@ -59,16 +63,29 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
   const navigate = useNavigate()
   const location = useLocation()
   const [checkingAuth, setCheckingAuth] = useState(true)
+  const [hasSession, setHasSession] = useState(false)
   const [followUpBadge, setFollowUpBadge] = useState(0)
   const [passportBadge, setPassportBadge] = useState(0)
   const [teamTaskBadge, setTeamTaskBadge] = useState(0)
   const [welcomeName, setWelcomeName] = useState(null)
 
+  const designPreview =
+    !hasAuthCallbackInUrl() &&
+    shouldUseCrmDesignPreview({
+      search: location.search,
+      authReady: !checkingAuth,
+      authed: hasSession
+    })
+
   useEffect(() => {
     const loadUser = async () => {
       const { data } = await supabase.auth.getSession()
-      if (data?.session?.user) {
-        setWelcomeName(getAdminDisplayName(data.session.user))
+      const session = data?.session ?? null
+      setHasSession(Boolean(session))
+      if (session?.user) {
+        setWelcomeName(getAdminDisplayName(session.user))
+      } else {
+        setWelcomeName(null)
       }
       setCheckingAuth(false)
     }
@@ -78,6 +95,7 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
     const {
       data: { subscription }
     } = supabase.auth.onAuthStateChange((event, session) => {
+      setHasSession(Boolean(session))
       if (!session) {
         setWelcomeName(null)
         if (event === 'SIGNED_OUT') {
@@ -105,8 +123,8 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
       const { count } = await fetchOpenTasksCount()
       setTeamTaskBadge(count)
     }
-    if (!checkingAuth) loadBadge()
-  }, [checkingAuth, title])
+    if (!checkingAuth && !designPreview) loadBadge()
+  }, [checkingAuth, title, designPreview])
 
   const navItems = useMemo(
     () =>
@@ -135,6 +153,10 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
   const PageIcon = currentNav ? ICONS[currentNav.icon] : LayoutDashboard
 
   const handleSignOut = async () => {
+    if (designPreview) {
+      navigate('/admin/login', { replace: true })
+      return
+    }
     await signOutAdmin()
     navigate('/admin/login', { replace: true })
   }
@@ -162,7 +184,17 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
               />
             </div>
             <p className="crm-sidebar__brand-tagline">CRM Workspace</p>
-            {welcomeName ? (
+            {designPreview ? (
+              <div className="crm-sidebar__brand-user crm-sidebar__brand-user--preview">
+                <span className="crm-sidebar__brand-user-avatar" aria-hidden="true">
+                  PV
+                </span>
+                <div className="crm-sidebar__brand-user-copy">
+                  <span className="crm-sidebar__brand-user-label">Design preview</span>
+                  <span className="crm-sidebar__brand-user-name">Local dev only</span>
+                </div>
+              </div>
+            ) : welcomeName ? (
               <div className="crm-sidebar__brand-user">
                 <span className="crm-sidebar__brand-user-avatar" aria-hidden="true">
                   {adminInitials(welcomeName)}
@@ -202,12 +234,21 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
             <p className="crm-sidebar__hint">Leads, clients, pipeline &amp; follow-ups in one place.</p>
             <button type="button" className="crm-sidebar__signout" onClick={handleSignOut}>
               <LogOut size={16} strokeWidth={2} aria-hidden />
-              Sign out
+              {designPreview ? 'Exit preview' : 'Sign out'}
             </button>
           </div>
         </aside>
 
         <div className="crm-shell__main">
+          {designPreview ? (
+            <div className="crm-preview-banner" role="status">
+              <strong>Layout preview only — you are not logged in</strong>
+              <span>
+                No real user session (not Alex). For live CRM data in Cursor, sign in at{' '}
+                <a href="/admin/login">/admin/login</a> and use your magic link from localhost.
+              </span>
+            </div>
+          ) : null}
           {header ?? (
             <header className="crm-header crm-header--premium">
               <div className="crm-header__mesh" aria-hidden="true" />

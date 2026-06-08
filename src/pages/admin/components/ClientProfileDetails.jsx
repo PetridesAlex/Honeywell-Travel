@@ -3,6 +3,7 @@ import {
   CalendarClock,
   FileText,
   Globe2,
+  Lock,
   Mail,
   Phone,
   Shield
@@ -21,6 +22,17 @@ function formatDate(value) {
     })
   } catch {
     return null
+  }
+}
+
+function getNotesMeta(notes) {
+  const text = String(notes || '').trim()
+  if (!text) return { words: 0, lines: 0, chars: 0 }
+
+  return {
+    words: text.split(/\s+/).filter(Boolean).length,
+    lines: text.split(/\n/).length,
+    chars: text.length
   }
 }
 
@@ -51,6 +63,7 @@ function ProfileFact({ icon: Icon, label, value, href, emptyText = 'Not provided
 
 function ClientProfileDetails({ client, clientName }) {
   const passportStatus = getPassportStatus(client.date_of_expiry)
+  const notesMeta = getNotesMeta(client.notes)
   const mailto = client.email
     ? getComposeLinks({ to: client.email, recipientName: clientName }).mailto
     : null
@@ -126,17 +139,53 @@ function ClientProfileDetails({ client, clientName }) {
       </section>
 
       {client.notes ? (
-        <section className="crm-profile-block crm-profile-block--notes">
-          <header className="crm-profile-block__head">
-            <span className="crm-profile-block__icon crm-profile-block__icon--notes" aria-hidden="true">
-              <FileText size={20} />
+        <section className="crm-profile-block crm-profile-block--notes crm-profile-notes-block">
+          <header className="crm-profile-block__head crm-profile-notes-block__head">
+            <span
+              className="crm-profile-block__icon crm-profile-block__icon--notes crm-profile-notes-block__icon"
+              aria-hidden="true"
+            >
+              <FileText size={20} strokeWidth={2.25} />
             </span>
-            <div>
-              <h2 className="crm-profile-block__title">Internal notes</h2>
+            <div className="crm-profile-notes-block__head-copy">
+              <p className="crm-profile-notes-block__eyebrow">Team workspace</p>
+              <div className="crm-profile-notes-block__title-row">
+                <h2 className="crm-profile-block__title">Internal notes</h2>
+                <span className="crm-profile-notes-block__badge">
+                  <Lock size={11} aria-hidden="true" />
+                  Private
+                </span>
+              </div>
               <p className="crm-profile-block__desc">Private notes for your team only</p>
             </div>
+            {client.updated_at ? (
+              <div className="crm-profile-notes-block__meta">
+                <span className="crm-profile-notes-block__meta-label">Last updated</span>
+                <time className="crm-profile-notes-block__meta-value" dateTime={client.updated_at}>
+                  {formatDate(client.updated_at)}
+                </time>
+              </div>
+            ) : null}
           </header>
-          <div className="crm-profile-notes">{client.notes}</div>
+          <div className="crm-profile-notes-block__body">
+            <div className="crm-profile-notes crm-profile-notes--premium" aria-label="Internal notes content">
+              <span className="crm-profile-notes__quote" aria-hidden="true">
+                &ldquo;
+              </span>
+              <p className="crm-profile-notes__text">{client.notes}</p>
+            </div>
+            <footer className="crm-profile-notes-block__footer">
+              <span className="crm-profile-notes-block__stat">
+                <strong>{notesMeta.words}</strong> {notesMeta.words === 1 ? 'word' : 'words'}
+              </span>
+              <span className="crm-profile-notes-block__stat">
+                <strong>{notesMeta.lines}</strong> {notesMeta.lines === 1 ? 'line' : 'lines'}
+              </span>
+              <span className="crm-profile-notes-block__stat crm-profile-notes-block__stat--muted">
+                Staff only
+              </span>
+            </footer>
+          </div>
         </section>
       ) : null}
     </div>

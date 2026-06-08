@@ -5,7 +5,11 @@ import { ArrowLeft, Mail } from 'lucide-react'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {
   ADMIN_MAGIC_LINK_SUCCESS_MESSAGE,
+  ADMIN_MAGIC_LINK_SUCCESS_MESSAGE_DEV,
+  CRM_DEV_PREVIEW_DASHBOARD,
+  getAdminMagicLinkRedirectUrl,
   getMagicLinkErrorMessage,
+  resolveDevMagicLinkUrl,
   sendAdminMagicLink
 } from '../../lib/adminAuth'
 import { isSupabaseConfigured } from '../../lib/supabase'
@@ -23,6 +27,8 @@ function Login() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [captchaToken, setCaptchaToken] = useState('')
+  const [pastedMagicLink, setPastedMagicLink] = useState('')
+  const [pasteError, setPasteError] = useState('')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -69,8 +75,23 @@ function Login() {
       return
     }
 
-    setSuccess(ADMIN_MAGIC_LINK_SUCCESS_MESSAGE)
+    setSuccess(
+      import.meta.env.DEV
+        ? `${ADMIN_MAGIC_LINK_SUCCESS_MESSAGE_DEV} Return URL: ${getAdminMagicLinkRedirectUrl()}.`
+        : ADMIN_MAGIC_LINK_SUCCESS_MESSAGE
+    )
     setLoading(false)
+  }
+
+  const handlePasteMagicLink = (event) => {
+    event.preventDefault()
+    setPasteError('')
+    const resolved = resolveDevMagicLinkUrl(pastedMagicLink)
+    if (!resolved) {
+      setPasteError('Paste the full link from your email (Supabase verify URL or localhost dashboard link).')
+      return
+    }
+    window.location.replace(resolved)
   }
 
   return (
@@ -168,6 +189,46 @@ function Login() {
                 {loading ? 'Sending link…' : 'Send Login Link'}
               </button>
             </form>
+
+            {import.meta.env.DEV ? (
+              <section className="admin-auth-paste" aria-labelledby="admin-auth-paste-title">
+                <h2 id="admin-auth-paste-title" className="admin-auth-paste__title">
+                  Open login link in Cursor
+                </h2>
+                <p className="admin-auth-paste__hint">
+                  After the email arrives, <strong>right-click the login button → Copy link</strong> (do not
+                  click it — Outlook opens Safari and you will not be logged in here). Paste the full link
+                  below to open the CRM dashboard in Cursor with your real account.
+                </p>
+                <form className="admin-auth-paste__form" onSubmit={handlePasteMagicLink}>
+                  <input
+                    type="url"
+                    className="admin-auth-input admin-auth-input--paste"
+                    value={pastedMagicLink}
+                    onChange={syncInputValue(setPastedMagicLink)}
+                    onInput={syncInputValue(setPastedMagicLink)}
+                    placeholder="Paste magic link from Outlook here"
+                    aria-label="Paste magic link from email"
+                  />
+                  {pasteError ? (
+                    <p className="admin-auth-error" role="alert">
+                      {pasteError}
+                    </p>
+                  ) : null}
+                  <button type="submit" className="admin-auth-submit admin-auth-submit--paste">
+                    Open in Cursor &amp; sign in
+                  </button>
+                </form>
+                <p className="admin-auth-dev-hint">
+                  <Link
+                    to={`${CRM_DEV_PREVIEW_DASHBOARD}?preview=dev`}
+                    className="admin-auth-dev-preview"
+                  >
+                    Layout preview only (no login)
+                  </Link>
+                </p>
+              </section>
+            ) : null}
 
             <div className="admin-auth-footer">
               <Link to="/" className="admin-auth-back">
