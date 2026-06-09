@@ -107,13 +107,14 @@ export async function createLead(leadData = {}) {
 
   const { data, error } = await supabase.from('leads').insert(payload).select().single()
 
+  // Always sync to Travel Hub CRM — even if website Supabase insert fails
+  syncLeadToTravelHubCrm(payload)
+
   if (error) return { error }
 
   if (data?.id) {
     await linkLeadToClient(data.id, payload)
   }
-
-  syncLeadToTravelHubCrm(payload)
 
   return { error: null, data }
 }
