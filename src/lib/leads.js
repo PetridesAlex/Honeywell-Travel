@@ -1,4 +1,5 @@
 import { supabase } from './supabase'
+import { syncLeadToTravelHubCrm } from './crmSync'
 
 const DEFAULT_LEAD = {
   first_name: '',
@@ -111,6 +112,8 @@ export async function createLead(leadData = {}) {
   if (data?.id) {
     await linkLeadToClient(data.id, payload)
   }
+
+  syncLeadToTravelHubCrm(payload)
 
   return { error: null, data }
 }
