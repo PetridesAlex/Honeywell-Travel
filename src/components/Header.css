@@ -108,6 +108,8 @@
   box-shadow:
     0 4px 14px rgba(2, 6, 23, 0.22),
     0 1px 0 rgba(255, 255, 255, 0.14) inset;
+  overflow: hidden;
+  animation: esimLinkGlow 2.8s ease-in-out infinite;
   transition:
     transform 0.22s ease,
     border-color 0.22s ease,
@@ -115,8 +117,24 @@
     background 0.22s ease;
 }
 
+.tagline-esim-link::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 62%
+  );
+  transform: translateX(-130%);
+  animation: esimLinkSweep 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .tagline-esim-link:hover {
   transform: translateY(-1px);
+  animation-play-state: paused;
   color: #ffffff;
   border-color: rgba(110, 231, 183, 0.72);
   background:
@@ -128,7 +146,15 @@
     0 1px 0 rgba(255, 255, 255, 0.18) inset;
 }
 
+.tagline-esim-link:hover::after,
+.tagline-esim-link:hover .tagline-esim-link__label,
+.tagline-esim-link:hover .tagline-esim-link__icon {
+  animation-play-state: paused;
+}
+
 .tagline-esim-link__icon {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -139,9 +165,12 @@
   background: linear-gradient(145deg, #6ee7b7 0%, #34d399 100%);
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
   flex-shrink: 0;
+  animation: esimIconPulse 2.2s ease-in-out infinite;
 }
 
 .tagline-esim-link__copy {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -155,6 +184,19 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
+  background: linear-gradient(
+    90deg,
+    #d1fae5 0%,
+    #ffffff 22%,
+    #6ee7b7 45%,
+    #ffffff 68%,
+    #d1fae5 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: esimLabelShimmer 2.4s linear infinite;
 }
 
 .tagline-esim-link__hint {
@@ -163,6 +205,82 @@
   letter-spacing: 0.04em;
   color: rgba(209, 250, 229, 0.88);
   white-space: nowrap;
+  animation: esimHintPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes esimLinkGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 4px 14px rgba(2, 6, 23, 0.22),
+      0 0 0 0 rgba(52, 211, 153, 0),
+      0 1px 0 rgba(255, 255, 255, 0.14) inset;
+  }
+  50% {
+    box-shadow:
+      0 6px 18px rgba(2, 6, 23, 0.28),
+      0 0 14px rgba(52, 211, 153, 0.22),
+      0 1px 0 rgba(255, 255, 255, 0.16) inset;
+  }
+}
+
+@keyframes esimLinkSweep {
+  0%,
+  18% {
+    transform: translateX(-130%);
+  }
+  45% {
+    transform: translateX(130%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes esimLabelShimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 220% center;
+  }
+}
+
+@keyframes esimIconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 3px 14px rgba(52, 211, 153, 0.55);
+  }
+}
+
+@keyframes esimHintPulse {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tagline-esim-link,
+  .tagline-esim-link::after,
+  .tagline-esim-link__label,
+  .tagline-esim-link__hint,
+  .tagline-esim-link__icon {
+    animation: none;
+  }
+
+  .tagline-esim-link__label {
+    -webkit-text-fill-color: #ecfdf5;
+    background: none;
+  }
 }
 
 .tagline-right-controls .lang-btn {
