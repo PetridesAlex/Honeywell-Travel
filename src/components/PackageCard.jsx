@@ -27,6 +27,7 @@ function PackageCard({ package: pkg }) {
   }
 
   const displayPrice = getCheapestPrice()
+  const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
   const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0]
   const isGroup = (pkg.packageType || 'individual') === 'group'
   const resetScrollTop = () => {
@@ -86,7 +87,9 @@ function PackageCard({ package: pkg }) {
           <span className="package-category">{pkg.category}</span>
         </div>
         <div className="package-footer">
-          <span className="package-price">From €{displayPrice.toLocaleString()}</span>
+          <span className="package-price">
+            {priceOnRequest || !(displayPrice > 0) ? 'Price on request' : `From €${displayPrice.toLocaleString()}`}
+          </span>
           <span className="package-button">View Details →</span>
         </div>
       </div>

@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import './ModalCards.css'
 import { FALLBACK_PACKAGE_CARD_IMAGE } from '../utils/packageCardImage'
+import DepartureCountdownBadge from './DepartureCountdownBadge'
+import PackageCompletedBadge from './PackageCompletedBadge'
 
 const ANIMATION_SPEEDS = {
   slow: { duration: 0.62, springStiffness: 205, springDamping: 25 },
@@ -109,6 +111,11 @@ function ModalCards({
               }}
             />
             <div className="modal-card-shade" />
+            {card.statusBadge === 'completed' ? (
+              <PackageCompletedBadge variant="card" />
+            ) : card.departureCountdown ? (
+              <DepartureCountdownBadge countdown={card.departureCountdown} variant="card" />
+            ) : null}
             <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
               {card.packageType === 'group' ? 'Group' : 'Individual'}
             </span>
@@ -185,6 +192,11 @@ function ModalCards({
                         }}
                       />
                       <div className="modal-cards-hero-shade" />
+                      {selectedCard.statusBadge === 'completed' ? (
+                        <PackageCompletedBadge variant="hero" />
+                      ) : selectedCard.departureCountdown ? (
+                        <DepartureCountdownBadge countdown={selectedCard.departureCountdown} variant="hero" />
+                      ) : null}
                       <span className={`modal-card-type modal-card-type--${selectedCard.packageType || 'individual'}`}>
                         {selectedCard.packageType === 'group' ? 'Group' : 'Individual'}
                       </span>

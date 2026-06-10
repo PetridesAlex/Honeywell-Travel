@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import './Header.css'
 
+const ESIM_AFFILIATE_URL =
+  'https://globaladvancedcomm.myshopify.com?sca_ref=11515440.g6jdihq0ttYGdlkB'
+
 // Helper function to convert category name to URL-friendly slug
 const categoryToSlug = (category) => {
   return category
@@ -18,7 +21,7 @@ const holidayTypesLinkClass = (item, mode) => {
   const base = mode === 'mobile' ? 'mobile-dropdown-item' : 'dropdown-item'
   if (item === 'Summer Packages') return `${base} ${base}--summer-primary`
   if (item === 'Summer Packages to Greece') return `${base} ${base}--summer-secondary`
-  if (item === 'Exotic Packages') return `${base} ${base}--exotic-premium`
+  if (item === 'Exotic Packages' || item === 'Mary Specials Trips') return `${base} ${base}--exotic-premium`
   return `${base} ${base}--holiday-caps`
 }
 
@@ -32,7 +35,7 @@ function Header() {
   const holidayTypes = [
     'Summer Packages',
     'Summer Packages to Greece',
-    'Music & Sports',
+    'Mary Specials Trips',
     'Exotic Packages',
     'Easter Packages',
     'Autumn Packages',
@@ -41,7 +44,7 @@ function Header() {
     'Green Monday Packages',
     'Cruises',
     'City Breaks',
-    'Mary Specials Trips'
+    'Music & Sports'
   ]
 
   const honeymoonTypes = [
@@ -80,6 +83,30 @@ function Header() {
         <span className="tagline-brand">Honeywell Travel</span>
         <span className="tagline-text">#LivetheExperience</span>
         <div className="tagline-right-controls">
+          <a
+            href={ESIM_AFFILIATE_URL}
+            className="tagline-esim-link"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            aria-label={t('header.esimAria')}
+          >
+            <span className="tagline-esim-link__icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <rect x="5" y="2" width="14" height="20" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
+                <path
+                  d="M9 7h6M9 11h6M9 15h4"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                <circle cx="16.5" cy="16.5" r="2.5" fill="currentColor" opacity="0.9" />
+              </svg>
+            </span>
+            <span className="tagline-esim-link__copy">
+              <span className="tagline-esim-link__label">{t('header.esimLabel')}</span>
+              <span className="tagline-esim-link__hint">{t('header.esimHint')}</span>
+            </span>
+          </a>
           <LanguageSwitcher />
           <div className="social-icons tagline-social-icons">
             <a
@@ -473,6 +500,28 @@ function Header() {
             {t('header.termsAndConditions')}
           </Link>
           <Link to="/contact/" className="mobile-link" onClick={closeMobileMenu}>{t('header.contact')}</Link>
+
+          <a
+            href={ESIM_AFFILIATE_URL}
+            className="mobile-link mobile-esim-link"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            onClick={closeMobileMenu}
+            aria-label={t('header.esimAria')}
+          >
+            <span className="mobile-esim-link__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <rect x="5" y="2" width="14" height="20" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M9 7h6M9 11h6M9 15h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <circle cx="16.5" cy="16.5" r="2.5" fill="currentColor" opacity="0.9" />
+              </svg>
+            </span>
+            <span className="mobile-esim-link__copy">
+              <span>{t('header.esimLabel')}</span>
+              <small>{t('header.esimHint')}</small>
+            </span>
+            <span className="mobile-esim-link__arrow" aria-hidden="true">↗</span>
+          </a>
           
           <LanguageSwitcher />
           

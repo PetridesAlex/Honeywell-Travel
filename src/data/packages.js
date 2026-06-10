@@ -24,6 +24,7 @@ import { cretePackage314Program } from './cretePackage314Program.js'
 import { cretePackage315Program } from './cretePackage315Program.js'
 import { skiathosPackage69Hotels } from './skiathosPackage69Hotels.js'
 import { skiathosPackage72Hotels } from './skiathosPackage72Hotels.js'
+import { spainWinePackage320Program } from './spainWinePackage320Program.js'
 
 export const travelPackages = [
   {
@@ -15549,7 +15550,8 @@ export const travelPackages = [
     packageType: 'group',
     supplier: 'Mary',
     details: {
-      departureDate: '12/05',
+      packageStatus: 'completed',
+      departureDate: '12/05/2025',
       departureFrom: 'Larnaca',
       destinationFull: 'Copenhagen (Denmark), Malmö (Sweden), Bergen & Norwegian Fjords (Norway)',
       monthAvailability: 'May',
@@ -15672,6 +15674,153 @@ export const travelPackages = [
         day7: '18 Μαΐου – Μπέργκεν – Κοπεγχάγη\n\nΠρωινό και ελεύθερος χρόνος για βόλτα στην ψαραγορά (Fisketorget) ή για τις τελευταίες αγορές νορβηγικών πλεκτών και αναμνηστικών. Αναχώρηση για το αεροδρόμιο και πτήση για Κοπεγχάγη. Άφιξη, μεταφορά στο ξενοδοχείο και μία τελευταία βραδιά στην πόλη για όσα δεν προλάβατε τις προηγούμενες μέρες.',
         day8: '19 Μαΐου – Αναχώρηση\n\nΜεταφορά στο αεροδρόμιο νωρίς το πρωί και πτήση επιστροφής στη Λάρνακα, γεμάτες αναμνήσεις από την καρδιά της Σκανδιναβίας.'
       }
+    }
+  },
+  {
+    id: 320,
+    title: 'ΟΙΝΟΛΟΓΙΚΟ ΤΑΞΙΔΙ ΣΤΗΝ ΙΣΠΑΝΙΑ!',
+    destination: 'Spain',
+    category: 'Mary Special Trips',
+    price: 2340,
+    duration: '5 days / 4 nights',
+    description:
+      'Οινολογικό ταξίδι στη Βαρκελώνη, Penedès, Ριόχα και Μπιλμπάο (30 Σεπτεμβρίου – 4 Οκτωβρίου 2026). Premium ομάδα 22 ατόμων, σε συνοδεία της Μαίρης Σπύρου.',
+    longDescription:
+      'Ανακαλύψτε την καρδιά του ισπανικού κρασιού σε ένα premium ταξίδι που συνδυάζει τη Βαρκελώνη, τους αμπελώνες του Penedès, την περίφημη Ριόχα και το Μπιλμπάο. Περιλαμβάνει 7 κορυφαίες οινοποιητικές εμπειρίες, δύο ξεχωριστές γαστρονομικές στιγμές (Mastinell & Nerua Guggenheim Michelin ★), διαμονή σε 4★ Superior ξενοδοχεία, μεταφορές με πολυτελές ιδιωτικό λεωφορείο και επιστημονική καθοδήγηση από τη Sommelier Βικτώρια Χαραλάμπους. Premium ομάδα έως 22 ταξιδιώτες.',
+    image: '🍷',
+    featured: true,
+    packageType: 'group',
+    supplier: 'Mary',
+    details: {
+      departureDate: '30/09/2026',
+      departureYear: 2026,
+      showDepartureCountdown: true,
+      departureFrom: 'Larnaca',
+      destinationFull: 'Barcelona, Penedès, Logroño (Rioja) & Bilbao, Spain',
+      monthAvailability: 'September – October',
+      roomType: 'Twin Room',
+      boardBasis: 'Buffet Breakfast',
+      airline: 'Cyprus Airways & Aegean',
+      groupSize: 'Premium – έως 22 ταξιδιώτες',
+      includedLuggage:
+        '1 προσωπικό αντικείμενο (τσάντα/backpack που τοποθετείται κάτω από το κάθισμα), 1 χειραποσκευή έως 8kg στην καμπίνα και 1 παραδοτέα αποσκευή έως 23kg στο χώρο των αποσκευών του αεροπλάνου.',
+      hideHotelPrices: true,
+      hotelDatesAreStaySegments: true,
+      note: 'Μικρή premium ομάδα για αποκλειστική εμπειρία οινογνωσίας, γαστρονομίας και προσωπικής καθοδήγησης.',
+      coverImage: '/images/mary-special-trip/vinilio-trip-spain/vinilio-trip-spain-cover.webp',
+      thumbnailImage: '/images/mary-special-trip/vinilio-trip-spain/vinilio-trip-spain-cover.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '30/09',
+          route: 'Larnaca (LCA) → Barcelona (BCN)',
+          flight: 'CY322',
+          airline: 'Cyprus Airways',
+          time: '07:00–10:25',
+          luggage:
+            '1 προσωπικό αντικείμενο, 1 χειραποσκευή έως 8kg και 1 αποσκευή έως 23kg'
+        },
+        {
+          direction: 'Return',
+          date: '04/10',
+          route: 'Bilbao (BIO) → Athens (ATH)',
+          flight: 'A3 707',
+          airline: 'Aegean',
+          time: '12:10–16:30',
+          luggage:
+            '1 προσωπικό αντικείμενο, 1 χειραποσκευή έως 8kg και 1 αποσκευή έως 23kg'
+        },
+        {
+          direction: 'Return',
+          date: '04/10',
+          route: 'Athens (ATH) → Larnaca (LCA)',
+          flight: 'A3 908',
+          airline: 'Aegean',
+          time: '18:35–20:10',
+          luggage:
+            '1 προσωπικό αντικείμενο, 1 χειραποσκευή έως 8kg και 1 αποσκευή έως 23kg'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Mercer Casa Torner i Güell 4★ (ή παρόμοιο)',
+          stars: 4,
+          roomType: 'Twin Room',
+          image: '/images/mary-special-trip/vinilio-trip-spain/mercer-casa-torner-guell.webp',
+          location: 'Vilafranca del Penedès, Penedès, Spain',
+          boardBasis: 'Buffet Breakfast',
+          checkInDate: '30/09',
+          nights: 1,
+          prices: { double: 2340, single: 2540 },
+          packagePrice: 4680,
+          description:
+            'Ένα ατμοσφαιρικό boutique ξενοδοχείο στην καρδιά της Vilafranca del Penedès. Στεγάζεται σε πλήρως ανακαινισμένο κτίριο του 19ου αιώνα και βρίσκεται πάνω στον ιστορικό πεζόδρομο Rambla de Sant Francesc. Η τοποθεσία του επιτρέπει εύκολη πρόσβαση με τα πόδια στα καφέ, τα εστιατόρια και τα μεσαιωνικά σοκάκια της πόλης.'
+        },
+        {
+          name: 'Eurostars Marqués de Vallejo 4★ (ή παρόμοιο)',
+          stars: 4,
+          roomType: 'Twin Room',
+          image: '/images/mary-special-trip/vinilio-trip-spain/eurostars-marques-de-vallejo.webp',
+          location: 'Logroño, La Rioja, Spain',
+          boardBasis: 'Buffet Breakfast',
+          checkInDate: '01/10',
+          nights: 2,
+          description:
+            'Ένα elegant boutique ξενοδοχείο μέσα σε ιστορικό κτίριο του 1911. Βρίσκεται στην καρδιά του ιστορικού κέντρου του Logroño, δίπλα στον Καθεδρικό Ναό Santa María de la Redonda και μόλις λίγα βήματα από την περίφημη Calle Laurel.'
+        },
+        {
+          name: 'Barceló Bilbao Nervión 4★ (ή παρόμοιο)',
+          stars: 4,
+          roomType: 'Twin Room',
+          image: '/images/mary-special-trip/vinilio-trip-spain/barcelo-bilbao-nervion.webp',
+          location: 'Bilbao, Spain',
+          boardBasis: 'Buffet Breakfast',
+          checkInDate: '03/10',
+          nights: 1,
+          description:
+            'Σύγχρονο ξενοδοχείο με βραβευμένο design και μοναδική τοποθεσία πάνω στον ποταμό. Βρίσκεται λίγα λεπτά από το Guggenheim, την Παλιά Πόλη και τις πιο όμορφες γειτονιές του Μπιλμπάο. Στο ξενοδοχείο λειτουργεί εξαιρετικό wine bar και εστιατόριο με αυθεντικά βασκικά pintxos.'
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια οικονομικής θέσης (Cyprus Airways & Aegean): 30/09 Λάρνακα – Βαρκελώνη (CY322, 07:00–10:25)· 04/10 Μπιλμπάο – Αθήνα (A3 707, 12:10–16:30) και Αθήνα – Λάρνακα (A3 908, 18:35–20:10).',
+        'Επιτρεπόμενες αποσκευές ανά άτομο: 1 προσωπικό αντικείμενο κάτω από το κάθισμα, 1 χειραποσκευή έως 8 kg στην καμπίνα και 1 αποσκευή έως 23 kg στον αποθηκευτικό χώρο.',
+        'Οινολογικές εμπειρίες και γευσιγνωσίες σε 7 κορυφαία οινοποιεία:',
+        '30/09 · Familia Torres Winery (Penedès)',
+        '01/10 · Codorníu Winery & Bodegas Borsao',
+        '02/10 · Bodegas Muga, Bodegas Ysios (Photo Stop & Wine Bar) & Bodegas Viña Real – CVNE',
+        '03/10 · Bodegas Marqués de Riscal',
+        'Fine dining στο Cava & Hotel Mastinell: δείπνο εμπνευσμένο από την καταλανική φιλοσοφία Km0 με επιλεγμένα κρασιά του κτήματος.',
+        'Nerua Guggenheim (Michelin ★): αποχαιρετιστήριο δείπνο υψηλής γαστρονομίας με ειδικό πακέτο wine pairing.',
+        'Διαμονή 4 διανυκτερεύσεων σε επιλεγμένα ξενοδοχεία 4★ Superior (1 νύχτα Penedès, 2 νύχτες Logroño, 1 νύχτα Bilbao) με καθημερινό μπουφέ πρωινό.',
+        'Φόροι ξενοδοχείων.',
+        'Όλες οι μετακινήσεις με πολυτελές ιδιωτικό λεωφορείο σύμφωνα με το πρόγραμμα.',
+        'Επαγγελματίας Ελληνόφωνος / Ισπανόφωνος συνοδός, γνώστης των περιοχών.',
+        'Επιστημονική συνοδεία και καθοδήγηση από τη sommelier Βικτώρια Χαραλάμπους.',
+        'Ταξιδιωτική ασφάλεια και Φ.Π.Α.'
+      ],
+      notIncluded: [
+        'Γεύματα ή δείπνα που δεν αναφέρονται στο πρόγραμμα.',
+        'Ποτά και προσωπικά έξοδα.',
+        'Προαιρετικές εκδρομές.',
+        'Οτιδήποτε δεν αναφέρεται ως περιλαμβανόμενο.'
+      ],
+      importantNotes: [
+        'Η τιμή βασίζεται σε ελάχιστη συμμετοχή 20 ατόμων. Σε περίπτωση μικρότερου αριθμού ενδέχεται να υπάρξει αναπροσαρμογή.',
+        'Η τιμή βασίζεται στους ισχύοντες φόρους και τυχόν μεταβολές θα επηρεάσουν ανάλογα την τελική τιμή.',
+        'Η σειρά επισκέψεων στα οινοποιεία μπορεί να αλλάξει χωρίς να παραλειφθεί καμία εμπειρία.',
+        'Σε περίπτωση μη διαθεσιμότητας κάποιου οινοποιείου θα αντικατασταθεί από άλλο αντίστοιχης ποιότητας και κατηγορίας.'
+      ],
+      paymentPolicy:
+        'ΠΛΗΡΩΜΕΣ\n\n• Προκαταβολή απαραίτητη μέχρι 09/06/2026: €500 ανά άτομο.\n• 2η δόση: €1.000 – 60 μέρες πριν την αναχώρηση (μέχρι 30/07/2026).\n• 3η δόση: €840 (δίκλινο) ή €1.040 (μονόκλινο) – 30 μέρες πριν την αναχώρηση (μέχρι 30/08/2026).\n\nΜε την ένδειξη ενδιαφέροντος θα σας αποσταλεί σύμβαση ταξιδίου όπου θα αναγράφονται όλοι οι όροι συμμετοχής.',
+      cancellationPolicy:
+        'ΠΟΛΙΤΙΚΗ ΑΚΥΡΩΣΕΩΝ\n\n60–40 ημέρες πριν την αναχώρηση: απώλεια προκαταβολής.\n39–30 ημέρες πριν την αναχώρηση: 75% παρακράτηση του ποσού.\n29 ημέρες πριν την αναχώρηση και λιγότερο: 100% παρακράτηση του ποσού.',
+      program: spainWinePackage320Program,
+      gallery: [
+        '/images/mary-special-trip/vinilio-trip-spain/vinilio-trip-spain-cover.webp',
+        '/images/mary-special-trip/vinilio-trip-spain/mercer-casa-torner-guell.webp',
+        '/images/mary-special-trip/vinilio-trip-spain/eurostars-marques-de-vallejo.webp',
+        '/images/mary-special-trip/vinilio-trip-spain/barcelo-bilbao-nervion.webp'
+      ]
     }
   },
   {

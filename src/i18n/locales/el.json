@@ -23,10 +23,26 @@
     "blog": "Ιστολόγιο",
     "insurance": "Ασφάλεια",
     "termsAndConditions": "Όροι και Προϋποθέσεις",
-    "contact": "Επικοινωνία"
+    "contact": "Επικοινωνία",
+    "esimLabel": "Travel eSIM",
+    "esimHint": "200+ χώρες",
+    "esimAria": "Αγορά travel eSIM — ανοίγει το partner κατάστημα Global Advanced Communications σε νέα καρτέλα"
   },
   "package": {
     "departureDate": "Ημερομηνία Αναχώρησης",
+    "departureCountdown": {
+      "today": "Αναχώρηση σήμερα",
+      "tomorrow": "1 ημέρα μέχρι την αναχώρηση",
+      "days": "{{count}} ημέρες μέχρι την αναχώρηση",
+      "dayUnit": "ημέρα",
+      "daysUnit": "ημέρες",
+      "caption": "αναχώρηση"
+    },
+    "completedBadge": {
+      "title": "Ολοκληρώθηκε",
+      "label": "Το ταξίδι έχει ολοκληρωθεί"
+    },
+    "checkIn": "Check-in",
     "room": "Δωμάτιο",
     "adults": "Ενήλικες",
     "adult": "Ενήλικας",
@@ -39,6 +55,7 @@
     "included": "Συμπεριλαμβάνεται",
     "notIncluded": "Δεν Συμπεριλαμβάνεται",
     "importantNotes": "Σημαντικές Σημειώσεις",
+    "payments": "Πληρωμές",
     "price": "Τιμή",
     "from": "Από",
     "perPerson": "ανά άτομο",

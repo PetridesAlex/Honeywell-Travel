@@ -23,10 +23,26 @@
     "blog": "Blog",
     "insurance": "Insurance",
     "termsAndConditions": "Terms and Conditions",
-    "contact": "Contact"
+    "contact": "Contact",
+    "esimLabel": "Travel eSIM",
+    "esimHint": "200+ countries",
+    "esimAria": "Shop travel eSIM plans — opens Global Advanced Communications partner store in a new tab"
   },
   "package": {
     "departureDate": "Departure Date",
+    "departureCountdown": {
+      "today": "Departing today",
+      "tomorrow": "1 day until departure",
+      "days": "{{count}} days until departure",
+      "dayUnit": "day",
+      "daysUnit": "days",
+      "caption": "to go"
+    },
+    "completedBadge": {
+      "title": "Completed",
+      "label": "This trip has been completed"
+    },
+    "checkIn": "Check-in",
     "room": "Room",
     "adults": "Adults",
     "adult": "Adult",
@@ -39,6 +55,7 @@
     "included": "Included",
     "notIncluded": "Not Included",
     "importantNotes": "Important Notes",
+    "payments": "Payments",
     "price": "Price",
     "from": "From",
     "perPerson": "per person",

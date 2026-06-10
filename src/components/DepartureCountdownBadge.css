@@ -1,0 +1,108 @@
+.departure-countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.35rem;
+  padding: 0.45rem 0.62rem 0.5rem;
+  border-radius: 14px;
+  text-align: center;
+  pointer-events: none;
+  border: 1px solid rgba(252, 211, 77, 0.42);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(196, 18, 48, 0.35) 0%, transparent 58%),
+    linear-gradient(155deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 27, 46, 0.88) 100%);
+  box-shadow:
+    0 10px 28px rgba(15, 23, 42, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.12) inset;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.departure-countdown--card {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 3;
+}
+
+.departure-countdown--hero {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 4;
+  min-width: 4.85rem;
+  padding: 0.55rem 0.75rem 0.6rem;
+}
+
+.departure-countdown__value {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #fef3c7;
+  font-variant-numeric: tabular-nums;
+}
+
+.departure-countdown--hero .departure-countdown__value {
+  font-size: 1.75rem;
+}
+
+.departure-countdown__unit {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(252, 211, 77, 0.92);
+}
+
+.departure-countdown__caption {
+  display: block;
+  margin-top: 0.18rem;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.82);
+  line-height: 1.2;
+}
+
+.departure-countdown--urgent {
+  border-color: rgba(252, 211, 77, 0.62);
+  animation: departure-countdown-glow 2.8s ease-in-out infinite;
+}
+
+.departure-countdown--imminent {
+  border-color: rgba(254, 240, 138, 0.85);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(234, 88, 12, 0.42) 0%, transparent 58%),
+    linear-gradient(155deg, rgba(69, 10, 10, 0.94) 0%, rgba(30, 27, 46, 0.9) 100%);
+}
+
+@keyframes departure-countdown-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 28px rgba(15, 23, 42, 0.35),
+      0 0 0 0 rgba(252, 211, 77, 0);
+  }
+  50% {
+    box-shadow:
+      0 12px 32px rgba(15, 23, 42, 0.38),
+      0 0 0 3px rgba(252, 211, 77, 0.14);
+  }
+}
+
+@media (max-width: 640px) {
+  .departure-countdown--card {
+    min-width: 3.85rem;
+    padding: 0.38rem 0.5rem 0.42rem;
+  }
+
+  .departure-countdown--card .departure-countdown__value {
+    font-size: 1.25rem;
+  }
+}

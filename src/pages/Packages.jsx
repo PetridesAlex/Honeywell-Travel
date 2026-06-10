@@ -2,9 +2,8 @@ import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByFilter, travelPackages } from '../data/packages'
-import { packageCardImageUrl } from '../utils/packageCardImage'
-import { getEnglishPackageTitle } from '../utils/packageTranslations'
 import ModalCards from '../components/ModalCards'
+import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import SEO from '../components/SEO'
 import './Packages.css'
 
@@ -36,20 +35,6 @@ const slugToCategory = (slug) => {
     'exotic-destinations': 'Exotic Destinations'
   }
   return slugCategoryMap[slug] || null
-}
-
-function getLeadPrice(pkg) {
-  if (pkg.details?.hotels?.length) {
-    let lowestDouble = Infinity
-    for (const hotel of pkg.details.hotels) {
-      const price = hotel?.prices?.double
-      if (typeof price === 'number' && price > 0 && price < lowestDouble) {
-        lowestDouble = price
-      }
-    }
-    if (lowestDouble !== Infinity) return lowestDouble
-  }
-  return typeof pkg.price === 'number' ? pkg.price : Number.MAX_SAFE_INTEGER
 }
 
 function Packages() {
@@ -188,29 +173,7 @@ function Packages() {
   }, [category, destination, minPrice, maxPrice, departureMonth, travelType])
 
   const modalCards = useMemo(
-    () =>
-      filteredPackages.map((pkg) => {
-        const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
-        const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
-        const imageUrl = packageCardImageUrl(pkg)
-        const isGroup = (pkg.packageType || 'individual') === 'group'
-
-        return {
-          id: String(pkg.id),
-          imageUrl,
-          title: pkg.title,
-          secondaryTitle: hasAlternateTitle ? englishTitle : '',
-          description: pkg.description,
-          gradientColor: isGroup ? '#0d5c2e' : '#c41230',
-          destination: pkg.destination,
-          category: pkg.category,
-          duration: pkg.duration,
-          supplier: pkg.supplier || '',
-          packageType: isGroup ? 'group' : 'individual',
-          price: getLeadPrice(pkg),
-          link: `/packages/${pkg.id}/details`
-        }
-      }),
+    () => mapPackagesToModalCards(filteredPackages, i18n),
     [filteredPackages, i18n]
   )
 

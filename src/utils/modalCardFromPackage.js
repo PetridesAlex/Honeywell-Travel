@@ -1,5 +1,6 @@
 import { packageCardImageUrl } from './packageCardImage'
 import { getEnglishPackageTitle } from './packageTranslations'
+import { getPackageDepartureCountdown } from './packageDepartureCountdown'
 
 export function getPackageLeadPrice(pkg) {
   if (pkg?.details?.hotels?.length) {
@@ -34,7 +35,10 @@ export function mapPackageToModalCard(pkg, i18n) {
     supplier: pkg.supplier || '',
     packageType: isGroup ? 'group' : 'individual',
     price: getPackageLeadPrice(pkg),
-    link: `/packages/${pkg.id}/details`
+    link: `/packages/${pkg.id}/details`,
+    departureCountdown:
+      pkg.details?.packageStatus === 'completed' ? null : getPackageDepartureCountdown(pkg),
+    statusBadge: pkg.details?.packageStatus === 'completed' ? 'completed' : null
   }
 }
 

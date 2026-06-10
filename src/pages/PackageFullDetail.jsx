@@ -167,6 +167,48 @@ const isProgramInlineHeading = (raw) => {
 const programParagraphClass = (text) =>
   isProgramInlineHeading(text) ? 'section-text program-text-subheading' : 'section-text'
 
+const isProgramIntroTitle = (raw) => {
+  const t = raw.trim()
+  if (!t || t.length > 90 || t.includes('€') || t.includes('|')) return false
+  if (/^(Ημερομηνίες|Διάρκεια|Ομάδα|Δίκλινο|Μονόκλινο|Τιμή)/i.test(t)) return false
+  return /πρόγραμμα/i.test(t) || (t.length < 80 && (t.includes('–') || t.includes('-')))
+}
+
+const isProgramIntroMetaLine = (raw) =>
+  /^(Ημερομηνίες|Διάρκεια|Ομάδα|Δίκλινο|Μονόκλινο)/i.test(raw.trim())
+
+const programIntroParagraphClass = (text) => {
+  const t = text.trim()
+  if (t === 'Τιμές' || isProgramInlineHeading(t)) return 'program-text-subheading'
+  if (isProgramIntroMetaLine(t)) return 'program-intro-meta'
+  return 'section-text'
+}
+
+const formatProgramNoteAmount = (amount) =>
+  `€${Number(amount).toLocaleString('de-DE')}`
+
+/** Premium program notes: group size + twin/single rates when hotel prices are hidden. */
+const getProgramNoteHighlights = (details) => {
+  if (!details?.hideHotelPrices) return null
+  const prices = details.hotels?.[0]?.prices
+  if (!prices) return null
+
+  const highlights = []
+  if (details.groupSize) {
+    highlights.push({ label: 'Ομάδα', value: details.groupSize })
+  }
+  if (prices.double != null) {
+    highlights.push({ label: 'Δίκλινο', value: `${formatProgramNoteAmount(prices.double)} / άτομο` })
+  }
+  if (prices.single != null) {
+    highlights.push({ label: 'Μονόκλινο', value: `${formatProgramNoteAmount(prices.single)} / άτομο` })
+  }
+  return highlights.length ? highlights : null
+}
+
+const isPremiumProgramNote = (details, highlights) =>
+  Boolean(highlights?.length || /premium/i.test(details?.groupSize || ''))
+
 // Map airline names (as in package details.airline) to logo paths
 const AIRLINE_LOGO = {
   'Cyprus Airways': '/images/airlines-logo/cyprus-airways-logo.webp',
@@ -222,11 +264,63 @@ const sortDepartureDateStrings = (dates) => {
   return copy
 }
 
+const parseDateTokenList = (value) => {
+  if (!value || typeof value !== 'string') return []
+  return String(value)
+    .split(/[,\n;]+/)
+    .map((part) => part.trim())
+    .filter((part) => part && part !== '—' && part !== '-')
+}
+
+const dedupeSortDates = (dates) => {
+  const normalized = new Map()
+  dates.forEach((date) => {
+    const key = date.toLowerCase()
+    if (!normalized.has(key)) normalized.set(key, date)
+  })
+  return sortDepartureDateStrings([...normalized.values()])
+}
+
+/** Multi-city group trips: each hotel row is a stay leg (check-in), not a bookable departure option. */
+const isItineraryStyleHotels = (details) => {
+  if (details?.hotelDatesAreStaySegments) return true
+  const hotels = details?.hotels
+  if (!Array.isArray(hotels) || hotels.length < 2) return false
+  const names = new Set(hotels.map((h) => h?.name).filter(Boolean))
+  if (names.size < 2) return false
+  const stayDates = hotels.map((h) => h?.checkInDate || h?.departureDate).filter(Boolean)
+  return names.size === hotels.length && new Set(stayDates).size === stayDates.length
+}
+
+const getHotelStayDate = (hotel) => hotel?.checkInDate || hotel?.departureDate
+
+/** Outbound package departure options — not hotel stay segments or return/internal flight legs. */
+const getPackageDepartureDates = (details) => {
+  if (Array.isArray(details.departureDates) && details.departureDates.length > 0) {
+    return dedupeSortDates(details.departureDates)
+  }
+  const fromSingular = parseDateTokenList(details.departureDate)
+  if (fromSingular.length > 0) return dedupeSortDates(fromSingular)
+
+  const fromOutboundFlights = (details.flights || [])
+    .filter((f) => f?.direction === 'Departure')
+    .flatMap((f) => parseDateTokenList(f.date))
+  if (fromOutboundFlights.length > 0) return dedupeSortDates(fromOutboundFlights)
+
+  if (!isItineraryStyleHotels(details)) {
+    const fromHotels = (details.hotels || []).flatMap((h) => parseDateTokenList(h?.departureDate))
+    if (fromHotels.length > 0) return dedupeSortDates(fromHotels)
+  }
+
+  return []
+}
+
 /**
- * All departure date tokens for this package: package-level strings, hotel rows, flights, etc.
- * Includes `details.departureDate` (singular) when present — many packages use it instead of `departureDates[]`.
+ * Departure date tokens for filters / hotel alignment. Itinerary-style packages use package-level dates only.
  */
 const getDepartureDates = (details) => {
+  if (isItineraryStyleHotels(details)) return getPackageDepartureDates(details)
+
   const rawDates = [
     ...(Array.isArray(details.departureDates) ? details.departureDates : []),
     ...(details.departureDate && typeof details.departureDate === 'string' ? [details.departureDate] : []),
@@ -238,21 +332,7 @@ const getDepartureDates = (details) => {
       : []),
   ]
 
-  const normalized = new Map()
-  rawDates.forEach((value) => {
-    const parts = String(value)
-      .split(/[,\n;]+/)
-      .map((part) => part.trim())
-      .filter(Boolean)
-
-    parts.forEach((date) => {
-      if (!date || date === '—' || date === '-') return
-      const key = date.toLowerCase()
-      if (!normalized.has(key)) normalized.set(key, date)
-    })
-  })
-
-  return sortDepartureDateStrings([...normalized.values()])
+  return dedupeSortDates(rawDates.flatMap((value) => parseDateTokenList(value)))
 }
 
 /**
@@ -260,6 +340,8 @@ const getDepartureDates = (details) => {
  * variant when the CMS lists a date on package/flights but omitted a duplicate hotel entry.
  */
 const alignHotelVariantsToDepartures = (variants, details, baseHotel) => {
+  if (isItineraryStyleHotels(details)) return variants
+
   const fromCanonical = getDepartureDates(details)
   const unionKeys = new Map()
   fromCanonical.forEach((d) => unionKeys.set(d.toLowerCase(), d))
@@ -328,7 +410,7 @@ const FlightLegSegment = ({ leg }) => (
 
 const PackageFlightsSection = ({ details }) => {
   if (!details.flights?.length) return null
-  const departureDates = getDepartureDates(details)
+  const departureDates = getPackageDepartureDates(details)
   return (
     <div className="details-section">
       <h3 className="details-section-title details-section-title-flights">
@@ -341,7 +423,9 @@ const PackageFlightsSection = ({ details }) => {
       </h3>
       {departureDates.length > 0 && (
         <div className="flights-departures" aria-label="Package departure dates">
-          <p className="flights-departures__label">Departure Dates</p>
+          <p className="flights-departures__label">
+            {departureDates.length > 1 ? 'Departure Dates' : 'Departure Date'}
+          </p>
           <div className="flights-departures__list">
             {departureDates.map((date) => (
               <span key={date} className="flights-departures__item">
@@ -525,6 +609,8 @@ function PackageFullDetail() {
 
       const details = pkg.details || {}
       const gallery = details.gallery || []
+      const itineraryHotels = isItineraryStyleHotels(details)
+      const hotelDateLabel = itineraryHotels ? t('package.checkIn') : t('package.departureDate')
       const priceTabDestination = getPriceTabDestinationLine(details, pkg, translatedTitle)
       const filteredHotelsForDeparture = useMemo(() => {
         if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
@@ -569,6 +655,12 @@ function PackageFullDetail() {
           return lowestDouble !== Infinity ? lowestDouble : pkg.price
         }
         return pkg.price
+      }
+
+      const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
+      const formatPackagePrice = () => {
+        const cheapest = getCheapestPrice(pkg)
+        return priceOnRequest || !(cheapest > 0) ? 'Price on request' : `From €${cheapest.toLocaleString()}`
       }
 
       const relatedTours = travelPackages.filter(
@@ -756,7 +848,7 @@ function PackageFullDetail() {
               </span>
             ) : null}
             <span>⏱️ {pkg.duration}</span>
-            <span>From €{getCheapestPrice(pkg).toLocaleString()}</span>
+            <span>{formatPackagePrice()}</span>
           </div>
         </div>
       </div>
@@ -836,6 +928,7 @@ function PackageFullDetail() {
 
                 {details.hotels && details.hotels.length > 0 ? (
                   <>
+                    {!itineraryHotels ? (
                     <div className="hotel-filters">
                       <div className="hotel-filter-field">
                         <label htmlFor="departure-filter">{t('package.departureDate')}</label>
@@ -876,6 +969,7 @@ function PackageFullDetail() {
                         </button>
                       ) : null}
                     </div>
+                    ) : null}
                     {(() => {
                       const uniqueNames = [...new Set(details.hotels.map(h => h.name))]
                       const isSingleHotel = uniqueNames.length === 1
@@ -960,9 +1054,34 @@ function PackageFullDetail() {
                                 </div>
                                 {baseHotel.name ? <h3 className="hotel-single-title">{baseHotel.name}</h3> : null}
                                 {baseHotel.location && <p className="hotel-single-location">{baseHotel.location}</p>}
+                                {baseHotel.description && details.hideHotelPrices ? (
+                                  <p className="hotel-single-description">{baseHotel.description}</p>
+                                ) : null}
                               </div>
                               <div className="hotel-single-right">
-                                {pkg.id === 201 && groupIndex > 0 ? (
+                                {details.hideHotelPrices ? (
+                                  displayHotelVariants.map((variant, variantIdx) => {
+                                    const stayDate = getHotelStayDate(variant)
+                                    const depSlug =
+                                      typeof stayDate === 'string' && stayDate.trim()
+                                        ? stayDate.trim().toLowerCase().replace(/\s+/g, '').replace(/\//g, '-')
+                                        : `idx-${variantIdx}`
+                                    const variantKey = `${hotelKey}-variant-${depSlug}`
+                                    return (
+                                      <div key={variantKey} className="hotel-variant-block">
+                                        <div className="hotel-variant-date-badge">
+                                          <span className="hotel-variant-date-label">{hotelDateLabel}</span>
+                                          <span className="hotel-variant-date-value">{getHotelStayDate(variant)}</span>
+                                        </div>
+                                        {variant.nights != null ? (
+                                          <p className="section-text hotel-included-note">
+                                            {variant.nights} {variant.nights === 1 ? 'νύχτα' : 'νύχτες'}
+                                          </p>
+                                        ) : null}
+                                      </div>
+                                    )
+                                  })
+                                ) : pkg.id === 201 && groupIndex > 0 ? (
                                   // For the Scandinavia Mary Special trip, hide prices for the 2nd/3rd hotels
                                   <div className="hotel-variant-block">
                                     <p className="section-text hotel-included-note">
@@ -995,8 +1114,8 @@ function PackageFullDetail() {
                                     return (
                                       <div key={variantKey} className="hotel-variant-block">
                                         <div className="hotel-variant-date-badge">
-                                          <span className="hotel-variant-date-label">{t('package.departureDate')}</span>
-                                          <span className="hotel-variant-date-value">{variant.departureDate}</span>
+                                          <span className="hotel-variant-date-label">{hotelDateLabel}</span>
+                                          <span className="hotel-variant-date-value">{getHotelStayDate(variant)}</span>
                                         </div>
                                         <div className="hotel-variant-body">
                                           <div className="hotel-variant-head">
@@ -1275,20 +1394,36 @@ function PackageFullDetail() {
             {activeTab === 'program' && (
               <section className="full-section">
                 <h2>{t('package.program')}</h2>
-                {details.note && (
-                  <div style={{ 
-                    padding: '1rem 1.25rem', 
-                    marginBottom: '2rem', 
-                    background: '#fef3c7', 
-                    borderLeft: '4px solid #f59e0b', 
-                    borderRadius: '8px',
-                    fontSize: '0.95rem',
-                    color: '#92400e',
-                    lineHeight: '1.6'
-                  }}>
-                    <strong>ℹ️ {t('package.note')}:</strong> {details.note}
-                  </div>
-                )}
+                {details.note && (() => {
+                  const noteHighlights = getProgramNoteHighlights(details)
+                  const premiumNote = isPremiumProgramNote(details, noteHighlights)
+                  return (
+                    <aside
+                      className={`program-premium-note${premiumNote ? '' : ' program-premium-note--simple'}`}
+                      role="note"
+                    >
+                      <div className="program-premium-note__content">
+                        <div className="program-premium-note__eyebrow">
+                          {premiumNote ? (
+                            <span className="program-premium-note__badge">Premium</span>
+                          ) : null}
+                          <span className="program-premium-note__title">{t('package.note')}</span>
+                        </div>
+                        {noteHighlights ? (
+                          <div className="program-premium-note__stats">
+                            {noteHighlights.map(({ label, value }) => (
+                              <div key={label} className="program-premium-note__stat">
+                                <span className="program-premium-note__stat-label">{label}</span>
+                                <span className="program-premium-note__stat-value">{value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : null}
+                        <p className="program-premium-note__text">{details.note}</p>
+                      </div>
+                    </aside>
+                  )
+                })()}
                 
                 {details.itinerary && details.itinerary.length > 0 ? (
                   <div className="program-content">
@@ -1324,9 +1459,8 @@ function PackageFullDetail() {
                       const introText = details.program.programNarrative || details.program.introduction
                       // Split by double newlines to create paragraphs
                       const paragraphs = introText.split(/\n\n+/).filter(p => p.trim())
-                      // Check if first paragraph is a title (contains dashes and is short)
                       const firstPara = paragraphs[0]?.trim()
-                      const isTitle = firstPara && firstPara.length < 100 && (firstPara.includes('–') || firstPara.includes('-'))
+                      const isTitle = isProgramIntroTitle(firstPara)
                       
                       return (
                         <div className="program-section program-section-styled">
@@ -1340,7 +1474,7 @@ function PackageFullDetail() {
                                 const t = para.trim()
                                 const isBoldHeading = t === 'Η ριβιέρα της Ηπείρου' || t === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
                                 return (
-                                  <p key={idx} className={programParagraphClass(t)}>
+                                  <p key={idx} className={programIntroParagraphClass(t)}>
                                     {isBoldHeading ? <strong>{t}</strong> : t}
                                   </p>
                                 )
@@ -1351,7 +1485,7 @@ function PackageFullDetail() {
                                 const t = para.trim()
                                 const isBoldHeading = t === 'Η ριβιέρα της Ηπείρου' || t === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
                                 return (
-                                  <p key={idx} className={programParagraphClass(t)}>
+                                  <p key={idx} className={programIntroParagraphClass(t)}>
                                     {isBoldHeading ? <strong>{t}</strong> : t}
                                   </p>
                                 )
@@ -1376,6 +1510,7 @@ function PackageFullDetail() {
                             const paragraphs = formatProgramText(text)
                             const contentParas = title ? paragraphs.slice(1) : paragraphs
                             const description = contentParas.join('\n\n')
+                            const dayImage = details.program.dayImages?.[key]
                             return (
                               <li key={key} className="itinerary-item">
                                 <div className="itinerary-header">
@@ -1383,6 +1518,14 @@ function PackageFullDetail() {
                                   <h3 className="itinerary-title">{title || `${dayNum}η Μέρα`}</h3>
                                 </div>
                                 <ItineraryDescription text={description} />
+                                {dayImage ? (
+                                  <div
+                                    className="itinerary-image"
+                                    style={{ backgroundImage: `url(${dayImage})` }}
+                                  >
+                                    <div className="itinerary-image-overlay"></div>
+                                  </div>
+                                ) : null}
                               </li>
                             )
                           })}
@@ -1612,6 +1755,32 @@ function PackageFullDetail() {
                   </div>
                 )}
 
+                {details.importantNotes && details.importantNotes.length > 0 && (
+                  <div className="details-section">
+                    <h3 className="details-section-title">
+                      <span className="icon-badge terms">📌</span>
+                      {t('package.importantNotes')}
+                    </h3>
+                    <ul className="terms-list">
+                      {details.importantNotes.map((item, index) => (
+                        <li key={index} className="section-text">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {details.paymentPolicy ? (
+                  <div className="details-section">
+                    <h3 className="details-section-title">
+                      <span className="icon-badge terms">💳</span>
+                      {t('package.payments')}
+                    </h3>
+                    <div className="cancellation-policy">
+                      <CancellationPolicyBody policy={details.paymentPolicy} />
+                    </div>
+                  </div>
+                ) : null}
+
                 {/* Hotel Stay Note */}
                 {details.hotelStayNote && (
                   <div className="details-section">
@@ -1683,7 +1852,11 @@ function PackageFullDetail() {
                             className="related-card-image"
                             style={{ backgroundImage: `url(${thumbSrc})` }}
                           />
-                          <span className="related-card-badge">From €{tour.cheapestPrice.toLocaleString()}</span>
+                          <span className="related-card-badge">
+                            {tour.priceOnRequest || tour.details?.priceOnRequest || !(tour.cheapestPrice > 0)
+                              ? 'Price on request'
+                              : `From €${tour.cheapestPrice.toLocaleString()}`}
+                          </span>
                         </div>
                         <div className="related-card-body">
                           <span className="related-destination">{tour.destination}</span>
@@ -1700,7 +1873,7 @@ function PackageFullDetail() {
             {/* Mobile-only sidebar cards at the end */}
             <div className="summary-card mobile-sidebar-card">
               <h3>Summary</h3>
-              <p className="summary-price">From €{getCheapestPrice(pkg).toLocaleString()}</p>
+              <p className="summary-price">{formatPackagePrice()}</p>
               <p className="summary-duration">{pkg.duration}</p>
               <p className="summary-destination">{pkg.destination}</p>
               {!showBookSelection ? (
@@ -1798,7 +1971,7 @@ function PackageFullDetail() {
           <aside className="layout-aside">
             <div className="summary-card">
               <h3>Summary</h3>
-              <p className="summary-price">From €{getCheapestPrice(pkg).toLocaleString()}</p>
+              <p className="summary-price">{formatPackagePrice()}</p>
               <p className="summary-duration">{pkg.duration}</p>
               <p className="summary-destination">{pkg.destination}</p>
               {!showBookSelection ? (
