@@ -95,10 +95,13 @@ function HoneymoonTrips() {
   const [heroRequest, setHeroRequest] = useState({
     name: '',
     surname: '',
+    email: '',
+    phone: '',
     startDate: '',
     endDate: '',
     destination: ''
   })
+  const [heroCountryCode, setHeroCountryCode] = useState('+357')
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [destinationSearch, setDestinationSearch] = useState('')
@@ -155,10 +158,15 @@ function HoneymoonTrips() {
 
   const handleHeroRequestSubmit = async (e) => {
     e.preventDefault()
-    const { name, surname, startDate, endDate, destination } = heroRequest
+    const { name, surname, email, phone, startDate, endDate, destination } = heroRequest
 
-    if (!name.trim() || !surname.trim() || !startDate || !endDate || !destination) {
+    if (!name.trim() || !surname.trim() || !email.trim() || !phone.trim() || !startDate || !endDate || !destination) {
       alert('Please complete all fields before sending your request.')
+      return
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      alert('Please enter a valid email address.')
       return
     }
 
@@ -168,10 +176,11 @@ function HoneymoonTrips() {
     }
 
     const fullName = `${name.trim()} ${surname.trim()}`.trim()
+    const fullPhoneNumber = `${heroCountryCode}${phone.trim()}`
     const { error: leadError } = await createLead({
       full_name: fullName,
-      phone: '',
-      email: '',
+      phone: fullPhoneNumber,
+      email: email.trim(),
       destination,
       travel_dates: `${startDate} - ${endDate}`,
       number_of_travelers: '',
@@ -187,10 +196,13 @@ function HoneymoonTrips() {
     setHeroRequest({
       name: '',
       surname: '',
+      email: '',
+      phone: '',
       startDate: '',
       endDate: '',
       destination: ''
     })
+    setHeroCountryCode('+357')
     setShowHeroForm(false)
   }
 
@@ -311,6 +323,46 @@ function HoneymoonTrips() {
                     placeholder="Enter your surname"
                     required
                   />
+                </label>
+              </div>
+              <div className="hero-request-row">
+                <label>
+                  Email
+                  <input
+                    type="email"
+                    name="email"
+                    value={heroRequest.email}
+                    onChange={handleHeroRequestChange}
+                    placeholder="you@example.com"
+                    required
+                  />
+                </label>
+                <label className="phone-input-wrapper">
+                  Contact Number
+                  <div className="phone-input-container">
+                    <select
+                      className="country-code-select"
+                      value={heroCountryCode}
+                      onChange={(e) => setHeroCountryCode(e.target.value)}
+                      name="heroCountryCode"
+                      aria-label="Country code"
+                    >
+                      {COUNTRY_CODES.map((item, idx) => (
+                        <option key={idx} value={item.code}>
+                          {item.flag} {item.code}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={heroRequest.phone}
+                      onChange={handleHeroRequestChange}
+                      placeholder="Enter your phone number"
+                      required
+                      className="phone-number-input"
+                    />
+                  </div>
                 </label>
               </div>
               <div className="hero-request-row">
