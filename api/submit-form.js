@@ -4,27 +4,13 @@
  */
 import { Resend } from 'resend'
 import { createClient } from '@supabase/supabase-js'
+import { buildFormEmailContent, getEmailSubject } from './formEmailTemplate.js'
 
 const RECIPIENTS = [
   'limassol@honeywelltravel.com.cy',
   'infohoneywell@asg.com.cy',
 ]
 const FROM_EMAIL = 'Honeywell Travel <offers@honeywelltravel.com.cy>'
-
-const SUBJECT_BY_FORM_TYPE = {
-  contact: 'New Website Contact Form Submission',
-  our_world: 'New Website Contact Form Submission',
-  newsletter: 'Newsletter Subscription',
-  build_your_trip: 'New Travel Inquiry',
-  honeymoon: 'New Travel Inquiry',
-  flight_booking: 'New Travel Inquiry',
-  cruise: 'New Travel Inquiry',
-  dmc: 'New Group Request',
-  corporate: 'New Quote Request',
-  hotel_quote: 'New Quote Request',
-  package: 'New Quote Request',
-  gift_voucher: 'New Gift Voucher Request',
-}
 
 const RATE_LIMIT_WINDOW_MS = 60_000
 const RATE_LIMIT_MAX = 8
@@ -56,110 +42,6 @@ function checkRateLimit(ip) {
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim())
-}
-
-function formatSubmittedAt() {
-  return new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'full',
-    timeStyle: 'long',
-    timeZone: 'Asia/Nicosia',
-  }).format(new Date())
-}
-
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
-
-function buildExtraFieldsBlock(extraFields = {}) {
-  const entries = Object.entries(extraFields).filter(
-    ([, value]) => value != null && String(value).trim() !== ''
-  )
-  if (!entries.length) return { text: '', html: '' }
-
-  const text = `\n\nAdditional Details:\n${entries.map(([k, v]) => `${k}: ${v}`).join('\n')}`
-  const htmlRows = entries
-    .map(
-      ([key, value]) =>
-        `<tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;width:180px;">${escapeHtml(key)}</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${escapeHtml(value)}</td></tr>`
-    )
-    .join('')
-
-  return {
-    text,
-    html: `<h3 style="margin:24px 0 8px;font-size:14px;color:#333;">Additional Details</h3><table style="width:100%;border-collapse:collapse;font-size:14px;">${htmlRows}</table>`,
-  }
-}
-
-function buildEmailContent(payload) {
-  const formLabel = SUBJECT_BY_FORM_TYPE[payload.formType] || 'Website Form Submission'
-  const submittedAt = formatSubmittedAt()
-  const extra = buildExtraFieldsBlock(payload.extraFields)
-
-  const fields = [
-    ['Name', payload.name],
-    ['Email', payload.email],
-    ['Phone', payload.phone],
-    ['Destination / Service', payload.destination],
-    ['Travel Dates', payload.travelDates],
-    ['Number of Passengers', payload.passengers],
-    ['Page URL', payload.pageUrl],
-    ['Submitted', submittedAt],
-  ].filter(([, value]) => value != null && String(value).trim() !== '')
-
-  const textLines = [
-    formLabel,
-    '='.repeat(formLabel.length),
-    '',
-    ...fields.map(([label, value]) => `${label}: ${value}`),
-    '',
-    'Message / Notes:',
-    payload.message || '—',
-    extra.text,
-  ]
-
-  const htmlFieldRows = fields
-    .map(
-      ([label, value]) =>
-        `<tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;width:180px;">${escapeHtml(label)}</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${escapeHtml(value)}</td></tr>`
-    )
-    .join('')
-
-  const html = `<!DOCTYPE html>
-<html>
-<body style="font-family:Arial,Helvetica,sans-serif;line-height:1.5;color:#222;margin:0;padding:0;background:#f5f5f5;">
-  <div style="max-width:600px;margin:24px auto;background:#fff;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
-    <div style="background:#c41230;color:#fff;padding:20px 24px;">
-      <h1 style="margin:0;font-size:20px;">Honeywell Travel</h1>
-      <p style="margin:6px 0 0;font-size:14px;opacity:0.95;">${escapeHtml(formLabel)}</p>
-    </div>
-    <div style="padding:24px;">
-      <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:16px;">${htmlFieldRows}</table>
-      <h3 style="margin:0 0 8px;font-size:14px;color:#333;">Message / Notes</h3>
-      <div style="background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:12px 16px;font-size:14px;white-space:pre-wrap;">${escapeHtml(payload.message || '—')}</div>
-      ${extra.html}
-      <p style="margin:24px 0 0;font-size:12px;color:#888;">Reply directly to this email to reach the customer (${escapeHtml(payload.email)}).</p>
-    </div>
-  </div>
-</body>
-</html>`
-
-  return { text: textLines.join('\n').trim(), html }
-}
-
-function getSubject(payload) {
-  const amount =
-    payload.extraFields?.amount ||
-    payload.extraFields?.Amount ||
-    payload.extraFields?.['Amount']
-
-  if (payload.formType === 'gift_voucher' && amount) {
-    return `New Gift Voucher Request - ${amount}`
-  }
-  return SUBJECT_BY_FORM_TYPE[payload.formType] || 'New Website Contact Form Submission'
 }
 
 function getSupabaseAdmin() {
@@ -248,8 +130,8 @@ export default async function handler(req, res) {
       body.extraFields && typeof body.extraFields === 'object' ? body.extraFields : {},
   }
 
-  const subject = getSubject(payload)
-  const { text, html } = buildEmailContent(payload)
+  const subject = getEmailSubject(payload)
+  const { text, html } = buildFormEmailContent(payload)
 
   try {
     const resend = new Resend(apiKey)
