@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import SEO from '../components/SEO'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './BuildYourTrip.css'
 
 function BuildYourTrip() {
   const [sending, setSending] = useState(false)
   const [status, setStatus] = useState(null) // { type: 'success' | 'error', message }
+  const [honeypot, setHoneypot] = useState('')
   const [form, setForm] = useState({
     destination: '',
     hotelPreference: '',
@@ -52,20 +54,25 @@ function BuildYourTrip() {
     setStatus(null)
 
     const travelDates = [form.dateFrom, form.dateTo].filter(Boolean).join(' – ') || '—'
+    const messageBody = buildMessage()
 
-    const templateParams = {
-      name: form.name || 'Not provided',
-      email: form.email || '',
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.BUILD_YOUR_TRIP,
+      name: form.name,
+      email: form.email,
       phone: form.phone || '',
-      message: buildMessage(),
-      company: '',
-      country: '',
-      travel_dates: travelDates,
-      group_size: form.travelers || '—'
-    }
-
-    try {
-      const { error: leadError } = await createLead({
+      destination: form.destination || '',
+      travelDates,
+      passengers: form.travelers || '',
+      message: messageBody,
+      honeypot,
+      extraFields: {
+        'Hotel preference': form.hotelPreference || '—',
+        'Rent a car': form.rentCar || '—',
+        'Airport transfers': form.transferServices || '—',
+        'Travel insurance': form.travelInsurance || '—',
+      },
+      leadData: {
         full_name: form.name || 'Not provided',
         phone: form.phone || '',
         email: form.email || '',
@@ -73,15 +80,13 @@ function BuildYourTrip() {
         travel_dates: travelDates,
         number_of_travelers: form.travelers || '',
         budget: '',
-        message: buildMessage(),
-        source: 'Website'
-      })
-      if (leadError) {
-        console.error('Build Your Trip lead insert failed:', leadError)
-      }
+        message: messageBody,
+        source: 'Website',
+      },
+    })
 
-      await sendEmail(EMAIL_TEMPLATES.CONTACT, templateParams)
-      setStatus({ type: 'success', message: 'Request sent successfully. We’ll get back to you soon.' })
+    if (result.ok) {
+      setStatus({ type: 'success', message: result.message })
       setForm({
         destination: '',
         hotelPreference: '',
@@ -94,14 +99,13 @@ function BuildYourTrip() {
         name: '',
         email: '',
         phone: '',
-        message: ''
+        message: '',
       })
-    } catch (err) {
-      console.error('Build Your Trip email failed:', err)
-      setStatus({ type: 'error', message: 'Failed to send. Please try again.' })
-    } finally {
-      setSending(false)
+      setHoneypot('')
+    } else {
+      setStatus({ type: 'error', message: result.error })
     }
+    setSending(false)
   }
 
   return (
@@ -122,6 +126,7 @@ function BuildYourTrip() {
         <div className="bytp-container">
           <div className="bytp-form-layout">
             <form className="bytp-form" onSubmit={handleSubmit}>
+            <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="bytp-form-accent" aria-hidden="true" />
             <section className="bytp-section">
               <h2 className="bytp-section-title">Where & when</h2>

@@ -3,8 +3,9 @@ import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getPackageById, travelPackages } from '../data/packages'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import './PackageFullDetail.css'
 
@@ -574,6 +575,7 @@ function PackageFullDetail() {
   })
   const [reserveSending, setReserveSending] = useState(false)
   const [reserveToast, setReserveToast] = useState(null) // { type: 'success' | 'error', message }
+  const [reserveHoneypot, setReserveHoneypot] = useState('')
   const [selectedDepartureFilter, setSelectedDepartureFilter] = useState('')
   const [selectedHotelFilter, setSelectedHotelFilter] = useState('')
 
@@ -2169,19 +2171,22 @@ Phone: ${reserveFormData.phone}
 This reservation request was submitted through the Honeywell Travel website.
                       `.trim()
 
-                      const templateParams = {
-                        name: reserveFormData.name || '',
+                      const result = await submitWebsiteForm({
+                        formType: FORM_TYPES.PACKAGE,
+                        name: reserveFormData.name || 'Guest',
                         email: reserveFormData.email,
-                        phone: reserveFormData.phone,
+                        phone: reserveFormData.phone || '',
+                        destination: pkg.title || '',
+                        travelDates: reserveFormData.departureDate || '',
+                        passengers: peopleStr,
                         message: emailBody,
-                        company: '',
-                        country: '',
-                        travel_dates: reserveFormData.departureDate || '',
-                        group_size: peopleStr
-                      }
-
-                      try {
-                        const { error: leadError } = await createLead({
+                        honeypot: reserveHoneypot,
+                        extraFields: {
+                          Hotel: reserveFormData.hotelName,
+                          'Room type': selection.roomType,
+                          'Total price': `€${totalPrice.toLocaleString()}`,
+                        },
+                        leadData: {
                           full_name: reserveFormData.name || '',
                           phone: reserveFormData.phone || '',
                           email: reserveFormData.email || '',
@@ -2190,15 +2195,14 @@ This reservation request was submitted through the Honeywell Travel website.
                           number_of_travelers: peopleStr,
                           budget: String(totalPrice || ''),
                           message: emailBody,
-                          source: 'Package Form'
-                        })
-                        if (leadError) {
-                          console.error('Package reservation lead insert failed:', leadError)
-                        }
+                          source: 'Package Form',
+                        },
+                      })
 
-                        await sendEmail(EMAIL_TEMPLATES.PACKAGE, templateParams)
-                        setReserveToast({ type: 'success', message: 'Request sent successfully ✅' })
+                      if (result.ok) {
+                        setReserveToast({ type: 'success', message: result.message })
                         setShowReserveModal(false)
+                        setReserveHoneypot('')
                         setReserveFormData({
                           name: '',
                           email: '',
@@ -2213,17 +2217,16 @@ This reservation request was submitted through the Honeywell Travel website.
                           totalPrice: 0,
                           selectedHotel: null
                         })
-                      } catch (err) {
-                        console.error('Reservation request email failed:', err)
+                      } else {
                         setReserveToast({
                           type: 'error',
-                          message: 'Failed to send. Please try again.'
+                          message: result.error || FORM_ERROR_MESSAGE,
                         })
-                      } finally {
-                        setReserveSending(false)
                       }
+                      setReserveSending(false)
                     }}
                   >
+                    <HoneypotField value={reserveHoneypot} onChange={(e) => setReserveHoneypot(e.target.value)} />
                     <div className="form-group">
                       <label htmlFor="reserve-name">Full Name</label>
                       <input

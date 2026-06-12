@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
-import { sendGiftVoucherEmail } from '../utils/emailService'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitGiftVoucherForm } from '../lib/submitWebsiteForm'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import './GiftVoucher.css'
@@ -15,6 +16,7 @@ function GiftVoucher() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [honeypot, setHoneypot] = useState('')
   const [selectedService, setSelectedService] = useState('flights')
   const [openFaq, setOpenFaq] = useState(null)
   const formSectionRef = useRef(null)
@@ -142,12 +144,13 @@ function GiftVoucher() {
     setSubmitStatus(null)
 
     try {
-      const result = await sendGiftVoucherEmail({
+      const result = await submitGiftVoucherForm({
         toName: formData.recipientName,
         fromName: formData.fromName,
         fromEmail: formData.fromEmail,
         amount: formData.amount,
-        message: formData.message
+        message: formData.message,
+        honeypot,
       })
 
       if (result.success) {
@@ -203,6 +206,7 @@ function GiftVoucher() {
           <section ref={formSectionRef} className="voucher-form-section">
             <h2 className="section-title">Create Your Gift Voucher</h2>
             <form className="voucher-form" onSubmit={handleSubmit}>
+              <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
               <div className="form-grid">
                 <div className="form-group">
                   <label htmlFor="recipientName">
@@ -290,13 +294,13 @@ function GiftVoucher() {
 
               {submitStatus === 'success' && (
                 <div className="alert alert-success">
-                  ✅ Your gift voucher request has been submitted successfully! We'll process it and send you a confirmation email shortly.
+                  {FORM_SUCCESS_MESSAGE}
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className="alert alert-error">
-                  ❌ There was an error submitting your request. Please try again or contact us directly.
+                  {FORM_ERROR_MESSAGE}
                 </div>
               )}
 

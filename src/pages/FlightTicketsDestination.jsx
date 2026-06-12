@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getOffersByDestination } from '../data/flightTickets'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './FlightTickets.css'
 
 function FlightTicketsDestination() {
@@ -18,6 +19,7 @@ function FlightTicketsDestination() {
   })
   const [formError, setFormError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [honeypot, setHoneypot] = useState('')
 
   const openBookingForm = (offer, departure) => {
     setSelectedDeparture({ offer, departure })
@@ -43,7 +45,7 @@ function FlightTicketsDestination() {
     }))
   }
 
-  const handleBookingSubmit = (event) => {
+  const handleBookingSubmit = async (event) => {
     event.preventDefault()
     const emailValue = bookingForm.email.trim()
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -69,6 +71,7 @@ function FlightTicketsDestination() {
     }
 
     setIsSubmitting(true)
+    setFormError('')
 
     const message = [
       `Booking request for flight ticket.`,
@@ -79,49 +82,46 @@ function FlightTicketsDestination() {
       `Return: ${departure.returnDate} | ${offer.returnFlight.route} | ${offer.returnFlight.time}`,
       `Price: EUR ${departure.price}`,
       `Availability: ${departure.availability || 'Μόνο 6 καθίσματα!'}`,
-      `Email: ${emailValue}`,
-      `Contact Number: ${bookingForm.contactNumber.trim()}`
+      `Contact Number: ${bookingForm.contactNumber.trim()}`,
     ].join('\n')
 
-    const templateParams = {
+    const travelDates = `${departure.departureDate} - ${departure.returnDate}`
+
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.FLIGHT_BOOKING,
       name: fullName,
       email: emailValue,
       phone: bookingForm.contactNumber.trim(),
+      destination: offer.destination,
+      travelDates,
       message,
-      company: '',
-      country: '',
-      travel_dates: `${departure.departureDate} - ${departure.returnDate}`,
-      group_size: ''
-    }
-
-    Promise.all([
-      createLead({
+      honeypot,
+      extraFields: {
+        Offer: offer.title,
+        Airline: offer.airline,
+        Price: `EUR ${departure.price}`,
+      },
+      leadData: {
         full_name: fullName,
         phone: bookingForm.contactNumber.trim(),
         email: emailValue,
         destination: offer.destination,
-        travel_dates: `${departure.departureDate} - ${departure.returnDate}`,
+        travel_dates: travelDates,
         number_of_travelers: '',
         budget: departure.price ? String(departure.price) : '',
         message,
-        source: 'Book Online'
-      }),
-      sendEmail(EMAIL_TEMPLATES.OTHER, templateParams)
-    ])
-      .then(([leadResult]) => {
-        if (leadResult?.error) {
-          console.error('Flight booking lead insert failed:', leadResult.error)
-        }
-        closeBookingForm()
-        window.alert('Ευχαριστούμε! Το αίτημα κράτησης στάλθηκε με επιτυχία και θα επικοινωνήσουμε μαζί σας.')
-      })
-      .catch((err) => {
-        console.error('Flight ticket booking email failed:', err)
-        setFormError('Η αποστολή απέτυχε. Παρακαλώ δοκιμάστε ξανά ή καλέστε μας στο +357 25828848.')
-      })
-      .finally(() => {
-        setIsSubmitting(false)
-      })
+        source: 'Book Online',
+      },
+    })
+
+    if (result.ok) {
+      closeBookingForm()
+      setHoneypot('')
+      window.alert(FORM_SUCCESS_MESSAGE)
+    } else {
+      setFormError(result.error || FORM_ERROR_MESSAGE)
+    }
+    setIsSubmitting(false)
   }
 
   return (
@@ -210,6 +210,7 @@ function FlightTicketsDestination() {
                 </p>
 
                 <form onSubmit={handleBookingSubmit} className="flight-booking-form">
+                  <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                   <label>
                     Name
                     <input

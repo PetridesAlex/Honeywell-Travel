@@ -28,18 +28,11 @@ In [Vercel Dashboard](https://vercel.com) → your project → **Settings** → 
 |------|--------|--------|
 | `VITE_SUPABASE_URL` | `https://bgbgiazicjfpninnizjn.supabase.co` | Base URL only — no `/rest/v1/` |
 | `VITE_SUPABASE_ANON_KEY` | `sb_publishable_...` | From Supabase → API → Publishable |
-| `VITE_EMAILJS_SERVICE_ID` | `service_y7tl9ds` | Same as local `.env` |
-| `VITE_EMAILJS_PUBLIC_KEY` | Your EmailJS public key | |
-| `VITE_TEMPLATE_AUTOREPLY` | template id | |
-| `VITE_TEMPLATE_CONTACT` | template id | |
-| `VITE_TEMPLATE_CRUISE` | template id | |
-| `VITE_TEMPLATE_CORPORATE` | template id | |
-| `VITE_TEMPLATE_DMC` | template id | |
-| `VITE_TEMPLATE_HOTEL` | template id | |
-| `VITE_TEMPLATE_PACKAGE` | template id | |
-| `VITE_TEMPLATE_OTHER` | template id | |
+| `RESEND_API_KEY` | `re_...` | Server-side only — website form emails |
+| `SUPABASE_SECRET_KEY` | `sb_secret_...` | Server-side only — `website_submissions` logging |
+| `CRM_AGENCY_API_KEY` | Your CRM key | Server-side only — Travel Hub CRM sync |
 
-**Do not add** `SUPABASE_SECRET_KEY` to Vercel (browser build must not include it).
+**Do not add** `SUPABASE_SECRET_KEY` or `RESEND_API_KEY` with a `VITE_` prefix (browser build must not include them).
 
 Copy values from your local `.env` (except the secret key).
 
@@ -122,7 +115,7 @@ Env vars must still be set in the Vercel dashboard (or via `vercel env add`).
 ## Checklist
 
 - [ ] Code pushed to GitHub
-- [ ] Vercel env vars set (Supabase + EmailJS)
+- [ ] Vercel env vars set (Supabase + Resend + CRM)
 - [ ] Supabase Site URL + Redirect URLs include production domain
 - [ ] Redeploy after env changes
 - [ ] `/admin/login` works on live site

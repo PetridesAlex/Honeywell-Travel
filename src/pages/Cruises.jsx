@@ -4,8 +4,9 @@ import { travelPackages } from '../data/packages'
 import PackageCard from '../components/PackageCard'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Cruises.css'
 
 const cruisePackagesData = [
@@ -2110,6 +2111,7 @@ function Cruises() {
   const [cruiseEnquirySending, setCruiseEnquirySending] = useState(false)
   const [cruiseEnquirySent, setCruiseEnquirySent] = useState(false)
   const [cruiseEnquiryError, setCruiseEnquiryError] = useState('')
+  const [cruiseEnquiryHoneypot, setCruiseEnquiryHoneypot] = useState('')
 
   useEffect(() => {
     if (!selectedCruiseId) return
@@ -2444,7 +2446,7 @@ function Cruises() {
           <p className="cruise-enquiry-intro">Tell us which cruise line you&apos;re interested in and we&apos;ll get back to you with availability and the best prices.</p>
           {cruiseEnquirySent ? (
             <div className="cruise-enquiry-success">
-              <p>Thank you. We&apos;ve received your cruise enquiry and will contact you shortly.</p>
+              <p>{FORM_SUCCESS_MESSAGE}</p>
             </div>
           ) : (
             <form
@@ -2458,25 +2460,20 @@ function Cruises() {
                   (cruiseEnquiryForm.cruiseLine || 'Not specified')
                 const messageLines = [
                   `Cruise line: ${cruiseLineLabel}`,
-                  cruiseEnquiryForm.message ? `\nMessage:\n${cruiseEnquiryForm.message}` : ''
+                  cruiseEnquiryForm.message ? `\nMessage:\n${cruiseEnquiryForm.message}` : '',
                 ]
                   .filter(Boolean)
                   .join('')
 
-                const templateParams = {
-                  name: cruiseEnquiryForm.name || 'Not provided',
-                  email: cruiseEnquiryForm.email || '',
+                const result = await submitWebsiteForm({
+                  formType: FORM_TYPES.CRUISE,
+                  name: cruiseEnquiryForm.name,
+                  email: cruiseEnquiryForm.email,
                   phone: cruiseEnquiryForm.phone || '',
-                  message: messageLines || 'No additional message.',
-                  company: '',
-                  country: '',
-                  travel_dates: '',
-                  group_size: '',
-                  cruise_line: cruiseLineLabel
-                }
-
-                try {
-                  const { error: leadError } = await createLead({
+                  destination: cruiseLineLabel,
+                  message: messageLines || 'Cruise enquiry',
+                  honeypot: cruiseEnquiryHoneypot,
+                  leadData: {
                     full_name: cruiseEnquiryForm.name || 'Not provided',
                     phone: cruiseEnquiryForm.phone || '',
                     email: cruiseEnquiryForm.email || '',
@@ -2485,23 +2482,21 @@ function Cruises() {
                     number_of_travelers: '',
                     budget: '',
                     message: messageLines || 'No additional message.',
-                    source: 'Cruise Form'
-                  })
-                  if (leadError) {
-                    console.error('Cruise enquiry lead insert failed:', leadError)
-                  }
+                    source: 'Cruise Form',
+                  },
+                })
 
-                  await sendEmail(EMAIL_TEMPLATES.CRUISE, templateParams)
+                if (result.ok) {
                   setCruiseEnquirySent(true)
                   setCruiseEnquiryForm({ cruiseLine: '', name: '', email: '', phone: '', message: '' })
-                } catch (err) {
-                  console.error('Cruise enquiry email failed:', err)
-                  setCruiseEnquiryError('Something went wrong. Please try again.')
-                } finally {
-                  setCruiseEnquirySending(false)
+                  setCruiseEnquiryHoneypot('')
+                } else {
+                  setCruiseEnquiryError(result.error || FORM_ERROR_MESSAGE)
                 }
+                setCruiseEnquirySending(false)
               }}
             >
+              <HoneypotField value={cruiseEnquiryHoneypot} onChange={(e) => setCruiseEnquiryHoneypot(e.target.value)} />
               <div className="cruise-enquiry-fields">
                 <div className="filter-group cruise-enquiry-field">
                   <label htmlFor="cruise-enquiry-line">

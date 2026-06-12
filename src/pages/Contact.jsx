@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Contact.css'
 
 function Contact() {
@@ -14,6 +15,7 @@ function Contact() {
   })
   const [status, setStatus] = useState(null) // { type: 'success' | 'error', message }
   const [sending, setSending] = useState(false)
+  const [honeypot, setHoneypot] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -26,19 +28,14 @@ function Contact() {
     setSending(true)
     setStatus(null)
 
-    const templateParams = {
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.CONTACT,
       name: formData.name,
       email: formData.email,
       phone: formData.phone || '',
       message: formData.message,
-      company: '',
-      country: '',
-      travel_dates: '',
-      group_size: ''
-    }
-
-    try {
-      const { error: leadError } = await createLead({
+      honeypot,
+      leadData: {
         full_name: formData.name,
         phone: formData.phone || '',
         email: formData.email,
@@ -47,24 +44,18 @@ function Contact() {
         number_of_travelers: '',
         budget: '',
         message: formData.message,
-        source: 'Contact Form'
-      })
-      if (leadError) {
-        console.error('Contact form lead insert failed:', leadError)
-      }
+        source: 'Contact Form',
+      },
+    })
 
-      await sendEmail(EMAIL_TEMPLATES.CONTACT, templateParams)
-      setStatus({ type: 'success', message: 'Request sent successfully ✅' })
+    if (result.ok) {
+      setStatus({ type: 'success', message: result.message })
       setFormData({ name: '', email: '', phone: '', message: '' })
-    } catch (err) {
-      console.error('Contact form email failed:', err)
-      setStatus({
-        type: 'error',
-        message: 'Failed to send. Please try again.'
-      })
-    } finally {
-      setSending(false)
+      setHoneypot('')
+    } else {
+      setStatus({ type: 'error', message: result.error })
     }
+    setSending(false)
   }
 
   return (
@@ -140,6 +131,7 @@ function Contact() {
             <p>Fill out the form below and we'll get back to you as soon as possible</p>
           </div>
           <form className="contact-form" onSubmit={handleSubmit}>
+            <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="name">

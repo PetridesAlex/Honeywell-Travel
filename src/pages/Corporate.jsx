@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import RevealOnScroll from '../components/RevealOnScroll'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import './Corporate.css'
 
@@ -15,6 +17,7 @@ function Corporate() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'error' | null
+  const [honeypot, setHoneypot] = useState('')
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -28,31 +31,44 @@ function Corporate() {
     setIsSubmitting(true)
     setSubmitStatus(null)
 
-    const templateParams = {
+    const message = `Name: ${formData.name}\nCompany: ${formData.companyName}\nEmail: ${formData.email}\nContact: ${formData.contactNumber}\n\nMessage:\n${formData.message}`
+
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.CORPORATE,
       name: formData.name,
       email: formData.email,
       phone: formData.contactNumber,
-      message: `Name: ${formData.name}\nCompany: ${formData.companyName}\nEmail: ${formData.email}\nContact: ${formData.contactNumber}\n\nMessage:\n${formData.message}`,
-      company: formData.companyName,
-      country: '',
-      travel_dates: '',
-      group_size: ''
-    }
+      destination: formData.companyName,
+      message,
+      honeypot,
+      extraFields: {
+        Company: formData.companyName,
+      },
+      leadData: {
+        full_name: formData.name,
+        phone: formData.contactNumber,
+        email: formData.email,
+        destination: formData.companyName,
+        travel_dates: '',
+        number_of_travelers: '',
+        budget: '',
+        message,
+        source: 'Website',
+      },
+    })
 
-    try {
-      await sendEmail(EMAIL_TEMPLATES.CORPORATE, templateParams)
+    if (result.ok) {
       setSubmitStatus('success')
       setFormData({ name: '', companyName: '', email: '', contactNumber: '', message: '' })
+      setHoneypot('')
       setTimeout(() => {
         setShowQuoteModal(false)
         setSubmitStatus(null)
       }, 2000)
-    } catch (err) {
-      console.error('Corporate quote email failed:', err)
+    } else {
       setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
     }
+    setIsSubmitting(false)
   }
 
   const services = [
@@ -119,6 +135,7 @@ function Corporate() {
             <p className="quote-modal-subtitle">Fill out the form below and we'll get back to you with a customized quote</p>
             
             <form onSubmit={handleSubmitQuote} className="quote-form">
+              <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
               <div className="form-group">
                 <label htmlFor="name">Your Name *</label>
                 <input
@@ -191,13 +208,13 @@ function Corporate() {
 
               {submitStatus === 'success' && (
                 <div className="form-success">
-                  ✓ Thank you! We'll contact you soon with your quote.
+                  ✓ {FORM_SUCCESS_MESSAGE}
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className="form-error">
-                  ✗ Something went wrong. Please try again or contact us directly.
+                  ✗ {FORM_ERROR_MESSAGE}
                 </div>
               )}
 

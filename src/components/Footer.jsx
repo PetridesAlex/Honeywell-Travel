@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import HoneypotField from './HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Footer.css'
 
 function Footer() {
   const [phoneRevealed, setPhoneRevealed] = useState(false)
+  const [newsletterStatus, setNewsletterStatus] = useState(null)
+  const [newsletterSending, setNewsletterSending] = useState(false)
+  const [newsletterHoneypot, setNewsletterHoneypot] = useState('')
 
   return (
     <footer className="footer">
@@ -101,36 +107,52 @@ function Footer() {
           </Link>
           <form 
             className="newsletter-form"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
+              setNewsletterSending(true)
+              setNewsletterStatus(null)
               const formData = new FormData(e.target)
-              const firstName = formData.get('firstName') || 'Not provided'
+              const firstName = formData.get('firstName') || 'Subscriber'
               const email = formData.get('email')
               const agreed = formData.get('terms') ? 'Yes' : 'No'
-              
-              const emailBody = `NEWSLETTER SUBSCRIPTION
+              const message = `Newsletter subscription request.\nAgreed to terms: ${agreed}`
 
-First Name: ${firstName}
-Email: ${email}
-Agreed to Terms: ${agreed}
+              const result = await submitWebsiteForm({
+                formType: FORM_TYPES.NEWSLETTER,
+                name: firstName,
+                email,
+                message,
+                honeypot: newsletterHoneypot,
+                extraFields: {
+                  'Agreed to terms': agreed,
+                },
+              })
 
----
-This newsletter subscription was submitted through the Honeywell Travel website footer.`.trim()
-
-              const mailtoLink = `mailto:limassol@honeywelltravel.com.cy?subject=${encodeURIComponent('Newsletter Subscription')}&body=${encodeURIComponent(emailBody)}`
-              window.location.href = mailtoLink
-              
-              alert('Thank you for subscribing! You will receive updates on special offers.')
-              e.target.reset()
+              if (result.ok) {
+                setNewsletterStatus({ type: 'success', message: result.message })
+                e.target.reset()
+                setNewsletterHoneypot('')
+              } else {
+                setNewsletterStatus({ type: 'error', message: result.error || FORM_ERROR_MESSAGE })
+              }
+              setNewsletterSending(false)
             }}
           >
+            <HoneypotField value={newsletterHoneypot} onChange={(e) => setNewsletterHoneypot(e.target.value)} />
             <input type="text" name="firstName" placeholder="First Name" className="newsletter-input" />
             <input type="email" name="email" placeholder="Email address" className="newsletter-input" required />
             <label className="newsletter-checkbox">
               <input type="checkbox" name="terms" />
               I have read and agree to the terms & conditions
             </label>
-            <button type="submit" className="newsletter-button">Subscribe</button>
+            {newsletterStatus && (
+              <p role="alert" style={{ fontSize: '0.85rem', color: newsletterStatus.type === 'error' ? '#ffb4b4' : '#b8f5c3' }}>
+                {newsletterStatus.message}
+              </p>
+            )}
+            <button type="submit" className="newsletter-button" disabled={newsletterSending}>
+              {newsletterSending ? 'Subscribing…' : 'Subscribe'}
+            </button>
           </form>
         </div>
       </div>

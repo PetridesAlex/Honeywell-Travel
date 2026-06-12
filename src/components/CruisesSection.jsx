@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from './HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './CruisesSection.css'
 
 function CruisesSection() {
@@ -8,6 +9,7 @@ function CruisesSection() {
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
+  const [honeypot, setHoneypot] = useState('')
   const [form, setForm] = useState({
     hotelName: '',
     city: '',
@@ -38,50 +40,47 @@ function CruisesSection() {
     e.preventDefault()
     setError('')
     setSending(true)
+    const travelDates = [form.checkIn, form.checkOut].filter(Boolean).join(' - ')
     const message = [
       'Hotel Quote Request',
       '',
       `Hotel name: ${form.hotelName || '—'}`,
       `City: ${form.city || '—'}`,
       `Check-in: ${form.checkIn || '—'}`,
-      `Check-out: ${form.checkOut || '—'}`
+      `Check-out: ${form.checkOut || '—'}`,
     ].join('\n')
 
-    const templateParams = {
-      name: form.name || 'Not provided',
-      email: form.email || '',
-      phone: '',
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.HOTEL_QUOTE,
+      name: form.name,
+      email: form.email,
+      destination: form.city || form.hotelName || '',
+      travelDates,
       message,
-      company: '',
-      country: '',
-      travel_dates: '',
-      group_size: ''
-    }
-
-    try {
-      const { error: leadError } = await createLead({
+      honeypot,
+      extraFields: {
+        'Hotel name': form.hotelName || '—',
+      },
+      leadData: {
         full_name: form.name || 'Not provided',
         phone: '',
         email: form.email || '',
         destination: form.city || '',
-        travel_dates: [form.checkIn, form.checkOut].filter(Boolean).join(' - '),
+        travel_dates: travelDates,
         number_of_travelers: '',
         budget: '',
         message,
-        source: 'Website'
-      })
-      if (leadError) {
-        console.error('Hotel quote lead insert failed:', leadError)
-      }
+        source: 'Website',
+      },
+    })
 
-      await sendEmail(EMAIL_TEMPLATES.HOTEL, templateParams)
+    if (result.ok) {
       setSent(true)
-    } catch (err) {
-      console.error('Hotel quote email failed:', err)
-      setError('Something went wrong. Please try again.')
-    } finally {
-      setSending(false)
+      setHoneypot('')
+    } else {
+      setError(result.error)
     }
+    setSending(false)
   }
 
   return (
@@ -140,11 +139,12 @@ function CruisesSection() {
             </div>
             {sent ? (
               <div className="hotel-quote-success">
-                <p>Thank you. We’ve received your request and will get back to you with a quote soon.</p>
+                <p>{FORM_SUCCESS_MESSAGE}</p>
                 <button type="button" className="hotel-cta-btn" onClick={closeModal}>Close</button>
               </div>
             ) : (
               <form className="hotel-quote-form" onSubmit={handleSubmit}>
+                <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                 <p className="hotel-quote-intro">Provide the details below and we’ll email you a quote.</p>
                 <label className="hotel-quote-label">
                   Hotel name

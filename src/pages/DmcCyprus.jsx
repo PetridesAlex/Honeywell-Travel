@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
-import { EMAIL_TEMPLATES, sendEmail } from '../lib/emailService'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './DmcCyprus.css'
 
 const BRAND_RED = '#c41230'
@@ -76,6 +77,7 @@ function DmcCyprus() {
   })
   const [sending, setSending] = useState(false)
   const [status, setStatus] = useState(null)
+  const [honeypot, setHoneypot] = useState('')
   const [openServiceIndex, setOpenServiceIndex] = useState(null)
 
   const handleChange = (e) => {
@@ -99,19 +101,22 @@ function DmcCyprus() {
       '',
       formData.message
     ].join('\n')
-    const templateParams = {
+
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.DMC,
       name: formData.contactPerson,
       email: formData.email,
-      phone: '',
+      destination: 'Cyprus DMC',
+      travelDates: formData.travelDates,
+      passengers: formData.groupSize,
       message,
-      company: formData.companyName,
-      country: formData.country,
-      travel_dates: formData.travelDates,
-      group_size: formData.groupSize
-    }
-
-    try {
-      const { error: leadError } = await createLead({
+      honeypot,
+      extraFields: {
+        Company: formData.companyName,
+        Country: formData.country,
+        'Business type': formData.businessType,
+      },
+      leadData: {
         full_name: formData.contactPerson,
         phone: '',
         email: formData.email,
@@ -120,14 +125,12 @@ function DmcCyprus() {
         number_of_travelers: formData.groupSize,
         budget: '',
         message,
-        source: 'Website'
-      })
-      if (leadError) {
-        console.error('DMC lead insert failed:', leadError)
-      }
+        source: 'Website',
+      },
+    })
 
-      await sendEmail(EMAIL_TEMPLATES.DMC, templateParams)
-      setStatus({ type: 'success', text: 'Request sent successfully. Our DMC team will be in touch.' })
+    if (result.ok) {
+      setStatus({ type: 'success', text: result.message })
       setFormData({
         companyName: '',
         contactPerson: '',
@@ -136,17 +139,13 @@ function DmcCyprus() {
         businessType: 'Agency',
         groupSize: '',
         travelDates: '',
-        message: ''
+        message: '',
       })
-    } catch (err) {
-      console.error('DMC request email failed:', err)
-      setStatus({
-        type: 'error',
-        text: 'Failed to send. Please try again or email limassol@honeywelltravel.com.cy'
-      })
-    } finally {
-      setSending(false)
+      setHoneypot('')
+    } else {
+      setStatus({ type: 'error', text: result.error })
     }
+    setSending(false)
   }
 
   const scrollToForm = () => {
@@ -266,6 +265,7 @@ function DmcCyprus() {
         <div className="dmc-container dmc-form-container">
           <h2 className="dmc-section-title">Partner With Our Cyprus DMC Team</h2>
           <form className="dmc-form" onSubmit={handleSubmit}>
+            <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="dmc-form-row">
               <label htmlFor="dmc-company">Company Name</label>
               <input id="dmc-company" name="companyName" type="text" value={formData.companyName} onChange={handleChange} required placeholder="Your company name" />

@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import SEO from '../components/SEO'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './OurWorld.css'
 
 function OurWorld() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [formStatus, setFormStatus] = useState(null)
+  const [sending, setSending] = useState(false)
+  const [honeypot, setHoneypot] = useState('')
 
   const teamMembers = [
     { 
@@ -288,33 +294,48 @@ function OurWorld() {
           <p className="section-subtitle">We'd love to hear from you</p>
           <form 
             className="contact-form"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
+              setSending(true)
+              setFormStatus(null)
               const formData = new FormData(e.target)
               const name = formData.get('name')
               const email = formData.get('email')
               const subject = formData.get('subject') || 'No subject'
-              const message = formData.get('message')
-              
-              const emailBody = `CONTACT FORM - OUR WORLD PAGE
+              const messageText = formData.get('message')
+              const message = `Subject: ${subject}\n\n${messageText}`
 
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
+              const result = await submitWebsiteForm({
+                formType: FORM_TYPES.OUR_WORLD,
+                name,
+                email,
+                message,
+                honeypot,
+                extraFields: { Subject: subject },
+                leadData: {
+                  full_name: String(name || '').trim(),
+                  phone: '',
+                  email: String(email || '').trim(),
+                  destination: '',
+                  travel_dates: '',
+                  number_of_travelers: '',
+                  budget: '',
+                  message,
+                  source: 'Contact Form',
+                },
+              })
 
-Message:
-${message}
-
----
-This message was submitted through the Our World page contact form.`.trim()
-
-              const mailtoLink = `mailto:limassol@honeywelltravel.com.cy?subject=${encodeURIComponent(`Our World Contact - ${subject}`)}&body=${encodeURIComponent(emailBody)}`
-              window.location.href = mailtoLink
-              
-              alert('Thank you! Your message has been sent. We will get back to you soon.')
-              e.target.reset()
+              if (result.ok) {
+                setFormStatus({ type: 'success', message: result.message })
+                e.target.reset()
+                setHoneypot('')
+              } else {
+                setFormStatus({ type: 'error', message: result.error })
+              }
+              setSending(false)
             }}
           >
+            <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="contact-name">Name <span className="required">*</span></label>
@@ -360,8 +381,13 @@ This message was submitted through the Our World page contact form.`.trim()
                 placeholder="Tell us what's on your mind..."
               ></textarea>
             </div>
-            <button type="submit" className="submit-button">
-              Send Message
+            {formStatus && (
+              <p role="alert" style={{ marginBottom: '1rem', color: formStatus.type === 'error' ? '#c41230' : '#1a7f37' }}>
+                {formStatus.message}
+              </p>
+            )}
+            <button type="submit" className="submit-button" disabled={sending}>
+              {sending ? 'Sending…' : 'Send Message'}
             </button>
           </form>
         </div>

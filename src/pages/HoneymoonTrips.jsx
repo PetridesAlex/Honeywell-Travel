@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
-import { createLead } from '../lib/leads'
+import HoneypotField from '../components/HoneypotField'
+import { FORM_TYPES } from '../lib/formConstants'
+import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './HoneymoonTrips.css'
 
 const HONEYMOON_DESTINATIONS = [
@@ -110,6 +112,8 @@ function HoneymoonTrips() {
   const [countryCode, setCountryCode] = useState('+357')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [message, setMessage] = useState('')
+  const [heroHoneypot, setHeroHoneypot] = useState('')
+  const [mainHoneypot, setMainHoneypot] = useState('')
   const dropdownRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -177,33 +181,48 @@ function HoneymoonTrips() {
 
     const fullName = `${name.trim()} ${surname.trim()}`.trim()
     const fullPhoneNumber = `${heroCountryCode}${phone.trim()}`
-    const { error: leadError } = await createLead({
-      full_name: fullName,
-      phone: fullPhoneNumber,
-      email: email.trim(),
-      destination,
-      travel_dates: `${startDate} - ${endDate}`,
-      number_of_travelers: '',
-      budget: '',
-      message: 'Honeymoon hero request',
-      source: 'Website'
-    })
-    if (leadError) {
-      console.error('Honeymoon hero lead insert failed:', leadError)
-    }
+    const travelDates = `${startDate} - ${endDate}`
+    const messageBody = `Honeymoon hero request for ${destination}. Travel dates: ${travelDates}. Phone: ${fullPhoneNumber}.`
 
-    alert('Thank you! Your honeymoon request has been sent.')
-    setHeroRequest({
-      name: '',
-      surname: '',
-      email: '',
-      phone: '',
-      startDate: '',
-      endDate: '',
-      destination: ''
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.HONEYMOON,
+      name: fullName,
+      email: email.trim(),
+      phone: fullPhoneNumber,
+      destination,
+      travelDates,
+      message: messageBody,
+      honeypot: heroHoneypot,
+      leadData: {
+        full_name: fullName,
+        phone: fullPhoneNumber,
+        email: email.trim(),
+        destination,
+        travel_dates: travelDates,
+        number_of_travelers: '',
+        budget: '',
+        message: messageBody,
+        source: 'Website',
+      },
     })
-    setHeroCountryCode('+357')
-    setShowHeroForm(false)
+
+    if (result.ok) {
+      alert(FORM_SUCCESS_MESSAGE)
+      setHeroRequest({
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        startDate: '',
+        endDate: '',
+        destination: '',
+      })
+      setHeroCountryCode('+357')
+      setHeroHoneypot('')
+      setShowHeroForm(false)
+    } else {
+      alert(result.error || FORM_ERROR_MESSAGE)
+    }
   }
 
   const handleMainRequestSubmit = async (e) => {
@@ -230,29 +249,40 @@ function HoneymoonTrips() {
     }
 
     const fullPhoneNumber = `${countryCode}${phoneNumber.trim()}`
-    const { error: leadError } = await createLead({
-      full_name: fullName.trim(),
-      phone: fullPhoneNumber,
+    const result = await submitWebsiteForm({
+      formType: FORM_TYPES.HONEYMOON,
+      name: fullName.trim(),
       email: email.trim(),
+      phone: fullPhoneNumber,
       destination: selectedDestination,
-      travel_dates: '',
-      number_of_travelers: '',
-      budget: '',
       message: message.trim(),
-      source: 'Website'
+      honeypot: mainHoneypot,
+      leadData: {
+        full_name: fullName.trim(),
+        phone: fullPhoneNumber,
+        email: email.trim(),
+        destination: selectedDestination,
+        travel_dates: '',
+        number_of_travelers: '',
+        budget: '',
+        message: message.trim(),
+        source: 'Website',
+      },
     })
-    if (leadError) {
-      console.error('Honeymoon request lead insert failed:', leadError)
-    }
 
-    alert('Thank you for your request! We will contact you soon.')
-    setFullName('')
-    setEmail('')
-    setDestinationSearch('')
-    setSelectedDestination('')
-    setPhoneNumber('')
-    setMessage('')
-    setCountryCode('+357')
+    if (result.ok) {
+      alert(FORM_SUCCESS_MESSAGE)
+      setFullName('')
+      setEmail('')
+      setDestinationSearch('')
+      setSelectedDestination('')
+      setPhoneNumber('')
+      setMessage('')
+      setCountryCode('+357')
+      setMainHoneypot('')
+    } else {
+      alert(result.error || FORM_ERROR_MESSAGE)
+    }
   }
 
   return (
@@ -301,6 +331,7 @@ function HoneymoonTrips() {
             </button>
             <h3>Plan Your Honeymoon</h3>
             <form className="hero-request-form" onSubmit={handleHeroRequestSubmit}>
+              <HoneypotField value={heroHoneypot} onChange={(e) => setHeroHoneypot(e.target.value)} />
               <div className="hero-request-row">
                 <label>
                   Name
@@ -503,6 +534,7 @@ function HoneymoonTrips() {
             className="honeymoon-request-form"
             onSubmit={handleMainRequestSubmit}
           >
+            <HoneypotField value={mainHoneypot} onChange={(e) => setMainHoneypot(e.target.value)} />
             <div className="form-row">
               <label>
                 Full Name
