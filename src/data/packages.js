@@ -18,6 +18,8 @@ import { prevezaPackage318Hotels } from './prevezaPackage318Hotels.js'
 import { prevezaPackage318Program } from './prevezaPackage318Program.js'
 import { pargaPackage319Hotels } from './pargaPackage319Hotels.js'
 import { pargaPackage319Program } from './pargaPackage319Program.js'
+import { rhodesPackage321Hotels } from './rhodesPackage321Hotels.js'
+import { rhodesPackage321Program } from './rhodesPackage321Program.js'
 import { cretePackage314Hotels } from './cretePackage314Hotels.js'
 import { cretePackage315Hotels } from './cretePackage315Hotels.js'
 import { cretePackage314Program } from './cretePackage314Program.js'
@@ -18209,6 +18211,86 @@ export const travelPackages = [
       gallery: [
         '/images/greek-packages-summer/parga/parga-cover.webp',
         '/images/greek-packages-summer/parga/parga-thumbnail.webp'
+      ]
+    }
+  },
+  {
+    id: 321,
+    title: 'ΡΟΔΟΣ',
+    destination: 'Greece',
+    category: 'Summer Packages to Greece',
+    price: 629,
+    duration: '8 Μέρες',
+    description:
+      'Αεροπορικό πακέτο Λάρνακα – Ρόδος – Λάρνακα με Aegean Airlines· 7 διανυκτερεύσεις και ευρεία επιλογή ξενοδοχείων στη Ρόδο με πρόγευμα, ημιδιατροφή ή all inclusive.',
+    longDescription:
+      '8ήμερο στη Ρόδο: Μεσαιωνική παλιά πόλη, Λίνδος, παραλίες και πλούσια επιλογή ξενοδοχείων 2* έως 5*. Περιλαμβάνει πτήσεις, μεταφορές και διαμονή 7 βραδιών σύμφωνα με τον αναλυτικό τιμοκατάλογο.',
+    image: '🇬🇷',
+    featured: false,
+    packageType: 'individual',
+    details: {
+      departureDate: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08',
+      departureDates: ['10/07', '17/07', '24/07', '31/07', '07/08', '14/08', '21/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Rhodes, Greece',
+      monthAvailability: 'July – August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+      coverImage: '/images/greek-packages-summer/rhodes/rhodes-second-package-summer-hero.webp',
+      thumbnailImage: '/images/greek-packages-summer/rhodes/rhodes-second-package-summer-thumbnail.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08',
+          route:
+            '06:40 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n07:40 Diagoras Airport (RHO)\nRhodes, Greece',
+          flight: 'A3 496',
+          time: '06:40 → 07:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08',
+          route:
+            '13:00 Diagoras Airport (RHO)\nRhodes, Greece\nto\n14:00 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'A3 497',
+          time: '13:00 → 14:00',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: rhodesPackage321Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Ρόδος – Λάρνακα με Aegean Airlines.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή για 7 βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα, ημιδιατροφή ή πλήρη διατροφή όπου αναφέρεται.',
+        'Μεταφορές από και προς το αεροδρόμιο.',
+        'Μία αποσκευή 23kg και μία χειραποσκευή 8kg.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Τοπικός φόρος διαμονής (πληρώνεται επί τόπου).'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: rhodesPackage321Program,
+      gallery: [
+        '/images/greek-packages-summer/rhodes/rhodes-second-package-summer-hero.webp',
+        '/images/greek-packages-summer/rhodes/rhodes-second-package-summer-thumbnail.webp'
       ]
     }
   }
