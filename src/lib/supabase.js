@@ -64,7 +64,12 @@ function createMockSupabase() {
       signUp: async () => ({ data: null, error: buildConfigError() }),
       resetPasswordForEmail: async () => ({ data: null, error: buildConfigError() }),
       signOut: async () => ({ error: null }),
-      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } })
+      onAuthStateChange: (callback) => {
+        queueMicrotask(() => {
+          callback('INITIAL_SESSION', null)
+        })
+        return { data: { subscription: { unsubscribe: () => {} } } }
+      }
     },
     channel() {
       return channelObj

@@ -4,11 +4,11 @@ export const FEEDBACK_CAMPAIGN_STATUSES = ['draft', 'active', 'closed']
 
 export const FEEDBACK_QUESTION_TYPES = [
   { value: 'rating_stars', label: 'Star rating (1–5)' },
-  { value: 'nps', label: 'NPS (0–10)' },
+  { value: 'nps', label: 'NPS score (0–10)' },
+  { value: 'select', label: 'Multiple choice' },
   { value: 'text', label: 'Short text' },
   { value: 'textarea', label: 'Long text' },
   { value: 'yes_no', label: 'Yes / No' },
-  { value: 'select', label: 'Select options' },
 ]
 
 export const DEFAULT_FEEDBACK_QUESTIONS = [
@@ -28,9 +28,22 @@ function buildCampaignPayload(raw = {}) {
     travel_date_end: raw.travel_date_end || null,
     status: raw.status || 'draft',
     notes: (raw.notes || '').trim() || null,
+    cover_image_url: (raw.cover_image_url || '').trim() || null,
     corporate_group_id: raw.corporate_group_id || null,
     updated_at: new Date().toISOString(),
   }
+}
+
+export function parseOptionsText(text) {
+  return String(text || '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+}
+
+export function formatOptionsText(options) {
+  if (!Array.isArray(options)) return ''
+  return options.join('\n')
 }
 
 function generateTokenValue() {
@@ -107,6 +120,7 @@ export async function createFeedbackQuestion(payload) {
       question_type: payload.question_type || 'textarea',
       label: (payload.label || '').trim(),
       options: Array.isArray(payload.options) ? payload.options : [],
+      image_url: (payload.image_url || '').trim() || null,
       sort_order: payload.sort_order ?? 0,
       is_required: Boolean(payload.is_required),
       is_active: payload.is_active !== false,
@@ -123,6 +137,7 @@ export async function updateFeedbackQuestion(id, payload) {
       question_type: payload.question_type,
       label: (payload.label || '').trim(),
       options: Array.isArray(payload.options) ? payload.options : [],
+      image_url: (payload.image_url || '').trim() || null,
       sort_order: payload.sort_order ?? 0,
       is_required: Boolean(payload.is_required),
       is_active: payload.is_active !== false,

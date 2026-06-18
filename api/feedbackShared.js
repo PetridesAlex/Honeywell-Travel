@@ -122,6 +122,7 @@ export function sanitizeQuestionsForPublic(questions) {
     options: Array.isArray(q.options) ? q.options : [],
     sort_order: q.sort_order,
     is_required: q.is_required,
+    image_url: q.image_url || null,
   }))
 }
 
@@ -133,5 +134,6 @@ export function sanitizeCampaignForPublic(campaign) {
     travel_date_start: campaign.travel_date_start,
     travel_date_end: campaign.travel_date_end,
     travel_dates: formatTravelDates(campaign.travel_date_start, campaign.travel_date_end),
+    cover_image_url: campaign.cover_image_url || null,
   }
 }

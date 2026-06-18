@@ -81,14 +81,21 @@ function QuestionField({ question, value, onChange }) {
   if (type === 'select') {
     const options = Array.isArray(question.options) ? question.options : []
     return (
-      <select id={id} className="cf-input" value={value} onChange={(e) => onChange(e.target.value)}>
-        <option value="">Select…</option>
+      <div className="cf-choices" role="radiogroup" aria-labelledby={id}>
         {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
+          <button
+            key={opt}
+            type="button"
+            id={value === opt ? id : undefined}
+            className={`cf-choice${value === opt ? ' is-active' : ''}`}
+            onClick={() => onChange(opt)}
+            aria-pressed={value === opt}
+          >
+            <span className="cf-choice__marker" aria-hidden="true" />
+            <span>{opt}</span>
+          </button>
         ))}
-      </select>
+      </div>
     )
   }
 
@@ -215,6 +222,12 @@ function CorporateFeedback() {
           </div>
         ) : (
           <>
+            {campaign?.cover_image_url ? (
+              <div className="cf-cover">
+                <img src={campaign.cover_image_url} alt="" />
+              </div>
+            ) : null}
+
             <div className="cf-trip-card">
               <h1>Share your experience</h1>
               <dl className="cf-trip-meta">
@@ -272,6 +285,9 @@ function CorporateFeedback() {
 
               {questions.map((question) => (
                 <div key={question.id} className="cf-field">
+                  {question.image_url ? (
+                    <img src={question.image_url} alt="" className="cf-question-img" />
+                  ) : null}
                   <label htmlFor={`q-${question.id}`}>
                     {question.label}
                     {question.is_required ? <span className="cf-required"> *</span> : null}

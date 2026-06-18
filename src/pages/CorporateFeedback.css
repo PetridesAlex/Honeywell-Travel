@@ -75,6 +75,29 @@
   background: linear-gradient(135deg, #c41230, #8f0e24);
 }
 
+.cf-cover {
+  margin-bottom: 1rem;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.22);
+}
+
+.cf-cover img {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+}
+
+.cf-question-img {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 0.65rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e4e4e7;
+}
+
 .cf-trip-card {
   margin-bottom: 1rem;
   padding: clamp(1.25rem, 3vw, 1.6rem);
@@ -227,6 +250,53 @@
   background: #0f172a;
   border-color: #0f172a;
   color: #fff;
+}
+
+.cf-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cf-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.7rem;
+  padding: 0.72rem 0.9rem;
+  background: #fff;
+  font: inherit;
+  font-weight: 600;
+  color: #0f172a;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cf-choice:hover {
+  border-color: #c41230;
+}
+
+.cf-choice.is-active {
+  border-color: #c41230;
+  background: rgba(196, 18, 48, 0.06);
+  box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.1);
+}
+
+.cf-choice__marker {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  border: 2px solid #cbd5e1;
+  background: #fff;
+}
+
+.cf-choice.is-active .cf-choice__marker {
+  border-color: #c41230;
+  background: radial-gradient(circle at center, #c41230 42%, transparent 44%);
 }
 
 .cf-form-error {

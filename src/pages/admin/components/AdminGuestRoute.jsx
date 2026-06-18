@@ -1,15 +1,31 @@
-import { Navigate } from 'react-router-dom'
-import { ADMIN_DASHBOARD_PATH, hasAuthCallbackInUrl } from '../../../lib/adminAuth'
+import { Link, Navigate } from 'react-router-dom'
+import { ADMIN_DASHBOARD_PATH, ADMIN_LOGIN_PATH, hasAuthCallbackInUrl } from '../../../lib/adminAuth'
 import { useAdminAuthGate } from '../hooks/useAdminAuthGate'
 import AdminAuthLoading from './AdminAuthLoading'
 
 /** Login page only — redirects authenticated users straight to the dashboard. */
 function AdminGuestRoute({ children }) {
-  const { ready, authed } = useAdminAuthGate()
+  const { ready, authed, callbackFailed } = useAdminAuthGate()
 
   if (hasAuthCallbackInUrl()) {
-    if (!ready || !authed) {
+    if (!ready) {
       return <AdminAuthLoading />
+    }
+    if (!authed) {
+      return (
+        <div className="crm-page admin-auth-loading">
+          <div className="crm-state">
+            {callbackFailed
+              ? 'This login link has expired or was already used.'
+              : 'Signing you in…'}
+          </div>
+          {callbackFailed ? (
+            <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+              <Link to={ADMIN_LOGIN_PATH}>Request a new login link</Link>
+            </p>
+          ) : null}
+        </div>
+      )
     }
     return <Navigate to={ADMIN_DASHBOARD_PATH} replace />
   }
