@@ -1,0 +1,265 @@
+.corporate-feedback-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(196, 18, 48, 0.12), transparent 55%),
+    linear-gradient(180deg, #0f172a 0%, #111827 42%, #1e293b 100%);
+  padding: clamp(2rem, 5vw, 4rem) 1.25rem 3rem;
+}
+
+.cf-shell {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.cf-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.cf-logo {
+  width: min(180px, 60vw);
+  height: auto;
+  margin: 0 auto 0.75rem;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+}
+
+.cf-eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.cf-card {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 1.1rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.28);
+}
+
+.cf-card--center {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.cf-card--error h1,
+.cf-card--success h1 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  color: #0f172a;
+}
+
+.cf-card--error p,
+.cf-card--success p,
+.cf-muted {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.cf-success-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto 1rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #c41230, #8f0e24);
+}
+
+.cf-trip-card {
+  margin-bottom: 1rem;
+  padding: clamp(1.25rem, 3vw, 1.6rem);
+  border-radius: 1.1rem;
+  background: linear-gradient(135deg, rgba(196, 18, 48, 0.92), rgba(127, 29, 29, 0.95));
+  color: #fff;
+  box-shadow: 0 16px 40px rgba(196, 18, 48, 0.25);
+}
+
+.cf-trip-card h1 {
+  margin: 0 0 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 600;
+}
+
+.cf-trip-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.25rem;
+  margin: 0;
+}
+
+.cf-trip-meta dt {
+  margin: 0 0 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+
+.cf-trip-meta dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.cf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.cf-field label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cf-required {
+  color: #c41230;
+}
+
+.cf-input,
+.cf-textarea {
+  width: 100%;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.65rem;
+  padding: 0.72rem 0.85rem;
+  font: inherit;
+  color: #0f172a;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cf-input:focus,
+.cf-textarea:focus {
+  outline: none;
+  border-color: #c41230;
+  box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.12);
+}
+
+.cf-textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.cf-stars {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.cf-star {
+  border: 0;
+  background: transparent;
+  font-size: 1.85rem;
+  line-height: 1;
+  color: #d4d4d8;
+  cursor: pointer;
+  padding: 0.1rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.cf-star.is-active,
+.cf-star:hover {
+  color: #c9a227;
+  transform: scale(1.05);
+}
+
+.cf-nps-scale {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.cf-nps-btn {
+  border: 1px solid #d4d4d8;
+  border-radius: 0.45rem;
+  background: #fff;
+  padding: 0.45rem 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+}
+
+.cf-nps-btn.is-active {
+  background: #c41230;
+  border-color: #c41230;
+  color: #fff;
+}
+
+.cf-nps-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.cf-yesno {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.cf-yesno-btn {
+  flex: 1;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.65rem;
+  padding: 0.65rem;
+  background: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cf-yesno-btn.is-active {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #fff;
+}
+
+.cf-form-error {
+  margin: 0;
+  color: #b91c1c;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.cf-submit {
+  margin-top: 0.25rem;
+  border: 0;
+  border-radius: 0.7rem;
+  padding: 0.9rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #c41230 0%, #e31e24 100%);
+  box-shadow: 0 12px 28px rgba(196, 18, 48, 0.28);
+}
+
+.cf-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 640px) {
+  .cf-trip-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-nps-scale {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

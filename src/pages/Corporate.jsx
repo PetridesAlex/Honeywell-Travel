@@ -6,6 +6,19 @@ import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../
 import SEO from '../components/SEO'
 import './Corporate.css'
 
+function MessageSquareIcon() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 function Corporate() {
   const [showQuoteModal, setShowQuoteModal] = useState(false)
   const [formData, setFormData] = useState({
@@ -502,6 +515,41 @@ function Corporate() {
         </div>
       </section>
 
+      </RevealOnScroll>
+
+      <RevealOnScroll direction="up">
+      <section className="corporate-feedback-section">
+        <div className="container">
+          <div className="corporate-feedback-content">
+            <div className="corporate-feedback-icon" aria-hidden="true">
+              <MessageSquareIcon />
+            </div>
+            <div className="corporate-feedback-text">
+              <p className="corporate-feedback-eyebrow">Post-trip insights</p>
+              <h2>Corporate Travel Feedback</h2>
+              <p>
+                We value feedback from every corporate journey. After your trip, invited travelers receive a
+                secure private link to share their experience — helping us refine service, support, and
+                destination planning for your organisation.
+              </p>
+              <p className="corporate-feedback-note">
+                Feedback forms are invitation-only and not publicly accessible. If you have travelled with
+                Honeywell Travel and received a link, please use that URL to submit your responses.
+              </p>
+              <button
+                type="button"
+                className="corporate-feedback-cta"
+                onClick={() => setShowQuoteModal(true)}
+              >
+                Contact our corporate team
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      </RevealOnScroll>
+
+      <RevealOnScroll direction="up">
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
