@@ -252,7 +252,6 @@ export const ADMIN_NAV = [
   { to: '/admin/gift-vouchers', label: '🎁 Gift Vouchers', icon: 'vouchers' },
   { to: '/admin/package-calculator', label: 'Package Calculator', icon: 'calculator', highlight: true },
   { to: '/admin/corporate-groups', label: 'Corporate', icon: 'corporate', highlight: true },
-  { to: '/admin/corporate-feedback', label: 'Corp. Feedback', icon: 'corpFeedback', highlight: true },
   { to: '/admin/corporate-contacts', label: 'Corp. Services List', icon: 'corpContacts', highlight: true },
   { to: '/admin/clients', label: 'Clients', icon: 'clients' },
   { to: '/admin/leads', label: 'Leads', icon: 'leads' },

@@ -4,9 +4,7 @@
   "framework": "vite",
   "functions": {
     "api/crm-lead.js": { "maxDuration": 15 },
-    "api/submit-form.js": { "maxDuration": 15 },
-    "api/feedback-validate.js": { "maxDuration": 15 },
-    "api/feedback-submit.js": { "maxDuration": 15 }
+    "api/submit-form.js": { "maxDuration": 15 }
   },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
