@@ -75,7 +75,7 @@
 }
 
 .tour-category-row {
-  padding: 2rem 0 2.35rem;
+  padding: 2.15rem 0 2.6rem;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
   width: 100%;
 }
@@ -248,48 +248,85 @@
 .tour-category-modal-cards .modal-cards-grid {
   display: flex;
   flex-wrap: nowrap;
-  gap: 1.25rem;
+  gap: 1.5rem;
   width: max-content;
   grid-template-columns: none;
 }
 
 .tour-category-modal-cards .modal-card {
-  flex: 0 0 clamp(260px, 20vw, 340px);
-  width: clamp(260px, 20vw, 340px);
-  min-height: 340px;
+  flex: 0 0 clamp(300px, 28vw, 400px);
+  width: clamp(300px, 28vw, 400px);
+  min-height: 420px;
   scroll-snap-align: start;
-  border-radius: 1rem;
+  border-radius: 1.15rem;
   box-shadow:
-    0 14px 34px rgba(15, 23, 42, 0.14),
+    0 18px 40px rgba(15, 23, 42, 0.16),
     0 0 0 1px rgba(255, 255, 255, 0.55) inset;
 }
 
 .tour-category-modal-cards .modal-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow:
-    0 22px 44px rgba(15, 23, 42, 0.2),
+    0 26px 52px rgba(15, 23, 42, 0.22),
     0 0 0 1px rgba(255, 255, 255, 0.65) inset;
 }
 
+.tour-category-modal-cards .modal-card-shade {
+  background: linear-gradient(to top, rgba(2, 6, 23, 0.92) 8%, rgba(2, 6, 23, 0.42) 42%, rgba(2, 6, 23, 0.08) 100%);
+}
+
 .tour-category-modal-cards .modal-card-overlay {
-  padding: 0.9rem 0.95rem 1rem;
+  gap: 0.72rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.tour-category-modal-cards .modal-card-type {
+  top: 0.9rem;
+  right: 0.9rem;
+  padding: 0.3rem 0.68rem;
+  font-size: 0.72rem;
+}
+
+.tour-category-modal-cards .modal-card-destination {
+  padding: 0.3rem 0.72rem;
+  font-size: 0.72rem;
 }
 
 .tour-category-modal-cards .modal-card-title {
-  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
-  line-height: 1.25;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.22;
+}
+
+.tour-category-modal-cards .modal-card-secondary-title {
+  font-size: 0.84rem;
+  line-height: 1.4;
 }
 
 .tour-category-modal-cards .modal-card-meta {
-  font-size: 0.68rem;
+  gap: 0.55rem;
+}
+
+.tour-category-modal-cards .modal-card-meta span {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.78rem;
+}
+
+.tour-category-modal-cards .modal-card-meta span:last-child {
+  font-size: 0.72rem;
 }
 
 .tour-category-modal-cards .modal-card-footer {
-  margin-top: 0.15rem;
+  margin-top: 0.25rem;
+  gap: 0.75rem;
 }
 
 .tour-category-modal-cards .modal-card-price {
-  font-size: 0.78rem;
+  font-size: 1.12rem;
+}
+
+.tour-category-modal-cards .modal-card-cta {
+  padding: 0.34rem 0.78rem;
+  font-size: 0.72rem;
 }
 
 @media (max-width: 900px) {
@@ -330,9 +367,17 @@
   }
 
   .tour-category-modal-cards .modal-card {
-    flex-basis: min(78vw, 280px);
-    width: min(78vw, 280px);
-    min-height: 320px;
+    flex-basis: min(86vw, 320px);
+    width: min(86vw, 320px);
+    min-height: 390px;
+  }
+
+  .tour-category-modal-cards .modal-card-title {
+    font-size: 1.2rem;
+  }
+
+  .tour-category-modal-cards .modal-card-price {
+    font-size: 1.05rem;
   }
 
   .tour-category-modal-cards .modal-card:hover {
