@@ -11,7 +11,7 @@ function Preloader({
   variant = 'stairs',
   position = 'fixed',
   duration = 2500,
-  loadingLines = ['LIVE THE EXPERIENCE', 'HONEYWELL TRAVEL'],
+  loadingLines = ['Honeywell Travel', '#Live the Experience'],
   onComplete,
   children,
   className = '',
@@ -101,8 +101,8 @@ function Preloader({
     }
   }, [loading, duration, onComplete, showPreloader, variant])
 
-  const line1Words = loadingLines[0]?.split(/\s+/).filter(Boolean) ?? []
-  const line2Words = loadingLines[1]?.split(/\s+/).filter(Boolean) ?? []
+  const line1 = loadingLines[0] ?? ''
+  const line2 = loadingLines[1] ?? ''
 
   const textExitDuration = variant === 'stairs' ? STAIR_FULL_EXIT_S : 0.28
 
@@ -125,50 +125,38 @@ function Preloader({
         </span>
       </motion.div>
       <div className="preloader__text-columns">
-        <div className="preloader__text-line preloader__text-line--tagline">
-          {line1Words.map((word, i) => {
-            const index = i
-            return (
-              <motion.span
-                key={`l1-${word}-${i}`}
-                initial={{ opacity: 0, filter: 'blur(10px)', y: 12 }}
-                animate={
-                  hideText ? { opacity: 0, filter: 'blur(10px)', y: 12 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
-                }
-                transition={{
-                  duration: hideText ? textExitDuration : 0.62,
-                  delay: hideText ? 0 : index * 0.05,
-                  ease: [0.65, 0, 0.35, 1],
-                }}
-                className="preloader__text-word"
-              >
-                {word}
-              </motion.span>
-            )
-          })}
-        </div>
-        <div className="preloader__text-line preloader__text-line--brand">
-          {line2Words.map((word, i) => {
-            const index = line1Words.length + i
-            return (
-              <motion.span
-                key={`l2-${word}-${i}`}
-                initial={{ opacity: 0, filter: 'blur(10px)', y: 14 }}
-                animate={
-                  hideText ? { opacity: 0, filter: 'blur(10px)', y: 14 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
-                }
-                transition={{
-                  duration: hideText ? textExitDuration : 0.62,
-                  delay: hideText ? 0 : index * 0.05,
-                  ease: [0.65, 0, 0.35, 1],
-                }}
-                className="preloader__text-word preloader__text-word--brand"
-              >
-                {word}
-              </motion.span>
-            )
-          })}
-        </div>
+        {line1 ? (
+          <motion.p
+            className="preloader__text-line preloader__text-line--primary"
+            initial={{ opacity: 0, filter: 'blur(10px)', y: 12 }}
+            animate={
+              hideText ? { opacity: 0, filter: 'blur(10px)', y: 12 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
+            }
+            transition={{
+              duration: hideText ? textExitDuration : 0.62,
+              delay: hideText ? 0 : 0.15,
+              ease: [0.65, 0, 0.35, 1],
+            }}
+          >
+            {line1}
+          </motion.p>
+        ) : null}
+        {line2 ? (
+          <motion.p
+            className="preloader__text-line preloader__text-line--tagline"
+            initial={{ opacity: 0, filter: 'blur(10px)', y: 14 }}
+            animate={
+              hideText ? { opacity: 0, filter: 'blur(10px)', y: 14 } : { opacity: 1, filter: 'blur(0px)', y: 0 }
+            }
+            transition={{
+              duration: hideText ? textExitDuration : 0.62,
+              delay: hideText ? 0 : 0.35,
+              ease: [0.65, 0, 0.35, 1],
+            }}
+          >
+            {line2}
+          </motion.p>
+        ) : null}
       </div>
     </div>
   )

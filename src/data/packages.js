@@ -27,6 +27,11 @@ import { cretePackage315Program } from './cretePackage315Program.js'
 import { skiathosPackage69Hotels } from './skiathosPackage69Hotels.js'
 import { skiathosPackage72Hotels } from './skiathosPackage72Hotels.js'
 import { spainWinePackage320Program } from './spainWinePackage320Program.js'
+import { cairoAlexandriaPackage322Program } from './cairoAlexandriaPackage322Program.js'
+import { sriLankaPackage323Program } from './sriLankaPackage323Program.js'
+import { frenchItalianRivieraPackage326Program } from './frenchItalianRivieraPackage326Program.js'
+import { englandScotlandPackage327Program } from './englandScotlandPackage327Program.js'
+import { swedenPackage328Program } from './swedenPackage328Program.js'
 
 export const travelPackages = [
   {
@@ -18293,6 +18298,1022 @@ export const travelPackages = [
         '/images/greek-packages-summer/rhodes/rhodes-second-package-summer-thumbnail.webp'
       ]
     }
+  },
+  {
+    id: 322,
+    title: 'ΚΑΪΡΟ / ΑΛΕΞΑΝΔΡΕΙΑ',
+    destination: 'Egypt',
+    category: 'Exotic Packages',
+    price: 895,
+    duration: '4 Μέρες',
+    description:
+      'Ταξίδι 4 ημερών στο Καΐρο και την Αλεξάνδρεια με Egypt Air. Διαμονή σε 5★ ξενοδοχείο με πρόγευμα. Πυραμίδες Γκίζας, Μεγάλο Αιγυπτιακό Μουσείο, Khan el Khalili, Πατριαρχείο Αλεξανδρείας, Βιβλιοθήκη Αλεξάνδρειας και Σπίτι Καβάφη.',
+    longDescription:
+      'Ανακαλύψτε την Αίγυπτο σε 4 ημέρες: το ιστορικό Καΐρο με τις Πυραμίδες, τη Σφίγγα και το Μεγάλο Αιγυπτιακό Μουσείο, και την Αλεξάνδρεια με το Πατριαρχείο, τη Βιβλιοθήκη, το Σπίτι Καβάφη και το Οχυρό Qaitbay. Διαμονή στο Safir Hotel Cairo 5* (ή παρόμοιο) με πρόγευμα. Αναχωρήσεις Σεπτέμβριο – Οκτώβριο.',
+    image: '🇪🇬',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '13/09, 20/09, 01/10, 11/10, 26/10',
+      departureDates: ['13/09', '20/09', '01/10', '11/10', '26/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Cairo, Alexandria, Egypt',
+      monthAvailability: 'September, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Egypt Air',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών',
+      coverImage: '/images/alexandria-egypt/alexandria-egypt-cover.webp',
+      thumbnailImage: '/images/alexandria-egypt/alexandria-egypt-thumb.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/09, 20/09, 11/10',
+          route:
+            '12:15 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n13:40 Cairo Intl (CAI)\nCairo, Egypt',
+          flight: 'MS 744',
+          time: '12:15 → 13:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '13/09, 20/09, 11/10',
+          route:
+            '17:15 Cairo Intl (CAI)\nCairo, Egypt\nto\n18:30 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'MS 741',
+          time: '17:15 → 18:30',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '01/10',
+          route:
+            '19:30 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n20:55 Cairo Intl (CAI)\nCairo, Egypt',
+          flight: 'MS 742',
+          time: '19:30 → 20:55',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '01/10',
+          route:
+            '10:00 Cairo Intl (CAI)\nCairo, Egypt\nto\n11:15 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'MS 743',
+          time: '10:00 → 11:15',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '26/10',
+          route: 'Larnaca International Airport (LCA) → Cairo Intl (CAI)',
+          flight: '—',
+          time: '19:10 → 21:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '26/10',
+          route: 'Cairo Intl (CAI) → Larnaca International Airport (LCA)',
+          flight: '—',
+          time: '17:50 → 18:10',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Safir Hotel Cairo 5* or similar',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/alexandria-egypt/alexandria-egypt-hotel.webp',
+          location: 'Cairo, Egypt',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 895, single: 1195, child1: 699 },
+          packagePrice: 1790,
+          departureDate: '13/09',
+          nights: 3
+        },
+        {
+          name: 'Safir Hotel Cairo 5* or similar',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/alexandria-egypt/alexandria-egypt-hotel.webp',
+          location: 'Cairo, Egypt',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 895, single: 1195, child1: 699 },
+          packagePrice: 1790,
+          departureDate: '20/09',
+          nights: 3
+        },
+        {
+          name: 'Safir Hotel Cairo 5* or similar',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/alexandria-egypt/alexandria-egypt-hotel.webp',
+          location: 'Cairo, Egypt',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 895, single: 1195, child1: 699 },
+          packagePrice: 1790,
+          departureDate: '01/10',
+          nights: 3
+        },
+        {
+          name: 'Safir Hotel Cairo 5* or similar',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/alexandria-egypt/alexandria-egypt-hotel.webp',
+          location: 'Cairo, Egypt',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 895, single: 1195, child1: 699 },
+          packagePrice: 1790,
+          departureDate: '11/10',
+          nights: 3
+        },
+        {
+          name: 'Safir Hotel Cairo 5* or similar',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/alexandria-egypt/alexandria-egypt-hotel.webp',
+          location: 'Cairo, Egypt',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 895, single: 1195, child1: 699 },
+          packagePrice: 1790,
+          departureDate: '26/10',
+          nights: 3
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Κάιρο - Λάρνακα με πτήσεις της Egypt Air',
+        'Φόροι αεροδρομίων',
+        'Τρείς διανυκτερεύσεις σε ξενοδοχείο 5* με πρωινό',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το αναλυτικό πρόγραμμα',
+        'Εισιτήρια εισόδων: Πυραμίδες, Μεγάλο Αιγυπτιακό Μουσείο και Βιβλιοθήκη Αλεξάνδρειας',
+        'Τοπικός Ελληνόφωνος ξεναγός',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο',
+        'Εισιτήρια εισόδων εκτός αυτών που αναφέρονται στα περιλαμβάνονται',
+        'Βίζα εισόδου (30 δολάρια)',
+        'Φιλοδωρήματα (20 δολάρια)'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας ή μετρητά στο γραφείο μας',
+        'Τα πακέτα ενδέχεται να μην ακυρώνονται και να μην επιστρέφονται χρήματα'
+      ],
+      itinerary: [
+        {
+          day: '1η Μέρα',
+          title: 'Λάρνακα - Κάιρο',
+          description:
+            'Αναχώρηση από Λάρνακα, άφιξη στο Κάιρο, μεταφορά στο ξενοδοχείο και τακτοποίηση. Χρόνος για ξεκούραση ή πρώτη γνωριμία με την πόλη.'
+        },
+        {
+          day: '2η Μέρα',
+          title: 'Μεγάλο Αιγυπτιακό Μουσείο - Πυραμίδες Γκίζας - Khan el Khalili',
+          description:
+            'Επίσκεψη στο Μεγάλο Αιγυπτιακό Μουσείο, στις Πυραμίδες της Γκίζας και στη Σφίγγα, και περιήγηση στο παραδοσιακό bazaar Khan el Khalili.'
+        },
+        {
+          day: '3η Μέρα',
+          title: 'Αλεξάνδρεια',
+          description:
+            'Εκδρομή στην Αλεξάνδρεια: Πατριαρχείο, Βιβλιοθήκη Αλεξάνδρειας, Σπίτι Καβάφη και Οχυρό Qaitbay (εξωτερικά).'
+        },
+        {
+          day: '4η Μέρα',
+          title: 'Κάιρο - Λάρνακα',
+          description:
+            'Ελεύθερος χρόνος στο Κάιρο και πτήση επιστροφής στη Λάρνακα.'
+        }
+      ],
+      program: cairoAlexandriaPackage322Program,
+      gallery: [
+        '/images/alexandria-egypt/alexandria-egypt-cover.webp',
+        '/images/alexandria-egypt/alexandria-egypt-thumb.webp',
+        '/images/alexandria-egypt/alexandria-egypt-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 323,
+    title: 'ΣΡΙ ΛΑΝΚΑ / ΤΟ ΜΑΡΓΑΡΙΤΑΡΙ ΤΟΥ ΙΝΔΙΚΟΥ',
+    destination: 'Sri Lanka',
+    category: 'Exotic Destinations',
+    price: 2135,
+    duration: '10 Μέρες',
+    description:
+      '10ήμερο ταξίδι στη Σρι Λάνκα: Κολόμπο, Κάντυ, Νταμπούλα, Σιγκιρίγια, Νουβάρα Ελίγια, τρένο Έλλα, σαφάρι Γιάλα, Γκάλε και ποταμός Μαντού. Διαμονή σε 4* & 5* ξενοδοχεία με πρόγευμα.',
+    longDescription:
+      'Ανακαλύψτε το «μαργαριτάρι του Ινδικού» με πτήσεις Emirates μέσω Ντουμπάι: Ορφανοτροφείο Ελεφάντων Πιναβέλα, ιεροί ναοί της Κάντυ, σπήλαια Νταμπούλα, Βράχος του Λιονταριού, ορεινή διαδρομή με τρένο, σαφάρι στο Εθνικό Πάρκο Γιάλα, το φρούριο της Γκάλε και ξενάγηση στο Κολόμπο. Ξενοδοχεία: The Golden Crown 5* (Κάντυ), Hilton DoubleTree 4* (Τισαμαχαράμα), Grandbell 4* (Κολόμπο).',
+    image: '🇱🇰',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '13/08, 10/09, 15/10',
+      departureDates: ['13/08', '10/09', '15/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Colombo, Kandy, Tissamaharama, Sri Lanka',
+      monthAvailability: 'August, September, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage: 'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών με Emirates',
+      coverImage: '/images/sri-lanka-package/sri-lanka-cover.webp',
+      thumbnailImage: '/images/sri-lanka-package/sri-lanka-thumb.webp',
+      note: 'Για έκδοση βίζας η διαδικασία έκδοσης γίνεται μέσω του διαδικτύου.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/08, 10/09, 15/10',
+          route:
+            '20:10 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n01:05 (+1) Dubai Intl (DXB)\nDubai, United Arab Emirates',
+          flight: 'EK 110',
+          time: '20:10 → 01:05 (+1)',
+          stops: 'Στάση Ντουμπάι',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '13/08, 10/09, 15/10',
+          route:
+            '02:40 Dubai Intl (DXB)\nDubai, United Arab Emirates\nto\n08:35 Bandaranaike Intl (CMB)\nColombo, Sri Lanka',
+          flight: 'EK 650',
+          time: '02:40 → 08:35',
+          stops: 'Σύνδεση Ντουμπάι',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '—',
+          route:
+            '02:55 Bandaranaike Intl (CMB)\nColombo, Sri Lanka\nto\n05:50 Dubai Intl (DXB)\nDubai, United Arab Emirates',
+          flight: 'EK 649',
+          time: '02:55 → 05:50',
+          stops: 'Στάση Ντουμπάι',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '—',
+          route:
+            '07:55 Dubai Intl (DXB)\nDubai, United Arab Emirates\nto\n11:00 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'EK 109',
+          time: '07:55 → 11:00',
+          stops: 'Σύνδεση Ντουμπάι',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* & 5* Hotels – Kandy / Tissamaharama / Colombo',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/sri-lanka-package/sri-lanka-hotel.webp',
+          location: 'Kandy, Tissamaharama & Colombo, Sri Lanka',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 2465, single: 2855 },
+          packagePrice: 4930,
+          departureDate: '13/08',
+          nights: 8
+        },
+        {
+          name: '4* & 5* Hotels – Kandy / Tissamaharama / Colombo',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/sri-lanka-package/sri-lanka-hotel.webp',
+          location: 'Kandy, Tissamaharama & Colombo, Sri Lanka',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 2135, single: 2499 },
+          packagePrice: 4270,
+          departureDate: '10/09',
+          nights: 8
+        },
+        {
+          name: '4* & 5* Hotels – Kandy / Tissamaharama / Colombo',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/sri-lanka-package/sri-lanka-hotel.webp',
+          location: 'Kandy, Tissamaharama & Colombo, Sri Lanka',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 2175, single: 2539 },
+          packagePrice: 4350,
+          departureDate: '15/10',
+          nights: 8
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Κολόμπο - Λάρνακα μέσω Ντουμπάι με Emirates',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων',
+        'Διαμονή για 8 βράδια σε ξενοδοχεία 5* και 4* με πρόγευμα',
+        'Οκτώ δείπνα όπως αναφέρονται στο πρόγραμμα',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα, με πολυτελή κλιματιζόμενα πούλμαν',
+        'Βαρκάδα στο ποταμό Μαντού',
+        'Εισιτήριο τρένου παραδοσιακό',
+        'Εισιτήρια εισόδων στους χώρους των επισκέψεων',
+        'Τοπικοί Αγγλόφωνοι ξεναγοί',
+        'Έμπειρος Ελληνόφωνος αρχηγός/συνοδός από Κύπρο',
+        'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών με Emirates',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα',
+        'Έξοδα έκδοσης βίζας',
+        'Ποτά κατά τα δείπνα',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται προαιρετικό ή προτεινόμενο'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50,00 Ευρώ για λειτουργικά έξοδα',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      itinerary: [
+        {
+          day: '1η - 2η Μέρα',
+          title: 'Λάρνακα - Κολόμπο - Πιναβέλα - Κάντυ',
+          description: 'Άφιξη στο Κολόμπο, επίσκεψη στο Ορφανοτροφείο Ελεφάντων και μεταφορά στην Κάντυ.'
+        },
+        {
+          day: '3η Μέρα',
+          title: 'Νταμπούλα - Σιγκιρίγια',
+          description: 'Σπήλαια Νταμπούλα, παραδοσιακό χωριό και Βράχος του Λιονταριού.'
+        },
+        {
+          day: '4η Μέρα',
+          title: 'Κάντυ',
+          description: 'Ναός του Ιερού Δοντιού, βοτανικοί κήποι και παραδοσιακή παράσταση με πυροβασία.'
+        },
+        {
+          day: '5η Μέρα',
+          title: 'Νουβάρα Ελίγια - Έλλα - Τισαμαχαράμα',
+          description: 'Φυτείες τσαγιού, διαδρομή με τρένο, καταρράκτες Ραβάνα και άφιξη στην Τισαμαχαράμα.'
+        },
+        {
+          day: '6η Μέρα',
+          title: 'Σαφάρι Γιάλα',
+          description: 'Σαφάρι στο Εθνικό Πάρκο Γιάλα και επίσκεψη σε τοπική αγορά.'
+        },
+        {
+          day: '7η Μέρα',
+          title: 'Γκάλε - Κολόμπο',
+          description: 'Φρούριο Γκάλε, εκκολαπτήριο χελωνών, βαρκάδα στον ποταμό Μαντού και άφιξη στο Κολόμπο.'
+        },
+        {
+          day: '8η Μέρα',
+          title: 'Κολόμπο',
+          description: 'Ξενάγηση στην πρωτεύουσα: Φρούριο, μουσεία, Κήποι Κανέλας και αγορά Πέταχ.'
+        },
+        {
+          day: '9η - 10η Μέρα',
+          title: 'Κολόμπο - Λάρνακα',
+          description: 'Ελεύθερη ημέρα στο Κολόμπο και πτήση επιστροφής στη Λάρνακα.'
+        }
+      ],
+      program: sriLankaPackage323Program,
+      gallery: [
+        '/images/sri-lanka-package/sri-lanka-cover.webp',
+        '/images/sri-lanka-package/sri-lanka-thumb.webp',
+        '/images/sri-lanka-package/sri-lanka-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 324,
+    title: 'ΑΝΔΡΟΣ',
+    destination: 'Greece',
+    category: 'Summer Packages to Greece',
+    price: 689,
+    duration: '5 Μέρες',
+    description:
+      'Καλοκαιρινές διακοπές στην Άνδρο. 5 μέρες με διαμονή στο Paradise Art Hotel 4* με πρόγευμα, πτήσεις Cyprus Airways και ακτοπλοϊκά εισιτήρια για το νησί.',
+    longDescription:
+      'Η Άνδρος, το βορειότερο νησί των Κυκλάδων, ξεχωρίζει για την αρχοντική της ατμόσφαιρα, τη μοναδική φυσική ομορφιά και την πλούσια ναυτική παράδοση. Με καταπράσινα τοπία, τρεχούμενα νερά και γραφική Χώρα, προσφέρει αυθεντικές κυκλαδίτικες διακοπές γεμάτες γαλήνη.',
+    image: '🇬🇷',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '13/08, 20/08',
+      departureDates: ['13/08', '20/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Andros Island, Greece',
+      monthAvailability: 'August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 10 κιλών',
+      coverImage: '/images/greek-packages-summer/andros-greece/andros-summer-package-cover.webp',
+      thumbnailImage: '/images/greek-packages-summer/andros-greece/andros-summer-package-thumb.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/08, 20/08',
+          route:
+            '08:05 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n10:00 Athens Int E Venizelos (ATH)\nAthens, Greece',
+          flight: 'CY 310',
+          time: '08:05 → 10:00',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '13/08, 20/08',
+          route:
+            '20:50 Athens Int E Venizelos (ATH)\nAthens, Greece\nto\n22:35 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'CY 313',
+          time: '20:50 → 22:35',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Paradise Art Hotel',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/greek-packages-summer/andros-greece/andros-summer-package-hotel.webp',
+          location: 'Hora, Andros, 84500, Andros Island, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 689 },
+          packagePrice: 1378,
+          departureDate: '13/08',
+          nights: 4
+        },
+        {
+          name: 'Paradise Art Hotel',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/greek-packages-summer/andros-greece/andros-summer-package-hotel.webp',
+          location: 'Hora, Andros, 84500, Andros Island, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 689 },
+          packagePrice: 1378,
+          departureDate: '20/08',
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Αθήνα - Λάρνακα με Cyprus Airways',
+        'Φόροι αεροδρομίων',
+        'Διαμονή για 4 βράδια στο ξενοδοχείο Paradise Art Hotel 4* με πρόγευμα',
+        'Ακτοπλοϊκά εισιτήρια για Άνδρο',
+        'Μία αποσκευή 23 κιλών και μία χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Τοπικός φόρος διαμονής (πληρώνεται επί τόπου)',
+        'Φαγητό και ποτό στην πτήση',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50,00 Ευρώ για λειτουργικά έξοδα',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: {
+        introduction:
+          'ΆΝΔΡΟΣ\n\nΗ Άνδρος, το βορειότερο νησί των Κυκλάδων, ξεχωρίζει για την αρχοντική της ατμόσφαιρα, τη μοναδική φυσική ομορφιά και την πλούσια ναυτική παράδοση. Με καταπράσινα τοπία, τρεχούμενα νερά και γραφικά χωριά, προσφέρει μια διαφορετική εμπειρία κυκλαδίτικων διακοπών γεμάτη αυθεντικότητα και γαλήνη.',
+        aboutAndros:
+          'Η Χώρα της Άνδρου εντυπωσιάζει με τα νεοκλασικά αρχοντικά, τα στενά μαρμάρινα σοκάκια και τα σημαντικά μουσεία και πολιτιστικά ιδρύματα. Το νησί συνδυάζει αρμονικά την κοσμοπολίτικη αύρα με την παραδοσιακή κυκλαδίτικη αρχιτεκτονική, δημιουργώντας ένα μοναδικό σκηνικό για κάθε επισκέπτη.',
+        beaches:
+          'Οι παραλίες της Άνδρου, με τα κρυστάλλινα νερά και τη φυσική ομορφιά τους, προσφέρουν στιγμές χαλάρωσης και ξεγνοιασιάς. Από οργανωμένες αμμώδεις ακτές μέχρι ήσυχους κολπίσκους, το νησί καλύπτει κάθε προτίμηση για καλοκαιρινές αποδράσεις δίπλα στο Αιγαίο.',
+        nature:
+          'Παράλληλα, η Άνδρος αποτελεί ιδανικό προορισμό για φυσιολάτρες και λάτρεις της πεζοπορίας, χάρη στα πανέμορφα μονοπάτια και τις καταπράσινες διαδρομές της. Η αυθεντική φιλοξενία, η τοπική γαστρονομία και η ήρεμη ατμόσφαιρα κάνουν το νησί ιδανικό για ξεκούραστες και ποιοτικές διακοπές.'
+      },
+      gallery: [
+        '/images/greek-packages-summer/andros-greece/andros-summer-package-cover.webp',
+        '/images/greek-packages-summer/andros-greece/andros-summer-package-thumb.webp',
+        '/images/greek-packages-summer/andros-greece/andros-summer-package-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 325,
+    title: 'ΝΑΞΟΣ',
+    destination: 'Greece',
+    category: 'Summer Packages to Greece',
+    price: 859,
+    duration: '5 Μέρες',
+    description:
+      'Καλοκαιρινές διακοπές στη Νάξο. 5 μέρες με διαμονή στο Princess of Naxos Hotel 3* με πρόγευμα, πτήσεις Cyprus Airways και ακτοπλοϊκά εισιτήρια για το νησί.',
+    longDescription:
+      'Η Νάξος, το μεγαλύτερο νησί των Κυκλάδων, συνδυάζει αυθεντική κυκλαδίτικη ομορφιά με πλούσια ιστορία και εντυπωσιακές παραλίες. Η Πορτάρα, η Χώρα και τα παραδοσιακά ορεινά χωριά δημιουργούν μαγευτικό σκηνικό για αξέχαστες καλοκαιρινές διακοπές.',
+    image: '🇬🇷',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '13/08, 20/08',
+      departureDates: ['13/08', '20/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Naxos, Greece',
+      monthAvailability: 'August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 10 κιλών',
+      coverImage: '/images/greek-packages-summer/naxos-greece/naxos-cover-greece.webp',
+      thumbnailImage: '/images/greek-packages-summer/naxos-greece/naxos-thumb-greece.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/08, 20/08',
+          route:
+            '08:05 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n10:00 Athens Int E Venizelos (ATH)\nAthens, Greece',
+          flight: 'CY 310',
+          time: '08:05 → 10:00',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '13/08, 20/08',
+          route:
+            '20:50 Athens Int E Venizelos (ATH)\nAthens, Greece\nto\n22:35 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'CY 313',
+          time: '20:50 → 22:35',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Princess of Naxos Hotel',
+          stars: 3,
+          roomType: 'Standard Room',
+          image: '/images/greek-packages-summer/naxos-greece/naxos-hotel-greece.webp',
+          location: 'Saint George Beach, Naxos Town, Naxos, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 949 },
+          packagePrice: 1898,
+          departureDate: '13/08',
+          nights: 4
+        },
+        {
+          name: 'Princess of Naxos Hotel',
+          stars: 3,
+          roomType: 'Standard Room',
+          image: '/images/greek-packages-summer/naxos-greece/naxos-hotel-greece.webp',
+          location: 'Saint George Beach, Naxos Town, Naxos, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 859 },
+          packagePrice: 1718,
+          departureDate: '20/08',
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Αθήνα - Λάρνακα με Cyprus Airways',
+        'Φόροι αεροδρομίων',
+        'Διαμονή για 4 βράδια στο ξενοδοχείο Princess of Naxos Hotel 3* με πρόγευμα',
+        'Ακτοπλοϊκά εισιτήρια για Νάξο',
+        'Μία αποσκευή 23 κιλών και μία χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Τοπικός φόρος διαμονής (πληρώνεται επί τόπου)',
+        'Φαγητό και ποτό στην πτήση',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50,00 Ευρώ για λειτουργικά έξοδα',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες, σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: {
+        introduction:
+          'ΝΑΞΟΣ\n\nΗ Νάξος, το μεγαλύτερο νησί των Κυκλάδων, συνδυάζει μοναδικά την αυθεντική κυκλαδίτικη ομορφιά με την πλούσια ιστορία και τις εντυπωσιακές παραλίες. Η εμβληματική Πορτάρα, τα γραφικά σοκάκια της Χώρας και τα παραδοσιακά ορεινά χωριά δημιουργούν ένα μαγευτικό σκηνικό που κερδίζει κάθε επισκέπτη.',
+        aboutNaxos:
+          'Το νησί φημίζεται για τα κρυστάλλινα νερά, τη γαστρονομία και τη ζεστή φιλοξενία του. Από τις ατελείωτες αμμώδεις παραλίες μέχρι τις αυθεντικές τοπικές γεύσεις και τα μαγευτικά ηλιοβασιλέματα, η Νάξος αποτελεί ιδανικό προορισμό για χαλάρωση, εξερεύνηση και αξέχαστες καλοκαιρινές εμπειρίες.',
+        charm:
+          'Η Νάξος ξεχωρίζει για την αυθεντική κυκλαδίτικη γοητεία της, συνδυάζοντας μαγευτικά τοπία, παραδοσιακά χωριά και πλούσια πολιτιστική κληρονομιά. Από τη Χώρα με τα λευκά σοκάκια και το εμβληματικό κάστρο μέχρι την επιβλητική Πορτάρα, το νησί προσφέρει εικόνες που μένουν αξέχαστες σε κάθε επισκέπτη.',
+        experience:
+          'Με χρυσαφένιες παραλίες, καταγάλανα νερά και μοναδικές γαστρονομικές εμπειρίες, η Νάξος αποτελεί ιδανικό προορισμό για κάθε τύπο ταξιδιώτη. Είτε αναζητάτε στιγμές χαλάρωσης δίπλα στη θάλασσα είτε περιπέτεια και εξερεύνηση στην ενδοχώρα, το νησί υπόσχεται αξέχαστες καλοκαιρινές αποδράσεις.'
+      },
+      gallery: [
+        '/images/greek-packages-summer/naxos-greece/naxos-cover-greece.webp',
+        '/images/greek-packages-summer/naxos-greece/naxos-thumb-greece.webp',
+        '/images/greek-packages-summer/naxos-greece/naxos-hotel-greece.webp'
+      ]
+    }
+  },
+  {
+    id: 326,
+    title: 'ΓΑΛΛΟΪΤΑΛΙΚΗ ΡΙΒΙΕΡΑ / ΠΟΡΤΟΦΙΝΟ',
+    destination: 'Europe',
+    category: 'Summer Packages',
+    price: 1599,
+    duration: '8 Μέρες',
+    description:
+      'Ομαδικό ταξίδι 8 ημερών στη Γαλλική και Ιταλική Ριβιέρα: Μιλάνο, Κάννες, Νίκαια, Μονακό, Γένοβα και Πορτοφίνο με διαμονή σε ξενοδοχεία 4* και πρόγευμα.',
+    longDescription:
+      'Διανυκτερεύσεις: Μιλάνο (2), Κάννες (3), Γένοβα (2). Πλούσιο πρόγραμμα με ξεναγήσεις, εκδρομές στην Κυανή Ακτή, Μονακό, Πορτοφίνο και επίσκεψη στο εκπτωτικό χωριό Serravalle. Πτήσεις Cyprus Airways Λάρνακα – Μιλάνο – Λάρνακα.',
+    image: '🇫🇷',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '09/07, 16/07, 23/07, 30/07, 06/08, 13/08, 20/08',
+      departureDates: ['09/07', '16/07', '23/07', '30/07', '06/08', '13/08', '20/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Milan, Cannes, Nice, Monaco, Genoa, Portofino, Italy & France',
+      monthAvailability: 'July – August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed and Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 10 κιλών',
+      coverImage: '/images/protofino-summer-packages/portofino-cover.webp',
+      thumbnailImage: '/images/protofino-summer-packages/portofino-thumb.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '09/07, 16/07, 23/07, 30/07, 06/08, 13/08, 20/08',
+          route:
+            '14:10 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n17:00 Malpensa (MXP)\nMilan, Italy',
+          flight: 'CY 342',
+          time: '14:10 → 17:00',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '09/07, 16/07, 23/07, 30/07, 06/08, 13/08, 20/08',
+          route:
+            '18:00 Malpensa (MXP)\nMilan, Italy\nto\n22:30 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'CY 343',
+          time: '18:00 → 22:30',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '09/07',
+          nights: 7
+        },
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '16/07',
+          nights: 7
+        },
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '23/07',
+          nights: 7
+        },
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '30/07',
+          nights: 7
+        },
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '06/08',
+          nights: 7
+        },
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '13/08',
+          nights: 7
+        },
+        {
+          name: '4* Hotels - Genova / Cannes / Milan',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/protofino-summer-packages/protofino-hotel.webp',
+          location: 'Milan, Cannes & Genoa, Italy & France',
+          boardBasis: 'Bed and Breakfast',
+          prices: { double: 1599, single: 2149, child1: 1469 },
+          packagePrice: 3198,
+          departureDate: '20/08',
+          nights: 7
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Μιλάνο – Λάρνακα με πτήσεις της Cyprus Airways',
+        'Φόροι αεροδρομίων',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα',
+        'Αρχηγός / συνοδός του γραφείου μας',
+        'Τοπικός φόρος διαμονής',
+        'Διόδια και στάθμευση των λεωφορείων καθώς και τις ειδικές εισόδους σε όλες τις πόλεις',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Εισιτήρια εισόδων στους χώρους επισκέψεων',
+        'Οτιδήποτε δεν αναφέρετε στα περιλαμβάνονται ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      note: 'Η ροή του προγράμματος μπορεί να αλλάξει χωρίς να παραληφθεί καμία υπηρεσία. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 100 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50,00 Ευρώ για λειτουργικά έξοδα',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: frenchItalianRivieraPackage326Program,
+      gallery: [
+        '/images/protofino-summer-packages/portofino-cover.webp',
+        '/images/protofino-summer-packages/portofino-thumb.webp',
+        '/images/protofino-summer-packages/protofino-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 327,
+    title: 'ΑΓΓΛΙΑ - ΣΚΩΤΙΑ',
+    destination: 'United Kingdom',
+    category: 'Summer Packages',
+    price: 1999,
+    duration: '8 Μέρες',
+    description:
+      'Ομαδικό ταξίδι 8 ημερών στην Αγγλία και τη Σκωτία: Μάντσεστερ, Λίβερπουλ, Γλασκώβη, Εδιμβούργο, Γιορκ, Οξφόρδη και Λονδίνο με διαμονή σε ξενοδοχεία 3* & 4* και πρόγευμα.',
+    longDescription:
+      'Διανυκτερεύσεις: Μάντσεστερ (2), Γλασκώβη (2), Γιορκ (1), Λονδίνο (2). Πλούσιο πρόγραμμα με ξεναγήσεις, κρουαζιέρα στη λίμνη Windermere και πτήσεις British Airways Λάρνακα – Λονδίνο – Λάρνακα.',
+    image: '🇬🇧',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '19/07, 12/08',
+      departureDates: ['19/07', '12/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Manchester, Liverpool, Glasgow, Edinburgh, York, Oxford, London, United Kingdom',
+      monthAvailability: 'July – August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'British Airways',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 56Χ45Χ25cm',
+      coverImage: '/images/england-scotland-summer/england-scotland-cover.webp',
+      thumbnailImage: '/images/england-scotland-summer/england-scotland-thumb.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '19/07',
+          route:
+            '07:00 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n10:10 Heathrow (LHR)\nLondon, United Kingdom',
+          flight: 'BA 711',
+          time: '07:00 → 10:10',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '12/08',
+          route:
+            '07:25 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n10:35 Heathrow (LHR)\nLondon, United Kingdom',
+          flight: 'BA 711',
+          time: '07:25 → 10:35',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '19/07, 12/08',
+          route:
+            '19:20 Heathrow (LHR)\nLondon, United Kingdom\nto\n01:55 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'BA 710',
+          time: '19:20 → 01:55',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+        }
+      ],
+      hotels: [
+        {
+          name: '3* & 4* Hotels Manchester / Glasgow / York / London',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/england-scotland-summer/england-scotland-hotel.webp',
+          location: 'London, United Kingdom',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1999, single: 2799, child1: 1289 },
+          packagePrice: 3998,
+          departureDate: '19/07',
+          nights: 7
+        },
+        {
+          name: '3* & 4* Hotels Manchester / Glasgow / York / London',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/england-scotland-summer/england-scotland-hotel.webp',
+          location: 'London, United Kingdom',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1999, single: 2799, child1: 1289 },
+          packagePrice: 3998,
+          departureDate: '12/08',
+          nights: 7
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Λονδίνο – Λάρνακα με πτήσεις της British Airways',
+        'Φόροι αεροδρομίων',
+        'Επτά διανυκτερεύσεις σε ξενοδοχεία 3* και 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα',
+        'Μίνι κρουαζιέρα στη λίμνη Γουίντερμιρ',
+        'Τοπικοί αγγλόφωνοι ξεναγοί',
+        'Ελληνόφωνος αρχηγός/συνοδός του γραφείου μας',
+        'Μία αποσκευή 23 κιλών και μία χειραποσκευή 56Χ45Χ25cm',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα',
+        'Φαγητό στην πτήση',
+        'Εισιτήρια εισόδων στους χώρους επισκέψεων',
+        'Οτιδήποτε δεν αναφέρετε στα περιλαμβάνονται ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      note:
+        'Οι Κύπριοι πολίτες επιτρέπεται να ταξιδεύουν στη Μεγάλη Βρετανία ΜΟΝΟ με διαβατήριο. Όλοι οι Κύπριοι και Ευρωπαίοι πολίτες που ταξιδεύουν στο Ηνωμένο Βασίλειο χρειάζονται Ηλεκτρονική Ταξιδιωτική Άδεια (ETA). Η διαδικασία γίνεται διαδικτυακά https://www.gov.uk/eta/apply και κοστίζει 10 στερλίνες.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50,00 Ευρώ για λειτουργικά έξοδα',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: englandScotlandPackage327Program,
+      gallery: [
+        '/images/england-scotland-summer/england-scotland-cover.webp',
+        '/images/england-scotland-summer/england-scotland-thumb.webp',
+        '/images/england-scotland-summer/england-scotland-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 328,
+    title: 'ΣΟΥΗΔΙΑ',
+    destination: 'Europe',
+    category: 'Summer Packages',
+    price: 2475,
+    duration: '7 Μέρες',
+    description:
+      'Ομαδικό ταξίδι 7 ημερών στη Στοκχόλμη με διαμονή στο Best Western Plus Time Hotel 4*, πανοραμικές ξεναγήσεις, μουσεία, κρουαζιέρα στο αρχιπέλαγος και εκδρομές σε Ουψάλα, Σιγκτούνα και Τρόσα.',
+    longDescription:
+      'Διανυκτερεύσεις: Στοκχόλμη (6). Πλούσιο πρόγραμμα με ξενάγηση στην «Βενετία του Βορρά», Μουσείο Βάσα, Ανάκτορα Drottningholm, Skansen, κρουαζιέρα στα Fjäderholmarna και πτήσεις SAS Λάρνακα – Στοκχόλμη – Λάρνακα.',
+    image: '/images/sweden-summer/sweden-summer-package-cover.webp',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '05/08',
+      departureDates: ['05/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Stockholm, Sweden',
+      monthAvailability: 'August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'SAS',
+      includedLuggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+      coverImage: '/images/sweden-summer/sweden-summer-package-cover.webp',
+      thumbnailImage: '/images/sweden-summer/sweden-summer-thumb.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '05/08',
+          route:
+            '12:05 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n15:40 Arlanda (ARN)\nStockholm, Sweden',
+          flight: 'SK 2982',
+          time: '12:05 → 15:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '05/08',
+          route:
+            '06:00 Arlanda (ARN)\nStockholm, Sweden\nto\n11:25 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'SK 2981',
+          time: '06:00 → 11:25',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Best Western Plus Time Hotel',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/sweden-summer/sweden-summer-hotel.webp',
+          location: 'Vanadisvägen 12, 11346, Stockholm, Sweden',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 2475, single: 3265 },
+          packagePrice: 4950,
+          departureDate: '05/08',
+          nights: 6
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Στοκχόλμη – Λάρνακα με πτήσεις της SAS',
+        'Φόροι αεροδρομίων',
+        'Έξι διανυκτερεύσεις στο Best Western Plus Time Hotel 4* με πρόγευμα',
+        'Μεταφορές, εκδρομές και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα',
+        'Μίνι κρουαζιέρα στα Νησιά Φιέδερχολμαρνα',
+        'Τοπικοί αγγλόφωνοι ξεναγοί',
+        'Ελληνόφωνος αρχηγός/συνοδός του γραφείου μας',
+        'Μία αποσκευή 23 κιλών και μία χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα',
+        'Φαγητό στην πτήση',
+        'Εισιτήρια εισόδων στους χώρους επισκέψεων όπου δεν περιλαμβάνονται στο πρόγραμμα',
+        'Οτιδήποτε δεν αναφέρετε στα περιλαμβάνονται ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'
+      ],
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50,00 Ευρώ για λειτουργικά έξοδα',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης'
+      ],
+      program: swedenPackage328Program,
+      gallery: [
+        '/images/sweden-summer/sweden-summer-package-cover.webp',
+        '/images/sweden-summer/sweden-summer-thumb.webp',
+        '/images/sweden-summer/sweden-summer-hotel.webp'
+      ]
+    }
   }
 ]
 
@@ -18303,7 +19324,7 @@ const visiblePackages = () => travelPackages.filter(pkg => !pkg.hidden)
 export const REGION_DESTINATIONS = {
   Greece: ['Greece'],
   Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Austria', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom', 'Malta'],
-  Asia: ['Thailand', 'Indonesia', 'India', 'Japan', 'South Korea', 'China', 'Bali', 'Asia'],
+  Asia: ['Thailand', 'Indonesia', 'India', 'Japan', 'South Korea', 'China', 'Bali', 'Sri Lanka', 'Asia'],
   'Middle East': ['Middle East', 'UAE', 'Egypt'],
   America: ['America', 'United States', 'Argentina, Brazil', 'Peru'],
   Africa: ['Morocco', 'South Africa', 'Africa']
