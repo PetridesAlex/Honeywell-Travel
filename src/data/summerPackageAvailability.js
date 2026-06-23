@@ -157,7 +157,7 @@ export const summerAvailabilityCatalog = [
     title: 'Σκιάθος',
     duration: '8 μέρες',
     carrier: 'Cyprus Airways',
-    packageId: 12673,
+    packageId: 72,
     packageType: 'individual',
     departures: [
       d('04/07'),
