@@ -14705,6 +14705,7 @@ export const travelPackages = [
     image: '🏃',
     featured: true,
     packageType: 'individual',
+    hidden: true,
     details: {
       departureDate: '06/11',
       departureFrom: 'Larnaca',
@@ -14818,6 +14819,7 @@ export const travelPackages = [
     image: '🏃',
     featured: true,
     packageType: 'individual',
+    hidden: true,
     details: {
       departureDate: '06/11',
       departureFrom: 'Larnaca',
@@ -19318,7 +19320,15 @@ export const travelPackages = [
 ]
 
 // Helper functions
-const visiblePackages = () => travelPackages.filter(pkg => !pkg.hidden)
+// Seasonal categories hidden from listings until republished (remove from array to restore).
+export const EXPIRED_PACKAGE_CATEGORIES = ['Easter Packages']
+
+export const isPackageVisible = (pkg) =>
+  Boolean(pkg) && !pkg.hidden && !EXPIRED_PACKAGE_CATEGORIES.includes(pkg.category)
+
+const visiblePackages = () => travelPackages.filter(isPackageVisible)
+
+export const getVisiblePackages = () => visiblePackages()
 
 // Map search dropdown regions to package destination values (so "Asia" shows Thailand, Japan, etc.)
 export const REGION_DESTINATIONS = {
@@ -19378,7 +19388,8 @@ export const addPackage = (newPackage) => {
 }
 
 export const getPackageById = (id) => {
-  return travelPackages.find(pkg => pkg.id === parseInt(id))
+  const pkg = travelPackages.find((item) => item.id === parseInt(id, 10))
+  return isPackageVisible(pkg) ? pkg : undefined
 }
 
 

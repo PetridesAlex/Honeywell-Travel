@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getPackageById, travelPackages } from '../data/packages'
+import { getPackageById, getVisiblePackages } from '../data/packages'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
@@ -665,8 +665,8 @@ function PackageFullDetail() {
         return priceOnRequest || !(cheapest > 0) ? 'Price on request' : `From €${cheapest.toLocaleString()}`
       }
 
-      const relatedTours = travelPackages.filter(
-        (p) => !p.hidden && p.category === pkg.category && p.id !== pkg.id
+      const relatedTours = getVisiblePackages().filter(
+        (p) => p.category === pkg.category && p.id !== pkg.id
       ).slice(0, 3).map(tour => ({
         ...tour,
         cheapestPrice: getCheapestPrice(tour)

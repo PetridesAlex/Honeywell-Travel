@@ -9,11 +9,12 @@
 .summer-availability-hero {
   position: relative;
   overflow: hidden;
-  min-height: clamp(22rem, 48vh, 34rem);
+  width: 100%;
+  aspect-ratio: 2000 / 1333;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: clamp(3rem, 7vw, 5rem) 1.5rem;
+  padding: clamp(2.25rem, 5.5vh, 3.75rem) 1.5rem clamp(2rem, 4vw, 3rem);
   text-align: center;
 }
 
@@ -21,8 +22,6 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  transform: scale(1.04);
-  transform-origin: center center;
 }
 
 .summer-availability-hero-bg::after {
@@ -44,7 +43,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
 }
 
 .summer-availability-hero-content {
@@ -52,22 +51,20 @@
   z-index: 1;
   max-width: 820px;
   margin: 0 auto;
-  color: #fff;
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.55),
-    0 8px 28px rgba(0, 0, 0, 0.45);
+  color: #f8fafc;
+  text-shadow: 0 2px 14px rgba(15, 23, 42, 0.35);
 }
 
 .summer-availability-eyebrow {
   margin: 0 0 0.65rem;
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #fff;
+  color: #e8d4b0;
   text-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.65),
-    0 4px 16px rgba(0, 0, 0, 0.5);
+    0 1px 2px rgba(15, 23, 42, 0.45),
+    0 4px 18px rgba(15, 23, 42, 0.28);
 }
 
 .summer-availability-hero h1 {
@@ -75,22 +72,172 @@
   font-family: var(--font-serif);
   font-size: clamp(2.1rem, 5vw, 3.15rem);
   font-weight: 700;
-  color: #fff !important;
+  color: #ffffff !important;
+  letter-spacing: 0.01em;
   text-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.6),
-    0 10px 32px rgba(0, 0, 0, 0.5);
+    0 2px 4px rgba(15, 23, 42, 0.42),
+    0 8px 28px rgba(15, 23, 42, 0.32);
 }
 
 .summer-availability-hero-subtitle {
   margin: 0;
   font-family: var(--font-serif);
   font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  color: #c8d6e6;
+  letter-spacing: 0.04em;
   text-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.6),
-    0 8px 24px rgba(0, 0, 0, 0.45);
+    0 1px 3px rgba(15, 23, 42, 0.4),
+    0 6px 20px rgba(15, 23, 42, 0.26);
+}
+
+.summer-availability-hero-scroll {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: clamp(1.25rem, 2.8vh, 1.85rem) auto 0;
+  padding: 0.78rem 1.1rem 0.78rem 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.08) 52%, rgba(255, 255, 255, 0.16) 100%);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  color: #fff;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 12px 28px rgba(2, 6, 23, 0.24);
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.summer-availability-hero-scroll::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 64%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.65s ease;
+  pointer-events: none;
+}
+
+.summer-availability-hero-scroll-label {
+  position: relative;
+  z-index: 1;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 10px rgba(2, 6, 23, 0.28);
+}
+
+.summer-availability-hero-scroll-arrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.summer-availability-hero-scroll:hover,
+.summer-availability-hero-scroll:focus-visible {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.14) 52%, rgba(255, 255, 255, 0.26) 100%);
+  border-color: rgba(255, 255, 255, 0.62);
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 16px 34px rgba(2, 6, 23, 0.32);
+}
+
+.summer-availability-hero-scroll:hover::before,
+.summer-availability-hero-scroll:focus-visible::before {
+  transform: translateX(130%);
+}
+
+.summer-availability-hero-scroll:hover .summer-availability-hero-scroll-arrow,
+.summer-availability-hero-scroll:focus-visible .summer-availability-hero-scroll-arrow {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.summer-availability-hero-scroll:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .summer-availability-hero-scroll {
+    animation:
+      summerAvailabilityHeroScrollIn 0.7s ease-out 0.15s both,
+      summerAvailabilityHeroScrollGlow 2.8s ease-in-out 0.9s infinite;
+  }
+
+  .summer-availability-hero-scroll-arrow {
+    animation: summerAvailabilityHeroScrollBounce 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes summerAvailabilityHeroScrollIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes summerAvailabilityHeroScrollGlow {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.34),
+      0 12px 28px rgba(2, 6, 23, 0.24),
+      0 0 0 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      0 14px 30px rgba(2, 6, 23, 0.28),
+      0 0 0 6px rgba(255, 255, 255, 0.08);
+  }
+}
+
+@keyframes summerAvailabilityHeroScrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
 }
 
 .summer-availability-container {

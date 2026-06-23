@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { getPackagesByFilter, travelPackages } from '../data/packages'
+import { getPackagesByFilter, getVisiblePackages } from '../data/packages'
 import ModalCards from '../components/ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import SEO from '../components/SEO'
@@ -41,7 +41,7 @@ function Packages() {
   const { i18n } = useTranslation()
   const { slug } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [filteredPackages, setFilteredPackages] = useState(travelPackages)
+  const [filteredPackages, setFilteredPackages] = useState(getVisiblePackages)
   
   // Determine category from slug or query param
   const getInitialCategory = () => {
@@ -107,7 +107,7 @@ function Packages() {
 
   // Get price range from packages
   const getPriceRange = () => {
-    const prices = travelPackages
+    const prices = getVisiblePackages()
       .map(pkg => {
         if (pkg.details && pkg.details.hotels && pkg.details.hotels.length > 0) {
           return pkg.details.hotels[0].packagePrice || pkg.price

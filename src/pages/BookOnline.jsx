@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { travelPackages } from '../data/packages'
+import { getVisiblePackages } from '../data/packages'
 import SEO from '../components/SEO'
 import './BookOnline.css'
 
@@ -42,7 +42,7 @@ function BookOnline() {
   ]
 
   // Filter packages based on selections (exclude hidden)
-  const filteredPackages = travelPackages.filter(pkg => !pkg.hidden).filter(pkg => {
+  const filteredPackages = getVisiblePackages().filter(pkg => {
     let matches = true
 
     // Filter by category

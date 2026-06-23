@@ -9,7 +9,7 @@ import './PopularPackagesSection.css'
 
 const popularCategories = [
   { value: 'Summer Packages', label: 'Summer Packages' },
-  { value: 'Easter Packages', label: 'Easter Packages' },
+  { value: 'Summer Packages to Greece', label: 'Summer Packages to Greece' },
   { value: 'Music & Sports', label: 'Music & Sports' },
   { value: 'Exotic Packages', label: 'Exotic Packages' }
 ]

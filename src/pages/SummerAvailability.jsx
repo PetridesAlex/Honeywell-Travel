@@ -67,6 +67,11 @@ function SummerAvailabilityStatCount({ value }) {
 function SummerAvailability() {
   const [sectionFilter, setSectionFilter] = useState('all')
   const [destinationQuery, setDestinationQuery] = useState('')
+  const controlsRef = useRef(null)
+
+  const scrollToAvailability = () => {
+    controlsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   useLayoutEffect(() => {
     const resetTop = () => {
@@ -113,10 +118,21 @@ function SummerAvailability() {
           <p className="summer-availability-hero-subtitle">
             Διαθεσιμότητα Θέσεων – Καλοκαίρι – Φθινόπωρο 2026
           </p>
+          <button
+            type="button"
+            className="summer-availability-hero-scroll"
+            onClick={scrollToAvailability}
+            aria-label="Scroll to availability listings"
+          >
+            <span className="summer-availability-hero-scroll-label">View availability</span>
+            <span className="summer-availability-hero-scroll-arrow" aria-hidden="true">
+              ↓
+            </span>
+          </button>
         </div>
       </section>
 
-      <div className="summer-availability-container">
+      <div className="summer-availability-container" ref={controlsRef}>
         <div className="summer-availability-controls">
           <section className="summer-availability-summary" aria-label="Availability summary">
           <article className="summer-availability-stat summer-availability-stat--programmes">
