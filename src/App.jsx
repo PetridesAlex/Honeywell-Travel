@@ -22,6 +22,7 @@ import Corporate from './pages/Corporate'
 import DmcCyprus from './pages/DmcCyprus'
 import BookOnline from './pages/BookOnline'
 import BuildYourTrip from './pages/BuildYourTrip'
+import SummerAvailability from './pages/SummerAvailability'
 import Cruises from './pages/Cruises'
 import OurWorld from './pages/OurWorld'
 import BlogPostDetail from './pages/BlogPostDetail'
@@ -142,6 +143,8 @@ function AppContent() {
           <Route path="/flight-tickets/:destination" element={<FlightTicketsDestination />} />
           <Route path="/build-your-trip" element={<BuildYourTrip />} />
           <Route path="/build-your-trip/" element={<BuildYourTrip />} />
+          <Route path="/summer-availability" element={<SummerAvailability />} />
+          <Route path="/summer-availability/" element={<SummerAvailability />} />
           <Route path="/car-hire" element={<div className="page-placeholder"><h1>Car Hire</h1><p>Coming soon...</p></div>} />
           <Route path="/insurance" element={<div className="page-placeholder"><h1>Insurance</h1><p>Coming soon...</p></div>} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

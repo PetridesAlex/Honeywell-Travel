@@ -394,6 +394,17 @@ function Header() {
         </div>
       </div>
 
+      <div className="header-summer-availability">
+        <Link to="/summer-availability/" className="header-summer-availability-link">
+          <span className="header-summer-availability-text">
+            Summer package availability — see what&apos;s left
+          </span>
+          <span className="header-summer-availability-arrow" aria-hidden="true">
+            →
+          </span>
+        </Link>
+      </div>
+
       {isMobileMenuOpen && (
         <div className="mobile-menu">
           <Link to="/build-your-trip" className="mobile-link mobile-build-trip" onClick={closeMobileMenu}>
