@@ -52,9 +52,15 @@ import Team from './pages/admin/Team'
 import GroupBookings from './pages/admin/GroupBookings'
 import GroupBookingDetail from './pages/admin/GroupBookingDetail'
 import './App.css'
+import {
+  hasCompletedPreloaderThisSession,
+  markPreloaderComplete,
+} from './lib/preloaderSession'
 
 /** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
 function getMinLoaderMs() {
+  if (hasCompletedPreloaderThisSession()) return 0
+
   if (
     import.meta.env.DEV &&
     typeof window !== 'undefined' &&
@@ -62,6 +68,11 @@ function getMinLoaderMs() {
   ) {
     return 400
   }
+
+  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches) {
+    return 3200
+  }
+
   return 6000
 }
 
@@ -161,7 +172,7 @@ function AppContent() {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(() => !hasCompletedPreloaderThisSession())
 
   useEffect(() => {
     // Safety cleanup in case old cursor styling class remains after HMR.
@@ -170,19 +181,41 @@ function App() {
   }, [])
 
   useEffect(() => {
+    const handlePageShow = (event) => {
+      if (!event.persisted) return
+      markPreloaderComplete()
+      setLoading(false)
+    }
+
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
+  }, [])
+
+  useEffect(() => {
     let isMounted = true
     let minDurationDone = false
     let pageReady = document.readyState === 'complete'
+    const minLoaderMs = getMinLoaderMs()
 
     const maybeStartExit = () => {
       if (!isMounted || !minDurationDone || !pageReady) return
+      markPreloaderComplete()
       setLoading(false)
+    }
+
+    if (minLoaderMs <= 0) {
+      minDurationDone = true
+      if (pageReady) {
+        markPreloaderComplete()
+        setLoading(false)
+        return undefined
+      }
     }
 
     const minDurationTimer = setTimeout(() => {
       minDurationDone = true
       maybeStartExit()
-    }, getMinLoaderMs())
+    }, minLoaderMs)
 
     const handleReady = () => {
       pageReady = true

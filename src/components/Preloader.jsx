@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { hasCompletedPreloaderThisSession } from '../lib/preloaderSession'
 import './Preloader.css'
 
 function cx(...classes) {
@@ -18,7 +19,9 @@ function Preloader({
   zIndex = 9999,
 }) {
   const [progress, setProgress] = useState(loading ? 0 : 100)
-  const [showPreloader, setShowPreloader] = useState(loading)
+  const [showPreloader, setShowPreloader] = useState(
+    loading && !hasCompletedPreloaderThisSession(),
+  )
   const [hideText, setHideText] = useState(!loading)
   /** Stairs variant: columns exit one-by-one when loading completes. */
   const [stairsRaised, setStairsRaised] = useState(false)
@@ -38,6 +41,13 @@ function Preloader({
     let doneTimer
 
     if (loading) {
+      if (hasCompletedPreloaderThisSession()) {
+        setShowPreloader(false)
+        setHideText(true)
+        setProgress(100)
+        return undefined
+      }
+
       exitStartedRef.current = false
       const startTime = Date.now()
       let active = true
@@ -165,7 +175,7 @@ function Preloader({
     const stairs = Array.from({ length: STAIR_COUNT })
     const stairEase = [0.65, 0, 0.35, 1]
     return (
-      <div className={cx('preloader__panel', position === 'fixed' ? 'preloader__panel--fixed' : 'preloader__panel--absolute')} style={{ zIndex }}>
+      <div className={cx('preloader__panel', position === 'fixed' ? 'preloader__panel--fixed' : 'preloader__panel--absolute', stairsRaised && 'preloader__panel--exiting')} style={{ zIndex }}>
         {stairs.map((_, index) => (
           <motion.div
             key={`stair-${index}`}

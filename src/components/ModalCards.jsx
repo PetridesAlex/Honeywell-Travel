@@ -33,11 +33,11 @@ function ModalCards({
   ariaLabel = 'Package details modal',
   backdropGradientPosition = '50% 10%'
 }) {
-  const [selectedCard, setSelectedCard] = useState(null)
-  const [mounted, setMounted] = useState(false)
-
   const speedConfig = ANIMATION_SPEEDS[animationSpeed] || ANIMATION_SPEEDS.normal
   const isAnimationDisabled = animationSpeed === 'none'
+
+  const [selectedCard, setSelectedCard] = useState(null)
+  const [mounted, setMounted] = useState(isAnimationDisabled)
 
   const springTransition = useMemo(
     () => ({
@@ -49,9 +49,14 @@ function ModalCards({
   )
 
   useEffect(() => {
+    if (isAnimationDisabled) {
+      setMounted(true)
+      return undefined
+    }
+
     const timer = setTimeout(() => setMounted(true), 0)
     return () => clearTimeout(timer)
-  }, [])
+  }, [isAnimationDisabled])
 
   useEffect(() => {
     if (selectedCard) {
@@ -87,69 +92,209 @@ function ModalCards({
     if (document.body) document.body.scrollTop = 0
   }
 
+  const renderCardOverlay = (card) => (
+    <div className="modal-card-overlay">
+      {card.supplier ? (
+        <div className="modal-card-top-row">
+          <span className="modal-card-supplier">{card.supplier}</span>
+        </div>
+      ) : null}
+
+      <span className="modal-card-destination">{card.destination}</span>
+      <h3 className="modal-card-title">{card.title}</h3>
+      {card.secondaryTitle ? <p className="modal-card-secondary-title">{card.secondaryTitle}</p> : null}
+
+      <div className="modal-card-meta">
+        <span>{card.duration}</span>
+        <span>{card.category}</span>
+      </div>
+
+      <div className="modal-card-footer">
+        <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
+        <span className="modal-card-cta">Open</span>
+      </div>
+    </div>
+  )
+
+  const handleImageError = (event) => {
+    const el = event.currentTarget
+    if (!el.src.includes('patra1.webp')) el.src = FALLBACK_PACKAGE_CARD_IMAGE
+  }
+
   return (
-    <div className={`modal-cards ${className}`}>
+    <div className={`modal-cards ${className}${isAnimationDisabled ? ' modal-cards--static' : ''}`}>
       <div className="modal-cards-grid">
-        {cards.map((card) => (
-          <motion.button
-            key={card.id}
-            type="button"
-            layoutId={`card-${card.id}`}
-            className="modal-card"
-            onClick={() => setSelectedCard(card)}
-            whileTap={isAnimationDisabled ? undefined : { scale: 0.985 }}
-            transition={isAnimationDisabled ? { duration: 0 } : springTransition}
-          >
-            <motion.img
-              layoutId={`image-${card.id}`}
-              src={card.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
-              alt={card.title}
-              className="modal-card-image"
-              onError={(e) => {
-                const el = e.currentTarget
-                if (!el.src.includes('patra1.webp')) el.src = FALLBACK_PACKAGE_CARD_IMAGE
-              }}
-            />
-            <div className="modal-card-shade" />
-            {card.statusBadge === 'completed' ? (
-              <PackageCompletedBadge variant="card" />
-            ) : card.departureCountdown ? (
-              <DepartureCountdownBadge countdown={card.departureCountdown} variant="card" />
-            ) : null}
-            <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
-              {card.packageType === 'group' ? 'Group' : 'Individual'}
-            </span>
-            <motion.div layoutId={`overlay-${card.id}`} className="modal-card-overlay">
-              {card.supplier ? (
-                <div className="modal-card-top-row">
-                  <span className="modal-card-supplier">{card.supplier}</span>
-                </div>
+        {cards.map((card) =>
+          isAnimationDisabled ? (
+            <button
+              key={card.id}
+              type="button"
+              className="modal-card"
+              onClick={() => setSelectedCard(card)}
+            >
+              <img
+                src={card.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
+                alt={card.title}
+                className="modal-card-image"
+                loading="lazy"
+                decoding="async"
+                onError={handleImageError}
+              />
+              <div className="modal-card-shade" />
+              {card.statusBadge === 'completed' ? (
+                <PackageCompletedBadge variant="card" />
+              ) : card.departureCountdown ? (
+                <DepartureCountdownBadge countdown={card.departureCountdown} variant="card" />
               ) : null}
+              <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
+                {card.packageType === 'group' ? 'Group' : 'Individual'}
+              </span>
+              {renderCardOverlay(card)}
+            </button>
+          ) : (
+            <motion.button
+              key={card.id}
+              type="button"
+              layoutId={`card-${card.id}`}
+              className="modal-card"
+              onClick={() => setSelectedCard(card)}
+              whileTap={{ scale: 0.985 }}
+              transition={springTransition}
+            >
+              <motion.img
+                layoutId={`image-${card.id}`}
+                src={card.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
+                alt={card.title}
+                className="modal-card-image"
+                onError={handleImageError}
+              />
+              <div className="modal-card-shade" />
+              {card.statusBadge === 'completed' ? (
+                <PackageCompletedBadge variant="card" />
+              ) : card.departureCountdown ? (
+                <DepartureCountdownBadge countdown={card.departureCountdown} variant="card" />
+              ) : null}
+              <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
+                {card.packageType === 'group' ? 'Group' : 'Individual'}
+              </span>
+              <motion.div layoutId={`overlay-${card.id}`} className="modal-card-overlay">
+                {card.supplier ? (
+                  <div className="modal-card-top-row">
+                    <span className="modal-card-supplier">{card.supplier}</span>
+                  </div>
+                ) : null}
 
-              <span className="modal-card-destination">{card.destination}</span>
-              <motion.h3 layoutId={`title-${card.id}`} className="modal-card-title">
-                {card.title}
-              </motion.h3>
-              {card.secondaryTitle ? <p className="modal-card-secondary-title">{card.secondaryTitle}</p> : null}
+                <span className="modal-card-destination">{card.destination}</span>
+                <motion.h3 layoutId={`title-${card.id}`} className="modal-card-title">
+                  {card.title}
+                </motion.h3>
+                {card.secondaryTitle ? <p className="modal-card-secondary-title">{card.secondaryTitle}</p> : null}
 
-              <div className="modal-card-meta">
-                <span>{card.duration}</span>
-                <span>{card.category}</span>
-              </div>
+                <div className="modal-card-meta">
+                  <span>{card.duration}</span>
+                  <span>{card.category}</span>
+                </div>
 
-              <div className="modal-card-footer">
-                <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
-                <span className="modal-card-cta">Open</span>
-              </div>
-            </motion.div>
-          </motion.button>
-        ))}
+                <div className="modal-card-footer">
+                  <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
+                  <span className="modal-card-cta">Open</span>
+                </div>
+              </motion.div>
+            </motion.button>
+          ),
+        )}
       </div>
 
       {mounted &&
         createPortal(
           <AnimatePresence mode="wait">
             {selectedCard ? (
+              isAnimationDisabled ? (
+                <>
+                  <div
+                    className={`modal-cards-backdrop${closeOnBackdropClick ? ' is-clickable' : ''}`}
+                    onClick={closeOnBackdropClick ? closeModal : undefined}
+                    style={{
+                      background: `radial-gradient(125% 125% at ${backdropGradientPosition}, rgba(255, 255, 255, 0.88) 0%, rgba(17, 24, 39, 0.92) 38%, ${selectedCard.gradientColor || gradientColor} 100%)`,
+                    }}
+                    role="button"
+                    tabIndex={closeOnBackdropClick ? 0 : -1}
+                    aria-label={closeOnBackdropClick ? 'Close package modal' : undefined}
+                  />
+
+                  <div className="modal-cards-dialog-wrap" role="dialog" aria-modal="true" aria-label={ariaLabel}>
+                    <article className="modal-cards-dialog" onClick={(event) => event.stopPropagation()}>
+                      <div className="modal-cards-hero">
+                        <img
+                          src={selectedCard.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
+                          alt={selectedCard.title}
+                          className="modal-cards-hero-image"
+                          decoding="async"
+                          onError={handleImageError}
+                        />
+                        <div className="modal-cards-hero-shade" />
+                        {selectedCard.statusBadge === 'completed' ? (
+                          <PackageCompletedBadge variant="hero" />
+                        ) : selectedCard.departureCountdown ? (
+                          <DepartureCountdownBadge countdown={selectedCard.departureCountdown} variant="hero" />
+                        ) : null}
+                        <span className={`modal-card-type modal-card-type--${selectedCard.packageType || 'individual'}`}>
+                          {selectedCard.packageType === 'group' ? 'Group' : 'Individual'}
+                        </span>
+                        <div className="modal-cards-hero-overlay">
+                          {selectedCard.supplier ? (
+                            <div className="modal-cards-hero-top-row">
+                              <span className="modal-card-supplier">{selectedCard.supplier}</span>
+                            </div>
+                          ) : null}
+                          <span className="modal-card-destination">{selectedCard.destination}</span>
+                          <h3 className="modal-cards-hero-title">{selectedCard.title}</h3>
+                          {selectedCard.secondaryTitle ? (
+                            <p className="modal-cards-hero-subtitle">{selectedCard.secondaryTitle}</p>
+                          ) : null}
+                          <div className="modal-card-meta">
+                            <span>{selectedCard.duration}</span>
+                            <span>{selectedCard.category}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="modal-cards-content">
+                        <div
+                          className="modal-cards-highlight"
+                          style={{ background: getCardGradient(selectedCard, gradientColor) }}
+                        >
+                          <span className="modal-cards-highlight-label">From</span>
+                          <strong>EUR {Number(selectedCard.price || 0).toLocaleString()}</strong>
+                        </div>
+
+                        <div className="modal-cards-actions">
+                          <Link
+                            to={selectedCard.link}
+                            className="modal-cards-action primary"
+                            onClick={() => {
+                              resetScrollTop()
+                              closeModal()
+                            }}
+                          >
+                            View full package details
+                          </Link>
+                          <button type="button" className="modal-cards-action secondary" onClick={closeModal}>
+                            Close
+                          </button>
+                        </div>
+                      </div>
+
+                      {showCloseButton ? (
+                        <button type="button" className="modal-cards-close-btn" onClick={closeModal} aria-label="Close modal">
+                          <span />
+                          <span />
+                        </button>
+                      ) : null}
+                    </article>
+                  </div>
+                </>
+              ) : (
               <>
                 <motion.div
                   className={`modal-cards-backdrop${closeOnBackdropClick ? ' is-clickable' : ''}`}
@@ -257,6 +402,7 @@ function ModalCards({
                   </motion.article>
                 </div>
               </>
+              )
             ) : null}
           </AnimatePresence>,
           document.body

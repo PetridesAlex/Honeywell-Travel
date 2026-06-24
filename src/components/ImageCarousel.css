@@ -388,6 +388,17 @@
     font-size: 0.75rem;
     padding: 0.55rem 1.25rem;
   }
+
+  .hero-bg-single {
+    animation: none;
+    transform: none;
+    will-change: opacity;
+  }
+
+  .hero-content--welcome .hero-title {
+    animation: welcomeTitleReveal 850ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+    will-change: auto;
+  }
 }
 
 @media (max-width: 480px) {

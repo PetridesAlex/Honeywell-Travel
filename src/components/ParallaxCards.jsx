@@ -23,10 +23,27 @@ function ParallaxCards({
   const mousePositionRef = useRef({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(true)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [useStaticLayout, setUseStaticLayout] = useState(false)
   const [focusedCardIndex, setFocusedCardIndex] = useState(null)
 
   const totalCards = Math.min(cardCount || images.length, 12)
   const visibleImages = images.slice(0, totalCards)
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia('(max-width: 768px)')
+    const coarseQuery = window.matchMedia('(pointer: coarse)')
+    const updateLayout = () => {
+      setUseStaticLayout(mobileQuery.matches || coarseQuery.matches)
+    }
+
+    updateLayout()
+    mobileQuery.addEventListener('change', updateLayout)
+    coarseQuery.addEventListener('change', updateLayout)
+    return () => {
+      mobileQuery.removeEventListener('change', updateLayout)
+      coarseQuery.removeEventListener('change', updateLayout)
+    }
+  }, [])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -247,6 +264,32 @@ function ParallaxCards({
       gsap.set(stageRef.current, { rotationY: 0, rotationX: 0 })
     }
   }, [prefersReducedMotion])
+
+  if (useStaticLayout || prefersReducedMotion) {
+    return (
+      <div className={`parallax-cards parallax-cards--static ${className}`}>
+        <div className="parallax-cards-static-track">
+          {visibleImages.map((image, index) => (
+            <button
+              key={image.id || index}
+              type="button"
+              className="parallax-card parallax-card--static"
+              style={{
+                backgroundImage: `url(${image.src})`,
+              }}
+              onClick={(event) => {
+                event.stopPropagation()
+                if (onCardClick) onCardClick(index, image.src)
+              }}
+              aria-label={image.title || `Destination ${index + 1}`}
+            >
+              <span className="parallax-card-label">{image.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div

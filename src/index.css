@@ -151,11 +151,12 @@ textarea {
 
   /* Same smooth scroll and one scrollbar on mobile */
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     min-height: -webkit-fill-available;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
   }
 
   body {
@@ -163,7 +164,7 @@ textarea {
     min-height: -webkit-fill-available;
     overflow-x: hidden !important;
     overflow-y: visible !important;
-    overscroll-behavior-y: auto;
+    overscroll-behavior-y: none;
     touch-action: pan-y pinch-zoom;
   }
 
@@ -199,6 +200,13 @@ textarea {
 html.route-home {
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  html.route-home,
+  html.route-home body {
+    overscroll-behavior-y: none;
+  }
 }
 
 html.route-home body,

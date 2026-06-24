@@ -5,6 +5,7 @@ import { getPackagesByCategory } from '../data/packages'
 import { packageCardImageUrl } from '../utils/packageCardImage'
 import { getEnglishPackageTitle } from '../utils/packageTranslations'
 import ModalCards from './ModalCards'
+import { useMobileLite } from '../hooks/useMobileLite'
 import './PopularPackagesSection.css'
 
 const popularCategories = [
@@ -37,6 +38,7 @@ function getLeadPrice(pkg) {
 
 function PopularPackagesSection() {
   const { i18n } = useTranslation()
+  const isMobileLite = useMobileLite()
   const [selectedCategory, setSelectedCategory] = useState(popularCategories[0].value)
   const [rotationIndex, setRotationIndex] = useState(0)
 
@@ -51,14 +53,15 @@ function PopularPackagesSection() {
   }, [selectedCategory])
 
   useEffect(() => {
-    if (allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return
+    if (isMobileLite || allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return undefined
     const interval = setInterval(() => {
       setRotationIndex((prev) => (prev + 1) % allPackagesForCategory.length)
     }, PACKAGE_ROTATION_MS)
     return () => clearInterval(interval)
-  }, [allPackagesForCategory])
+  }, [allPackagesForCategory, isMobileLite])
 
   useEffect(() => {
+    if (isMobileLite) return undefined
     const interval = setInterval(() => {
       setSelectedCategory((prev) => {
         const currentIndex = popularCategories.findIndex((cat) => cat.value === prev)
@@ -67,7 +70,7 @@ function PopularPackagesSection() {
       })
     }, CATEGORY_ROTATION_MS)
     return () => clearInterval(interval)
-  }, [])
+  }, [isMobileLite])
 
   const packagesForCategory = useMemo(() => {
     if (allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return allPackagesForCategory
@@ -129,7 +132,7 @@ function PopularPackagesSection() {
         <ModalCards
           cards={modalCards}
           className="popular-packages-modal-cards"
-          animationSpeed="normal"
+          animationSpeed={isMobileLite ? 'none' : 'normal'}
           showCloseButton={false}
         />
 

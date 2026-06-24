@@ -98,3 +98,29 @@
     font-size: 0.85rem;
   }
 }
+
+.parallax-cards--static {
+  min-height: auto;
+  padding: 0 0 0.5rem;
+  overflow: visible;
+}
+
+.parallax-cards-static-track {
+  display: flex;
+  gap: 0.85rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 1rem 0.85rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.parallax-card--static {
+  position: relative;
+  flex: 0 0 min(72vw, 260px);
+  width: min(72vw, 260px);
+  height: min(92vw, 320px);
+  scroll-snap-align: start;
+  transform: none !important;
+}

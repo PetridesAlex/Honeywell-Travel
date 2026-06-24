@@ -35,13 +35,13 @@ function Home() {
       </div>
       <div className="unified-sections-wrapper">
         <div className="search-tour-shared-background">
-          <RevealOnScroll direction="up" delay={0}>
+          <RevealOnScroll direction="up" immediate>
             <SearchSection 
               sharedBackground={sharedBackground} 
               setSharedBackground={setSharedBackground} 
             />
           </RevealOnScroll>
-          <RevealOnScroll direction="up" delay={40}>
+          <RevealOnScroll direction="up" immediate>
             <PopularPackagesSection />
           </RevealOnScroll>
           <RevealOnScroll direction="up" delay={80}>

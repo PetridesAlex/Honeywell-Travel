@@ -5,6 +5,7 @@ import { MapPin, Plane, Search, Users } from 'lucide-react'
 import { getPackagesByFilter } from '../data/packages'
 import ModalCards from './ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
+import { useMobileLite } from '../hooks/useMobileLite'
 import './SearchSection.css'
 
 // Helper function to convert category name to URL-friendly slug
@@ -20,6 +21,7 @@ const categoryToSlug = (category) => {
 function SearchSection() {
   const navigate = useNavigate()
   const { i18n } = useTranslation()
+  const isMobileLite = useMobileLite()
   const [category, setCategory] = useState('Any')
   const [destination, setDestination] = useState('Any')
   const [travelers, setTravelers] = useState('2')
@@ -219,7 +221,7 @@ function SearchSection() {
                   <ModalCards
                     cards={modalCards}
                     className="search-packages-modal-cards"
-                    animationSpeed="normal"
+                    animationSpeed={isMobileLite ? 'none' : 'normal'}
                     showCloseButton={false}
                     ariaLabel={`${categoryLabel} packages`}
                   />

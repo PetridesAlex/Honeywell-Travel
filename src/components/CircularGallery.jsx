@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import ParallaxCards from './ParallaxCards'
+import { useMobileLite } from '../hooks/useMobileLite'
 import './CircularGallery.css'
 
 function CircularGallery() {
   const headerRef = useRef(null)
   const [headerVisible, setHeaderVisible] = useState(false)
+  const isMobileLite = useMobileLite()
 
   useEffect(() => {
     const node = headerRef.current
@@ -48,7 +50,9 @@ function CircularGallery() {
         </div>
         <h2 className="circular-gallery-title">Signature Destinations</h2>
         <p className="circular-gallery-subtitle">
-          Move your cursor through the gallery and click a card to focus on each destination.
+          {isMobileLite
+            ? 'Swipe through the gallery and tap a destination to explore.'
+            : 'Move your cursor through the gallery and click a card to focus on each destination.'}
         </p>
       </div>
 

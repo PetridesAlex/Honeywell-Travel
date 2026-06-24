@@ -855,6 +855,12 @@
 
   .packages-by-category-section {
     margin-top: 2rem;
+    padding: 2.25rem 1rem 2.75rem;
+  }
+
+  .packages-by-category-section--results::before,
+  .packages-by-category-section--results::after {
+    animation: none;
   }
 
   .packages-by-category-subtitle {

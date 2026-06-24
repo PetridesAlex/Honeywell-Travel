@@ -15,6 +15,10 @@
   position: fixed;
 }
 
+.preloader__panel--exiting {
+  pointer-events: none;
+}
+
 .preloader__panel--absolute {
   position: absolute;
 }

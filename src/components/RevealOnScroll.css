@@ -7,7 +7,11 @@
 .reveal-on-scroll.reveal-visible {
   opacity: 1;
   transform: translateY(0);
-  will-change: auto; /* Remove will-change after animation */
+}
+
+.reveal-on-scroll.reveal-visible.reveal-no-motion {
+  transition: none;
+  transform: none;
 }
 
 .reveal-on-scroll.reveal-up {
@@ -42,12 +46,25 @@
     transform: translateY(16px); /* Reduce distance for smoother animation */
   }
 
+  .reveal-on-scroll.reveal-visible {
+    transition: none;
+    transform: none;
+  }
+
   .reveal-on-scroll.reveal-up {
     transform: translateY(16px);
   }
 
+  .reveal-on-scroll.reveal-up.reveal-visible {
+    transform: none;
+  }
+
   .reveal-on-scroll.reveal-down {
     transform: translateY(-16px);
+  }
+
+  .reveal-on-scroll.reveal-down.reveal-visible {
+    transform: none;
   }
 }
 

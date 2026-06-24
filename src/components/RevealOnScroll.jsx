@@ -30,8 +30,8 @@ function RevealOnScroll({ children, className = '', delay = 0, direction = 'up',
   return (
     <div
       ref={ref}
-      className={`reveal-on-scroll ${isVisible ? 'reveal-visible' : ''} reveal-${direction} ${className}`.trim()}
-      style={{ transitionDelay: isVisible ? `${delay}ms` : '0ms' }}
+      className={`reveal-on-scroll ${isVisible ? 'reveal-visible' : ''}${immediate ? ' reveal-no-motion' : ''} reveal-${direction} ${className}`.trim()}
+      style={{ transitionDelay: immediate ? '0ms' : isVisible ? `${delay}ms` : '0ms' }}
     >
       {children}
     </div>

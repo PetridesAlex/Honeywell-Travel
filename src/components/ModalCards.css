@@ -445,7 +445,21 @@
   }
 
   .modal-card {
-    min-height: 340px;
+    min-height: 300px;
+  }
+
+  .modal-cards--static .modal-card {
+    transform: none;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .modal-cards--static .modal-card:hover {
+    transform: none;
+  }
+
+  .modal-cards--static .modal-card-meta span {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .modal-cards-dialog-wrap {
