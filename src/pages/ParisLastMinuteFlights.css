@@ -325,44 +325,41 @@
 
 .paris-lm-gallery-track {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(160px, 20vw);
-  gap: clamp(0.55rem, 1.2vw, 0.85rem);
+  grid-template-columns: 1fr;
+  gap: clamp(0.65rem, 2vw, 0.85rem);
   width: 100%;
 }
 
 .paris-lm-gallery-item {
   position: relative;
   margin: 0;
-  min-height: 100%;
-  border-radius: clamp(10px, 1.2vw, 18px);
   overflow: hidden;
+  border-radius: clamp(10px, 1.2vw, 18px);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+}
+
+.paris-lm-gallery-item--feature,
+.paris-lm-gallery-item--tall,
+.paris-lm-gallery-item--wide,
+.paris-lm-gallery-item--standard {
+  grid-column: 1 / -1;
+  grid-row: auto;
 }
 
 .paris-lm-gallery-item--feature {
-  grid-column: span 7;
-  grid-row: span 2;
-}
-
-.paris-lm-gallery-item--tall {
-  grid-column: span 5;
-  grid-row: span 2;
-}
-
-.paris-lm-gallery-item--wide {
-  grid-column: span 8;
-}
-
-.paris-lm-gallery-item--standard {
-  grid-column: span 4;
+  aspect-ratio: 16 / 11;
 }
 
 .paris-lm-gallery-item img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   transition: transform 0.5s ease;
 }
 
@@ -380,6 +377,12 @@
   transform: scale(1.05);
 }
 
+@media (hover: none) {
+  .paris-lm-gallery-item:hover img {
+    transform: none;
+  }
+}
+
 .paris-lm-gallery-item:hover::after {
   opacity: 0.9;
 }
@@ -391,12 +394,126 @@
   bottom: 0;
   z-index: 1;
   margin: 0;
-  padding: 0.85rem 1rem;
-  font-size: 0.78rem;
+  padding: clamp(0.65rem, 2vw, 0.85rem) clamp(0.75rem, 2vw, 1rem);
+  font-size: clamp(0.72rem, 2.2vw, 0.78rem);
   font-weight: 600;
   line-height: 1.35;
   color: #f8fafc;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Gallery — small phones */
+@media (max-width: 479px) {
+  .paris-lm-gallery {
+    padding-top: clamp(2rem, 8vw, 3rem);
+    padding-bottom: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .paris-lm-gallery-head {
+    margin-bottom: 1.25rem;
+  }
+
+  .paris-lm-container--full {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+  }
+
+  .paris-lm-gallery-item {
+    aspect-ratio: 16 / 11;
+    border-radius: 12px;
+  }
+
+  .paris-lm-gallery-item--feature {
+    aspect-ratio: 16 / 12;
+  }
+}
+
+/* Gallery — large phones / small tablets */
+@media (min-width: 480px) and (max-width: 767px) {
+  .paris-lm-gallery-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .paris-lm-gallery-item--feature,
+  .paris-lm-gallery-item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .paris-lm-gallery-item--tall,
+  .paris-lm-gallery-item--standard {
+    grid-column: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Gallery — tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .paris-lm-gallery-track {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(140px, 18vw);
+    gap: 0.75rem;
+  }
+
+  .paris-lm-gallery-item {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .paris-lm-gallery-item--feature {
+    grid-column: span 4;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+
+  .paris-lm-gallery-item--tall {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+
+  .paris-lm-gallery-item--wide {
+    grid-column: span 4;
+    aspect-ratio: auto;
+  }
+
+  .paris-lm-gallery-item--standard {
+    grid-column: span 2;
+    aspect-ratio: auto;
+  }
+}
+
+/* Gallery — desktop */
+@media (min-width: 1024px) {
+  .paris-lm-gallery-track {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: minmax(150px, 16vw);
+    gap: clamp(0.55rem, 1.2vw, 0.85rem);
+  }
+
+  .paris-lm-gallery-item {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .paris-lm-gallery-item--feature {
+    grid-column: span 7;
+    grid-row: span 2;
+  }
+
+  .paris-lm-gallery-item--tall {
+    grid-column: span 5;
+    grid-row: span 2;
+  }
+
+  .paris-lm-gallery-item--wide {
+    grid-column: span 8;
+    grid-row: auto;
+  }
+
+  .paris-lm-gallery-item--standard {
+    grid-column: span 4;
+    grid-row: auto;
+  }
 }
 
 /* Section headers */
@@ -1267,27 +1384,6 @@
 @media (max-width: 900px) {
   .paris-lm-hero {
     padding-bottom: clamp(16rem, 42vh, 22rem);
-  }
-
-  .paris-lm-gallery-track {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(160px, 42vw);
-  }
-
-  .paris-lm-gallery-item--feature,
-  .paris-lm-gallery-item--tall,
-  .paris-lm-gallery-item--wide,
-  .paris-lm-gallery-item--standard {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-
-  .paris-lm-gallery-item--feature {
-    grid-column: span 2;
-  }
-
-  .paris-lm-gallery-item--wide {
-    grid-column: span 2;
   }
 
   .paris-lm-strip-inner,

@@ -91,6 +91,40 @@
   margin-left: 0;
 }
 
+.tagline-utility-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.header-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.header-utility-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.header-utility-controls .language-switcher {
+  margin-left: 0;
+  margin-top: 0;
+  width: auto;
+  justify-content: center;
+}
+
+.header-utility-controls .lang-btn {
+  flex: none;
+  max-width: none;
+}
+
 .tagline-esim-link {
   position: relative;
   z-index: 2;
@@ -2106,7 +2140,45 @@
   }
 
   .header-container {
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .tagline-utility-controls {
+    display: none;
+  }
+
+  .tagline-bar {
+    padding: 0.35rem 0.75rem;
     justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .tagline-brand {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 42%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tagline-text {
+    margin-left: auto;
+    text-align: right;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 58%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-mobile-actions {
+    display: flex;
   }
 
   .mobile-menu-btn {
@@ -2128,22 +2200,10 @@
     display: none;
   }
 
-  .tagline-esim-link__hint {
-    display: none;
-  }
-
-  .tagline-esim-link {
-    padding: 0.24rem 0.48rem 0.24rem 0.38rem;
-  }
-
-  .tagline-esim-link__label {
-    font-size: 0.58rem;
-  }
-
   .tagline-bar {
-    padding: 0.35rem 1rem;
+    padding: 0.35rem 0.75rem;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .tagline-text {
@@ -2152,6 +2212,11 @@
     margin-left: auto;
     text-align: right;
     white-space: nowrap;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 58%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .tagline-brand {
@@ -2161,13 +2226,33 @@
     left: auto;
     top: auto;
     transform: none;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 42%;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .header-container {
-    padding: 0.4rem 1rem;
+    padding: 0.4rem 0.75rem;
     min-height: 58px;
+  }
+
+  .header-utility-controls .tagline-esim-link__hint {
+    display: none;
+  }
+
+  .header-utility-controls .tagline-esim-link {
+    padding: 0.28rem 0.5rem 0.28rem 0.38rem;
+  }
+
+  .header-utility-controls .tagline-esim-link__label {
+    font-size: 0.58rem;
+  }
+
+  .header-mobile-actions {
+    gap: 0.35rem;
   }
 
   .header-announcement-track {
@@ -2187,13 +2272,16 @@
 
   .logo {
     height: 58px;
-    min-width: 200px;
+    min-width: 0;
+    flex: 1 1 auto;
+    max-width: calc(100% - 11.5rem);
   }
 
   .logo-image {
     height: 52px;
-    min-width: 200px;
-    max-width: 280px;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
   }
 
   .mobile-menu-btn {
@@ -2221,41 +2309,55 @@
 
 @media (max-width: 480px) {
   .tagline-right-controls {
-    right: 0.5rem;
-  }
-
-  .tagline-social-icons {
     display: none;
   }
 
   .tagline-bar {
-    padding: 0.3rem 0.75rem;
+    padding: 0.3rem 0.65rem;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
 
   .tagline-text {
-    font-size: 0.9375rem;
-    letter-spacing: 0.12em;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
     margin-left: auto;
     text-align: right;
     white-space: nowrap;
+    max-width: 62%;
   }
 
   .tagline-brand {
     font-size: 0.8125rem;
     letter-spacing: 0.05em;
-    position: static;
-    left: auto;
-    top: auto;
-    transform: none;
-    flex: 0 0 auto;
-    white-space: nowrap;
+    max-width: 38%;
   }
 
   .header-container {
-    padding: 0.4rem 0.75rem;
+    padding: 0.35rem 0.65rem;
     min-height: 54px;
+  }
+
+  .header-utility-controls .tagline-esim-link__label {
+    display: none;
+  }
+
+  .header-utility-controls .tagline-esim-link {
+    padding: 0.32rem;
+  }
+
+  .header-utility-controls .tagline-esim-link__copy {
+    display: none;
+  }
+
+  .header-utility-controls .lang-btn {
+    padding: 4px 7px;
+    min-width: 28px;
+    font-size: 10px;
+  }
+
+  .header-mobile-actions {
+    gap: 0.28rem;
   }
 
   .header-announcement-track {
@@ -2275,13 +2377,15 @@
 
   .logo {
     height: 54px;
-    min-width: 170px;
+    min-width: 0;
+    max-width: calc(100% - 9.5rem);
   }
 
   .logo-image {
     height: 48px;
-    min-width: 170px;
-    max-width: 240px;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
   }
 
   .mobile-menu-btn {
