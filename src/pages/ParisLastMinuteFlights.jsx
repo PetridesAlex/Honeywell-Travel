@@ -209,8 +209,8 @@ function ParisLastMinuteFlights() {
         </div>
       </section>
 
-      <section className="paris-lm-gallery" aria-label="Paris imagery">
-        <div className="paris-lm-container">
+      <section className="paris-lm-gallery paris-lm-section-full" aria-label="Paris imagery">
+        <div className="paris-lm-container paris-lm-container--full">
           <header className="paris-lm-gallery-head">
             <p className="paris-lm-section-eyebrow">Discover Paris</p>
             <h2>The City of Light awaits</h2>
@@ -229,8 +229,8 @@ function ParisLastMinuteFlights() {
         </div>
       </section>
 
-      <section className="paris-lm-dates" ref={datesRef} id="departure-dates">
-        <div className="paris-lm-container">
+      <section className="paris-lm-dates paris-lm-section-full" ref={datesRef} id="departure-dates">
+        <div className="paris-lm-container paris-lm-container--full">
           <header className="paris-lm-section-head paris-lm-section-head--dates">
             <p className="paris-lm-section-eyebrow">Available departures</p>
             <h2>Select your departure date</h2>
@@ -291,8 +291,8 @@ function ParisLastMinuteFlights() {
         </div>
       </section>
 
-      <section className="paris-lm-inclusions">
-        <div className="paris-lm-container paris-lm-inclusions-grid">
+      <section className="paris-lm-inclusions paris-lm-section-full">
+        <div className="paris-lm-container paris-lm-container--full paris-lm-inclusions-grid">
           <div className="paris-lm-inclusions-copy">
             <p className="paris-lm-section-eyebrow">What&apos;s included</p>
             <h2>Everything you need for take-off</h2>

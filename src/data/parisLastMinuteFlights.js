@@ -46,7 +46,7 @@ export const PARIS_LAST_MINUTE_OFFER = {
     'Book now — availability is subject to change',
   ],
   images: {
-    hero: '/images/paris-last-minute/paris-hero.jpg',
+    hero: '/images/last-minute/low-angle-shot-eiffel-tower-paris-france.jpg',
     gallery: [
       {
         src: '/images/last-minute/low-angle-shot-eiffel-tower-paris-france.jpg',
