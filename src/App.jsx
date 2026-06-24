@@ -6,6 +6,7 @@ import Preloader from './components/Preloader'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import FloatingContactDock from './components/FloatingContactDock'
+import FloatingParisOfferDock from './components/FloatingParisOfferDock'
 import Home from './pages/Home'
 import Blog from './pages/Blog'
 import Gallery from './pages/Gallery'
@@ -23,6 +24,7 @@ import DmcCyprus from './pages/DmcCyprus'
 import BookOnline from './pages/BookOnline'
 import BuildYourTrip from './pages/BuildYourTrip'
 import SummerAvailability from './pages/SummerAvailability'
+import ParisLastMinuteFlights from './pages/ParisLastMinuteFlights'
 import Cruises from './pages/Cruises'
 import OurWorld from './pages/OurWorld'
 import BlogPostDetail from './pages/BlogPostDetail'
@@ -145,6 +147,8 @@ function AppContent() {
           <Route path="/build-your-trip/" element={<BuildYourTrip />} />
           <Route path="/summer-availability" element={<SummerAvailability />} />
           <Route path="/summer-availability/" element={<SummerAvailability />} />
+          <Route path="/last-minute-flights/paris" element={<ParisLastMinuteFlights />} />
+          <Route path="/last-minute-flights/paris/" element={<ParisLastMinuteFlights />} />
           <Route path="/car-hire" element={<div className="page-placeholder"><h1>Car Hire</h1><p>Coming soon...</p></div>} />
           <Route path="/insurance" element={<div className="page-placeholder"><h1>Insurance</h1><p>Coming soon...</p></div>} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
@@ -210,6 +214,7 @@ function App() {
       >
         <div className="app">
           <AppContent />
+          <FloatingParisOfferDock />
           <FloatingContactDock />
         </div>
       </Preloader>
