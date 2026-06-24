@@ -1383,7 +1383,41 @@
 
 @media (max-width: 900px) {
   .paris-lm-hero {
-    padding-bottom: clamp(16rem, 42vh, 22rem);
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-items: stretch;
+    justify-items: stretch;
+    justify-content: stretch;
+    padding: clamp(4.75rem, 13vh, 6.25rem) 1rem 0;
+    min-height: 100svh;
+    box-sizing: border-box;
+  }
+
+  .paris-lm-hero-content {
+    margin: 0;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0.25rem 1.25rem;
+  }
+
+  .paris-lm-hero-cta {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .paris-lm-strip {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    z-index: 3;
+    grid-row: 2;
+    align-self: end;
+    width: 100%;
+    padding: 0 0 max(1rem, env(safe-area-inset-bottom));
   }
 
   .paris-lm-strip-inner,
@@ -1411,6 +1445,33 @@
 }
 
 @media (max-width: 600px) {
+  .paris-lm-hero {
+    padding-top: clamp(4.25rem, 11vh, 5.5rem);
+  }
+
+  .paris-lm-hero-content {
+    padding-bottom: 1rem;
+  }
+
+  .paris-lm-hero-price {
+    margin-bottom: 1.75rem;
+  }
+
+  .paris-lm-strip {
+    padding-bottom: max(0.85rem, env(safe-area-inset-bottom));
+  }
+
+  .paris-lm-strip-panel {
+    padding: 0.55rem;
+    border-radius: 16px;
+  }
+
+  .paris-lm-strip-item {
+    min-height: auto;
+    padding: 0.85rem 1rem;
+    gap: 0.75rem;
+  }
+
   .paris-lm-form-row--split {
     grid-template-columns: 1fr;
   }
