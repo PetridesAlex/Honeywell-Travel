@@ -110,7 +110,7 @@ export const summerAvailabilityCatalog = [
     carrier: 'Cyprus Airways',
     packageId: 315,
     packageType: 'individual',
-    departures: [d('13/07'), d('20/07'), d('27/07'), d('03/08'), d('24/08')],
+    departures: [d('13/07'), d('20/07'), d('27/07'), d('03/08'), d('10/08'), d('17/08'), d('24/08')],
   },
   {
     id: 'crete-5-gq',
@@ -120,7 +120,7 @@ export const summerAvailabilityCatalog = [
     carrier: 'Sky Express',
     packageId: 314,
     packageType: 'individual',
-    departures: [d('14/08'), d('28/08')],
+    departures: [d('14/08')],
   },
   {
     id: 'crete-8-a3',

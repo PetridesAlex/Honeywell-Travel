@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ArrowRight, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById, getVisiblePackages } from '../data/packages'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import HoneypotField from '../components/HoneypotField'
@@ -8,6 +9,115 @@ import { FORM_TYPES } from '../lib/formConstants'
 import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import './PackageFullDetail.css'
+
+const parseAirportEndpoint = (segment) => {
+  const trimmed = String(segment || '').trim()
+  if (!trimmed) return {}
+
+  const withTime = trimmed.match(/^(\d{1,2}:\d{2})\s+(.+)$/)
+  const body = withTime ? withTime[2] : trimmed
+  const time = withTime ? withTime[1] : null
+
+  const codeComma = body.match(/^(.+?)\s*\(([^)]+)\)\s*,\s*(.+)$/)
+  if (codeComma) {
+    return {
+      time,
+      airport: codeComma[1].trim(),
+      code: codeComma[2].trim(),
+      location: codeComma[3].trim(),
+    }
+  }
+
+  const codeOnly = body.match(/^(.+?)\s*\(([^)]+)\)\s*$/)
+  if (codeOnly) {
+    return {
+      time,
+      airport: codeOnly[1].trim(),
+      code: codeOnly[2].trim(),
+    }
+  }
+
+  return { time, airport: body }
+}
+
+const parseFlightRoute = (route) => {
+  if (!route) return null
+  const text = String(route).trim()
+
+  if (text.includes('\n')) {
+    const lines = text.split('\n').map((line) => line.trim()).filter(Boolean)
+    const toIndex = lines.findIndex((line) => /^to$/i.test(line))
+    if (toIndex > 0) {
+      const origin = parseAirportEndpoint(lines[0])
+      if (lines[1] && toIndex > 1) origin.location = lines[1]
+
+      const destination = parseAirportEndpoint(lines[toIndex + 1] || '')
+      if (lines[toIndex + 2]) destination.location = lines[toIndex + 2]
+
+      return { origin, destination }
+    }
+  }
+
+  if (text.includes('→')) {
+    const [left, right] = text.split('→').map((part) => part.trim())
+    return {
+      origin: parseAirportEndpoint(left),
+      destination: parseAirportEndpoint(right),
+    }
+  }
+
+  return { raw: text }
+}
+
+const FlightRouteEndpoint = ({ endpoint, type }) => {
+  if (!endpoint?.airport) return null
+  const Icon = type === 'destination' ? PlaneLanding : PlaneTakeoff
+
+  return (
+    <div className={`flight-route-endpoint flight-route-endpoint--${type}`}>
+      <span className="flight-route-endpoint__icon" aria-hidden="true">
+        <Icon size={17} strokeWidth={2.1} />
+      </span>
+      <div className="flight-route-endpoint__body">
+        {endpoint.time ? (
+          <span className="flight-route-endpoint__time">{endpoint.time}</span>
+        ) : null}
+        <span className="flight-route-endpoint__airport">{endpoint.airport}</span>
+        <div className="flight-route-endpoint__meta">
+          {endpoint.code ? (
+            <span className="flight-route-endpoint__code">{endpoint.code}</span>
+          ) : null}
+          {endpoint.location ? (
+            <span className="flight-route-endpoint__location">{endpoint.location}</span>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const FlightRouteDisplay = ({ route, isReturn }) => {
+  const parsed = parseFlightRoute(route)
+
+  if (!parsed || parsed.raw || !parsed.origin?.airport || !parsed.destination?.airport) {
+    return <p className="flight-route-fallback">{parsed?.raw || route}</p>
+  }
+
+  return (
+    <div className={`flight-route-layout${isReturn ? ' flight-route-layout--return' : ''}`}>
+      <FlightRouteEndpoint endpoint={parsed.origin} type="origin" />
+      <div className="flight-route-connector" aria-hidden="true">
+        <span className="flight-route-connector__line" />
+        <span className="flight-route-connector__badge">
+          <Plane size={14} strokeWidth={2.25} />
+        </span>
+        <ArrowRight size={15} strokeWidth={2.25} className="flight-route-connector__arrow" />
+        <span className="flight-route-connector__line" />
+      </div>
+      <FlightRouteEndpoint endpoint={parsed.destination} type="destination" />
+    </div>
+  )
+}
 
 const PackageBackChevron = () => (
   <span className="package-back-nav__icon" aria-hidden="true">
@@ -442,10 +552,11 @@ const PackageFlightsSection = ({ details }) => {
           const isDomestic = flight.direction === 'Domestic'
           const hasLegs = Array.isArray(flight.legs) && flight.legs.length > 0
           const directionLabel = isReturn
-            ? '🛬 Return'
+            ? 'Return'
             : isDomestic
-              ? '✈️ Domestic'
-              : '🛫 Departure'
+              ? 'Domestic'
+              : 'Departure'
+          const DirectionIcon = isReturn ? PlaneLanding : PlaneTakeoff
           return (
             <div
               key={index}
@@ -454,18 +565,14 @@ const PackageFlightsSection = ({ details }) => {
             >
               <div className="flight-card__accent" aria-hidden="true" />
               <div className="flight-header">
-                <span className="flight-direction">{directionLabel}</span>
+                <span className="flight-direction">
+                  <DirectionIcon size={15} strokeWidth={2.25} aria-hidden="true" />
+                  {directionLabel}
+                </span>
               </div>
               <div className="flight-details">
-                <div
-                  className="flight-route"
-                  style={
-                    typeof flight.route === 'string' && flight.route.includes('\n')
-                      ? { whiteSpace: 'pre-line' }
-                      : undefined
-                  }
-                >
-                  <strong>{flight.route || `${flight.direction}`}</strong>
+                <div className="flight-route">
+                  <FlightRouteDisplay route={flight.route || flight.direction} isReturn={isReturn} />
                 </div>
                 {hasLegs ? (
                   <>

@@ -1361,29 +1361,29 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "03/07",
     "prices": {
-      "double": 619,
-      "single": 829,
-      "triple": 589,
-      "child1": 459
-    },
-    "packagePrice": 1238
-  },
-  {
-    "nights": 4,
-    "name": "Rhodes Palace Luxury Convention Resort  Hotel – Rhodes",
-    "stars": 5,
-    "roomType": "Premium Sea View Room",
-    "image": "/images/greek-packages-summer/rhodes/rhodes-summer-greece-cover.webp",
-    "location": "Trianton Avenue, Ixia, 85100, Rhodes, Greece",
-    "boardBasis": "Half Board",
-    "departureDate": "03/07",
-    "prices": {
-      "double": 659,
-      "single": 879,
-      "triple": 619,
+      "double": 649,
+      "single": 869,
+      "triple": 609,
       "child1": 479
     },
-    "packagePrice": 1318
+    "packagePrice": 1298
+  },
+  {
+    "nights": 4,
+    "name": "Rhodes Palace Luxury Convention Resort  Hotel – Rhodes",
+    "stars": 5,
+    "roomType": "Premium Sea View Room",
+    "image": "/images/greek-packages-summer/rhodes/rhodes-summer-greece-cover.webp",
+    "location": "Trianton Avenue, Ixia, 85100, Rhodes, Greece",
+    "boardBasis": "Half Board",
+    "departureDate": "03/07",
+    "prices": {
+      "double": 689,
+      "single": 939,
+      "triple": 659,
+      "child1": 499
+    },
+    "packagePrice": 1378
   },
   {
     "nights": 4,
@@ -1396,8 +1396,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "03/07",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1412,8 +1412,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "10/07",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1428,8 +1428,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "17/07",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1444,8 +1444,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "31/07",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1460,8 +1460,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "07/08",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1476,8 +1476,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "14/08",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1492,8 +1492,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "21/08",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1508,8 +1508,8 @@ export const rhodesPackage68Hotels = [
     "departureDate": "28/08",
     "prices": {
       "double": 829,
-      "child1": 439,
-      "child2": 439
+      "child1": 485,
+      "child2": 485
     },
     "packagePrice": 1658
   },
@@ -1523,12 +1523,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "10/07",
     "prices": {
-      "double": 655,
+      "double": 649,
       "single": 869,
-      "triple": 619,
-      "child1": 469
+      "triple": 609,
+      "child1": 479
     },
-    "packagePrice": 1310
+    "packagePrice": 1298
   },
   {
     "nights": 4,
@@ -1541,9 +1541,9 @@ export const rhodesPackage68Hotels = [
     "departureDate": "10/07",
     "prices": {
       "double": 689,
-      "single": 929,
-      "triple": 655,
-      "child1": 489
+      "single": 939,
+      "triple": 659,
+      "child1": 499
     },
     "packagePrice": 1378
   },
@@ -1557,27 +1557,10 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "17/07",
     "prices": {
-      "double": 655,
-      "single": 869,
-      "triple": 619,
-      "child1": 469
-    },
-    "packagePrice": 1310
-  },
-  {
-    "nights": 4,
-    "name": "Rhodes Palace Luxury Convention Resort  Hotel – Rhodes",
-    "stars": 5,
-    "roomType": "Premium Sea View Room",
-    "image": "/images/greek-packages-summer/rhodes/rhodes-summer-greece-cover.webp",
-    "location": "Trianton Avenue, Ixia, 85100, Rhodes, Greece",
-    "boardBasis": "Half Board",
-    "departureDate": "17/07",
-    "prices": {
       "double": 689,
-      "single": 929,
+      "single": 939,
       "triple": 655,
-      "child1": 489
+      "child1": 499
     },
     "packagePrice": 1378
   },
@@ -1589,14 +1572,31 @@ export const rhodesPackage68Hotels = [
     "image": "/images/greek-packages-summer/rhodes/rhodes-summer-greece-cover.webp",
     "location": "Trianton Avenue, Ixia, 85100, Rhodes, Greece",
     "boardBasis": "Half Board",
+    "departureDate": "17/07",
+    "prices": {
+      "double": 739,
+      "single": 1019,
+      "triple": 699,
+      "child1": 519
+    },
+    "packagePrice": 1478
+  },
+  {
+    "nights": 4,
+    "name": "Rhodes Palace Luxury Convention Resort  Hotel – Rhodes",
+    "stars": 5,
+    "roomType": "Premium Sea View Room",
+    "image": "/images/greek-packages-summer/rhodes/rhodes-summer-greece-cover.webp",
+    "location": "Trianton Avenue, Ixia, 85100, Rhodes, Greece",
+    "boardBasis": "Half Board",
     "departureDate": "31/07",
     "prices": {
-      "double": 799,
-      "single": 1115,
-      "triple": 749,
-      "child1": 549
+      "double": 849,
+      "single": 1185,
+      "triple": 789,
+      "child1": 569
     },
-    "packagePrice": 1598
+    "packagePrice": 1698
   },
   {
     "nights": 4,
@@ -1608,12 +1608,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "31/07",
     "prices": {
-      "double": 719,
-      "single": 969,
-      "triple": 669,
-      "child1": 499
+      "double": 769,
+      "single": 1059,
+      "triple": 719,
+      "child1": 529
     },
-    "packagePrice": 1438
+    "packagePrice": 1538
   },
   {
     "nights": 4,
@@ -1625,12 +1625,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "07/08",
     "prices": {
-      "double": 799,
-      "single": 1115,
-      "triple": 749,
-      "child1": 549
+      "double": 849,
+      "single": 1185,
+      "triple": 789,
+      "child1": 569
     },
-    "packagePrice": 1598
+    "packagePrice": 1698
   },
   {
     "nights": 4,
@@ -1642,12 +1642,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "07/08",
     "prices": {
-      "double": 719,
-      "single": 969,
-      "triple": 669,
-      "child1": 499
+      "double": 769,
+      "single": 1059,
+      "triple": 719,
+      "child1": 529
     },
-    "packagePrice": 1438
+    "packagePrice": 1538
   },
   {
     "nights": 4,
@@ -1659,12 +1659,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "14/08",
     "prices": {
-      "double": 799,
-      "single": 1115,
-      "triple": 749,
-      "child1": 549
+      "double": 849,
+      "single": 1185,
+      "triple": 789,
+      "child1": 569
     },
-    "packagePrice": 1598
+    "packagePrice": 1698
   },
   {
     "nights": 4,
@@ -1676,12 +1676,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "14/08",
     "prices": {
-      "double": 719,
-      "single": 969,
-      "triple": 669,
-      "child1": 499
+      "double": 769,
+      "single": 1059,
+      "triple": 719,
+      "child1": 529
     },
-    "packagePrice": 1438
+    "packagePrice": 1538
   },
   {
     "nights": 4,
@@ -1693,12 +1693,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "21/08",
     "prices": {
-      "double": 799,
-      "single": 1115,
-      "triple": 749,
-      "child1": 549
+      "double": 849,
+      "single": 1185,
+      "triple": 789,
+      "child1": 569
     },
-    "packagePrice": 1598
+    "packagePrice": 1698
   },
   {
     "nights": 4,
@@ -1710,12 +1710,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "21/08",
     "prices": {
-      "double": 719,
-      "single": 969,
-      "triple": 669,
-      "child1": 499
+      "double": 769,
+      "single": 1059,
+      "triple": 719,
+      "child1": 529
     },
-    "packagePrice": 1438
+    "packagePrice": 1538
   },
   {
     "nights": 4,
@@ -1727,12 +1727,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "28/08",
     "prices": {
-      "double": 799,
-      "single": 1115,
-      "triple": 749,
-      "child1": 549
+      "double": 849,
+      "single": 1185,
+      "triple": 789,
+      "child1": 569
     },
-    "packagePrice": 1598
+    "packagePrice": 1698
   },
   {
     "nights": 4,
@@ -1744,12 +1744,12 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "Half Board",
     "departureDate": "28/08",
     "prices": {
-      "double": 719,
-      "single": 969,
-      "triple": 669,
-      "child1": 499
+      "double": 769,
+      "single": 1059,
+      "triple": 719,
+      "child1": 529
     },
-    "packagePrice": 1438
+    "packagePrice": 1538
   },
   {
     "nights": 4,
@@ -4298,7 +4298,7 @@ export const rhodesPackage68Hotels = [
     "departureDate": "28/08",
     "prices": {
       "double": 934,
-      "triple": 870,
+      "triple": 874,
       "child1": 614
     },
     "packagePrice": 1868
@@ -4425,10 +4425,10 @@ export const rhodesPackage68Hotels = [
     "boardBasis": "All Inclusive",
     "departureDate": "28/08",
     "prices": {
-      "double": 1044,
-      "triple": 984,
+      "double": 1160,
+      "triple": 1094,
       "child1": 304
     },
-    "packagePrice": 2088
+    "packagePrice": 2320
   }
 ];

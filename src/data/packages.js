@@ -16,6 +16,7 @@ import { lefkadaPackage317Hotels } from './lefkadaPackage317Hotels.js'
 import { lefkadaPackage317Program } from './lefkadaPackage317Program.js'
 import { prevezaPackage318Hotels } from './prevezaPackage318Hotels.js'
 import { prevezaPackage318Program } from './prevezaPackage318Program.js'
+import { pargaPackage71Hotels } from './pargaPackage71Hotels.js'
 import { pargaPackage319Hotels } from './pargaPackage319Hotels.js'
 import { pargaPackage319Program } from './pargaPackage319Program.js'
 import { rhodesPackage321Hotels } from './rhodesPackage321Hotels.js'
@@ -12450,7 +12451,7 @@ export const travelPackages = [
     title: 'ΣΚΙΑΘΟΣ - 5 Μέρες',
     destination: 'Greece',
     category: 'Summer Packages to Greece',
-    price: 499,
+    price: 639,
     duration: '5 Μέρες',
     description: 'Καλοκαιρινές διακοπές στη Σκιάθο. 5 μέρες με διαμονή σε ξενοδοχεία και διαμερίσματα 2* έως 5*, Room Only ή Bed & Breakfast.',
     longDescription: 'Η Σκιάθος, το πρασινωπό νησί των Σποράδων, προσφέρει παραλίες, νυχτερινή ζωή και ηρεμία. Επιλέξτε από πολλές επιλογές ξενοδοχείων και ημερομηνιών αναχώρησης από Ιούνιο έως Αύγουστο.',
@@ -12458,7 +12459,8 @@ export const travelPackages = [
     featured: true,
     packageType: 'individual',
     details: {
-            departureDate: '04/07, 07/07, 11/07, 14/07, 18/07, 21/07, 25/07, 28/07, 01/08, 04/08, 08/08, 11/08, 15/08, 18/08, 22/08',
+      departureDate: '04/08, 25/08',
+      departureDates: ['04/08', '25/08'],
       departureFrom: 'Larnaca',
       destinationFull: 'Skiathos, Greece',
       monthAvailability: 'June – August',
@@ -12469,8 +12471,8 @@ export const travelPackages = [
       coverImage: '/images/greek-packages-summer/skiathos/skiathos-lake-hero.webp',
       thumbnailImage: '/images/greek-packages-summer/skiathos/skiathos-lake-hero.webp',
       flights: [
-        { direction: 'Departure', date: '—', route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Alex Papadiamantis (JSI), Skiathos, Greece', flight: 'CY 464', time: '13:45 → 15:45', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' },
-        { direction: 'Return', date: '—', route: 'Alex Papadiamantis (JSI), Skiathos, Greece → Larnaca International Airport (LCA), Larnaca, Cyprus', flight: 'CY 465', time: '11:00 → 12:50', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' }
+        { direction: 'Departure', date: '04/08, 25/08', route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Alex Papadiamantis (JSI), Skiathos, Greece', flight: 'CY 464', time: '13:45 → 15:45', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' },
+        { direction: 'Return', date: '04/08, 25/08', route: 'Alex Papadiamantis (JSI), Skiathos, Greece → Larnaca International Airport (LCA), Larnaca, Cyprus', flight: 'CY 465', time: '11:00 → 12:50', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' }
       ],
       hotels: skiathosPackage69Hotels,
       included: ['Αεροπορικό εισιτήριο Λάρνακα – Σκιάθος – Λάρνακα με πτήσεις της Cyprus Airways.', 'Φόροι αεροδρομίων.', 'Διαμονή για 4 βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα όπου αναφέρεται.', '1 αποσκευή 23 κιλών και 1 χειραποσκευή 10 κιλών.', 'Υπηρεσίες των αντιπροσώπων μας.'],
@@ -12551,7 +12553,7 @@ export const travelPackages = [
     title: 'ΠΑΡΓΑ - 5 Μέρες',
     destination: 'Greece',
     category: 'Summer Packages to Greece',
-    price: 619,
+    price: 639,
     duration: '5 Μέρες',
     description: 'Καλοκαιρινές διακοπές στην Πάργα. 5 μέρες με διαμονή σε ξενοδοχεία και studios με Room Only ή πρόγευμα ανά ξενοδοχείο.',
     longDescription: 'Η Πάργα, η πανέμορφη παραθαλάσσια πόλη της Ηπείρου, προσφέρει αξέχαστες διακοπές. Επιλέξτε από studios, apart-hotels και ξενοδοχεία 2* έως 5* με ημερομηνίες αναχώρησης από Ιούλιο έως Αύγουστο.',
@@ -12559,7 +12561,8 @@ export const travelPackages = [
     featured: true,
     packageType: 'individual',
     details: {
-      departureDate: '05/07',
+      departureDate: '12/07, 19/07, 02/08, 23/08',
+      departureDates: ['12/07', '19/07', '02/08', '23/08'],
       departureFrom: 'Larnaca',
       destinationFull: 'Parga, Greece',
       monthAvailability: 'July – August',
@@ -12570,92 +12573,10 @@ export const travelPackages = [
       coverImage: '/images/greek-packages-summer/parga/parga-cover.webp',
       thumbnailImage: '/images/greek-packages-summer/parga/parga-thumbnail.webp',
       flights: [
-        { direction: 'Departure', date: '—', route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Aktion (PVK), Preveza Lefkada, Greece', flight: 'CY 472', time: '07:00 → 09:10', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' },
-        { direction: 'Return', date: '—', route: 'Aktion (PVK), Preveza Lefkada, Greece → Larnaca International Airport (LCA), Larnaca, Cyprus', flight: 'CY 473', time: '10:10 → 12:10', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' }
+        { direction: 'Departure', date: '12/07, 19/07, 02/08, 23/08', route: 'Larnaca International Airport (LCA), Larnaca, Cyprus → Aktion (PVK), Preveza Lefkada, Greece', flight: 'CY 472', time: '07:00 → 09:10', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' },
+        { direction: 'Return', date: '12/07, 19/07, 02/08, 23/08', route: 'Aktion (PVK), Preveza Lefkada, Greece → Larnaca International Airport (LCA), Larnaca, Cyprus', flight: 'CY 473', time: '10:10 → 12:10', luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής' }
       ],
-      hotels: [
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 619, triple: 579, child1: 509 }, packagePrice: 1238, departureDate: '05/07', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 639, triple: 599, child1: 509 }, packagePrice: 1278, departureDate: '12/07', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 659, triple: 609, child1: 509 }, packagePrice: 1318, departureDate: '19/07', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 679, triple: 619, child1: 509 }, packagePrice: 1358, departureDate: '26/07', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 779, triple: 699, child1: 539 }, packagePrice: 1558, departureDate: '02/08', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 779, triple: 699, child1: 539 }, packagePrice: 1558, departureDate: '09/08', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 789, triple: 709, child1: 539 }, packagePrice: 1578, departureDate: '16/08', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 739, triple: 669, child1: 539 }, packagePrice: 1478, departureDate: '23/08', nights: 4 },
-        { name: 'Casa Di Dandolo Studios – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/casa-di-dandolo-parga.webp', location: 'Parga, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 669, triple: 629, child1: 539 }, packagePrice: 1338, departureDate: '30/08', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 659, triple: 589, quadruple: 559, child1: 499, child2: 459 }, packagePrice: 1318, departureDate: '05/07', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 659, triple: 589, quadruple: 559, child1: 499, child2: 459 }, packagePrice: 1318, departureDate: '12/07', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 659, triple: 589, quadruple: 559, child1: 499, child2: 459 }, packagePrice: 1318, departureDate: '19/07', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 659, triple: 589, quadruple: 559, child1: 499, child2: 459 }, packagePrice: 1318, departureDate: '26/07', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 749, triple: 669, quadruple: 619, child1: 529, child2: 489 }, packagePrice: 1498, departureDate: '02/08', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 749, triple: 669, quadruple: 619, child1: 529, child2: 489 }, packagePrice: 1498, departureDate: '09/08', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 749, triple: 669, quadruple: 619, child1: 529, child2: 489 }, packagePrice: 1498, departureDate: '16/08', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 749, triple: 669, quadruple: 619, child1: 529, child2: 489 }, packagePrice: 1498, departureDate: '23/08', nights: 4 },
-        { name: 'Villa Avli Apartments – Parga', stars: 3, roomType: 'Studio', image: '/images/greek-packages-summer/parga/villa-avil-apartments-parga.webp', location: 'Agion Saranta Martyron 16, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 699, triple: 629, quadruple: 589, child1: 529, child2: 489 }, packagePrice: 1398, departureDate: '30/08', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 669, triple: 619, child1: 509 }, packagePrice: 1338, departureDate: '05/07', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 669, triple: 619, child1: 509 }, packagePrice: 1338, departureDate: '12/07', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 669, triple: 619, child1: 509 }, packagePrice: 1338, departureDate: '19/07', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 699, triple: 639, child1: 509 }, packagePrice: 1398, departureDate: '26/07', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 729, triple: 669, child1: 539 }, packagePrice: 1458, departureDate: '02/08', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 729, triple: 669, child1: 539 }, packagePrice: 1458, departureDate: '30/08', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 759, triple: 689, child1: 539 }, packagePrice: 1518, departureDate: '09/08', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 759, triple: 689, child1: 539 }, packagePrice: 1518, departureDate: '16/08', nights: 4 },
-        { name: 'San Nectarios Hotel – Parga', stars: 2, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/san-nectarios-hotel-parga.webp', location: 'Agias Marinas 2, Párga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 739, triple: 669, child1: 539 }, packagePrice: 1478, departureDate: '23/08', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 669, triple: 629, quadruple: 599, child1: 539, child2: 509 }, packagePrice: 1338, departureDate: '05/07', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 669, triple: 629, quadruple: 599, child1: 539, child2: 509 }, packagePrice: 1338, departureDate: '12/07', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 669, triple: 629, quadruple: 599, child1: 539, child2: 509 }, packagePrice: 1338, departureDate: '19/07', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 669, triple: 629, quadruple: 599, child1: 539, child2: 509 }, packagePrice: 1338, departureDate: '26/07', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 729, triple: 679, quadruple: 629, child1: 559, child2: 539 }, packagePrice: 1458, departureDate: '02/08', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 729, triple: 679, quadruple: 629, child1: 559, child2: 539 }, packagePrice: 1458, departureDate: '09/08', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 729, triple: 679, quadruple: 629, child1: 559, child2: 539 }, packagePrice: 1458, departureDate: '16/08', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 729, triple: 679, quadruple: 629, child1: 559, child2: 539 }, packagePrice: 1458, departureDate: '23/08', nights: 4 },
-        { name: 'Yellow House – Parga', stars: 2, roomType: 'Studio', image: '/images/greek-packages-summer/parga/yello-house-parga.webp', location: 'Labrou Katsoni 4, 48060, Parga, Greece', boardBasis: 'Room Only', prices: { double: 699, triple: 639, quadruple: 609, child1: 539, child2: 529 }, packagePrice: 1398, departureDate: '30/08', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 699, triple: 659, quadruple: 659, child1: 559, child2: 659 }, packagePrice: 1398, departureDate: '05/07', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 699, triple: 659, quadruple: 659, child1: 559, child2: 659 }, packagePrice: 1398, departureDate: '12/07', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 699, triple: 659, quadruple: 659, child1: 559, child2: 659 }, packagePrice: 1398, departureDate: '19/07', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 699, triple: 659, quadruple: 659, child1: 559, child2: 659 }, packagePrice: 1398, departureDate: '26/07', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 749, triple: 679, quadruple: 699, child1: 579, child2: 729 }, packagePrice: 1498, departureDate: '02/08', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 749, triple: 679, quadruple: 699, child1: 579, child2: 729 }, packagePrice: 1498, departureDate: '09/08', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 749, triple: 679, quadruple: 699, child1: 579, child2: 729 }, packagePrice: 1498, departureDate: '16/08', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 749, triple: 679, quadruple: 699, child1: 579, child2: 729 }, packagePrice: 1498, departureDate: '23/08', nights: 4 },
-        { name: 'Saint George Hotel – Parga', stars: 3, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/saint-geroge-hotel-parga.webp', location: '1 Patatoukou Str, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 699, triple: 659, quadruple: 669, child1: 569, child2: 719 }, packagePrice: 1398, departureDate: '30/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 729, triple: 649, quadruple: 659, child1: 459, child2: 719 }, packagePrice: 1458, departureDate: '05/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 729, triple: 649, quadruple: 659, child1: 459, child2: 719 }, packagePrice: 1458, departureDate: '12/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 729, triple: 649, quadruple: 659, child1: 459, child2: 719 }, packagePrice: 1458, departureDate: '19/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 729, triple: 649, quadruple: 659, child1: 459, child2: 719 }, packagePrice: 1458, departureDate: '26/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, child1: 459 }, packagePrice: 1598, departureDate: '05/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, child1: 459 }, packagePrice: 1598, departureDate: '12/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, child1: 459 }, packagePrice: 1598, departureDate: '19/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, child1: 459 }, packagePrice: 1598, departureDate: '26/07', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, quadruple: 699, child1: 489, child2: 709 }, packagePrice: 1598, departureDate: '02/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, quadruple: 699, child1: 489, child2: 709 }, packagePrice: 1598, departureDate: '09/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, quadruple: 699, child1: 489, child2: 709 }, packagePrice: 1598, departureDate: '16/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 799, triple: 699, quadruple: 699, child1: 489, child2: 709 }, packagePrice: 1598, departureDate: '23/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 879, triple: 749, child1: 489 }, packagePrice: 1758, departureDate: '02/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 879, triple: 749, child1: 489 }, packagePrice: 1758, departureDate: '09/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 879, triple: 749, child1: 489 }, packagePrice: 1758, departureDate: '16/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 879, triple: 749, child1: 489 }, packagePrice: 1758, departureDate: '23/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Land View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 749, triple: 679, quadruple: 689, child1: 489, child2: 769 }, packagePrice: 1498, departureDate: '30/08', nights: 4 },
-        { name: 'Villa Coralli Hotel – Parga', stars: 3, roomType: 'Sea View Room', image: '/images/greek-packages-summer/parga/villa-coralli-hotel-parga.webp', location: 'Agiou Athanasiou 7, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 829, triple: 729, child1: 489 }, packagePrice: 1658, departureDate: '30/08', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 819, triple: 719, quadruple: 719, child1: 509, child2: 699 }, packagePrice: 1638, departureDate: '05/07', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 819, triple: 719, quadruple: 719, child1: 509, child2: 699 }, packagePrice: 1638, departureDate: '12/07', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 819, triple: 719, quadruple: 719, child1: 509, child2: 699 }, packagePrice: 1638, departureDate: '19/07', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 819, triple: 719, quadruple: 719, child1: 509, child2: 699 }, packagePrice: 1638, departureDate: '26/07', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 859, triple: 789, quadruple: 799, child1: 629, child2: 829 }, packagePrice: 1718, departureDate: '02/08', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 859, triple: 789, quadruple: 799, child1: 629, child2: 829 }, packagePrice: 1718, departureDate: '09/08', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 859, triple: 789, quadruple: 799, child1: 629, child2: 829 }, packagePrice: 1718, departureDate: '16/08', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 859, triple: 789, quadruple: 799, child1: 629, child2: 829 }, packagePrice: 1718, departureDate: '23/08', nights: 4 },
-        { name: 'Olympic Hotel – Parga', stars: 4, roomType: 'Standard Room', image: '/images/greek-packages-summer/parga/olympic-hotel-parga.webp', location: 'Skoufa 1, Parga, 48060, Parga, Greece', boardBasis: 'Bed and Breakfast', prices: { double: 809, triple: 729, quadruple: 739, child1: 579, child2: 749 }, packagePrice: 1618, departureDate: '30/08', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1189, triple: 1149, child1: 629, child2: 839 }, packagePrice: 2378, departureDate: '05/07', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1279, triple: 1239, child1: 659, child2: 929 }, packagePrice: 2558, departureDate: '12/07', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1299, triple: 1259, child1: 669, child2: 939 }, packagePrice: 2598, departureDate: '19/07', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1299, triple: 1259, child1: 669, child2: 939 }, packagePrice: 2598, departureDate: '26/07', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1349, triple: 1279, child1: 689, child2: 959 }, packagePrice: 2698, departureDate: '02/08', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1349, triple: 1279, child1: 689, child2: 959 }, packagePrice: 2698, departureDate: '09/08', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1349, triple: 1279, child1: 689, child2: 959 }, packagePrice: 2698, departureDate: '16/08', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1319, triple: 1279, child1: 689, child2: 959 }, packagePrice: 2638, departureDate: '23/08', nights: 4 },
-        { name: 'Lichnos Beach Hotel – Parga', stars: 5, roomType: 'Superior Sea View Room', image: '/images/greek-packages-summer/parga/lichnos-beach-hotel-parga.webp', location: 'Lichnos, 48060, Parga, Greece', boardBasis: 'Halfboard', prices: { double: 1259, triple: 1229, child1: 669, child2: 909 }, packagePrice: 2518, departureDate: '30/08', nights: 4 }
-      ],
+      hotels: pargaPackage71Hotels,
       included: ['Αεροπορικό εισιτήριο Λάρνακα – Πρέβεζα -Λάρνακα με απευθείας πτήσεις της Cyprus Airways.', 'Φόροι αεροδρομίων.', 'Διαμονή για 4 βράδια σε ξενοδοχείο της επιλογής σας.', 'Διατροφή βάσει καταλύματος.', 'Μια αποσκευή 23 κιλών και 1 χειραποσκευή 10 κιλών.', 'Υπηρεσίες των αντιπροσώπων μας.'],
       notIncluded: ['Μεταφορές από και προς το αεροδρόμιο της Πρέβεζας.', 'Δημοτικός φόρος ξενοδοχείου (πληρώνεται κατά την άφιξη σας στο ξενοδοχείο). Για ξενοδοχείο 5* είναι €15 το δωμάτιο το βράδι, για 4*- €10, για 3*- €5 και για 1*-2*- €2.', 'Φαγητό και ποτό στην πτήση.'],
       note: 'Ημερομηνίες και τιμές ανά ξενοδοχείο. Επικοινωνήστε για διαθεσιμότητα.',
@@ -17699,7 +17620,7 @@ export const travelPackages = [
     title: 'ΚΡΗΤΗ – 5 Μέρες',
     destination: 'Greece',
     category: 'Summer Packages to Greece',
-    price: 519,
+    price: 564,
     duration: '5 days / 4 nights',
     description:
       'Αεροπορικό πακέτο Λάρνακα – Ηράκλειο – Λάρνακα με Sky Express· επιλογή ξενοδοχείου σε Ηράκλειο, Αμμουδάρα, Χερσόνησο, Ρέθυμνο, Άγιο Νικόλαο, Ελούντα κ.ά. με πρωινό, ημιδιατροφή ή all inclusive ανά κατάλογο. Αναχωρήσεις Ιούλιος–Αύγουστος.',
@@ -17709,11 +17630,11 @@ export const travelPackages = [
     featured: true,
     packageType: 'individual',
     details: {
-      departureDate:
-        '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08, 28/08',
+      departureDate: '14/08',
+      departureDates: ['14/08'],
       departureFrom: 'Larnaca',
       destinationFull: 'Heraklion, Crete, Greece',
-      monthAvailability: 'July – August',
+      monthAvailability: 'August',
       roomType: 'Standard Room',
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
@@ -17727,7 +17648,7 @@ export const travelPackages = [
       flights: [
         {
           direction: 'Departure',
-          date: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08, 28/08',
+          date: '14/08',
           route:
             '23:05 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n00:30 Nikos Kazantzakis (HER)\nHeraklion, Greece',
           flight: 'GQ 620',
@@ -17738,7 +17659,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08, 28/08',
+          date: '14/08',
           route:
             '21:00 Nikos Kazantzakis (HER)\nHeraklion, Greece\nto\n23:05 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
           flight: 'GQ 621',
@@ -17789,8 +17710,8 @@ export const travelPackages = [
     featured: false,
     packageType: 'individual',
     details: {
-      departureDate:
-        '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08, 31/08',
+      departureDate: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08',
+      departureDates: ['13/07', '20/07', '27/07', '03/08', '10/08', '17/08', '24/08'],
       departureFrom: 'Larnaca',
       destinationFull: 'Heraklion, Crete, Greece',
       monthAvailability: 'July – August',
@@ -17807,7 +17728,7 @@ export const travelPackages = [
       flights: [
         {
           direction: 'Departure',
-          date: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08, 31/08',
+          date: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08',
           route:
             '06:45 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n08:15 Nikos Kazantzakis (HER)\nHeraklion, Greece',
           flight: 'CY 460',
@@ -17817,7 +17738,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08, 31/08',
+          date: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08',
           route:
             '18:35 Nikos Kazantzakis (HER)\nHeraklion, Greece\nto\n20:05 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
           flight: 'CY 461',
@@ -17868,16 +17789,13 @@ export const travelPackages = [
     featured: false,
     packageType: 'individual',
     details: {
-      departureDate: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08, 31/08',
+      departureDate: '13/07, 27/07, 03/08, 10/08, 24/08',
       departureDates: [
         '13/07',
-        '20/07',
         '27/07',
         '03/08',
         '10/08',
-        '17/08',
-        '24/08',
-        '31/08'
+        '24/08'
       ],
       departureFrom: 'Larnaca',
       destinationFull: 'Rhodes, Greece',
@@ -17893,7 +17811,7 @@ export const travelPackages = [
       flights: [
         {
           direction: 'Departure',
-          date: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08, 31/08',
+          date: '13/07, 27/07, 03/08, 10/08, 24/08',
           route:
             '10:30 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n11:40 Diagoras Airport (RHO)\nRhodes, Greece',
           flight: 'CY 462',
@@ -17903,7 +17821,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '13/07, 20/07, 27/07, 03/08, 10/08, 17/08, 24/08, 31/08',
+          date: '13/07, 27/07, 03/08, 10/08, 24/08',
           route:
             '09:35 Diagoras Airport (RHO)\nRhodes, Greece\nto\n10:45 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
           flight: 'CY 463',
@@ -17954,14 +17872,11 @@ export const travelPackages = [
     featured: false,
     packageType: 'individual',
     details: {
-      departureDate: '05/07, 12/07, 19/07, 26/07, 02/08, 16/08, 23/08',
+      departureDate: '12/07, 19/07, 02/08, 23/08',
       departureDates: [
-        '05/07',
         '12/07',
         '19/07',
-        '26/07',
         '02/08',
-        '16/08',
         '23/08'
       ],
       departureFrom: 'Larnaca',
@@ -17978,7 +17893,7 @@ export const travelPackages = [
       flights: [
         {
           direction: 'Departure',
-          date: '05/07, 12/07, 19/07, 26/07, 02/08, 16/08, 23/08',
+          date: '12/07, 19/07, 02/08, 23/08',
           route:
             '07:00 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n09:10 Aktion (PVK)\nPreveza Lefkada, Greece',
           flight: 'CY 472',
@@ -17988,7 +17903,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '05/07, 12/07, 19/07, 26/07, 02/08, 16/08, 23/08',
+          date: '12/07, 19/07, 02/08, 23/08',
           route:
             '10:10 Aktion (PVK)\nPreveza Lefkada, Greece\nto\n12:10 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
           flight: 'CY 473',
@@ -18236,8 +18151,8 @@ export const travelPackages = [
     featured: false,
     packageType: 'individual',
     details: {
-      departureDate: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08',
-      departureDates: ['10/07', '17/07', '24/07', '31/07', '07/08', '14/08', '21/08'],
+      departureDate: '17/07, 24/07, 07/08, 14/08, 21/08',
+      departureDates: ['17/07', '24/07', '07/08', '14/08', '21/08'],
       departureFrom: 'Larnaca',
       destinationFull: 'Rhodes, Greece',
       monthAvailability: 'July – August',
@@ -18251,7 +18166,7 @@ export const travelPackages = [
       flights: [
         {
           direction: 'Departure',
-          date: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08',
+          date: '17/07, 24/07, 07/08, 14/08, 21/08',
           route:
             '06:40 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n07:40 Diagoras Airport (RHO)\nRhodes, Greece',
           flight: 'A3 496',
@@ -18261,7 +18176,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '10/07, 17/07, 24/07, 31/07, 07/08, 14/08, 21/08',
+          date: '17/07, 24/07, 07/08, 14/08, 21/08',
           route:
             '13:00 Diagoras Airport (RHO)\nRhodes, Greece\nto\n14:00 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
           flight: 'A3 497',
