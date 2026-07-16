@@ -21,28 +21,28 @@ const CATEGORY_ROWS = [
     description: 'Tropical paradises and far-flung destinations for unforgettable adventures.'
   },
   {
-    slug: 'cruises',
-    category: 'Cruises',
-    title: 'Cruises',
-    description: 'Luxury sailing experiences to iconic ports and scenic coastlines.'
-  },
-  {
     slug: 'autumn-packages',
     category: 'Autumn Packages',
     title: 'Autumn Packages',
     description: 'Golden-season travel across Europe and beyond.'
   },
   {
-    slug: 'winter-packages',
-    category: 'Winter Packages',
-    title: 'Winter Packages',
-    description: 'Cozy winter escapes and seasonal city experiences.'
-  },
-  {
     slug: 'christmas-packages',
     category: 'Christmas Packages',
     title: 'Christmas Packages',
     description: 'Festive holidays and magical Christmas market itineraries.'
+  },
+  {
+    slug: 'cruises',
+    category: 'Cruises',
+    title: 'Cruises',
+    description: 'Luxury sailing experiences to iconic ports and scenic coastlines.'
+  },
+  {
+    slug: 'winter-packages',
+    category: 'Winter Packages',
+    title: 'Winter Packages',
+    description: 'Cozy winter escapes and seasonal city experiences.'
   },
   {
     slug: 'ski-packages',

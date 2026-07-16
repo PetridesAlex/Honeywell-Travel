@@ -33,6 +33,50 @@ import { sriLankaPackage323Program } from './sriLankaPackage323Program.js'
 import { frenchItalianRivieraPackage326Program } from './frenchItalianRivieraPackage326Program.js'
 import { englandScotlandPackage327Program } from './englandScotlandPackage327Program.js'
 import { swedenPackage328Program } from './swedenPackage328Program.js'
+import { heraklionPackage329Hotels } from './heraklionPackage329Hotels.js'
+import { heraklionPackage329Program } from './heraklionPackage329Program.js'
+import { maltaPackage330Hotels } from './maltaPackage330Hotels.js'
+import { maltaPackage330Program } from './maltaPackage330Program.js'
+import { dubaiPackage331Hotels } from './dubaiPackage331Hotels.js'
+import { dubaiPackage331Program } from './dubaiPackage331Program.js'
+import { cairoPackage332Hotels } from './cairoPackage332Hotels.js'
+import { cairoPackage332Program } from './cairoPackage332Program.js'
+import { constantinoplePackage333Hotels } from './constantinoplePackage333Hotels.js'
+import { constantinoplePackage333Program } from './constantinoplePackage333Program.js'
+import { madridPackage334Hotels } from './madridPackage334Hotels.js'
+import { madridPackage334Program } from './madridPackage334Program.js'
+import { moroccoPackage335Hotels } from './moroccoPackage335Hotels.js'
+import { moroccoPackage335Program } from './moroccoPackage335Program.js'
+import { moroccoPackage336Hotels } from './moroccoPackage336Hotels.js'
+import { moroccoPackage336Program } from './moroccoPackage336Program.js'
+import { indiaPackage337Hotels } from './indiaPackage337Hotels.js'
+import { indiaPackage337Program } from './indiaPackage337Program.js'
+import { sriLankaPackage338Hotels } from './sriLankaPackage338Hotels.js'
+import { sriLankaPackage338Program } from './sriLankaPackage338Program.js'
+import { bangkokPhuketPackage339Hotels } from './bangkokPhuketPackage339Hotels.js'
+import { bangkokPhuketPackage339Program } from './bangkokPhuketPackage339Program.js'
+import { baliPackage340Hotels } from './baliPackage340Hotels.js'
+import { baliPackage340Program } from './baliPackage340Program.js'
+import { vietnamPackage341Hotels } from './vietnamPackage341Hotels.js'
+import { vietnamPackage341Program } from './vietnamPackage341Program.js'
+import { newYorkPackage342Hotels } from './newYorkPackage342Hotels.js'
+import { newYorkPackage342Program } from './newYorkPackage342Program.js'
+import { easternUsaCanadaPackage343Hotels } from './easternUsaCanadaPackage343Hotels.js'
+import { easternUsaCanadaPackage343Program } from './easternUsaCanadaPackage343Program.js'
+import { peruPackage344Hotels } from './peruPackage344Hotels.js'
+import { peruPackage344Program } from './peruPackage344Program.js'
+import { japanPackage345Hotels } from './japanPackage345Hotels.js'
+import { japanPackage345Program } from './japanPackage345Program.js'
+import { southAfricaPackage346Hotels } from './southAfricaPackage346Hotels.js'
+import { southAfricaPackage346Program } from './southAfricaPackage346Program.js'
+import { australiaPackage347Hotels } from './australiaPackage347Hotels.js'
+import { australiaPackage347Program } from './australiaPackage347Program.js'
+import { laplandHelsinkiPackage348Hotels } from './laplandHelsinkiPackage348Hotels.js'
+import { laplandHelsinkiPackage348Program } from './laplandHelsinkiPackage348Program.js'
+import { leviRovaniemiPackage349Hotels } from './leviRovaniemiPackage349Hotels.js'
+import { leviRovaniemiPackage349Program } from './leviRovaniemiPackage349Program.js'
+import { leviNewYearPackage350Hotels } from './leviNewYearPackage350Hotels.js'
+import { leviNewYearPackage350Program } from './leviNewYearPackage350Program.js'
 
 export const travelPackages = [
   {
@@ -19231,6 +19275,3303 @@ export const travelPackages = [
         '/images/sweden-summer/sweden-summer-hotel.webp'
       ]
     }
+  },
+  {
+    id: 329,
+    title: 'ΗΡΑΚΛΕΙΟ – 4 Μέρες',
+    destination: 'Greece',
+    category: 'Autumn Packages',
+    price: 519,
+    duration: '4 days / 3 nights',
+    description:
+      'Φθινοπωρινό αεροπορικό πακέτο Λάρνακα – Ηράκλειο – Λάρνακα με Cyprus Airways· επιλογή ξενοδοχείου στο Ηράκλειο ή την Αμμουδάρα με πρωινό. Αναχώρηση 02/10.',
+    longDescription:
+      'Το Ηράκλειο είναι η μεγαλύτερη πόλη της Κρήτης και ένα από τα σημαντικότερα αστικά και πολιτιστικά κέντρα της Ελλάδας. Τετραήμερο αεροπορικό πακέτο με Cyprus Airways, διαμονή 3 διανυκτερεύσεων σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+    image: '🇬🇷',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '02/10',
+      departureDates: ['02/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Heraklion, Crete, Greece',
+      monthAvailability: 'October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage:
+        'Μια αποσκευή 10kg, και ένα προσωπικό αντικείμενο στην καμπίνα του αεροπλάνου.',
+      coverImage:
+        '/images/greek-packages-summer/crete-summer-package/crete-hero-summer-packages.webp',
+      thumbnailImage:
+        '/images/greek-packages-summer/crete-summer-package/crete-thumbnail-summer-packages.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '02/10',
+          route:
+            '16:15 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n17:45 Nikos Kazantzakis (HER)\nHeraklion, Greece',
+          flight: 'CY 460',
+          time: '16:15 → 17:45',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '05/10',
+          route:
+            '09:05 Nikos Kazantzakis (HER)\nHeraklion, Greece\nto\n10:35 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'CY 461',
+          time: '09:05 → 10:35',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: heraklionPackage329Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Ηράκλειο – Λάρνακα με πτήσεις της Cyprus Airways.',
+        'Μια αποσκευή 10kg, και ένα προσωπικό αντικείμενο στην καμπίνα του αεροπλάνου.',
+        '3 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Μεταφορές από και προς το αεροδρόμιο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ότι δεν αναφέρεται στα περιλαμβάνονται ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: heraklionPackage329Program,
+      gallery: [
+        '/images/greek-packages-summer/crete-summer-package/crete-hero-summer-packages.webp',
+        '/images/greek-packages-summer/crete-summer-package/crete-thumbnail-summer-packages.webp'
+      ]
+    }
+  },
+  {
+    id: 330,
+    title: 'ΜΑΛΤΑ – 4 Μέρες',
+    destination: 'Malta',
+    category: 'Autumn Packages',
+    price: 699,
+    duration: '4 days / 3 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 4 ημερών στη Μάλτα με ξενάγηση στη Βαλέτα, τη Μόστα, τη Μεδίνα και εργαστήριο φυσητού γυαλιού. Αναχωρήσεις 01/10 και 25/10.',
+    longDescription:
+      'Ανακαλύψτε το νησί των Ιπποτών σε ένα τετραήμερο ταξίδι με πτήσεις, διαμονή 3 διανυκτερεύσεων σε ξενοδοχείο της επιλογής σας με πρόγευμα, μεταφορές και οργανωμένες εκδρομές σύμφωνα με το πρόγραμμα.',
+    image: '🇲🇹',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '01/10, 25/10',
+      departureDates: ['01/10', '25/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Valletta, Mosta, Mdina – Malta',
+      monthAvailability: 'October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage: 'Μία αποσκευή μέχρι 25 κιλά και μία χειραποσκευή μέχρι 7 κιλά.',
+      coverImage: '/images/malta-package/malta-hero-cover.webp',
+      thumbnailImage: '/images/malta-package/malta-thumbnail-one.webp',
+      note: 'Το πρόγραμμα ενδέχεται να πραγματοποιηθεί με διαφορετική σειρά αλλά με παροχή όλων των υπηρεσιών.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '01/10, 25/10',
+          route:
+            '12:15 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n14:00 Luqa International (MLA)\nMalta, Malta',
+          flight: 'EK 109',
+          time: '12:15 → 14:00',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '04/10, 28/10',
+          route:
+            '15:30 Luqa International (MLA)\nMalta, Malta\nto\n18:55 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'EK 110',
+          time: '15:30 → 18:55',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: maltaPackage330Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Μάλτα - Λάρνακα με Emirates.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα, με πολυτελή πούλμαν.',
+        'Τοπικός Ελληνόφωνος Συνοδός/Ξεναγός κατά τη διάρκεια των ξεναγήσεων.',
+        'Μία αποσκευή μέχρι 25 κιλά και μια χειραποσκευή μέχρι 7 κιλά.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Δικαιώματα εισόδων στους τόπους επισκέψεων.',
+        'Τοπικός φόρος του ξενοδοχείου (€1,50 ανά άτομο ανά βράδυ), πληρώνεται επιτόπου.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: maltaPackage330Program,
+      gallery: [
+        '/images/malta-package/malta-hero-cover.webp',
+        '/images/malta-package/malta-thumbnail-one.webp',
+        '/images/malta-package/Mercure Hotel - Malta.webp',
+        '/images/malta-package/Intercontinental-malta.webp'
+      ]
+    }
+  },
+  {
+    id: 331,
+    title: 'ΝΤΟΥΜΠΑΙ / ΑΜΠΟΥ ΝΤΑΜΠΙ / ΣΑΦΑΡΙ ΣΤΗΝ ΕΡΗΜΟ',
+    destination: 'UAE',
+    category: 'Autumn Packages',
+    price: 789,
+    duration: '5 days / 4 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 5 ημερών στο Ντουμπάι με πανοραμική ξενάγηση, σαφάρι στην έρημο με δείπνο Βεδουίνων και εκδρομή στο Άμπου Ντάμπι. Αναχωρήσεις Σεπτέμβριος–Οκτώβριο.',
+    longDescription:
+      'Ζήστε την απόλυτη αραβική εμπειρία σε ένα ταξίδι 5 ημερών με βάση το Ντουμπάι. Ανακαλύψτε τα σύγχρονα θαύματα της πόλης, απολαύστε σαφάρι στην έρημο και επισκεφθείτε το Άμπου Ντάμπι με το Τζαμί του Σεΐχη Ζάιντ και το μουσείο Louvre Abu Dhabi. Διαμονή σε 4* ξενοδοχείο (Novotel Al Barsha ή παρόμοιο).',
+    image: '🇦🇪',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '09/09, 16/09, 23/09, 30/09, 07/10, 14/10, 21/10',
+      departureDates: ['09/09', '16/09', '23/09', '30/09', '07/10', '14/10', '21/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Dubai & Abu Dhabi, United Arab Emirates',
+      monthAvailability: 'September – October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μία χειραποσκευή 10 κιλών.',
+      coverImage: '/images/dubai/Dubai-hero.webp',
+      thumbnailImage: '/images/dubai/Dubai-skyscrapers.webp',
+      note: 'Ξενοδοχείο: NOVOTEL AL BARSHA HTL 4* OR SIMILAR',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '09/09, 16/09, 23/09, 30/09, 07/10, 14/10, 21/10',
+          route:
+            '08:00 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n12:40 Dubai Intl (DXB)\nDubai, United Arab Emirates',
+          flight: 'CY 106',
+          time: '08:00 → 12:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '13/09, 20/09, 27/09, 04/10, 11/10, 18/10, 25/10',
+          route:
+            '18:00 Dubai Intl (DXB)\nDubai, United Arab Emirates\nto\n21:25 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'CY 107',
+          time: '18:00 → 21:25',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: dubaiPackage331Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Ντουμπάι - Λάρνακα με πτήσεις της Cyprus Airways.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε ξενοδοχείο 4* με πρόγευμα.',
+        'Μεταφορές αεροδρόμιο ξενοδοχείο αεροδρόμιο με αγγλόφωνο συνοδό.',
+        'Αγγλόφωνοι ξεναγοί τις μέρες των ξεναγήσεων.',
+        'Σαφάρι στην έρημο με δείπνο.',
+        'Εισιτήριο εισόδου για το μουσείο του Λούβρου.',
+        'Μία χειραποσκευή 10 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Τοπικός φόρος AED20 (περίπου €5) το δωμάτιο το βράδυ. Το πληρώνεται στο ξενοδοχείο κατά την άφιξη σας.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται ως προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: dubaiPackage331Program,
+      gallery: [
+        '/images/dubai/Dubai-hero.webp',
+        '/images/dubai/Dubai-skyscrapers.webp',
+        '/images/dubai/hotel-in-dubai.webp'
+      ]
+    }
+  },
+  {
+    id: 332,
+    title: 'ΚΑΙΡΟ / ΑΛΕΞΑΝΔΡΕΙΑ',
+    destination: 'Egypt',
+    category: 'Autumn Packages',
+    price: 895,
+    duration: '4 days / 3 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 4 ημερών στο Καΐρο και την Αλεξάνδρεια με Egypt Air. Πυραμίδες Γκίζας, Μεγάλο Αιγυπτιακό Μουσείο, Khan el Khalili, Πατριαρχείο Αλεξανδρείας, Βιβλιοθήκη Αλεξάνδρειας και Σπίτι Καβάφη.',
+    longDescription:
+      'Ανακαλύψτε την Αίγυπτο σε 4 ημέρες: το ιστορικό Καΐρο με τις Πυραμίδες, τη Σφίγγα και το Μεγάλο Αιγυπτιακό Μουσείο, και την Αλεξάνδρεια με το Πατριαρχείο, τη Βιβλιοθήκη, το Σπίτι Καβάφη και το Οχυρό Qaitbay. Διαμονή σε 5* ξενοδοχείο (Safir ή παρόμοιο) με πρόγευμα.',
+    image: '🇪🇬',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '13/09, 20/09, 01/10, 11/10, 26/10',
+      departureDates: ['13/09', '20/09', '01/10', '11/10', '26/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Cairo, Alexandria, Egypt',
+      monthAvailability: 'September – October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Egypt Air',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών',
+      coverImage: '/images/alexandria-egypt/alexandria-egypt-cover.webp',
+      thumbnailImage: '/images/alexandria-egypt/alexandria-egypt-thumb.webp',
+      note: 'Ξενοδοχείο: SAFIR HTL 5* OR SIMILAR',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/09, 20/09, 11/10',
+          route:
+            '12:15 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n13:40 Cairo Intl (CAI)\nCairo, Egypt',
+          flight: 'MS 744',
+          time: '12:15 → 13:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '16/09, 23/09, 14/10',
+          route:
+            '17:15 Cairo Intl (CAI)\nCairo, Egypt\nto\n18:30 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'MS 741',
+          time: '17:15 → 18:30',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '01/10',
+          route:
+            '19:30 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n20:55 Cairo Intl (CAI)\nCairo, Egypt',
+          flight: 'MS 742',
+          time: '19:30 → 20:55',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '04/10',
+          route:
+            '10:00 Cairo Intl (CAI)\nCairo, Egypt\nto\n11:15 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'MS 743',
+          time: '10:00 → 11:15',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Departure',
+          date: '26/10',
+          route:
+            '19:10 Larnaca International Airport (LCA)\nLarnaca, Cyprus\nto\n21:40 Cairo Intl (CAI)\nCairo, Egypt',
+          flight: 'MS 742',
+          time: '19:10 → 21:40',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '29/10',
+          route:
+            '17:50 Cairo Intl (CAI)\nCairo, Egypt\nto\n18:10 Larnaca International Airport (LCA)\nLarnaca, Cyprus',
+          flight: 'MS 741',
+          time: '17:50 → 18:10',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: cairoPackage332Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Κάιρο - Λάρνακα με πτήσεις της Egypt Air.',
+        'Φόροι αεροδρομίων.',
+        'Τρείς διανυκτερεύσεις σε ξενοδοχείο 5* με πρωινό.',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το αναλυτικό πρόγραμμα.',
+        'Εισιτήρια εισόδων: Πυραμίδες, Μεγάλο Αιγυπτιακό Μουσείο και Βιβλιοθήκη Αλεξάνδρειας.',
+        'Τοπικός Ελληνόφωνος ξεναγός.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.',
+        'Εισιτήρια εισόδων εκτός αυτών που αναφέρονται στα περιλαμβάνονται.',
+        'Βίζα εισόδου (30 δολάρια).',
+        'Φιλοδωρήματα (20 δολάρια).'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας ή μετρητά στο γραφείο μας.',
+        'Τα πακέτα ενδέχεται να μην ακυρώνονται και να μην επιστρέφονται χρήματα.'
+      ],
+      itinerary: [],
+      program: cairoPackage332Program,
+      gallery: [
+        '/images/alexandria-egypt/alexandria-egypt-cover.webp',
+        '/images/alexandria-egypt/alexandria-egypt-thumb.webp',
+        '/images/alexandria-egypt/alexandria-egypt-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 333,
+    title: 'ΚΩΝΣΤΑΝΤΙΝΟΥΠΟΛΗ – 5 Μέρες',
+    destination: 'Turkey',
+    category: 'Autumn Packages',
+    price: 929,
+    duration: '5 days / 4 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 5 ημερών στην Κωνσταντινούπολη με ξενάγηση Πέραν, Πριγκηπονήσια, Αγία Σοφία, Τοπ Καπί, κρουαζιέρα στον Βόσπορο και επίσκεψη στο Οικουμενικό Πατριαρχείο. Αναχωρήσεις Ιούλιος–Σεπτέμβριο.',
+    longDescription:
+      'Ανακαλύψτε την πόλη που ενώνει Ευρώπη και Ασία σε ένα οργανωμένο ταξίδι 5 ημερών. Εξερευνήστε την Παλιά Πόλη, επισκεφτείτε την Αγία Σοφία και το Παλάτι Τοπ Καπί, απολαύστε κρουαζιέρα στον Βόσπορο, τα Πριγκηπονήσια και τα ιερά προσκυνήματα του Οικουμενικού Πατριαρχείου. Διαμονή στο The Central Palace Hotel 4* (ή παρόμοιο) με πρόγευμα.',
+    image: '🇹🇷',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '20/07, 03/08, 10/08, 17/08, 07/09, 28/09',
+      departureDates: ['20/07', '03/08', '10/08', '17/08', '07/09', '28/09'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Istanbul, Turkey',
+      monthAvailability: 'July – September',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Μια αποσκευή 23 κιλά και μία χειραποσκευή μέχρι 8 κιλά.',
+      coverImage: '/images/Constandinopole/instanbul-hero.webp',
+      thumbnailImage: '/images/destinations/constantinopole-view.webp',
+      note: 'Ξενοδοχείο: THE CENTRAL PALACE HTL 4* OR SIMILAR',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '20/07, 03/08, 10/08, 17/08, 07/09, 28/09',
+          route: 'Larnaca (LCA) → Istanbul (IST)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '10:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '12:00',
+              flight: 'A3 903',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '13:00',
+              toCode: 'IST',
+              toName: 'Ataturk',
+              toCity: 'Istanbul, Turkey',
+              arrive: '14:35',
+              flight: 'A3 992',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '24/07, 07/08, 14/08, 21/08, 11/09, 02/10',
+          route: 'Istanbul (IST) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'IST',
+              fromName: 'Ataturk',
+              fromCity: 'Istanbul, Turkey',
+              depart: '20:55',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '22:25',
+              flight: 'A3 995',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '23:55',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '01:30',
+              flight: 'A3 910',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        }
+      ],
+      hotels: constantinoplePackage333Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Αθήνα - Κωνσταντινούπολη - Αθήνα -Λάρνακα με πτήσεις της Aegean Airlines ( Δίνεται η δυνατότητα προαγοράς θέσης με έκπτωση 50% πριν από το άνοιγμα του check-in για όλες τις θέσεις ).',
+        'Φόροι αεροδρομίων.',
+        'Τέσσερεις διανυκτερεύσεις σε κεντρικό ξενοδοχείο 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        'Κρουαζιέρα στο Βόσπορο.',
+        'Αρχηγό/συνοδό καθ\' όλη την διάρκεια του προγράμματος.',
+        'Εισιτήριο για τα Πριγκηπονήσσα.',
+        'Μια αποσκευή 23 κιλά και μία χειραποσκευή μέχρι 8 κιλά.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Βίζα για τη Τουρκία η οποία γίνεται ηλεκτρονικά και στοιχίζει περίπου €50.',
+        'Εισιτήρια εισόδου, εκτός από αυτά που αναγράφονται στα περιλαμβανόμενα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      importantNotes: [
+        'Πληροφορίες για την έκδοση βίζας: Η έκδοση βίζας γίνεται υποχρεωτικά από τον κάθε ταξιδιώτη μέσω διαδικτύου. Για περισσότερες πληροφορίες επισκεφθείτε την ιστοσελίδα www.evisa.gov.tr/en/ Κόστος γύρω στα 50 ευρώ.',
+        'Στη Τουρκία ταξιδεύετε μόνο με διαβατήριο το οποίο πρέπει να είναι σε ισχύει 6 μήνες μετά την είσοδο στη Χώρα.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: constantinoplePackage333Program,
+      gallery: [
+        '/images/Constandinopole/instanbul-hero.webp',
+        '/images/destinations/constantinopole-view.webp',
+        '/images/destinations/conpole-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 334,
+    title: 'ΜΑΔΡΙΤΗ / ΤΟΛΕΔΟ – 5 Μέρες',
+    destination: 'Spain',
+    category: 'Autumn Packages',
+    price: 989,
+    duration: '5 days / 4 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 5 ημερών σε Μαδρίτη και Τολέδο με πανοραμική ξενάγηση, εκδρομή στο μεσαιωνικό Τολέδο και προαιρετική επίσκεψη στο Πάρκο Warner Bros. Αναχωρήσεις Ιούλιος–Οκτώβριο.',
+    longDescription:
+      'Ανακαλύψτε την ισπανική πρωτεύουσα και το μαγευτικό Τολέδο σε ένα οργανωμένο ταξίδι 5 ημερών. Πανοραμική ξενάγηση στη Μαδρίτη, ολοήμερη εκδρομή στο UNESCO Τολέδο, ελεύθερη ημέρα ή προαιρετικά Warner Bros Park. Διαμονή 4 διανυκτερεύσεις σε 4* ξενοδοχείο (Rafael Atocha ή Praga ή παρόμοιο) με πρόγευμα.',
+    image: '🇪🇸',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '22/07, 29/07, 05/08, 12/08, 19/08, 02/09, 16/09, 30/09, 08/10',
+      departureDates: ['22/07', '29/07', '05/08', '12/08', '19/08', '02/09', '16/09', '30/09', '08/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Madrid / Toledo, Spain',
+      monthAvailability: 'July – October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Sky Express',
+      includedLuggage: 'Μια αποσκευή 23κιλών και μια χειραποσκευή 8κιλών.',
+      coverImage: '/images/madrid-package/madrid-cover-one.webp',
+      thumbnailImage: '/images/madrid-package/madrid-thumbnail.webp',
+      note: 'Ξενοδοχείο: RAFAEL ATOCHA OR PRAGA HTL 4* OR SIMILAR',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '22/07, 29/07, 05/08, 12/08, 19/08, 02/09, 16/09, 30/09, 08/10',
+          route: 'Larnaca (LCA) → Madrid (MAD)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '07:00',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '08:45',
+              flight: 'GQ 607',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '10:30',
+              toCode: 'MAD',
+              toName: 'Barajas',
+              toCity: 'Madrid, Spain',
+              arrive: '13:15',
+              flight: 'GQ 920',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '26/07, 02/08, 09/08, 16/08, 23/08, 06/09, 20/09, 04/10, 12/10',
+          route: 'Madrid (MAD) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'MAD',
+              fromName: 'Barajas',
+              fromCity: 'Madrid, Spain',
+              depart: '14:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '18:45',
+              flight: 'GQ 921',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '21:55',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '23:40',
+              flight: 'GQ 606',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: madridPackage334Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Αθήνα - Μαδρίτη - Αθήνα - Λάρνακα με πτήσεις της Sky Express.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε κεντρικά ξενοδοχεία 4* με πρόγευμα τύπου μπουφέ.',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        'Τοπικοί ελληνόφωνοι ξεναγοί κατά τη διάρκεια των ξεναγήσεων.',
+        'Έμπειρος Ελληνόφωνος Αρχηγός / συνοδός.',
+        'Μια αποσκευή 23κιλών και μια χειραποσκευή 8κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Εισιτήρια εισόδους στους χώρους επισκέψεων.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.',
+        'Προαιρετικό - Πάρκο Warner Bros – 75 ευρώ το άτομο. Περιλαμβάνεται μεταφορά και εισιτήριο εισόδου. (Ελάχιστη συμμετοχή 20 άτομα).'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωση των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.'
+      ],
+      itinerary: [],
+      program: madridPackage334Program,
+      gallery: [
+        '/images/madrid-package/madrid-cover-one.webp',
+        '/images/madrid-package/madrid-thumbnail.webp',
+        '/images/madrid-package/hotel-in-madrid.webp'
+      ]
+    }
+  },
+  {
+    id: 335,
+    title: 'ΑΥΤΟΚΡΑΤΟΡΙΚΟ ΜΑΡΟΚΟ ΜΕ ΤΑΓΓΕΡΗ',
+    destination: 'Morocco',
+    category: 'Autumn Packages',
+    price: 1789,
+    duration: '8 days / 7 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 8 ημερών στο αυτοκρατορικό Μαρόκο με Ταγγέρη. Καζαμπλάνκα, Ραμπάτ, Σεφσαουέν, Φεζ και Μαρακές με έμπειρο ελληνόφωνο συνοδό. Αναχωρήσεις Σεπτέμβριος–Οκτώβριο.',
+    longDescription:
+      'Ένα ολοκληρωμένο ταξίδι 8 ημερών στο αυτοκρατορικό Μαρόκο με Ταγγέρη. Από την κοσμοπολίτικη Καζαμπλάνκα και την πρωτεύουσα Ραμπάτ, στην «μπλε πόλη» Σεφσαουέν, την πνευματική Φεζ και την ατμοσφαιρική Μαρακές. Περιλαμβάνονται πτήσεις Aegean μέσω Αθήνας, ημιδιατροφή, ξεναγήσεις και διαμονή σε 4★ & 5★ ξενοδοχεία.',
+    image: '🇲🇦',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '15/09, 06/10',
+      departureDates: ['15/09', '06/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Casablanca, Rabat, Tangier, Chefchaouen, Meknes, Fes, Marrakech – Morocco',
+      monthAvailability: 'September – October',
+      roomType: 'Standard Room',
+      boardBasis: 'Half Board',
+      airline: 'Aegean Airlines',
+      includedLuggage: '1 αποσκευή 23Kg και 1 χειραποσκευή 8Kg.',
+      coverImage: '/images/marocco/maroco-church.webp',
+      thumbnailImage: '/images/marocco/marroco-town.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '15/09, 06/10',
+          route: 'Larnaca (LCA) → Marrakech (RAK)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '05:00',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '06:45',
+              flight: 'A3 901',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '08:55',
+              toCode: 'RAK',
+              toName: 'Menara',
+              toCity: 'Marrakech, Morocco',
+              arrive: '11:25',
+              flight: 'A3 738',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '22/09, 13/10',
+          route: 'Marrakech (RAK) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'RAK',
+              fromName: 'Menara',
+              fromCity: 'Marrakech, Morocco',
+              depart: '12:25',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '18:30',
+              flight: 'A3 739',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '21:20',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '23:00',
+              flight: 'A3 914',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: moroccoPackage335Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Αθήνα - Μαρρακές - Αθήνα - Λάρνακα με πτήσεις της Aegean Airlines ( Δίνεται η δυνατότητα προαγοράς θέσης με έκπτωση 50% πριν από το άνοιγμα του check-in για όλες τις θέσεις ).',
+        'Φόροι αεροδρομίων.',
+        '7 διανυκτερεύσεις σε ξενοδοχεία 4* και 5* με ημιδιατροφή.',
+        'Τοπικοί Αγγλόφωνοι ξεναγοί.',
+        'Ελληνόφωνας αρχηγός/Συνοδός.',
+        'Μεταφορές, εκδρομές και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        'Εισιτήρια εισόδου στη Σχολή Μπου Ανάνια, στο Παλάτι Μπαχία και Κήπους Μαζορέλ.',
+        '1 αποσκευή 23Kg και 1 χειραποσκευή 8Kg.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Εισιτήρια εισόδων που δεν αναφέρονται στα περιλαμβάνονται.',
+        'Ποτά κατά τα δείπνα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται προαιρετικό ή προτεινόμενο.'
+      ],
+      importantNotes: [
+        'Το διαβατήριο σας θα πρέπει να έχει ισχύ 6 μήνες μετά την είσοδο σας στο Μαρόκο.',
+        'Για Κυπριακά και Βρετανικά διαβατήρια δεν χρειάζεται έκδοση βίζας.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: moroccoPackage335Program,
+      gallery: [
+        '/images/marocco/maroco-church.webp',
+        '/images/marocco/marroco-town.webp',
+        '/images/marocco/hotels-marrakesh-tangier-casablanca-fes.webp'
+      ]
+    }
+  },
+  {
+    id: 336,
+    title: 'ΑΥΤΟΚΡΑΤΟΡΙΚΟΣ ΓΥΡΟΣ ΜΑΡΟΚΟΥ',
+    destination: 'Morocco',
+    category: 'Autumn Packages',
+    price: 1819,
+    duration: '8 days / 7 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 8 ημερών στον αυτοκρατορικό γύρο του Μαρόκου με έρημο. Καζαμπλάνκα, Ραμπάτ, Μεκνές, Φεζ, Ερφούντ, Ουαρζαζάτ και Μαρακές. Αναχωρήσεις 15/09 και 06/10.',
+    longDescription:
+      'Ένα ολοκληρωμένο ταξίδι 8 ημερών στο αυτοκρατορικό Μαρόκο με έρημο. Από την κοσμοπολίτικη Καζαμπλάνκα και την πρωτεύουσα Ραμπάτ, στην πνευματική Φεζ, την έρημο Ερφούντ, την Ουαρζαζάτ και την ατμοσφαιρική Μαρακές. Περιλαμβάνονται πτήσεις Aegean μέσω Αθήνας, ημιδιατροφή, ξεναγήσεις και διαμονή σε 4★ & 5★ ξενοδοχεία.',
+    image: '🇲🇦',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '15/09, 06/10',
+      departureDates: ['15/09', '06/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Casablanca, Rabat, Meknes, Fes, Erfoud, Ouarzazate, Marrakech – Morocco',
+      monthAvailability: 'September – October',
+      roomType: 'Standard Room',
+      boardBasis: 'Half Board',
+      airline: 'Aegean Airlines',
+      includedLuggage: '1 αποσκευή 23Kg και 1 χειραποσκευή 8Kg.',
+      coverImage: '/images/marocco/maroco-church.webp',
+      thumbnailImage: '/images/marocco/marroco-town.webp',
+      note: 'Ξενοδοχεία: Καζαμπλάνκα GRAND MOGADOR CENTER 5* OR SIMILAR · Φες PALAIS MEDINA 5* OR SIMILAR · Ερφούντ HOTEL KASBAH YASMINA 4* OR SIMILAR · Ουαρζαζάτ KARAM HOTEL 4* OR SIMILAR · Μαρακές KENZI FARAH ROSE GARDEN 5* OR SIMILAR',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '15/09, 06/10',
+          route: 'Larnaca (LCA) → Marrakech (RAK)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '05:00',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '06:45',
+              flight: 'A3 901',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '08:55',
+              toCode: 'RAK',
+              toName: 'Menara',
+              toCity: 'Marrakech, Morocco',
+              arrive: '11:25',
+              flight: 'A3 738',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '22/09, 13/10',
+          route: 'Marrakech (RAK) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'RAK',
+              fromName: 'Menara',
+              fromCity: 'Marrakech, Morocco',
+              depart: '12:25',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '18:30',
+              flight: 'A3 739',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '21:20',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '23:00',
+              flight: 'A3 914',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: moroccoPackage336Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Αθήνα - Μαρρακές - Αθήνα - Λάρνακα με πτήσεις της Aegean Airlines ( Δίνεται η δυνατότητα προαγοράς θέσης με έκπτωση 50% πριν από το άνοιγμα του check-in για όλες τις θέσεις ).',
+        'Φόροι αεροδρομίων.',
+        '7 διανυκτερεύσεις σε ξενοδοχεία 4* και 5* με ημιδιατροφή.',
+        'Τοπικοί Αγγλόφωνοι ξεναγοί.',
+        'Ελληνόφωνας αρχηγός/Συνοδός.',
+        'Μεταφορές, εκδρομές και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        'Εισιτήρια εισόδου στη Σχολή Μπου Ανάνια, Κήπους Μαζορέλ, στο Παλάτι Μπαχία και στούντιο Ατλας.',
+        '1 αποσκευή 23Kg και 1 χειραποσκευή 8Kg.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Εισιτήρια εισόδων που δεν αναφέρονται στα περιλαμβάνονται.',
+        'Ποτά κατά τα δείπνα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται προαιρετικό ή προτεινόμενο.'
+      ],
+      importantNotes: [
+        'Το διαβατήριο σας θα πρέπει να έχει ισχύ 6 μήνες μετά την είσοδο σας στο Μαρόκο.',
+        'Για Κυπριακά και Βρετανικά διαβατήρια δεν χρειάζεται έκδοση βίζας.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: moroccoPackage336Program,
+      gallery: [
+        '/images/marocco/maroco-church.webp',
+        '/images/marocco/marroco-town.webp',
+        '/images/marocco/marrakesh.webp'
+      ]
+    }
+  },
+  {
+    id: 337,
+    title: 'ΧΡΥΣΟ ΤΡΙΓΩΝΟ ΙΝΔΙΑΣ',
+    destination: 'India',
+    category: 'Autumn Packages',
+    price: 1869,
+    duration: '9 days / 6 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 9 ημερών στο Χρυσό Τρίγωνο της Ινδίας: Δελχί, Άγκρα και Τζαϊπούρ. Ταζ Μαχάλ, παλάτια Μαχαραγιάδων και ιστορικά μνημεία με διαμονή σε 5★ ξενοδοχεία. Αναχωρήσεις 17/09 και 18/10.',
+    longDescription:
+      'Ένα μοναδικό ταξίδι 9 ημερών στο Χρυσό Τρίγωνο της Ινδίας. Από το Δελχί στην Άγκρα για το θρυλικό Ταζ Μαχάλ, και στη «Ροζ Πόλη» Τζαϊπούρ με τα παλάτια των Μαχαραγιάδων. Περιλαμβάνονται πτήσεις Emirates μέσω Ντουμπάι, ξεναγήσεις και διαμονή σε 5★ ξενοδοχεία.',
+    image: '🇮🇳',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '17/09, 18/10',
+      departureDates: ['17/09', '18/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Delhi, Agra, Jaipur – India',
+      monthAvailability: 'September – October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates Airlines',
+      includedLuggage: 'Μία αποσκευή 30 κιλών και 1 χειραποσκευή 7 κιλών.',
+      coverImage: '/images/India/India-hero.webp',
+      thumbnailImage: '/images/India/India-elephant.webp',
+      note: 'Ξενοδοχεία: AGRA - GRAND MERCURE 5* Ή ΠΑΡΟΜΟΙΟ · JAIPUR - RADISSON CITY CENTER 5* Ή ΠΑΡΟΜΟΙΟ · DELHI - CROWNE PLAZA 5* Ή ΠΑΡΟΜΟΙΟ',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '17/09, 18/10',
+          route: 'Larnaca (LCA) → Delhi (DEL)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '03:55',
+              toCode: 'DEL',
+              toName: 'Indira Gandhi Intl',
+              toCity: 'Delhi, India',
+              arrive: '09:05',
+              flight: 'EK 510',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '25/09, 26/10',
+          route: 'Delhi (DEL) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'DEL',
+              fromName: 'Indira Gandhi Intl',
+              fromCity: 'Delhi, India',
+              depart: '04:15',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '06:20',
+              flight: 'EK 513',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '08:00',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '11:10',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: indiaPackage337Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Νέο Δελχί - Λάρνακα μέσω Ντουμπάι με πτήσεις της Emirates Airlines.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        '6 διανυκτερεύσεις σε ξενοδοχεία 5* με πρόγευμα.',
+        '7 δείπνα όπως αναφέρονται στο πρόγραμμα.',
+        'Μεταφορές, εκδρομές και ξεναγήσεις όπως αναφέρονται στο πρόγραμμα.',
+        'Είσοδοι στα διάφορα αξιοθέατα όπως αναφέρονται στο πρόγραμμα.',
+        'Βόλτα με παραδοσιακά τρίκυκλα (ρίκσο).',
+        'Ανάβαση με ελέφαντες στο φρούριο Αμπέρ και στην Τζαϊπούρ (ανάλογα με την διαθεσιμότητα των ελεφάντων).',
+        'Έμπειρος τοπικός αγγλόφωνος ξεναγός.',
+        'Έμπειρος ελληνόφωνος Αρχηγός / Συνοδός.',
+        'Μία αποσκευή 30 κιλών και 1 χειραποσκευή 7 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ποτά στα φαγητά.',
+        'Έξοδα για έκδοση Βίζα Ινδίας.',
+        'Ότι δεν αναφέρεται στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      importantNotes: [
+        'Τα διαβατήρια σας πρέπει να έχουν ισχύ 6 μήνες μετά το ταξίδι.',
+        'Η διαδικασία έκδοσης βίζας γίνεται υποχρεωτικά από τον κάθε ταξιδιώτη μέσω διαδικτύου. Για περισσότερες πληροφορίες επισκεφθείτε την ιστοσελίδα www.indianvisaonline.gov.in (Τα διαβατήρια σας πρέπει να έχουν ισχύ 6 μήνες μετά το ταξίδι).'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: indiaPackage337Program,
+      gallery: [
+        '/images/India/India-hero.webp',
+        '/images/India/India-elephant.webp',
+        '/images/India/India-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 338,
+    title: 'ΣΡΙ ΛΑΝΚΑ / ΤΟ ΜΑΡΓΑΡΙΤΑΡΙ ΤΟΥ ΙΝΔΙΚΟΥ',
+    destination: 'Sri Lanka',
+    category: 'Autumn Packages',
+    price: 2175,
+    duration: '10 days / 8 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 10 ημερών στη Σρι Λάνκα: Κολόμπο, Κάντυ, Νταμπούλα, Σιγκιρίγια, Νουβάρα Ελίγια, τρένο Έλλα, σαφάρι Γιάλα και Γκάλε. Διαμονή σε 4* & 5* ξενοδοχεία. Αναχωρήσεις 13/08 και 15/10.',
+    longDescription:
+      'Ανακαλύψτε το «μαργαριτάρι του Ινδικού» με πτήσεις Emirates μέσω Ντουμπάι: Ορφανοτροφείο Ελεφάντων Πιναβέλα, ιεροί ναοί της Κάντυ, σπήλαια Νταμπούλα, Βράχος του Λιονταριού, ορεινή διαδρομή με τρένο, σαφάρι στο Εθνικό Πάρκο Γιάλα, το φρούριο της Γκάλε και ξενάγηση στο Κολόμπο. Ξενοδοχεία: The Golden Crown 5* (Κάντυ), Hilton DoubleTree 4* (Τισαμαχαράμα), Grandbell 4* (Κολόμπο).',
+    image: '🇱🇰',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '13/08, 15/10',
+      departureDates: ['13/08', '15/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Colombo, Kandy, Tissamaharama, Sri Lanka',
+      monthAvailability: 'August, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage: 'Μια αποσκευή 30κιλών και μια χειραποσκευή 7κιλών με Emirates.',
+      coverImage: '/images/sri-lanka-package/sri-lanka-cover.webp',
+      thumbnailImage: '/images/sri-lanka-package/sri-lanka-thumb.webp',
+      note: 'Ξενοδοχεία: KANDY - THE GOLDEN CROWN 5* Ή ΠΑΡΟΜΟΙΟ · THISSA - HILTON DOUBLE TREE 4* OR SIMILAR · COLOMBO - GRANDBELL 4* Ή ΠΑΡΟΜΟΙΟ',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/08, 15/10',
+          route: 'Larnaca (LCA) → Colombo (CMB)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '02:40',
+              toCode: 'CMB',
+              toName: 'Bandaranayike Intl',
+              toCity: 'Colombo, Sri lanka',
+              arrive: '08:35',
+              flight: 'EK 650',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '22/08, 24/10',
+          route: 'Colombo (CMB) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'CMB',
+              fromName: 'Bandaranayike Intl',
+              fromCity: 'Colombo, Sri lanka',
+              depart: '02:55',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '05:50',
+              flight: 'EK 649',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '07:55',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '11:00',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: sriLankaPackage338Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Κολόμπο - Λάρνακα μέσω Ντουμπάι με Emirates.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για 8 βράδια σε ξενοδοχεία 5* και 4* με πρόγευμα.',
+        'Οκτώ δείπνα όπως αναφέρονται στο πρόγραμμα.',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα, με πολυτελή κλιματιζόμενα πούλμαν.',
+        'Βαρκάδα στο ποταμό Μαντού.',
+        'Εισιτήριο τρένου παραδοσιακό.',
+        'Εισιτήρια εισόδων στους χώρους των επισκέψεων.',
+        'Τοπικοί Αγγλόφωνοι ξεναγοί.',
+        'Έμπειρος Ελληνόφωνος αρχηγός/συνοδός από Κύπρο.',
+        'Μια αποσκευή 30κιλών και μια χειραποσκευή 7κιλών με Emirates.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Έξοδα έκδοσης Βίζας.',
+        'Ποτά κατά τα δείπνα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται προαιρετικό ή προτεινόμενο.'
+      ],
+      importantNotes: [
+        'Για έκδοση βίζας η διαδικασία έκδοσης γίνεται μέσω του διαδικτύου.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: sriLankaPackage338Program,
+      gallery: [
+        '/images/sri-lanka-package/sri-lanka-cover.webp',
+        '/images/sri-lanka-package/sri-lanka-thumb.webp',
+        '/images/sri-lanka-package/sri-lanka-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 339,
+    title: 'ΜΠΑΝΓΚΟΚ / ΠΟΥΚΕΤ / ΝΗΣΙ JAMES BOND',
+    destination: 'Thailand',
+    category: 'Autumn Packages',
+    price: 2299,
+    duration: '10 days / 7 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 10 ημερών στην Ταϊλάνδη: Πουκέτ, κρουαζιέρα στο νησί James Bond και Μπανγκόκ. Διαμονή σε ξενοδοχεία 4*. Αναχωρήσεις 20/07, 10/08, 17/08, 14/09 και 19/10.',
+    longDescription:
+      'Μια ολοκληρωμένη περιήγηση στο Πουκέτ και την Μπανγκόκ με Emirates μέσω Ντουμπάι: τροπικές παραλίες, ζούγκλα, bamboo rafting, κρουαζιέρα στο νησί James Bond, βουδιστικοί ναοί και Chinatown. Διανυκτερεύσεις: Πουκέτ (5), Μπανγκόκ (2). Ξενοδοχεία: Hilton Garden Inn Silom 4* (Μπανγκόκ), Duanjitt Resort 4* (Πουκέτ) ή παρόμοιο.',
+    image: '🇹🇭',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '20/07, 10/08, 17/08, 14/09, 19/10',
+      departureDates: ['20/07', '10/08', '17/08', '14/09', '19/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Phuket, Bangkok, James Bond Island, Thailand',
+      monthAvailability: 'July, August, September, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage:
+        'Μια αποσκευή 30 κιλών και μία χειραποσκευή 7 κιλών για τις πτήσεις της Emirates και για την εσωτερική πτήση μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών.',
+      coverImage: '/images/thailand/thailand-jame-bond.webp',
+      thumbnailImage: '/images/thailand/thailand-jame-bond.webp',
+      note: 'Διανυκτερεύσεις: Πουκέτ (5), Μπανγκόκ (2) · BANGKOK - HILTON GARDEN INN SILOM 4* Ή ΠΑΡΟΜΟΙΟ · PHUKET - DUANJITT RESORT 4* Ή ΠΑΡΟΜΟΙΟ',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '20/07, 10/08, 17/08, 14/09, 19/10',
+          route: 'Larnaca (LCA) → Phuket (HKT)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '02:30',
+              toCode: 'HKT',
+              toName: 'Phuket Intl',
+              toCity: 'Phuket, Thailand',
+              arrive: '12:00',
+              flight: 'EK 378',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Domestic',
+          date: '20/07, 10/08, 17/08, 14/09, 19/10',
+          route: 'Phuket (HKT) → Bangkok (BKK)',
+          flight: 'TBA',
+          time: 'TBA',
+          luggage: '1 checked bag 23kg'
+        },
+        {
+          direction: 'Return',
+          date: '29/07, 19/08, 26/08, 23/09, 28/10',
+          route: 'Bangkok (BKK) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'BKK',
+              fromName: 'Suvarnabhumi Intl',
+              fromCity: 'Bangkok, Thailand',
+              depart: '03:40',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '06:50',
+              flight: 'EK 371',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '08:00',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '11:10',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: bangkokPhuketPackage339Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Ντουμπάι– Πουκέτ και Μπαγκόκ – Ντουμπάι – Λάρνακα με Emirates Airlines.',
+        'Αεροπορικό εισιτήριο Πουκέτ - Μπανγκόκ.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές και περιηγήσεις όπως αναφέρονται στο πρόγραμμα.',
+        '2 γεύματα όπως αναγράφονται στο πρόγραμμα.',
+        'Βόλτα με παραδοσιακές σχεδίες από μπαμπού.',
+        'Κρουαζιέρα στο νησί του James Bond.',
+        'Τοπικός αγγλόφωνος ξεναγός στις εκδρομές.',
+        'Ελληνόφωνος συνοδός του γραφείου μας από Κύπρο.',
+        'Εισιτήρια εισόδων όπου χρειάζεται.',
+        'Μια αποσκευή 30 κιλών και μία χειραποσκευή 7 κιλών για τις πτήσεις της Emirates και για την εσωτερική πτήση μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.',
+        'Προαιρετικά: Κρουαζιέρα στα νησιά Πι Πι με γεύμα – 70 ευρώ το άτομο.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 100 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 100.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: bangkokPhuketPackage339Program,
+      gallery: [
+        '/images/thailand/thailand-jame-bond.webp',
+        '/images/thailand/thailand-cover.webp',
+        '/images/thailand/thailand-hotel-boat.webp',
+        '/images/thailand/thailand-boat.webp'
+      ]
+    }
+  },
+  {
+    id: 340,
+    title: 'ΜΠΑΛΙ',
+    destination: 'Indonesia',
+    category: 'Autumn Packages',
+    price: 2855,
+    duration: '10 days / 7 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 10 ημερών στο Μπαλί: Seminyak, ναοί Tanah Lot & Ulun Danu, Ουμπούντ, Δάσος των Πιθήκων και ρυζοκαλλιέργειες Τεγκαλαλάνγκ. Διαμονή σε ξενοδοχεία 5*. Αναχώρηση 18/08.',
+    longDescription:
+      'Ανακαλύψτε το «Νησί των Θεών» με Emirates μέσω Ντουμπάι: 4 νύχτες στο Μπαλί (Montigo Resorts Seminyak 5*) και 3 νύχτες στο Ουμπούντ (Sthala Tribute Portfolio 5*). Ναοί, τέχνες, ορυζώνες και πνευματική χαλάρωση.',
+    image: '🇮🇩',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '18/08',
+      departureDates: ['18/08'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Bali, Ubud, Indonesia',
+      monthAvailability: 'August',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage: 'Μία αποσκευή 30 κιλών και μία χειραποσκευή 7 κιλών.',
+      coverImage: '/images/bali/bali-hero.webp',
+      thumbnailImage: '/images/bali/bali-rocks.webp',
+      note: 'Διανυκτερεύσεις: Μπαλί (4), Ουμπούντ (3) · BALI - Montigo Resorts Seminyak 5* Ή ΠΑΡΟΜΟΙΟ · UBUD - Sthala, a Tribute Portfolio Hotel OR SIMILAR',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '18/08',
+          route: 'Larnaca (LCA) → Denpasar Bali (DPS)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:25',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '00:50',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '03:10',
+              toCode: 'DPS',
+              toName: 'Ngurah Rai',
+              toCity: 'Denpasar Bali, Indonesia',
+              arrive: '16:35',
+              flight: 'EK 368',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '27/08',
+          route: 'Denpasar Bali (DPS) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'DPS',
+              fromName: 'Ngurah Rai',
+              fromCity: 'Denpasar Bali, Indonesia',
+              depart: '00:35',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '05:35',
+              flight: 'EK 399',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '07:55',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '10:40',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: baliPackage340Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Ντουμπάι – Ντενμπανσάρ – Ντουμπάι – Λάρνακα με πτήσεις της Emirates Airlines.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τέσσερα βράδια στο Μπαλί σε ξενοδοχείο 5* με πρόγευμα.',
+        'Διαμονή για τρία βράδια στο Ουμπούντ σε ξενοδοχείο 5* με πρόγευμα.',
+        'Δύο γεύματα όπως αναφέρονται στο πρόγραμμα.',
+        'Μεταφορές, εκδρομές και ξεναγήσεις όπως αναφέρονται στο πρόγραμμα.',
+        'Τοπικοί αγγλόφωνοι ξεναγοί.',
+        'Τουριστικός φόρος Μπαλί.',
+        'Εισιτήρια εισόδων στους χώρους επισκέψεων.',
+        'Μία αποσκευή 30 κιλών και μία χειραποσκευή 7 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ποτά στα γεύματα.',
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Έκδοση βίζας κατά την άφιξη ($30 περίπου).',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: baliPackage340Program,
+      gallery: [
+        '/images/bali/bali-hero.webp',
+        '/images/bali/bali-rocks.webp',
+        '/images/bali/bali-hotel.webp',
+        '/images/bali/bali-town.webp'
+      ]
+    }
+  },
+  {
+    id: 341,
+    title: 'ΠΑΝΟΡΑΜΑ ΒΙΕΤΝΑΜ',
+    destination: 'Vietnam',
+    category: 'Autumn Packages',
+    price: 3159,
+    duration: '11 days / 8 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 11 ημερών στο Βιετνάμ: Ανόι, κρουαζιέρα Halong Bay, Χόι Αν, Golden Bridge, Σαϊγκόν, τούνελ Κου Τσι και Δέλτα Μεκόνγκ. Διαμονή σε ξενοδοχεία 4*. Αναχώρηση 13/10.',
+    longDescription:
+      'Ανακαλύψτε το Βιετνάμ από Βορρά προς Νότο με Emirates μέσω Ντουμπάι: 3 νύχτες στο Ανόι, 2 στο Χόι Αν και 3 στη Σαϊγκόν. Ξενοδοχεία: Mercure Hanoi La Gare 4*, Vinh Hung Riverside Resort 4*, Eden Star 4* ή παρόμοιο.',
+    image: '🇻🇳',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '13/10',
+      departureDates: ['13/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Hanoi, Halong Bay, Hoi An, Saigon, Vietnam',
+      monthAvailability: 'October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates',
+      includedLuggage:
+        'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών στις πτήσεις της Emirates και μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών στην εσωτερική πτήση.',
+      coverImage: '/images/thailand/thailand-cover.webp',
+      thumbnailImage: '/images/thailand/thailand-boat.webp',
+      note: 'Διανυκτερεύσεις: Ανόι (3), Χόι Αν (2), Σαϊγκόν (3) · HANOI - MERCURE HANOI LA GARE 4* Ή ΠΑΡΟΜΟΙΟ · HOIAN - VINH HUNG RIVERSIDE RESORT 4* Ή ΠΑΡΟΜΟΙΟ · SAIGON - EDEN STAR 4* Ή ΠΑΡΟΜΟΙΟ · Βίζα Βιετνάμ ηλεκτρονικά (~$25)',
+      importantNotes: [
+        'Η έκδοση βίζας για το Βιετνάμ γίνεται ηλεκτρονικά, στοιχίζει περίπου 25 δολάρια και θα χρειαστεί να ανεβάσετε αντίγραφο του διαβατηρίου σας και μια πρόσφατη φωτογραφία διαβατηρίου.'
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '13/10',
+          route: 'Larnaca (LCA) → Hanoi (HAN)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '03:30',
+              toCode: 'HAN',
+              toName: 'Noibai',
+              toCity: 'Hanoi, Viet nam',
+              arrive: '13:15',
+              flight: 'EK 394',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Domestic',
+          date: '13/10',
+          route: 'Hanoi (HAN) → Da Nang (DAD)',
+          flight: 'TBA',
+          time: 'TBA',
+          luggage: '1 checked bag 23kg'
+        },
+        {
+          direction: 'Domestic',
+          date: '13/10',
+          route: 'Da Nang / Hoi An (DAD) → Saigon / Ho Chi Minh (SGN)',
+          flight: 'TBA',
+          time: 'TBA',
+          luggage: '1 checked bag 23kg'
+        },
+        {
+          direction: 'Return',
+          date: '23/10',
+          route: 'Ho Chi Minh City (SGN) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'SGN',
+              fromName: 'Tan Son Nhat',
+              fromCity: 'Ho Chi Minh City, Viet nam',
+              depart: '23:50',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '03:45',
+              flight: 'EK 393',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '07:55',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '11:00',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: vietnamPackage341Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Ντουμπάι - Ανόι και Σαϊγκόν - Ντουμπάι - Λάρνακα με πτήσεις της Emirates.',
+        'Εσωτερικές πτήσεις Ανόι – Danang και Hoian - Σαϊγκόν.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα καθημερινά.',
+        'Επτά γεύματα / δείπνα όπως αναφέρονται στο πρόγραμμα.',
+        'Ένα γεύμα με θαλασσινά κατά την κρουαζιέρα στο Χα Λονγκ.',
+        'Κρουαζιέρα στον ποταμό Ben Tre.',
+        'Εισιτήριο για τη χρυσή γέφυρα.',
+        'Βόλτα με καραβάκι για το παραδοσιακό χωριό Ταν Χα.',
+        'Μεταφορές, εκδρομές και ξεναγήσεις όπως αναφέρονται στο πρόγραμμα.',
+        'Παράσταση με μαριονέττες του νερού.',
+        'Τοπικοί αγγλόφωνοι ξεναγοί.',
+        'Ελληνόφωνος συνοδός του γραφείου μας.',
+        'Εισιτήρια εισόδων.',
+        'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών στις πτήσεις της Emirates και μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών στην εσωτερική πτήση.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Έξοδα έκδοσης βίζας (Η έκδοση βίζας για το Βιετνάμ γίνεται ηλεκτρονικά, στοιχίζει περίπου 25 δολάρια και θα χρειαστεί να ανεβάσετε αντίγραφο του διαβατηρίου σας και μια πρόσφατη φωτογραφία διαβατηρίου).',
+        'Ποτά στα φαγητά.',
+        'Φιλοδωρήματα και αχθοφορικά.',
+        'Οτιδήποτε δεν αναφέρεται στο πρόγραμμα ή αναφέρεται ως προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: vietnamPackage341Program,
+      gallery: [
+        '/images/thailand/thailand-cover.webp',
+        '/images/thailand/thailand-boat.webp',
+        '/images/thailand/thailand-hotel-boat.webp'
+      ]
+    }
+  },
+  {
+    id: 342,
+    title: 'ΝΕΑ ΥΟΡΚΗ',
+    destination: 'United States',
+    category: 'Autumn Packages',
+    price: 3479,
+    duration: '9 days / 7 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 9 ημερών στη Νέα Υόρκη: Μανχάταν, Central Park, Άγαλμα της Ελευθερίας, Brooklyn Bridge και Times Square. Διαμονή σε ξενοδοχείο 4*. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Ανακαλύψτε το «Μεγάλο Μήλο» με πτήσεις μέσω Αθήνας και Emirates: ξεναγήσεις Βόρειο & Νότιο Μανχάταν, κρουαζιέρα στο Άγαλμα της Ελευθερίας, Chelsea Market, Brooklyn Bridge, Hudson Yards και δώρο το Αμερικανικό Μουσείο Φυσικής Ιστορίας. 7 βράδια σε 4* ξενοδοχείο στη Νέα Υόρκη.',
+    image: '🇺🇸',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '02/08, 13/08, 21/08, 10/10, 23/10',
+      departureDates: ['02/08', '13/08', '21/08', '10/10', '23/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'New York City, United States',
+      monthAvailability: 'August, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Room Only',
+      airline: 'Emirates / Aegean',
+      includedLuggage:
+        'Μία (1) αποσκευή 23 κιλά στην πτήση Λάρνακα – Αθήνα και δύο (2) παραδοτέες αποσκευές κατ’ άτομο, μέχρι 23 κιλά η κάθε μία στις πτήσεις της Emirates.',
+      coverImage: '/images/new-york/new-york-white.webp',
+      thumbnailImage: '/images/new-york/New-york-cover.webp',
+      note: 'Διαθέσιμο σε ζήτηση · 7 βράδια TIMES SQUARE: MARRIOTT MARQUIS 4* ή Shelburne Sonesta 4* χωρίς πρωινό',
+      availabilityNote: 'Διαθέσιμο σε ζήτηση',
+      importantNotes: [
+        'Η προ-επιλογή θέσεων στα γκρουπ δεν είναι πάντα εγγυημένη και στις περισσότερες αεροπορικές εταιρείες υπάρχει επιπλέον κόστος. Γίνεται μετά την έκδοση εισιτηρίων ή στο check in.',
+        'Το πρόγραμμα πραγματοποιείται σε συνεργασία με το γραφείο Manessis στην Αθήνα.',
+        'Οι πτήσεις Λάρνακα – Αθήνα – Λάρνακα που αναγράφονται είναι ενδεικτικές. Πιθανόν να χρησιμοποιηθεί άλλη αεροπορική εταιρεία ή άλλες ώρες. Οι κρατήσεις θα γίνουν ανάλογα με τη διαθεσιμότητα των αεροπορικών γραμμών και των ημερομηνιών.'
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '02/08, 13/08, 21/08, 10/10, 23/10',
+          route: 'Larnaca (LCA) → New York (JFK)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '10:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '12:00',
+              flight: 'A3 903',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '17:35',
+              toCode: 'JFK',
+              toName: 'John F Kennedy',
+              toCity: 'New York, United States',
+              arrive: '21:20',
+              flight: 'EK 209',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '10/08, 21/08, 29/08, 18/10, 31/10',
+          route: 'New York (JFK) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'JFK',
+              fromName: 'John F Kennedy',
+              fromCity: 'New York, United States',
+              depart: '23:55',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '16:05',
+              flight: 'EK 210',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '21:20',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '23:00',
+              flight: 'A3 914',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: newYorkPackage342Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Αθήνα – Λάρνακα.',
+        'Αεροπορικά εισιτήρια με Emirates για Αθήνα – Νέα Υόρκη – Αθήνα.',
+        'Φόροι αεροδρομίων & επίναυλοι.',
+        'Μία (1) αποσκευή 23 κιλά στην πτήση Λάρνακα – Αθήνα και δύο (2) παραδοτέες αποσκευές κατ’ άτομο, μέχρι 23 κιλά η κάθε μία στις πτήσεις της Emirates.',
+        '7 βράδια διαμονή πάνω στην TIMES SQUARE στο πολυτελές MARRIOTT MARQUIS 4* sup. ή στο Shelburne Sonesta 4* χωρίς πρωινό.',
+        'ΔΩΡΕΑΝ Wi-Fi και στα δωμάτια.',
+        'Τοπικοί φόροι Ξενοδοχείων (City taxes).',
+        'Τρεις πολυδιάστατες Ξεναγήσεις με έμπειρους και εξειδικευμένους Ελληνόφωνους ξεναγούς.',
+        'Ελληνόφωνη Ξενάγηση με πούλμαν στο Βόρειο Μανχάταν.',
+        'Ελληνόφωνη Ξενάγηση με πούλμαν στο Νότιο Μανχάταν.',
+        'ΔΩΡΟ: Κρουαζιέρα για φωτογράφηση αγάλματος Ελευθερίας, Νησί Ellis κλπ.',
+        'Βόλτα σε Chelsea Market, γέφυρα του Μπρούκλιν και Hudson Yards.',
+        'ΔΩΡΟ: Επίσκεψη στο Αμερικανικό Μουσείο Φυσικής Ιστορίας (American Museum of Natural History).',
+        'Μεταφορά από και προς αεροδρόμιο/ξενοδοχείο στην Αμερική.',
+        'Έμπειρος Ελληνόφωνος αρχηγός-ξεναγός καθημερινά.',
+        'Αχθοφορικά μιας αποσκευής κατ’ άτομο στα ξενοδοχεία σας & αποθήκευσης την τελευταία μέρα.',
+        'Ασφάλεια αστικής ευθύνης.',
+        'Δικαίωμα συμμέτοχης στις προαιρετικές εκδρομές σε Ουάσιγκτον, Βοστόνη και Εκπτωτικό Χωριό Woodbury Common.'
+      ],
+      notIncluded: [
+        'Τοπικοί φόροι-Αχθοφορικά-Φιλοδωρήματα (ΟΧΙ Ξεναγών/Αρχηγών) υποχρεωτικά $50, πληρωτέα με την άφιξη.',
+        'Κόστος έκδοσης βίζας.',
+        'Ό,τι δεν αναγράφεται στα περιλαμβανόμενα.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωση των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.'
+      ],
+      itinerary: [],
+      program: newYorkPackage342Program,
+      gallery: [
+        '/images/new-york/new-york-white.webp',
+        '/images/new-york/New-york-cover.webp',
+        '/images/new-york/new-york-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 343,
+    title: 'ΑΝΑΤΟΛΙΚΕΣ ΗΠΑ / ΚΑΝΑΔΑΣ',
+    destination: 'America',
+    category: 'Autumn Packages',
+    price: 4109,
+    duration: '10 days / 8 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 10 ημερών στις Ανατολικές ΗΠΑ και τον Καναδά: Νέα Υόρκη, Καταρράκτες Νιαγάρα, Τορόντο, Ουάσιγκτον DC, Βαλτιμόρη και Φιλαδέλφεια. Αναχωρήσεις 31/07, 08/08, 21/08, 25/09 και 10/10.',
+    longDescription:
+      'Μια ολοκληρωμένη περιήγηση με Aegean & Emirates μέσω Αθήνας: ξεναγήσεις στο Μανχάταν, κρουαζιέρα στο Άγαλμα της Ελευθερίας, Καταρράκτες Νιαγάρα με Maid of the Mist, Τορόντο, Ουάσιγκτον DC, Βαλτιμόρη και Φιλαδέλφεια. 8 νύχτες σε ξενοδοχεία 4* (χωρίς πρωινό).',
+    image: '🇺🇸🇨🇦',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '31/07, 08/08, 21/08, 25/09, 10/10',
+      departureDates: ['31/07', '08/08', '21/08', '25/09', '10/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'New York, Niagara Falls, Toronto, Washington DC, Baltimore, Philadelphia – USA & Canada',
+      monthAvailability: 'July, August, September, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Room Only',
+      airline: 'Aegean Airlines & Emirates',
+      includedLuggage:
+        'Μία (1) αποσκευή 23 κιλά στην πτήση Λάρνακα – Αθήνα και δύο (2) παραδοτέες αποσκευές κατ’ άτομο, μέχρι 23 κιλά η κάθε μία στις πτήσεις της Emirates.',
+      coverImage: '/images/destinations/usa.webp',
+      thumbnailImage: '/images/new-york/New-york-cover.webp',
+      note: 'Διαμονή 8 νύχτες σε ξενοδοχεία 4* χωρίς πρωινό · Συνεργασία με Manessis Αθήνα · Πτήσεις Λάρνακα–Αθήνα ενδεικτικές',
+      importantNotes: [
+        'Η προ-επιλογή θέσεων στα γκρουπ δεν είναι πάντα εγγυημένη και στις περισσότερες αεροπορικές εταιρείες υπάρχει επιπλέον κόστος. Γίνεται μετά την έκδοση εισιτηρίων ή στο check in.',
+        'Το πρόγραμμα πραγματοποιείται σε συνεργασία με το γραφείο Manessis στην Αθήνα.',
+        'Οι πτήσεις Λάρνακα – Αθήνα – Λάρνακα που αναγράφονται είναι ενδεικτικές. Πιθανόν να χρησιμοποιηθεί άλλη αεροπορική εταιρεία ή άλλες ώρες. Οι κρατήσεις θα γίνουν ανάλογα με τη διαθεσιμότητα των αεροπορικών γραμμών και των ημερομηνιών.'
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '31/07, 08/08, 21/08, 25/09, 10/10',
+          route: 'Larnaca (LCA) → New York (JFK)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '10:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '12:00',
+              flight: 'A3 903',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '17:35',
+              toCode: 'JFK',
+              toName: 'John F Kennedy',
+              toCity: 'New York, United States',
+              arrive: '21:20',
+              flight: 'EK 209',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '09/08, 17/08, 30/08, 04/10, 19/10',
+          route: 'New York (JFK) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'JFK',
+              fromName: 'John F Kennedy',
+              fromCity: 'New York, United States',
+              depart: '23:55',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '16:05',
+              flight: 'EK 210',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '21:20',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '23:00',
+              flight: 'A3 914',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: easternUsaCanadaPackage343Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Αθήνα – Λάρνακα.',
+        'Αεροπορικά εισιτήρια με Emirates από Αθήνα για Νέα Υόρκη.',
+        'Μία (1) αποσκευή 23 κιλά στην πτήση Λάρνακα – Αθήνα και δύο (2) παραδοτέες αποσκευές κατ’ άτομο, μέχρι 23 κιλά η κάθε μία στις πτήσεις της Emirates.',
+        'Φόροι αεροδρομίων και επίναυλοι καυσίμων.',
+        'Διαμονή 8-νύχτες σε Ξενοδοχεία 4* χωρίς πρωινό.',
+        'Τοπικοί φόροι Ξενοδοχείων (City taxes).',
+        'Τρεις πολυδιάστατες Ξεναγήσεις στην Νέα Υόρκη με έμπειρους και εξειδικευμένους Ελληνόφωνους ξεναγούς.',
+        'Ελληνόφωνη Ξενάγηση με πούλμαν στο Βόρειο Μανχάταν.',
+        'Ελληνόφωνη Ξενάγηση με πούλμαν στο Νότιο Μανχάταν.',
+        'ΔΩΡΟ: Κρουαζιέρα για φωτογράφηση αγάλματος Ελευθερίας, Νησί Ellis κλπ.',
+        'Βόλτα σε Chelsea Market, γέφυρα του Μπρούκλιν και Hudson Yards.',
+        'Ξενάγηση στο Τορόντο.',
+        'Ξενάγηση στους Καταρράκτες του Νιαγάρα και ΔΩΡΟ: Κρουαζιέρα «Maid of the Mist».',
+        'Ξενάγηση στην Ουάσιγκτον DC.',
+        'Επίσκεψη στην Βαλτιμόρη.',
+        'Έμπειρος Ελληνόφωνος αρχηγός-ξεναγός καθημερινά.',
+        'Ειδική ατομική ταξιδιωτική ασφάλιση & Covid-19.',
+        'Ταξιδιωτικός φάκελος με χρήσιμες πληροφορίες.',
+        'Ασφάλεια αστικής ευθύνης.'
+      ],
+      notIncluded: [
+        'Ό,τι δεν αναγράφεται στα περιλαμβανόμενα.',
+        'Κόστος έκδοσης βίζας.',
+        'Φιλοδωρήματα, Αχθοφορικά, Τοπικοί φόροι (ΟΧΙ Ξεναγών/Αρχηγών) $125.'
+      ],
+      cancellationPolicy:
+        'Πολιτική ακύρωσης\n\nΣε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\n\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωση των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.'
+      ],
+      itinerary: [],
+      program: easternUsaCanadaPackage343Program,
+      gallery: [
+        '/images/destinations/usa.webp',
+        '/images/new-york/new-york-white.webp',
+        '/images/new-york/new-york-waterfall.webp',
+        '/images/new-york/New-york-cover.webp'
+      ]
+    }
+  },
+  {
+    id: 344,
+    title: 'ΠΕΡΟΥ / ΣΤΑ ΜΟΝΟΠΑΤΙΑ ΤΩΝ ΙΝΚΑΣ',
+    destination: 'Peru',
+    category: 'Autumn Packages',
+    price: 4845,
+    duration: '13 days / 10 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 13 ημερών στο Περού: Λίμα, Ιερή Κοιλάδα, Μάτσου Πίτσου, Κούσκο, Λίμνη Πιουράι και Βουνό του Ουράνιου Τόξου. Αναχώρηση 11/09.',
+    longDescription:
+      'Ένα ολοκληρωμένο ταξίδι 13 ημερών στα μονοπάτια των Ίνκας. Διανυκτερεύσεις στη Λίμα (4), Ιερή Κοιλάδα (3) και Κούσκο (3). Πτήσεις μέσω Αθήνας και Μαδρίτης, ξεναγήσεις, είσοδοι και διαμονή σε 4★ ξενοδοχεία με πρόγευμα.',
+    image: '🇵🇪',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '11/09',
+      departureDates: ['11/09'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Lima, Sacred Valley, Cusco, Machu Picchu – Peru',
+      monthAvailability: 'September',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines, Iberia Airlines & Latam Airways',
+      includedLuggage: '1 αποσκευή 23 κιλών και 1 χειραποσκευή 7 κιλών',
+      coverImage: '/images/Peru/peru-cover.webp',
+      thumbnailImage: '/images/Peru/peru-hero.webp',
+      note: 'Διανυκτερεύσεις: Λίμα (4), Ιερή Κοιλάδα (3), Κούσκο (3) · Holiday Inn Lima / Sonesta Posada Yucay / Jose Antonio Cusco ή παρόμοιο',
+      importantNotes: [
+        'Στην Αθήνα θα πρέπει να παραλάβετε αποσκευές και να περάσετε ξανά το check in και τον έλεγχο διαβατηρίων.'
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '11/09',
+          route: 'Larnaca (LCA) → Lima (LIM)',
+          stops: 'Athens (ATH), Madrid (MAD)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '10:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '12:00',
+              flight: 'A3 903',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '16:00',
+              toCode: 'MAD',
+              toName: 'Barajas',
+              toCity: 'Madrid, Spain',
+              arrive: '18:55',
+              flight: 'IB 834',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'MAD',
+              fromName: 'Barajas',
+              fromCity: 'Madrid, Spain',
+              depart: '23:59',
+              toCode: 'LIM',
+              toName: 'J Chavez Intl',
+              toCity: 'Lima, Peru',
+              arrive: '05:25',
+              flight: 'IB 123',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        },
+        {
+          direction: 'Domestic',
+          date: 'TBA',
+          route: 'Lima (LIM) ↔ Cusco (CUZ)',
+          flight: 'Latam Airways',
+          time: 'TBA',
+          luggage: 'Σύμφωνα με αεροπορική εταιρεία'
+        },
+        {
+          direction: 'Return',
+          date: '23/09',
+          route: 'Lima (LIM) → Larnaca (LCA)',
+          stops: 'Madrid (MAD), Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LIM',
+              fromName: 'J Chavez Intl',
+              fromCity: 'Lima, Peru',
+              depart: '11:00',
+              toCode: 'MAD',
+              toName: 'Barajas',
+              toCity: 'Madrid, Spain',
+              arrive: '05:40',
+              flight: 'IB 124',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'MAD',
+              fromName: 'Barajas',
+              fromCity: 'Madrid, Spain',
+              depart: '10:30',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '15:15',
+              flight: 'IB 833',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '18:30',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '20:05',
+              flight: 'A3 908',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: peruPackage344Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Αθήνα – Λάρνακα με Aegean Airlines.',
+        'Αεροπορικά εισιτήρια Αθήνα – Μαδρίτη – Λίμα – Μαδρίτη – Αθήνα με την Iberia Airlines.',
+        'Εσωτερικές πτήσεις Lima- Cusco - Lima με την Latam Airways.',
+        'Μεταφορές εκδρομές και ξεναγήσεις σύμφωνα με το πρόγραμμα.',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα.',
+        'Early check in στην άφιξη.',
+        'Όλα τα γεύματα που αναφέρονται στο πρόγραμμα.',
+        'Εισιτήρια εισόδων σε Μουσεία και Αρχαιολογικούς Χώρους σύμφωνα με το πρόγραμμα.',
+        'Έμπειρος αγγλόφωνος ξεναγός καθ’ όλη την διάρκεια της εκδρομής.',
+        'Εισιτήρια τρένου μετ\' επιστροφής για Μάτσου Πίτσου (κατηγορία VISTADOME).',
+        'Τοπικοί φόροι.',
+        '1 αποσκευή βάρους 23 κιλών και 1 χειραποσκευή βάρους 7 κιλών.'
+      ],
+      notIncluded: [
+        'Ποτά κατά τη διάρκεια των γευμάτων.',
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ 44 και 31 μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ 30 και 21 μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: peruPackage344Program,
+      gallery: [
+        '/images/Peru/peru-cover.webp',
+        '/images/Peru/peru-hero.webp',
+        '/images/Peru/peru-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 345,
+    title: 'ΙΑΠΩΝΙΑ',
+    destination: 'Japan',
+    category: 'Autumn Packages',
+    price: 4945,
+    duration: '12 days / 9 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 12 ημερών στην Ιαπωνία: Οσάκα, Κιότο, Νάρα, Ματσουμότο, Όρος Φούτζι, Τόκιο και Νίκκο. Διαμονή σε ξενοδοχεία 4* με πρόγευμα. Αναχώρηση 14/10.',
+    longDescription:
+      'Ένα ολοκληρωμένο ταξίδι 12 ημερών με Emirates μέσω Ντουμπάι. Διανυκτερεύσεις: Οσάκα (1), Κιότο (3), Ματσουμότο (1), Τόκιο (4). Ξενοδοχεία: Karaksa Shin Osaka, Miyako Kyoto Hachijo, Buena Vista Matsumoto, Metropolitan Ikebukuro ή παρόμοιο. Ξεναγήσεις, είσοδοι, εμπειρία Σούμο, τελεφερίκ και τρένα σύμφωνα με το πρόγραμμα.',
+    image: '🇯🇵',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '14/10',
+      departureDates: ['14/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Osaka, Kyoto, Nara, Matsumoto, Mount Fuji, Tokyo, Nikko – Japan',
+      monthAvailability: 'October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates Airlines',
+      includedLuggage: '1 αποσκευή 30kg + 1 χειραποσκευή 7kg ανά άτομο',
+      coverImage: '/images/Japan/Japan-hero.webp',
+      thumbnailImage: '/images/Japan/japan-cover.webp',
+      note: 'Την 6η μέρα για το ταξίδι σας με τα τρένα θα πρέπει να έχετε μαζί σας μόνο μια μικρή τσάντα με τα απαραίτητα. Οι αποσκευές θα σταλούν στο Τόκυο και θα τις παραλάβετε την 7η μέρα στην άφιξη σας στο ξενοδοχείο.\n\nΔιανυκτερεύσεις: Οσάκα (1), Κιότο (3), Ματσουμότο (1), Τόκιο (4) · OSAKA - KARAKSA HTL SHIN OSAKA 4* · KYOTO - MIYAKO KYOTO HACHIJO 4* · MATSUMOTO - BUENA VISTA 4* · TOKYO - METROPOLITAN IKEBUKURO 4* ή παρόμοιο',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '14/10',
+          route: 'Larnaca (LCA) → Osaka (KIX)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '03:00',
+              toCode: 'KIX',
+              toName: 'Kansai Intl',
+              toCity: 'Osaka, Japan',
+              arrive: '17:15',
+              flight: 'EK 316',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '25/10',
+          route: 'Tokyo (NRT) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'NRT',
+              fromName: 'Narita',
+              fromCity: 'Tokyo, Japan',
+              depart: '22:30',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '04:50',
+              flight: 'EK 319',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '08:00',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '11:10',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: japanPackage345Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Ντουμπάι - Οσάκα - Ντουμπάι - Λάρνακα με Emirates.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για 9 βράδια σε ξενοδοχεία 4* με πρόγευμα.',
+        'Μεταφορές, ξεναγήσεις και εκδρομές όπως αναφέρονται στο πρόγραμμα.',
+        'Είσοδοι στα διάφορα αξιοθέατα όπως αναφέρονται στο πρόγραμμα.',
+        '3 γεύματα σε τοπικά εστιατόρια όπως αναφέρονται στο πρόγραμμα.',
+        'Εμπειρία Σούμο με γεύμα.',
+        'Τοπικοί αγγλόφωνοι ξεναγοί.',
+        'Εισιτήριο τελεφερίκ.',
+        'Εισιτήρια τρένου Κιότο – Ναγκόγια – Ματσουμότο.',
+        'Εισιτήρια τρένου JR super express σε τουριστική θέση από Ματσουμότο - Τόκιο.',
+        'Έμπειρος ελληνόφωνος αρχηγός / συνοδός από Κύπρο.',
+        'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ποτά στα γεύματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: japanPackage345Program,
+      gallery: [
+        '/images/Japan/Japan-hero.webp',
+        '/images/Japan/japan-cover.webp',
+        '/images/Japan/Japan-hotel.webp',
+        '/images/Japan/Japan-building.webp'
+      ]
+    }
+  },
+  {
+    id: 346,
+    title: 'ΝΟΤΙΑ ΑΦΡΙΚΗ',
+    destination: 'South Africa',
+    category: 'Autumn Packages',
+    price: 4655,
+    duration: '12 days / 9 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 12 ημερών στη Νότια Αφρική: Γιοχάνεσμπουργκ, Σαν Σίτυ, σαφάρι στο Pilansberg και Κέιπ Τάουν με Table Mountain και Winelands. Διαμονή σε ξενοδοχεία 4* & 5*. Αναχωρήσεις 10/08 και 12/10.',
+    longDescription:
+      'Ένα ολοκληρωμένο ταξίδι 12 ημερών με Emirates μέσω Ντουμπάι. Διανυκτερεύσεις: Γιοχάνεσμπουργκ (2), Σαν Σίτυ (2), Pilansberg (2), Κέιπ Τάουν (3). Ξενοδοχεία: DaVinci 5*, Sun City Hotel, Bakubung Bush Lodge, The Commodore ή παρόμοιο. Σαφάρι, Lesedi, Cape Point και Winelands.',
+    image: '🇿🇦',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '10/08, 12/10',
+      departureDates: ['10/08', '12/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Johannesburg, Sun City, Pilansberg Game Reserve, Cape Town – South Africa',
+      monthAvailability: 'August, October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates Airlines',
+      includedLuggage:
+        'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών · Μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών για την εσωτερική πτήση',
+      coverImage: '/images/south-africa/south-africa-hero.webp',
+      thumbnailImage: '/images/south-africa/south-africa-giraffe.webp',
+      note: 'Διανυκτερεύσεις: Γιοχάνεσμπουργκ (2), Σαν Σίτυ (2), Εθνικό Πάρκο Pilansberg (2), Κέιπ Τάουν (3) · DAVINCI Hotel and Suites 5* · Sun City Hotel · Bakubung Bush Lodge · The Commodore Hotel ή παρόμοιο',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '10/08, 12/10',
+          route: 'Larnaca (LCA) → Johannesburg (JNB)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '04:05',
+              toCode: 'JNB',
+              toName: 'O.R. Tambo Intl',
+              toCity: 'Johannesburg, South africa',
+              arrive: '10:15',
+              flight: 'EK 761',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Domestic',
+          date: 'TBA',
+          route: 'Johannesburg (JNB) → Cape Town (CPT)',
+          flight: 'Internal',
+          time: 'TBA',
+          luggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών'
+        },
+        {
+          direction: 'Return',
+          date: '21/08, 23/10',
+          route: 'Cape Town (CPT) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'CPT',
+              fromName: 'Cape Town Intl',
+              fromCity: 'Cape Town, South africa',
+              depart: '18:25',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '05:50',
+              flight: 'EK 771',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '07:55',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '11:00',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: southAfricaPackage346Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Ντουμπάι - Γιοχάνεσμπουργκ και Κέιπ Τάουν - Ντουμπάι - Λάρνακα με πτήσεις της Emirates.',
+        'Εσωτερική πτήση Γιοχάνεσμπουργκ - Κέιπ Τάουν.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε ξενοδοχεία 4* και 5* με πρόγευμα.',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        '3 γεύματα/δείπνα όπως αναφέρονται στο πρόγραμμα.',
+        'Τοπικός ελληνόφωνος ξεναγός.',
+        'Συνοδός/αρχηγός από Κύπρο.',
+        'Μια αποσκευή 30 κιλών και μια χειραποσκευή 7 κιλών.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 7 κιλών για την εσωτερική πτήση.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωση των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.'
+      ],
+      itinerary: [],
+      program: southAfricaPackage346Program,
+      gallery: [
+        '/images/south-africa/south-africa-hero.webp',
+        '/images/south-africa/south-africa-giraffe.webp',
+        '/images/south-africa/south-africa-leopard.webp',
+        '/images/south-africa/south-africa-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 347,
+    title: 'ΑΥΣΤΡΑΛΙΑ / ΜΙΑ ΗΠΕΙΡΟΣ ΑΠΕΙΡΕΣ ΕΜΠΕΙΡΙΕΣ',
+    destination: 'Australia',
+    category: 'Autumn Packages',
+    price: 5295,
+    duration: '12 days / 9 nights',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 12 ημερών στην Αυστραλία: Μελβούρνη, Great Ocean Road, Phillip Island, Σίδνεϋ, Blue Mountains και κρουαζιέρα φαλαινών. Διαμονή σε ξενοδοχεία 4*. Αναχωρήσεις 17/10 και 05/11.',
+    longDescription:
+      'Ένα ολοκληρωμένο ταξίδι 12 ημερών με Emirates μέσω Ντουμπάι. Διανυκτερεύσεις: Μελβούρνη (4), Σίδνεϋ (5). Ξενοδοχεία: Indigo Melbourne on Flinders και Indigo Sydney Potts Point ή παρόμοιο. Great Ocean Road, Phillip Island, Blue Mountains, νυχτερινή κρουαζιέρα και παρακολούθηση φαλαινών.',
+    image: '🇦🇺',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '17/10, 05/11',
+      departureDates: ['17/10', '05/11'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Melbourne, Great Ocean Road, Phillip Island, Sydney, Blue Mountains – Australia',
+      monthAvailability: 'October, November',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Emirates Airlines',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+      coverImage: '/images/Australia/australia-hero.webp',
+      thumbnailImage: '/images/Australia/australia-cover.webp',
+      note: 'Διαβατήριο με τουλάχιστον 6μηνη ισχύ από την ημέρα εξόδου από τη χώρα προορισμού.\nΗλεκτρονική μορφή (έγχρωμο αρχείο pdf) του διαβατηρίου σας, που θα αποστείλετε στο γραφείο μας ένα μήνα τουλάχιστον πριν από την αναχώρηση του ταξιδιού.\n\nΔιανυκτερεύσεις: Μελβούρνη (4), Σίδνεϋ (5) · MELBOURNE - INDIGO MELBOURNE ON FLINDERS OR SIMILAR · SYDNEY - INDIGO SYDNEY POTTS POINT OR SIMILAR',
+      importantNotes: [
+        'Διαβατήριο με τουλάχιστον 6μηνη ισχύ από την ημέρα εξόδου από τη χώρα προορισμού.',
+        'Ηλεκτρονική μορφή (έγχρωμο αρχείο pdf) του διαβατηρίου σας, που θα αποστείλετε στο γραφείο μας ένα μήνα τουλάχιστον πριν από την αναχώρηση του ταξιδιού.'
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '17/10, 05/11',
+          route: 'Larnaca (LCA) → Melbourne (MEL)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '20:10',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '01:05',
+              flight: 'EK 110',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '03:00',
+              toCode: 'MEL',
+              toName: 'Tullamarine',
+              toCity: 'Melbourne, Australia',
+              arrive: '23:20',
+              flight: 'EK 408',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        },
+        {
+          direction: 'Domestic',
+          date: 'TBA',
+          route: 'Melbourne (MEL) → Sydney (SYD)',
+          flight: 'Internal',
+          time: 'TBA',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '28/10, 16/11',
+          route: 'Sydney (SYD) → Larnaca (LCA)',
+          stops: 'Dubai (DXB)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'SYD',
+              fromName: 'Kingsford Smith',
+              fromCity: 'Sydney, Australia',
+              depart: '21:45',
+              toCode: 'DXB',
+              toName: 'Dubai Intl',
+              toCity: 'Dubai, United Arab Emirates',
+              arrive: '05:15',
+              flight: 'EK 413',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'DXB',
+              fromName: 'Dubai Intl',
+              fromCity: 'Dubai, United Arab Emirates',
+              depart: '07:35',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '09:40',
+              flight: 'EK 109',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: australiaPackage347Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Ντουμπάι – Μελβούρνη και Σύδνεϋ – Ντουμπάι - Λάρνακα με πτήσεις της Emirates Airlines.',
+        'Αεροπορικό εισιτήριο Μελβούρνη – Σύδνεϋ.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε ξενοδοχεία 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο αναλυτικό πρόγραμμα.',
+        'Εισιτήριο κρουαζιέρας με δείπνο.',
+        'Γεύμα στα Μπλε Βουνά με ένα ποτό.',
+        'Εισιτήρια εισόδων για το Σπίτι του Καπετάνιου Κουκ, Maru Wildlife Park, Παρέλαση Πιγκουίνων, Featherdale Wildlife Park.',
+        'Εισιτήριο με φέρι από Paramatta για Circular Quay.',
+        'Κρουαζιέρα Παρακολούθησης Φαλαινών.',
+        'Αρχηγός / συνοδός του γραφείου μας.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ποτά στα φαγητά.',
+        'Φιλοδωρήματα και αχθοφορικά.',
+        'Οτιδήποτε δεν αναφέρεται στο πρόγραμμα ή αναφέρεται ως προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: australiaPackage347Program,
+      gallery: [
+        '/images/Australia/australia-hero.webp',
+        '/images/Australia/australia-cover.webp',
+        '/images/Australia/australia-hotel.webp',
+        '/images/Australia/australia-opera.webp'
+      ]
+    }
+  },
+  {
+    id: 348,
+    title: 'ΦΩΤΑ ΣΤΗ ΛΑΠΩΝΙΑ ΚΑΙ ΤΟ ΕΛΣΙΝΚΙ',
+    destination: 'Finland',
+    category: 'Christmas Packages',
+    price: 3239,
+    duration: '6 days / 6 nights',
+    description:
+      'Χριστουγεννιάτικο οργανωμένο πακέτο 6 ημερών στη Λαπωνία και το Ελσίνκι: Rovaniemi και Helsinki με διαμονή σε A Category ξενοδοχεία. Διαθέσιμο σε ζήτηση. Αναχώρηση 02/01.',
+    longDescription:
+      'Ζήστε τα φώτα της Λαπωνίας και την ατμόσφαιρα του Ελσίνκι σε ένα πακέτο 6 ημερών: 3 νύχτες στο Ροβανιέμι, 2 στο Ελσίνκι και 1 στην Αθήνα. Snowmobile σαφάρι, χάσκυ, τάρανδοι, χωριό Αϊ Βασίλη, Ranua και ξενάγηση Ελσίνκι. Διαθέσιμο σε ζήτηση.',
+    image: '🇫🇮🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '02/01',
+      departureDates: ['02/01'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Rovaniemi, Helsinki – Finland (Lapland)',
+      monthAvailability: 'January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines & Lufthansa',
+      includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
+      coverImage: '/images/destinations/northern-lights.webp',
+      thumbnailImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      note: 'Διαθέσιμο σε ζήτηση · Διανυκτερεύσεις: Ροβανιέμι (3), Ελσίνκι (2), Αθήνα (1) · Arctic City Hotel / Home Hotel Jugend ή παρόμοιο\n\nΛόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.\nΤα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
+      availabilityNote: 'Διαθέσιμο σε ζήτηση',
+      importantNotes: [
+        'Λόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.',
+        'Τα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.',
+        'Snowmobile: κάθε οδηγός πρέπει να είναι πάνω από 18 ετών και να έχει έγκυρη άδεια οδήγησης μαζί του.',
+        'Στο snowmobile safari παρέχεται απαραίτητος ρουχισμός και εξοπλισμός: ολόσωμη φόρμα, μπότες, μάλλινες κάλτσες, γάντια, κασκόλ, μπαλακλάβα και κράνος.',
+        'Παιδιά έως 12 ετών κάθονται σε έλκηθρο που τραβάει το snowmobile του τοπικού συνοδού.',
+        'Για τα πιο μικρά παιδιά συνιστάται ένας γονέας να κάθεται μαζί τους στο έλκηθρο.',
+        'Παιδιά άνω των 12 ετών και με ύψος πάνω από 140 cm μπορούν να κάθονται ως συνεπιβάτες πίσω από τον γονέα σε snowmobile, πληρώνοντας την τιμή του ενήλικα.',
+        'Στην εκδρομή snowmobile δεν μπορούν να συμμετέχουν παιδιά κάτω των 3 ετών.'
+      ],
+      optionalExcursions: [
+        {
+          title: 'Προαιρετική εκδρομή στο Ταλίν',
+          priceAdult: 160,
+          priceChild: 120,
+          childAgeNote: 'έως 11 ετών',
+          includes:
+            'Εισιτήρια πλοίου Ελσίνκι – Ταλίν – Ελσίνκι, μεταφορές στο Ελσίνκι και το Ταλίν, ξενάγηση στο Ταλίν, γεύμα και δείπνο.'
+        },
+        {
+          title: 'Βραδινή εξόρμηση για το Βόρειο Σέλας',
+          priceAdult: 100,
+          priceChild: 70,
+          childAgeNote: '4 έως 14 ετών',
+          duration: '3 ώρες',
+          description:
+            'Το Βόρειο Σέλας είναι δυνατόν να παρατηρηθεί στην Φινλανδική Λαπωνία. Η θέση στον Αρκτικό Κύκλο δίνει τις μεγαλύτερες πιθανότητες. Ο οδηγός οδηγεί έξω από την πόλη στα καλύτερα σημεία για Φινλανδικό πικνίκ κάτω από τα φώτα του Βόρειου Σέλαος.',
+          includes:
+            'Μεταφορά με λεωφορείο, εκδρομικό γεύμα με λουκάνικα γλυκό, ζεστά ροφήματα και πληροφορίες για το Βόρειο Σέλας από τον τοπικό ξεναγό.'
+        },
+        {
+          title: 'Είσοδος Santa Park',
+          priceAdult: 66,
+          priceChild: 57,
+          childAgeNote: '3 έως 12 ετών · έως 3 ετών ελεύθερη είσοδος',
+          includes: 'Προαιρετική είσοδος · η μεταφορά περιλαμβάνεται στο πακέτο.'
+        }
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '02/01',
+          route: 'Larnaca (LCA) → Rovaniemi (RVN)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '05:00',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '06:45',
+              flight: 'A3 901',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '12:00',
+              toCode: 'RVN',
+              toName: 'Rovaniemi',
+              toCity: 'Rovaniemi, Finland',
+              arrive: '16:40',
+              flight: 'A3 4092',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Domestic',
+          date: '05/01',
+          route: 'Rovaniemi (RVN) → Helsinki (HEL)',
+          flight: 'TBA',
+          time: 'TBA',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '07/01',
+          route: 'Helsinki (HEL) → Larnaca (LCA)',
+          stops: 'Frankfurt (FRA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'HEL',
+              fromName: 'Helsinki Vantaa',
+              fromCity: 'Helsinki, Finland',
+              depart: '07:05',
+              toCode: 'FRA',
+              toName: 'Frankfurt Intl',
+              toCity: 'Frankfurt, Germany',
+              arrive: '08:50',
+              flight: 'LH 4121',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'FRA',
+              fromName: 'Frankfurt Intl',
+              fromCity: 'Frankfurt, Germany',
+              depart: '10:40',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '15:30',
+              flight: 'LH 4570',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: laplandHelsinkiPackage348Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα Αθήνα.',
+        'Αεροπορικό εισιτήριο Αθήνα – Ροβανιέμι απ’ ευθείας και Ελσίνκι – Αθήνα/Λάρνακα μέσω σταθμού.',
+        'Αεροπορικό εισιτήριο Ροβανιέμι - Ελσίνκι.',
+        'Διαμονή στο Ροβανιέμι (3 νύχτες).',
+        'Διαμονή στο Ελσίνκι (2 νύχτες).',
+        'Διαμονή στην Αθήνα (1 νύχτα).',
+        'Χρήση σάουνας σε όλα τα ξενοδοχεία.',
+        'Χρήση πισίνας σε όλα τα ξενοδοχεία (όπου διαθέσιμη).',
+        'Πρωινό μπουφέ καθημερινά.',
+        'Οκτώ δείπνα/γεύματα.',
+        'Γεύμα στο IceRestaurant στο χωριό του Αϊ Βασίλη.',
+        'Μεταφορά και επίσκεψη στο χωριό του Αϊ Βασίλη στο Ροβανιέμι.',
+        'Πιστοποιητικό Αρκτικού Κύκλου.',
+        'Εκδρομή με Snowmobile με ειδικά ρούχα και μπότες.',
+        'Επίσκεψη σε φάρμα ταράνδων και βόλτα με έλκηθρο ταράνδων.',
+        'Επίσκεψη σε φάρμα σκυλιών χάσκι και βόλτα με έλκηθρο χάσκυ.',
+        'Μεταφορές όπως αναφέρονται στο πρόγραμμα.',
+        'Μεταφορά στο Santa Park με προαιρετική είσοδο (66€ ενήλικας, 57€ παιδί 3 έως 12 ετών & παιδί έως 3 ετών ελεύθερη είσοδος).',
+        'Μεταφορά και είσοδος στο Ζωολογικό κήπο της Ranua.',
+        'Ξενάγηση στο Ελσίνκι.',
+        'Ειδικοί τοπικοί αρχηγοί κατά την διάρκεια των δραστηριοτήτων.',
+        'Ελληνόφωνο συνοδό - αρχηγό.',
+        'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά.',
+        'ΔΩΡΟ: Μεταφορά, είσοδος και ξενάγηση στο μουσείο Arktikum.',
+        'ΔΩΡΟ: Είσοδος στο SnowmanWorld στο χωριό του Αϊ Βασίλη.'
+      ],
+      notIncluded: [
+        'Τυχόν είσοδοι σε μουσεία.',
+        'Ό,τι δεν αναφέρεται ρητά στο πρόγραμμα.',
+        'Προαιρετική εκδρομή στο Ταλίν (€160 ενήλικας / €120 παιδί έως 11 ετών).',
+        'Βραδινή εξόρμηση Βόρειο Σέλας (€100 ενήλικας / €70 παιδιά 4–14 ετών).',
+        'Είσοδος Santa Park (€66 ενήλικας / €57 παιδί 3–12 ετών).'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 40% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 40 μέρες πριν την αναχώρηση, παρακράτηση ποσού 100.00 Ευρώ το άτομο για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [39] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: laplandHelsinkiPackage348Program,
+      gallery: [
+        '/images/destinations/northern-lights.webp',
+        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 349,
+    title: 'ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΟ ΛΕΒΙ, ΣΤΟ ΡΟΒΑΝΙΕΜΙ ΚΑΙ ΣΤΟ ΧΩΡΙΟ ΤΟΥ ΑΓΙΟΥ ΒΑΣΙΛΗ',
+    destination: 'Finland',
+    category: 'Christmas Packages',
+    price: 4179,
+    duration: '7 days / 6 nights',
+    description:
+      'Χριστουγεννιάτικο οργανωμένο πακέτο 7 ημερών στο Levi, το Ροβανιέμι και το χωριό του Αγίου Βασίλη. Διαμονή σε A Category ξενοδοχεία. Αναχώρηση 22/12.',
+    longDescription:
+      'Ζήστε τα Χριστούγεννα στη Φινλανδική Λαπωνία: 3 νύχτες στο Levi, 2 στο Ροβανιέμι και 1 στην Αθήνα. Χωριό Αϊ Βασίλη, snowmobile, χάσκυ, τάρανδοι, Snow Village και εορταστικά δείπνα. Charter Αθήνα–Ροβανιέμι.',
+    image: '🇫🇮🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '22/12',
+      departureDates: ['22/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Levi, Rovaniemi, Santa Claus Village – Finland (Lapland)',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
+      coverImage: '/images/destinations/northern-lights.webp',
+      thumbnailImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      note: 'Διανυκτερεύσεις: Λέβι (3), Ροβανιέμι (2), Αθήνα (1) · A Category Hotel - Rovaniemi / Levi / Athens\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '22/12',
+          route: 'Larnaca (LCA) → Rovaniemi (RVN)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '21:00',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '22:45',
+              flight: 'A3 909',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '06:00',
+              toCode: 'RVN',
+              toName: 'Rovaniemi',
+              toCity: 'Rovaniemi, Finland',
+              arrive: '10:40',
+              flight: 'A3 4092',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '28/12',
+          route: 'Rovaniemi (RVN) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'RVN',
+              fromName: 'Rovaniemi',
+              fromCity: 'Rovaniemi, Finland',
+              depart: '14:05',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '18:25',
+              flight: 'A3 4093',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '23:45',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '01:20',
+              flight: 'A3 910',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        }
+      ],
+      hotels: leviRovaniemiPackage349Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα Αθήνα Λάρνακα.',
+        'Αεροπορικά εισιτήρια με απευθείας πτήσεις τσάρτερ από Αθήνα-Ροβανιέμι-Αθήνα.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή στο Λέβι (3 νύχτες).',
+        'Διαμονή στο Ροβανιέμι (2 νύχτες).',
+        'Διαμονή στην Αθήνα (1 νύχτα).',
+        'Πρωινό μπουφέ καθημερινά.',
+        'Δείπνα καθημερινά με εορταστικό μπουφέ.',
+        'Γεύματα καθημερινά.',
+        'Γεύμα στο Ice Restaurant στο χωριό του Aϊ Βασίλη.',
+        'Δείπνο την Παραμονή των Χριστουγέννων σε παραδοσιακό εστιατόριο, στο χωριό των ξωτικών μέσα στο χιονισμένο δάσος.',
+        'Επίσκεψη Αϊ Βασίλη κατά την διάρκεια του δείπνου την παραμονή των Χριστουγέννων και δώρα για τους μικρούς του φίλους.',
+        'Πιστοποιητικό Αρκτικού Κύκλου.',
+        'Είσοδος στο Spa και στις πισίνες του ξενοδοχείου Levi Spa.',
+        'Μεταφορά και επίσκεψη στο χωριό του Αϊ Βασίλη στο Ροβανιέμι.',
+        'Συνάντηση με τον Άγιο Βασίλη στο γραφείο του.',
+        'Εκδρομή με snowmobile με ειδικά ρούχα και μπότες.',
+        'Επίσκεψη σε φάρμα ταράνδων και βόλτα με έλκηθρο ταράνδων.',
+        'Επίσκεψη σε φάρμα σκυλιών χάσκι και βόλτα με έλκηθρο χάσκι.',
+        'Μεταφορές όπως αναφέρονται στο πρόγραμμα.',
+        'Χρήση σάουνας σε όλα τα ξενοδοχεία.',
+        'Χρήση πισίνας σε όλα τα ξενοδοχεία (όπου διαθέσιμη).',
+        'Είσοδος στο Snow Village.',
+        'Μεταφορά στο Santa Park με προαιρετική είσοδο (66€ / ενήλικας, 57€ / παιδί 3 έως 12 ετών & παιδί έως 3 ετών ελεύθερη είσοδος).',
+        'Ειδικοί τοπικοί αρχηγοί κατά την διάρκεια των δραστηριοτήτων.',
+        'Συνοδός - αρχηγός καθόλη τη διάρκεια του ταξιδιού.',
+        'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά.',
+        'Ασφάλεια Αστικής Ευθύνης.',
+        'ΔΩΡΟ: Μεταφορά, είσοδος και ξενάγηση στο μουσείο Arktikum στο Ροβανιέμι.',
+        'ΔΩΡΟ: Είσοδος στο χειμερινό πάρκο SnowmanWorld, στο χωριό του Αϊ-Βασίλη.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ότι δεν αναφέρεται ρητά στα περιλαμβανόμενα.',
+        'Είσοδος Santa Park (€66 ενήλικας / €57 παιδί 3–12 ετών).'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 40% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 40 μέρες πριν την αναχώρηση, παρακράτηση ποσού 100.00 Ευρώ το άτομο για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [39] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: leviRovaniemiPackage349Program,
+      gallery: [
+        '/images/destinations/northern-lights.webp',
+        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 350,
+    title: 'ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΟ ΛΕΒΙ, ΣΤΟ ΡΟΒΑΝΙΕΜΙ ΚΑΙ ΣΤΟ ΧΩΡΙΟ ΤΟΥ ΑΓΙΟΥ ΒΑΣΙΛΗ',
+    destination: 'Finland',
+    category: 'Christmas Packages',
+    price: 4279,
+    duration: '8 days / 7 nights',
+    description:
+      'Πρωτοχρονιάτικο οργανωμένο πακέτο 8 ημερών στο Levi, το Ροβανιέμι και το χωριό του Αγίου Βασίλη. Διαμονή σε A Category ξενοδοχεία. Αναχώρηση 27/12.',
+    longDescription:
+      'Υποδεχτείτε το νέο έτος στη Φινλανδική Λαπωνία: 2 νύχτες Αθήνα, 2 Ροβανιέμι και 3 Λέβι. Χωριό Αϊ Βασίλη, Snowman World, Arktikum, snowmobile, χάσκυ, τάρανδοι, Snow Village και εορταστικό δείπνο παραμονής Πρωτοχρονιάς. Ξενοδοχεία: Sokos Levi, Sokos Vaakuna, Holiday Inn Athens Airport.',
+    image: '🇫🇮🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '27/12',
+      departureDates: ['27/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Levi, Rovaniemi, Santa Claus Village – Finland (Lapland)',
+      monthAvailability: 'December, January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
+      coverImage: '/images/destinations/northern-lights.webp',
+      thumbnailImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      note: 'Διανυκτερεύσεις: Αθήνα (2), Ροβανιέμι (2), Λέβι (3) · Sokos Levi / Sokos Vaakuna / Holiday Inn Athens Airport\n\nΛόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.\nΤα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.\nΜεταφορά στο ξενοδοχείο Αθήνας με δική σας διευθέτηση (shuttle bus διαθέσιμο).\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
+      importantNotes: [
+        'Λόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ. Ζητήστε μας τους αναλυτικούς όρους συμμετοχής σε οργανωμένο ταξίδι.',
+        'Τα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.',
+        'Snowmobile: κάθε οδηγός πρέπει να είναι πάνω από 18 ετών και να έχει έγκυρη άδεια οδήγησης μαζί του.',
+        'Στο snowmobile safari παρέχεται απαραίτητος ρουχισμός και εξοπλισμός: ολόσωμη φόρμα, μπότες, μάλλινες κάλτσες, γάντια, κασκόλ, μπαλακλάβα και κράνος.',
+        'Παιδιά έως 12 ετών κάθονται σε έλκηθρο που τραβάει το snowmobile του τοπικού συνοδού.',
+        'Για τα πιο μικρά παιδιά συνιστάται ένας γονέας να κάθεται μαζί τους στο έλκηθρο.',
+        'Παιδιά άνω των 12 ετών και με ύψος πάνω από 140 cm μπορούν να κάθονται ως συνεπιβάτες πίσω από τον γονέα σε snowmobile, πληρώνοντας την τιμή του ενήλικα.',
+        'Στην εκδρομή snowmobile δεν μπορούν να συμμετέχουν παιδιά κάτω των 3 ετών.'
+      ],
+      optionalExcursions: [
+        {
+          title: 'Βραδινή εξόρμηση για το Βόρειο Σέλας',
+          priceAdult: 100,
+          priceChild: 70,
+          childAgeNote: '4 έως 14 ετών',
+          duration: '3 ώρες',
+          description:
+            'Το Βόρειο Σέλας είναι δυνατόν να παρατηρηθεί στην Φινλανδική Λαπωνία. Η θέση στον Αρκτικό Κύκλο δίνει τις μεγαλύτερες πιθανότητες. Ο οδηγός οδηγεί έξω από την πόλη στα καλύτερα σημεία για Φινλανδικό πικνίκ κάτω από τα φώτα του Βόρειου Σέλαος.',
+          includes:
+            'Μεταφορά με λεωφορείο, εκδρομικό γεύμα με λουκάνικα γλυκό, ζεστά ροφήματα και πληροφορίες για το Βόρειο Σέλας από τον τοπικό ξεναγό.'
+        },
+        {
+          title: 'Είσοδος Santa Park',
+          priceAdult: 66,
+          priceChild: 57,
+          childAgeNote: '3 έως 12 ετών · έως 3 ετών ελεύθερη είσοδος',
+          includes: 'Προαιρετική είσοδος · η μεταφορά περιλαμβάνεται στο πακέτο.'
+        }
+      ],
+      flights: [
+        {
+          direction: 'Departure',
+          date: '27/12',
+          route: 'Larnaca (LCA) → Rovaniemi (RVN)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '21:00',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '22:45',
+              flight: 'A3 909',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '08:35',
+              toCode: 'RVN',
+              toName: 'Rovaniemi',
+              toCity: 'Rovaniemi, Finland',
+              arrive: '13:15',
+              flight: 'A3 4092',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '02/01',
+          route: 'Rovaniemi (RVN) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'RVN',
+              fromName: 'Rovaniemi',
+              fromCity: 'Rovaniemi, Finland',
+              depart: '17:30',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '21:50',
+              flight: 'A3 4093',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '07:45',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '09:20',
+              flight: 'A3 902',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        }
+      ],
+      hotels: leviNewYearPackage350Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα Αθήνα Λάρνακα.',
+        'Αεροπορικά εισιτήρια με απευθείας πτήσεις τσάρτερ από Αθήνα-Ροβανιέμι-Αθήνα.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή στο Λέβι (3 νύχτες).',
+        'Διαμονή στο Ροβανιέμι (2 νύχτες).',
+        'Διαμονή στην Αθήνα (2 νύχτες).',
+        'Πρωινό μπουφέ καθημερινά.',
+        'Δείπνα καθημερινά με εορταστικό μπουφέ.',
+        'Γεύματα καθημερινά.',
+        'Γεύμα στο Ice Restaurant στο χωριό του Aϊ Βασίλη.',
+        'Δείπνο την Παραμονή της Πρωτοχρονιάς σε παραδοσιακό εστιατόριο, στο χωριό των ξωτικών μέσα στο χιονισμένο δάσος.',
+        'Επίσκεψη Αϊ Βασίλη κατά την διάρκεια του δείπνου την παραμονή της Πρωτοχρονιάς και δώρα για τους μικρούς του φίλους.',
+        'Πιστοποιητικό Αρκτικού Κύκλου.',
+        'Είσοδος στο Spa και στις πισίνες του ξενοδοχείου Levi Spa.',
+        'Μεταφορά και επίσκεψη στο χωριό του Αϊ Βασίλη στο Ροβανιέμι.',
+        'Συνάντηση με τον Άγιο Βασίλη στο γραφείο του.',
+        'Εκδρομή με snowmobile με ειδικά ρούχα και μπότες.',
+        'Επίσκεψη σε φάρμα ταράνδων και βόλτα με έλκηθρο ταράνδων.',
+        'Επίσκεψη σε φάρμα σκυλιών χάσκι και βόλτα με έλκηθρο χάσκι.',
+        'Μεταφορές όπως αναφέρονται στο πρόγραμμα.',
+        'Χρήση σάουνας σε όλα τα ξενοδοχεία.',
+        'Χρήση πισίνας σε όλα τα ξενοδοχεία (όπου διαθέσιμη).',
+        'Είσοδος στο Snow Village.',
+        'Μεταφορά στο Santa Park με προαιρετική είσοδο (66€ / ενήλικας, 57€ / παιδί 3 έως 12 ετών & παιδί έως 3 ετών ελεύθερη είσοδος).',
+        'Ειδικοί τοπικοί αρχηγοί κατά την διάρκεια των δραστηριοτήτων.',
+        'Συνοδός - αρχηγός καθόλη τη διάρκεια του ταξιδιού.',
+        'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά.',
+        'ΔΩΡΟ: Μεταφορά, είσοδος και ξενάγηση στο μουσείο Arktikum.',
+        'ΔΩΡΟ: Είσοδος στο χειμερινό πάρκο SnowmanWorld, στο χωριό του Αϊ-Βασίλη.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά, είσοδοι στους επισκεπτόμενους χώρους.',
+        'Ότι δεν αναφέρεται ρητά στα περιλαμβανόμενα.',
+        'Είσοδος Santa Park (€66 ενήλικας / €57 παιδί 3–12 ετών).',
+        'Βραδινή εξόρμηση Βόρειο Σέλας (€100 ενήλικας / €70 παιδιά 4–14 ετών).'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 40% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 40 μέρες πριν την αναχώρηση, παρακράτηση ποσού 100.00 Ευρώ το άτομο για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [39] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [],
+      program: leviNewYearPackage350Program,
+      gallery: [
+        '/images/destinations/northern-lights.webp',
+        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+      ]
+    }
   }
 ]
 
@@ -19248,8 +22589,8 @@ export const getVisiblePackages = () => visiblePackages()
 // Map search dropdown regions to package destination values (so "Asia" shows Thailand, Japan, etc.)
 export const REGION_DESTINATIONS = {
   Greece: ['Greece'],
-  Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Austria', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom', 'Malta'],
-  Asia: ['Thailand', 'Indonesia', 'India', 'Japan', 'South Korea', 'China', 'Bali', 'Sri Lanka', 'Asia'],
+  Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Austria', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom', 'Malta', 'Finland'],
+  Asia: ['Thailand', 'Indonesia', 'India', 'Japan', 'South Korea', 'China', 'Bali', 'Sri Lanka', 'Vietnam', 'Asia'],
   'Middle East': ['Middle East', 'UAE', 'Egypt'],
   America: ['America', 'United States', 'Argentina, Brazil', 'Peru'],
   Africa: ['Morocco', 'South Africa', 'Africa']

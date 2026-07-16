@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ArrowRight, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
+import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById, getVisiblePackages } from '../data/packages'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import HoneypotField from '../components/HoneypotField'
@@ -660,6 +660,54 @@ const CancellationPolicyBody = ({ policy }) => {
   }
   return <p className="section-text">{policy}</p>
 }
+
+const PACKAGE_CONTACT_PHONE = '+357 77771234'
+const PACKAGE_CONTACT_EMAIL = 'info@honeywelltravel.com'
+
+const PackageContactCard = ({ className = '' }) => (
+  <div className={`contact-card ${className}`.trim()}>
+    <div className="contact-card-glow" aria-hidden="true" />
+    <div className="contact-card-header">
+      <span className="contact-card-emblem" aria-hidden="true">
+        <Headphones size={18} strokeWidth={1.75} />
+      </span>
+      <div className="contact-card-heading">
+        <h3>Concierge assistance</h3>
+        <p className="contact-card-lead">Speak with a travel specialist</p>
+      </div>
+    </div>
+    <div className="contact-card-links">
+      <a
+        className="contact-link"
+        href={`tel:${PACKAGE_CONTACT_PHONE.replace(/\s/g, '')}`}
+        aria-label={`Call Honeywell Travel at ${PACKAGE_CONTACT_PHONE}`}
+      >
+        <span className="contact-link-icon contact-link-icon-phone" aria-hidden="true">
+          <Phone size={16} strokeWidth={2} />
+        </span>
+        <span className="contact-link-copy">
+          <span className="contact-link-label">Call us</span>
+          <span className="contact-link-value">{PACKAGE_CONTACT_PHONE}</span>
+        </span>
+        <ArrowRight className="contact-link-arrow" size={15} strokeWidth={2} aria-hidden="true" />
+      </a>
+      <a
+        className="contact-link"
+        href={`mailto:${PACKAGE_CONTACT_EMAIL}?subject=Honeywell%20Travel%20Package%20Inquiry`}
+        aria-label={`Email Honeywell Travel at ${PACKAGE_CONTACT_EMAIL}`}
+      >
+        <span className="contact-link-icon contact-link-icon-email" aria-hidden="true">
+          <Mail size={16} strokeWidth={2} />
+        </span>
+        <span className="contact-link-copy">
+          <span className="contact-link-label">Email us</span>
+          <span className="contact-link-value">{PACKAGE_CONTACT_EMAIL}</span>
+        </span>
+        <ArrowRight className="contact-link-arrow" size={15} strokeWidth={2} aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+)
 
 function PackageFullDetail() {
   const { id } = useParams()
@@ -1981,10 +2029,18 @@ function PackageFullDetail() {
 
             {/* Mobile-only sidebar cards at the end */}
             <div className="summary-card mobile-sidebar-card">
-              <h3>Summary</h3>
+              <p className="summary-card-label">Summary</p>
               <p className="summary-price">{formatPackagePrice()}</p>
-              <p className="summary-duration">{pkg.duration}</p>
-              <p className="summary-destination">{pkg.destination}</p>
+              <div className="summary-meta">
+                <p className="summary-duration">
+                  <Clock size={14} strokeWidth={2} aria-hidden />
+                  {pkg.duration}
+                </p>
+                <p className="summary-destination">
+                  <MapPin size={14} strokeWidth={2} aria-hidden />
+                  {pkg.destination}
+                </p>
+              </div>
               {!showBookSelection ? (
                 <button
                   type="button"
@@ -2070,19 +2126,23 @@ function PackageFullDetail() {
               </ul>
             </div>
 
-            <div className="contact-card mobile-sidebar-card">
-              <h3>Need help?</h3>
-              <p className="contact-phone">📞 +357 77771234</p>
-              <p className="contact-email">✉️ info@honeywelltravel.com</p>
-            </div>
+            <PackageContactCard className="mobile-sidebar-card" />
           </main>
 
           <aside className="layout-aside">
             <div className="summary-card">
-              <h3>Summary</h3>
+              <p className="summary-card-label">Summary</p>
               <p className="summary-price">{formatPackagePrice()}</p>
-              <p className="summary-duration">{pkg.duration}</p>
-              <p className="summary-destination">{pkg.destination}</p>
+              <div className="summary-meta">
+                <p className="summary-duration">
+                  <Clock size={14} strokeWidth={2} aria-hidden />
+                  {pkg.duration}
+                </p>
+                <p className="summary-destination">
+                  <MapPin size={14} strokeWidth={2} aria-hidden />
+                  {pkg.destination}
+                </p>
+              </div>
               {!showBookSelection ? (
                 <button
                   type="button"
@@ -2168,11 +2228,7 @@ function PackageFullDetail() {
               </ul>
             </div>
 
-            <div className="contact-card">
-              <h3>Need help?</h3>
-              <p className="contact-phone">📞 +357 77771234</p>
-              <p className="contact-email">✉️ info@honeywelltravel.com</p>
-            </div>
+            <PackageContactCard />
           </aside>
         </div>
       </div>

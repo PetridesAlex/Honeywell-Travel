@@ -1388,6 +1388,92 @@
   color: #a7f3d0;
 }
 
+/* Holiday Types – Autumn Packages (premium amber) */
+.dropdown-item--autumn-premium {
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.052em;
+  text-transform: uppercase;
+  color: #fff7ed;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  background:
+    linear-gradient(
+      125deg,
+      rgba(234, 88, 12, 0.22) 0%,
+      rgba(217, 119, 6, 0.16) 45%,
+      rgba(180, 83, 9, 0.12) 100%
+    );
+  border-color: rgba(251, 146, 60, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    0 2px 16px rgba(234, 88, 12, 0.12);
+}
+
+.dropdown-item--autumn-premium .dropdown-item-icon {
+  color: #fdba74;
+  opacity: 1;
+  font-size: 0.8rem;
+}
+
+.dropdown-item--autumn-premium:hover {
+  background:
+    linear-gradient(
+      125deg,
+      rgba(234, 88, 12, 0.32) 0%,
+      rgba(217, 119, 6, 0.24) 45%,
+      rgba(180, 83, 9, 0.16) 100%
+    );
+  color: #ffedd5;
+  border-color: rgba(253, 186, 116, 0.55);
+}
+
+.dropdown-item--autumn-premium:hover .dropdown-item-icon {
+  color: #fed7aa;
+}
+
+/* Holiday Types – Christmas Packages (premium festive) */
+.dropdown-item--christmas-premium {
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.052em;
+  text-transform: uppercase;
+  color: #fef2f2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  background:
+    linear-gradient(
+      125deg,
+      rgba(227, 30, 36, 0.28) 0%,
+      rgba(185, 28, 28, 0.16) 40%,
+      rgba(212, 175, 55, 0.14) 100%
+    );
+  border-color: rgba(248, 113, 113, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 16px rgba(227, 30, 36, 0.14);
+}
+
+.dropdown-item--christmas-premium .dropdown-item-icon {
+  color: #fca5a5;
+  opacity: 1;
+  font-size: 0.8rem;
+}
+
+.dropdown-item--christmas-premium:hover {
+  background:
+    linear-gradient(
+      125deg,
+      rgba(227, 30, 36, 0.38) 0%,
+      rgba(185, 28, 28, 0.24) 42%,
+      rgba(212, 175, 55, 0.2) 100%
+    );
+  color: #fff1f2;
+  border-color: rgba(252, 165, 165, 0.55);
+}
+
+.dropdown-item--christmas-premium:hover .dropdown-item-icon {
+  color: #fecaca;
+}
+
 /* Holiday Types – all-caps label (Music & Sports, Easter, etc.) */
 .dropdown-item--holiday-caps {
   text-transform: uppercase;
@@ -1972,6 +2058,70 @@
 
 .mobile-dropdown-item--exotic-premium:hover .dropdown-item-icon {
   color: #a7f3d0;
+}
+
+.mobile-dropdown-item--autumn-premium {
+  font-weight: 600;
+  font-size: 0.91rem;
+  letter-spacing: 0.048em;
+  text-transform: uppercase;
+  color: #fff7ed;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.38);
+  background:
+    linear-gradient(125deg, rgba(234, 88, 12, 0.28), rgba(217, 119, 6, 0.2)),
+    radial-gradient(circle at 20% 50%, rgba(180, 83, 9, 0.16), transparent 55%);
+  border: 1px solid rgba(251, 146, 60, 0.45);
+  box-shadow:
+    0 4px 18px rgba(2, 6, 23, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mobile-dropdown-item--autumn-premium .dropdown-item-icon {
+  color: #fdba74;
+}
+
+.mobile-dropdown-item--autumn-premium:hover {
+  background:
+    linear-gradient(125deg, rgba(234, 88, 12, 0.36), rgba(217, 119, 6, 0.28)),
+    radial-gradient(circle at 20% 50%, rgba(180, 83, 9, 0.22), transparent 55%);
+  color: #ffedd5;
+  border-color: rgba(253, 186, 116, 0.58);
+}
+
+.mobile-dropdown-item--autumn-premium:hover .dropdown-item-icon {
+  color: #fed7aa;
+}
+
+.mobile-dropdown-item--christmas-premium {
+  font-weight: 600;
+  font-size: 0.91rem;
+  letter-spacing: 0.048em;
+  text-transform: uppercase;
+  color: #fef2f2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.38);
+  background:
+    linear-gradient(125deg, rgba(227, 30, 36, 0.32), rgba(185, 28, 28, 0.2)),
+    radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.16), transparent 55%);
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  box-shadow:
+    0 4px 18px rgba(2, 6, 23, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mobile-dropdown-item--christmas-premium .dropdown-item-icon {
+  color: #fca5a5;
+}
+
+.mobile-dropdown-item--christmas-premium:hover {
+  background:
+    linear-gradient(125deg, rgba(227, 30, 36, 0.42), rgba(185, 28, 28, 0.28)),
+    radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.22), transparent 55%);
+  color: #fff1f2;
+  border-color: rgba(252, 165, 165, 0.58);
+}
+
+.mobile-dropdown-item--christmas-premium:hover .dropdown-item-icon {
+  color: #fecaca;
 }
 
 .mobile-dropdown-item--holiday-caps {

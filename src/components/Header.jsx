@@ -56,6 +56,8 @@ const holidayTypesLinkClass = (item, mode) => {
   if (item === 'Summer Packages') return `${base} ${base}--summer-primary`
   if (item === 'Summer Packages to Greece') return `${base} ${base}--summer-secondary`
   if (item === 'Exotic Packages' || item === 'Mary Specials Trips') return `${base} ${base}--exotic-premium`
+  if (item === 'Autumn Packages') return `${base} ${base}--autumn-premium`
+  if (item === 'Christmas Packages') return `${base} ${base}--christmas-premium`
   return `${base} ${base}--holiday-caps`
 }
 
@@ -71,10 +73,10 @@ function Header() {
     'Summer Packages to Greece',
     'Mary Specials Trips',
     'Exotic Packages',
-    'Easter Packages',
     'Autumn Packages',
-    'Winter Packages',
     'Christmas Packages',
+    'Easter Packages',
+    'Winter Packages',
     'Green Monday Packages',
     'Cruises',
     'City Breaks',
