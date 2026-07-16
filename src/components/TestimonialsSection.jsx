@@ -235,8 +235,11 @@ function TestimonialsSection() {
         <div className="testimonials-mobile-wall">
           <div className="testimonials-marquee-viewport">
             <div ref={mobileMarqueeRef} className="testimonials-marquee-track">
-              {reviews.map((review) => (
-                <article className="review-card" key={`mobile-${review.id}`}>
+              {reviews.map((review, index) => (
+                <article
+                  className={`review-card review-card--accent-${(index % 3) + 1}`}
+                  key={`mobile-${review.id}`}
+                >
                   <p className="review-text">&ldquo;{review.text}&rdquo;</p>
                   <div className="review-meta">
                     <div className="reviewer-avatar">{getInitials(review.name)}</div>
@@ -264,8 +267,11 @@ function TestimonialsSection() {
                 ref={columnIndex === 0 ? marqueeCol1Ref : columnIndex === 1 ? marqueeCol2Ref : marqueeCol3Ref}
                 className="testimonials-marquee-track"
               >
-                {column.map((review) => (
-                  <article className="review-card" key={`col-${columnIndex}-${review.id}`}>
+                {column.map((review, reviewIndex) => (
+                  <article
+                    className={`review-card review-card--accent-${((columnIndex + reviewIndex) % 3) + 1}`}
+                    key={`col-${columnIndex}-${review.id}`}
+                  >
                     <p className="review-text">&ldquo;{review.text}&rdquo;</p>
                     <div className="review-meta">
                       <div className="reviewer-avatar">{getInitials(review.name)}</div>
