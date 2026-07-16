@@ -482,88 +482,6 @@
   text-shadow: 0 1px 8px rgba(2, 6, 23, 0.55);
 }
 
-.header-summer-availability {
-  display: flex;
-  justify-content: center;
-  padding: 0.58rem 1rem 0.68rem;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.94) 0%,
-    rgba(241, 245, 249, 0.9) 55%,
-    rgba(226, 232, 240, 0.88) 100%
-  );
-  backdrop-filter: blur(12px) saturate(120%);
-  -webkit-backdrop-filter: blur(12px) saturate(120%);
-  border-top: 1px solid rgba(255, 255, 255, 0.98);
-  border-bottom: 1px solid rgba(203, 213, 225, 0.75);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 2px 10px rgba(15, 23, 42, 0.08);
-}
-
-.header-summer-availability-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  max-width: 100%;
-  padding: 0;
-  text-decoration: none;
-  text-align: center;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  line-height: 1.35;
-  text-transform: none;
-  color: #153a63;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  transition: color 0.2s ease;
-}
-
-.header-summer-availability-text {
-  color: inherit;
-}
-
-.header-summer-availability-arrow {
-  display: inline-flex;
-  color: #1e4a7a;
-  font-size: 0.9rem;
-  line-height: 1;
-  animation: headerSummerArrowNudge 2s ease-in-out infinite;
-}
-
-.header-summer-availability-link:hover,
-.header-summer-availability-link:focus-visible {
-  color: #0f2744;
-}
-
-.header-summer-availability-link:hover .header-summer-availability-arrow,
-.header-summer-availability-link:focus-visible .header-summer-availability-arrow {
-  color: #0f2744;
-  animation: none;
-  transform: translateX(4px);
-  transition: transform 0.2s ease;
-}
-
-.header-summer-availability-link:focus-visible {
-  outline: 2px solid rgba(21, 58, 99, 0.45);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
-@keyframes headerSummerArrowNudge {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(4px);
-  }
-}
-
 .header-announcement-separator {
   color: rgba(248, 250, 252, 0.7);
   font-size: 0.8rem;
@@ -2412,14 +2330,6 @@
     animation-duration: 6.3s;
   }
 
-  .header-summer-availability {
-    padding: 0.5rem 0.85rem 0.62rem;
-  }
-
-  .header-summer-availability-link {
-    font-size: 0.75rem;
-  }
-
   .logo {
     height: 58px;
     min-width: 0;
@@ -2515,14 +2425,6 @@
     letter-spacing: 0.04em;
     padding: 0.3rem 0;
     animation-duration: 5.2s;
-  }
-
-  .header-summer-availability {
-    padding: 0.45rem 0.75rem 0.58rem;
-  }
-
-  .header-summer-availability-link {
-    font-size: 0.7rem;
   }
 
   .logo {
