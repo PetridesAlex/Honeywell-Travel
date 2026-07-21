@@ -77,6 +77,14 @@ import { leviRovaniemiPackage349Hotels } from './leviRovaniemiPackage349Hotels.j
 import { leviRovaniemiPackage349Program } from './leviRovaniemiPackage349Program.js'
 import { leviNewYearPackage350Hotels } from './leviNewYearPackage350Hotels.js'
 import { leviNewYearPackage350Program } from './leviNewYearPackage350Program.js'
+import { krakowChristmasPackage351Hotels } from './krakowChristmasPackage351Hotels.js'
+import { krakowChristmasPackage351Program } from './krakowChristmasPackage351Program.js'
+import { pragueChristmasPackage352Hotels } from './pragueChristmasPackage352Hotels.js'
+import { pragueChristmasPackage352Program } from './pragueChristmasPackage352Program.js'
+import { viennaChristmasPackage353Hotels } from './viennaChristmasPackage353Hotels.js'
+import { viennaChristmasPackage353Program } from './viennaChristmasPackage353Program.js'
+import { londonChristmasPackage354Hotels } from './londonChristmasPackage354Hotels.js'
+import { londonChristmasPackage354Program } from './londonChristmasPackage354Program.js'
 
 export const travelPackages = [
   {
@@ -22027,8 +22035,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Aegean Airlines & Lufthansa',
       includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
-      coverImage: '/images/destinations/northern-lights.webp',
-      thumbnailImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      coverImage: '/images/lapland/lapland-cover-1.webp',
+      thumbnailImage: '/images/lapland/lapland-cover-1.webp',
       note: 'Διαθέσιμο σε ζήτηση · Διανυκτερεύσεις: Ροβανιέμι (3), Ελσίνκι (2), Αθήνα (1) · Arctic City Hotel / Home Hotel Jugend ή παρόμοιο\n\nΛόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.\nΤα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
       availabilityNote: 'Διαθέσιμο σε ζήτηση',
       importantNotes: [
@@ -22205,9 +22213,9 @@ export const travelPackages = [
       itinerary: [],
       program: laplandHelsinkiPackage348Program,
       gallery: [
-        '/images/destinations/northern-lights.webp',
-        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
-        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+        '/images/lapland/lapland-cover-1.webp',
+        '/images/lapland/lapland-cover-2.webp',
+        '/images/lapland/lapland-cover-3.webp'
       ]
     }
   },
@@ -22235,8 +22243,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Aegean Airlines',
       includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
-      coverImage: '/images/destinations/northern-lights.webp',
-      thumbnailImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      coverImage: '/images/lapland/lapland-cover-2.webp',
+      thumbnailImage: '/images/lapland/lapland-cover-2.webp',
       note: 'Διανυκτερεύσεις: Λέβι (3), Ροβανιέμι (2), Αθήνα (1) · A Category Hotel - Rovaniemi / Levi / Athens\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
       flights: [
         {
@@ -22371,9 +22379,9 @@ export const travelPackages = [
       itinerary: [],
       program: leviRovaniemiPackage349Program,
       gallery: [
-        '/images/destinations/northern-lights.webp',
-        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
-        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+        '/images/lapland/lapland-cover-2.webp',
+        '/images/lapland/lapland-cover-1.webp',
+        '/images/lapland/lapland-cover-3.webp'
       ]
     }
   },
@@ -22401,8 +22409,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Aegean Airlines',
       includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
-      coverImage: '/images/destinations/northern-lights.webp',
-      thumbnailImage: '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
+      coverImage: '/images/lapland/lapland-cover-3.webp',
+      thumbnailImage: '/images/lapland/lapland-cover-3.webp',
       note: 'Διανυκτερεύσεις: Αθήνα (2), Ροβανιέμι (2), Λέβι (3) · Sokos Levi / Sokos Vaakuna / Holiday Inn Athens Airport\n\nΛόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.\nΤα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.\nΜεταφορά στο ξενοδοχείο Αθήνας με δική σας διευθέτηση (shuttle bus διαθέσιμο).\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
       importantNotes: [
         'Λόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ. Ζητήστε μας τους αναλυτικούς όρους συμμετοχής σε οργανωμένο ταξίδι.',
@@ -22567,9 +22575,437 @@ export const travelPackages = [
       itinerary: [],
       program: leviNewYearPackage350Program,
       gallery: [
-        '/images/destinations/northern-lights.webp',
-        '/images/sweden-estonia-finland-package/sweden-finland-estonia-cover.webp',
-        '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp'
+        '/images/lapland/lapland-cover-3.webp',
+        '/images/lapland/lapland-cover-1.webp',
+        '/images/lapland/lapland-cover-2.webp'
+      ]
+    }
+  },
+  {
+    id: 351,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΚΡΑΚΟΒΙΑ',
+    destination: 'Poland',
+    category: 'Christmas Packages',
+    price: 369,
+    duration: '4 days / 3 nights',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στην Κρακοβία από Πάφο με Ryanair: Christmas Markets, Παλιά Πόλη UNESCO και διαμονή Bed & Breakfast. Αναχωρήσεις 26/11, 03/12, 10/12.',
+    longDescription:
+      'Ζήστε τη μαγεία των Χριστουγέννων στην Κρακοβία. Πλατείες και σοκάκια στολισμένα με φώτα, η Παλιά Πόλη UNESCO και μία από τις πιο αυθεντικές χριστουγεννιάτικες αγορές της Ευρώπης στην Rynek Główny. Επιλογές ξενοδοχείων: Down Town, Leonardo Boutique Old Town, Tribe Old Town και Ibis Styles Centrum.',
+    image: '🇵🇱🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '26/11',
+      departureDates: ['26/11', '03/12', '10/12'],
+      departureFrom: 'Paphos',
+      destinationFull: 'Krakow – Poland',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Ryanair',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/Krakow/krakow-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/Krakow/krakow-christmas-cover.webp',
+      note: 'Αναχωρήσεις: 26/11, 03/12, 10/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '26/11, 03/12, 10/12',
+          route: 'Paphos (PFO) → Krakow (KRK)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PFO',
+              fromName: 'Paphos Intl',
+              fromCity: 'Paphos, Cyprus',
+              depart: '17:05',
+              toCode: 'KRK',
+              toName: 'John Paul Ii Balice',
+              toCity: 'Krakow, Poland',
+              arrive: '19:25',
+              flight: 'FR 5086',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '29/11, 06/12, 13/12',
+          route: 'Krakow (KRK) → Paphos (PFO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'KRK',
+              fromName: 'John Paul Ii Balice',
+              fromCity: 'Krakow, Poland',
+              depart: '09:00',
+              toCode: 'PFO',
+              toName: 'Paphos Intl',
+              toCity: 'Paphos, Cyprus',
+              arrive: '13:05',
+              flight: 'FR 5087',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: krakowChristmasPackage351Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Πάφο - Κρακοβία - Πάφο με Ryanair.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.'
+      ],
+      itinerary: [],
+      program: krakowChristmasPackage351Program,
+      gallery: [
+        '/images/christmas-packages/Krakow/krakow-christmas-cover.webp',
+        '/images/christmas-packages/Krakow/Down-Town-Hotel-Krakow.webp',
+        '/images/christmas-packages/Krakow/Leonardo-Boutique-Hotel-krakow.webp',
+        '/images/christmas-packages/Krakow/Tribe-Krakow-Old-Town-Hotel.webp',
+        '/images/christmas-packages/Krakow/ibis-style-hotel-krakow.webp'
+      ]
+    }
+  },
+  {
+    id: 352,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΠΡΑΓΑ',
+    destination: 'Czech Republic',
+    category: 'Christmas Packages',
+    price: 419,
+    duration: '4 days / 3 nights',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στην Πράγα από Λάρνακα με Wizz Air: Christmas Markets, διαμονή Bed & Breakfast. Αναχωρήσεις 20/11, 29/11, 04/12, 11/12.',
+    longDescription:
+      'Ζήστε τη μαγεία των Χριστουγέννων στην Πράγα. Λιθόστρωτα σοκάκια, χριστουγεννιάτικο δέντρο στην Πλατεία της Παλιάς Πόλης, svařák και παραδοσιακές αγορές. Επιλογές ξενοδοχείων: Astoria, Moods Boutique, Garden Court, K+K Central και Maestro by Adrez.',
+    image: '🇨🇿🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '20/11',
+      departureDates: ['20/11', '29/11', '04/12', '11/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Prague – Czech Republic',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/parga/praque-cover-christmas.webp',
+      thumbnailImage: '/images/christmas-packages/parga/praque-cover-christmas.webp',
+      note: 'Αναχωρήσεις: 20/11, 29/11, 04/12, 11/12 από Λάρνακα με Wizz Air · Διαμονή 3 νύχτες με πρωινό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '20/11, 29/11, 04/12, 11/12',
+          route: 'Larnaca (LCA) → Prague (PRG)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '05:45',
+              toCode: 'PRG',
+              toName: 'Ruzyne',
+              toCity: 'Prague, Czech Republic',
+              arrive: '08:35',
+              flight: 'W6 4599',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '23/11, 02/12, 07/12, 14/12',
+          route: 'Prague (PRG) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PRG',
+              fromName: 'Ruzyne',
+              fromCity: 'Prague, Czech Republic',
+              depart: '09:10',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '13:35',
+              flight: 'W6 4600',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: pragueChristmasPackage352Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Πράγα - Λάρνακα με WizzAir.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.'
+      ],
+      itinerary: [],
+      program: pragueChristmasPackage352Program,
+      gallery: [
+        '/images/christmas-packages/parga/praque-cover-christmas.webp',
+        '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
+        '/images/christmas-packages/parga/Moods-boutique-hotel-prague.webp',
+        '/images/christmas-packages/parga/Garden-court-hotel-Prague.webp',
+        '/images/christmas-packages/parga/Kk-Central-Hotel-Prague.webp',
+        '/images/christmas-packages/parga/Maestro-by-adrez-hotel-Prague.webp'
+      ]
+    }
+  },
+  {
+    id: 353,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗ ΒΙΕΝΝΗ',
+    destination: 'Austria',
+    category: 'Christmas Packages',
+    price: 499,
+    duration: '4 days / 3 nights',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στη Βιέννη από Πάφο με Ryanair: Christmas Markets στο Rathaus, Schönbrunn και Belvedere, διαμονή Bed & Breakfast. Αναχωρήσεις 25/11, 02/12, 09/12.',
+    longDescription:
+      'Ζήστε τη μαγεία των Χριστουγέννων στη Βιέννη. Φωτισμένες λεωφόροι, αυτοκρατορικά παλάτια και οι φημισμένες αγορές Advent Dream στο Δημαρχείο, Schönbrunn και Belvedere με Glühwein και παραδοσιακές γεύσεις. Επιλογές: Austria Classic Wien, NH Belvedere και Mercure Wien City.',
+    image: '🇦🇹🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '25/11',
+      departureDates: ['25/11', '02/12', '09/12'],
+      departureFrom: 'Paphos',
+      destinationFull: 'Vienna – Austria',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Ryanair',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/vienna/cover-vienna-christmas.webp',
+      thumbnailImage: '/images/christmas-packages/vienna/cover-vienna-christmas.webp',
+      note: 'Αναχωρήσεις: 25/11, 02/12, 09/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '25/11, 02/12, 09/12',
+          route: 'Paphos (PFO) → Vienna (VIE)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PFO',
+              fromName: 'Paphos Intl',
+              fromCity: 'Paphos, Cyprus',
+              depart: '06:55',
+              toCode: 'VIE',
+              toName: 'Vienna Intl',
+              toCity: 'Vienna, Austria',
+              arrive: '09:15',
+              flight: 'FR 722',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '28/11, 05/12, 12/12',
+          route: 'Vienna (VIE) → Paphos (PFO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'VIE',
+              fromName: 'Vienna Intl',
+              fromCity: 'Vienna, Austria',
+              depart: '19:40',
+              toCode: 'PFO',
+              toName: 'Paphos Intl',
+              toCity: 'Paphos, Cyprus',
+              arrive: '23:40',
+              flight: 'FR 721',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: viennaChristmasPackage353Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Πάφος - Βιέννη - Πάφος με πτήσεις της Ryanair.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.'
+      ],
+      itinerary: [],
+      program: viennaChristmasPackage353Program,
+      gallery: [
+        '/images/christmas-packages/vienna/cover-vienna-christmas.webp',
+        '/images/christmas-packages/vienna/Austria-classic-hotel-wien-Vienna.webp',
+        '/images/christmas-packages/vienna/NH-wien-belvedere-Hotel-Vienna.webp',
+        '/images/christmas-packages/vienna/Mercure-wien-city-vienna.webp'
+      ]
+    }
+  },
+  {
+    id: 354,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΛΟΝΔΙΝΟ',
+    destination: 'United Kingdom',
+    category: 'Christmas Packages',
+    price: 539,
+    duration: '4 days / 3 nights',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στο Λονδίνο από Πάφο με Ryanair: Winter Wonderland στο Hyde Park, Oxford Street και Christmas Markets, διαμονή Bed & Breakfast. Αναχωρήσεις 26/11, 03/12, 10/12.',
+    longDescription:
+      'Ζήστε τη μαγεία των Χριστουγέννων στο Λονδίνο. Oxford Street, Regent Street, Covent Garden, Winter Wonderland στο Hyde Park και αγορές σε Leicester Square, Southbank και Trafalgar Square. Ξενοδοχεία: Royal National, President και Tavistock.',
+    image: '🇬🇧🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '26/11',
+      departureDates: ['26/11', '03/12', '10/12'],
+      departureFrom: 'Paphos',
+      destinationFull: 'London – United Kingdom',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Ryanair',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/london/christmas-cover-london.webp',
+      thumbnailImage: '/images/christmas-packages/london/christmas-cover-london.webp',
+      note: 'Αναχωρήσεις: 26/11, 03/12, 10/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό · Winter Wonderland / Christmas Markets\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '26/11, 03/12, 10/12',
+          route: 'Paphos (PFO) → London Stansted (STN)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PFO',
+              fromName: 'Paphos Intl',
+              fromCity: 'Paphos, Cyprus',
+              depart: '14:20',
+              toCode: 'STN',
+              toName: 'Stansted',
+              toCity: 'London, United Kingdom',
+              arrive: '17:15',
+              flight: 'FR 3132',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '29/11, 06/12, 13/12',
+          route: 'London Stansted (STN) → Paphos (PFO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'STN',
+              fromName: 'Stansted',
+              fromCity: 'London, United Kingdom',
+              depart: '18:00',
+              toCode: 'PFO',
+              toName: 'Paphos Intl',
+              toCity: 'Paphos, Cyprus',
+              arrive: '00:25',
+              flight: 'FR 3131',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        }
+      ],
+      hotels: londonChristmasPackage354Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Πάφος - Λονδίνο - Πάφος με πτήσεις της Ryanair.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.'
+      ],
+      itinerary: [],
+      program: londonChristmasPackage354Program,
+      gallery: [
+        '/images/christmas-packages/london/christmas-cover-london.webp',
+        '/images/music-events/arsenal-city-soccer/royal-national-hotel-london.webp',
+        '/images/christmas-packages/london/president-hotel-london.webp',
+        '/images/music-events/arsenal-city-soccer/tavistock-hotel-london.webp'
       ]
     }
   }
