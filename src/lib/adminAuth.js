@@ -165,7 +165,7 @@ export function getMagicLinkErrorMessage(error) {
   if (isUnauthorizedOtpError(error)) return ADMIN_UNAUTHORIZED_MESSAGE
   const msg = error.message.toLowerCase()
   if (msg.includes('captcha')) {
-    return 'Please complete the security check below, then try again.'
+    return 'Login is blocked by captcha in Supabase. Disable hCaptcha under Authentication → Attack Protection, then try again.'
   }
   if (msg.includes('rate limit') || msg.includes('too many')) {
     return 'Too many requests. Please wait a few minutes and try again.'
@@ -175,7 +175,7 @@ export function getMagicLinkErrorMessage(error) {
   return error.message
 }
 
-export async function sendAdminMagicLink(email, captchaToken) {
+export async function sendAdminMagicLink(email) {
   const normalized = String(email || '')
     .trim()
     .toLowerCase()
@@ -184,14 +184,9 @@ export async function sendAdminMagicLink(email, captchaToken) {
     return { error: { message: 'Please enter your email address.' } }
   }
 
-  if (!captchaToken) {
-    return { error: { message: 'Please complete the security check before continuing.' } }
-  }
-
   const { data, error } = await supabase.auth.signInWithOtp({
     email: normalized,
     options: {
-      captchaToken,
       shouldCreateUser: false,
       emailRedirectTo: getAdminMagicLinkRedirectUrl()
     }

@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft, Mail } from 'lucide-react'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {
   ADMIN_MAGIC_LINK_SUCCESS_MESSAGE,
   ADMIN_MAGIC_LINK_SUCCESS_MESSAGE_DEV,
@@ -20,13 +19,10 @@ const syncInputValue = (setter) => (event) => {
 }
 
 function Login() {
-  const captchaRef = useRef(null)
-  const hCaptchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [captchaToken, setCaptchaToken] = useState('')
   const [pastedMagicLink, setPastedMagicLink] = useState('')
   const [pasteError, setPasteError] = useState('')
 
@@ -44,12 +40,6 @@ function Login() {
       return
     }
 
-    if (!hCaptchaSiteKey) {
-      setError('Admin login is unavailable: missing VITE_HCAPTCHA_SITE_KEY in your environment.')
-      setLoading(false)
-      return
-    }
-
     const emailValue = String(email).trim().toLowerCase()
     if (!emailValue) {
       setError('Please enter your email address.')
@@ -57,20 +47,12 @@ function Login() {
       return
     }
 
-    if (!captchaToken) {
-      setError('Please complete the security check before continuing.')
-      setLoading(false)
-      return
-    }
-
     setEmail(emailValue)
 
-    const { error: otpError } = await sendAdminMagicLink(emailValue, captchaToken)
+    const { error: otpError } = await sendAdminMagicLink(emailValue)
 
     if (otpError) {
       setError(getMagicLinkErrorMessage(otpError))
-      captchaRef.current?.resetCaptcha()
-      setCaptchaToken('')
       setLoading(false)
       return
     }
@@ -157,16 +139,6 @@ function Login() {
                 aria-label="Email"
                 disabled={loading || Boolean(success)}
               />
-
-              <div className="admin-auth-captcha-wrap">
-                <HCaptcha
-                  sitekey={hCaptchaSiteKey}
-                  onVerify={setCaptchaToken}
-                  onExpire={() => setCaptchaToken('')}
-                  onError={() => setCaptchaToken('')}
-                  ref={captchaRef}
-                />
-              </div>
 
               {error ? (
                 <p className="admin-auth-error" role="alert">

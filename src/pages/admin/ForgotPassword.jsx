@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { CRM_SENDER_EMAIL } from './constants'
 import { isSupabaseConfigured, supabase } from '../../lib/supabase'
 import './Login.css'
@@ -12,13 +11,10 @@ const syncInputValue = (setter) => (event) => {
 }
 
 function ForgotPassword() {
-  const captchaRef = useRef(null)
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [captchaToken, setCaptchaToken] = useState('')
-  const hCaptchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -34,12 +30,6 @@ function ForgotPassword() {
       return
     }
 
-    if (!hCaptchaSiteKey) {
-      setError('Password reset is unavailable: missing VITE_HCAPTCHA_SITE_KEY in your environment.')
-      setLoading(false)
-      return
-    }
-
     const emailValue = email.trim().toLowerCase()
 
     if (!emailValue) {
@@ -48,15 +38,7 @@ function ForgotPassword() {
       return
     }
 
-    if (!captchaToken) {
-      setError('Please complete the security check before continuing.')
-      setLoading(false)
-      return
-    }
-
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(emailValue, {
-      captchaToken,
-    })
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(emailValue)
 
     if (resetError) {
       setError(resetError.message || 'Password reset failed. Please try again.')
@@ -65,8 +47,6 @@ function ForgotPassword() {
     }
 
     setSuccess('Password reset email sent. Check your inbox for next steps.')
-    setCaptchaToken('')
-    captchaRef.current?.resetCaptcha()
     setLoading(false)
   }
 
@@ -128,16 +108,6 @@ function ForgotPassword() {
                 autoComplete="email"
                 aria-label="Email"
               />
-
-              <div className="admin-auth-captcha-wrap">
-                <HCaptcha
-                  sitekey={hCaptchaSiteKey ?? ''}
-                  onVerify={setCaptchaToken}
-                  onExpire={() => setCaptchaToken('')}
-                  onError={() => setCaptchaToken('')}
-                  ref={captchaRef}
-                />
-              </div>
 
               {error ? <p className="admin-auth-error">{error}</p> : null}
               {success ? <p className="admin-auth-success">{success}</p> : null}

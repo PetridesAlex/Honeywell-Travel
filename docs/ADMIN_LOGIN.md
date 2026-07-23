@@ -10,14 +10,13 @@ The CRM at `/admin/login` uses **Supabase Magic Link** (OTP email). Staff enter 
 VITE_SUPABASE_URL=https://xxxxxxxx.supabase.co
 VITE_SUPABASE_ANON_KEY=sb_publishable_...
 VITE_ADMIN_AUTH_REDIRECT_URL=https://www.honeywelltravel.com.cy/admin/dashboard
-VITE_HCAPTCHA_SITE_KEY=your_hcaptcha_site_key
 ```
 
 For local dev, omit `VITE_ADMIN_AUTH_REDIRECT_URL` — the app uses `http://localhost:5173/admin/dashboard` automatically.
 
-If your Supabase project has **Auth → Bot and Abuse Protection → hCaptcha** enabled, the login page must send a captcha token (the checkbox above the Send Login Link button). Alternatively, you can turn off hCaptcha in Supabase for staff-only CRM access.
-
 Restart the dev server after changing `.env`.
+
+**Important:** In Supabase → **Authentication** → **Attack Protection**, turn **hCaptcha / Captcha** **off**. The login page no longer uses captcha; if captcha stays enabled in Supabase, magic links will fail.
 
 ## 2. Supabase Auth settings
 
@@ -41,7 +40,7 @@ Restart the dev server after changing `.env`.
 
 | Step | What happens |
 |------|----------------|
-| 1 | User opens `/admin/login`, enters email, completes the security check, clicks **Send Login Link** |
+| 1 | User opens `/admin/login`, enters email, clicks **Send Login Link** |
 | 2 | Success: *Check your email for your secure login link.* |
 | 3 | User clicks the link in email |
 | 4 | Browser opens `https://www.honeywelltravel.com.cy/admin/dashboard` — session is restored and the dashboard loads directly (no login page in between) |

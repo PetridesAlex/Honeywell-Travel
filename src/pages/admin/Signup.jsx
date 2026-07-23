@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { CRM_SENDER_EMAIL } from './constants'
 import { getAdminAuthErrorMessage, isSupabaseConfigured, supabase } from '../../lib/supabase'
 import './Login.css'
@@ -12,15 +11,12 @@ const syncInputValue = (setter) => (event) => {
 }
 
 function Signup() {
-  const captchaRef = useRef(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [captchaToken, setCaptchaToken] = useState('')
-  const hCaptchaSiteKey = import.meta.env.VITE_HCAPTCHA_SITE_KEY
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -36,12 +32,6 @@ function Signup() {
       return
     }
 
-    if (!hCaptchaSiteKey) {
-      setError('Admin signup is unavailable: missing VITE_HCAPTCHA_SITE_KEY in your environment.')
-      setLoading(false)
-      return
-    }
-
     const emailValue = email.trim().toLowerCase()
     const passwordValue = password
 
@@ -51,24 +41,13 @@ function Signup() {
       return
     }
 
-    if (!captchaToken) {
-      setError('Please complete the security check before continuing.')
-      setLoading(false)
-      return
-    }
-
     const { data, error: signUpError } = await supabase.auth.signUp({
       email: emailValue,
-      password: passwordValue,
-      options: {
-        captchaToken,
-      },
+      password: passwordValue
     })
 
     if (signUpError) {
       setError(getAdminAuthErrorMessage(signUpError))
-      captchaRef.current?.resetCaptcha()
-      setCaptchaToken('')
       setLoading(false)
       return
     }
@@ -76,8 +55,6 @@ function Signup() {
     if (data?.user) {
       setSuccess('Account created. Please confirm the email before signing in.')
       setPassword('')
-      setCaptchaToken('')
-      captchaRef.current?.resetCaptcha()
     } else {
       setError('Signup did not complete. Please try again.')
     }
@@ -170,16 +147,6 @@ function Signup() {
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
-              </div>
-
-              <div className="admin-auth-captcha-wrap">
-                <HCaptcha
-                  sitekey={hCaptchaSiteKey ?? ''}
-                  onVerify={setCaptchaToken}
-                  onExpire={() => setCaptchaToken('')}
-                  onError={() => setCaptchaToken('')}
-                  ref={captchaRef}
-                />
               </div>
 
               {error ? <p className="admin-auth-error">{error}</p> : null}
