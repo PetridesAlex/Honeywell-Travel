@@ -14,6 +14,7 @@ import {
   ClipboardList,
   Gift,
   LogOut,
+  Package,
   UserCircle,
   Users
 } from 'lucide-react'
@@ -44,6 +45,7 @@ const ICONS = {
   team: ClipboardList,
   vouchers: Gift,
   calculator: Calculator,
+  packages: Package,
   groupBookings: Ship
 }
 

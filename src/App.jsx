@@ -35,6 +35,8 @@ import CorporateGroups from './pages/admin/CorporateGroups'
 import CorporateServiceContacts from './pages/admin/CorporateServiceContacts'
 import ServicesDashboard from './pages/admin/ServicesDashboard'
 import PackageCalculator from './pages/admin/PackageCalculator'
+import PackagesCms from './pages/admin/PackagesCms'
+import PackageCmsDetail from './pages/admin/PackageCmsDetail'
 import Dashboard from './pages/admin/Dashboard'
 import AdminIndexRedirect from './pages/admin/components/AdminIndexRedirect'
 import FollowUps from './pages/admin/FollowUps'
@@ -100,6 +102,8 @@ function AppContent() {
             <Route path="/admin/group-bookings" element={<GroupBookings />} />
             <Route path="/admin/group-bookings/:id" element={<GroupBookingDetail />} />
             <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
+            <Route path="/admin/packages" element={<PackagesCms />} />
+            <Route path="/admin/packages/:id" element={<PackageCmsDetail />} />
             <Route path="/admin/package-calculator" element={<PackageCalculator />} />
             <Route path="/admin/corporate-contacts" element={<CorporateServiceContacts />} />
             <Route path="/admin/clients" element={<Clients />} />

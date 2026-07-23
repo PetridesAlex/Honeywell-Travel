@@ -90,3 +90,7 @@ Production magic links still go to `https://www.honeywelltravel.com.cy/admin/das
 ## 7. Protected routes
 
 All `/admin/*` routes except `/admin/login` require a valid Supabase session. Unauthenticated users are redirected to `/admin/login`.
+
+## 8. Packages CMS
+
+Staff can edit package prices and dates at **`/admin/packages`**. Setup steps: [PACKAGES_CMS.md](./PACKAGES_CMS.md).

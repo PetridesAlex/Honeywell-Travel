@@ -250,6 +250,7 @@ export const ADMIN_NAV = [
   { to: '/admin/services-hub', label: 'Services Hub', icon: 'servicesHub', highlight: true },
   { to: '/admin/team', label: 'Team hub', icon: 'team', badgeKey: 'teamTasks' },
   { to: '/admin/gift-vouchers', label: '🎁 Gift Vouchers', icon: 'vouchers' },
+  { to: '/admin/packages', label: 'Packages CMS', icon: 'packages', highlight: true },
   { to: '/admin/package-calculator', label: 'Package Calculator', icon: 'calculator', highlight: true },
   { to: '/admin/corporate-groups', label: 'Corporate', icon: 'corporate', highlight: true },
   { to: '/admin/corporate-contacts', label: 'Corp. Services List', icon: 'corpContacts', highlight: true },

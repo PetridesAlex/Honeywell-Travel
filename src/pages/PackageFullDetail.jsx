@@ -2,7 +2,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
-import { getPackageById, getVisiblePackages } from '../data/packages'
+import { getPackageById } from '../data/packages'
+import { getMergedPackageById, loadMergedPackages } from '../lib/packagesCatalog'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
@@ -709,11 +710,34 @@ const PackageContactCard = ({ className = '' }) => (
   </div>
 )
 
+function getCheapestPriceFromPkg(pkg) {
+  if (pkg?.details?.hotels?.length > 0) {
+    let lowestDouble = Infinity
+    pkg.details.hotels.forEach((hotel) => {
+      if (
+        hotel.prices &&
+        hotel.prices.double != null &&
+        hotel.prices.double > 0 &&
+        hotel.prices.double < lowestDouble
+      ) {
+        lowestDouble = hotel.prices.double
+      }
+    })
+    return lowestDouble !== Infinity ? lowestDouble : pkg.price
+  }
+  return pkg?.price
+}
+
+function mergedOrFallback(all, id, fallback) {
+  const numericId = parseInt(id, 10)
+  return all.find((p) => p.id === numericId) || fallback
+}
+
 function PackageFullDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
-  const pkg = getPackageById(id)
+  const [pkg, setPkg] = useState(() => getPackageById(id))
   const translatedTitle = pkg ? getTranslatedPackageTitle(pkg.id, pkg.title, i18n) : ''
   const [activeTab, setActiveTab] = useState('price')
   const [hotelSelections, setHotelSelections] = useState({})
@@ -733,6 +757,34 @@ function PackageFullDetail() {
   const [reserveHoneypot, setReserveHoneypot] = useState('')
   const [selectedDepartureFilter, setSelectedDepartureFilter] = useState('')
   const [selectedHotelFilter, setSelectedHotelFilter] = useState('')
+  const [relatedTours, setRelatedTours] = useState([])
+
+  useEffect(() => {
+    let cancelled = false
+    const fallback = getPackageById(id)
+    setPkg(fallback)
+
+    getMergedPackageById(id).then((merged) => {
+      if (!cancelled) setPkg(merged || fallback)
+    })
+
+    loadMergedPackages().then((all) => {
+      if (cancelled) return
+      const current = mergedOrFallback(all, id, fallback)
+      const related = all
+        .filter((p) => p.category === current?.category && p.id !== current?.id)
+        .slice(0, 3)
+        .map((tour) => ({
+          ...tour,
+          cheapestPrice: getCheapestPriceFromPkg(tour)
+        }))
+      setRelatedTours(related)
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [id])
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -801,31 +853,13 @@ function PackageFullDetail() {
       }, [selectedDepartureFilter, filteredDeparturesForHotel])
 
       // From price = lowest double room price per person across all hotels
-      const getCheapestPrice = (pkg) => {
-        if (pkg.details && pkg.details.hotels && pkg.details.hotels.length > 0) {
-          let lowestDouble = Infinity
-          pkg.details.hotels.forEach(hotel => {
-            if (hotel.prices && hotel.prices.double != null && hotel.prices.double > 0 && hotel.prices.double < lowestDouble) {
-              lowestDouble = hotel.prices.double
-            }
-          })
-          return lowestDouble !== Infinity ? lowestDouble : pkg.price
-        }
-        return pkg.price
-      }
+      const getCheapestPrice = (pkg) => getCheapestPriceFromPkg(pkg)
 
       const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
       const formatPackagePrice = () => {
         const cheapest = getCheapestPrice(pkg)
         return priceOnRequest || !(cheapest > 0) ? 'Price on request' : `From €${cheapest.toLocaleString()}`
       }
-
-      const relatedTours = getVisiblePackages().filter(
-        (p) => p.category === pkg.category && p.id !== pkg.id
-      ).slice(0, 3).map(tour => ({
-        ...tour,
-        cheapestPrice: getCheapestPrice(tour)
-      }))
 
       // Unique hotel options for "Book this package" (same grouping as hotels grid)
       const packageHotelOptions = details.hotels && details.hotels.length > 0

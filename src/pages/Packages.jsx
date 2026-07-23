@@ -1,7 +1,8 @@
 import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { getPackagesByFilter, getVisiblePackages } from '../data/packages'
+import { getVisiblePackages, REGION_DESTINATIONS } from '../data/packages'
+import { loadMergedPackages } from '../lib/packagesCatalog'
 import ModalCards from '../components/ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import SEO from '../components/SEO'
@@ -41,6 +42,7 @@ function Packages() {
   const { i18n } = useTranslation()
   const { slug } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
+  const [catalog, setCatalog] = useState(() => getVisiblePackages())
   const [filteredPackages, setFilteredPackages] = useState(getVisiblePackages)
   
   // Determine category from slug or query param
@@ -107,7 +109,7 @@ function Packages() {
 
   // Get price range from packages
   const getPriceRange = () => {
-    const prices = getVisiblePackages()
+    const prices = catalog
       .map(pkg => {
         if (pkg.details && pkg.details.hotels && pkg.details.hotels.length > 0) {
           return pkg.details.hotels[0].packagePrice || pkg.price
@@ -124,6 +126,16 @@ function Packages() {
 
   const priceRange = getPriceRange()
 
+  useEffect(() => {
+    let cancelled = false
+    loadMergedPackages().then((packages) => {
+      if (!cancelled) setCatalog(packages)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   // Update category when slug changes
   useEffect(() => {
     if (slug) {
@@ -136,7 +148,16 @@ function Packages() {
   }, [slug])
 
   useEffect(() => {
-    let filtered = getPackagesByFilter(category, destination)
+    let filtered = catalog
+
+    if (category !== 'Any') {
+      filtered = filtered.filter((pkg) => pkg.category === category)
+    }
+
+    if (destination !== 'Any') {
+      const destinations = REGION_DESTINATIONS[destination] || [destination]
+      filtered = filtered.filter((pkg) => destinations.includes(pkg.destination))
+    }
     
     // Apply price filter
     if (minPrice || maxPrice) {
@@ -170,7 +191,7 @@ function Packages() {
     
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFilteredPackages(filtered)
-  }, [category, destination, minPrice, maxPrice, departureMonth, travelType])
+  }, [catalog, category, destination, minPrice, maxPrice, departureMonth, travelType])
 
   const modalCards = useMemo(
     () => mapPackagesToModalCards(filteredPackages, i18n),
@@ -178,8 +199,8 @@ function Packages() {
   )
 
   const applyFilters = (nextCategory, nextDestination) => {
-    const filtered = getPackagesByFilter(nextCategory, nextDestination)
-    setFilteredPackages(filtered)
+    setCategory(nextCategory)
+    setDestination(nextDestination)
     const params = {}
     if (nextCategory && nextCategory !== 'Any') params.category = nextCategory
     if (nextDestination && nextDestination !== 'Any') params.destination = nextDestination
