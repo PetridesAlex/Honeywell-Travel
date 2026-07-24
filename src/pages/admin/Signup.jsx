@@ -1,9 +1,14 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
-import { CRM_SENDER_EMAIL } from './constants'
-import { getAdminAuthErrorMessage, isSupabaseConfigured, supabase } from '../../lib/supabase'
+import {
+  ADMIN_DASHBOARD_PATH,
+  ADMIN_LOGIN_PATH,
+  getSignUpErrorMessage,
+  signUpAdmin
+} from '../../lib/adminAuth'
+import { isSupabaseConfigured } from '../../lib/supabase'
 import './Login.css'
 
 const syncInputValue = (setter) => (event) => {
@@ -11,6 +16,7 @@ const syncInputValue = (setter) => (event) => {
 }
 
 function Signup() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -41,24 +47,27 @@ function Signup() {
       return
     }
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email: emailValue,
-      password: passwordValue
-    })
+    const { data, error: signUpError } = await signUpAdmin(emailValue, passwordValue)
 
     if (signUpError) {
-      setError(getAdminAuthErrorMessage(signUpError))
+      setError(getSignUpErrorMessage(signUpError))
       setLoading(false)
       return
     }
 
-    if (data?.user) {
-      setSuccess('Account created. Please confirm the email before signing in.')
-      setPassword('')
-    } else {
-      setError('Signup did not complete. Please try again.')
+    if (data?.session) {
+      navigate(ADMIN_DASHBOARD_PATH, { replace: true })
+      return
     }
 
+    if (data?.user) {
+      setSuccess('Account created. You can sign in now (confirm email first if required by Supabase).')
+      setPassword('')
+      setLoading(false)
+      return
+    }
+
+    setError('Signup did not complete. Please try again.')
     setLoading(false)
   }
 
@@ -106,6 +115,9 @@ function Signup() {
             >
               Sign up
             </motion.h1>
+            <p className="admin-auth-muted admin-auth-muted--intro">
+              Create an admin account with email and password.
+            </p>
 
             <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>
               <input
@@ -119,6 +131,7 @@ function Signup() {
                 required
                 autoComplete="email"
                 aria-label="Email"
+                disabled={loading}
               />
 
               <div className="admin-auth-password-wrap">
@@ -129,13 +142,14 @@ function Signup() {
                   value={password}
                   onChange={syncInputValue(setPassword)}
                   onInput={syncInputValue(setPassword)}
-                  placeholder="Password"
+                  placeholder="Password (min. 6 characters)"
                   required
                   autoComplete="new-password"
                   aria-label="Password"
                   spellCheck={false}
                   autoCorrect="off"
                   autoCapitalize="off"
+                  disabled={loading}
                 />
                 <button
                   type="button"
@@ -144,6 +158,7 @@ function Signup() {
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => setShowPassword((prev) => !prev)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  disabled={loading}
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -157,12 +172,8 @@ function Signup() {
               </button>
             </form>
 
-            <p className="admin-auth-email-hint">
-              Admin notifications continue through <strong>{CRM_SENDER_EMAIL}</strong> via Outlook.
-            </p>
-
             <div className="admin-auth-links">
-              <Link to="/admin/login" className="admin-auth-back">
+              <Link to={ADMIN_LOGIN_PATH} className="admin-auth-back">
                 Already have an account? Sign in
               </Link>
               <Link to="/admin/forgot-password" className="admin-auth-back">

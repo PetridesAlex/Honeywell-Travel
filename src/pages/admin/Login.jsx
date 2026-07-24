@@ -1,15 +1,12 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { ArrowLeft, Mail } from 'lucide-react'
+import { ArrowLeft, Eye, EyeOff, LogIn } from 'lucide-react'
 import {
-  ADMIN_MAGIC_LINK_SUCCESS_MESSAGE,
-  ADMIN_MAGIC_LINK_SUCCESS_MESSAGE_DEV,
+  ADMIN_DASHBOARD_PATH,
   CRM_DEV_PREVIEW_DASHBOARD,
-  getAdminMagicLinkRedirectUrl,
-  getMagicLinkErrorMessage,
-  resolveDevMagicLinkUrl,
-  sendAdminMagicLink
+  getPasswordAuthErrorMessage,
+  signInAdminWithPassword
 } from '../../lib/adminAuth'
 import { isSupabaseConfigured } from '../../lib/supabase'
 import './Login.css'
@@ -19,18 +16,17 @@ const syncInputValue = (setter) => (event) => {
 }
 
 function Login() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-  const [pastedMagicLink, setPastedMagicLink] = useState('')
-  const [pasteError, setPasteError] = useState('')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     setLoading(true)
     setError('')
-    setSuccess('')
 
     if (!isSupabaseConfigured) {
       setError(
@@ -46,34 +42,29 @@ function Login() {
       setLoading(false)
       return
     }
-
-    setEmail(emailValue)
-
-    const { error: otpError } = await sendAdminMagicLink(emailValue)
-
-    if (otpError) {
-      setError(getMagicLinkErrorMessage(otpError))
+    if (!password) {
+      setError('Please enter your password.')
       setLoading(false)
       return
     }
 
-    setSuccess(
-      import.meta.env.DEV
-        ? `${ADMIN_MAGIC_LINK_SUCCESS_MESSAGE_DEV} Return URL: ${getAdminMagicLinkRedirectUrl()}.`
-        : ADMIN_MAGIC_LINK_SUCCESS_MESSAGE
-    )
-    setLoading(false)
-  }
+    setEmail(emailValue)
 
-  const handlePasteMagicLink = (event) => {
-    event.preventDefault()
-    setPasteError('')
-    const resolved = resolveDevMagicLinkUrl(pastedMagicLink)
-    if (!resolved) {
-      setPasteError('Paste the full link from your email (Supabase verify URL or localhost dashboard link).')
+    const { data, error: signInError } = await signInAdminWithPassword(emailValue, password)
+
+    if (signInError) {
+      setError(getPasswordAuthErrorMessage(signInError))
+      setLoading(false)
       return
     }
-    window.location.replace(resolved)
+
+    if (!data?.session) {
+      setError('Sign in did not complete. Please try again.')
+      setLoading(false)
+      return
+    }
+
+    navigate(ADMIN_DASHBOARD_PATH, { replace: true })
   }
 
   return (
@@ -121,7 +112,7 @@ function Login() {
               Sign in
             </motion.h1>
             <p className="admin-auth-muted admin-auth-muted--intro">
-              Enter your work email and we will send you a secure one-time login link.
+              Enter your work email and password to access the CRM.
             </p>
 
             <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>
@@ -137,8 +128,39 @@ function Login() {
                 required
                 autoComplete="email"
                 aria-label="Email"
-                disabled={loading || Boolean(success)}
+                disabled={loading}
               />
+
+              <div className="admin-auth-password-wrap">
+                <input
+                  id="admin-password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  className="admin-auth-input"
+                  value={password}
+                  onChange={syncInputValue(setPassword)}
+                  onInput={syncInputValue(setPassword)}
+                  placeholder="Password"
+                  required
+                  autoComplete="current-password"
+                  aria-label="Password"
+                  disabled={loading}
+                  spellCheck={false}
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                />
+                <button
+                  type="button"
+                  className="admin-auth-password-toggle"
+                  tabIndex={-1}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  disabled={loading}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
 
               {error ? (
                 <p className="admin-auth-error" role="alert">
@@ -146,60 +168,30 @@ function Login() {
                 </p>
               ) : null}
 
-              {success ? (
-                <p className="admin-auth-success" role="status">
-                  {success}
-                </p>
-              ) : null}
-
-              <button
-                type="submit"
-                className="admin-auth-submit"
-                disabled={loading || Boolean(success)}
-              >
-                <Mail size={18} aria-hidden />
-                {loading ? 'Sending link…' : 'Send Login Link'}
+              <button type="submit" className="admin-auth-submit" disabled={loading}>
+                <LogIn size={18} aria-hidden />
+                {loading ? 'Signing in…' : 'Sign in'}
               </button>
             </form>
 
+            <div className="admin-auth-links">
+              <Link to="/admin/forgot-password" className="admin-auth-back">
+                Forgot password?
+              </Link>
+              <Link to="/admin/signup" className="admin-auth-back">
+                Create admin account
+              </Link>
+            </div>
+
             {import.meta.env.DEV ? (
-              <section className="admin-auth-paste" aria-labelledby="admin-auth-paste-title">
-                <h2 id="admin-auth-paste-title" className="admin-auth-paste__title">
-                  Open login link in Cursor
-                </h2>
-                <p className="admin-auth-paste__hint">
-                  After the email arrives, <strong>right-click the login button → Copy link</strong> (do not
-                  click it — Outlook opens Safari and you will not be logged in here). Paste the full link
-                  below to open the CRM dashboard in Cursor with your real account.
-                </p>
-                <form className="admin-auth-paste__form" onSubmit={handlePasteMagicLink}>
-                  <input
-                    type="url"
-                    className="admin-auth-input admin-auth-input--paste"
-                    value={pastedMagicLink}
-                    onChange={syncInputValue(setPastedMagicLink)}
-                    onInput={syncInputValue(setPastedMagicLink)}
-                    placeholder="Paste magic link from Outlook here"
-                    aria-label="Paste magic link from email"
-                  />
-                  {pasteError ? (
-                    <p className="admin-auth-error" role="alert">
-                      {pasteError}
-                    </p>
-                  ) : null}
-                  <button type="submit" className="admin-auth-submit admin-auth-submit--paste">
-                    Open in Cursor &amp; sign in
-                  </button>
-                </form>
-                <p className="admin-auth-dev-hint">
-                  <Link
-                    to={`${CRM_DEV_PREVIEW_DASHBOARD}?preview=dev`}
-                    className="admin-auth-dev-preview"
-                  >
-                    Layout preview only (no login)
-                  </Link>
-                </p>
-              </section>
+              <p className="admin-auth-dev-hint">
+                <Link
+                  to={`${CRM_DEV_PREVIEW_DASHBOARD}?preview=dev`}
+                  className="admin-auth-dev-preview"
+                >
+                  Layout preview only (no login)
+                </Link>
+              </p>
             ) : null}
 
             <div className="admin-auth-footer">

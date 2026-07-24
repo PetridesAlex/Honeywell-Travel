@@ -42,9 +42,11 @@ import AdminIndexRedirect from './pages/admin/components/AdminIndexRedirect'
 import FollowUps from './pages/admin/FollowUps'
 import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
+import Signup from './pages/admin/Signup'
+import ForgotPassword from './pages/admin/ForgotPassword'
 import AdminGuestRoute from './pages/admin/components/AdminGuestRoute'
 import AdminProtectedRoute from './pages/admin/components/AdminProtectedRoute'
-import { ADMIN_DASHBOARD_PATH, ADMIN_LOGIN_PATH } from './lib/adminAuth'
+import { ADMIN_LOGIN_PATH } from './lib/adminAuth'
 import Pipeline from './pages/admin/Pipeline'
 import Reports from './pages/admin/Reports'
 import GiftVouchers from './pages/admin/GiftVouchers'
@@ -92,8 +94,22 @@ function AppContent() {
               </AdminGuestRoute>
             }
           />
-          <Route path="/admin/signup" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
-          <Route path="/admin/forgot-password" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
+          <Route
+            path="/admin/signup"
+            element={
+              <AdminGuestRoute>
+                <Signup />
+              </AdminGuestRoute>
+            }
+          />
+          <Route
+            path="/admin/forgot-password"
+            element={
+              <AdminGuestRoute>
+                <ForgotPassword />
+              </AdminGuestRoute>
+            }
+          />
           <Route element={<AdminProtectedRoute />}>
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/services-hub" element={<ServicesDashboard />} />

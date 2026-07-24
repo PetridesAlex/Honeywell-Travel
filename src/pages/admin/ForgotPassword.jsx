@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
 import { CRM_SENDER_EMAIL } from './constants'
+import { getAdminAuthRedirectUrl } from '../../lib/adminAuth'
 import { isSupabaseConfigured, supabase } from '../../lib/supabase'
 import './Login.css'
 
@@ -38,7 +39,9 @@ function ForgotPassword() {
       return
     }
 
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(emailValue)
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(emailValue, {
+      redirectTo: getAdminAuthRedirectUrl()
+    })
 
     if (resetError) {
       setError(resetError.message || 'Password reset failed. Please try again.')

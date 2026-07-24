@@ -21,7 +21,7 @@ function AdminGuestRoute({ children }) {
           </div>
           {callbackFailed ? (
             <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-              <Link to={ADMIN_LOGIN_PATH}>Request a new login link</Link>
+              <Link to={ADMIN_LOGIN_PATH}>Back to sign in</Link>
             </p>
           ) : null}
         </div>

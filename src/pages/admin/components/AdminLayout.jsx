@@ -247,7 +247,7 @@ function AdminLayout({ title, subtitle, actions, header, children }) {
               <strong>Layout preview only — you are not logged in</strong>
               <span>
                 No real user session (not Alex). For live CRM data in Cursor, sign in at{' '}
-                <a href="/admin/login">/admin/login</a> and use your magic link from localhost.
+                <a href="/admin/login">/admin/login</a> with your email and password.
               </span>
             </div>
           ) : null}

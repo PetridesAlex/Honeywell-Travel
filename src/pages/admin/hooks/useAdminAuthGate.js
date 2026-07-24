@@ -10,7 +10,7 @@ const CALLBACK_SETTLE_MS = 8000
 const READY_FALLBACK_MS = 3000
 
 /**
- * Waits for Supabase session (including magic-link callbacks) before routing.
+ * Waits for Supabase session (including auth callbacks) before routing.
  * Never hangs indefinitely — always becomes ready within a few seconds.
  */
 export function useAdminAuthGate() {

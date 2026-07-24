@@ -1,27 +1,20 @@
 import { supabase } from './supabase'
 
-export const ADMIN_MAGIC_LINK_SUCCESS_MESSAGE =
-  'Check your email for your secure login link.'
-
-export const ADMIN_MAGIC_LINK_SUCCESS_MESSAGE_DEV =
-  'Link sent. In Outlook: right-click the login button → Copy link. Paste it below to open logged in inside Cursor (do not open in Safari).'
-
 export const ADMIN_UNAUTHORIZED_MESSAGE = 'You are not authorized to access this CRM.'
 
 export const ADMIN_DASHBOARD_PATH = '/admin/dashboard'
 export const ADMIN_LOGIN_PATH = '/admin/login'
 
-/** Production magic-link landing URL (must be allowlisted in Supabase Auth). */
-export const ADMIN_MAGIC_LINK_REDIRECT = 'https://www.honeywelltravel.com.cy/admin/dashboard'
+/** @deprecated Kept for redirect URL allowlists / recovery emails. */
+export const ADMIN_AUTH_REDIRECT = 'https://www.honeywelltravel.com.cy/admin/dashboard'
 
-/** Redirect target for signInWithOtp — local dev always returns to this machine (Cursor / localhost). */
-export function getAdminMagicLinkRedirectUrl() {
+export function getAdminAuthRedirectUrl() {
   if (import.meta.env.DEV && typeof window !== 'undefined') {
     return `${window.location.origin}${ADMIN_DASHBOARD_PATH}`
   }
   const fromEnv = import.meta.env.VITE_ADMIN_AUTH_REDIRECT_URL?.trim()
   if (fromEnv) return fromEnv
-  return ADMIN_MAGIC_LINK_REDIRECT
+  return ADMIN_AUTH_REDIRECT
 }
 
 /** Dev-only: browse CRM in Cursor without login (`?preview=dev`). Not available in production builds. */
@@ -37,8 +30,7 @@ export function isCrmUiPreviewMode(search = '') {
 
 /**
  * Dev-only layout preview: open /admin/dashboard?preview=dev in Cursor without login.
- * Requires the explicit preview query param — never auto-preview when unauthenticated,
- * so magic-link login is not confused with a fake logged-in shell.
+ * Requires the explicit preview query param — never auto-preview when unauthenticated.
  */
 export function shouldUseCrmDesignPreview({
   search = '',
@@ -68,8 +60,8 @@ export function getLocalAdminDashboardUrl() {
 }
 
 /**
- * Magic-link callbacks must land on /admin/dashboard so Supabase can restore the session
- * and the CRM shell loads (not the login page).
+ * Auth callbacks (e.g. password recovery) must land on /admin/dashboard so Supabase
+ * can restore the session and the CRM shell loads.
  */
 export function ensureAuthCallbackLandsOnDashboard() {
   if (typeof window === 'undefined' || !hasAuthCallbackInUrl()) return false
@@ -82,48 +74,6 @@ export function ensureAuthCallbackLandsOnDashboard() {
   return true
 }
 
-/** Dev helper: paste magic link from email and stay in Cursor (rewrites www → localhost when needed). */
-export function resolveDevMagicLinkUrl(raw) {
-  const trimmed = String(raw || '').trim()
-  if (!trimmed || !import.meta.env.DEV) return null
-
-  try {
-    const url = new URL(trimmed)
-    const isSupabaseVerify =
-      url.hostname.includes('supabase.co') &&
-      (url.pathname.includes('/auth/v1/verify') || url.pathname.includes('/auth/v1/confirm'))
-    const isAppCallback =
-      url.hash.includes('access_token') ||
-      url.hash.includes('type=magiclink') ||
-      url.search.includes('code=') ||
-      url.search.includes('token_hash=')
-
-    if (!isSupabaseVerify && !isAppCallback) return null
-
-    if (typeof window === 'undefined') return trimmed
-
-    const localDashboard = getLocalAdminDashboardUrl()
-
-    if (isSupabaseVerify) {
-      url.searchParams.set('redirect_to', localDashboard)
-      return url.toString()
-    }
-
-    if (url.origin !== window.location.origin && url.pathname.startsWith('/admin')) {
-      const path = url.pathname === ADMIN_LOGIN_PATH ? ADMIN_DASHBOARD_PATH : url.pathname
-      return `${window.location.origin}${path}${url.search}${url.hash}`
-    }
-
-    if (isAppCallback && url.pathname !== ADMIN_DASHBOARD_PATH) {
-      return `${localDashboard}${url.search}${url.hash}`
-    }
-
-    return trimmed
-  } catch {
-    return null
-  }
-}
-
 export function hasAuthCallbackInUrl() {
   if (typeof window === 'undefined') return false
   const hash = window.location.hash || ''
@@ -131,41 +81,40 @@ export function hasAuthCallbackInUrl() {
   return (
     hash.includes('access_token') ||
     hash.includes('refresh_token') ||
-    hash.includes('type=magiclink') ||
     hash.includes('type=recovery') ||
+    hash.includes('type=signup') ||
     search.includes('code=') ||
     search.includes('token_hash=')
   )
 }
 
-/** Remove OAuth tokens from the address bar after magic link sign-in. */
+/** Remove auth tokens from the address bar after callback sign-in. */
 export function cleanAdminAuthUrlAfterLogin() {
   if (typeof window === 'undefined' || !hasAuthCallbackInUrl()) return
 
   window.history.replaceState({}, document.title, ADMIN_DASHBOARD_PATH)
 }
 
-export function isUnauthorizedOtpError(error) {
-  if (!error) return false
-  const msg = `${error.message || ''} ${error.code || ''}`.toLowerCase()
-  return (
-    msg.includes('signup') ||
-    msg.includes('sign up') ||
-    msg.includes('not allowed') ||
-    msg.includes('user not found') ||
-    msg.includes('no user') ||
-    (msg.includes('invalid') && msg.includes('email')) ||
-    error.code === 'otp_disabled' ||
-    error.status === 403
-  )
-}
-
-export function getMagicLinkErrorMessage(error) {
-  if (!error?.message) return 'Could not send login link. Please try again.'
-  if (isUnauthorizedOtpError(error)) return ADMIN_UNAUTHORIZED_MESSAGE
+export function getPasswordAuthErrorMessage(error) {
+  if (!error?.message) return 'Sign in failed. Please try again.'
   const msg = error.message.toLowerCase()
+  const code = String(error.code || '').toLowerCase()
+
+  if (
+    msg.includes('invalid login credentials') ||
+    msg.includes('invalid credentials') ||
+    code === 'invalid_credentials'
+  ) {
+    return 'Invalid email or password.'
+  }
+  if (msg.includes('email not confirmed')) {
+    return 'Email not confirmed. Confirm the user in Supabase Authentication → Users, or check your inbox.'
+  }
+  if (msg.includes('user not found') || msg.includes('no user')) {
+    return ADMIN_UNAUTHORIZED_MESSAGE
+  }
   if (msg.includes('captcha')) {
-    return 'Login is blocked by captcha in Supabase. Disable hCaptcha under Authentication → Attack Protection, then try again.'
+    return 'Login is blocked by captcha in Supabase. Disable captcha under Authentication → Attack Protection, then try again.'
   }
   if (msg.includes('rate limit') || msg.includes('too many')) {
     return 'Too many requests. Please wait a few minutes and try again.'
@@ -175,20 +124,64 @@ export function getMagicLinkErrorMessage(error) {
   return error.message
 }
 
-export async function sendAdminMagicLink(email) {
+export function getSignUpErrorMessage(error) {
+  if (!error?.message) return 'Could not create account. Please try again.'
+  const msg = error.message.toLowerCase()
+  if (msg.includes('already registered') || msg.includes('already been registered')) {
+    return 'An account with this email already exists. Sign in instead.'
+  }
+  if (msg.includes('password') && (msg.includes('least') || msg.includes('weak') || msg.includes('short'))) {
+    return 'Password is too weak. Use at least 6 characters.'
+  }
+  if (msg.includes('captcha')) {
+    return 'Signup is blocked by captcha in Supabase. Disable captcha under Authentication → Attack Protection.'
+  }
+  if (msg.includes('not configured')) return error.message
+  return error.message
+}
+
+export async function signInAdminWithPassword(email, password) {
   const normalized = String(email || '')
     .trim()
     .toLowerCase()
+  const passwordValue = String(password || '')
 
   if (!normalized) {
-    return { error: { message: 'Please enter your email address.' } }
+    return { data: null, error: { message: 'Please enter your email address.' } }
+  }
+  if (!passwordValue) {
+    return { data: null, error: { message: 'Please enter your password.' } }
   }
 
-  const { data, error } = await supabase.auth.signInWithOtp({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: normalized,
+    password: passwordValue
+  })
+
+  return { data, error }
+}
+
+export async function signUpAdmin(email, password) {
+  const normalized = String(email || '')
+    .trim()
+    .toLowerCase()
+  const passwordValue = String(password || '')
+
+  if (!normalized) {
+    return { data: null, error: { message: 'Please enter your email address.' } }
+  }
+  if (!passwordValue) {
+    return { data: null, error: { message: 'Please enter a password.' } }
+  }
+  if (passwordValue.length < 6) {
+    return { data: null, error: { message: 'Password must be at least 6 characters.' } }
+  }
+
+  const { data, error } = await supabase.auth.signUp({
+    email: normalized,
+    password: passwordValue,
     options: {
-      shouldCreateUser: false,
-      emailRedirectTo: getAdminMagicLinkRedirectUrl()
+      emailRedirectTo: getAdminAuthRedirectUrl()
     }
   })
 
