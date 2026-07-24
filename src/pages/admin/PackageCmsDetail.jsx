@@ -904,7 +904,7 @@ function PackageCmsDetail() {
                 />
                 <span className="cms-money__unit">per person</span>
               </div>
-              <span className="cms-field__hint">Website listing “from” price (cards &amp; modals). Hotel doubles stay on the detail tariffs.</span>
+              <span className="cms-field__hint">Website listing “from” price. Cards use the lowest hotel double when hotels exist.</span>
             </label>
             <label className="cms-field">
               <span className="cms-field__label">Duration</span>
