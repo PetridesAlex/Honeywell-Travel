@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getVisiblePackages, REGION_DESTINATIONS } from '../data/packages'
-import { loadMergedPackages } from '../lib/packagesCatalog'
+import { loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import ModalCards from '../components/ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import SEO from '../components/SEO'
@@ -128,11 +128,19 @@ function Packages() {
 
   useEffect(() => {
     let cancelled = false
-    loadMergedPackages().then((packages) => {
-      if (!cancelled) setCatalog(packages)
-    })
+
+    const refresh = (force = true) => {
+      loadMergedPackages({ force }).then((packages) => {
+        if (!cancelled) setCatalog(packages)
+      })
+    }
+
+    refresh(true)
+    const unsubscribe = subscribePackagesCatalogRefresh(() => refresh(true))
+
     return () => {
       cancelled = true
+      unsubscribe()
     }
   }, [])
 

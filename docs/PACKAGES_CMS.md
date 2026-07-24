@@ -24,6 +24,8 @@ Employee workspace for searching and updating travel packages live. The admin ar
 
 Published CMS packages override the static website catalog on `/packages` and package detail pages.
 
+**Hidden** or **Draft** packages are removed from the public site (they no longer fall back to the static catalog copy).
+
 ## Import
 
 Use **Import from website** once (or when you want to refresh from `src/data/packages.js`). Matching rows are overwritten by package ID.
@@ -36,4 +38,6 @@ Keep folders under `public/images/…` **or** paste a Google/web **Copy image ad
 
 - Old CRM URLs (`/admin/clients`, `/admin/leads`, etc.) redirect to Packages CMS
 - Deleting a CMS row does not delete the code copy in `packages.js`
-- Catalog cache refreshes about every 60 seconds (cleared immediately after save in-session)
+- After **Save**, the public catalog cache is cleared immediately and other open tabs are notified
+- Public package pages force-refresh on open / tab focus (fallback cache max ~8 seconds)
+- After marking **Hidden** or changing prices, refresh the public page once to confirm

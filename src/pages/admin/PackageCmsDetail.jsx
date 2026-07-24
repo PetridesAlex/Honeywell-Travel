@@ -613,7 +613,7 @@ function PackageCmsDetail() {
     pushToast(
       wasNew
         ? 'Package created. Add prices, program, and images — then publish when it is ready for the live site.'
-        : 'Package saved. Your updates will appear on the website shortly.',
+        : 'Package saved. Live website updates within a few seconds — refresh the public page to confirm.',
       'success'
     )
 

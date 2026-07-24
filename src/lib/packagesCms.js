@@ -131,3 +131,36 @@ export async function fetchPublishedCmsPackages() {
 
   return { data: (data || []).map(cmsRowToSitePackage), error: null }
 }
+
+/**
+ * Legacy IDs that staff have marked draft/hidden in CMS.
+ * These must not fall back to the static website catalog.
+ */
+export async function fetchSuppressedCmsLegacyIds() {
+  if (!isSupabaseConfigured) {
+    return { data: [], error: null }
+  }
+
+  const { data, error } = await supabase
+    .from('cms_packages')
+    .select('legacy_id, hidden, published')
+    .or('hidden.eq.true,published.eq.false')
+
+  if (error) {
+    return {
+      data: [],
+      error: {
+        message: isPackagesCmsSchemaMissing(error)
+          ? 'Package CMS tables are not set up in Supabase yet.'
+          : error.message || 'Request failed',
+        schemaMissing: isPackagesCmsSchemaMissing(error)
+      }
+    }
+  }
+
+  const ids = (data || [])
+    .map((row) => Number(row.legacy_id))
+    .filter((id) => Number.isFinite(id))
+
+  return { data: ids, error: null }
+}

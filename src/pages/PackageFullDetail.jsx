@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById } from '../data/packages'
-import { getMergedPackageById, loadMergedPackages } from '../lib/packagesCatalog'
+import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
@@ -764,25 +764,31 @@ function PackageFullDetail() {
     const fallback = getPackageById(id)
     setPkg(fallback)
 
-    getMergedPackageById(id).then((merged) => {
-      if (!cancelled) setPkg(merged || fallback)
-    })
+    const refresh = (force = true) => {
+      getMergedPackageById(id, { force }).then((merged) => {
+        if (!cancelled) setPkg(merged || fallback)
+      })
 
-    loadMergedPackages().then((all) => {
-      if (cancelled) return
-      const current = mergedOrFallback(all, id, fallback)
-      const related = all
-        .filter((p) => p.category === current?.category && p.id !== current?.id)
-        .slice(0, 3)
-        .map((tour) => ({
-          ...tour,
-          cheapestPrice: getCheapestPriceFromPkg(tour)
-        }))
-      setRelatedTours(related)
-    })
+      loadMergedPackages({ force }).then((all) => {
+        if (cancelled) return
+        const current = mergedOrFallback(all, id, fallback)
+        const related = all
+          .filter((p) => p.category === current?.category && p.id !== current?.id)
+          .slice(0, 3)
+          .map((tour) => ({
+            ...tour,
+            cheapestPrice: getCheapestPriceFromPkg(tour)
+          }))
+        setRelatedTours(related)
+      })
+    }
+
+    refresh(true)
+    const unsubscribe = subscribePackagesCatalogRefresh(() => refresh(true))
 
     return () => {
       cancelled = true
+      unsubscribe()
     }
   }, [id])
 
