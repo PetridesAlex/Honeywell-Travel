@@ -6,10 +6,19 @@ import { getPackageById } from '../data/packages'
 import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
+import {
+  getDepartureDates,
+  getHotelStayDate,
+  getPackageDepartureDates,
+  isItineraryStyleHotels,
+  sortDepartureDateStrings,
+} from '../utils/packageDepartureDates'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
 import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
+import FavoriteToggleButton from '../components/FavoriteToggleButton'
+import '../components/FavoritesTrigger.css'
 import './PackageFullDetail.css'
 
 const parseAirportEndpoint = (segment) => {
@@ -348,104 +357,6 @@ const getAirlineLogo = (airlineName) => {
   // For compound names (e.g. "Aegean Airlines / Turkish Airlines"), try first segment
   const first = airlineName.split(/[/&]/)[0].trim()
   return AIRLINE_LOGO[first] || null
-}
-
-/** Parse DD/MM or DD/MM/YYYY for chronological sorting (Cyprus/Romanian-style dates in package data). */
-const parseDepartureSortKey = (s) => {
-  const m = String(s)
-    .trim()
-    .match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/)
-  if (!m) return null
-  const day = parseInt(m[1], 10)
-  const month = parseInt(m[2], 10)
-  let year = m[3] ? parseInt(m[3], 10) : new Date().getFullYear()
-  if (year < 100) year += 2000
-  if (month < 1 || month > 12 || day < 1 || day > 31) return null
-  return new Date(year, month - 1, day).getTime()
-}
-
-const sortDepartureDateStrings = (dates) => {
-  const copy = [...dates]
-  copy.sort((a, b) => {
-    const ta = parseDepartureSortKey(a)
-    const tb = parseDepartureSortKey(b)
-    if (ta != null && tb != null) return ta - tb
-    if (ta != null) return -1
-    if (tb != null) return 1
-    return String(a).localeCompare(String(b), 'el')
-  })
-  return copy
-}
-
-const parseDateTokenList = (value) => {
-  if (!value || typeof value !== 'string') return []
-  return String(value)
-    .split(/[,\n;]+/)
-    .map((part) => part.trim())
-    .filter((part) => part && part !== '—' && part !== '-')
-}
-
-const dedupeSortDates = (dates) => {
-  const normalized = new Map()
-  dates.forEach((date) => {
-    const key = date.toLowerCase()
-    if (!normalized.has(key)) normalized.set(key, date)
-  })
-  return sortDepartureDateStrings([...normalized.values()])
-}
-
-/** Multi-city group trips: each hotel row is a stay leg (check-in), not a bookable departure option. */
-const isItineraryStyleHotels = (details) => {
-  if (details?.hotelDatesAreStaySegments) return true
-  const hotels = details?.hotels
-  if (!Array.isArray(hotels) || hotels.length < 2) return false
-  const names = new Set(hotels.map((h) => h?.name).filter(Boolean))
-  if (names.size < 2) return false
-  const stayDates = hotels.map((h) => h?.checkInDate || h?.departureDate).filter(Boolean)
-  return names.size === hotels.length && new Set(stayDates).size === stayDates.length
-}
-
-const getHotelStayDate = (hotel) => hotel?.checkInDate || hotel?.departureDate
-
-/** Outbound package departure options — not hotel stay segments or return/internal flight legs. */
-const getPackageDepartureDates = (details) => {
-  if (Array.isArray(details.departureDates) && details.departureDates.length > 0) {
-    return dedupeSortDates(details.departureDates)
-  }
-  const fromSingular = parseDateTokenList(details.departureDate)
-  if (fromSingular.length > 0) return dedupeSortDates(fromSingular)
-
-  const fromOutboundFlights = (details.flights || [])
-    .filter((f) => f?.direction === 'Departure')
-    .flatMap((f) => parseDateTokenList(f.date))
-  if (fromOutboundFlights.length > 0) return dedupeSortDates(fromOutboundFlights)
-
-  if (!isItineraryStyleHotels(details)) {
-    const fromHotels = (details.hotels || []).flatMap((h) => parseDateTokenList(h?.departureDate))
-    if (fromHotels.length > 0) return dedupeSortDates(fromHotels)
-  }
-
-  return []
-}
-
-/**
- * Departure date tokens for filters / hotel alignment. Itinerary-style packages use package-level dates only.
- */
-const getDepartureDates = (details) => {
-  if (isItineraryStyleHotels(details)) return getPackageDepartureDates(details)
-
-  const rawDates = [
-    ...(Array.isArray(details.departureDates) ? details.departureDates : []),
-    ...(details.departureDate && typeof details.departureDate === 'string' ? [details.departureDate] : []),
-    ...(Array.isArray(details.hotels)
-      ? details.hotels.map((hotel) => hotel?.departureDate).filter(Boolean)
-      : []),
-    ...(Array.isArray(details.flights)
-      ? details.flights.map((flight) => flight?.date).filter(Boolean)
-      : []),
-  ]
-
-  return dedupeSortDates(rawDates.flatMap((value) => parseDateTokenList(value)))
 }
 
 /**
@@ -1014,6 +925,9 @@ function PackageFullDetail() {
           aria-hidden="true"
         />
         <div className="package-full-hero-overlay" aria-hidden="true" />
+        <div className="package-full-hero-favorite">
+          <FavoriteToggleButton packageId={pkg.id} className="package-favorite-btn" size={17} />
+        </div>
         <div className="package-full-hero-content">
           <h1>
             {translatedTitle}

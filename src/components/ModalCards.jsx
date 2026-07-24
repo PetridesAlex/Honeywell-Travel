@@ -6,6 +6,8 @@ import './ModalCards.css'
 import { FALLBACK_PACKAGE_CARD_IMAGE } from '../utils/packageCardImage'
 import DepartureCountdownBadge from './DepartureCountdownBadge'
 import PackageCompletedBadge from './PackageCompletedBadge'
+import FavoriteToggleButton from './FavoriteToggleButton'
+import './FavoritesTrigger.css'
 
 const ANIMATION_SPEEDS = {
   slow: { duration: 0.62, springStiffness: 205, springDamping: 25 },
@@ -20,6 +22,25 @@ const getCardGradient = (card, defaultGradient) => {
   // Keep a premium consistent palette for the price band; avoid green tones.
   const preferredColor = normalized === '#0d5c2e' ? '#c41230' : baseColor
   return `linear-gradient(140deg, ${preferredColor} 0%, #7f1d1d 45%, #111827 100%)`
+}
+
+function ModalCardDepartureDates({ dates, className = '' }) {
+  if (!Array.isArray(dates) || dates.length === 0) return null
+
+  const label = dates.length > 1 ? 'Departures' : 'Departure'
+
+  return (
+    <div className={`modal-card-departures ${className}`.trim()} aria-label={label}>
+      <span className="modal-card-departures__label">{label}</span>
+      <div className="modal-card-departures__list">
+        {dates.map((date) => (
+          <span key={date} className="modal-card-departures__item">
+            {date}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 function ModalCards({
@@ -109,6 +130,8 @@ function ModalCards({
         <span>{card.category}</span>
       </div>
 
+      <ModalCardDepartureDates dates={card.departureDates} />
+
       <div className="modal-card-footer">
         <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
         <span className="modal-card-cta">Open</span>
@@ -141,6 +164,9 @@ function ModalCards({
                 onError={handleImageError}
               />
               <div className="modal-card-shade" />
+              <div className="modal-card-favorite">
+                <FavoriteToggleButton packageId={card.id} />
+              </div>
               {card.statusBadge === 'completed' ? (
                 <PackageCompletedBadge variant="card" />
               ) : card.departureCountdown ? (
@@ -169,6 +195,9 @@ function ModalCards({
                 onError={handleImageError}
               />
               <div className="modal-card-shade" />
+              <div className="modal-card-favorite">
+                <FavoriteToggleButton packageId={card.id} />
+              </div>
               {card.statusBadge === 'completed' ? (
                 <PackageCompletedBadge variant="card" />
               ) : card.departureCountdown ? (
@@ -194,6 +223,8 @@ function ModalCards({
                   <span>{card.duration}</span>
                   <span>{card.category}</span>
                 </div>
+
+                <ModalCardDepartureDates dates={card.departureDates} />
 
                 <div className="modal-card-footer">
                   <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
@@ -233,6 +264,9 @@ function ModalCards({
                           onError={handleImageError}
                         />
                         <div className="modal-cards-hero-shade" />
+                        <div className="modal-card-favorite">
+                          <FavoriteToggleButton packageId={selectedCard.id} />
+                        </div>
                         {selectedCard.statusBadge === 'completed' ? (
                           <PackageCompletedBadge variant="hero" />
                         ) : selectedCard.departureCountdown ? (
@@ -256,6 +290,10 @@ function ModalCards({
                             <span>{selectedCard.duration}</span>
                             <span>{selectedCard.category}</span>
                           </div>
+                          <ModalCardDepartureDates
+                            dates={selectedCard.departureDates}
+                            className="modal-card-departures--hero"
+                          />
                         </div>
                       </div>
 
@@ -337,6 +375,9 @@ function ModalCards({
                         }}
                       />
                       <div className="modal-cards-hero-shade" />
+                      <div className="modal-card-favorite">
+                        <FavoriteToggleButton packageId={selectedCard.id} />
+                      </div>
                       {selectedCard.statusBadge === 'completed' ? (
                         <PackageCompletedBadge variant="hero" />
                       ) : selectedCard.departureCountdown ? (
@@ -362,6 +403,10 @@ function ModalCards({
                           <span>{selectedCard.duration}</span>
                           <span>{selectedCard.category}</span>
                         </div>
+                        <ModalCardDepartureDates
+                          dates={selectedCard.departureDates}
+                          className="modal-card-departures--hero"
+                        />
                       </motion.div>
                     </div>
 

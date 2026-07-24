@@ -28,6 +28,20 @@
     "esimHint": "200+ χώρες",
     "esimAria": "Αγορά travel eSIM — ανοίγει το partner κατάστημα Global Advanced Communications σε νέα καρτέλα"
   },
+  "favorites": {
+    "title": "Αγαπημένα",
+    "openAria": "Άνοιγμα λίστας αγαπημένων, {{count}} αποθηκευμένα",
+    "count": "{{count}} αποθηκευμένα",
+    "emptyTitle": "Δεν υπάρχουν αγαπημένα ακόμη",
+    "emptyText": "Πατήστε την καρδιά σε οποιοδήποτε πακέτο για να το αποθηκεύσετε εδώ.",
+    "browse": "Δείτε τα πακέτα",
+    "add": "Προσθήκη στα αγαπημένα",
+    "remove": "Αφαίρεση από τα αγαπημένα",
+    "clear": "Καθαρισμός όλων",
+    "close": "Κλείσιμο αγαπημένων",
+    "unavailable": "Το πακέτο δεν είναι διαθέσιμο",
+    "fromPrice": "Από €{{price}}"
+  },
   "package": {
     "departureDate": "Ημερομηνία Αναχώρησης",
     "departureCountdown": {

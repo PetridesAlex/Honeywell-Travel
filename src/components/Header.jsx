@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
+import FavoritesTrigger from './FavoritesTrigger'
 import './Header.css'
 
 const ESIM_AFFILIATE_URL =
@@ -12,6 +13,7 @@ function HeaderUtilityControls() {
 
   return (
     <>
+      <FavoritesTrigger />
       <a
         href={ESIM_AFFILIATE_URL}
         className="tagline-esim-link"
@@ -40,6 +42,8 @@ function HeaderUtilityControls() {
     </>
   )
 }
+
+import FavoritesPanel from './FavoritesPanel'
 
 // Helper function to convert category name to URL-friendly slug
 const categoryToSlug = (category) => {
@@ -115,6 +119,7 @@ function Header() {
 
   return (
     <header className="header">
+      <FavoritesPanel />
       <div className="tagline-bar">
         <span className="tagline-brand">Honeywell Travel</span>
         <span className="tagline-text">#LivetheExperience</span>

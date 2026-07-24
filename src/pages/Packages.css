@@ -413,7 +413,7 @@
 }
 
 .packages-modal-cards .modal-card {
-  min-height: clamp(320px, 26vw, 460px);
+  min-height: clamp(360px, 28vw, 520px);
   border-radius: 1.25rem;
 }
 
@@ -462,6 +462,11 @@
 .packages-modal-cards .modal-card-meta span:last-child {
   font-size: 0.7rem;
   letter-spacing: 0.11em;
+}
+
+.packages-modal-cards .modal-card-departures__item {
+  font-size: 0.72rem;
+  padding: 0.26rem 0.55rem;
 }
 
 /* Ensure package cards on Packages page never clip content */

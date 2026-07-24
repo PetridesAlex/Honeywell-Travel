@@ -2,9 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
-import { packageCardImageUrl } from '../utils/packageCardImage'
-import { getEnglishPackageTitle } from '../utils/packageTranslations'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
+import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import ModalCards from './ModalCards'
 import { useMobileLite } from '../hooks/useMobileLite'
 import './PopularPackagesSection.css'
@@ -74,29 +73,7 @@ function PopularPackagesSection() {
   }, [allPackagesForCategory, rotationIndex])
 
   const modalCards = useMemo(
-    () =>
-      packagesForCategory.map((pkg) => {
-        const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
-        const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
-        const imageUrl = packageCardImageUrl(pkg)
-        const isGroup = (pkg.packageType || 'individual') === 'group'
-
-        return {
-          id: String(pkg.id),
-          imageUrl,
-          title: pkg.title,
-          secondaryTitle: hasAlternateTitle ? englishTitle : '',
-          description: pkg.description,
-          gradientColor: isGroup ? '#0d5c2e' : '#c41230',
-          destination: pkg.destination,
-          category: pkg.category,
-          duration: pkg.duration,
-          supplier: pkg.supplier || '',
-          packageType: isGroup ? 'group' : 'individual',
-          price: getLeadPrice(pkg),
-          link: `/packages/${pkg.id}/details`
-        }
-      }),
+    () => mapPackagesToModalCards(packagesForCategory, i18n),
     [packagesForCategory, i18n]
   )
 

@@ -6,6 +6,7 @@ import Preloader from './components/Preloader'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import FloatingContactDock from './components/FloatingContactDock'
+import { FavoritesProvider } from './context/FavoritesContext'
 import Home from './pages/Home'
 import Blog from './pages/Blog'
 import Gallery from './pages/Gallery'
@@ -233,10 +234,12 @@ function App() {
         loadingLines={['Honeywell Travel', '#Live the Experience']}
         position="fixed"
       >
-        <div className="app">
-          <AppContent />
-          <FloatingContactDock />
-        </div>
+        <FavoritesProvider>
+          <div className="app">
+            <AppContent />
+            <FloatingContactDock />
+          </div>
+        </FavoritesProvider>
       </Preloader>
     </Router>
   )

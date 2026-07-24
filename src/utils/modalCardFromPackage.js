@@ -1,6 +1,7 @@
 import { packageCardImageUrl } from './packageCardImage'
 import { getEnglishPackageTitle } from './packageTranslations'
 import { getPackageDepartureCountdown } from './packageDepartureCountdown'
+import { getPackageDepartureDatesFromPkg } from './packageDepartureDates'
 import { getPackageLeadPrice } from './packageLeadPrice'
 
 export { getPackageLeadPrice }
@@ -24,6 +25,7 @@ export function mapPackageToModalCard(pkg, i18n) {
     supplier: pkg.supplier || '',
     packageType: isGroup ? 'group' : 'individual',
     price: getPackageLeadPrice(pkg),
+    departureDates: getPackageDepartureDatesFromPkg(pkg),
     link: `/packages/${pkg.id}/details`,
     departureCountdown:
       pkg.details?.packageStatus === 'completed' ? null : getPackageDepartureCountdown(pkg),

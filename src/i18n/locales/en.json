@@ -28,6 +28,20 @@
     "esimHint": "200+ countries",
     "esimAria": "Shop travel eSIM plans — opens Global Advanced Communications partner store in a new tab"
   },
+  "favorites": {
+    "title": "Favourites",
+    "openAria": "Open favourites list, {{count}} saved",
+    "count": "{{count}} saved",
+    "emptyTitle": "No favourites yet",
+    "emptyText": "Tap the heart on any travel package to save it here.",
+    "browse": "Browse packages",
+    "add": "Add to favourites",
+    "remove": "Remove from favourites",
+    "clear": "Clear all",
+    "close": "Close favourites",
+    "unavailable": "Package unavailable",
+    "fromPrice": "From €{{price}}"
+  },
   "package": {
     "departureDate": "Departure Date",
     "departureCountdown": {
