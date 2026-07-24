@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { getVisiblePackages } from '../data/packages'
 import SEO from '../components/SEO'
+import { loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import './BookOnline.css'
 
 function BookOnline() {
@@ -9,10 +9,29 @@ function BookOnline() {
   const [selectedType, setSelectedType] = useState('Any Type')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [catalog, setCatalog] = useState([])
   const resultsRef = useRef(null)
 
   // Check if any filters are active
   const hasActiveFilters = selectedCategory || selectedType !== 'Any Type' || startDate || endDate
+
+  useEffect(() => {
+    let cancelled = false
+
+    const refresh = (force = true) => {
+      loadMergedPackages({ force }).then((packages) => {
+        if (!cancelled) setCatalog(packages)
+      })
+    }
+
+    refresh(true)
+    const unsubscribe = subscribePackagesCatalogRefresh(() => refresh(true))
+
+    return () => {
+      cancelled = true
+      unsubscribe()
+    }
+  }, [])
 
   const categories = [
     'Destinations',
@@ -41,84 +60,71 @@ function BookOnline() {
     'Luxury'
   ]
 
-  // Filter packages based on selections (exclude hidden)
-  const filteredPackages = getVisiblePackages().filter(pkg => {
-    let matches = true
+  // Filter packages based on selections (exclude hidden via CMS merge)
+  const filteredPackages = useMemo(() => {
+    return catalog.filter((pkg) => {
+      let matches = true
 
-    // Filter by category
-    if (selectedCategory && selectedCategory !== '') {
-      if (pkg.category !== selectedCategory) {
-        matches = false
-      }
-    }
-
-    // Filter by type (if package has type field)
-    if (selectedType && selectedType !== 'Any Type' && selectedType !== '') {
-      if (pkg.type && pkg.type !== selectedType) {
-        matches = false
-      }
-    }
-
-    // Filter by date range - ONLY if dates are actually selected
-    if ((startDate && startDate !== '') || (endDate && endDate !== '')) {
-      // Check if package has departure date information
-      if (pkg.details?.departureDate) {
-        const pkgDates = pkg.details.departureDate
-        
-        // Handle multiple departure dates (format: 'DD/MM, DD/MM, ...' or single 'DD/MM')
-        const dateStrings = pkgDates.split(',').map(d => d.trim())
-        const currentYear = new Date().getFullYear()
-        
-        // Parse all departure dates
-        const departureDates = dateStrings.map(dateStr => {
-          const [day, month] = dateStr.split('/').map(num => parseInt(num))
-          return new Date(currentYear, month - 1, day)
-        }).filter(date => !isNaN(date.getTime())) // Filter out invalid dates
-        
-        if (departureDates.length === 0) {
-          // If no valid dates could be parsed, exclude package
+      if (selectedCategory && selectedCategory !== '') {
+        if (pkg.category !== selectedCategory) {
           matches = false
-        } else {
-          // Check if ANY of the departure dates fall within the selected range
-          const hasMatchingDate = departureDates.some(packageDate => {
-            let dateMatches = true
-            
-            // If start date is selected, check if package date is on or after start date
-            if (startDate) {
-              const selectedStartDate = new Date(startDate)
-              if (packageDate < selectedStartDate) {
-                dateMatches = false
-              }
-            }
-            
-            // If end date is selected, check if package date is on or before end date
-            if (endDate) {
-              const selectedEndDate = new Date(endDate)
-              if (packageDate > selectedEndDate) {
-                dateMatches = false
-              }
-            }
-            
-            return dateMatches
-          })
-          
-          if (!hasMatchingDate) {
-            matches = false
-          }
         }
-      } else {
-        // If dates are selected but package has no departure date, exclude it
-        matches = false
       }
-    }
-    
-    return matches
-  })
 
-  // Debug: Log filtered results (only when filters are active)
-  if (hasActiveFilters && selectedCategory) {
-    console.log(`Filtered packages for "${selectedCategory}":`, filteredPackages.length)
-  }
+      if (selectedType && selectedType !== 'Any Type' && selectedType !== '') {
+        if (pkg.type && pkg.type !== selectedType) {
+          matches = false
+        }
+      }
+
+      if ((startDate && startDate !== '') || (endDate && endDate !== '')) {
+        if (pkg.details?.departureDate) {
+          const pkgDates = pkg.details.departureDate
+          const dateStrings = pkgDates.split(',').map((d) => d.trim())
+          const currentYear = new Date().getFullYear()
+
+          const departureDates = dateStrings
+            .map((dateStr) => {
+              const [day, month] = dateStr.split('/').map((num) => parseInt(num, 10))
+              return new Date(currentYear, month - 1, day)
+            })
+            .filter((date) => !isNaN(date.getTime()))
+
+          if (departureDates.length === 0) {
+            matches = false
+          } else {
+            const hasMatchingDate = departureDates.some((packageDate) => {
+              let dateMatches = true
+
+              if (startDate) {
+                const selectedStartDate = new Date(startDate)
+                if (packageDate < selectedStartDate) {
+                  dateMatches = false
+                }
+              }
+
+              if (endDate) {
+                const selectedEndDate = new Date(endDate)
+                if (packageDate > selectedEndDate) {
+                  dateMatches = false
+                }
+              }
+
+              return dateMatches
+            })
+
+            if (!hasMatchingDate) {
+              matches = false
+            }
+          }
+        } else {
+          matches = false
+        }
+      }
+
+      return matches
+    })
+  }, [catalog, selectedCategory, selectedType, startDate, endDate])
 
   // Auto-scroll to results when filters change and there are active filters
   useEffect(() => {
