@@ -4,7 +4,6 @@ import { motion } from 'motion/react'
 import { ArrowLeft, Eye, EyeOff, LogIn } from 'lucide-react'
 import {
   ADMIN_DASHBOARD_PATH,
-  CRM_DEV_PREVIEW_DASHBOARD,
   getPasswordAuthErrorMessage,
   signInAdminWithPassword
 } from '../../lib/adminAuth'
@@ -97,7 +96,7 @@ function Login() {
               </span>
               <span className="admin-auth-visual-name">Honeywell Travel</span>
             </div>
-            <p className="admin-auth-visual-tagline">Your premium travel hub</p>
+            <p className="admin-auth-visual-tagline">Your Travel Package Experience</p>
           </div>
         </div>
 
@@ -174,30 +173,15 @@ function Login() {
               </button>
             </form>
 
-            <div className="admin-auth-links">
-              <Link to="/admin/forgot-password" className="admin-auth-back">
-                Forgot password?
-              </Link>
-              <Link to="/admin/signup" className="admin-auth-back">
-                Create admin account
-              </Link>
-            </div>
-
-            {import.meta.env.DEV ? (
-              <p className="admin-auth-dev-hint">
-                <Link
-                  to={`${CRM_DEV_PREVIEW_DASHBOARD}?preview=dev`}
-                  className="admin-auth-dev-preview"
-                >
-                  Layout preview only (no login)
-                </Link>
-              </p>
-            ) : null}
-
             <div className="admin-auth-footer">
-              <Link to="/" className="admin-auth-back">
-                <ArrowLeft size={15} />
-                Back to home
+              <Link to="/" className="admin-auth-home">
+                <span className="admin-auth-home__icon" aria-hidden="true">
+                  <ArrowLeft size={16} strokeWidth={2.35} />
+                </span>
+                <span className="admin-auth-home__copy">
+                  <span className="admin-auth-home__label">Back to home</span>
+                  <span className="admin-auth-home__hint">honeywelltravel.com.cy</span>
+                </span>
               </Link>
             </div>
           </div>
