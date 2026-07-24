@@ -29,30 +29,15 @@ import BlogPostDetail from './pages/BlogPostDetail'
 import FlightTickets from './pages/FlightTickets'
 import FlightTicketsDestination from './pages/FlightTicketsDestination'
 import TermsAndConditions from './pages/TermsAndConditions'
-import ClientProfile from './pages/admin/ClientProfile'
-import Clients from './pages/admin/Clients'
-import CorporateGroups from './pages/admin/CorporateGroups'
-import CorporateServiceContacts from './pages/admin/CorporateServiceContacts'
-import ServicesDashboard from './pages/admin/ServicesDashboard'
-import PackageCalculator from './pages/admin/PackageCalculator'
 import PackagesCms from './pages/admin/PackagesCms'
 import PackageCmsDetail from './pages/admin/PackageCmsDetail'
-import Dashboard from './pages/admin/Dashboard'
 import AdminIndexRedirect from './pages/admin/components/AdminIndexRedirect'
-import FollowUps from './pages/admin/FollowUps'
-import Leads from './pages/admin/Leads'
 import Login from './pages/admin/Login'
 import Signup from './pages/admin/Signup'
 import ForgotPassword from './pages/admin/ForgotPassword'
 import AdminGuestRoute from './pages/admin/components/AdminGuestRoute'
 import AdminProtectedRoute from './pages/admin/components/AdminProtectedRoute'
-import { ADMIN_LOGIN_PATH } from './lib/adminAuth'
-import Pipeline from './pages/admin/Pipeline'
-import Reports from './pages/admin/Reports'
-import GiftVouchers from './pages/admin/GiftVouchers'
-import Team from './pages/admin/Team'
-import GroupBookings from './pages/admin/GroupBookings'
-import GroupBookingDetail from './pages/admin/GroupBookingDetail'
+import { ADMIN_LOGIN_PATH, ADMIN_PACKAGES_PATH } from './lib/adminAuth'
 import './App.css'
 import {
   hasCompletedPreloaderThisSession,
@@ -111,24 +96,11 @@ function AppContent() {
             }
           />
           <Route element={<AdminProtectedRoute />}>
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/services-hub" element={<ServicesDashboard />} />
-            <Route path="/admin/gift-vouchers" element={<GiftVouchers />} />
-            <Route path="/admin/team" element={<Team />} />
-            <Route path="/admin/group-bookings" element={<GroupBookings />} />
-            <Route path="/admin/group-bookings/:id" element={<GroupBookingDetail />} />
-            <Route path="/admin/corporate-groups" element={<CorporateGroups />} />
             <Route path="/admin/packages" element={<PackagesCms />} />
             <Route path="/admin/packages/:id" element={<PackageCmsDetail />} />
-            <Route path="/admin/package-calculator" element={<PackageCalculator />} />
-            <Route path="/admin/corporate-contacts" element={<CorporateServiceContacts />} />
-            <Route path="/admin/clients" element={<Clients />} />
-            <Route path="/admin/clients/:id" element={<ClientProfile />} />
-            <Route path="/admin/leads" element={<Leads />} />
-            <Route path="/admin/pipeline" element={<Pipeline />} />
-            <Route path="/admin/follow-ups" element={<FollowUps />} />
-            <Route path="/admin/reports" element={<Reports />} />
             <Route path="/admin" element={<AdminIndexRedirect />} />
+            <Route path="/admin/dashboard" element={<Navigate to={ADMIN_PACKAGES_PATH} replace />} />
+            <Route path="/admin/*" element={<Navigate to={ADMIN_PACKAGES_PATH} replace />} />
           </Route>
           <Route path="/admin/*" element={<Navigate to={ADMIN_LOGIN_PATH} replace />} />
         </Routes>

@@ -1017,6 +1017,7 @@ function PackageFullDetail() {
           decoding="async"
           fetchPriority="high"
           loading="eager"
+          referrerPolicy="no-referrer"
           aria-hidden="true"
         />
         <div className="package-full-hero-overlay" aria-hidden="true" />
@@ -1103,6 +1104,7 @@ function PackageFullDetail() {
                         className="price-thumb-img"
                         loading="lazy"
                         decoding="async"
+                        referrerPolicy="no-referrer"
                         sizes="(min-width: 900px) min(92vw, 1200px), 100vw"
                       />
                     ) : (
@@ -1226,7 +1228,14 @@ function PackageFullDetail() {
                               <div className="hotel-single-left">
                                 <div className="hotel-image-top hotel-image-single">
                                   {baseHotel.image ? (
-                                    <div className="hotel-image-bg" style={{ backgroundImage: `url("${baseHotel.image}")` }} />
+                                    <img
+                                      src={baseHotel.image}
+                                      alt=""
+                                      className="hotel-image-bg hotel-image-bg--img"
+                                      loading="lazy"
+                                      decoding="async"
+                                      referrerPolicy="no-referrer"
+                                    />
                                   ) : (
                                     <div className="hotel-image-placeholder"><span className="image-text">INSERT IMAGE HERE</span></div>
                                   )}

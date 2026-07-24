@@ -18,6 +18,43 @@ export function cloneJson(value) {
   return JSON.parse(JSON.stringify(value ?? null))
 }
 
+/** True when a value can be used as an <img src> (paths/URLs, not emoji flags). */
+export function isUsableImageSrc(value) {
+  if (value == null) return false
+  const src = String(value).trim()
+  if (!src) return false
+  return (
+    src.startsWith('/') ||
+    src.startsWith('http://') ||
+    src.startsWith('https://') ||
+    src.startsWith('data:') ||
+    src.startsWith('blob:')
+  )
+}
+
+/**
+ * Pick the best cover image for cards / sticky headers.
+ * Order: cover → thumbnail → gallery → package image → first hotel image.
+ */
+export function resolvePackageCoverImage(pkgOrRow) {
+  if (!pkgOrRow) return ''
+  const details = pkgOrRow.details || {}
+  const gallery = Array.isArray(details.gallery) ? details.gallery : []
+  const hotels = Array.isArray(details.hotels) ? details.hotels : []
+  const candidates = [
+    details.coverImage,
+    details.thumbnailImage,
+    gallery[0],
+    pkgOrRow.image,
+    ...hotels.map((hotel) => hotel?.image)
+  ]
+
+  for (const candidate of candidates) {
+    if (isUsableImageSrc(candidate)) return String(candidate).trim()
+  }
+  return ''
+}
+
 /** Map a cms_packages row to the website package shape. */
 export function cmsRowToSitePackage(row) {
   if (!row) return null
@@ -42,6 +79,13 @@ export function cmsRowToSitePackage(row) {
 
 /** Map a static website package into a cms_packages row payload. */
 export function staticPackageToCmsRow(pkg) {
+  const details = cloneJson(pkg.details || {})
+  const cover = resolvePackageCoverImage({ ...pkg, details })
+  if (cover) {
+    if (!isUsableImageSrc(details.coverImage)) details.coverImage = cover
+    if (!isUsableImageSrc(details.thumbnailImage)) details.thumbnailImage = cover
+  }
+
   return {
     legacy_id: Number(pkg.id),
     title: pkg.title || 'Untitled package',
@@ -51,12 +95,12 @@ export function staticPackageToCmsRow(pkg) {
     duration: pkg.duration || null,
     description: pkg.description || null,
     long_description: pkg.longDescription || null,
-    image: pkg.image || null,
+    image: isUsableImageSrc(pkg.image) ? pkg.image : cover || null,
     featured: Boolean(pkg.featured),
     package_type: pkg.packageType || null,
     hidden: Boolean(pkg.hidden),
     published: true,
-    details: cloneJson(pkg.details || {}),
+    details,
     updated_at: new Date().toISOString()
   }
 }

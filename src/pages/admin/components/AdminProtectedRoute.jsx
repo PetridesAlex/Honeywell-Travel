@@ -8,9 +8,8 @@ import { useAdminAuthGate } from '../hooks/useAdminAuthGate'
 import AdminAuthLoading from './AdminAuthLoading'
 
 /**
- * Guards all CRM routes. Magic-link callbacks land on /admin/dashboard and
- * stay there — no intermediate login page.
- * Dev-only: localhost opens CRM layout without login (incl. /admin/dashboard#).
+ * Guards Packages CMS routes. Auth callbacks land on /admin/packages.
+ * Dev-only: localhost opens CMS layout without login via ?preview=dev.
  */
 function AdminProtectedRoute() {
   const location = useLocation()

@@ -245,20 +245,7 @@ export const EMPTY_TRAVEL_GROUP = {
 }
 
 export const ADMIN_NAV = [
-  { to: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
-  { to: '/admin/group-bookings', label: 'Group bookings', icon: 'groupBookings', highlight: true },
-  { to: '/admin/services-hub', label: 'Services Hub', icon: 'servicesHub', highlight: true },
-  { to: '/admin/team', label: 'Team hub', icon: 'team', badgeKey: 'teamTasks' },
-  { to: '/admin/gift-vouchers', label: '🎁 Gift Vouchers', icon: 'vouchers' },
-  { to: '/admin/packages', label: 'Packages CMS', icon: 'packages', highlight: true },
-  { to: '/admin/package-calculator', label: 'Package Calculator', icon: 'calculator', highlight: true },
-  { to: '/admin/corporate-groups', label: 'Corporate', icon: 'corporate', highlight: true },
-  { to: '/admin/corporate-contacts', label: 'Corp. Services List', icon: 'corpContacts', highlight: true },
-  { to: '/admin/clients', label: 'Clients', icon: 'clients' },
-  { to: '/admin/leads', label: 'Leads', icon: 'leads' },
-  { to: '/admin/pipeline', label: 'Pipeline', icon: 'pipeline' },
-  { to: '/admin/follow-ups', label: 'Follow-ups', icon: 'followups', badgeKey: 'followUps' },
-  { to: '/admin/reports', label: 'Reports', icon: 'reports' }
+  { to: '/admin/packages', label: 'Travel Packages', icon: 'packages' }
 ]
 
 export const SOURCE_OPTIONS = [
@@ -274,6 +261,28 @@ export const SOURCE_OPTIONS = [
   'Walk-in',
   'Referral',
   'Other'
+]
+
+/** Website package categories — used when creating/editing CMS packages. */
+export const PACKAGE_CATEGORY_OPTIONS = [
+  'Summer Packages',
+  'Summer Packages to Greece',
+  'Autumn Packages',
+  'Winter Packages',
+  'Spring Packages',
+  'Christmas Packages',
+  'City Breaks',
+  'Cruises',
+  'Easter Packages',
+  'Exotic Packages',
+  'Exotic Destinations',
+  'Green Monday',
+  'Group Travel',
+  'Mary Special Trips',
+  'Music & Sports',
+  'Sports Events & Concerts',
+  'Ski Packages',
+  'Destinations'
 ]
 
 export const EMPTY_LEAD = {

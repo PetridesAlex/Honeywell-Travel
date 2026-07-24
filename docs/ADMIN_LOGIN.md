@@ -2,14 +2,14 @@
 
 For **production deployment**, see [DEPLOY.md](./DEPLOY.md).
 
-The CRM at `/admin/login` uses **Supabase email/password** authentication (`signInWithPassword`). Sessions persist via the Supabase client (`persistSession` / `autoRefreshToken`).
+The admin at `/admin/login` uses **Supabase email/password** authentication. After login you enter the **Packages CMS** at `/admin/packages`.
 
 ## 1. Environment variables
 
 ```env
 VITE_SUPABASE_URL=https://nwdyywbtbgdbdwneovme.supabase.co
 VITE_SUPABASE_ANON_KEY=sb_publishable_...
-VITE_ADMIN_AUTH_REDIRECT_URL=https://www.honeywelltravel.com.cy/admin/dashboard
+VITE_ADMIN_AUTH_REDIRECT_URL=https://www.honeywelltravel.com.cy/admin/packages
 ```
 
 Use the **base** project URL only (no `/rest/v1/`). Restart the dev server after changing `.env`.
@@ -18,51 +18,56 @@ Use the **base** project URL only (no `/rest/v1/`). Restart the dev server after
 
 ## 2. Supabase Auth settings
 
-1. Supabase → **Authentication** → **Providers** → **Email**.
-2. Enable **Email** provider.
-3. Enable **Email password** sign-in (disable Magic Link if you no longer want it).
-4. Under **URL Configuration**, add:
+1. Supabase → **Authentication** → **Providers** → **Email**
+2. Enable email/password sign-in
+3. Under **URL Configuration**, add:
    - `https://www.honeywelltravel.com.cy/**`
-   - `http://localhost:5173/**` (local testing)
-5. Optional: disable public sign-ups if only invited staff should have accounts.
+   - `http://localhost:5173/**`
 
 ## 3. Create staff users
 
-**Option A — Dashboard**
-1. **Authentication** → **Users** → **Add user**
-2. Enter email + password
-3. Enable **Auto Confirm User**
+**Dashboard:** Authentication → Users → Add user (email + password, Auto Confirm).
 
-**Option B — App signup**
-1. Open `/admin/signup`
-2. Create account with email + password (`supabase.auth.signUp`)
+**Or** open `/admin/signup` and create an account.
+
+### Display names (Welcome Back, …)
+
+Friendly first names are mapped in `src/pages/admin/utils/adminUser.js`.
+
+| Email | Shows as |
+|-------|----------|
+| `honeywelltravel1@asg.com.cy` | Alex |
+| `honey@gmail.com` | Alex |
+| `v.avraam@asg.com.cy` | Valentina |
+
+When you add another staff account, add their email → first name in `DISPLAY_NAME_BY_EMAIL` so the header shows **Welcome Back, {Name}**.
 
 ## 4. User experience
 
 | Step | What happens |
 |------|----------------|
 | 1 | Open `/admin/login`, enter email + password, click **Sign in** |
-| 2 | On success, redirect to `/admin/dashboard` |
-| 3 | Session stays until **Sign out** |
-| 4 | Wrong credentials show: *Invalid email or password.* |
+| 2 | Redirect to `/admin/packages` (Packages CMS) |
+| 3 | Search/edit packages and **Save** to publish live |
+| 4 | **Sign out** clears the session |
 
 ## 5. Troubleshooting
 
 | Message | Fix |
 |--------|-----|
 | Invalid email or password | Check credentials; create/reset user in Supabase |
-| Email not confirmed | Auto-confirm the user in Authentication → Users |
-| Invalid API key | Fix `VITE_SUPABASE_URL` + publishable `VITE_SUPABASE_ANON_KEY` on Vercel and redeploy |
+| Invalid path specified in request URL | `VITE_SUPABASE_URL` must not include `/rest/v1/` |
+| Invalid API key | Fix publishable key on Vercel and redeploy |
 | Supabase is not configured | Set `VITE_SUPABASE_*` in hosting env |
 
 ## 6. Design preview (local only)
 
-Open `http://localhost:5173/admin/dashboard?preview=dev` for layout-only browsing without login.
+Open `http://localhost:5173/admin/packages?preview=dev` for layout-only browsing without login.
 
 ## 7. Protected routes
 
-All `/admin/*` routes except `/admin/login`, `/admin/signup`, and `/admin/forgot-password` require a valid Supabase session.
+Authenticated admin routes are Packages CMS only. Other former CRM paths redirect to `/admin/packages`.
 
-## 8. Packages CMS
+## 8. Packages CMS guide
 
-Staff can edit package prices and dates at **`/admin/packages`**. Setup steps: [PACKAGES_CMS.md](./PACKAGES_CMS.md).
+See [PACKAGES_CMS.md](./PACKAGES_CMS.md).

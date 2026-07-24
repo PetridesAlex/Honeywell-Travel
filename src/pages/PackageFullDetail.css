@@ -1742,6 +1742,12 @@
   transform: translateZ(0);
 }
 
+img.hotel-image-bg--img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
 .hotel-image-overlay {
   position: absolute;
   inset: 0;

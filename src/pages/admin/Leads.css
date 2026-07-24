@@ -3508,39 +3508,165 @@ a.crm-btn.crm-btn-primary {
 
 .crm-toast-host {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: 1.1rem;
+  bottom: 1.1rem;
   z-index: 1200;
   display: grid;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  max-width: min(26rem, calc(100vw - 1.5rem));
+  pointer-events: none;
 }
 
-.crm-toast {
-  min-width: 260px;
-  background: #0f172a;
+.crm-toast,
+.cms-toast {
+  pointer-events: auto;
+  min-width: min(22rem, 100%);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 0.75rem;
+  padding: 0.9rem 0.95rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    radial-gradient(ellipse 80% 90% at 0% 0%, rgba(94, 184, 232, 0.16), transparent 55%),
+    linear-gradient(145deg, #12151c 0%, #1a2030 55%, #151922 100%);
+  color: #f4f7fb;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    0 8px 18px rgba(15, 21, 28, 0.25);
+  animation: cms-toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.crm-toast-success,
+.cms-toast--success {
+  border-color: rgba(52, 211, 153, 0.35);
+  background:
+    radial-gradient(ellipse 80% 90% at 0% 0%, rgba(52, 211, 153, 0.18), transparent 55%),
+    linear-gradient(145deg, #0d1f18 0%, #123028 48%, #0f1c18 100%);
+}
+
+.crm-toast-error,
+.cms-toast--error {
+  border-color: rgba(248, 113, 113, 0.4);
+  background:
+    radial-gradient(ellipse 80% 90% at 0% 0%, rgba(248, 113, 113, 0.18), transparent 55%),
+    linear-gradient(145deg, #2a1216 0%, #3a1520 48%, #1f1014 100%);
+}
+
+.crm-toast-info,
+.cms-toast--info {
+  border-color: rgba(125, 211, 252, 0.32);
+}
+
+.cms-toast__icon {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.cms-toast--success .cms-toast__icon {
+  background: linear-gradient(145deg, rgba(52, 211, 153, 0.28), rgba(15, 122, 79, 0.45));
+  border-color: rgba(110, 231, 183, 0.4);
+  color: #bbf7d0;
+}
+
+.cms-toast--error .cms-toast__icon {
+  background: linear-gradient(145deg, rgba(248, 113, 113, 0.3), rgba(185, 28, 28, 0.45));
+  border-color: rgba(252, 165, 165, 0.4);
+  color: #fecaca;
+}
+
+.cms-toast--info .cms-toast__icon {
+  background: linear-gradient(145deg, rgba(125, 211, 252, 0.25), rgba(30, 77, 123, 0.4));
+  border-color: rgba(186, 230, 253, 0.35);
+  color: #bae6fd;
+}
+
+.cms-toast__copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.18rem;
+  padding-top: 0.05rem;
+}
+
+.cms-toast__eyebrow {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.62);
+}
+
+.cms-toast--success .cms-toast__eyebrow {
+  color: rgba(167, 243, 208, 0.78);
+}
+
+.cms-toast--error .cms-toast__eyebrow {
+  color: rgba(254, 202, 202, 0.78);
+}
+
+.cms-toast__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
   color: #fff;
-  padding: 0.65rem 0.85rem;
-  border-radius: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
 }
 
-.crm-toast-success {
-  background: #b51234;
+.cms-toast__detail {
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(226, 232, 240, 0.78);
 }
 
-.crm-toast-error {
-  background: #b91c1c;
-}
-
-.crm-toast button {
-  border: none;
-  background: transparent;
-  color: inherit;
+.crm-toast button,
+.cms-toast__close {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.82);
   cursor: pointer;
-  font-size: 1.1rem;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.crm-toast button:hover,
+.cms-toast__close:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+@keyframes cms-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crm-toast,
+  .cms-toast {
+    animation: none;
+  }
 }
 
 .crm-modal-backdrop {

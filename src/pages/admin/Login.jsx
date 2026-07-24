@@ -112,7 +112,7 @@ function Login() {
               Sign in
             </motion.h1>
             <p className="admin-auth-muted admin-auth-muted--intro">
-              Enter your work email and password to access the CRM.
+              Enter your work email and password to access Packages CMS.
             </p>
 
             <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>

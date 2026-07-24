@@ -50,11 +50,19 @@ function PackageCard({ package: pkg }) {
       <span className={`package-type-badge package-type-badge--${isGroup ? 'group' : 'individual'}`} aria-hidden="true">
         {isGroup ? 'Group' : 'Individual'}
       </span>
-      <div
-        className={`package-image${imageUrl ? ' package-image-bg' : ''}`}
-        style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : undefined}
-      >
-        {!imageUrl && pkg.image}
+      <div className={`package-image${imageUrl ? ' package-image-bg' : ''}`}>
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt=""
+            className="package-image-photo"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          pkg.image
+        )}
       </div>
       <div className="package-content">
         <div className="package-header-row">

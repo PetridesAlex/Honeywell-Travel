@@ -4,6 +4,8 @@ import {
   cloneJson,
   cmsRowToSitePackage,
   isPackagesCmsSchemaMissing,
+  isUsableImageSrc,
+  resolvePackageCoverImage,
   staticPackageToCmsRow
 } from '../../../lib/packagesCms'
 
@@ -23,7 +25,7 @@ export async function fetchCmsPackages({ includeHidden = true } = {}) {
   let query = supabase
     .from('cms_packages')
     .select(
-      'id, legacy_id, title, destination, category, price, duration, featured, package_type, hidden, published, updated_at, created_at'
+      'id, legacy_id, title, destination, category, price, duration, image, featured, package_type, hidden, published, details, updated_at, created_at'
     )
     .order('legacy_id', { ascending: true })
 
@@ -60,6 +62,23 @@ export async function fetchCmsPackageById(id) {
   return { data, error: null }
 }
 
+export async function getNextLegacyId() {
+  const [{ data: cmsRows, error: cmsError }, staticMax] = await Promise.all([
+    supabase.from('cms_packages').select('legacy_id').order('legacy_id', { ascending: false }).limit(1),
+    Promise.resolve(Math.max(0, ...travelPackages.map((pkg) => Number(pkg.id) || 0)))
+  ])
+
+  if (cmsError) {
+    return {
+      legacyId: staticMax + 1,
+      error: { message: formatError(cmsError), schemaMissing: isPackagesCmsSchemaMissing(cmsError) }
+    }
+  }
+
+  const cmsMax = Number(cmsRows?.[0]?.legacy_id) || 0
+  return { legacyId: Math.max(cmsMax, staticMax) + 1, error: null }
+}
+
 export async function saveCmsPackage(row) {
   const details = cloneJson(row.details || {})
   const hotels = Array.isArray(details.hotels) ? details.hotels : []
@@ -68,6 +87,12 @@ export async function saveCmsPackage(row) {
     if (Number.isFinite(value) && value > 0 && value < min) return value
     return min
   }, Infinity)
+
+  const resolvedCover = resolvePackageCoverImage({ ...row, details })
+  if (resolvedCover) {
+    if (!isUsableImageSrc(details.coverImage)) details.coverImage = resolvedCover
+    if (!isUsableImageSrc(details.thumbnailImage)) details.thumbnailImage = resolvedCover
+  }
 
   const payload = {
     title: (row.title || 'Untitled package').trim(),
@@ -82,7 +107,7 @@ export async function saveCmsPackage(row) {
     duration: (row.duration || '').trim() || null,
     description: (row.description || '').trim() || null,
     long_description: (row.long_description || '').trim() || null,
-    image: row.image || null,
+    image: isUsableImageSrc(row.image) ? row.image : resolvedCover || null,
     featured: Boolean(row.featured),
     package_type: row.package_type || null,
     hidden: Boolean(row.hidden),

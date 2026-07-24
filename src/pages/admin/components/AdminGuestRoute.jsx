@@ -3,7 +3,7 @@ import { ADMIN_DASHBOARD_PATH, ADMIN_LOGIN_PATH, hasAuthCallbackInUrl } from '..
 import { useAdminAuthGate } from '../hooks/useAdminAuthGate'
 import AdminAuthLoading from './AdminAuthLoading'
 
-/** Login page only — redirects authenticated users straight to the dashboard. */
+/** Login page — redirects authenticated users to Packages CMS. */
 function AdminGuestRoute({ children }) {
   const { ready, authed, callbackFailed } = useAdminAuthGate()
 

@@ -1,12 +1,13 @@
 import { supabase } from './supabase'
 
-export const ADMIN_UNAUTHORIZED_MESSAGE = 'You are not authorized to access this CRM.'
+export const ADMIN_UNAUTHORIZED_MESSAGE = 'You are not authorized to access this CMS.'
 
-export const ADMIN_DASHBOARD_PATH = '/admin/dashboard'
+export const ADMIN_DASHBOARD_PATH = '/admin/packages'
+export const ADMIN_PACKAGES_PATH = '/admin/packages'
 export const ADMIN_LOGIN_PATH = '/admin/login'
 
 /** @deprecated Kept for redirect URL allowlists / recovery emails. */
-export const ADMIN_AUTH_REDIRECT = 'https://www.honeywelltravel.com.cy/admin/dashboard'
+export const ADMIN_AUTH_REDIRECT = 'https://www.honeywelltravel.com.cy/admin/packages'
 
 export function getAdminAuthRedirectUrl() {
   if (import.meta.env.DEV && typeof window !== 'undefined') {
