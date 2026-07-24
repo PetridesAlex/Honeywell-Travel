@@ -1,20 +1,9 @@
 import { packageCardImageUrl } from './packageCardImage'
 import { getEnglishPackageTitle } from './packageTranslations'
 import { getPackageDepartureCountdown } from './packageDepartureCountdown'
+import { getPackageLeadPrice } from './packageLeadPrice'
 
-export function getPackageLeadPrice(pkg) {
-  if (pkg?.details?.hotels?.length) {
-    let lowestDouble = Infinity
-    for (const hotel of pkg.details.hotels) {
-      const price = hotel?.prices?.double
-      if (typeof price === 'number' && price > 0 && price < lowestDouble) {
-        lowestDouble = price
-      }
-    }
-    if (lowestDouble !== Infinity) return lowestDouble
-  }
-  return typeof pkg?.price === 'number' ? pkg.price : 0
-}
+export { getPackageLeadPrice }
 
 export function mapPackageToModalCard(pkg, i18n) {
   const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)

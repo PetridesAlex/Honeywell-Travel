@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getEnglishPackageTitle } from '../utils/packageTranslations'
+import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import './PackageCard.css'
 
 function PackageCard({ package: pkg }) {
@@ -11,22 +12,8 @@ function PackageCard({ package: pkg }) {
   const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
   const canToggleLanguage = Boolean(englishTitle && englishTitle.trim() !== primaryTitle.trim())
   const displayTitle = showEnglishTitle && canToggleLanguage ? englishTitle : primaryTitle
-  
-  // From price = lowest double room price per person across all hotels
-  const getCheapestPrice = () => {
-    if (pkg.details && pkg.details.hotels && pkg.details.hotels.length > 0) {
-      let lowestDouble = Infinity
-      pkg.details.hotels.forEach(hotel => {
-        if (hotel.prices && hotel.prices.double != null && hotel.prices.double > 0 && hotel.prices.double < lowestDouble) {
-          lowestDouble = hotel.prices.double
-        }
-      })
-      return lowestDouble !== Infinity ? lowestDouble : pkg.price
-    }
-    return pkg.price
-  }
 
-  const displayPrice = getCheapestPrice()
+  const displayPrice = getPackageLeadPrice(pkg)
   const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
   const imageUrl = pkg.details?.coverImage || pkg.details?.thumbnailImage || pkg.details?.gallery?.[0]
   const isGroup = (pkg.packageType || 'individual') === 'group'

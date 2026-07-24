@@ -5,6 +5,7 @@ import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding
 import { getPackageById } from '../data/packages'
 import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import { getTranslatedPackageTitle } from '../utils/packageTranslations'
+import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
 import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
@@ -711,21 +712,7 @@ const PackageContactCard = ({ className = '' }) => (
 )
 
 function getCheapestPriceFromPkg(pkg) {
-  if (pkg?.details?.hotels?.length > 0) {
-    let lowestDouble = Infinity
-    pkg.details.hotels.forEach((hotel) => {
-      if (
-        hotel.prices &&
-        hotel.prices.double != null &&
-        hotel.prices.double > 0 &&
-        hotel.prices.double < lowestDouble
-      ) {
-        lowestDouble = hotel.prices.double
-      }
-    })
-    return lowestDouble !== Infinity ? lowestDouble : pkg.price
-  }
-  return pkg?.price
+  return getPackageLeadPrice(pkg)
 }
 
 function mergedOrFallback(all, id, fallback) {

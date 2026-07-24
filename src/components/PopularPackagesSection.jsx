@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
 import { packageCardImageUrl } from '../utils/packageCardImage'
 import { getEnglishPackageTitle } from '../utils/packageTranslations'
+import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import ModalCards from './ModalCards'
 import { useMobileLite } from '../hooks/useMobileLite'
 import './PopularPackagesSection.css'
@@ -23,17 +24,8 @@ const categoryToSlug = (category) =>
   category.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '')
 
 function getLeadPrice(pkg) {
-  if (pkg.details?.hotels?.length) {
-    let lowestDouble = Infinity
-    for (const hotel of pkg.details.hotels) {
-      const price = hotel?.prices?.double
-      if (typeof price === 'number' && price > 0 && price < lowestDouble) {
-        lowestDouble = price
-      }
-    }
-    if (lowestDouble !== Infinity) return lowestDouble
-  }
-  return typeof pkg.price === 'number' ? pkg.price : Number.MAX_SAFE_INTEGER
+  const price = getPackageLeadPrice(pkg)
+  return price > 0 ? price : Number.MAX_SAFE_INTEGER
 }
 
 function PopularPackagesSection() {
