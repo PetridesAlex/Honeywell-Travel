@@ -1,0 +1,120 @@
+.package-brochure-card {
+  margin-top: 1rem;
+  position: relative;
+  isolation: isolate;
+  padding: 1.2rem 1.15rem 1.15rem;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(196, 18, 48, 0.16), transparent 55%),
+    radial-gradient(90% 70% at 100% 100%, rgba(21, 58, 99, 0.22), transparent 52%),
+    linear-gradient(155deg, #0b1220 0%, #111827 42%, #1e293b 100%);
+  box-shadow:
+    0 18px 40px rgba(2, 6, 23, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  overflow: hidden;
+}
+
+.package-brochure-card__glow {
+  position: absolute;
+  top: -3rem;
+  left: -1.5rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 18, 48, 0.22) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.package-brochure-card__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 0.95rem;
+}
+
+.package-brochure-card__emblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 14px;
+  color: #fecdd3;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid rgba(254, 202, 202, 0.28);
+}
+
+.package-brochure-card__heading h3 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  color: #f8fafc;
+}
+
+.package-brochure-card__heading p {
+  margin: 0.28rem 0 0;
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: rgba(226, 232, 240, 0.82);
+}
+
+.package-brochure-card__button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.72rem 1rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #c41230 0%, #e31e24 100%);
+  box-shadow: 0 12px 24px rgba(196, 18, 48, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.package-brochure-card__button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(196, 18, 48, 0.34);
+}
+
+.package-brochure-card__button:disabled {
+  opacity: 0.78;
+  cursor: wait;
+}
+
+.package-brochure-card__spinner {
+  animation: brochureSpin 0.85s linear infinite;
+}
+
+@keyframes brochureSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.package-brochure-card__hint,
+.package-brochure-card__error {
+  position: relative;
+  z-index: 1;
+  margin: 0.7rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(203, 213, 225, 0.88);
+}
+
+.package-brochure-card__error {
+  color: #fecaca;
+}

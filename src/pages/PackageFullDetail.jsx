@@ -18,6 +18,7 @@ import { FORM_TYPES } from '../lib/formConstants'
 import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import FavoriteToggleButton from '../components/FavoriteToggleButton'
+import PackageBrochureCard from '../components/PackageBrochureCard'
 import '../components/FavoritesTrigger.css'
 import './PackageFullDetail.css'
 
@@ -2077,6 +2078,12 @@ function PackageFullDetail() {
             </div>
 
             <PackageContactCard className="mobile-sidebar-card" />
+            <PackageBrochureCard
+              className="mobile-sidebar-card"
+              pkg={pkg}
+              title={translatedTitle || pkg.title}
+              priceLabel={formatPackagePrice()}
+            />
           </main>
 
           <aside className="layout-aside">
@@ -2179,6 +2186,11 @@ function PackageFullDetail() {
             </div>
 
             <PackageContactCard />
+            <PackageBrochureCard
+              pkg={pkg}
+              title={translatedTitle || pkg.title}
+              priceLabel={formatPackagePrice()}
+            />
           </aside>
         </div>
       </div>
