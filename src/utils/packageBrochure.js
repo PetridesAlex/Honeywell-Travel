@@ -310,45 +310,75 @@ function brochureStyles() {
     }
     .cta-card {
       margin-top: auto;
-      border-radius: 14px;
-      padding: 18px 20px;
-      background: #153a63;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      padding: 22px 24px 20px;
+      background:
+        radial-gradient(120% 80% at 100% 0%, rgba(196, 18, 48, 0.28) 0%, transparent 55%),
+        linear-gradient(155deg, #1a1a1a 0%, #111111 48%, #2a1216 100%);
       color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #c41230 0%, #e31e24 55%, #7f1d1d 100%);
     }
     .cta-card__label {
-      margin: 0 0 4px;
+      margin: 0 0 6px;
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+      font-weight: 800;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.72);
+      color: #fda4af;
     }
     .cta-card__title {
-      margin: 0 0 14px;
-      font-size: 18px;
+      margin: 0 0 6px;
+      font-size: 20px;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0;
     }
+    .cta-card__subtitle {
+      margin: 0 0 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.72);
+    }
     .cta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px 18px;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .cta-item {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .cta-item__label {
       display: block;
       font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 2px;
+      color: #fda4af;
+      margin-bottom: 4px;
     }
     .cta-item__value {
       display: block;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 12.5px;
+      font-weight: 700;
       color: #ffffff;
+      line-height: 1.35;
     }
     .inner-top {
       display: flex;
@@ -701,6 +731,7 @@ function renderCtaCard() {
     <div class="cta-card">
       <p class="cta-card__label">Book this package</p>
       <p class="cta-card__title">Honeywell Travel</p>
+      <p class="cta-card__subtitle">Cyprus travel specialists · #LivetheExperience</p>
       <div class="cta-grid">
         <div class="cta-item">
           <span class="cta-item__label">Call</span>
@@ -715,8 +746,8 @@ function renderCtaCard() {
           <span class="cta-item__value">www.honeywelltravel.com.cy</span>
         </div>
         <div class="cta-item">
-          <span class="cta-item__label">Tagline</span>
-          <span class="cta-item__value">#LivetheExperience</span>
+          <span class="cta-item__label">Support</span>
+          <span class="cta-item__value">Before, during &amp; after your trip</span>
         </div>
       </div>
     </div>
