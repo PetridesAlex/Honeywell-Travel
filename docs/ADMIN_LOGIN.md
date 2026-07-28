@@ -4,15 +4,18 @@ For **production deployment**, see [DEPLOY.md](./DEPLOY.md).
 
 The admin at `/admin/login` uses **Supabase email/password** authentication. After login you enter the **Packages CMS** at `/admin/packages`.
 
+**Preferred day-to-day CMS:** Travel Hub CRM → **Packages** (same Supabase project; existing Travel Hub login). Honeywell `/admin` remains a fallback.
+
 ## 1. Environment variables
 
 ```env
 VITE_SUPABASE_URL=https://nwdyywbtbgdbdwneovme.supabase.co
 VITE_SUPABASE_ANON_KEY=sb_publishable_...
+# or: VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 VITE_ADMIN_AUTH_REDIRECT_URL=https://www.honeywelltravel.com.cy/admin/packages
 ```
 
-Use the **base** project URL only (no `/rest/v1/`). Restart the dev server after changing `.env`.
+Use the **Travel Hub CRM** Supabase project (shared with `travel-hub-crm`). Base URL only (no `/rest/v1/`). Restart the dev server after changing `.env`.
 
 **Important:** In Supabase → **Authentication** → **Attack Protection**, turn **Captcha** **off**.
 

@@ -1,14 +1,18 @@
 # Packages CMS
 
-Employee workspace for searching and updating travel packages live. The admin area is **Packages CMS only** (no Clients / Leads / CRM modules).
+Employee workspace for searching and updating travel packages live.
+
+**Preferred entry:** Travel Hub CRM → **Packages** (same login as the rest of the CRM, shared `cms_packages` table).
+
+Honeywell `/admin/packages` remains available as a fallback against the same database.
 
 ## Setup (once)
 
-1. Open **Supabase → SQL Editor**
-2. Paste and run [`supabase/fix_packages_cms.sql`](../supabase/fix_packages_cms.sql)
+1. Open **Supabase → SQL Editor** (Travel Hub project `nwdyywbtbgdbdwneovme`)
+2. Paste and run [`supabase/fix_packages_cms.sql`](../supabase/fix_packages_cms.sql) (or Travel Hub migration `023_cms_packages.sql`)
 3. Confirm `cms_packages` exists under **Table Editor**
 
-## Sign in
+## Sign in (Honeywell admin fallback)
 
 1. Open `/admin/login`
 2. Sign in with email + password
@@ -32,7 +36,13 @@ Published CMS packages override the static website catalog on `/packages` and pa
 
 Use **Import from website** once (or when you want to refresh from `src/data/packages.js`). Matching rows are overwritten by package ID.
 
-You must be **logged in** as admin for import/save (RLS). The local `SUPABASE_SECRET_KEY` in `.env` must be a valid **service_role / secret** key for the same project as `VITE_SUPABASE_URL` if you use server-side scripts.
+Or from a machine with the Travel Hub **service_role** JWT in `.env`:
+
+```bash
+npm run sync:cms-packages
+```
+
+You must be **logged in** as admin for import/save (RLS). For server-side scripts (`npm run sync:cms-packages`), set `SUPABASE_SECRET_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`) to the Travel Hub project’s JWT **service_role** key — the same project as `VITE_SUPABASE_URL` (`nwdyywbtbgdbdwneovme`).
 
 ## Images
 

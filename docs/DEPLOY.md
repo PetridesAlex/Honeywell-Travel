@@ -26,15 +26,16 @@ In [Vercel Dashboard](https://vercel.com) → your project → **Settings** → 
 
 | Name | Value | Notes |
 |------|--------|--------|
-| `VITE_SUPABASE_URL` | `https://bgbgiazicjfpninnizjn.supabase.co` | Base URL only — no `/rest/v1/` |
-| `VITE_SUPABASE_ANON_KEY` | `sb_publishable_...` | From Supabase → API → Publishable |
+| `VITE_SUPABASE_URL` | `https://nwdyywbtbgdbdwneovme.supabase.co` | Travel Hub CRM Supabase — base URL only, no `/rest/v1/` |
+| `VITE_SUPABASE_ANON_KEY` or `VITE_SUPABASE_PUBLISHABLE_KEY` | `sb_publishable_...` | From Supabase → API → Publishable |
 | `RESEND_API_KEY` | `re_...` | Server-side only — website form emails |
-| `SUPABASE_SECRET_KEY` | `sb_secret_...` | Server-side only — `website_submissions` logging |
-| `CRM_AGENCY_API_KEY` | Your CRM key | Server-side only — Travel Hub CRM sync |
+| `SUPABASE_SECRET_KEY` | JWT `service_role` key | Server-side only — `website_submissions` logging (legacy JWT preferred; `SUPABASE_SERVICE_ROLE_KEY` also works) |
+| `CRM_AGENCY_API_KEY` | From Travel Hub → Settings → Agency Profile | Server-side only — lead sync |
+| `CRM_INBOUND_URL` | `https://travel-hub-crm.vercel.app/api/leads/inbound` | Optional if using the default |
 
-**Do not add** `SUPABASE_SECRET_KEY` or `RESEND_API_KEY` with a `VITE_` prefix (browser build must not include them).
+**Do not add** `SUPABASE_SECRET_KEY`, `RESEND_API_KEY`, or `CRM_AGENCY_API_KEY` with a `VITE_` prefix (browser build must not include them).
 
-Copy values from your local `.env` (except the secret key).
+Copy values from your local `.env` (except secrets — paste those from Supabase / Travel Hub Settings).
 
 After adding variables → **Deployments** → **Redeploy** latest (or push a new commit).
 
@@ -42,7 +43,7 @@ After adding variables → **Deployments** → **Redeploy** latest (or push a ne
 
 ## 3. Supabase Auth (required for admin login on live site)
 
-[Supabase → Authentication → URL Configuration](https://supabase.com/dashboard/project/bgbgiazicjfpninnizjn/auth/url-configuration)
+[Supabase → Authentication → URL Configuration](https://supabase.com/dashboard/project/nwdyywbtbgdbdwneovme/auth/url-configuration)
 
 | Field | Value |
 |--------|--------|
@@ -94,7 +95,9 @@ Quick CRM test: add a client → add a lead with the same email → confirm they
 | Admin login works locally but not on live | Add production URL in Supabase Auth URL config (section 3) |
 | “Supabase is not configured” on live | Set `VITE_SUPABASE_*` on Vercel and redeploy |
 | 404 on `/admin/leads` refresh | `vercel.json` rewrites are already configured |
-| Leads/clients empty after deploy | DB is correct — same project `bgbgiazicjfpninnizjn`; data is shared with local |
+| Leads/clients empty after deploy | Confirm Vercel points at Travel Hub project `nwdyywbtbgdbdwneovme` |
+| CRM sync 503 / not configured | Set `CRM_AGENCY_API_KEY` on Vercel from Travel Hub → Settings → Agency Profile |
+| `SUPABASE_SECRET_KEY` Invalid API key | Use the JWT **service_role** key (same as Travel Hub `SUPABASE_SERVICE_ROLE_KEY`), not a broken `sb_secret_` value |
 | Build fails on Vercel | Run `npm run build` locally; fix errors before push |
 
 ---
@@ -115,7 +118,14 @@ Env vars must still be set in the Vercel dashboard (or via `vercel env add`).
 ## Checklist
 
 - [ ] Code pushed to GitHub
-- [ ] Vercel env vars set (Supabase + Resend + CRM)
+- [ ] Vercel env vars set for **Travel Hub** Supabase (`nwdyywbtbgdbdwneovme`):
+  - `VITE_SUPABASE_URL` + publishable/anon key
+  - `SUPABASE_SECRET_KEY` = JWT **service_role** (same value as Travel Hub’s `SUPABASE_SERVICE_ROLE_KEY`)
+  - `RESEND_API_KEY`
+  - `CRM_AGENCY_API_KEY` (Travel Hub → Settings → Agency Profile for **Honeywell Travel**)
+  - `CRM_INBOUND_URL` = `https://travel-hub-crm.vercel.app/api/leads/inbound`
 - [ ] Supabase Site URL + Redirect URLs include production domain
 - [ ] Redeploy after env changes
 - [ ] `/admin/login` works on live site
+- [ ] Form submission creates a lead in Travel Hub CRM
+- [ ] Optional: `npm run sync:cms-packages` locally after package data changes
