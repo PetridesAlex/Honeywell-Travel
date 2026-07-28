@@ -32,7 +32,7 @@ function Signup() {
 
     if (!isSupabaseConfigured) {
       setError(
-        'Admin signup is unavailable: Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment.'
+        'Admin signup is unavailable: Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (or VITE_SUPABASE_PUBLISHABLE_KEY) to your environment.'
       )
       setLoading(false)
       return

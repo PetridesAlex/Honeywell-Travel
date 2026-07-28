@@ -1,12 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+/** Prefer ANON_KEY; accept PUBLISHABLE_KEY (Supabase’s newer name) as an alias. */
+const supabaseKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
 const isConfigured = Boolean(supabaseUrl && supabaseKey)
 
 const buildConfigError = () => ({
-  message: 'Supabase is not configured. Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY.'
+  message:
+    'Supabase is not configured. Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY / VITE_SUPABASE_PUBLISHABLE_KEY.'
 })
 
 function createMockQueryResponse() {
