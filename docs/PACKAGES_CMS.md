@@ -24,11 +24,15 @@ Employee workspace for searching and updating travel packages live. The admin ar
 
 Published CMS packages override the static website catalog on `/packages` and package detail pages.
 
+**Exception:** if a static package sets `details.codeUpdatedAt` to a timestamp **newer** than the CMS row’s `updated_at`, the website uses the code version (so code fixes are not overwritten by a stale CMS import). After you fix the package in CMS (or re-run **Import from website** while logged in), CMS becomes current again.
+
 **Hidden** or **Draft** packages are removed from the public site (they no longer fall back to the static catalog copy).
 
 ## Import
 
 Use **Import from website** once (or when you want to refresh from `src/data/packages.js`). Matching rows are overwritten by package ID.
+
+You must be **logged in** as admin for import/save (RLS). The local `SUPABASE_SECRET_KEY` in `.env` must be a valid **service_role / secret** key for the same project as `VITE_SUPABASE_URL` if you use server-side scripts.
 
 ## Images
 

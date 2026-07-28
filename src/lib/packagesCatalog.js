@@ -27,17 +27,48 @@ function resetCatalogMemory() {
 
 /**
  * Merge static website packages with published CMS rows.
- * CMS wins for matching legacy ids so employee edits appear on the site.
+ * CMS wins for matching legacy ids so employee edits appear on the site,
+ * unless the static package sets details.codeUpdatedAt newer than the CMS row.
  * suppressedIds = CMS draft/hidden packages that must not fall back to static data.
  */
 export function mergeStaticWithCms(staticList, cmsList, suppressedIds = []) {
   const map = new Map()
+
   for (const pkg of staticList || []) {
     if (pkg?.id != null) map.set(Number(pkg.id), pkg)
   }
+
   for (const pkg of cmsList || []) {
-    if (pkg?.id != null) map.set(Number(pkg.id), pkg)
+    if (pkg?.id == null) continue
+    const id = Number(pkg.id)
+    const staticPkg = map.get(id)
+
+    if (!staticPkg) {
+      map.set(id, pkg)
+      continue
+    }
+
+    const staticTs = Date.parse(staticPkg.details?.codeUpdatedAt || '')
+    const cmsTs = Date.parse(pkg._cmsUpdatedAt || '')
+    const staticIsNewer =
+      Number.isFinite(staticTs) && (!Number.isFinite(cmsTs) || staticTs > cmsTs)
+
+    if (staticIsNewer) {
+      map.set(id, {
+        ...pkg,
+        ...staticPkg,
+        details: {
+          ...(pkg.details || {}),
+          ...(staticPkg.details || {})
+        },
+        _cmsId: pkg._cmsId,
+        _cmsUpdatedAt: pkg._cmsUpdatedAt
+      })
+    } else {
+      map.set(id, pkg)
+    }
   }
+
   for (const id of suppressedIds || []) {
     const numericId = Number(id)
     if (Number.isFinite(numericId)) map.delete(numericId)

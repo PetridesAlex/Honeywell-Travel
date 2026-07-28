@@ -145,6 +145,7 @@ export function getPackageDepartureDatesFromPkg(pkg, now = new Date()) {
  * Departure date tokens for filters / hotel alignment.
  * Itinerary-style packages use package-level dates only.
  * Past / expired dates are excluded.
+ * Return / domestic flight legs are never treated as package departures.
  */
 export function getDepartureDates(details, now = new Date()) {
   if (!details) return []
@@ -157,7 +158,13 @@ export function getDepartureDates(details, now = new Date()) {
       ? details.hotels.map((hotel) => hotel?.departureDate).filter(Boolean)
       : []),
     ...(Array.isArray(details.flights)
-      ? details.flights.map((flight) => flight?.date).filter(Boolean)
+      ? details.flights
+          .filter((flight) => {
+            const direction = String(flight?.direction || 'Departure').trim().toLowerCase()
+            return direction === 'departure' || direction === ''
+          })
+          .map((flight) => flight?.date)
+          .filter(Boolean)
       : []),
   ]
 
