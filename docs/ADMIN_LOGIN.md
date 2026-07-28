@@ -9,7 +9,7 @@ The admin at `/admin/login` uses **Supabase email/password** authentication. Aft
 ```env
 VITE_SUPABASE_URL=https://nwdyywbtbgdbdwneovme.supabase.co
 VITE_SUPABASE_ANON_KEY=sb_publishable_...
-VITE_ADMIN_AUTH_REDIRECT_URL=4
+VITE_ADMIN_AUTH_REDIRECT_URL=https://www.honeywelltravel.com.cy/admin/packages
 ```
 
 Use the **base** project URL only (no `/rest/v1/`). Restart the dev server after changing `.env`.
