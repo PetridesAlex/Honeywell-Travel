@@ -231,9 +231,18 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  touch-action: pan-x pinch-zoom;
   scrollbar-width: none;
   width: 100%;
   padding: 0.15rem clamp(1rem, 3vw, 2.5rem) 0.65rem;
+}
+
+@media (max-width: 768px) {
+  .tour-category-row__track {
+    scroll-behavior: auto;
+  }
 }
 
 .tour-category-row__track::-webkit-scrollbar {
@@ -269,6 +278,12 @@
   box-shadow:
     0 26px 52px rgba(15, 23, 42, 0.22),
     0 0 0 1px rgba(255, 255, 255, 0.65) inset;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .tour-category-modal-cards .modal-card:hover {
+    transform: none;
+  }
 }
 
 .tour-category-modal-cards .modal-card-shade {

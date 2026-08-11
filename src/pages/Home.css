@@ -50,6 +50,27 @@
   .search-tour-shared-background {
     background: transparent !important;
   }
+
+  .home-page {
+    overflow-x: hidden;
+    overflow-y: visible;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .unified-sections-wrapper,
+  .search-tour-shared-background,
+  .tour-packages-section-wrapper {
+    overflow-x: hidden;
+    overflow-y: visible;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .featured-japan-promo,
+  .featured-japan-promo__media {
+    transform: none !important;
+    will-change: auto !important;
+    transition: none !important;
+  }
 }
 
 @media (max-width: 480px) {

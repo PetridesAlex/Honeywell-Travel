@@ -38,13 +38,104 @@ const slugToCategory = (slug) => {
   return slugCategoryMap[slug] || null
 }
 
+const CATEGORY_TILES = {
+  Destinations: {
+    image: '/images/destinations/dubai-hero.webp',
+    blurb: 'Worldwide escapes'
+  },
+  'Summer Packages': {
+    image: '/images/bali/bali-hero.webp',
+    blurb: 'Sun-filled getaways'
+  },
+  'Summer Packages to Greece': {
+    image: '/images/kerkyra-greece/corfu-cover-hero.webp',
+    blurb: 'Islands & mainland'
+  },
+  'Autumn Packages': {
+    image: '/images/Georgia/Georgia-hero.webp',
+    blurb: 'Golden-season journeys'
+  },
+  'Winter Packages': {
+    image: '/images/lapland/lapland-cover-1.webp',
+    blurb: 'Cozy winter escapes'
+  },
+  'Spring Packages': {
+    image: '/images/Hraklio-crete/crete-cover-spring.webp',
+    blurb: 'Fresh spring breaks'
+  },
+  'Christmas Packages': {
+    image: '/images/christmas-packages/vienna/cover-vienna-christmas.webp',
+    blurb: 'Festive holidays'
+  },
+  'City Breaks': {
+    image: '/images/barcelona-package/barcelona-cover-one.webp',
+    blurb: 'Urban weekends'
+  },
+  Cruises: {
+    image: '/images/cruises/msc-world-europa/msc-world-europa-5.webp',
+    blurb: 'Voyages at sea'
+  },
+  'Easter Packages': {
+    image: '/images/easter-packages/kerkyra-easter-packages/kerkyra-easter-package-cover-hero.webp',
+    blurb: 'Spring celebrations'
+  },
+  'Exotic Packages': {
+    image: '/images/south-africa/south-africa-hero.webp',
+    blurb: 'Faraway paradises'
+  },
+  'Green Monday': {
+    image: '/images/Arachova/Arachova-cover.webp',
+    blurb: 'Seasonal escapes'
+  },
+  'Group Travel': {
+    image: '/images/Balcans-countries/balcans-hero.webp',
+    blurb: 'Shared adventures'
+  },
+  'Mary Special Trips': {
+    image: '/images/mary-special-trip/japan-2026/japan-6.webp',
+    blurb: 'Exclusive curated trips'
+  },
+  'Music & Sports': {
+    image: '/images/music-events/iron-maiden/iron-maiden-hero.webp',
+    blurb: 'Live events abroad'
+  },
+  'Sports Events & Concerts': {
+    image: '/images/athens-marathon/athens-marathon-hero.webp',
+    blurb: 'Matches & concerts'
+  },
+  'Ski Packages': {
+    image: '/images/Arachova/arachova-town-.webp',
+    blurb: 'Alpine slopes'
+  }
+}
+
+const GALLERY_CATEGORIES = [
+  'Destinations',
+  'Summer Packages',
+  'Summer Packages to Greece',
+  'Autumn Packages',
+  'Winter Packages',
+  'Spring Packages',
+  'Christmas Packages',
+  'City Breaks',
+  'Cruises',
+  'Easter Packages',
+  'Exotic Packages',
+  'Green Monday',
+  'Group Travel',
+  'Mary Special Trips',
+  'Music & Sports',
+  'Sports Events & Concerts',
+  'Ski Packages'
+]
+
 function Packages() {
   const { i18n } = useTranslation()
   const { slug } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const [catalog, setCatalog] = useState(() => getVisiblePackages())
   const [filteredPackages, setFilteredPackages] = useState(getVisiblePackages)
-  
+
   // Determine category from slug or query param
   const getInitialCategory = () => {
     if (slug) {
@@ -53,7 +144,7 @@ function Packages() {
     }
     return searchParams.get('category') || 'Any'
   }
-  
+
   const [category, setCategory] = useState(getInitialCategory())
   const [destination, setDestination] = useState(searchParams.get('destination') || 'Any')
   const [minPrice, setMinPrice] = useState('')
@@ -86,45 +177,15 @@ function Packages() {
     }
   }, [slug])
 
-  const categories = [
-    'Any',
-    'Destinations',
-    'Summer Packages',
-    'Summer Packages to Greece',
-    'Autumn Packages',
-    'Winter Packages',
-    'Spring Packages',
-    'Christmas Packages',
-    'City Breaks',
-    'Cruises',
-    'Easter Packages',
-    'Exotic Packages',
-    'Green Monday',
-    'Group Travel',
-    'Mary Special Trips',
-    'Music & Sports',
-    'Sports Events & Concerts',
-    'Ski Packages'
-  ]
-
-  // Get price range from packages
-  const getPriceRange = () => {
-    const prices = catalog
-      .map(pkg => {
-        if (pkg.details && pkg.details.hotels && pkg.details.hotels.length > 0) {
-          return pkg.details.hotels[0].packagePrice || pkg.price
-        }
-        return pkg.price
-      })
-      .filter(price => price != null && price > 0)
-    if (prices.length === 0) return { min: 0, max: 10000 }
-    return {
-      min: Math.min(...prices),
-      max: Math.max(...prices)
+  const categoryCounts = useMemo(() => {
+    const counts = Object.fromEntries(GALLERY_CATEGORIES.map((cat) => [cat, 0]))
+    for (const pkg of catalog) {
+      if (pkg.category && counts[pkg.category] != null) {
+        counts[pkg.category] += 1
+      }
     }
-  }
-
-  const priceRange = getPriceRange()
+    return counts
+  }, [catalog])
 
   useEffect(() => {
     let cancelled = false
@@ -166,7 +227,7 @@ function Packages() {
       const destinations = REGION_DESTINATIONS[destination] || [destination]
       filtered = filtered.filter((pkg) => destinations.includes(pkg.destination))
     }
-    
+
     // Apply price filter
     if (minPrice || maxPrice) {
       filtered = filtered.filter(pkg => {
@@ -176,7 +237,7 @@ function Packages() {
         return pkgPrice >= min && pkgPrice <= max
       })
     }
-    
+
     // Apply departure month filter
     if (departureMonth !== 'Any') {
       filtered = filtered.filter(pkg => {
@@ -184,7 +245,7 @@ function Packages() {
         return month && month.toLowerCase() === departureMonth.toLowerCase()
       })
     }
-    
+
     // Apply travel type filter
     if (travelType !== 'Any') {
       filtered = filtered.filter(pkg => {
@@ -196,7 +257,7 @@ function Packages() {
         return true
       })
     }
-    
+
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFilteredPackages(filtered)
   }, [catalog, category, destination, minPrice, maxPrice, departureMonth, travelType])
@@ -242,22 +303,53 @@ function Packages() {
         </div>
       </div>
 
-      {/* Browse by Category – directly below hero, no empty space */}
-      <div className="category-chips-wrapper">
-        <h2 className="section-subtitle">Browse by Category</h2>
-        <div className="category-chips">
-          {categories.filter((cat) => cat !== 'Any').map((cat) => (
-            <button
-              key={cat}
-              className={`category-chip ${category === cat ? 'active' : ''}`}
-              onClick={() => {
-                setCategory(cat)
-                applyFilters(cat, destination)
-              }}
-            >
-              {cat}
-            </button>
-          ))}
+      {/* Browse by Category – premium image gallery */}
+      <div className="category-gallery-wrapper">
+        <div className="category-gallery-header">
+          <h2 className="category-gallery-title">Browse by Category</h2>
+          <p className="category-gallery-lead">
+            Select a collection to explore carefully curated journeys.
+          </p>
+        </div>
+        <div className="category-gallery" role="list">
+          {GALLERY_CATEGORIES.map((cat) => {
+            const tile = CATEGORY_TILES[cat] || {
+              image: '/images/destinations/paris-hero.webp',
+              blurb: 'Travel collection'
+            }
+            const count = categoryCounts[cat] || 0
+            const isActive = category === cat
+            return (
+              <button
+                key={cat}
+                type="button"
+                role="listitem"
+                className={`category-tile${isActive ? ' is-active' : ''}`}
+                aria-pressed={isActive}
+                onClick={() => {
+                  setCategory(cat)
+                  applyFilters(cat, destination)
+                }}
+              >
+                <span
+                  className="category-tile__media"
+                  style={{ backgroundImage: `url(${tile.image})` }}
+                  aria-hidden="true"
+                />
+                <span className="category-tile__veil" aria-hidden="true" />
+                <span className="category-tile__content">
+                  {isActive ? <span className="category-tile__badge">Selected</span> : null}
+                  <span className="category-tile__name">{cat}</span>
+                  <span className="category-tile__meta">
+                    <span className="category-tile__blurb">{tile.blurb}</span>
+                    <span className="category-tile__count">
+                      {count} {count === 1 ? 'package' : 'packages'}
+                    </span>
+                  </span>
+                </span>
+              </button>
+            )
+          })}
         </div>
       </div>
 
@@ -287,7 +379,7 @@ function Packages() {
                 {category !== 'Any' && (
                   <span className="active-filter-tag">
                     {category}
-                    <button 
+                    <button
                       onClick={() => {
                         setCategory('Any')
                         applyFilters('Any', destination)
@@ -301,7 +393,7 @@ function Packages() {
                 {destination !== 'Any' && (
                   <span className="active-filter-tag">
                     {destination}
-                    <button 
+                    <button
                       onClick={() => {
                         setDestination('Any')
                         applyFilters(category, 'Any')
@@ -315,7 +407,7 @@ function Packages() {
                 {travelType !== 'Any' && (
                   <span className="active-filter-tag">
                     {travelType}
-                    <button 
+                    <button
                       onClick={() => setTravelType('Any')}
                       className="remove-filter"
                     >
@@ -325,8 +417,8 @@ function Packages() {
                 )}
                 {(minPrice || maxPrice) && (
                   <span className="active-filter-tag">
-                    €{minPrice || priceRange.min} - €{maxPrice || priceRange.max}
-                    <button 
+                    Price: {minPrice || '0'} - {maxPrice || '∞'}
+                    <button
                       onClick={() => {
                         setMinPrice('')
                         setMaxPrice('')
@@ -340,7 +432,7 @@ function Packages() {
                 {departureMonth !== 'Any' && (
                   <span className="active-filter-tag">
                     {departureMonth}
-                    <button 
+                    <button
                       onClick={() => setDepartureMonth('Any')}
                       className="remove-filter"
                     >
@@ -348,27 +440,22 @@ function Packages() {
                     </button>
                   </span>
                 )}
+                <button onClick={clearAllFilters} className="clear-all-filters">
+                  Clear All
+                </button>
               </div>
             )}
           </div>
 
           {filteredPackages.length > 0 ? (
-            <ModalCards
-              cards={modalCards}
-              className="packages-modal-cards"
-              animationSpeed="normal"
-              showCloseButton={false}
-            />
+            <ModalCards cards={modalCards} />
           ) : (
             <div className="no-results">
               <div className="no-results-icon">🔍</div>
               <h3>No packages found</h3>
-              <p>No packages match your current filters. Try adjusting your search criteria.</p>
-              <button 
-                className="clear-filters-btn"
-                onClick={clearAllFilters}
-              >
-                Clear All Filters
+              <p>Try adjusting your filters to see more results</p>
+              <button onClick={clearAllFilters} className="reset-filters-btn">
+                Reset Filters
               </button>
             </div>
           )}
@@ -379,9 +466,3 @@ function Packages() {
 }
 
 export default Packages
-
-
-
-
-
-

@@ -16,11 +16,16 @@
   background-repeat: no-repeat;
   transform: scale(1.02);
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
 }
 
-.featured-japan-promo:hover .featured-japan-promo__media {
-  transform: scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+  .featured-japan-promo__media {
+    will-change: transform;
+  }
+
+  .featured-japan-promo:hover .featured-japan-promo__media {
+    transform: scale(1.06);
+  }
 }
 
 .featured-japan-promo__veil {
