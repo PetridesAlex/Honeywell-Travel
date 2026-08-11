@@ -3,6 +3,7 @@ import SEO from '../components/SEO'
 import ImageCarousel from '../components/ImageCarousel'
 import CircularGallery from '../components/CircularGallery'
 import SearchSection from '../components/SearchSection'
+import FeaturedJapanPromo from '../components/FeaturedJapanPromo'
 import PopularPackagesSection from '../components/PopularPackagesSection'
 import TourPackagesSection from '../components/TourPackagesSection'
 import CruisesSection from '../components/CruisesSection'
@@ -40,6 +41,9 @@ function Home() {
               sharedBackground={sharedBackground} 
               setSharedBackground={setSharedBackground} 
             />
+          </RevealOnScroll>
+          <RevealOnScroll direction="up" delay={60}>
+            <FeaturedJapanPromo />
           </RevealOnScroll>
           <RevealOnScroll direction="up" immediate>
             <PopularPackagesSection />

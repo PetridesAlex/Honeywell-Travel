@@ -1163,7 +1163,10 @@ function PackageFullDetail() {
                                 {baseHotel.name ? <h3 className="hotel-single-title">{baseHotel.name}</h3> : null}
                                 {baseHotel.location && <p className="hotel-single-location">{baseHotel.location}</p>}
                                 {baseHotel.description && details.hideHotelPrices ? (
-                                  <p className="hotel-single-description">{baseHotel.description}</p>
+                                  <div className="hotel-single-description hotel-single-description--premium">
+                                    <span className="hotel-single-description__eyebrow">About the stay</span>
+                                    <p className="hotel-single-description__text">{baseHotel.description}</p>
+                                  </div>
                                 ) : null}
                               </div>
                               <div className="hotel-single-right">
@@ -1182,9 +1185,26 @@ function PackageFullDetail() {
                                           <span className="hotel-variant-date-value">{getHotelStayDate(variant)}</span>
                                         </div>
                                         {variant.nights != null ? (
-                                          <p className="section-text hotel-included-note">
-                                            {variant.nights} {variant.nights === 1 ? 'νύχτα' : 'νύχτες'}
-                                          </p>
+                                          <div className="hotel-included-note hotel-included-note--premium">
+                                            <div className="hotel-included-note__top">
+                                              <span className="hotel-included-note__badge">Included stay</span>
+                                              <span className="hotel-included-note__nights">
+                                                {variant.nights}{' '}
+                                                {variant.nights === 1 ? 'νύχτα' : 'νύχτες'}
+                                              </span>
+                                            </div>
+                                            <div className="hotel-included-note__meta">
+                                              {(variant.boardBasis || baseHotel.boardBasis) ? (
+                                                <span>{variant.boardBasis || baseHotel.boardBasis}</span>
+                                              ) : null}
+                                              {(variant.roomType || baseHotel.roomType) ? (
+                                                <span>{variant.roomType || baseHotel.roomType}</span>
+                                              ) : null}
+                                            </div>
+                                            <p className="hotel-included-note__caption">
+                                              Περιλαμβάνεται στην τιμή του πακέτου
+                                            </p>
+                                          </div>
                                         ) : null}
                                       </div>
                                     )

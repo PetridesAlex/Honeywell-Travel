@@ -100,16 +100,16 @@
 
 .category-chips-wrapper .section-subtitle {
   position: relative;
-  font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-family: var(--font-accent);
+  font-size: clamp(1.35rem, 2.6vw, 1.65rem);
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.02em;
   text-transform: none;
-  color: #0f172a;
+  color: #1a1218;
   margin: 0 0 1.45rem;
   padding-bottom: 0.9rem;
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.22;
 }
 
 .category-chips-wrapper .section-subtitle::after {
@@ -135,14 +135,14 @@
 }
 
 .category-chip {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   border: 1px solid rgba(226, 232, 240, 0.98);
   border-radius: 12px;
-  padding: 0.58rem 1.2rem;
-  font-size: 0.86rem;
-  font-weight: 600;
-  letter-spacing: 0.015em;
-  color: #334155;
+  padding: 0.62rem 1.3rem;
+  font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #0f172a;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.95);
   box-shadow:
@@ -714,8 +714,8 @@
   }
 
   .category-chip {
-    padding: 0.46rem 0.88rem;
-    font-size: 0.79rem;
+    padding: 0.52rem 1rem;
+    font-size: 1.02rem;
   }
 }
 
@@ -758,8 +758,8 @@
   }
 
   .category-chip {
-    padding: 0.42rem 0.76rem;
-    font-size: 0.74rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 1rem;
   }
 
   .packages-grid {
@@ -792,8 +792,8 @@
   }
 
   .category-chip {
-    padding: 0.42rem 0.76rem;
-    font-size: 0.74rem;
+    padding: 0.48rem 0.88rem;
+    font-size: 0.98rem;
   }
 
   .packages-container {
