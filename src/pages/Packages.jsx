@@ -448,7 +448,7 @@ function Packages() {
           </div>
 
           {filteredPackages.length > 0 ? (
-            <ModalCards cards={modalCards} />
+            <ModalCards cards={modalCards} className="packages-modal-cards" />
           ) : (
             <div className="no-results">
               <div className="no-results-icon">🔍</div>
