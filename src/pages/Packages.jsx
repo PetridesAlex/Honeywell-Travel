@@ -154,27 +154,21 @@ function Packages() {
   const resultsRef = useRef(null)
 
   useLayoutEffect(() => {
+    // Only snap to top when landing on a tour-category slug route.
+    if (!slug) return undefined
+
     const resetTop = () => {
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-      if (document.documentElement) document.documentElement.scrollTop = 0
-      if (document.body) document.body.scrollTop = 0
       if (document.scrollingElement) document.scrollingElement.scrollTop = 0
-
-      const mainContent = document.querySelector('.main-content')
-      if (mainContent) {
-        mainContent.scrollTop = 0
-      }
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     }
 
     resetTop()
     const rafId = requestAnimationFrame(resetTop)
-    const t1 = setTimeout(resetTop, 80)
-    const t2 = setTimeout(resetTop, 220)
 
     return () => {
       cancelAnimationFrame(rafId)
-      clearTimeout(t1)
-      clearTimeout(t2)
     }
   }, [slug])
 
@@ -288,15 +282,16 @@ function Packages() {
           getComputedStyle(document.documentElement).getPropertyValue('--header-height').trim(),
           10,
         ) || 100
-    const top = el.getBoundingClientRect().top + window.scrollY - headerOffset - 16
+    const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset - 16
     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
   }
 
   const selectCategory = (cat) => {
     applyFilters(cat, destination)
-    // Wait for results to paint, then scroll into view under the sticky header.
+    // After filters paint, scroll to results (retry once for layout settle).
     requestAnimationFrame(() => {
-      requestAnimationFrame(scrollToResults)
+      scrollToResults()
+      window.setTimeout(scrollToResults, 120)
     })
   }
 

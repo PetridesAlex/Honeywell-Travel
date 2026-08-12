@@ -2,29 +2,25 @@ import { useLayoutEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
 /**
- * Reset window scroll on route changes.
- * Keep this lightweight — aggressive timers/intervals fight the user on mobile
- * and make scrolling feel stuck or glitchy.
+ * Reset window scroll on pathname changes only.
+ * Do NOT reset on search-param filter updates (e.g. Packages category tiles),
+ * or those intentional in-page scrolls get cancelled.
  */
 function ScrollToTop() {
   const location = useLocation()
-  const previousLocationRef = useRef(location)
+  const previousPathnameRef = useRef(location.pathname)
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual'
     }
 
-    const previousLocation = previousLocationRef.current
-    const isHashOnlyNavigation =
-      previousLocation.pathname === location.pathname &&
-      previousLocation.search === location.search &&
-      previousLocation.hash !== location.hash
+    const previousPathname = previousPathnameRef.current
+    previousPathnameRef.current = location.pathname
 
-    previousLocationRef.current = location
-
-    // Preserve native in-page anchor behavior.
-    if (isHashOnlyNavigation || location.hash) return undefined
+    // Same page with only ?query or #hash changes — leave scroll alone.
+    if (previousPathname === location.pathname) return undefined
+    if (location.hash) return undefined
 
     const resetWindowScroll = () => {
       window.scrollTo(0, 0)
@@ -41,7 +37,7 @@ function ScrollToTop() {
     return () => {
       cancelAnimationFrame(rafId)
     }
-  }, [location.pathname, location.search, location.hash])
+  }, [location.pathname, location.hash])
 
   return null
 }
