@@ -6,13 +6,33 @@
   overflow-y: visible;
 }
 
+.preloader__layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.preloader__layer .preloader__panel {
+  pointer-events: auto;
+}
+
 .preloader__panel {
   inset: 0;
   overflow: hidden;
+  display: flex;
+  contain: layout paint;
 }
 
 .preloader__panel--fixed {
   position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
 }
 
 .preloader__panel--exiting {
@@ -27,21 +47,20 @@
   height: 100%;
   flex: 1;
   min-width: 0;
-  background: linear-gradient(160deg, #05070d 0%, #0a1425 50%, #070c16 100%);
+  background: #070c16;
   box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
   will-change: transform;
 }
 
-.preloader__stair:nth-child(odd) {
-  filter: brightness(1.06);
+/* Avoid CSS filter:brightness during stair motion — it causes stutter / flicker. */
+.preloader__stair--odd {
+  background: linear-gradient(160deg, #0a1425 0%, #0c1830 52%, #08111f 100%);
 }
 
-.preloader__stair:nth-child(even) {
-  filter: brightness(0.94);
-}
-
-.preloader__panel {
-  display: flex;
+.preloader__stair--even {
+  background: linear-gradient(160deg, #05070d 0%, #070d18 50%, #05070d 100%);
 }
 
 .preloader__overlay-grad {
@@ -52,6 +71,7 @@
     radial-gradient(120% 100% at 85% 10%, rgba(196, 18, 48, 0.34) 0%, transparent 58%),
     radial-gradient(90% 80% at 50% 100%, rgba(244, 63, 94, 0.12) 0%, transparent 45%);
   pointer-events: none;
+  will-change: opacity;
 }
 
 .preloader__text-wrap {
@@ -296,6 +316,31 @@
   overflow-y: visible;
 }
 
-.preloader__content--hidden {
-  visibility: hidden;
+/*
+ * Keep the app painted under the stairs (no visibility:hidden flash).
+ * Block interaction until the cover fully exits.
+ */
+.preloader__content--covered {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Scroll lock while preloader is on screen — overflow only (never touch-action:none on html) */
+html.preloader-active,
+html.preloader-active body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader__brand-aura,
+  .preloader__brand-aura--glow,
+  .preloader__brand-logo-wrap,
+  .preloader__brand-logo {
+    animation: none !important;
+  }
+
+  .preloader__stair {
+    will-change: auto;
+  }
 }

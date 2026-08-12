@@ -101,17 +101,12 @@
   min-height: 100%;
   padding: 1.85rem 1.55rem 1.7rem;
   border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 250, 252, 0.92) 100%);
-  box-shadow:
-    0 16px 36px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
   overflow: hidden;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    filter 0.3s ease;
 }
 
 .stats-rewards-card::before {
@@ -120,40 +115,148 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #c41230 0%, #c9a227 100%);
-  opacity: 0.85;
+  height: 4px;
+  opacity: 1;
 }
 
+/* Card 1 — Crimson */
 .stats-rewards-card--1 {
+  border: 1px solid rgba(196, 18, 48, 0.45);
+  background:
+    radial-gradient(ellipse 90% 70% at 0% 0%, rgba(227, 30, 36, 0.22), transparent 55%),
+    linear-gradient(155deg, #fff5f5 0%, #ffe4e6 42%, #fecaca 100%);
   box-shadow:
-    0 16px 36px rgba(15, 23, 42, 0.08),
-    inset 3px 0 0 rgba(196, 18, 48, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    0 18px 40px rgba(196, 18, 48, 0.22),
+    inset 4px 0 0 #c41230,
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
+.stats-rewards-card--1::before {
+  background: linear-gradient(90deg, #9f1028 0%, #e31e24 45%, #c41230 100%);
+}
+
+.stats-rewards-card--1 .stats-rewards-value {
+  color: #7f1d1d;
+}
+
+.stats-rewards-card--1 .stats-rewards-label {
+  color: #c41230;
+}
+
+.stats-rewards-card--1 .stats-rewards-detail {
+  color: #9f1239;
+}
+
+.stats-rewards-card--1 .stats-rewards-icon {
+  color: #ffffff;
+  background: linear-gradient(145deg, #e31e24 0%, #c41230 55%, #9f1028 100%);
+  border: 1px solid rgba(127, 29, 29, 0.45);
+  box-shadow:
+    0 10px 22px rgba(196, 18, 48, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Card 2 — Gold */
 .stats-rewards-card--2 {
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  background:
+    radial-gradient(ellipse 90% 70% at 0% 0%, rgba(251, 191, 36, 0.28), transparent 55%),
+    linear-gradient(155deg, #fffbeb 0%, #fef3c7 42%, #fde68a 100%);
   box-shadow:
-    0 16px 36px rgba(15, 23, 42, 0.08),
-    inset 3px 0 0 rgba(201, 162, 39, 0.75),
+    0 18px 40px rgba(180, 130, 20, 0.24),
+    inset 4px 0 0 #d4af37,
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.stats-rewards-card--2::before {
+  background: linear-gradient(90deg, #b45309 0%, #e8c547 45%, #d4af37 100%);
+}
+
+.stats-rewards-card--2 .stats-rewards-value {
+  color: #78350f;
+}
+
+.stats-rewards-card--2 .stats-rewards-label {
+  color: #a16207;
+}
+
+.stats-rewards-card--2 .stats-rewards-detail {
+  color: #92400e;
+}
+
+.stats-rewards-card--2 .stats-rewards-icon {
+  color: #78350f;
+  background: linear-gradient(145deg, #fef3c7 0%, #e8c547 48%, #d4af37 100%);
+  border: 1px solid rgba(180, 130, 20, 0.5);
+  box-shadow:
+    0 10px 22px rgba(212, 175, 55, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+/* Card 3 — Silver */
+.stats-rewards-card--3 {
+  border: 1px solid rgba(100, 116, 139, 0.45);
+  background:
+    radial-gradient(ellipse 90% 70% at 0% 0%, rgba(148, 163, 184, 0.35), transparent 55%),
+    linear-gradient(155deg, #f8fafc 0%, #e2e8f0 42%, #cbd5e1 100%);
+  box-shadow:
+    0 18px 40px rgba(71, 85, 105, 0.2),
+    inset 4px 0 0 #64748b,
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
-.stats-rewards-card--3 {
+.stats-rewards-card--3::before {
+  background: linear-gradient(90deg, #475569 0%, #94a3b8 45%, #cbd5e1 100%);
+}
+
+.stats-rewards-card--3 .stats-rewards-value {
+  color: #0f172a;
+}
+
+.stats-rewards-card--3 .stats-rewards-label {
+  color: #334155;
+}
+
+.stats-rewards-card--3 .stats-rewards-detail {
+  color: #475569;
+}
+
+.stats-rewards-card--3 .stats-rewards-icon {
+  color: #0f172a;
+  background: linear-gradient(145deg, #f8fafc 0%, #cbd5e1 48%, #94a3b8 100%);
+  border: 1px solid rgba(71, 85, 105, 0.4);
   box-shadow:
-    0 16px 36px rgba(15, 23, 42, 0.08),
-    inset 3px 0 0 rgba(15, 23, 42, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    0 10px 22px rgba(71, 85, 105, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .stats-rewards-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(196, 18, 48, 0.3);
+  filter: saturate(1.08) brightness(1.02);
+}
+
+.stats-rewards-card--1:hover {
+  border-color: rgba(196, 18, 48, 0.65);
   box-shadow:
-    0 22px 44px rgba(15, 23, 42, 0.12),
-    0 0 0 1px rgba(196, 18, 48, 0.08),
-    inset 3px 0 0 rgba(196, 18, 48, 0.85),
+    0 24px 48px rgba(196, 18, 48, 0.3),
+    inset 4px 0 0 #9f1028,
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.stats-rewards-card--2:hover {
+  border-color: rgba(212, 175, 55, 0.75);
+  box-shadow:
+    0 24px 48px rgba(180, 130, 20, 0.32),
+    inset 4px 0 0 #b45309,
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.stats-rewards-card--3:hover {
+  border-color: rgba(71, 85, 105, 0.55);
+  box-shadow:
+    0 24px 48px rgba(71, 85, 105, 0.28),
+    inset 4px 0 0 #334155,
+    inset 0 1px 0 rgba(255, 255, 255, 0.98);
 }
 
 .stats-rewards-icon {
@@ -164,42 +267,16 @@
   height: 2.85rem;
   margin: 0 0 0.65rem;
   border-radius: 999px;
-  color: #9f1239;
-  background:
-    linear-gradient(145deg, #fff1f2 0%, #ffe4e6 55%, #fff7ed 100%);
-  border: 1px solid rgba(196, 18, 48, 0.22);
-  box-shadow:
-    0 8px 18px rgba(196, 18, 48, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   filter: none;
-}
-
-.stats-rewards-card--2 .stats-rewards-icon {
-  color: #92400e;
-  background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 55%, #fff7ed 100%);
-  border-color: rgba(201, 162, 39, 0.35);
-  box-shadow:
-    0 8px 18px rgba(201, 162, 39, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-.stats-rewards-card--3 .stats-rewards-icon {
-  color: #0f172a;
-  background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 55%, #f1f5f9 100%);
-  border-color: rgba(15, 23, 42, 0.18);
-  box-shadow:
-    0 8px 18px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .stats-rewards-value {
   margin: 0;
   font-family: var(--font-serif);
   font-size: clamp(1.85rem, 2.6vw, 2.45rem);
-  font-weight: 750;
+  font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  color: #0f172a;
   text-shadow: none;
 }
 
@@ -216,10 +293,9 @@
   margin: 0;
   font-family: var(--font-sans);
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #7f1d1d;
   text-shadow: none;
 }
 
@@ -227,9 +303,8 @@
   margin: 0.15rem 0 0;
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  font-weight: 450;
+  font-weight: 550;
   line-height: 1.5;
-  color: var(--sr-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {

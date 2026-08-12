@@ -15,7 +15,6 @@
   --hero-gap: 1rem;
   background: #f5f5f5;
   -webkit-tap-highlight-color: transparent;
-  touch-action: pan-y pinch-zoom;
 }
 
 /* Contains scaled backgrounds / fades — avoids overflow clip on the outer section (which trapped scroll chaining on some devices). */

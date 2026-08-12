@@ -12,7 +12,11 @@ img,
   -ms-interpolation-mode: bicubic;
 }
 
-/* One scroll root: document (html) only — no nested full-page scrollports on body/#root/.app */
+/*
+ * Single document scroll root (html).
+ * Do NOT set touch-action on nested wrappers — that traps gestures on iOS/Android
+ * and makes page scrolling feel sticky when crossing sections / carousels.
+ */
 html {
   height: 100%;
   width: 100%;
@@ -21,7 +25,7 @@ html {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: auto;
-  touch-action: pan-y pinch-zoom;
+  overscroll-behavior-x: none;
 }
 
 :root {
@@ -52,8 +56,8 @@ body {
   min-height: 100%;
   width: 100%;
   background-color: #0f0f12;
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
+  overflow-x: hidden;
+  overflow-y: visible;
   cursor: default;
   -webkit-user-select: text;
   user-select: text;
@@ -62,9 +66,7 @@ body {
   text-size-adjust: 100%;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: auto;
-  touch-action: pan-y pinch-zoom;
 }
 
 /* Global premium header style (applies site-wide unless explicitly overridden) */
@@ -90,11 +92,10 @@ body::-webkit-scrollbar,
   min-height: 100%;
   width: 100%;
   background-color: #0f0f12;
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
+  overflow-x: hidden;
+  overflow-y: visible;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Never let wrappers become vertical scroll containers — avoids double scroll with html */
@@ -102,14 +103,8 @@ body::-webkit-scrollbar,
 .preloader__content,
 .app,
 .main-content {
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
-}
-
-.app,
-.main-content {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 /* Ensure buttons and links show pointer and remain clickable; remove 300ms tap delay on mobile */
@@ -133,7 +128,6 @@ textarea {
 
 /* Mobile-specific optimizations – single document scroll, no gesture traps */
 @media (max-width: 768px) {
-  /* Subtle tap highlight so taps feel responsive (avoid transparent = no feedback) */
   a,
   button,
   [role="button"],
@@ -145,11 +139,8 @@ textarea {
     -webkit-tap-highlight-color: rgba(196, 18, 48, 0.15);
   }
 
-  /*
-   * Keep ONE vertical scroll root (html). Avoid overscroll-behavior: none —
-   * it makes iOS/Android scrolling feel sticky / “stuck” between sections.
-   */
   html {
+    /* Instant scroll on mobile — smooth + momentum feels sticky/janky */
     scroll-behavior: auto;
     min-height: -webkit-fill-available;
     overflow-x: hidden;
@@ -157,16 +148,14 @@ textarea {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: auto;
     overscroll-behavior-x: none;
-    touch-action: pan-y pinch-zoom;
   }
 
   body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
+    overflow-x: hidden;
+    overflow-y: visible;
     overscroll-behavior-y: auto;
-    touch-action: pan-y pinch-zoom;
   }
 
   #root,
@@ -174,29 +163,29 @@ textarea {
   .preloader__content,
   .app,
   .main-content {
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-    overscroll-behavior-y: auto;
-    touch-action: pan-y pinch-zoom;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .main-content {
     min-height: 0;
-    /* Re-enable scroll anchoring on mobile for more stable finger scrolling */
     overflow-anchor: auto;
   }
 
-  /* Horizontal carousels: allow vertical page scroll to win on mostly-vertical swipes */
+  /*
+   * Horizontal carousels must ALSO allow vertical pan.
+   * `touch-action: pan-x` alone traps the finger and makes page scroll feel stuck.
+   */
   .parallax-cards-static-track,
   .tour-category-row__track {
-    touch-action: pan-x pinch-zoom;
+    touch-action: pan-x pan-y pinch-zoom;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: auto;
     scroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Disable expensive backdrop-filter on mobile for smoother scroll (modals still work) */
+  /* Disable expensive backdrop-filter on mobile for smoother scroll */
   *[style*='backdrop-filter'],
   *[class*='backdrop'] {
     backdrop-filter: none !important;
@@ -204,17 +193,10 @@ textarea {
   }
 }
 
-/* Home route: reinforce single scroll root (same as global; kept for clarity / future home-only tweaks) */
+/* Home route: reinforce single scroll root */
 html.route-home {
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-@media (max-width: 768px) {
-  html.route-home,
-  html.route-home body {
-    overscroll-behavior-y: auto;
-  }
 }
 
 html.route-home body,
@@ -223,6 +205,6 @@ html.route-home .preloader,
 html.route-home .preloader__content,
 html.route-home .app,
 html.route-home main.main-content {
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
+  overflow-x: hidden;
+  overflow-y: visible;
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { useSearchParams, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getVisiblePackages, REGION_DESTINATIONS } from '../data/packages'
@@ -151,6 +151,7 @@ function Packages() {
   const [maxPrice, setMaxPrice] = useState('')
   const [departureMonth, setDepartureMonth] = useState('Any')
   const [travelType, setTravelType] = useState('Any')
+  const resultsRef = useRef(null)
 
   useLayoutEffect(() => {
     const resetTop = () => {
@@ -276,6 +277,29 @@ function Packages() {
     setSearchParams(params)
   }
 
+  const scrollToResults = () => {
+    const el = resultsRef.current
+    if (!el) return
+
+    const headerEl = document.querySelector('.header')
+    const headerOffset = headerEl instanceof HTMLElement
+      ? headerEl.getBoundingClientRect().height
+      : Number.parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue('--header-height').trim(),
+          10,
+        ) || 100
+    const top = el.getBoundingClientRect().top + window.scrollY - headerOffset - 16
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+  }
+
+  const selectCategory = (cat) => {
+    applyFilters(cat, destination)
+    // Wait for results to paint, then scroll into view under the sticky header.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(scrollToResults)
+    })
+  }
+
   const clearAllFilters = () => {
     setCategory('Any')
     setDestination('Any')
@@ -326,10 +350,7 @@ function Packages() {
                 role="listitem"
                 className={`category-tile${isActive ? ' is-active' : ''}`}
                 aria-pressed={isActive}
-                onClick={() => {
-                  setCategory(cat)
-                  applyFilters(cat, destination)
-                }}
+                onClick={() => selectCategory(cat)}
               >
                 <span
                   className="category-tile__media"
@@ -362,7 +383,7 @@ function Packages() {
 
       <div className="packages-container">
         {/* Results Section */}
-        <div className="packages-results">
+        <div className="packages-results" id="packages-results" ref={resultsRef}>
           <div className="results-header">
             <div className="results-title-block">
               <h2 className="results-title">

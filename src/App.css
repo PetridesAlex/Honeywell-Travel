@@ -1,8 +1,8 @@
 /* No scrollbar here – only html scrolls */
 .app,
 .main-content {
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
+  overflow-x: hidden;
+  overflow-y: visible;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -26,8 +26,8 @@
   min-height: 0;
   background-color: #fff;
   overflow-anchor: none;
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 @media (max-width: 768px) {
@@ -35,11 +35,6 @@
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
     overflow-anchor: auto;
-    touch-action: pan-y pinch-zoom;
-  }
-
-  .app {
-    touch-action: pan-y pinch-zoom;
   }
 }
 

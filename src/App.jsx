@@ -58,10 +58,15 @@ function getMinLoaderMs() {
   }
 
   if (typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches) {
-    return 3200
+    return 2800
   }
 
-  return 6000
+  return 4200
+}
+
+function getPreloaderDurationMs() {
+  const minMs = getMinLoaderMs()
+  return minMs > 0 ? minMs : 2500
 }
 
 function AppContent() {
@@ -162,18 +167,25 @@ function AppContent() {
 
 function App() {
   const [loading, setLoading] = useState(() => !hasCompletedPreloaderThisSession())
+  const [preloaderDuration] = useState(() => getPreloaderDurationMs())
 
   useEffect(() => {
-    // Safety cleanup in case old cursor styling class remains after HMR.
-    document.documentElement.classList.remove('cursor-accent-enabled')
+    // Safety cleanup in case old cursor styling class remains after HMR / bfcache.
+    document.documentElement.classList.remove('cursor-accent-enabled', 'preloader-active')
     document.body.classList.remove('cursor-accent-enabled')
   }, [])
 
   useEffect(() => {
+    const unlockScroll = () => {
+      document.documentElement.classList.remove('preloader-active')
+    }
+
     const handlePageShow = (event) => {
-      if (!event.persisted) return
-      markPreloaderComplete()
-      setLoading(false)
+      if (event.persisted) {
+        markPreloaderComplete()
+        setLoading(false)
+      }
+      unlockScroll()
     }
 
     window.addEventListener('pageshow', handlePageShow)
@@ -230,7 +242,7 @@ function App() {
       <Preloader
         loading={loading}
         variant="stairs"
-        duration={6000}
+        duration={preloaderDuration}
         loadingLines={['Honeywell Travel', '#Live the Experience']}
         position="fixed"
       >

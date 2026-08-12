@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import HoneypotField from './HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
 import { FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
@@ -66,6 +67,20 @@ function CruisesSection() {
       }
     }
   }
+
+  useEffect(() => {
+    if (!modalOpen) return undefined
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') closeModal()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [modalOpen, sending, sent])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -199,122 +214,124 @@ function CruisesSection() {
         </div>
       </div>
 
-      {modalOpen && (
-        <div
-          className="hotel-quote-overlay"
-          onClick={closeModal}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="hotel-quote-title"
-        >
-          <div className="hotel-quote-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="hotel-quote-modal-header">
-              <h2 id="hotel-quote-title" className="hotel-quote-modal-title">
-                Request a hotel quote
-              </h2>
-              <button type="button" className="hotel-quote-close" onClick={closeModal} aria-label="Close">
-                ×
-              </button>
-            </div>
-            {sent ? (
-              <div className="hotel-quote-success">
-                <p>{FORM_SUCCESS_MESSAGE}</p>
-                <button type="button" className="hotel-cta-btn" onClick={closeModal}>
-                  Close
+      {modalOpen &&
+        createPortal(
+          <div
+            className="hotel-quote-overlay"
+            onClick={closeModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="hotel-quote-title"
+          >
+            <div className="hotel-quote-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="hotel-quote-modal-header">
+                <h2 id="hotel-quote-title" className="hotel-quote-modal-title">
+                  Request a hotel quote
+                </h2>
+                <button type="button" className="hotel-quote-close" onClick={closeModal} aria-label="Close">
+                  ×
                 </button>
               </div>
-            ) : (
-              <form className="hotel-quote-form" onSubmit={handleSubmit}>
-                <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
-                <p className="hotel-quote-intro">
-                  Share the details below and we&apos;ll email you a quote for Marriott, Hilton,
-                  Sheraton, and other leading hotels.
-                </p>
-                <label className="hotel-quote-label">
-                  Hotel name
-                  <input
-                    type="text"
-                    name="hotelName"
-                    value={form.hotelName}
-                    onChange={handleChange}
-                    placeholder="e.g. Hilton Paris Opéra"
-                    className="hotel-quote-input"
-                  />
-                </label>
-                <label className="hotel-quote-label">
-                  City
-                  <input
-                    type="text"
-                    name="city"
-                    value={form.city}
-                    onChange={handleChange}
-                    placeholder="e.g. Paris"
-                    className="hotel-quote-input"
-                    required
-                  />
-                </label>
-                <div className="hotel-quote-row">
+              {sent ? (
+                <div className="hotel-quote-success">
+                  <p>{FORM_SUCCESS_MESSAGE}</p>
+                  <button type="button" className="hotel-cta-btn" onClick={closeModal}>
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <form className="hotel-quote-form" onSubmit={handleSubmit}>
+                  <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+                  <p className="hotel-quote-intro">
+                    Share the details below and we&apos;ll email you a quote for Marriott, Hilton,
+                    Sheraton, and other leading hotels.
+                  </p>
                   <label className="hotel-quote-label">
-                    Check-in date
+                    Hotel name
                     <input
-                      type="date"
-                      name="checkIn"
-                      value={form.checkIn}
+                      type="text"
+                      name="hotelName"
+                      value={form.hotelName}
                       onChange={handleChange}
+                      placeholder="e.g. Hilton Paris Opéra"
+                      className="hotel-quote-input"
+                    />
+                  </label>
+                  <label className="hotel-quote-label">
+                    City
+                    <input
+                      type="text"
+                      name="city"
+                      value={form.city}
+                      onChange={handleChange}
+                      placeholder="e.g. Paris"
+                      className="hotel-quote-input"
+                      required
+                    />
+                  </label>
+                  <div className="hotel-quote-row">
+                    <label className="hotel-quote-label">
+                      Check-in date
+                      <input
+                        type="date"
+                        name="checkIn"
+                        value={form.checkIn}
+                        onChange={handleChange}
+                        className="hotel-quote-input"
+                        required
+                      />
+                    </label>
+                    <label className="hotel-quote-label">
+                      Check-out date
+                      <input
+                        type="date"
+                        name="checkOut"
+                        value={form.checkOut}
+                        onChange={handleChange}
+                        className="hotel-quote-input"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <label className="hotel-quote-label">
+                    Your name
+                    <input
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Full name"
                       className="hotel-quote-input"
                       required
                     />
                   </label>
                   <label className="hotel-quote-label">
-                    Check-out date
+                    Your email
                     <input
-                      type="date"
-                      name="checkOut"
-                      value={form.checkOut}
+                      type="email"
+                      name="email"
+                      value={form.email}
                       onChange={handleChange}
+                      placeholder="you@example.com"
                       className="hotel-quote-input"
                       required
                     />
                   </label>
-                </div>
-                <label className="hotel-quote-label">
-                  Your name
-                  <input
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Full name"
-                    className="hotel-quote-input"
-                    required
-                  />
-                </label>
-                <label className="hotel-quote-label">
-                  Your email
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="you@example.com"
-                    className="hotel-quote-input"
-                    required
-                  />
-                </label>
-                {error && <p className="hotel-quote-error">{error}</p>}
-                <div className="hotel-quote-actions">
-                  <button type="button" className="hotel-quote-btn secondary" onClick={closeModal}>
-                    Cancel
-                  </button>
-                  <button type="submit" className="hotel-quote-btn primary" disabled={sending}>
-                    {sending ? 'Sending…' : 'Send request'}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+                  {error && <p className="hotel-quote-error">{error}</p>}
+                  <div className="hotel-quote-actions">
+                    <button type="button" className="hotel-quote-btn secondary" onClick={closeModal}>
+                      Cancel
+                    </button>
+                    <button type="submit" className="hotel-quote-btn primary" disabled={sending}>
+                      {sending ? 'Sending…' : 'Send request'}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>,
+          document.body,
+        )}
     </section>
   )
 }

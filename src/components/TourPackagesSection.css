@@ -233,7 +233,8 @@
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   overscroll-behavior-y: auto;
-  touch-action: pan-x pinch-zoom;
+  /* Allow vertical page scroll when the gesture is mostly vertical */
+  touch-action: pan-x pan-y pinch-zoom;
   scrollbar-width: none;
   width: 100%;
   padding: 0.15rem clamp(1rem, 3vw, 2.5rem) 0.65rem;

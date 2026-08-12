@@ -4768,8 +4768,6 @@ img.hotel-image-bg--img {
   .package-full-page {
     overflow-x: hidden;
     overflow-y: visible;
-    touch-action: pan-y pinch-zoom;
-    -webkit-overflow-scrolling: touch;
   }
 
   .package-full-container {
