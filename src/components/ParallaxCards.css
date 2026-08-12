@@ -111,7 +111,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.35rem 1rem 0.85rem;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
+  scroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   overscroll-behavior-y: auto;
@@ -126,4 +127,14 @@
   height: min(92vw, 320px);
   scroll-snap-align: start;
   transform: none !important;
+}
+
+@media (max-width: 768px) {
+  .parallax-cards-static-track {
+    scroll-snap-type: none;
+  }
+
+  .parallax-card--static {
+    scroll-snap-align: none;
+  }
 }

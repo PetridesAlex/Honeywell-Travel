@@ -57,16 +57,12 @@ function getMinLoaderMs() {
     return 400
   }
 
-  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches) {
-    return 2800
-  }
-
-  return 4200
+  return 5000
 }
 
 function getPreloaderDurationMs() {
   const minMs = getMinLoaderMs()
-  return minMs > 0 ? minMs : 2500
+  return minMs > 0 ? minMs : 5000
 }
 
 function AppContent() {
@@ -239,13 +235,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Preloader
-        loading={loading}
-        variant="stairs"
-        duration={preloaderDuration}
-        loadingLines={['Honeywell Travel', '#Live the Experience']}
-        position="fixed"
-      >
+      <Preloader loading={loading} duration={preloaderDuration}>
         <FavoritesProvider>
           <div className="app">
             <AppContent />

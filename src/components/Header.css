@@ -2264,6 +2264,28 @@
     gap: 0.35rem;
   }
 
+  .header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .tagline-esim-link,
+  .tagline-esim-link__icon,
+  .tagline-esim-link__label,
+  .tagline-esim-link__hint,
+  .tagline-esim-link::before,
+  .tagline-esim-link::after,
+  .tagline-text,
+  .tagline-text::before,
+  .tagline-brand,
+  .header-announcement-track {
+    animation: none !important;
+  }
+
+  .header-announcement-track {
+    will-change: auto;
+  }
+
   .tagline-social-icons {
     display: none;
   }

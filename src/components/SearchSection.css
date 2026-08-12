@@ -1034,6 +1034,12 @@
     padding: 0;
   }
 
+  .packages-by-category-section--results::before,
+  .packages-by-category-section--results::after {
+    animation: none !important;
+    transform: none !important;
+  }
+
   .destination-image-card {
     min-height: 160px;
     width: 100%;

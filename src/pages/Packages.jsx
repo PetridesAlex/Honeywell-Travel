@@ -39,10 +39,6 @@ const slugToCategory = (slug) => {
 }
 
 const CATEGORY_TILES = {
-  Destinations: {
-    image: '/images/destinations/dubai-hero.webp',
-    blurb: 'Worldwide escapes'
-  },
   'Summer Packages': {
     image: '/images/bali/bali-hero.webp',
     blurb: 'Sun-filled getaways'
@@ -110,7 +106,6 @@ const CATEGORY_TILES = {
 }
 
 const GALLERY_CATEGORIES = [
-  'Destinations',
   'Summer Packages',
   'Summer Packages to Greece',
   'Autumn Packages',
@@ -283,7 +278,9 @@ function Packages() {
           10,
         ) || 100
     const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset - 16
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+    const preferSmooth = window.matchMedia('(min-width: 769px)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: Math.max(0, top), behavior: preferSmooth ? 'smooth' : 'auto' })
   }
 
   const selectCategory = (cat) => {

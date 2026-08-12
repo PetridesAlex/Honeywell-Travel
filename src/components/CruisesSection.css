@@ -448,6 +448,11 @@
     margin-bottom: 1.75rem;
   }
 
+  .hotel-partners-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
   .hotel-partners-marquee-item {
     padding: 0 1.25rem;
     font-size: 0.95rem;

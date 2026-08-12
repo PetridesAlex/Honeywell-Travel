@@ -10,7 +10,11 @@
   font-family: "Poppins", "Montserrat", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
+
+@media (min-width: 769px) {
+  html { scroll-behavior: smooth; }
+}
 
 /* ---------- HERO ---------- */
 .dmc-hero {

@@ -1,16 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
 import { getPackageLeadPrice, mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import ModalCards from './ModalCards'
 
-const AUTO_SCROLL_MS = 5500
-
 function TourCategoryPackageRow({ slug, category, title, description }) {
   const { i18n } = useTranslation()
   const trackRef = useRef(null)
-  const [paused, setPaused] = useState(false)
 
   const packages = useMemo(() => {
     return getPackagesByCategory(category)
@@ -42,13 +39,6 @@ function TourCategoryPackageRow({ slug, category, title, description }) {
 
     track.scrollBy({ left: direction * step, behavior: 'smooth' })
   }, [])
-
-  useEffect(() => {
-    if (paused || packages.length <= 1) return undefined
-
-    const interval = setInterval(() => scrollByCard(1), AUTO_SCROLL_MS)
-    return () => clearInterval(interval)
-  }, [paused, packages.length, scrollByCard])
 
   if (packages.length === 0) return null
 
@@ -85,13 +75,7 @@ function TourCategoryPackageRow({ slug, category, title, description }) {
         </div>
       </div>
 
-      <div
-        className="tour-category-row__scroll-shell"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocusCapture={() => setPaused(true)}
-        onBlurCapture={() => setPaused(false)}
-      >
+      <div className="tour-category-row__scroll-shell">
         <div className="tour-category-row__fade tour-category-row__fade--left" aria-hidden="true" />
         <div className="tour-category-row__fade tour-category-row__fade--right" aria-hidden="true" />
         <div ref={trackRef} className="tour-category-row__track">

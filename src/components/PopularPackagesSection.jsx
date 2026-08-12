@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
@@ -15,8 +15,6 @@ const popularCategories = [
   { value: 'Exotic Packages', label: 'Exotic Packages' }
 ]
 
-const PACKAGE_ROTATION_MS = 8000
-const CATEGORY_ROTATION_MS = 14000
 const VISIBLE_PACKAGES_COUNT = 6
 
 const categoryToSlug = (category) =>
@@ -31,7 +29,7 @@ function PopularPackagesSection() {
   const { i18n } = useTranslation()
   const isMobileLite = useMobileLite()
   const [selectedCategory, setSelectedCategory] = useState(popularCategories[0].value)
-  const [rotationIndex, setRotationIndex] = useState(0)
+  const [pageIndex, setPageIndex] = useState(0)
 
   const allPackagesForCategory = useMemo(() => {
     return getPackagesByCategory(selectedCategory)
@@ -39,43 +37,33 @@ function PopularPackagesSection() {
       .sort((a, b) => getLeadPrice(a) - getLeadPrice(b))
   }, [selectedCategory])
 
-  useEffect(() => {
-    setRotationIndex(0)
-  }, [selectedCategory])
-
-  useEffect(() => {
-    if (isMobileLite || allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return undefined
-    const interval = setInterval(() => {
-      setRotationIndex((prev) => (prev + 1) % allPackagesForCategory.length)
-    }, PACKAGE_ROTATION_MS)
-    return () => clearInterval(interval)
-  }, [allPackagesForCategory, isMobileLite])
-
-  useEffect(() => {
-    if (isMobileLite) return undefined
-    const interval = setInterval(() => {
-      setSelectedCategory((prev) => {
-        const currentIndex = popularCategories.findIndex((cat) => cat.value === prev)
-        const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % popularCategories.length
-        return popularCategories[nextIndex].value
-      })
-    }, CATEGORY_ROTATION_MS)
-    return () => clearInterval(interval)
-  }, [isMobileLite])
+  const totalPages = Math.max(1, Math.ceil(allPackagesForCategory.length / VISIBLE_PACKAGES_COUNT))
+  const safePageIndex = Math.min(pageIndex, totalPages - 1)
+  const canGoPrev = totalPages > 1
+  const canGoNext = totalPages > 1
 
   const packagesForCategory = useMemo(() => {
-    if (allPackagesForCategory.length <= VISIBLE_PACKAGES_COUNT) return allPackagesForCategory
-    const visible = []
-    for (let i = 0; i < VISIBLE_PACKAGES_COUNT; i += 1) {
-      visible.push(allPackagesForCategory[(rotationIndex + i) % allPackagesForCategory.length])
-    }
-    return visible
-  }, [allPackagesForCategory, rotationIndex])
+    const start = safePageIndex * VISIBLE_PACKAGES_COUNT
+    return allPackagesForCategory.slice(start, start + VISIBLE_PACKAGES_COUNT)
+  }, [allPackagesForCategory, safePageIndex])
 
   const modalCards = useMemo(
     () => mapPackagesToModalCards(packagesForCategory, i18n),
     [packagesForCategory, i18n]
   )
+
+  const selectCategory = (category) => {
+    setSelectedCategory(category)
+    setPageIndex(0)
+  }
+
+  const goPrev = () => {
+    setPageIndex((prev) => (prev - 1 + totalPages) % totalPages)
+  }
+
+  const goNext = () => {
+    setPageIndex((prev) => (prev + 1) % totalPages)
+  }
 
   return (
     <section className="popular-packages-section" aria-label="Popular packages">
@@ -86,10 +74,7 @@ function PopularPackagesSection() {
               key={cat.value}
               type="button"
               className={`popular-category-chip${selectedCategory === cat.value ? ' active' : ''}`}
-              onClick={() => {
-                setSelectedCategory(cat.value)
-                setRotationIndex(0)
-              }}
+              onClick={() => selectCategory(cat.value)}
               role="tab"
               aria-selected={selectedCategory === cat.value}
             >
@@ -97,6 +82,32 @@ function PopularPackagesSection() {
             </button>
           ))}
         </div>
+
+        {totalPages > 1 ? (
+          <div className="popular-packages-nav" aria-label="Browse popular packages">
+            <button
+              type="button"
+              className="popular-packages-nav__btn"
+              onClick={goPrev}
+              disabled={!canGoPrev}
+              aria-label="Previous packages"
+            >
+              ←
+            </button>
+            <span className="popular-packages-nav__status">
+              {safePageIndex + 1} / {totalPages}
+            </span>
+            <button
+              type="button"
+              className="popular-packages-nav__btn"
+              onClick={goNext}
+              disabled={!canGoNext}
+              aria-label="Next packages"
+            >
+              →
+            </button>
+          </div>
+        ) : null}
 
         <ModalCards
           cards={modalCards}

@@ -54,11 +54,35 @@ function ModalCards({
   ariaLabel = 'Package details modal',
   backdropGradientPosition = '50% 10%'
 }) {
-  const speedConfig = ANIMATION_SPEEDS[animationSpeed] || ANIMATION_SPEEDS.normal
-  const isAnimationDisabled = animationSpeed === 'none'
+  const [preferLiteMotion, setPreferLiteMotion] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return (
+      window.matchMedia('(max-width: 768px)').matches
+      || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+  })
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia('(max-width: 768px)')
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const sync = () => {
+      setPreferLiteMotion(mobileQuery.matches || motionQuery.matches)
+    }
+    sync()
+    mobileQuery.addEventListener('change', sync)
+    motionQuery.addEventListener('change', sync)
+    return () => {
+      mobileQuery.removeEventListener('change', sync)
+      motionQuery.removeEventListener('change', sync)
+    }
+  }, [])
+
+  const effectiveSpeed = preferLiteMotion ? 'none' : animationSpeed
+  const speedConfig = ANIMATION_SPEEDS[effectiveSpeed] || ANIMATION_SPEEDS.normal
+  const isAnimationDisabled = effectiveSpeed === 'none'
 
   const [selectedCard, setSelectedCard] = useState(null)
-  const [mounted, setMounted] = useState(isAnimationDisabled)
+  const [mounted, setMounted] = useState(() => preferLiteMotion || animationSpeed === 'none')
 
   const springTransition = useMemo(
     () => ({
@@ -70,10 +94,7 @@ function ModalCards({
   )
 
   useEffect(() => {
-    if (isAnimationDisabled) {
-      setMounted(true)
-      return undefined
-    }
+    if (isAnimationDisabled) return undefined
 
     const timer = setTimeout(() => setMounted(true), 0)
     return () => clearTimeout(timer)

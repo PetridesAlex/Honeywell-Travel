@@ -38,42 +38,26 @@
   transform: none;
 }
 
-/* Mobile performance optimizations */
+/* Mobile: no reveal transforms — they fight finger scrolling on large sections */
 @media (max-width: 768px) {
-  .reveal-on-scroll {
-    /* Faster, simpler animations on mobile */
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    transform: translateY(16px); /* Reduce distance for smoother animation */
-  }
-
-  .reveal-on-scroll.reveal-visible {
-    transition: none;
-    transform: none;
-  }
-
-  .reveal-on-scroll.reveal-up {
-    transform: translateY(16px);
-  }
-
-  .reveal-on-scroll.reveal-up.reveal-visible {
-    transform: none;
-  }
-
-  .reveal-on-scroll.reveal-down {
-    transform: translateY(-16px);
-  }
-
+  .reveal-on-scroll,
+  .reveal-on-scroll.reveal-up,
+  .reveal-on-scroll.reveal-down,
+  .reveal-on-scroll.reveal-fade,
+  .reveal-on-scroll.reveal-visible,
+  .reveal-on-scroll.reveal-up.reveal-visible,
   .reveal-on-scroll.reveal-down.reveal-visible {
+    opacity: 1;
     transform: none;
+    transition: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-on-scroll {
-    transition-duration: 0.2s;
-    transform: none;
-  }
+  .reveal-on-scroll,
   .reveal-on-scroll.reveal-visible {
+    opacity: 1;
     transform: none;
+    transition: none;
   }
 }

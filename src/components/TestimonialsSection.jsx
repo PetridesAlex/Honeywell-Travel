@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { useEffect, useMemo, useRef } from 'react'
 import './TestimonialsSection.css'
@@ -127,6 +126,7 @@ function TestimonialsSection() {
     return grouped
   }, [reviews])
 
+  const sectionRef = useRef(null)
   const mobileMarqueeRef = useRef(null)
   const marqueeCol1Ref = useRef(null)
   const marqueeCol2Ref = useRef(null)
@@ -139,30 +139,28 @@ function TestimonialsSection() {
   }
 
   useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return undefined
+
+    const mobileQuery = window.matchMedia('(max-width: 768px)')
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    // Mobile: no JS marquee — continuous transforms steal frames from page scroll.
+    if (mobileQuery.matches || reducedMotionQuery.matches) {
+      return undefined
+    }
+
     const columnRefs = [marqueeCol1Ref, marqueeCol2Ref, marqueeCol3Ref]
     const offsets = [0, 0, 0]
     const directions = [1, 1, 1]
-    /* px per frame @ ~60fps — higher = faster vertical marquee */
     const speeds = [0.42, 0.5, 0.38]
-    let mobileOffset = 0
-    let mobileDirection = 1
-    const mobileSpeed = 0.42
+    let isInView = false
+    let running = false
 
     const animate = () => {
-      const mobileEl = mobileMarqueeRef.current
-      if (mobileEl && mobileEl.parentElement) {
-        const mobileMaxOffset = Math.max(0, mobileEl.scrollHeight - mobileEl.parentElement.clientHeight)
-        if (mobileMaxOffset > 0) {
-          mobileOffset += mobileSpeed * mobileDirection
-          if (mobileOffset >= mobileMaxOffset) {
-            mobileOffset = mobileMaxOffset
-            mobileDirection = -1
-          } else if (mobileOffset <= 0) {
-            mobileOffset = 0
-            mobileDirection = 1
-          }
-          mobileEl.style.transform = `translateY(-${mobileOffset}px)`
-        }
+      if (!isInView) {
+        running = false
+        return
       }
 
       columnRefs.forEach((ref, index) => {
@@ -185,51 +183,46 @@ function TestimonialsSection() {
       animationRef.current = requestAnimationFrame(animate)
     }
 
-    animationRef.current = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationRef.current)
+    const start = () => {
+      if (running || !isInView) return
+      running = true
+      animationRef.current = requestAnimationFrame(animate)
+    }
+
+    const stop = () => {
+      running = false
+      cancelAnimationFrame(animationRef.current)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInView = entry.isIntersecting
+        if (isInView) start()
+        else stop()
+      },
+      { threshold: 0.12, rootMargin: '80px 0px' },
+    )
+
+    observer.observe(section)
+
+    return () => {
+      observer.disconnect()
+      stop()
+    }
   }, [])
 
   return (
-    <section className="testimonials-section">
+    <section ref={sectionRef} className="testimonials-section">
       <div className="testimonials-container">
         <div className="testimonials-header">
-          <motion.span
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.4 }}
-            className="testimonials-kicker"
-          >
-            Trusted By Travelers
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45 }}
-            className="section-title"
-          >
-            Clients Review
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45, delay: 0.06 }}
-            className="testimonials-subtitle"
-          >
+          <span className="testimonials-kicker">Trusted By Travelers</span>
+          <h2 className="section-title">Clients Review</h2>
+          <p className="testimonials-subtitle">
             Real feedback from travelers who booked unforgettable journeys with Honeywell Travel.
-          </motion.p>
-          <motion.a
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.45, delay: 0.1 }}
-            href="/packages"
-            className="testimonials-wall-link"
-          >
+          </p>
+          <a href="/packages" className="testimonials-wall-link">
             Explore Packages <ArrowRight size={16} />
-          </motion.a>
+          </a>
         </div>
 
         <div className="testimonials-mobile-wall">
