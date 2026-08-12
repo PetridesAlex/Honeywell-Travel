@@ -4,7 +4,7 @@ import { hasCompletedPreloaderThisSession } from '../lib/preloaderSession'
 import './Preloader.css'
 
 const EXIT_FADE_MS = 480
-const LINE_ROTATE_MS = 1550
+const LINE_ROTATE_MS = 2100
 
 const PRELOADER_LINES = [
   {
@@ -26,7 +26,7 @@ const PRELOADER_LINES = [
 
 function Preloader({
   loading,
-  duration = 5000,
+  duration = 7000,
   onComplete,
   children,
   className = '',

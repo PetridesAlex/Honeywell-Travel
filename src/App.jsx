@@ -57,12 +57,12 @@ function getMinLoaderMs() {
     return 400
   }
 
-  return 5000
+  return 7000
 }
 
 function getPreloaderDurationMs() {
   const minMs = getMinLoaderMs()
-  return minMs > 0 ? minMs : 5000
+  return minMs > 0 ? minMs : 7000
 }
 
 function AppContent() {
