@@ -124,6 +124,37 @@ const collectRawPackageDepartureDates = (details) => {
 }
 
 /**
+ * True when the package should stay on the public site.
+ * - No parseable departure dates → keep visible (incomplete / undated packages).
+ * - At least one parseable date on/after today → visible.
+ * - All parseable dates before today → expired (hide).
+ * Uses calendar years only (no roll-forward to next year).
+ */
+export function hasUpcomingPackageDepartures(pkg, now = new Date()) {
+  const details = pkg?.details
+  if (!details) return true
+
+  const raw = collectRawPackageDepartureDates(details)
+  if (raw.length === 0) return true
+
+  const yearOverride = details.departureYear
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+  let parseableCount = 0
+  let upcomingCount = 0
+
+  for (const token of raw) {
+    const parsed = parseDepartureCalendarDate(token, now, yearOverride)
+    if (!parsed) continue
+    parseableCount += 1
+    if (parsed >= startOfToday) upcomingCount += 1
+  }
+
+  if (parseableCount === 0) return true
+  return upcomingCount > 0
+}
+
+/**
  * Outbound package departure options — not hotel stay segments or return/internal flight legs.
  * Same source of truth as the package detail Flights section.
  * Past / expired dates are excluded.

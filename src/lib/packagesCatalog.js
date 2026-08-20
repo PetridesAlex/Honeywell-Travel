@@ -5,6 +5,7 @@ import {
   isPackagesCmsSchemaMissing
 } from './packagesCms'
 import { isSupabaseConfigured } from './supabase'
+import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice'
 
 let cache = null
 let cacheAt = 0
@@ -16,7 +17,7 @@ const CATALOG_BUST_KEY = 'hw_packages_catalog_bust'
 const CATALOG_CHANNEL = 'hw-packages-catalog'
 
 function staticVisiblePackages() {
-  return travelPackages.filter(isPackageVisible)
+  return sortPackagesByLeadPriceAsc(travelPackages.filter(isPackageVisible))
 }
 
 function resetCatalogMemory() {
@@ -73,7 +74,7 @@ export function mergeStaticWithCms(staticList, cmsList, suppressedIds = []) {
     const numericId = Number(id)
     if (Number.isFinite(numericId)) map.delete(numericId)
   }
-  return Array.from(map.values()).filter(isPackageVisible)
+  return sortPackagesByLeadPriceAsc(Array.from(map.values()).filter(isPackageVisible))
 }
 
 /**
@@ -190,7 +191,7 @@ export async function getMergedPackagesByFilter(category = 'Any', destination = 
     filtered = filtered.filter((pkg) => pkg.destination === destination)
   }
 
-  return filtered
+  return sortPackagesByLeadPriceAsc(filtered)
 }
 
 /** Keep public pages synced when CMS saves in another tab or the user returns to the page. */

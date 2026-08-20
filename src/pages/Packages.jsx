@@ -5,6 +5,7 @@ import { getVisiblePackages, REGION_DESTINATIONS } from '../data/packages'
 import { loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import ModalCards from '../components/ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
+import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice'
 import SEO from '../components/SEO'
 import './Packages.css'
 
@@ -249,7 +250,7 @@ function Packages() {
     }
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setFilteredPackages(filtered)
+    setFilteredPackages(sortPackagesByLeadPriceAsc(filtered))
   }, [catalog, category, destination, minPrice, maxPrice, departureMonth, travelType])
 
   const modalCards = useMemo(

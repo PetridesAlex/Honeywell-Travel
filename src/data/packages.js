@@ -85,6 +85,10 @@ import { viennaChristmasPackage353Hotels } from './viennaChristmasPackage353Hote
 import { viennaChristmasPackage353Program } from './viennaChristmasPackage353Program.js'
 import { londonChristmasPackage354Hotels } from './londonChristmasPackage354Hotels.js'
 import { londonChristmasPackage354Program } from './londonChristmasPackage354Program.js'
+import { sofiaChristmasPackage365Hotels } from './sofiaChristmasPackage365Hotels.js'
+import { bucharestChristmasPackage366Hotels } from './bucharestChristmasPackage366Hotels.js'
+import { hasUpcomingPackageDepartures } from '../utils/packageDepartureDates.js'
+import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice.js'
 
 export const travelPackages = [
   {
@@ -23293,6 +23297,1213 @@ export const travelPackages = [
         '/images/mary-special-trip/japan-2026/japan-5.webp'
       ]
     }
+  },
+  {
+    id: 358,
+    title: 'SHAKIRA ΣΤΟ ΑΜΠΟΥ ΝΤΑΜΠΙ',
+    destination: 'UAE',
+    category: 'Music & Sports',
+    price: 699,
+    duration: '4 Μέρες',
+    description:
+      'Συναυλία Shakira στο Άμπου Ντάμπι. 4 μέρες με 3 διανυκτερεύσεις, πρόγευμα και εισιτήριο συναυλίας. Αναχώρηση 19/11 με Wizz Air από Λάρνακα.',
+    longDescription:
+      'Ταξίδι στο Άμπου Ντάμπι για τη συναυλία της Shakira. Διαμονή σε City Seasons Al Hamra (4*), Copthorne Downtown (4*) ή Sofitel Abu Dhabi Corniche (5*) με πρόγευμα. Πτήσεις Wizz Air Λάρνακα – Άμπου Ντάμπι – Λάρνακα. Εισιτήριο συναυλίας περιλαμβάνεται.',
+    image: '🎵',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '19/11',
+      departureYear: 2026,
+      departureDates: ['19/11'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Abu Dhabi, United Arab Emirates',
+      monthAvailability: 'November',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μία χειραποσκευή και μια αποσκευή 10kg στη καμπίνα του αεροπλάνου',
+      coverImage: '/images/music-events/abu-dhabi-shakira/shakira-cover.webp',
+      thumbnailImage: '/images/music-events/abu-dhabi-shakira/shakira-cover.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '19/11',
+          route: 'Larnaca International Airport (LCA) → Abu Dhabi Intl (AUH)',
+          flight: 'W6 4617',
+          time: '15:50 → 21:55',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '22/11',
+          route: 'Abu Dhabi Intl (AUH) → Larnaca International Airport (LCA)',
+          flight: 'W6 4618',
+          time: '22:30 → 01:25 (άφιξη επόμενη μέρα)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'City Seasons Al Hamra Hotel - Abu Dhabi',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/music-events/abu-dhabi-shakira/city-seasons-al-hamra-abu-dhabi.webp',
+          location:
+            'Electra Street, corner Najda Street Abu Dhabi, United Arab Emirates, 4706, Abu Dhabi, United Arab Emirates',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 699 },
+          packagePrice: 1398,
+          departureDate: '19/11',
+          nights: 3
+        },
+        {
+          name: 'Copthorne Downtown Abu Dhabi Hotel - Abu Dhabi',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/music-events/abu-dhabi-shakira/copthorne-downtown-abu-dhabi.webp',
+          location:
+            'Sheikh Zayed the 1st Rd Electra Street, Abu Dhabi, United Arab Emirates, 32430, Abu Dhabi, United Arab Emirates',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 745 },
+          packagePrice: 1490,
+          departureDate: '19/11',
+          nights: 3
+        },
+        {
+          name: 'Sofitel Abu Dhabi Corniche Hotel - Abu Dhabi',
+          stars: 5,
+          roomType: 'Standard Room',
+          image: '/images/music-events/abu-dhabi-shakira/sofitel-abu-dhabi-corniche.webp',
+          location: '3rd St - Al Danah - Zone 1 - Abu Dhabi, Abu Dhabi, United Arab Emirates',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 799 },
+          packagePrice: 1598,
+          departureDate: '19/11',
+          nights: 3
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Άμπου Ντάμπι – Λάρνακα με πτήσεις της WizzAir.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        '3 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Εισιτήριο συναυλίας.',
+        'Μία χειραποσκευή και μια αποσκευή 10kg στη καμπίνα του αεροπλάνου.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Φαγητό και ποτό στη πτήση.',
+        'Τοπικός φόρος διαμονής (πληρώνεται επι τόπου).'
+      ],
+      note:
+        'Εισιτήρια για τη συναυλία μπορούν να εξασφαλιστούν και σε διαφορετικές κατηγορίες, αναλόγως της διαθεσιμότητας την ώρα της κράτησης.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας ή μετρητά στο γραφείο μας.'
+      ],
+      program: {
+        introduction:
+          'Το Άμπου Ντάμπι είναι η πρωτεύουσα και η μεγαλύτερη σε έκταση πόλη των Ηνωμένων Αραβικών Εμιράτων, γνωστή για τον συνδυασμό της σύγχρονης αρχιτεκτονικής, της πολυτέλειας και της πλούσιας αραβικής παράδοσης. Ξεχωρίζει για εντυπωσιακά αξιοθέατα όπως το Μεγάλο Τζαμί του Σεΐχη Ζάιντ, το Προεδρικό Μέγαρο Qasr Al Watan και το μουσείο Louvre Abu Dhabi, ενώ παράλληλα προσφέρει μοναδικές εμπειρίες, από σαφάρι στην έρημο μέχρι παραλίες με καταγάλανα νερά και θεματικά πάρκα στο νησί Yas. Με υψηλό επίπεδο φιλοξενίας, εξαιρετικές υποδομές και έντονη πολιτιστική ταυτότητα, το Άμπου Ντάμπι αποτελεί έναν ιδανικό προορισμό για ταξιδιώτες που αναζητούν τόσο χαλάρωση όσο και εξερεύνηση.\n\nΗ Shakira είναι μία από τις πιο επιτυχημένες και επιδραστικές καλλιτέχνιδες της σύγχρονης μουσικής σκηνής. Γεννημένη στην Μπαρανκίγια της Κολομβίας στις 2 Φεβρουαρίου 1977, ξεχώρισε για τη μοναδική φωνή της, τις εντυπωσιακές χορευτικές της ικανότητες και τον συνδυασμό λατινικών, ποπ και ροκ μουσικών στοιχείων. Έχει κυκλοφορήσει πολυάριθμες επιτυχίες, όπως τα «Hips Don\'t Lie», «Whenever, Wherever» και «Waka Waka (This Time for Africa)», το επίσημο τραγούδι του Παγκοσμίου Κυπέλλου Ποδοσφαίρου 2010. Εκτός από τη μουσική της πορεία, η Shakira είναι γνωστή για το φιλανθρωπικό της έργο, ιδιαίτερα στον τομέα της εκπαίδευσης των παιδιών μέσω του ιδρύματος Pies Descalzos.\n\nΜερικές δραστηριότητες που σας προτείνουμε για να εμπλουτίσετε το πρόγραμμα σας κατά τη διαμονή σας:\n\n1) Επίσκεψη στο Μεγάλο Τζαμί του Σεΐχη Ζάιντ\n\n2) Louvre Abu Dhabi\n\n3) Ferrari World Abu Dhabi'
+      },
+      gallery: [
+        '/images/music-events/abu-dhabi-shakira/shakira-abu-dhabi-hero.webp',
+        '/images/music-events/abu-dhabi-shakira/shakira-cover.webp',
+        '/images/music-events/abu-dhabi-shakira/city-seasons-al-hamra-abu-dhabi.webp',
+        '/images/music-events/abu-dhabi-shakira/copthorne-downtown-abu-dhabi.webp',
+        '/images/music-events/abu-dhabi-shakira/sofitel-abu-dhabi-corniche.webp'
+      ]
+    }
+  },
+  {
+    id: 359,
+    title: 'SHAKIRA ΣΤΗΝ ΜΑΔΡΙΤΗ',
+    destination: 'Spain',
+    category: 'Music & Sports',
+    price: 949,
+    duration: '4 Μέρες',
+    description:
+      'Συναυλία Shakira στη Μαδρίτη. 4 μέρες με 3 διανυκτερεύσεις, πρόγευμα και εισιτήριο συναυλίας. Αναχώρηση 10/10 με Wizz Air από Λάρνακα.',
+    longDescription:
+      'Ταξίδι στη Μαδρίτη για τη συναυλία της Shakira. Διαμονή σε Santos Praga (4*), Acta Madfor (3*), Sercotel Gran Conde Duque (4*) ή Regente Hotel (3*) με πρόγευμα. Πτήσεις Wizz Air Λάρνακα – Μαδρίτη – Λάρνακα. Εισιτήριο συναυλίας περιλαμβάνεται. Διαθέσιμο σε ζήτηση.',
+    image: '🎵',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '10/10',
+      departureYear: 2026,
+      departureDates: ['10/10'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Madrid, Spain',
+      monthAvailability: 'October',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μία χειραποσκευή και μια αποσκευή 10kg στη καμπίνα του αεροπλάνου',
+      coverImage: '/images/music-events/madrid-shakira/shakira-madrid-3.webp',
+      thumbnailImage: '/images/music-events/madrid-shakira/shakira-madrid-3.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '10/10',
+          route: 'Larnaca International Airport (LCA) → Barajas (MAD)',
+          flight: 'W6 4663',
+          time: '13:35 → 17:35',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '13/10',
+          route: 'Barajas (MAD) → Larnaca International Airport (LCA)',
+          flight: 'W6 4664',
+          time: '18:20 → 00:05 (άφιξη επόμενη μέρα)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Santos Praga Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/music-events/madrid-shakira/santos-praga-madrid.webp',
+          location: 'Antonio Lopez, 65, Carabanchel, 28019, Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 949 },
+          packagePrice: 1898,
+          departureDate: '10/10',
+          nights: 3
+        },
+        {
+          name: 'Acta Madfor Hotel - Madrid',
+          stars: 3,
+          roomType: 'Standard Room',
+          image: '/images/music-events/madrid-shakira/acta-madfor-madrid.webp',
+          location: 'Paseo de la Florida, 13, Moncloa-Aravaca, Madrid, 28008, Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 999 },
+          packagePrice: 1998,
+          departureDate: '10/10',
+          nights: 3
+        },
+        {
+          name: 'Sercotel Gran Conde Duque Hotel - Madrid',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/music-events/madrid-shakira/sercotel-gran-conde-duque-madrid.webp',
+          location: 'Plaza del Conde Valle Suchil, 5, Chamberí, 28015, Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1015 },
+          packagePrice: 2030,
+          departureDate: '10/10',
+          nights: 3
+        },
+        {
+          name: 'Regente Hotel - Madrid',
+          stars: 3,
+          roomType: 'Standard Room',
+          image: '/images/music-events/madrid-shakira/regente-madrid.webp',
+          location: 'Mesoneros Romanos, 9, Madrid, 28013, Madrid, Spain',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1079 },
+          packagePrice: 2158,
+          departureDate: '10/10',
+          nights: 3
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Μαδρίτη – Λάρνακα με πτήσεις της WizzAir.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        '3 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Εισιτήριο συναυλίας.',
+        'Μία χειραποσκευή και μια αποσκευή 10kg στη καμπίνα του αεροπλάνου.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Φαγητό και ποτό στη πτήση.',
+        'Τοπικός φόρος διαμονής (πληρώνεται επι τόπου).'
+      ],
+      note:
+        'Εισιτήρια για τη συναυλία μπορούν να εξασφαλιστούν και σε διαφορετικές κατηγορίες, αναλόγως της διαθεσιμότητας την ώρα της κράτησης. Διαθέσιμο σε ζήτηση.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας ή μετρητά στο γραφείο μας.'
+      ],
+      program: {
+        introduction:
+          'Η Μαδρίτη, η πρωτεύουσα της Ισπανίας, είναι μια ζωντανή και πολιτιστικά πλούσια πόλη που συνδυάζει την ιστορική κληρονομιά με τον σύγχρονο τρόπο ζωής. Είναι γνωστή για τα μεγαλοπρεπή της μνημεία, όπως το Βασιλικό Παλάτι και την Πλατεία Πουέρτα δελ Σολ, καθώς και για τα κορυφαία μουσεία της, όπως το Μουσείο Πράδο και το Reina Sofía. Η πόλη φημίζεται επίσης για τη ζωντανή νυχτερινή ζωή, τις όμορφες πλατείες και τα πολυάριθμα πάρκα, όπως το πάρκο Ρετίρο. Με μια πλούσια γαστρονομική σκηνή και ισχυρές παραδόσεις, η Μαδρίτη αποτελεί έναν δημοφιλή προορισμό που συνδυάζει την κλασική ισπανική κουλτούρα με το κοσμοπολίτικο πνεύμα.\n\nΗ Shakira είναι μία από τις πιο επιτυχημένες και επιδραστικές καλλιτέχνιδες της σύγχρονης μουσικής σκηνής. Γεννημένη στην Μπαρανκίγια της Κολομβίας στις 2 Φεβρουαρίου 1977, ξεχώρισε για τη μοναδική φωνή της, τις εντυπωσιακές χορευτικές της ικανότητες και τον συνδυασμό λατινικών, ποπ και ροκ μουσικών στοιχείων. Έχει κυκλοφορήσει πολυάριθμες επιτυχίες, όπως τα «Hips Don\'t Lie», «Whenever, Wherever» και «Waka Waka (This Time for Africa)», το επίσημο τραγούδι του Παγκοσμίου Κυπέλλου Ποδοσφαίρου 2010. Εκτός από τη μουσική της πορεία, η Shakira είναι γνωστή για το φιλανθρωπικό της έργο, ιδιαίτερα στον τομέα της εκπαίδευσης των παιδιών μέσω του ιδρύματος Pies Descalzos.\n\nΜερικές δραστηριότητες που σας προτείνουμε για να εμπλουτίσετε το πρόγραμμα σας κατά τη διαμονή σας:\n\n1) City Tour Madrid\n\n2) Madrid’s Royal Palace Expert Guided Tour\n\n3) Madrid Tapas, Wine Tour'
+      },
+      gallery: [
+        '/images/music-events/madrid-shakira/shakira-madrid-3.webp',
+        '/images/music-events/madrid-shakira/shakira-madrid-hero.webp',
+        '/images/music-events/madrid-shakira/santos-praga-madrid.webp',
+        '/images/music-events/madrid-shakira/acta-madfor-madrid.webp',
+        '/images/music-events/madrid-shakira/sercotel-gran-conde-duque-madrid.webp',
+        '/images/music-events/madrid-shakira/regente-madrid.webp'
+      ]
+    }
+  },
+  {
+    id: 360,
+    title: 'IMAGINE DRAGONS ΣΤΟ ΑΜΠΟΥ ΝΤΑΜΠΙ',
+    destination: 'UAE',
+    category: 'Music & Sports',
+    price: 1159,
+    duration: '4 Μέρες',
+    description:
+      'Συναυλία Imagine Dragons στο Άμπου Ντάμπι. 4 μέρες με 3 διανυκτερεύσεις, πρόγευμα και εισιτήριο συναυλίας. Αναχώρηση 03/12 με Wizz Air από Λάρνακα.',
+    longDescription:
+      'Ταξίδι στο Άμπου Ντάμπι για τη συναυλία των Imagine Dragons. Διαμονή σε Nehal Hotel (3*) ή Oryx Hotel (4*) με πρόγευμα. Πτήσεις Wizz Air Λάρνακα – Άμπου Ντάμπι – Λάρνακα. Εισιτήριο συναυλίας περιλαμβάνεται. Διαθέσιμο σε ζήτηση.',
+    image: '🎵',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '03/12',
+      departureYear: 2026,
+      departureDates: ['03/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Abu Dhabi, United Arab Emirates',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μία χειραποσκευή και μια αποσκευή 10kg στη καμπίνα του αεροπλάνου',
+      coverImage: '/images/music-events/imagine-dragons/imagine-dragons-cover.webp',
+      thumbnailImage: '/images/music-events/imagine-dragons/imagine-dragons-cover.webp',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '03/12',
+          route: 'Larnaca International Airport (LCA) → Abu Dhabi Intl (AUH)',
+          flight: 'W6 4617',
+          time: '15:50 → 21:55',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '06/12',
+          route: 'Abu Dhabi Intl (AUH) → Larnaca International Airport (LCA)',
+          flight: 'W6 4618',
+          time: '22:30 → 01:25 (άφιξη επόμενη μέρα)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Nehal Hotel - Abu Dhabi',
+          stars: 3,
+          roomType: 'Standard Room',
+          image: '/images/music-events/imagine-dragons/nehal-hotel-abu-dhabi.webp',
+          location: 'Abu Dhabi, United Arab Emirates',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1159 },
+          packagePrice: 2318,
+          departureDate: '03/12',
+          nights: 3
+        },
+        {
+          name: 'Oryx Hotel - Abu Dhabi',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/music-events/imagine-dragons/oryx-hotel-abu-dhabi.webp',
+          location:
+            'Zayed the First Street, Khalidiya Area Abu Dhabi, United Arab Emirates, 54845, Abu Dhabi, United Arab Emirates',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 1275 },
+          packagePrice: 2550,
+          departureDate: '03/12',
+          nights: 3
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Άμπου Ντάμπι – Λάρνακα με πτήσεις της WizzAir.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        '3 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Εισιτήριο συναυλίας.',
+        'Μία χειραποσκευή και μια αποσκευή 10kg στη καμπίνα του αεροπλάνου.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Φαγητό και ποτό στη πτήση.',
+        'Τοπικός φόρος διαμονής (πληρώνεται επι τόπου).'
+      ],
+      note:
+        'Εισιτήρια για τη συναυλία μπορούν να εξασφαλιστούν και σε διαφορετικές κατηγορίες, αναλόγως της διαθεσιμότητας την ώρα της κράτησης.',
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν. Σε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας ή μετρητά στο γραφείο μας.'
+      ],
+      program: {
+        introduction:
+          'Το Άμπου Ντάμπι είναι η πρωτεύουσα και η μεγαλύτερη σε έκταση πόλη των Ηνωμένων Αραβικών Εμιράτων, γνωστή για τον συνδυασμό της σύγχρονης αρχιτεκτονικής, της πολυτέλειας και της πλούσιας αραβικής παράδοσης. Ξεχωρίζει για εντυπωσιακά αξιοθέατα όπως το Μεγάλο Τζαμί του Σεΐχη Ζάιντ, το Προεδρικό Μέγαρο Qasr Al Watan και το μουσείο Louvre Abu Dhabi, ενώ παράλληλα προσφέρει μοναδικές εμπειρίες, από σαφάρι στην έρημο μέχρι παραλίες με καταγάλανα νερά και θεματικά πάρκα στο νησί Yas. Με υψηλό επίπεδο φιλοξενίας, εξαιρετικές υποδομές και έντονη πολιτιστική ταυτότητα, το Άμπου Ντάμπι αποτελεί έναν ιδανικό προορισμό για ταξιδιώτες που αναζητούν τόσο χαλάρωση όσο και εξερεύνηση.\n\nΟι Imagine Dragons είναι ένα από τα πιο επιτυχημένα σύγχρονα ροκ συγκροτήματα, γνωστοί για τον δυναμικό τους ήχο που συνδυάζει στοιχεία alternative rock, pop και electronic μουσικής. Δημιουργήθηκαν το 2008 στο Λας Βέγκας των Ηνωμένων Πολιτειών και έγιναν παγκοσμίως γνωστοί με την επιτυχία "Radioactive", η οποία θεωρείται ένα από τα πιο εμβληματικά τραγούδια της δεκαετίας του 2010. Με τραγούδια όπως "Demons", "Believer", "Thunder" και "Bones", έχουν κατακτήσει τις κορυφαίες θέσεις των μουσικών charts και έχουν αποκτήσει εκατομμύρια θαυμαστές σε όλο τον κόσμο. Οι στίχοι τους συχνά πραγματεύονται θέματα όπως η προσωπική δύναμη, η αυτογνωσία και η υπέρβαση των δυσκολιών, γεγονός που κάνει τη μουσική τους ιδιαίτερα αγαπητή σε ανθρώπους κάθε ηλικίας.\n\nΜερικές δραστηριότητες που σας προτείνουμε για να εμπλουτίσετε το πρόγραμμα σας κατά τη διαμονή σας:\n\n1) Επίσκεψη στο Μεγάλο Τζαμί του Σεΐχη Ζάιντ\n\n2) Louvre Abu Dhabi\n\n3) Ferrari World Abu Dhabi'
+      },
+      gallery: [
+        '/images/music-events/imagine-dragons/imagine-dragons-cover.webp',
+        '/images/music-events/imagine-dragons/imagine-dragons-hero.webp',
+        '/images/music-events/imagine-dragons/nehal-hotel-abu-dhabi.webp',
+        '/images/music-events/imagine-dragons/oryx-hotel-abu-dhabi.webp'
+      ]
+    }
+  },
+  {
+    id: 361,
+    title: 'ΙΩΑΝΝΙΝΑ – 4 Μέρες',
+    destination: 'Greece',
+    category: 'Autumn Packages',
+    price: 619,
+    duration: '4 Μέρες',
+    description:
+      'Φθινοπωρινό αεροπορικό πακέτο Λάρνακα – Αθήνα – Ιωάννινα με Aegean. 4 μέρες με 3 διανυκτερεύσεις στο Centro Hotel (4*) με πρόγευμα. Αναχώρηση 18/09.',
+    longDescription:
+      'Ταξίδι στα Ιωάννινα στις όχθες της λίμνης Παμβώτιδας. Πτήσεις Aegean μέσω Αθήνας, διαμονή στο Centro Hotel με πρόγευμα και μεταφορές από/προς το αεροδρόμιο.',
+    image: '🇬🇷',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '18/09',
+      departureYear: 2026,
+      departureDates: ['18/09'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Ioannina, Greece',
+      monthAvailability: 'September',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Μια αποσκευή 23kg, και μια χειραποσκευή 8kg.',
+      coverImage: '/images/autumn/ioannina-greece/ioannina-cover.webp',
+      thumbnailImage: '/images/autumn/ioannina-greece/ioannina-thumb.webp',
+      note: 'Διαθέσιμο κατόπιν ζητήσεως. Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την κράτηση.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '18/09',
+          route: 'Larnaca (LCA) → Ioannina (IOA)',
+          stops: 'Athens (ATH)',
+          time: '07:25 → 11:45',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '07:25',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '09:10',
+              flight: 'A3 911',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '10:30',
+              toCode: 'IOA',
+              toName: 'King Pyrros',
+              toCity: 'Ioannina, Greece',
+              arrive: '11:45',
+              flight: 'A3 160',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '21/09',
+          route: 'Ioannina (IOA) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          time: '12:15 → 17:30',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'IOA',
+              fromName: 'King Pyrros',
+              fromCity: 'Ioannina, Greece',
+              depart: '12:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '13:30',
+              flight: 'A3 161',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '15:50',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '17:30',
+              flight: 'A3 906',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: [
+        {
+          name: 'Centro Hotel - Ioannina',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/autumn/ioannina-greece/centro-hotel-ioannina.webp',
+          location: 'DODONIS 113, IOANNINA, GR, 45221, Ioannina, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 619 },
+          packagePrice: 1238,
+          departureDate: '18/09',
+          nights: 3
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Αθήνα - Ιωάννινα - Αθήνα – Λάρνακα με πτήσεις της Aegean.',
+        'Μια αποσκευή 23kg, και μια χειραποσκευή 8kg.',
+        '3 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Μεταφορές από και προς το αεροδρόμιο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Ότι δεν αναφέρεται στα περιλαμβάνονται ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: {
+        introduction:
+          'Τα μαγευτικά Ιωάννινα, χτισμένα στις όχθες της πανέμορφης λίμνης Παμβώτιδας, αποτελούν μία από τις πιο ατμοσφαιρικές και ιστορικές πόλεις της Ελλάδας. Η λίμνη, που αποτελεί αναπόσπαστο κομμάτι της ταυτότητας της πόλης, δημιουργεί ένα μοναδικό τοπίο και προσφέρεται για όμορφους περιπάτους με θέα το Νησάκι και τα γύρω βουνά. Στην καρδιά της πόλης δεσπόζει το επιβλητικό Κάστρο των Ιωαννίνων, ένα από τα παλαιότερα βυζαντινά κάστρα της χώρας, μέσα στο οποίο ο επισκέπτης συναντά σημαντικά μνημεία και μουσεία που αφηγούνται τη μακραίωνη ιστορία της περιοχής. Τα γραφικά σοκάκια, τα παραδοσιακά κτίρια και οι ιστορικές γειτονιές συνθέτουν μια πόλη όπου το παρελθόν συναντά αρμονικά τη σύγχρονη ζωή.\n\nΙδιαίτερη εμπειρία αποτελεί η επίσκεψη στο Νησάκι της λίμνης Παμβώτιδας, το οποίο είναι εύκολα προσβάσιμο με καραβάκι και συνδέεται στενά με την ιστορία του Αλή Πασά. Παράλληλα, τα Ιωάννινα είναι γνωστά για τη μακρά παράδοσή τους στην αργυροχρυσοχοΐα, την πλούσια πολιτιστική τους κληρονομιά και τη χαρακτηριστική ηπειρώτικη γαστρονομία, με παραδοσιακές πίτες και αυθεντικές τοπικές γεύσεις. Οι ζωντανές πλατείες, τα καφέ και τα εστιατόρια δημιουργούν μια φιλόξενη ατμόσφαιρα καθ’ όλη τη διάρκεια της ημέρας, ενώ η προνομιακή θέση της πόλης την καθιστά ιδανικό σημείο για την εξερεύνηση των εντυπωσιακών φυσικών τοπίων και των παραδοσιακών χωριών της Ηπείρου.'
+      },
+      gallery: [
+        '/images/autumn/ioannina-greece/ioannina-cover.webp',
+        '/images/autumn/ioannina-greece/ioannina-thumb.webp',
+        '/images/autumn/ioannina-greece/centro-hotel-ioannina.webp'
+      ]
+    }
+  },
+  {
+    id: 362,
+    title: 'ΠΑΤΡΑ - ΖΑΚΥΝΘΟΣ - ΑΘΗΝΑ',
+    destination: 'Greece',
+    category: 'Autumn Packages',
+    price: 760,
+    duration: '5 Μέρες',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 5 ημερών: Πάτρα, Ναύπακτος, Τριζόνια, Ζάκυνθος, Καλάβρυτα και Αθήνα. Διανυκτερεύσεις Πάτρα (3), Αθήνα (1). Αναχώρηση 20/09 με Sky Express.',
+    longDescription:
+      'Πέντε ημέρες στην Πελοπόννησο και Αθήνα με τοπικό αρχηγό. Διαμονή στο Moxy Hotel 4* στην Πάτρα και Polis Grand Hotel 4* στην Αθήνα με πρόγευμα. Περιλαμβάνει ημερήσια Ζάκυνθο, Ναύπακτο–Τριζόνια, Καλάβρυτα–Μέγα Σπήλαιο και αποχαιρετιστήριο δείπνο στην Αθήνα.',
+    image: '🇬🇷',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '20/09',
+      departureYear: 2026,
+      departureDates: ['20/09'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Patra, Zakynthos, Athens, Greece',
+      monthAvailability: 'September',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Sky Express',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών.',
+      coverImage: '/images/autumn/patra-zakynthos-athens/patra-zakynthos-cover.webp',
+      thumbnailImage: '/images/autumn/patra-zakynthos-athens/patra-zakinthos-thumb.webp',
+      note: 'ΞΕΝΟΔΟΧΕΙΑ ΔΙΑΜΟΝΗΣ: PATRA - MOXY HOTEL 4* · ATHENS - POLIS GRAND HTL 4* · Διανυκτερεύσεις: Πάτρα (3), Αθήνα (1)',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '20/09',
+          route: 'Larnaca International Airport (LCA) → Athens Int E Venizelos (ATH)',
+          flight: 'GQ 607',
+          time: '07:00 → 08:45',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '24/09',
+          route: 'Athens Int E Venizelos (ATH) → Larnaca International Airport (LCA)',
+          flight: 'GQ 602',
+          time: '19:10 → 20:45',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Polis Grand Hotel 4* - Athens / Moxy Hotel 4* - Patra',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/autumn/patra-zakynthos-athens/polis-grand-moxy-hotel.webp',
+          location: 'Athens & Patra, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 760, single: 920 },
+          packagePrice: 1520,
+          departureDate: '20/09',
+          nights: 4
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Αθήνα - Λάρνακα με πτήσεις της Sky Express.',
+        'Φόροι αεροδρομίων.',
+        'Τρεις διανυκτερεύσεις στην Πάτρα με πρόγευμα σε ξενοδοχείο 4*.',
+        'Μία διανυκτέρευση στην Αθήνα με πρόγευμα σε ξενοδοχείο 4*.',
+        'Ακτοπλοϊκό εισιτήριο για Κυλλίνη - Ζάκυνθο – Κυλλίνη.',
+        'Το εισιτήριο για τον οδοντωτό.',
+        'Το εισιτήριο για την βαρκάδα στα Τριζόνια.',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το αναλυτικό πρόγραμμα.',
+        'Τοπικός Αρχηγός /Συνοδός.',
+        'Ένα δείπνο στην Αθήνα σε τοπική ταβέρνα.',
+        'Τρία δείπνα στο ξενοδοχείο στην Πάτρα.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων/μουσείων προαιρετικά.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [
+        {
+          day: '1η Μέρα',
+          title: 'Λάρνακα - Αθήνα - Πάτρα',
+          description:
+            'Συγκέντρωση στο αεροδρόμιο Λάρνακας και αναχώρηση για Αθήνα με πτήση της Sky Express. Άφιξη, παραλαβή από τον αρχηγό μας και αναχώρηση για την Πάτρα, τη μεγαλύτερη πόλη της Πελοποννήσου και σημαντικό λιμάνι της Δυτικής Ελλάδας, παγκοσμίως γνωστή για το εντυπωσιακό Πατρινό Καρναβάλι. Ενδιάμεσα θα κάνουμε στάση για καφέ και ξεκούραση. Άφιξη στο ξενοδοχείο και τακτοποίηση δωματίων. Το απόγευμα, με χαλαρή διάθεση θα έχουμε περιήγηση στα σημαντικότερα αξιοθέατα της πόλης όπου θα δούμε την επιβλητική Πλατεία Γεωργίου Α΄, το καλοδιατηρημένο Ρωμαϊκό Ωδείο που κάθε καλοκαίρι φιλοξενεί σημαντικές πολιτιστικές εκδηλώσεις, καθώς και τον Ιερό Ναό Αγίου Ανδρέα, έναν από τους μεγαλύτερους ναούς των Βαλκανίων και σημαντικό προσκύνημα της Ορθοδοξίας. Στη συνέχεια θα ανηφορίσουμε προς το Κάστρο της Πάτρας, απ’ όπου θα απολαύσουμε πανοραμική θέα στον Πατραϊκό κόλπο και την πόλη. Περιπλάνηση στην παλιά πόλη με τα γραφικά σοκάκια, τα νεοκλασικά αρχοντικά και τα μικρά εμπορικά δρομάκια που σφύζουν από ζωή. Διανυκτέρευση στην Πάτρα.'
+        },
+        {
+          day: '2η Μέρα',
+          title: 'Πάτρα - Ναύπακτος - Τριζόνια',
+          description:
+            'Πρωινό στο ξενοδοχείο και αναχώρηση για μια μαγευτική ημερήσια εκδρομή στη Ναυπακτία, έναν προορισμό που συνδυάζει αρμονικά θάλασσα και βουνό. Η γραφική Ναύπακτος μάς καλωσορίζει με το καλοδιατηρημένο ενετικό λιμάνι της, ένα από τα ομορφότερα της Ελλάδας, και το επιβλητικό κάστρο που δεσπόζει στον λόφο, προσφέροντας πανοραμική θέα στη γύρω περιοχή. Χρόνος ελεύθερος για περίπατο στα στενά δρομάκια, φωτογραφίες και καφέ δίπλα στη θάλασσα. Αφήνοντας πίσω μας τη γραφική Ναύπακτο, ακολουθούμε την πανέμορφη παραλιακή διαδρομή προς τα Χάνια Δωρίδας, απολαμβάνοντας τη θέα του Κορινθιακού Κόλπου. Από το μικρό λιμανάκι επιβιβαζόμαστε στη βάρκα που, μέσα σε μόλις πέντε λεπτά, μας μεταφέρει στα Τριζόνια, το μοναδικό κατοικημένο νησί του Κορινθιακού. Η σύντομη αυτή βαρκάδα αποτελεί από μόνη της μια ξεχωριστή εμπειρία, με τα γαλήνια νερά και το καταπράσινο τοπίο να δημιουργούν την ιδανική εισαγωγή σε έναν τόπο χωρίς αυτοκίνητα, όπου κυριαρχούν η ηρεμία, η φυσική ομορφιά και οι χαλαροί ρυθμοί. Με την άφιξή μας θα έχουμε ελεύθερο χρόνο για να γνωρίσουμε το ειδυλλιακό αυτό νησί, το οποίο ξεχωρίζει για την απουσία αυτοκινήτων, το καταπράσινο φυσικό του περιβάλλον και τους ήρεμους ρυθμούς ζωής. Μπορείτε να απολαύσετε έναν χαλαρό περίπατο στο παραλιακό μέτωπο και στα γραφικά σοκάκια, να απολαύσετε τον καφέ ή το γεύμα σας σε μία από τις παραδοσιακές ταβέρνες με θέα τη θάλασσα. Στη συνέχεια, επιβιβαζόμαστε στη βάρκα για την επιστροφή μας στα Χάνια Δωρίδας και αναχωρούμε οδικώς για την Πάτρα, γεμάτοι όμορφες εικόνες από έναν από τους πιο γαλήνιους και αυθεντικούς προορισμούς του Κορινθιακού Κόλπου.'
+        },
+        {
+          day: '3η Μέρα',
+          title: 'Πάτρα - Κυλλήνη - Ζάκυνθος',
+          description:
+            'Αναχώρηση μετά το πρωινό για το λιμάνι της Κυλλήνης απ’ όπου θα επιβιβαστούμε στο φέρυ μποτ με προορισμό το όμορφο νησί της Ζακύνθου. Κατά τη διάρκεια της θαλάσσιας διαδρομής θα απολαύσουμε τη δροσιά του Ιονίου και την υπέροχη θέα στο γαλάζιο του πελάγους. Η Ζάκυνθος, το νοτιότερο νησί του Ιονίου, είναι γνωστή ως το «Λουλούδι της Ανατολής» ή Fiore di Levante, όπως την ονόμασαν οι Λατίνοι, μαγεμένοι από την απαράμιλλη φυσική της ομορφιά. Ένας τόπος με πλούσια πολιτιστική κληρονομιά, έντονη μουσική και λογοτεχνική παράδοση. Είναι η πατρίδα του εθνικού μας ποιητή Διονυσίου Σολωμού, δημιουργού του Εθνικού Ύμνου της Ελλάδας. Άφιξη και θα περπατήσουμε στη Χώρα. Θα προσκυνήσουμε στην εκκλησία του Αγίου Διονυσίου, πολιούχου του νησιού. Επιστροφή στην Κυλλήνη με το φέρρυ και μεταφορά στο ξενοδοχείο μας στη Πάτρα.'
+        },
+        {
+          day: '4η Μέρα',
+          title: 'Πάτρα - Καλάβρυτα - Μέγα Σπήλαιο - Αγία Λαύρα - Αθήνα',
+          description:
+            'Πρωινό στο ξενοδοχείο και αναχώρηση για μία μοναδική ολοήμερη εκδρομή. Προορισμός τα ιστορικά Καλάβρυτα, έναν από τους δημοφιλέστερους ορεινούς προορισμούς της Πελοποννήσου. Η διαδρομή μάς χαρίζει όμορφες εικόνες από το φυσικό τοπίο της Αχαΐας και τη φημισμένη χαράδρα του Βουραϊκού, γνωστή για τη μοναδική διαδρομή του οδοντωτού σιδηροδρόμου που συνδέει το Διακοφτό με τα Καλάβρυτα. Πρώτος μας σταθμός η ιστορική Ιερά Μονή του Μεγάλου Σπηλαίου, ένα από τα σημαντικότερα και αρχαιότερα μοναστήρια της Ελλάδας, χτισμένο επιβλητικά μέσα σε έναν απόκρημνο βράχο. Στη συνέχεια θα μεταβούμε στα Καλάβρυτα, όπου θα επισκεφθούμε τον συγκλονιστικό Τόπο Θυσίας και το Μνημείο των Καλαβρύτων, αφιερωμένο στα θύματα της γερμανικής κατοχής και ένα από τα σημαντικότερα σύμβολα μνήμης και εθνικής ιστορίας. Έπειτα θα έχουμε ελεύθερο χρόνο για βόλτα στα γραφικά σοκάκια της πόλης, για αγορές παραδοσιακών τοπικών προϊόντων και προαιρετικό γεύμα σε μία από τις φιλόξενες ταβέρνες της περιοχής. Αναχώρηση για την Αθήνα στην οποία και θα διανυκτερεύσουμε. Άφιξη στο ξενοδοχείο και τακτοποίηση στα δωμάτια. Το βράδυ θα έχουμε αποχαιρετιστήριο δείπνο σε ταβέρνα.'
+        },
+        {
+          day: '5η Μέρα',
+          title: 'Αθήνα - Λάρνακα',
+          description:
+            'Πρωινό στο ξενοδοχείο και ελεύθερος χρόνος στην Αθήνα για τις τελευταίες σας βόλτες, αγορές ή έναν χαλαρό καφέ, απολαμβάνοντας την ατμόσφαιρα της πρωτεύουσας. Αναχώρηση για το αεροδρόμιο «Ελευθέριος Βενιζέλος» για την πτήση της επιστροφής μας στη Λάρνακα, γεμάτοι όμορφες εικόνες και αξέχαστες εμπειρίες από το ταξίδι μας.'
+        }
+      ],
+      program: {
+        introduction:
+          'ΠΑΤΡΑ - ΖΑΚΥΝΘΟΣ - ΑΘΗΝΑ\n\nΔιανυκτερεύσεις: Πάτρα (3), Αθήνα (1)\n\nΞΕΝΟΔΟΧΕΙΑ ΔΙΑΜΟΝΗΣ:\n• PATRA – MOXY HOTEL 4*\n• ATHENS – POLIS GRAND HTL 4*'
+      },
+      gallery: [
+        '/images/autumn/patra-zakynthos-athens/patra-zakynthos-cover.webp',
+        '/images/autumn/patra-zakynthos-athens/patra-zakinthos-thumb.webp',
+        '/images/autumn/patra-zakynthos-athens/polis-grand-moxy-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 363,
+    title: 'ΠΡΕΒΕΖΑ - ΛΕΥΚΑΔΑ - ΑΘΗΝΑ',
+    destination: 'Greece',
+    category: 'Autumn Packages',
+    price: 765,
+    duration: '6 Μέρες',
+    description:
+      'Φθινοπωρινό οργανωμένο πακέτο 6 ημερών: Πρέβεζα, Λευκάδα και Αθήνα. Διανυκτερεύσεις Αθήνα (3), Πρέβεζα (2). Αναχώρηση 26/09 με Sky Express. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Έξι ημέρες με Πρέβεζα, εκδρομή στη Λευκάδα, Ναύπακτο και ελεύθερες ημέρες στην Αθήνα. Διαμονή στο Dioni Boutique Hotel 4* στην Πρέβεζα και Athens Cypria 4* στην Αθήνα με πρόγευμα. Πτήσεις Sky Express Λάρνακα – Αθήνα – Λάρνακα.',
+    image: '🇬🇷',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '26/09',
+      departureYear: 2026,
+      departureDates: ['26/09'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Preveza, Lefkada, Athens, Greece',
+      monthAvailability: 'September',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Sky Express',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών.',
+      coverImage: '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-cover.webp',
+      thumbnailImage: '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-thumb.webp',
+      note: 'Διαθέσιμο σε ζήτηση. ΞΕΝΟΔΟΧΕΙΑ ΔΙΑΜΟΝΗΣ: ΠΡΕΒΕΖΑ - DIONI BOUTIQUE HOTEL 4* | ΑΘΗΝΑ - ATHENS CYPRIA 4* · Διανυκτερεύσεις: Αθήνα (3), Πρέβεζα (2)',
+      priceOnRequest: false,
+      flights: [
+        {
+          direction: 'Departure',
+          date: '26/09',
+          route: 'Larnaca International Airport (LCA) → Athens Int E Venizelos (ATH)',
+          flight: 'GQ 607',
+          time: '07:00 → 08:45',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        },
+        {
+          direction: 'Return',
+          date: '01/10',
+          route: 'Athens Int E Venizelos (ATH) → Larnaca International Airport (LCA)',
+          flight: 'GQ 602',
+          time: '19:00 → 20:45',
+          stops: 'Απευθείας',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+        }
+      ],
+      hotels: [
+        {
+          name: 'Dioni Boutique Hotel 4* Preveza / Athens Cypria 4* Athens',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/autumn/preveza-lefkada-athens/dioni-athens-cypria-hotel.webp',
+          location: 'Athens & Preveza, Greece',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 765, single: 985 },
+          packagePrice: 1530,
+          departureDate: '26/09',
+          nights: 5
+        }
+      ],
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Αθήνα - Λάρνακα με πτήσεις της Sky Express.',
+        'Φόροι αεροδρομίων.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών.',
+        'Δύο διανυκτερεύσεις στην Πρέβεζα με πρόγευμα σε ξενοδοχείο 4*.',
+        'Τρεις διανυκτερεύσεις στην Αθήνα με πρόγευμα σε ξενοδοχείο 4*.',
+        'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το αναλυτικό πρόγραμμα.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων προαιρετικά.',
+        'Γεύματα εκτός προγεύματος.',
+        'Ασφάλεια ταξιδιού.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: ['Πλήρης εξόφληση με την κράτηση.'],
+      itinerary: [
+        {
+          day: '1η Μέρα',
+          title: 'Αθήνα – Πρέβεζα',
+          description:
+            'Συγκέντρωση στο αεροδρόμιο Λάρνακας και αναχώρηση για την Αθήνα με πτήση της Sky Express. Με την άφιξή μας και αφού παραλάβουμε τις αποσκευές μας, θα μεταφερθούμε στην Πρέβεζα, με ενδιάμεσο σταθμό στο Μεσολόγγι. Θα έχουμε την ευκαιρία να γνωρίσουμε μια πόλη με ιδιαίτερη, ρετρό ατμόσφαιρα, που θυμίζει μια παλιά, αυθεντική Ελλάδα. Στη συνέχεια, θα αναχωρήσουμε για την Πρέβεζα. Διανυκτέρευση.'
+        },
+        {
+          day: '2η Μέρα',
+          title: 'Πρέβεζα – Λευκάδα',
+          description:
+            'Πρωινό και αναχωρούμε για την εκδρομή μας στην πανέμορφη Λευκάδα. Η πρωτεύουσα και ταυτόχρονα λιμάνι του νησιού μάς υποδέχεται με τα χαρακτηριστικά χρώματα των σπιτιών, τα στενά δρομάκια, τις περιποιημένες αυλές και μια αρχοντική ομορφιά που μοιάζει να έχει μείνει ανέγγιχτη στον χρόνο. Μικρές πλατείες, πλακόστρωτοι πεζόδρομοι και περίτεχνα καμπαναριά συνθέτουν μια πόλη γραφική και ζωντανή, ιδανική για μια όμορφη βόλτα και εξερεύνηση. Θα έχουμε ελεύθερο χρόνο για να απολαύσουμε τη βόλτα μας στην πόλη, να γνωρίσουμε τις όμορφες γωνιές της και να γευτούμε την τοπική κουζίνα σε μία από τις ταβέρνες απέναντι από τον Σκορπιό. Στη συνέχεια, θα επιστρέψουμε στην Πρέβεζα. Διανυκτέρευση.'
+        },
+        {
+          day: '3η Μέρα',
+          title: 'Πρέβεζα – Ναύπακτος – Αθήνα',
+          description:
+            'Πρωινό και αναχωρούμε από το ξενοδοχείο μας στην Πρέβεζα με προορισμό την Αθήνα, με ενδιάμεσο σταθμό στη Ναύπακτο. Στη Ναύπακτο ο χρόνος φαίνεται σαν να έχει σταματήσει. Είναι από τις λίγες πόλεις της Ελλάδας που επέζησαν 30 αιώνες μέσα από μια πολυτάραχη ιστορία, η οποία αποτυπώνεται στα διάσπαρτα μνημεία της. Στη συνέχεια, θα συνεχίσουμε το ταξίδι μας προς την Αθήνα. Με την άφιξή μας, θα μεταφερθούμε στο ξενοδοχείο μας. Διανυκτέρευση.'
+        },
+        {
+          day: '4η & 5η Μέρα',
+          title: 'Αθήνα',
+          description:
+            'Πρωινό και ελεύθερες ημέρες στην Αθήνα. Η Αθήνα είναι μια πόλη που συνδυάζει μοναδικά την ιστορία με τη σύγχρονη ζωή και μας προσφέρει αμέτρητες επιλογές. Οι ημέρες αυτές είναι αφιερωμένες στη δική μας εξερεύνηση της Αθήνας, με ελεύθερο χρόνο για βόλτες, αγορές, γαστρονομικές απολαύσεις και όμορφες στιγμές στην πόλη. Δυο διανυκτερεύσεις.'
+        },
+        {
+          day: '6η Μέρα',
+          title: 'Αθήνα – Αεροδρόμιο Αθηνών',
+          description:
+            'Πρωινό και αναχωρούμε για το αεροδρόμιο Αθηνών, με ενδιάμεσο σταθμό στο εκπτωτικό χωριό, όπου θα έχουμε περίπου 3 ώρες στη διάθεσή μας. Θα έχουμε την ευκαιρία να κάνουμε τις τελευταίες μας αγορές και να απολαύσουμε τον χρόνο μας πριν από την επιστροφή. Στη συνέχεια, θα μεταφερθούμε στο αεροδρόμιο Αθηνών για την πτήση της Sky Express με προορισμό τη Λάρνακα.'
+        }
+      ],
+      program: {
+        introduction:
+          'ΠΡΕΒΕΖΑ - ΛΕΥΚΑΔΑ - ΑΘΗΝΑ\n\nΔιανυκτερεύσεις: Αθήνα (3), Πρέβεζα (2)\n\nΞΕΝΟΔΟΧΕΙΑ ΔΙΑΜΟΝΗΣ:\n• ΠΡΕΒΕΖΑ – DIONI BOUTIQUE HOTEL 4*\n• ΑΘΗΝΑ – ATHENS CYPRIA 4*\n\nΔιαθέσιμο σε ζήτηση.'
+      },
+      gallery: [
+        '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-cover.webp',
+        '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-thumb.webp',
+        '/images/autumn/preveza-lefkada-athens/dioni-athens-cypria-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 364,
+    title: 'ΠΑΝΟΡΑΜΑ ΠΟΡΤΟΓΑΛΙΑΣ ΜΕ ΤΗΝ ΕΛΕΝΑ ΤΑΝΟΥ',
+    destination: 'Portugal',
+    category: 'Autumn Packages',
+    price: 2240,
+    duration: '8 Μέρες',
+    description:
+      'Φθινοπωρινό οργανωμένο πανόραμα Πορτογαλίας 8 ημερών με την Έλενα Τάνου. Διανυκτερεύσεις Λισαβόνα (3), Πόρτο (3), Κοΐμπρα (1). Αναχώρηση 02/09. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Οκτώ ημέρες σε Λισαβόνα, Σίντρα, Όμπιδος, Φάτιμα, Ναζαρέ, Πόρτο, Μπράγκα, Γκιμαράες, Αβέιρο και Κοΐμπρα. Διαμονή σε Pestana Vintage 4* (Λισαβόνα), Acta The Avenue 4* (Πόρτο) και NH Dona Ines 4* (Κοΐμπρα) με πρόγευμα.',
+    image: '🇵🇹',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '02/09',
+      departureYear: 2026,
+      departureDates: ['02/09'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Lisbon, Porto, Coimbra – Portugal',
+      monthAvailability: 'September',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών.',
+      coverImage: '/images/autumn/portugal-elena-tanou/portugal-elena-tanou-cover.webp',
+      thumbnailImage: '/images/autumn/portugal-elena-tanou/portugal-elena-tanou-thumb.webp',
+      note: 'Διαθέσιμο σε ζήτηση. Συνοδός του γκρουπ: κ. Έλενα Τάνου. Η προσφορά ισχύει για 20 συμμετέχοντες και έως 30 Απριλίου 2026. Με τη δήλωση συμμετοχής προκαταβολή 30%. ΞΕΝΟΔΟΧΕΙΑ: LISBON - PESTANA VINTAGE HTL 4* · PORTO - ACTA THE AVENUE HTL 4* · COIMBRA - NH DONA INES HTL 4* · Διανυκτερεύσεις: Λισαβόνα (3), Πόρτο (3), Κοΐμπρα (1)',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '02/09',
+          route: 'Larnaca (LCA) → Lisbon (LIS)',
+          stops: 'Athens (ATH)',
+          time: '15:45 → 22:45',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '15:45',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '17:30',
+              flight: 'A3 905',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '20:05',
+              toCode: 'LIS',
+              toName: 'Airport',
+              toCity: 'Lisbon, Portugal',
+              arrive: '22:45',
+              flight: 'A3 722',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '09/09',
+          route: 'Lisbon (LIS) → Larnaca (LCA)',
+          stops: 'Athens (ATH)',
+          time: '23:50 → 09:20',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LIS',
+              fromName: 'Airport',
+              fromCity: 'Lisbon, Portugal',
+              depart: '23:50',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '05:45',
+              flight: 'A3 723',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '07:45',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '09:20',
+              flight: 'A3 902',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: [
+        {
+          name: '4* Hotel - Lisbon / Coimbra / Porto',
+          stars: 4,
+          roomType: 'Standard Room',
+          image: '/images/autumn/portugal-elena-tanou/portugal-elena-tanou-hotel.webp',
+          location: 'Lisbon, Portugal',
+          boardBasis: 'Bed & Breakfast',
+          prices: { double: 2240, single: 2840 },
+          packagePrice: 4480,
+          departureDate: '02/09',
+          nights: 7
+        }
+      ],
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Αθήνα – Λισαβόνα – Αθήνα - Λάρνακα με πτήσεις της Aegean Airlines.',
+        'Φόροι αεροδρομίων.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών.',
+        'Διαμονή σε επιλεγμένα ξενοδοχεία 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα.',
+        'Έμπειρος τοπικός Ελληνόφωνος αρχηγός / ξεναγός.',
+        'Δημοτικός φόρος ξενοδοχείων.',
+        'Ακουστικά για τις ξεναγήσεις.',
+        'Εισιτήρια εισόδων: Πύργο Μπελέμ, Μουσείο αυτοκρατορικών αμαξών, Εθνικό μουσείο στην Σίντρα, Πανεπιστήμιο στην Κόιμπρα, Παλάτι Bolsa στο Πόρτο, κελάρι στο Πόρτο.',
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.',
+        'Εισιτήρια εισόδων που δεν αναφέρονται στα περιλαμβάνονται.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Συνοδός του γκρουπ θα είναι η κ. Έλενα Τάνου.',
+        'Η παραπάνω προσφορά ισχύει για 20 συμμετέχοντες και έως 30 Απριλίου 2026.',
+        'Με την δήλωση συμμετοχής θα πρέπει να δοθεί προκαταβολή 30% με κράτηση.',
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      itinerary: [
+        {
+          day: '1η Μέρα',
+          title: 'Τετάρτη 2 Σεπτεμβρίου: Λάρνακα – Αθήνα - Λισαβόνα',
+          description:
+            'Λισαβόνα, μια αδιαμφισβήτητα ξεχωριστή πόλη. Γραφική, κοσμοπολίτικη και δημιουργική, συνδυάζει αρμονικά την ιστορία με το σύγχρονο στοιχείο και το παραδοσιακό με το μοντέρνο. Αναχώρηση από τη Λάρνακα με ενδιάμεση στάση και αλλαγή αεροσκάφους στην Αθήνα. Άφιξη στη Λισαβόνα, υποδοχή από τους τοπικούς μας αντιπροσώπους και μεταφορά στο ξενοδοχείο. Διανυκτέρευση.'
+        },
+        {
+          day: '2η Μέρα',
+          title: 'Πέμπτη 3 Σεπτεμβρίου: Λισαβόνα',
+          description:
+            'Πρόγευμα και πανοραμική περιήγηση στην ιστορική περιοχή του Μπελέμ, απ’ όπου ξεκίνησαν πολλοί σπουδαίοι θαλασσοπόροι. Επίσκεψη στον Πύργο του Μπελέμ και στο Μοναστήρι των Ιερονυμιτών, μνημεία Παγκόσμιας Πολιτιστικής Κληρονομιάς της UNESCO. Ο ναός των Ιερονυμιτών είναι το εντυπωσιακότερο σύμβολο της πορτογαλικής δύναμης και πλούτου της περιόδου των θαλάσσιων ανακαλύψεων. Στη συνέχεια, επίσκεψη στο Μουσείο Αυτοκρατορικών Αμαξών. Το απόγευμα, ελεύθερος χρόνος. Προτείνουμε βόλτα με το παραδοσιακό τραμ της Λισαβόνας, σύμβολο της πόλης με τον ξεχωριστό vintage χαρακτήρα του.'
+        },
+        {
+          day: '3η Μέρα',
+          title: 'Παρασκευή 4 Σεπτεμβρίου: Λισαβόνα – Εστορίλ – Κασκάις – Κάμπο Ντα Ρόκα – Σίντρα',
+          description:
+            'Πρωινή αναχώρηση για να γνωρίσουμε τα φημισμένα κοντινά κοσμοπολίτικα προάστεια της Λισαβόνας με τη διεθνή ατμόσφαιρα. Πρώτος μας σταθμός το παραθαλάσσιο θέρετρο του Εστορίλ, γνωστό επίσης και για το διάσημο καζίνο του. Συνεχίζουμε για το όμορφο Κασκάις το οποίο παλιά ήταν σπουδαίο ψαροχώρι αλλά σήμερα είναι περιοχή με εντυπωσιακές επαύλεις, jet set, ατμόσφαιρα και σπουδαία αλιευτική δραστηριότητα. Μεταξύ Κασκάις και Σίντρα βρίσκεται το ακρωτήριο Κάμπο ντα Ρόκα, το δυτικότερο σημείο της Ευρωπαϊκής ηπείρου και της Πορτογαλίας στον Ατλαντικό Ωκεανό. Άφιξη στην πανέμορφη Σίντρα. Πρόκειται για μία πόλη παραμύθι πνιγμένη στο πράσινο. Επιστροφή στο ξενοδοχείο μας. Για το βράδι σας προτείνουμε να απολαύσετε γνήσια τραγούδια φάδο, τα τραγούδια της μοίρας. Ακόμα και αν δεν μιλάτε την γλώσσα η μελωδία και μόνο θα σας μείνει αξέχαστη…'
+        },
+        {
+          day: '4η Μέρα',
+          title: 'Σάββατο 5 Σεπτεμβρίου: Λισαβόνα - Όμπιδος - Φάτιμα - Ναζαρέ – Πόρτο',
+          description:
+            'Πρόγευμα και αναχώρηση με κατεύθυνση τον βορρά της Πορτογαλίας. Πρώτη μας στάση το μεσαιωνικό Όμπιδος, ένα χωριό βγαλμένο από άλλη εποχή, με κατάλευκα σπίτια, λιθόστρωτα δρομάκια και μπαλκόνια στολισμένα με γιασεμιά. Συνεχίζουμε για τη Φάτιμα, έναν από τους σημαντικότερους τόπους προσκυνήματος παγκοσμίως, όπου δεσπόζει η επιβλητική Βασιλική της Αγίας Τριάδας. Ακολουθεί επίσκεψη στο γραφικό ψαροχώρι Ναζαρέ, παγκοσμίως γνωστό για τα εντυπωσιακά κύματα του Ατλαντικού. Το απόγευμα άφιξη στο Πόρτο, μια πόλη με έντονη προσωπικότητα, που εκφράζει την παράδοση, τις ανθρώπινες αξίες και τη βαθιά ψυχή του πορτογαλικού έθνους. Μεταφορά στο ξενοδοχείο, τακτοποίηση και διανυκτέρευση.'
+        },
+        {
+          day: '5η Μέρα',
+          title: 'Κυριακή 6 Σεπτεμβρίου: Πόρτο',
+          description:
+            'Μετά το πρόγευμα, αναχώρηση για την περιήγησή μας. Αρχικά θα επισκεφθούμε το φημισμένο Πανεπιστήμιο της Κοΐμπρα, ένα από τα παλαιότερα της Ευρώπης, και θα περιηγηθούμε στους ιστορικούς του χώρους. Θα ακολουθήσει ελεύθερος χρόνος για καφέ στο γραφικό ιστορικό κέντρο της πόλης. Στη συνέχεια αναχώρηση για το Πόρτο, του οποίου το ιστορικό κέντρο έχει ανακηρυχθεί Μνημείο Παγκόσμιας Πολιτιστικής Κληρονομιάς της UNESCO. Στην Άνω Πόλη θα περιηγηθούμε στην περιοχή του Καθεδρικού Ναού και στο παλιό κτίριο του σιδηροδρομικού σταθμού. Ακολουθεί επίσκεψη στο εντυπωσιακό Παλάτι Μπόλσα, έδρα του Εμπορικού Επιμελητηρίου. Τέλος, επίσκεψη σε μία από τις φημισμένες κάβες του Vila Nova de Gaia, όπου θα γνωρίσουμε και θα δοκιμάσουμε το διάσημο κρασί Πόρτο, σήμα κατατεθέν της πόλης. Υπόλοιπη ημέρα ελεύθερη.'
+        },
+        {
+          day: '6η Μέρα',
+          title: 'Δευτέρα 7 Σεπτεμβρίου: Πόρτο - Μπράγκα – Γκιμαράες',
+          description:
+            'Πρόγευμα και αναχώρηση για εκδρομή στην καταπράσινη επαρχία του Μίνιο, γνωστή για την παραγωγή του φημισμένου «πράσινου κρασιού» της Πορτογαλίας. Πρώτος σταθμός η αρχοντική Μπράγκα, όπου θα θαυμάσουμε τον κατάφυτο λόφο με το εντυπωσιακό ιερό Bom Jesus do Monte. Στη συνέχεια, επίσκεψη στο Γκιμαράες, τη γενέτειρα του πορτογαλικού έθνους και πόλη όπου γεννήθηκε ο πρώτος βασιλιάς της χώρας, Αλφόνσο Α΄. Θα περιηγηθούμε στο κάστρο και στο ιστορικό κέντρο, τα οποία έχουν ανακηρυχθεί Μνημεία Παγκόσμιας Πολιτιστικής Κληρονομιάς της UNESCO. Επιστροφή στο Πόρτο και διανυκτέρευση.'
+        },
+        {
+          day: '7η Μέρα',
+          title: 'Τρίτη 8 Σεπτεμβρίου: Πόρτο – Αβέιρο – Costa Nova – Bussaco - Κοΐμπρα',
+          description:
+            'Πρόγευμα και, νωρίς το μεσημέρι, αναχώρηση για το Αβέιρο, τη λεγόμενη «Βενετία της Πορτογαλίας», όπου θα θαυμάσουμε τα κανάλια της πόλης και τις χαρακτηριστικές βάρκες που θυμίζουν παραδοσιακές γόνδολες. Στη συνέχεια κατευθυνόμαστε προς τη γραφική Costa Nova, γνωστή για τα πολύχρωμα ριγέ σπίτια της, χτισμένα σε μια στενή λωρίδα γης ανάμεσα στον Ατλαντικό Ωκεανό και τη λιμνοθάλασσα. Ακολουθεί επίσκεψη στο εντυπωσιακό Εθνικό Πάρκο Serra do Bussaco, το οποίο έχει χαρακτηριστεί εθνικό μνημείο και ξεχωρίζει για το πλούσιο φυσικό του τοπίο. Τελικός προορισμός η Κοΐμπρα, η μεσαιωνική φοιτητούπολη της Πορτογαλίας. Γνωστή για το ιστορικό της πανεπιστήμιο του 13ου αιώνα, ένα από τα παλαιότερα της Ευρώπης, καθώς και για την ατμοσφαιρική παλιά πόλη με τα στενά πλακόστρωτα δρομάκια, τις εκκλησίες και τα πολύχρωμα σπίτια της. Ο ποταμός Μοντέγκο διασχίζει την πόλη, προσφέροντας όμορφες διαδρομές και γραφικά τοπία. Μετά το τέλος της περιήγησης, μεταφορά στο ξενοδοχείο, τακτοποίηση στα δωμάτια και διανυκτέρευση.'
+        },
+        {
+          day: '8η Μέρα',
+          title: 'Τετάρτη 9 Σεπτεμβρίου: Πόρτο – Λισαβόνα – Αθήνα - Λάρνακα',
+          description:
+            'Το όμορφο μας ταξίδι σήμερα τελειώνει. Πρόγευμα και χρόνος ελεύθερος μέχρι την μεταφορά μας στο αεροδρόμιο της Λισαβόνας για να πάρουμε την πτήση της επιστροφής, με ενδιάμεση στάση στην Αθήνα.'
+        }
+      ],
+      program: {
+        introduction:
+          'ΠΑΝΟΡΑΜΑ ΠΟΡΤΟΓΑΛΙΑΣ ΜΕ ΤΗΝ ΕΛΕΝΑ ΤΑΝΟΥ\n\nΔιανυκτερεύσεις: Λισαβόνα (3), Πόρτο (3), Κοΐμπρα (1)\n\nΞΕΝΟΔΟΧΕΙΑ:\n• LISBON – PESTANA VINTAGE HTL 4*\n• PORTO – ACTA THE AVENUE HTL 4*\n• COIMBRA – NH DONA INES HTL 4*\n\nΔιαθέσιμο σε ζήτηση.'
+      },
+      gallery: [
+        '/images/autumn/portugal-elena-tanou/portugal-elena-tanou-cover.webp',
+        '/images/autumn/portugal-elena-tanou/portugal-elena-tanou-thumb.webp',
+        '/images/autumn/portugal-elena-tanou/portugal-elena-tanou-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 365,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΣΟΦΙΑ',
+    destination: 'Bulgaria',
+    category: 'Christmas Packages',
+    price: 329,
+    duration: '4 Μέρες',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στη Σόφια από Πάφο με Ryanair: χριστουγεννιάτικες αγορές, φωτισμένοι δρόμοι και Alexander Nevsky. Διαμονή με πρόγευμα. Αναχωρήσεις 27/11, 04/12, 11/12, 18/12.',
+    longDescription:
+      'Ζήστε τη μαγεία των γιορτών στην Σόφια. Διαμονή στο Amar Design Hotel (3*), Abrazo Sofia Hotel (4*) ή Rosslyn Thracia Hotel (4*) με πρόγευμα. Αεροπορικό εισιτήριο Πάφος – Σόφια – Πάφος με Ryanair.',
+    image: '🇧🇬🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '27/11, 04/12, 11/12, 18/12',
+      departureYear: 2026,
+      departureDates: ['27/11', '04/12', '11/12', '18/12'],
+      departureFrom: 'Paphos',
+      destinationFull: 'Sofia – Bulgaria',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Ryanair',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/sofia/sofia-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/sofia/sofia-christmas-thumb.webp',
+      note: 'Αναχωρήσεις: 27/11, 04/12, 11/12, 18/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '27/11, 04/12, 11/12, 18/12',
+          route: 'Paphos (PFO) → Sofia (SOF)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PFO',
+              fromName: 'Paphos Intl',
+              fromCity: 'Paphos, Cyprus',
+              depart: '13:15',
+              toCode: 'SOF',
+              toName: 'Sofia',
+              toCity: 'Sofia, Bulgaria',
+              arrive: '15:25',
+              flight: 'FR 3339',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '30/11, 07/12, 14/12, 21/12',
+          route: 'Sofia (SOF) → Paphos (PFO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'SOF',
+              fromName: 'Sofia',
+              fromCity: 'Sofia, Bulgaria',
+              depart: '16:25',
+              toCode: 'PFO',
+              toName: 'Paphos Intl',
+              toCity: 'Paphos, Cyprus',
+              arrive: '18:25',
+              flight: 'FR 3338',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: sofiaChristmasPackage365Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Πάφος - Σόφια - Πάφος με πτήσεις της Ryanair.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.'
+      ],
+      program: {
+        introduction:
+          'Ζήστε τη μαγεία των γιορτών στην Σόφια!\n\nΗ Σόφια τα Χριστούγεννα ντύνεται στα γιορτινά και υποδέχεται τους επισκέπτες με μια ζεστή και παραμυθένια ατμόσφαιρα. Οι φωτισμένοι δρόμοι, οι στολισμένες πλατείες και οι χριστουγεννιάτικες αγορές δημιουργούν το ιδανικό σκηνικό για χειμερινές βόλτες, ενώ εντυπωσιακά αξιοθέατα, όπως ο Καθεδρικός Ναός Alexander Nevsky, προσθέτουν ξεχωριστή ομορφιά στην πόλη.\n\nΑνάμεσα σε παραδοσιακές γεύσεις, ζεστά ροφήματα και όμορφες γιορτινές εικόνες, η βουλγαρική πρωτεύουσα προσφέρει μια υπέροχη εμπειρία για κάθε ταξιδιώτη. Με τον ιδιαίτερο συνδυασμό ιστορίας, πολιτισμού και σύγχρονης ζωής, η Σόφια αποτελεί μια όμορφη επιλογή για μια χριστουγεννιάτικη απόδραση γεμάτη χαλάρωση, διασκέδαση και αξέχαστες στιγμές.'
+      },
+      gallery: [
+        '/images/christmas-packages/sofia/sofia-christmas-cover.webp',
+        '/images/christmas-packages/sofia/sofia-christmas-thumb.webp',
+        '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp',
+        '/images/christmas-packages/sofia/abrazo-sofia-hotel.webp',
+        '/images/christmas-packages/sofia/rosslyn-thracia-hotel-sofia.webp'
+      ]
+    }
+  },
+  {
+    id: 366,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΟΥΚΟΥΡΕΣΤΙ',
+    destination: 'Romania',
+    category: 'Christmas Packages',
+    price: 355,
+    duration: '4 Μέρες',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στο Βουκουρέστι από Πάφο με Ryanair: χριστουγεννιάτικες αγορές και διαμονή με πρόγευμα. Αναχωρήσεις 27/11, 04/12, 11/12, 18/12. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Ζήστε τη μαγεία των γιορτών στο Βουκουρέστι. Διαμονή στο Zeus Essence Bucharest (3*), Mercure Bucharest City Center (4*) ή Novotel City Centre (4*) με πρόγευμα. Αεροπορικό εισιτήριο Πάφος – Βουκουρέστι – Πάφος με Ryanair.',
+    image: '🇷🇴🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      departureDate: '27/11, 04/12, 11/12, 18/12',
+      departureYear: 2026,
+      departureDates: ['27/11', '04/12', '11/12', '18/12'],
+      departureFrom: 'Paphos',
+      destinationFull: 'Bucharest – Romania',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Ryanair',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/bucharest/bucharest-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/bucharest/bucharest-christmas-thumb.webp',
+      note: 'Αναχωρήσεις: 27/11, 04/12, 11/12, 18/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '27/11, 04/12, 11/12, 18/12',
+          route: 'Paphos (PFO) → Bucharest (OTP)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PFO',
+              fromName: 'Paphos Intl',
+              fromCity: 'Paphos, Cyprus',
+              depart: '19:25',
+              toCode: 'OTP',
+              toName: 'Henri Coanda',
+              toCity: 'Bucharest, Romania',
+              arrive: '21:40',
+              flight: 'FR 3335',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '30/11, 07/12, 14/12, 21/12',
+          route: 'Bucharest (OTP) → Paphos (PFO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'OTP',
+              fromName: 'Henri Coanda',
+              fromCity: 'Bucharest, Romania',
+              depart: '11:45',
+              toCode: 'PFO',
+              toName: 'Paphos Intl',
+              toCity: 'Paphos, Cyprus',
+              arrive: '13:55',
+              flight: 'FR 3334',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: bucharestChristmasPackage366Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Πάφος - Βουκουρέστι - Πάφος με πτήσεις της Ryanair.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.'
+      ],
+      program: {
+        introduction:
+          'Ζήστε τη μαγεία των γιορτών στο Βουκουρέστι!\n\nΤο Βουκουρέστι τα Χριστούγεννα μεταμορφώνεται σε έναν λαμπερό και παραμυθένιο προορισμό, γεμάτο γιορτινά φώτα, στολισμένες πλατείες και χριστουγεννιάτικες αγορές. Οι επιβλητικές λεωφόροι και τα ιστορικά κτίρια της πόλης δημιουργούν ένα μοναδικό σκηνικό, ενώ οι μυρωδιές από παραδοσιακές λιχουδιές, ζεστό κρασί και γλυκά κάνουν κάθε βόλτα ακόμη πιο απολαυστική.\n\nΗ γιορτινή ατμόσφαιρα συνεχίζεται στα γραφικά σοκάκια της Παλιάς Πόλης, όπου εστιατόρια, καφέ και καταστήματα γεμίζουν ζωή και χριστουγεννιάτικες μελωδίες. Με τον εντυπωσιακό στολισμό, τη ζεστή φιλοξενία και τη μοναδική χειμωνιάτικη ατμόσφαιρα, το Βουκουρέστι αποτελεί ιδανική επιλογή για μια όμορφη χριστουγεννιάτικη απόδραση γεμάτη εικόνες και αξέχαστες αναμνήσεις.'
+      },
+      gallery: [
+        '/images/christmas-packages/bucharest/bucharest-christmas-cover.webp',
+        '/images/christmas-packages/bucharest/bucharest-christmas-thumb.webp',
+        '/images/christmas-packages/bucharest/zeus-essence-bucharest.webp',
+        '/images/christmas-packages/bucharest/mercure-bucharest-city-center.webp',
+        '/images/christmas-packages/bucharest/novotel-city-centre-bucharest.webp'
+      ]
+    }
   }
 ]
 
@@ -23301,16 +24512,20 @@ export const travelPackages = [
 export const EXPIRED_PACKAGE_CATEGORIES = ['Easter Packages']
 
 export const isPackageVisible = (pkg) =>
-  Boolean(pkg) && !pkg.hidden && !EXPIRED_PACKAGE_CATEGORIES.includes(pkg.category)
+  Boolean(pkg) &&
+  !pkg.hidden &&
+  !EXPIRED_PACKAGE_CATEGORIES.includes(pkg.category) &&
+  pkg.details?.packageStatus !== 'completed' &&
+  hasUpcomingPackageDepartures(pkg)
 
-const visiblePackages = () => travelPackages.filter(isPackageVisible)
+const visiblePackages = () => sortPackagesByLeadPriceAsc(travelPackages.filter(isPackageVisible))
 
 export const getVisiblePackages = () => visiblePackages()
 
 // Map search dropdown regions to package destination values (so "Asia" shows Thailand, Japan, etc.)
 export const REGION_DESTINATIONS = {
   Greece: ['Greece'],
-  Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Austria', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom', 'Malta', 'Finland', 'Switzerland'],
+  Europe: ['Europe', 'Greece', 'Romania', 'Czech Republic', 'Poland', 'Spain', 'France', 'Italy', 'Hungary', 'Austria', 'Baltic States', 'Slovakia', 'Turkey', 'Iceland', 'Georgia', 'United Kingdom', 'Malta', 'Finland', 'Switzerland', 'Portugal', 'Bulgaria'],
   Asia: ['Thailand', 'Indonesia', 'India', 'Japan', 'South Korea', 'China', 'Bali', 'Sri Lanka', 'Vietnam', 'Asia'],
   'Middle East': ['Middle East', 'UAE', 'Egypt'],
   America: ['America', 'United States', 'Argentina, Brazil', 'Peru'],
@@ -23329,32 +24544,32 @@ export const getPackagesByDestination = (destination) => {
   if (destination === 'Any') return packages
   const destinations = getDestinationsForRegion(destination)
   if (!destinations) return packages
-  return packages.filter(pkg => destinations.includes(pkg.destination))
+  return sortPackagesByLeadPriceAsc(packages.filter((pkg) => destinations.includes(pkg.destination)))
 }
 
 export const getPackagesByCategory = (category) => {
   const packages = visiblePackages()
   if (category === 'Any') return packages
-  return packages.filter(pkg => pkg.category === category)
+  return sortPackagesByLeadPriceAsc(packages.filter((pkg) => pkg.category === category))
 }
 
 export const getPackagesByFilter = (category, destination) => {
   let filtered = visiblePackages()
 
   if (category !== 'Any') {
-    filtered = filtered.filter(pkg => pkg.category === category)
+    filtered = filtered.filter((pkg) => pkg.category === category)
   }
 
   if (destination !== 'Any') {
     const destinations = getDestinationsForRegion(destination)
     if (destinations) {
-      filtered = filtered.filter(pkg => destinations.includes(pkg.destination))
+      filtered = filtered.filter((pkg) => destinations.includes(pkg.destination))
     } else {
-    filtered = filtered.filter(pkg => pkg.destination === destination)
+      filtered = filtered.filter((pkg) => pkg.destination === destination)
     }
   }
 
-  return filtered
+  return sortPackagesByLeadPriceAsc(filtered)
 }
 
 export const addPackage = (newPackage) => {

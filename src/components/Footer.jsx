@@ -56,24 +56,42 @@ function Footer() {
               <span className="location-text">Where to find us</span>
             </a>
             <p className="address-text">9 Anastasi Sioukri street, Limassol 3035, Cyprus</p>
-            <a 
-              href="https://maps.google.com/?q=Honeywell+Travel+9+Anastasi+Sioukri+street+Limassol+3035+Cyprus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="google-map-container map-link"
-              title="Click to open Honeywell Travel location in Google Maps"
-            >
-              <iframe
-                src="https://www.google.com/maps?q=Honeywell+Travel+9+Anastasi+Sioukri+street+Limassol+3035+Cyprus&output=embed&zoom=16"
-                width="100%"
-                height="180"
-                style={{ border: 0, borderRadius: '10px' }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Honeywell Travel Location"
-              ></iframe>
-            </a>
+            <div className="footer-map-card">
+              <div className="footer-map-frame">
+                <iframe
+                  src="https://www.google.com/maps?q=34.6826,33.0469&hl=en&z=17&output=embed"
+                  title="Honeywell Travel office on Google Maps"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+                <div className="footer-map-vignette" aria-hidden="true" />
+                <div className="footer-map-pin" aria-hidden="true">
+                  <span className="footer-map-pin__pulse" />
+                  <span className="footer-map-pin__dot" />
+                </div>
+                <div className="footer-map-overlay">
+                  <div className="footer-map-brand">
+                    <span className="footer-map-brand__eyebrow">Our office</span>
+                    <span className="footer-map-brand__name">Honeywell Travel</span>
+                    <span className="footer-map-brand__place">Limassol · Cyprus</span>
+                  </div>
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=9+Anastasi+Sioukri+street,+Limassol+3035,+Cyprus"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-map-directions"
+                    title="Get directions to Honeywell Travel"
+                  >
+                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                      <circle cx="12" cy="9" r="2.5" />
+                    </svg>
+                    Get directions
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

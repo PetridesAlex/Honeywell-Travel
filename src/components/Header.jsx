@@ -390,35 +390,6 @@ function Header() {
         </div>
       </div>
 
-      <div className="header-announcement-bar" role="status" aria-live="polite">
-        <div className="header-announcement-track">
-          <div className="header-announcement-group">
-            <span className="header-announcement-item">
-              Prices may vary due to airline and airport tax changes.
-            </span>
-            <span className="header-announcement-separator" aria-hidden>
-              •
-            </span>
-            <span className="header-announcement-item" aria-hidden>
-              Prices may vary due to airline and airport tax changes.
-            </span>
-            <span className="header-announcement-separator" aria-hidden>
-              •
-            </span>
-          </div>
-          <div className="header-announcement-group" aria-hidden>
-            <span className="header-announcement-item">
-              Prices may vary due to airline and airport tax changes.
-            </span>
-            <span className="header-announcement-separator">•</span>
-            <span className="header-announcement-item">
-              Prices may vary due to airline and airport tax changes.
-            </span>
-            <span className="header-announcement-separator">•</span>
-          </div>
-        </div>
-      </div>
-
       {isMobileMenuOpen && (
         <div className="mobile-menu">
           <Link to="/build-your-trip" className="mobile-link mobile-build-trip" onClick={closeMobileMenu}>

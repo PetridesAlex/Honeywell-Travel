@@ -1161,7 +1161,12 @@ function PackageFullDetail() {
                                   </div>
                                 </div>
                                 {baseHotel.name ? <h3 className="hotel-single-title">{baseHotel.name}</h3> : null}
-                                {baseHotel.location && <p className="hotel-single-location">{baseHotel.location}</p>}
+                                {baseHotel.location && (
+                                  <p className="hotel-single-location">
+                                    <span className="hotel-single-location__label">Location</span>
+                                    <span className="hotel-single-location__text">{baseHotel.location}</span>
+                                  </p>
+                                )}
                                 {baseHotel.description && details.hideHotelPrices ? (
                                   <div className="hotel-single-description hotel-single-description--premium">
                                     <span className="hotel-single-description__eyebrow">About the stay</span>

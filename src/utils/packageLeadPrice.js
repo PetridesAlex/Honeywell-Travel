@@ -18,3 +18,20 @@ export function getPackageLeadPrice(pkg) {
   const listing = Number(pkg?.price)
   return Number.isFinite(listing) && listing > 0 ? listing : 0
 }
+
+/** Missing / on-request prices sort after priced packages. */
+function sortableLeadPrice(pkg) {
+  const price = getPackageLeadPrice(pkg)
+  return price > 0 ? price : Number.POSITIVE_INFINITY
+}
+
+export function comparePackagesByLeadPriceAsc(a, b) {
+  const priceDiff = sortableLeadPrice(a) - sortableLeadPrice(b)
+  if (priceDiff !== 0) return priceDiff
+  return String(a?.title || '').localeCompare(String(b?.title || ''), 'el')
+}
+
+/** Cheapest → most expensive (copy; does not mutate input). */
+export function sortPackagesByLeadPriceAsc(packages) {
+  return [...(packages || [])].sort(comparePackagesByLeadPriceAsc)
+}

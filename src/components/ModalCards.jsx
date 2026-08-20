@@ -279,6 +279,13 @@ function ModalCards({
                       <div className="modal-cards-hero">
                         <img
                           src={selectedCard.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
+                          alt=""
+                          aria-hidden="true"
+                          className="modal-cards-hero-image modal-cards-hero-image--backdrop"
+                          decoding="async"
+                        />
+                        <img
+                          src={selectedCard.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
                           alt={selectedCard.title}
                           className="modal-cards-hero-image"
                           decoding="async"
@@ -385,6 +392,13 @@ function ModalCards({
                     onClick={(event) => event.stopPropagation()}
                   >
                     <div className="modal-cards-hero">
+                      <img
+                        src={selectedCard.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
+                        alt=""
+                        aria-hidden="true"
+                        className="modal-cards-hero-image modal-cards-hero-image--backdrop"
+                        decoding="async"
+                      />
                       <motion.img
                         layoutId={`image-${selectedCard.id}`}
                         src={selectedCard.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
