@@ -93,7 +93,7 @@ const CATEGORY_TILES = {
     blurb: 'Exclusive curated trips'
   },
   'Music & Sports': {
-    image: '/images/music-events/iron-maiden/iron-maiden-hero.webp',
+    image: '/images/categories/music-events-travel-package-cover.webp',
     blurb: 'Live events abroad'
   },
   'Sports Events & Concerts': {
