@@ -87,6 +87,12 @@ import { londonChristmasPackage354Hotels } from './londonChristmasPackage354Hote
 import { londonChristmasPackage354Program } from './londonChristmasPackage354Program.js'
 import { sofiaChristmasPackage365Hotels } from './sofiaChristmasPackage365Hotels.js'
 import { bucharestChristmasPackage366Hotels } from './bucharestChristmasPackage366Hotels.js'
+import { warsawChristmasPackage367Hotels } from './warsawChristmasPackage367Hotels.js'
+import { warsawChristmasPackage367Program } from './warsawChristmasPackage367Program.js'
+import { warsawNewYearPackage368Hotels } from './warsawNewYearPackage368Hotels.js'
+import { warsawNewYearPackage368Program } from './warsawNewYearPackage368Program.js'
+import { pragueKarlovyVaryChristmasPackage369Hotels } from './pragueKarlovyVaryChristmasPackage369Hotels.js'
+import { pragueKarlovyVaryChristmasPackage369Program } from './pragueKarlovyVaryChristmasPackage369Program.js'
 import { hasUpcomingPackageDepartures } from '../utils/packageDepartureDates.js'
 import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice.js'
 
@@ -24502,6 +24508,360 @@ export const travelPackages = [
         '/images/christmas-packages/bucharest/zeus-essence-bucharest.webp',
         '/images/christmas-packages/bucharest/mercure-bucharest-city-center.webp',
         '/images/christmas-packages/bucharest/novotel-city-centre-bucharest.webp'
+      ]
+    }
+  },
+  {
+    id: 367,
+    title: 'ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΗ ΒΑΡΣΟΒΙΑ',
+    destination: 'Poland',
+    category: 'Christmas Packages',
+    price: 655,
+    duration: '5 Μέρες',
+    description:
+      'Χριστούγεννα 5 ημερών στη Βαρσοβία από Λάρνακα με LOT: 4 διανυκτερεύσεις Novotel Centrum 4*, περιπατητική ξενάγηση και χριστουγεννιάτικες αγορές. Αναχώρηση 26/12. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Γιορτινή απόδραση στη Βαρσοβία με διαμονή στο Novotel Centrum Hotel (4*) με πρόγευμα. Αεροπορικό εισιτήριο Λάρνακα – Βαρσοβία – Λάρνακα με Πολωνικές Αερογραμμές (LOT), μεταφορές και ξενάγηση με τοπικό ελληνόφωνο ξεναγό.',
+    image: '🇵🇱🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '26/12',
+      departureYear: 2026,
+      departureDates: ['26/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Warsaw – Poland',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'LOT Polish Airlines',
+      includedLuggage: 'Μια αποσκευή 23κιλών και μια χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/warsaw-christmas/warsaw-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/warsaw-christmas/warsaw-christmas-thumb.webp',
+      note: 'Αναχώρηση: 26/12 από Λάρνακα με LOT · Διαμονή 4 νύχτες στο Novotel Centrum 4* με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '26/12',
+          route: 'Larnaca (LCA) → Warsaw (WAW)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '16:10',
+              toCode: 'WAW',
+              toName: 'F.Chopin',
+              toCity: 'Warsaw, Poland',
+              arrive: '18:50',
+              flight: 'LO 172',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '30/12',
+          route: 'Warsaw (WAW) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'WAW',
+              fromName: 'F.Chopin',
+              fromCity: 'Warsaw, Poland',
+              depart: '10:40',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '15:10',
+              flight: 'LO 171',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: warsawChristmasPackage367Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Βαρσοβία - Λάρνακα με Πολωνικές Αερογραμμές.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή για 4 βράδια σε ξενοδοχείο 4* με πρόγευμα.',
+        'Μεταφορές και ξενάγηση σύμφωνα με το πρόγραμμα με τοπικό Ελληνόφωνο ξεναγό.',
+        'Μια αποσκευή 23κιλών και μια χειραποσκευή 8 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Δικαιώματα εισόδων προαιρετικά.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: warsawChristmasPackage367Program,
+      gallery: [
+        '/images/christmas-packages/warsaw-christmas/warsaw-christmas-cover.webp',
+        '/images/christmas-packages/warsaw-christmas/warsaw-christmas-thumb.webp',
+        '/images/christmas-packages/warsaw-christmas/novotel-centrum-warsaw.webp'
+      ]
+    }
+  },
+  {
+    id: 368,
+    title: 'ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΗΝ ΒΑΡΣΟΒΙΑ',
+    destination: 'Poland',
+    category: 'Christmas Packages',
+    price: 685,
+    duration: '5 Μέρες',
+    description:
+      'Πρωτοχρονιά 5 ημερών στη Βαρσοβία από Λάρνακα με LOT: 4 διανυκτερεύσεις Novotel Centrum 4*, περιπατητική ξενάγηση και παραμονή Πρωτοχρονιάς. Αναχώρηση 30/12.',
+    longDescription:
+      'Υποδεχθείτε τη νέα χρονιά στη Βαρσοβία με διαμονή στο Novotel Centrum Hotel (4*) με πρόγευμα. Αεροπορικό εισιτήριο Λάρνακα – Βαρσοβία – Λάρνακα με Πολωνικές Αερογραμμές (LOT), μεταφορές και ξενάγηση με τοπικό ελληνόφωνο ξεναγό.',
+    image: '🇵🇱🎆',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '30/12',
+      departureYear: 2026,
+      departureDates: ['30/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Warsaw – Poland',
+      monthAvailability: 'December, January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'LOT Polish Airlines',
+      includedLuggage: 'Μια αποσκευή 23κιλών και μια χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/warsaw-christmas/new-year-eve-warsaw-02-cover.webp',
+      thumbnailImage: '/images/christmas-packages/warsaw-christmas/new-year-eve-warsaw-01.webp',
+      note: 'Αναχώρηση: 30/12 από Λάρνακα με LOT · Επιστροφή: 03/01 · Διαμονή 4 νύχτες στο Novotel Centrum 4* με πρωινό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '30/12',
+          route: 'Larnaca (LCA) → Warsaw (WAW)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '16:10',
+              toCode: 'WAW',
+              toName: 'F.Chopin',
+              toCity: 'Warsaw, Poland',
+              arrive: '18:50',
+              flight: 'LO 172',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '03/01',
+          route: 'Warsaw (WAW) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'WAW',
+              fromName: 'F.Chopin',
+              fromCity: 'Warsaw, Poland',
+              depart: '10:40',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '15:10',
+              flight: 'LO 171',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: warsawNewYearPackage368Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Βαρσοβία - Λάρνακα με Πολωνικές Αερογραμμές.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή για 4 βράδια σε ξενοδοχείο 4* με πρόγευμα.',
+        'Μεταφορές και ξενάγηση σύμφωνα με το πρόγραμμα με τοπικό Ελληνόφωνο ξεναγό.',
+        'Μια αποσκευή 23κιλών και μια χειραποσκευή 8 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Δικαιώματα εισόδων προαιρετικά.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: warsawNewYearPackage368Program,
+      gallery: [
+        '/images/christmas-packages/warsaw-christmas/new-year-eve-warsaw-02-cover.webp',
+        '/images/christmas-packages/warsaw-christmas/new-year-eve-warsaw-01.webp',
+        '/images/christmas-packages/warsaw-christmas/novotel-centrum-warsaw.webp'
+      ]
+    }
+  },
+  {
+    id: 369,
+    title: 'ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΗΝ ΠΡΑΓΑ ΚΑΙ ΤΟ ΚΑΡΛΟΒΥ ΒΑΡΥ',
+    destination: 'Czech Republic',
+    category: 'Christmas Packages',
+    price: 785,
+    duration: '5 Μέρες',
+    description:
+      'Χριστούγεννα 5 ημερών στην Πράγα και Κάρλοβυ Βάρυ από Λάρνακα με Austrian Airlines μέσω Βιέννης: Καστρούπολη, κρουαζιέρα στον Μολδάβα, Παλιά Πόλη και ολοήμερη εκδρομή στη λουτρόπολη. Αναχώρηση 22/12.',
+    longDescription:
+      'Γιορτινή απόδραση στην Πράγα με διαμονή σε ξενοδοχείο 4* με πρόγευμα, κρουαζιέρα στον Μολδάβα με γεύμα και ολοήμερη εκδρομή στο Κάρλοβυ Βάρυ. Αεροπορικό εισιτήριο Λάρνακα – Βιέννη – Πράγα – Βιέννη – Λάρνακα με Αυστριακές Αερογραμμές.',
+    image: '🇨🇿🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '22/12',
+      departureYear: 2026,
+      departureDates: ['22/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Prague, Karlovy Vary – Czech Republic',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Austrian Airlines',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/praque-christmas/cover-christmas-praque.webp',
+      thumbnailImage: '/images/christmas-packages/praque-christmas/thumb-praque-christmas.webp',
+      note: 'Αναχώρηση: 22/12 από Λάρνακα με Austrian Airlines μέσω Βιέννης · Διαμονή 4 νύχτες σε ξενοδοχείο 4* με πρωινό\n\nΤα οικογενειακά δωμάτια είναι 2 δίκλινα δωμάτια με ενδιάμεση πόρτα.\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '22/12',
+          route: 'Larnaca (LCA) → Prague (PRG)',
+          stops: 'Vienna (VIE)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '17:20',
+              toCode: 'VIE',
+              toName: 'Vienna Intl',
+              toCity: 'Vienna, Austria',
+              arrive: '19:50',
+              flight: 'OS 796',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'VIE',
+              fromName: 'Vienna Intl',
+              fromCity: 'Vienna, Austria',
+              depart: '21:45',
+              toCode: 'PRG',
+              toName: 'Ruzyne',
+              toCity: 'Prague, Czech Republic',
+              arrive: '22:40',
+              flight: 'OS 649',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '26/12',
+          route: 'Prague (PRG) → Larnaca (LCA)',
+          stops: 'Vienna (VIE)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PRG',
+              fromName: 'Ruzyne',
+              fromCity: 'Prague, Czech Republic',
+              depart: '07:25',
+              toCode: 'VIE',
+              toName: 'Vienna Intl',
+              toCity: 'Vienna, Austria',
+              arrive: '08:20',
+              flight: 'OS 650',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            },
+            {
+              type: 'connection',
+              text: 'ώρα αναμονής για την επόμενη πτήση:'
+            },
+            {
+              type: 'segment',
+              fromCode: 'VIE',
+              fromName: 'Vienna Intl',
+              fromCity: 'Vienna, Austria',
+              depart: '12:30',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '16:35',
+              flight: 'OS 795',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: pragueKarlovyVaryChristmasPackage369Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Βιέννη - Πράγα – Βιέννη - Λάρνακα με πτήσεις των Αυστριακών Αερογραμμών.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε ξενοδοχείο 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές, περιηγήσεις, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα με πολυτελή πούλμαν.',
+        'Έμπειρος τοπικός Ελληνόφωνος αρχηγός / ξεναγός.',
+        'Κρουαζιέρα στο Μολδάβα με γεύμα.',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων προαιρετικά.',
+        'Ποτά στα γεύματα.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+        'Τα οικογενειακά δωμάτια είναι 2 δίκλινα δωμάτια με ενδιάμεση πόρτα.'
+      ],
+      program: pragueKarlovyVaryChristmasPackage369Program,
+      gallery: [
+        '/images/christmas-packages/praque-christmas/cover-christmas-praque.webp',
+        '/images/christmas-packages/praque-christmas/thumb-praque-christmas.webp',
+        '/images/christmas-packages/praque-christmas/hotel-praque-christmas.webp'
       ]
     }
   }
