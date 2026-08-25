@@ -52,7 +52,11 @@ function ModalCards({
   closeOnEscape = true,
   showCloseButton = true,
   ariaLabel = 'Package details modal',
-  backdropGradientPosition = '50% 10%'
+  backdropGradientPosition = '50% 10%',
+  /** 'lazy' (default) or 'eager' for all card images */
+  imageLoading = 'lazy',
+  /** First N cards use eager + high fetch priority (above-the-fold strips) */
+  priorityImageCount = 0
 }) {
   const [preferLiteMotion, setPreferLiteMotion] = useState(() => {
     if (typeof window === 'undefined') return false
@@ -165,11 +169,22 @@ function ModalCards({
     if (!el.src.includes('patra1.webp')) el.src = FALLBACK_PACKAGE_CARD_IMAGE
   }
 
+  const getImageLoadingProps = (index) => {
+    const isPriority = index < priorityImageCount || imageLoading === 'eager'
+    return {
+      loading: isPriority ? 'eager' : 'lazy',
+      decoding: isPriority ? 'sync' : 'async',
+      fetchPriority: isPriority ? 'high' : 'auto'
+    }
+  }
+
   return (
     <div className={`modal-cards ${className}${isAnimationDisabled ? ' modal-cards--static' : ''}`}>
       <div className="modal-cards-grid">
-        {cards.map((card) =>
-          isAnimationDisabled ? (
+        {cards.map((card, index) => {
+          const imageProps = getImageLoadingProps(index)
+
+          return isAnimationDisabled ? (
             <button
               key={card.id}
               type="button"
@@ -180,8 +195,9 @@ function ModalCards({
                 src={card.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
                 alt={card.title}
                 className="modal-card-image"
-                loading="lazy"
-                decoding="async"
+                loading={imageProps.loading}
+                decoding={imageProps.decoding}
+                fetchPriority={imageProps.fetchPriority}
                 onError={handleImageError}
               />
               <div className="modal-card-shade" />
@@ -213,6 +229,9 @@ function ModalCards({
                 src={card.imageUrl || FALLBACK_PACKAGE_CARD_IMAGE}
                 alt={card.title}
                 className="modal-card-image"
+                loading={imageProps.loading}
+                decoding={imageProps.decoding}
+                fetchPriority={imageProps.fetchPriority}
                 onError={handleImageError}
               />
               <div className="modal-card-shade" />
@@ -253,8 +272,8 @@ function ModalCards({
                 </div>
               </motion.div>
             </motion.button>
-          ),
-        )}
+          )
+        })}
       </div>
 
       {mounted &&

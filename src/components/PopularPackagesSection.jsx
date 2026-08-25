@@ -1,11 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
+import { packageCardImageUrl } from '../utils/packageCardImage'
 import ModalCards from './ModalCards'
-import { useMobileLite } from '../hooks/useMobileLite'
 import './PopularPackagesSection.css'
 
 const popularCategories = [
@@ -15,7 +15,8 @@ const popularCategories = [
   { value: 'Exotic Packages', label: 'Exotic Packages' }
 ]
 
-const VISIBLE_PACKAGES_COUNT = 6
+const PRIORITY_IMAGE_COUNT = 6
+const preloadedImageUrls = new Set()
 
 const categoryToSlug = (category) =>
   category.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '')
@@ -25,96 +26,143 @@ function getLeadPrice(pkg) {
   return price > 0 ? price : Number.MAX_SAFE_INTEGER
 }
 
+function getSortedCategoryPackages(category) {
+  return getPackagesByCategory(category)
+    .slice()
+    .sort((a, b) => getLeadPrice(a) - getLeadPrice(b))
+}
+
+function preloadPackageImages(packages, limit = PRIORITY_IMAGE_COUNT) {
+  if (typeof window === 'undefined' || !Array.isArray(packages)) return
+
+  packages.slice(0, limit).forEach((pkg) => {
+    const url = packageCardImageUrl(pkg)
+    if (!url || preloadedImageUrls.has(url)) return
+    preloadedImageUrls.add(url)
+
+    const img = new Image()
+    img.decoding = 'async'
+    img.src = url
+  })
+}
+
+// Start downloading default Summer card images during module load (while preloader runs).
+preloadPackageImages(getSortedCategoryPackages(popularCategories[0].value))
+
 function PopularPackagesSection() {
   const { i18n } = useTranslation()
-  const isMobileLite = useMobileLite()
+  const trackRef = useRef(null)
   const [selectedCategory, setSelectedCategory] = useState(popularCategories[0].value)
-  const [pageIndex, setPageIndex] = useState(0)
 
-  const allPackagesForCategory = useMemo(() => {
-    return getPackagesByCategory(selectedCategory)
-      .slice()
-      .sort((a, b) => getLeadPrice(a) - getLeadPrice(b))
-  }, [selectedCategory])
-
-  const totalPages = Math.max(1, Math.ceil(allPackagesForCategory.length / VISIBLE_PACKAGES_COUNT))
-  const safePageIndex = Math.min(pageIndex, totalPages - 1)
-  const canGoPrev = totalPages > 1
-  const canGoNext = totalPages > 1
-
-  const packagesForCategory = useMemo(() => {
-    const start = safePageIndex * VISIBLE_PACKAGES_COUNT
-    return allPackagesForCategory.slice(start, start + VISIBLE_PACKAGES_COUNT)
-  }, [allPackagesForCategory, safePageIndex])
+  const packagesForCategory = useMemo(
+    () => getSortedCategoryPackages(selectedCategory),
+    [selectedCategory]
+  )
 
   const modalCards = useMemo(
     () => mapPackagesToModalCards(packagesForCategory, i18n),
     [packagesForCategory, i18n]
   )
 
+  useEffect(() => {
+    preloadPackageImages(packagesForCategory)
+  }, [packagesForCategory])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    track.scrollTo({ left: 0, behavior: 'auto' })
+  }, [selectedCategory])
+
   const selectCategory = (category) => {
     setSelectedCategory(category)
-    setPageIndex(0)
   }
 
-  const goPrev = () => {
-    setPageIndex((prev) => (prev - 1 + totalPages) % totalPages)
-  }
+  const scrollByCard = useCallback((direction = 1) => {
+    const track = trackRef.current
+    if (!track) return
+    const card = track.querySelector('.modal-card')
+    if (!card) return
 
-  const goNext = () => {
-    setPageIndex((prev) => (prev + 1) % totalPages)
-  }
+    const styles = getComputedStyle(track)
+    const gap =
+      Number.parseFloat(styles.columnGap || styles.gap) ||
+      Number.parseFloat(getComputedStyle(track.querySelector('.modal-cards-grid') || track).gap) ||
+      24
+    const step = card.offsetWidth + gap
+    const maxScroll = track.scrollWidth - track.clientWidth
+
+    if (direction > 0 && track.scrollLeft >= maxScroll - 4) {
+      track.scrollTo({ left: 0, behavior: 'smooth' })
+      return
+    }
+
+    if (direction < 0 && track.scrollLeft <= 4) {
+      track.scrollTo({ left: maxScroll, behavior: 'smooth' })
+      return
+    }
+
+    track.scrollBy({ left: direction * step, behavior: 'smooth' })
+  }, [])
 
   return (
     <section className="popular-packages-section" aria-label="Popular packages">
       <div className="popular-packages-container">
-        <div className="popular-category-chips" role="tablist" aria-label="Popular package categories">
-          {popularCategories.map((cat) => (
-            <button
-              key={cat.value}
-              type="button"
-              className={`popular-category-chip${selectedCategory === cat.value ? ' active' : ''}`}
-              onClick={() => selectCategory(cat.value)}
-              role="tab"
-              aria-selected={selectedCategory === cat.value}
-            >
-              {cat.label}
-            </button>
-          ))}
+        <div className="popular-packages-toolbar">
+          <div className="popular-category-chips" role="tablist" aria-label="Popular package categories">
+            {popularCategories.map((cat) => (
+              <button
+                key={cat.value}
+                type="button"
+                className={`popular-category-chip${selectedCategory === cat.value ? ' active' : ''}`}
+                onClick={() => selectCategory(cat.value)}
+                role="tab"
+                aria-selected={selectedCategory === cat.value}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {packagesForCategory.length > 1 ? (
+            <div className="popular-packages-nav" aria-label="Browse popular packages">
+              <button
+                type="button"
+                className="popular-packages-nav__btn"
+                onClick={() => scrollByCard(-1)}
+                aria-label="Previous packages"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                className="popular-packages-nav__btn"
+                onClick={() => scrollByCard(1)}
+                aria-label="Next packages"
+              >
+                →
+              </button>
+            </div>
+          ) : null}
         </div>
 
-        {totalPages > 1 ? (
-          <div className="popular-packages-nav" aria-label="Browse popular packages">
-            <button
-              type="button"
-              className="popular-packages-nav__btn"
-              onClick={goPrev}
-              disabled={!canGoPrev}
-              aria-label="Previous packages"
-            >
-              ←
-            </button>
-            <span className="popular-packages-nav__status">
-              {safePageIndex + 1} / {totalPages}
-            </span>
-            <button
-              type="button"
-              className="popular-packages-nav__btn"
-              onClick={goNext}
-              disabled={!canGoNext}
-              aria-label="Next packages"
-            >
-              →
-            </button>
+        {packagesForCategory.length === 0 ? (
+          <p className="popular-packages-empty">No packages available in this category right now.</p>
+        ) : (
+          <div className="popular-packages-scroll-shell">
+            <div className="popular-packages-fade popular-packages-fade--left" aria-hidden="true" />
+            <div className="popular-packages-fade popular-packages-fade--right" aria-hidden="true" />
+            <div ref={trackRef} className="popular-packages-track">
+              <ModalCards
+                cards={modalCards}
+                className="popular-packages-modal-cards"
+                animationSpeed="none"
+                showCloseButton={false}
+                priorityImageCount={PRIORITY_IMAGE_COUNT}
+              />
+            </div>
           </div>
-        ) : null}
-
-        <ModalCards
-          cards={modalCards}
-          className="popular-packages-modal-cards"
-          animationSpeed={isMobileLite ? 'none' : 'normal'}
-          showCloseButton={false}
-        />
+        )}
 
         <div className="popular-packages-actions">
           <Link to={`/tour-category/${categoryToSlug(selectedCategory)}/`} className="popular-packages-link">
