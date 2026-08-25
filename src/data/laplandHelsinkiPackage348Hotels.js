@@ -1,15 +1,16 @@
 // Hotel inventory & tariffs for package 348 (ΦΩΤΑ ΣΤΗ ΛΑΠΩΝΙΑ ΚΑΙ ΤΟ ΕΛΣΙΝΚΙ) — Christmas departures.
 export const laplandHelsinkiPackage348Hotels = [
   {
-    name: 'Arctic City Hotel / Home Hotel Jugend ή παρόμοιο',
+    name: 'A Category Hotel - Rovaniemi / Helsinki',
     stars: 4,
     roomType: 'Standard Room',
-    image: '/images/sweden-estonia-finland-package/stockhold-Tallinn-hotel.webp',
+    image: '/images/christmas-packages/lapland/A Category Hotel - Rovaniemi : Helsinki.webp',
     location: 'Rovaniemi / Helsinki, Finland',
     boardBasis: 'Bed & Breakfast',
+    hotelNote: 'Ροβανιέμι: Arctic City Hotel ή παρόμοιο · Ελσίνκι: Home Hotel Jugend ή παρόμοιο',
     prices: { double: 3239, single: 3929, child1: 2749 },
     packagePrice: 6478,
     departureDate: '02/01',
-    nights: 6
+    nights: 5
   }
 ]

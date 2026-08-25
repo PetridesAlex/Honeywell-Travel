@@ -784,37 +784,40 @@ function PackageFullDetail() {
 
   // Calculate price for a single room based on selection
   const calculateRoomPrice = (hotel, selection) => {
+    const prices = hotel?.prices
+    if (!prices) return 0
+
     let total = 0
-    
+
     // Calculate adult pricing
-    if (selection.roomType === 'single' && hotel.prices.single) {
-      total = hotel.prices.single * selection.adults
-    } else if (selection.roomType === 'double' && hotel.prices.double) {
-      total = hotel.prices.double * selection.adults
-    } else if (selection.roomType === 'triple' && hotel.prices.triple) {
-      total = hotel.prices.triple * Math.min(selection.adults, 3)
+    if (selection.roomType === 'single' && prices.single) {
+      total = prices.single * selection.adults
+    } else if (selection.roomType === 'double' && prices.double) {
+      total = prices.double * selection.adults
+    } else if (selection.roomType === 'triple' && prices.triple) {
+      total = prices.triple * Math.min(selection.adults, 3)
       if (selection.adults > 3) {
         const extraAdults = selection.adults - 3
-        total += hotel.prices.double * extraAdults
+        total += (prices.double || 0) * extraAdults
       }
-    } else if (selection.roomType === 'quadruple' && hotel.prices.quadruple) {
-      total = hotel.prices.quadruple * Math.min(selection.adults, 4)
+    } else if (selection.roomType === 'quadruple' && prices.quadruple) {
+      total = prices.quadruple * Math.min(selection.adults, 4)
       if (selection.adults > 4) {
         const extraAdults = selection.adults - 4
-        total += hotel.prices.double * extraAdults
+        total += (prices.double || 0) * extraAdults
       }
-    } else if (hotel.prices.double) {
-      total = hotel.prices.double * selection.adults
+    } else if (prices.double) {
+      total = prices.double * selection.adults
     }
-    
+
     // Add children pricing
-    if (selection.children > 0 && hotel.prices.child1) {
-      total += hotel.prices.child1 * Math.min(selection.children, 1)
+    if (selection.children > 0 && prices.child1) {
+      total += prices.child1 * Math.min(selection.children, 1)
     }
-    if (selection.children2 > 0 && hotel.prices.child2) {
-      total += hotel.prices.child2 * selection.children2
+    if (selection.children2 > 0 && prices.child2) {
+      total += prices.child2 * selection.children2
     }
-    
+
     return total || 0
   }
 
@@ -838,7 +841,7 @@ function PackageFullDetail() {
     } else if (selection.roomType === 'triple' && hotel.prices?.triple != null) {
       let amount = hotel.prices.triple * Math.min(selection.adults, 3)
       if (selection.adults > 3) {
-        amount += hotel.prices.double * (selection.adults - 3)
+        amount += (hotel.prices.double || 0) * (selection.adults - 3)
       }
       lines.push({
         key: 'triple',
@@ -848,7 +851,7 @@ function PackageFullDetail() {
     } else if (selection.roomType === 'quadruple' && hotel.prices?.quadruple != null) {
       let amount = hotel.prices.quadruple * Math.min(selection.adults, 4)
       if (selection.adults > 4) {
-        amount += hotel.prices.double * (selection.adults - 4)
+        amount += (hotel.prices.double || 0) * (selection.adults - 4)
       }
       lines.push({
         key: 'quadruple',

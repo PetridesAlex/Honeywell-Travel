@@ -93,6 +93,12 @@ import { warsawNewYearPackage368Hotels } from './warsawNewYearPackage368Hotels.j
 import { warsawNewYearPackage368Program } from './warsawNewYearPackage368Program.js'
 import { pragueKarlovyVaryChristmasPackage369Hotels } from './pragueKarlovyVaryChristmasPackage369Hotels.js'
 import { pragueKarlovyVaryChristmasPackage369Program } from './pragueKarlovyVaryChristmasPackage369Program.js'
+import { parisNewYearPackage370Hotels } from './parisNewYearPackage370Hotels.js'
+import { parisNewYearPackage370Program } from './parisNewYearPackage370Program.js'
+import { parisDisneylandChristmasPackage371Hotels } from './parisDisneylandChristmasPackage371Hotels.js'
+import { parisDisneylandChristmasPackage371Program } from './parisDisneylandChristmasPackage371Program.js'
+import { parisDisneylandStayChristmasPackage372Hotels } from './parisDisneylandStayChristmasPackage372Hotels.js'
+import { parisDisneylandStayChristmasPackage372Program } from './parisDisneylandStayChristmasPackage372Program.js'
 import { hasUpcomingPackageDepartures } from '../utils/packageDepartureDates.js'
 import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice.js'
 
@@ -21771,16 +21777,17 @@ export const travelPackages = [
     destination: 'Finland',
     category: 'Christmas Packages',
     price: 3239,
-    duration: '6 days / 6 nights',
+    duration: '6 Μέρες',
     description:
       'Χριστουγεννιάτικο οργανωμένο πακέτο 6 ημερών στη Λαπωνία και το Ελσίνκι: Rovaniemi και Helsinki με διαμονή σε A Category ξενοδοχεία. Διαθέσιμο σε ζήτηση. Αναχώρηση 02/01.',
     longDescription:
-      'Ζήστε τα φώτα της Λαπωνίας και την ατμόσφαιρα του Ελσίνκι σε ένα πακέτο 6 ημερών: 3 νύχτες στο Ροβανιέμι, 2 στο Ελσίνκι και 1 στην Αθήνα. Snowmobile σαφάρι, χάσκυ, τάρανδοι, χωριό Αϊ Βασίλη, Ranua και ξενάγηση Ελσίνκι. Διαθέσιμο σε ζήτηση.',
+      'Ζήστε τα φώτα της Λαπωνίας και την ατμόσφαιρα του Ελσίνκι σε ένα πακέτο 6 ημερών: 3 νύχτες στο Ροβανιέμι και 2 στο Ελσίνκι. Snowmobile σαφάρι, χάσκυ, τάρανδοι, χωριό Αϊ Βασίλη, Ranua και ξενάγηση Ελσίνκι. Ξενοδοχεία: Arctic City Hotel / Home Hotel Jugend ή παρόμοιο. Διαθέσιμο σε ζήτηση.',
     image: '🇫🇮🎄',
     featured: true,
     packageType: 'group',
     details: {
       departureDate: '02/01',
+      departureYear: 2027,
       departureDates: ['02/01'],
       departureFrom: 'Larnaca',
       destinationFull: 'Rovaniemi, Helsinki – Finland (Lapland)',
@@ -21789,9 +21796,10 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Aegean Airlines & Lufthansa',
       includedLuggage: 'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά',
-      coverImage: '/images/lapland/lapland-cover-1.webp',
-      thumbnailImage: '/images/lapland/lapland-cover-1.webp',
-      note: 'Διαθέσιμο σε ζήτηση · Διανυκτερεύσεις: Ροβανιέμι (3), Ελσίνκι (2), Αθήνα (1) · Arctic City Hotel / Home Hotel Jugend ή παρόμοιο\n\nΛόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.\nΤα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
+      coverImage: '/images/christmas-packages/lapland/lapland-helsinki-cover.webp',
+      thumbnailImage: '/images/christmas-packages/lapland/lapland-helsinki-thumb.webp',
+      codeUpdatedAt: '2026-08-25T12:00:00.000Z',
+      note: 'Διαθέσιμο σε ζήτηση · Διανυκτερεύσεις: Ροβανιέμι (3), Ελσίνκι (2) · Arctic City Hotel / Home Hotel Jugend ή παρόμοιο\n\nΛόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.\nΤα τρίκλινα δωμάτια είναι δίκλινα με την προσθήκη μίας επιπλέον κλίνης.\n\nΜεταφορά στο Santa Park με προαιρετική είσοδο (€66 ενήλικας, €57 παιδί 3–12 ετών, έως 3 ετών δωρεάν).',
       availabilityNote: 'Διαθέσιμο σε ζήτηση',
       importantNotes: [
         'Λόγω των καιρικών συνθηκών της περιοχής, η ροή του προγράμματος μπορεί να αλλάξει αν αυτό κριθεί απαραίτητο για την καλύτερη εξυπηρέτηση του γκρουπ.',
@@ -21926,7 +21934,6 @@ export const travelPackages = [
         'Αεροπορικό εισιτήριο Ροβανιέμι - Ελσίνκι.',
         'Διαμονή στο Ροβανιέμι (3 νύχτες).',
         'Διαμονή στο Ελσίνκι (2 νύχτες).',
-        'Διαμονή στην Αθήνα (1 νύχτα).',
         'Χρήση σάουνας σε όλα τα ξενοδοχεία.',
         'Χρήση πισίνας σε όλα τα ξενοδοχεία (όπου διαθέσιμη).',
         'Πρωινό μπουφέ καθημερινά.',
@@ -21944,15 +21951,12 @@ export const travelPackages = [
         'Ειδικοί τοπικοί αρχηγοί κατά την διάρκεια των δραστηριοτήτων.',
         'Ελληνόφωνο συνοδό - αρχηγό.',
         'Μια χειραποσκευή και 1 αποσκευή έως 20 κιλά.',
-        'ΔΩΡΟ: Μεταφορά, είσοδος και ξενάγηση στο μουσείο Arktikum.',
-        'ΔΩΡΟ: Είσοδος στο SnowmanWorld στο χωριό του Αϊ Βασίλη.'
+        'ΔΩΡΑ ΑΠΟ ΤΟ ΓΡΑΦΕΙΟ ΜΑΣ: Μεταφορά, είσοδος και ξενάγηση στο μουσείο Arktikum.',
+        'ΔΩΡΑ ΑΠΟ ΤΟ ΓΡΑΦΕΙΟ ΜΑΣ: Είσοδος στο SnowmanWorld στο χωριό του Αϊ Βασίλη.'
       ],
       notIncluded: [
         'Τυχόν είσοδοι σε μουσεία.',
-        'Ό,τι δεν αναφέρεται ρητά στο πρόγραμμα.',
-        'Προαιρετική εκδρομή στο Ταλίν (€160 ενήλικας / €120 παιδί έως 11 ετών).',
-        'Βραδινή εξόρμηση Βόρειο Σέλας (€100 ενήλικας / €70 παιδιά 4–14 ετών).',
-        'Είσοδος Santa Park (€66 ενήλικας / €57 παιδί 3–12 ετών).'
+        'Ό,τι δεν αναφέρεται ρητά στο πρόγραμμα.'
       ],
       cancellationPolicy:
         'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
@@ -21967,9 +21971,9 @@ export const travelPackages = [
       itinerary: [],
       program: laplandHelsinkiPackage348Program,
       gallery: [
-        '/images/lapland/lapland-cover-1.webp',
-        '/images/lapland/lapland-cover-2.webp',
-        '/images/lapland/lapland-cover-3.webp'
+        '/images/christmas-packages/lapland/lapland-helsinki-cover.webp',
+        '/images/christmas-packages/lapland/lapland-helsinki-thumb.webp',
+        '/images/christmas-packages/lapland/A Category Hotel - Rovaniemi : Helsinki.webp'
       ]
     }
   },
@@ -24862,6 +24866,336 @@ export const travelPackages = [
         '/images/christmas-packages/praque-christmas/cover-christmas-praque.webp',
         '/images/christmas-packages/praque-christmas/thumb-praque-christmas.webp',
         '/images/christmas-packages/praque-christmas/hotel-praque-christmas.webp'
+      ]
+    }
+  },
+  {
+    id: 370,
+    title: 'ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΟ ΠΑΡΙΣΙ - ΛΟΥΒΡΟ ΜΟΝΜΑΡΤΗ',
+    destination: 'France',
+    category: 'Christmas Packages',
+    price: 995,
+    duration: '4 Μέρες',
+    description:
+      'Πρωτοχρονιά 4 ημερών στο Παρίσι από Λάρνακα με Cyprus Airways: πανοραμική ξενάγηση, Λούβρο, Μονμάρτη, Sacré-Cœur και κρουαζιέρα στον Σηκουάνα. Αναχώρηση 01/01. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Υποδεχθείτε τη νέα χρονιά στην Πόλη του Φωτός. Διαμονή 3 βράδια σε ξενοδοχείο 4* με πρόγευμα, είσοδος στο Λούβρο, μίνι κρουαζιέρα στον Σηκουάνα και ξεναγήσεις όπως στο πρόγραμμα. Απευθείας πτήσεις Cyprus Airways Λάρνακα – Παρίσι – Λάρνακα. Διαθέσιμο σε ζήτηση.',
+    image: '🇫🇷🎆',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '01/01',
+      departureYear: 2027,
+      departureDates: ['01/01'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Paris – France',
+      monthAvailability: 'January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+      coverImage: '/images/christmas-packages/paris-luvro-christmas/paris-luvro-cover.webp',
+      thumbnailImage: '/images/christmas-packages/paris-luvro-christmas/paris-luvro-thumb.webp',
+      note: 'Αναχώρηση: 01/01 από Λάρνακα με Cyprus Airways · Επιστροφή: 04/01 · Διαμονή 3 νύχτες σε ξενοδοχείο 4* με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      availabilityNote: 'Διαθέσιμο σε ζήτηση',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '01/01',
+          route: 'Larnaca (LCA) → Paris (CDG)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '08:00',
+              toCode: 'CDG',
+              toName: 'Charles De Gaulle',
+              toCity: 'Paris, France',
+              arrive: '11:40',
+              flight: 'CY 380',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '04/01',
+          route: 'Paris (CDG) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'CDG',
+              fromName: 'Charles De Gaulle',
+              fromCity: 'Paris, France',
+              depart: '12:40',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '17:50',
+              flight: 'CY 381',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: parisNewYearPackage370Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Παρίσι - Λάρνακα με απευθείας πτήση της CYPRUS AIRWAYS',
+        'Φόροι αεροδρομίων',
+        'Μεταφορές, εκδρομές, περιηγήσεις, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα',
+        'Μίνι κρουαζιέρα στο Σηκουάνα',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο 4* στο Παρίσι με πρόγευμα',
+        'Εισιτήριο εισόδου στο Λούβρο',
+        'Δημοτικός φόρος του ξενοδοχείου',
+        'Αρχηγός/συνοδός του γραφείου μας',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων προαιρετικά',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: parisNewYearPackage370Program,
+      gallery: [
+        '/images/christmas-packages/paris-luvro-christmas/paris-luvro-cover.webp',
+        '/images/christmas-packages/paris-luvro-christmas/paris-luvro-thumb.webp',
+        '/images/christmas-packages/paris-luvro-christmas/paris-luvro-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 371,
+    title: 'ΜΑΓΙΚΑ ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΟ ΠΑΡΙΣΙ - DISNEYLAND & ΛΟΥΒΡΟ',
+    destination: 'France',
+    category: 'Christmas Packages',
+    price: 1295,
+    duration: '6 Μέρες',
+    description:
+      'Μαγικά Χριστούγεννα 6 ημερών στο Παρίσι από Λάρνακα με Cyprus Airways: πανοραμική ξενάγηση, κρουαζιέρα στον Σηκουάνα, Disneyland Enchanted Christmas, Λούβρο και Μονμάρτη. Αναχώρηση 23/12.',
+    longDescription:
+      'Πέντε διανυκτερεύσεις σε ξενοδοχείο 4* στο Παρίσι με πρόγευμα. Περιλαμβάνονται είσοδος στο Λούβρο, είσοδος σε ένα πάρκο της Disneyland Paris, μίνι κρουαζιέρα στον Σηκουάνα και ξεναγήσεις όπως στο πρόγραμμα. Απευθείας πτήσεις Cyprus Airways.',
+    image: '🇫🇷🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '23/12',
+      departureYear: 2026,
+      departureDates: ['23/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Paris, Disneyland – France',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+      coverImage: '/images/christmas-packages/paris-luvro-christmas/magical-paris-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/paris-luvro-christmas/magical-paris-christmas-cover.webp',
+      note: 'Αναχώρηση: 23/12 από Λάρνακα με Cyprus Airways · Επιστροφή: 28/12 · Διαμονή 5 νύχτες σε ξενοδοχείο 4* με πρωινό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '23/12',
+          route: 'Larnaca (LCA) → Paris (CDG)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '08:00',
+              toCode: 'CDG',
+              toName: 'Charles De Gaulle',
+              toCity: 'Paris, France',
+              arrive: '11:40',
+              flight: 'CY 380',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '28/12',
+          route: 'Paris (CDG) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'CDG',
+              fromName: 'Charles De Gaulle',
+              fromCity: 'Paris, France',
+              depart: '12:40',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '17:50',
+              flight: 'CY 381',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: parisDisneylandChristmasPackage371Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Παρίσι - Λάρνακα με απευθείας πτήση της CYPRUS AIRWAYS',
+        'Φόροι αεροδρομίων',
+        'Μεταφορές, εκδρομές, περιηγήσεις, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα',
+        'Μίνι κρουαζιέρα στο Σηκουάνα',
+        'Διαμονή για πέντε βράδια σε ξενοδοχείο 4* στο Παρίσι με πρόγευμα',
+        'Εισιτήριο εισόδου στο Λούβρο',
+        'Εισιτήριο εισόδου για το ένα πάρκο της Ντίσνευλαντ',
+        'Δημοτικός φόρος των ξενοδοχείων',
+        'Αρχηγός/συνοδός του γραφείου μας',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων προαιρετικά',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: parisDisneylandChristmasPackage371Program,
+      gallery: [
+        '/images/christmas-packages/paris-luvro-christmas/magical-paris-christmas-cover.webp',
+        '/images/christmas-packages/paris-luvro-christmas/magical-paris-christmas-thumb.webp',
+        '/images/christmas-packages/paris-disneyland-christmas/paris-4star-hotel.webp'
+      ]
+    }
+  },
+  {
+    id: 372,
+    title: 'ΠΑΡΙΣΙ / DISNEYLAND',
+    destination: 'France',
+    category: 'Christmas Packages',
+    price: 1595,
+    duration: '6 Μέρες',
+    description:
+      'Χριστούγεννα 6 ημερών Παρίσι & Disneyland από Λάρνακα: 2 νύχτες σε Disney hotel (Cheyenne ή Newport Bay Club), 3 νύχτες Παρίσι, Disneyland Park, Disney Adventure World & World of Frozen, πανοραμική ξενάγηση και κρουαζιέρα στον Σηκουάνα. Αναχώρηση 23/12.',
+    longDescription:
+      'Διανυκτερεύσεις: Ντίσνεϋλαντ (2), Παρίσι (3). Επιλογή Disney’s Hotel Cheyenne (3*) ή Disney’s Newport Bay Club (4*). Πρόγευμα μόνο στο ξενοδοχείο Παρισιού. Εισιτήρια πάρκων Disneyland περιλαμβάνονται.',
+    image: '🇫🇷🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      departureDate: '23/12',
+      departureYear: 2026,
+      departureDates: ['23/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Paris, Disneyland – France',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed and Breakfast only in Paris Hotel',
+      airline: 'Cyprus Airways',
+      includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+      coverImage: '/images/christmas-packages/paris-disneyland-christmas/paris-cover-disneyland.webp',
+      thumbnailImage: '/images/christmas-packages/paris-luvro-christmas/magical-paris-christmas-thumb.webp',
+      note: 'Αναχώρηση: 23/12 από Λάρνακα με Cyprus Airways · Επιστροφή: 28/12 · Ντίσνεϋλαντ (2) + Παρίσι (3) · Πρόγευμα μόνο στο ξενοδοχείο Παρισιού\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '23/12',
+          route: 'Larnaca (LCA) → Paris (CDG)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '08:00',
+              toCode: 'CDG',
+              toName: 'Charles De Gaulle',
+              toCity: 'Paris, France',
+              arrive: '11:40',
+              flight: 'CY 380',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '28/12',
+          route: 'Paris (CDG) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'CDG',
+              fromName: 'Charles De Gaulle',
+              fromCity: 'Paris, France',
+              depart: '12:40',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '17:50',
+              flight: 'CY 381',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: parisDisneylandStayChristmasPackage372Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Παρίσι - Λάρνακα με απευθείας πτήση της CYPRUS AIRWAYS',
+        'Φόροι αεροδρομίων',
+        'Μεταφορές, εκδρομές, περιηγήσεις, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα',
+        'Μίνι κρουαζιέρα στο Σηκουάνα',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο 4* στο Παρίσι με πρόγευμα',
+        'Διαμονή για δύο βράδια σε ξενοδοχείο της επιλογής σας στη Disneyland χωρίς πρωινό',
+        'Εισιτήριο εισόδου στο Πάρκο της Disneyland και Adventure World (World of Frozen) για 3 μέρες',
+        'Επιπλέον 1 ώρα στα πάρκα πριν την κανονική έναρξη',
+        'Δημοτικός φόρος των ξενοδοχείων',
+        'Αρχηγός/συνοδός του γραφείου μας',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας'
+      ],
+      notIncluded: [
+        'Δικαιώματα εισόδων προαιρετικά',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.'
+      ],
+      program: parisDisneylandStayChristmasPackage372Program,
+      gallery: [
+        '/images/christmas-packages/paris-disneyland-christmas/paris-cover-disneyland.webp',
+        '/images/christmas-packages/paris-luvro-christmas/magical-paris-christmas-thumb.webp',
+        '/images/Paris-disneyland/paris-disney-hotel.webp',
+        '/images/Paris-disneyland/paris-disney-hotel-secondary.webp',
+        '/images/Paris-disneyland/Paris-Disneyland-hero.webp'
       ]
     }
   }
