@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -70,15 +71,18 @@ function Header() {
   const [closeTimeout, setCloseTimeout] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeMobileDropdown, setActiveMobileDropdown] = useState(null)
+  const [mobileMenuTop, setMobileMenuTop] = useState(0)
+  const taglineRef = useRef(null)
+  const headerContainerRef = useRef(null)
 
   const holidayTypes = [
     'Autumn Packages',
     'Exotic Packages',
+    'Christmas Packages',
     'Music & Sports',
     'Mary Specials Trips',
     'Summer Packages',
     'Summer Packages to Greece',
-    'Christmas Packages',
     'Easter Packages',
     'Winter Packages',
     'Green Monday Packages',
@@ -116,10 +120,42 @@ function Header() {
     setActiveMobileDropdown((prev) => (prev === type ? null : type))
   }
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined
+
+    const updateMenuTop = () => {
+      const taglineHeight = taglineRef.current?.offsetHeight || 0
+      const containerHeight = headerContainerRef.current?.offsetHeight || 0
+      setMobileMenuTop(taglineHeight + containerHeight)
+    }
+
+    updateMenuTop()
+    window.addEventListener('resize', updateMenuTop)
+
+    const { overflow: bodyOverflow, paddingRight: bodyPaddingRight } = document.body.style
+    const htmlOverflow = document.documentElement.style.overflow
+    const scrollbarGap = window.innerWidth - document.documentElement.clientWidth
+
+    document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
+    if (scrollbarGap > 0) {
+      document.body.style.paddingRight = `${scrollbarGap}px`
+    }
+    document.documentElement.classList.add('mobile-nav-open')
+
+    return () => {
+      window.removeEventListener('resize', updateMenuTop)
+      document.body.style.overflow = bodyOverflow
+      document.body.style.paddingRight = bodyPaddingRight
+      document.documentElement.style.overflow = htmlOverflow
+      document.documentElement.classList.remove('mobile-nav-open')
+    }
+  }, [isMobileMenuOpen])
+
   return (
-    <header className="header">
+    <header className={`header${isMobileMenuOpen ? ' header--menu-open' : ''}`}>
       <FavoritesPanel />
-      <div className="tagline-bar">
+      <div className="tagline-bar" ref={taglineRef}>
         <div className="header-autumn-leaves" aria-hidden="true">
           {Array.from({ length: 14 }, (_, index) => (
             <span
@@ -161,7 +197,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="header-container">
+      <div className="header-container" ref={headerContainerRef}>
         <Link to="/" className="logo">
           <img 
             src="/images/icons/honeywell-travel-logo.webp" 
@@ -398,143 +434,160 @@ function Header() {
         </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="mobile-menu">
-          <Link to="/build-your-trip" className="mobile-link mobile-build-trip" onClick={closeMobileMenu}>
-            <span>Build Your Trip</span>
-            <span className="mobile-build-trip-icon">→</span>
-          </Link>
-          <Link to="/flight-tickets/" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
-            <span className="mobile-flight-tickets-icon" aria-hidden>✈</span>
-            <span>Flight Tickets</span>
-            <span className="mobile-flight-tickets-arrow">→</span>
-          </Link>
-          <Link to="/cruises/" className="mobile-link mobile-cruises-cta" onClick={closeMobileMenu}>
-            <span className="mobile-cruises-cta-icon" aria-hidden>🚢</span>
-            <span>Cruises</span>
-            <span className="mobile-cruises-cta-arrow">→</span>
-          </Link>
-          <Link to="/ourworld/" className="mobile-link" onClick={closeMobileMenu}>{t('header.ourWorld')}</Link>
-          
-          <div className="mobile-dropdown">
-            <button 
-              className="mobile-link mobile-dropdown-trigger" 
-              onClick={() => toggleMobileDropdown('holiday')}
-            >
-              {t('header.holidayTypes')}
-              <span className="mobile-dropdown-arrow">{activeMobileDropdown === 'holiday' ? '▲' : '▼'}</span>
-            </button>
-            {activeMobileDropdown === 'holiday' && (
-              <div className="mobile-dropdown-menu">
-                {holidayTypes.map((item, index) => (
-                  <Link 
-                    key={index} 
-                    to={item === 'Cruises' ? '/cruises/' : `/tour-category/${categoryToSlug(item)}/`}
-                    className={holidayTypesLinkClass(item, 'mobile')}
-                    onClick={() => {
-                      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-                      if (document.documentElement) document.documentElement.scrollTop = 0
-                      if (document.body) document.body.scrollTop = 0
-                      setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0)
-                      closeMobileMenu()
-                    }}
-                  >
-                    <span className="dropdown-item-icon">→</span>
-                    {item}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="mobile-dropdown">
-            <button 
-              className="mobile-link mobile-dropdown-trigger" 
-              onClick={() => toggleMobileDropdown('honeymoon')}
-            >
-              {t('header.honeymoon')}
-              <span className="mobile-dropdown-arrow">{activeMobileDropdown === 'honeymoon' ? '▲' : '▼'}</span>
-            </button>
-            {activeMobileDropdown === 'honeymoon' && (
-              <div className="mobile-dropdown-menu">
-                {honeymoonTypes.map((item, index) => (
-                  <Link 
-                    key={index} 
-                    to={
-                      item === 'Gift Voucher'
-                        ? '/gift-vouchers'
-                        : item === 'Honeymoon Calendar'
-                          ? '/honeymoon-calendar'
-                          : `/${item.toLowerCase().replace(/\s+/g, '-')}`
-                    } 
-                    className="mobile-dropdown-item"
-                    onClick={closeMobileMenu}
-                  >
-                    <span className="dropdown-item-icon">→</span>
-                    {item}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <Link to="/our-services/" className="mobile-link" onClick={closeMobileMenu}>{t('header.corporate')}</Link>
-          <Link to="/dmc-cyprus" className="mobile-link" onClick={closeMobileMenu}>{t('header.dmcServices')}</Link>
-          <a
-            href="https://summerautos.com/"
-            className="mobile-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={closeMobileMenu}
-          >
-            {t('header.carHire')}
-          </a>
-          <Link to="/honeywell-travel-gallery/" className="mobile-link" onClick={closeMobileMenu}>{t('header.gallery')}</Link>
-          <Link to="/our-blog/" className="mobile-link" onClick={closeMobileMenu}>{t('header.blog')}</Link>
-          <a 
-            href="https://www.icontract.gr/whitelabelcy/el/index.aspx" 
-            className="mobile-link" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            onClick={closeMobileMenu}
-          >
-            {t('header.insurance')}
-          </a>
-          <Link to="/terms-and-conditions/" className="mobile-link" onClick={closeMobileMenu}>
-            {t('header.termsAndConditions')}
-          </Link>
-          <Link to="/contact/" className="mobile-link" onClick={closeMobileMenu}>{t('header.contact')}</Link>
-
-          <div className="mobile-social-icons">
-            <a 
-              href="https://www.facebook.com/honeywelltravel" 
-              className="mobile-social-icon mobile-social-icon--facebook" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="Facebook"
+      {isMobileMenuOpen &&
+        createPortal(
+          <div className="mobile-menu-layer" role="presentation">
+            <button
+              type="button"
+              className="mobile-menu-backdrop"
+              aria-label="Close menu"
               onClick={closeMobileMenu}
+            />
+            <div
+              className="mobile-menu"
+              style={{ '--mobile-menu-top': `${mobileMenuTop || 103}px` }}
+              role="navigation"
+              aria-label="Mobile menu"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-              <span>Facebook</span>
-            </a>
-            <a 
-              href="https://www.instagram.com/honeywell_travel/" 
-              className="mobile-social-icon mobile-social-icon--instagram" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              onClick={closeMobileMenu}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              <span>Instagram</span>
-            </a>
-          </div>
-        </div>
-      )}
+              <div className="mobile-menu__body">
+                <Link to="/build-your-trip" className="mobile-link mobile-build-trip" onClick={closeMobileMenu}>
+                  <span>Build Your Trip</span>
+                  <span className="mobile-build-trip-icon">→</span>
+                </Link>
+                <Link to="/flight-tickets/" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
+                  <span className="mobile-flight-tickets-icon" aria-hidden>✈</span>
+                  <span>Flight Tickets</span>
+                  <span className="mobile-flight-tickets-arrow">→</span>
+                </Link>
+                <Link to="/cruises/" className="mobile-link mobile-cruises-cta" onClick={closeMobileMenu}>
+                  <span className="mobile-cruises-cta-icon" aria-hidden>🚢</span>
+                  <span>Cruises</span>
+                  <span className="mobile-cruises-cta-arrow">→</span>
+                </Link>
+                <Link to="/ourworld/" className="mobile-link" onClick={closeMobileMenu}>{t('header.ourWorld')}</Link>
+
+                <div className="mobile-dropdown">
+                  <button
+                    className="mobile-link mobile-dropdown-trigger"
+                    onClick={() => toggleMobileDropdown('holiday')}
+                  >
+                    {t('header.holidayTypes')}
+                    <span className="mobile-dropdown-arrow">{activeMobileDropdown === 'holiday' ? '▲' : '▼'}</span>
+                  </button>
+                  {activeMobileDropdown === 'holiday' && (
+                    <div className="mobile-dropdown-menu">
+                      {holidayTypes.map((item, index) => (
+                        <Link
+                          key={index}
+                          to={item === 'Cruises' ? '/cruises/' : `/tour-category/${categoryToSlug(item)}/`}
+                          className={holidayTypesLinkClass(item, 'mobile')}
+                          onClick={() => {
+                            window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+                            if (document.documentElement) document.documentElement.scrollTop = 0
+                            if (document.body) document.body.scrollTop = 0
+                            setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0)
+                            closeMobileMenu()
+                          }}
+                        >
+                          <span className="dropdown-item-icon">→</span>
+                          {item}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="mobile-dropdown">
+                  <button
+                    className="mobile-link mobile-dropdown-trigger"
+                    onClick={() => toggleMobileDropdown('honeymoon')}
+                  >
+                    {t('header.honeymoon')}
+                    <span className="mobile-dropdown-arrow">{activeMobileDropdown === 'honeymoon' ? '▲' : '▼'}</span>
+                  </button>
+                  {activeMobileDropdown === 'honeymoon' && (
+                    <div className="mobile-dropdown-menu">
+                      {honeymoonTypes.map((item, index) => (
+                        <Link
+                          key={index}
+                          to={
+                            item === 'Gift Voucher'
+                              ? '/gift-vouchers'
+                              : item === 'Honeymoon Calendar'
+                                ? '/honeymoon-calendar'
+                                : `/${item.toLowerCase().replace(/\s+/g, '-')}`
+                          }
+                          className="mobile-dropdown-item"
+                          onClick={closeMobileMenu}
+                        >
+                          <span className="dropdown-item-icon">→</span>
+                          {item}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <Link to="/our-services/" className="mobile-link" onClick={closeMobileMenu}>{t('header.corporate')}</Link>
+                <Link to="/dmc-cyprus" className="mobile-link" onClick={closeMobileMenu}>{t('header.dmcServices')}</Link>
+                <a
+                  href="https://summerautos.com/"
+                  className="mobile-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobileMenu}
+                >
+                  {t('header.carHire')}
+                </a>
+                <Link to="/honeywell-travel-gallery/" className="mobile-link" onClick={closeMobileMenu}>{t('header.gallery')}</Link>
+                <Link to="/our-blog/" className="mobile-link" onClick={closeMobileMenu}>{t('header.blog')}</Link>
+                <a
+                  href="https://www.icontract.gr/whitelabelcy/el/index.aspx"
+                  className="mobile-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobileMenu}
+                >
+                  {t('header.insurance')}
+                </a>
+                <Link to="/terms-and-conditions/" className="mobile-link" onClick={closeMobileMenu}>
+                  {t('header.termsAndConditions')}
+                </Link>
+                <Link to="/contact/" className="mobile-link" onClick={closeMobileMenu}>{t('header.contact')}</Link>
+              </div>
+
+              <div className="mobile-social-icons">
+                <a
+                  href="https://www.facebook.com/honeywelltravel"
+                  className="mobile-social-icon mobile-social-icon--facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  onClick={closeMobileMenu}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  <span>Facebook</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/honeywell_travel/"
+                  className="mobile-social-icon mobile-social-icon--instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  onClick={closeMobileMenu}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </header>
   )
 }

@@ -28,6 +28,25 @@ html {
   overscroll-behavior-x: none;
 }
 
+html.mobile-nav-open,
+html.mobile-nav-open body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  touch-action: none;
+  height: 100%;
+}
+
+html.mobile-nav-open .floating-contact-dock,
+html.mobile-nav-open .autumn-leaves {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.mobile-nav-open .mobile-menu,
+html.mobile-nav-open .mobile-menu__body {
+  touch-action: pan-y;
+}
+
 :root {
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
