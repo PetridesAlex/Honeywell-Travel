@@ -42,7 +42,7 @@ html.mobile-nav-open .autumn-leaves {
   pointer-events: none !important;
 }
 
-html.mobile-nav-open .mobile-menu,
+html.mobile-nav-open .mobile-menu-layer,
 html.mobile-nav-open .mobile-menu__body {
   touch-action: pan-y;
 }
