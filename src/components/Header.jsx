@@ -57,10 +57,9 @@ const categoryToSlug = (category) => {
 /** Desktop vs mobile Holiday Types link modifiers for featured rows. */
 const holidayTypesLinkClass = (item, mode) => {
   const base = mode === 'mobile' ? 'mobile-dropdown-item' : 'dropdown-item'
-  if (item === 'Summer Packages') return `${base} ${base}--summer-primary`
-  if (item === 'Summer Packages to Greece') return `${base} ${base}--summer-secondary`
   if (item === 'Exotic Packages' || item === 'Mary Specials Trips') return `${base} ${base}--exotic-premium`
   if (item === 'Autumn Packages') return `${base} ${base}--autumn-premium`
+  if (item === 'Music & Sports') return `${base} ${base}--music-premium`
   if (item === 'Christmas Packages') return `${base} ${base}--christmas-premium`
   return `${base} ${base}--holiday-caps`
 }
@@ -73,18 +72,18 @@ function Header() {
   const [activeMobileDropdown, setActiveMobileDropdown] = useState(null)
 
   const holidayTypes = [
+    'Autumn Packages',
+    'Exotic Packages',
+    'Music & Sports',
+    'Mary Specials Trips',
     'Summer Packages',
     'Summer Packages to Greece',
-    'Mary Specials Trips',
-    'Exotic Packages',
-    'Autumn Packages',
     'Christmas Packages',
     'Easter Packages',
     'Winter Packages',
     'Green Monday Packages',
     'Cruises',
-    'City Breaks',
-    'Music & Sports'
+    'City Breaks'
   ]
 
   const honeymoonTypes = [
@@ -121,6 +120,15 @@ function Header() {
     <header className="header">
       <FavoritesPanel />
       <div className="tagline-bar">
+        <div className="header-autumn-leaves" aria-hidden="true">
+          {Array.from({ length: 14 }, (_, index) => (
+            <span
+              key={`tagline-leaf-${index}`}
+              className={`header-autumn-leaf header-autumn-leaf--${(index % 5) + 1}`}
+              style={{ '--leaf-i': index }}
+            />
+          ))}
+        </div>
         <span className="tagline-brand">Honeywell Travel</span>
         <span className="tagline-text">#LivetheExperience</span>
         <div className="tagline-right-controls">

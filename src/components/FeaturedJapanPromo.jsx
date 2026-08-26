@@ -24,8 +24,22 @@ function FeaturedJapanPromo() {
         aria-label={pkg.title}
       />
       <div className="featured-japan-promo__veil" aria-hidden="true" />
+      <div className="featured-japan-promo__shine" aria-hidden="true" />
       <div className="featured-japan-promo__inner">
         <div className="featured-japan-promo__copy">
+          <div
+            className="featured-japan-promo__urgency"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="featured-japan-promo__urgency-pulse" aria-hidden="true" />
+            <span className="featured-japan-promo__urgency-label">Limited seats</span>
+            <span className="featured-japan-promo__urgency-divider" aria-hidden="true" />
+            <span className="featured-japan-promo__urgency-copy">
+              Reserve quickly — seats are filling fast
+            </span>
+          </div>
+
           <p className="featured-japan-promo__eyebrow">
             <span className="featured-japan-promo__badge">Featured</span>
             <span>Mary Special Trips</span>
@@ -59,7 +73,7 @@ function FeaturedJapanPromo() {
           </ul>
           <div className="featured-japan-promo__actions">
             <Link to={`/packages/${FEATURED_PACKAGE_ID}/details`} className="featured-japan-promo__cta">
-              Explore the journey
+              Book now
             </Link>
             <Link to="/packages?category=Mary%20Special%20Trips" className="featured-japan-promo__link">
               All Mary Special Trips

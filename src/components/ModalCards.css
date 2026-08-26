@@ -370,7 +370,8 @@
 
 .modal-cards-hero .modal-card-type {
   top: 1rem;
-  right: 1rem;
+  /* Keep clear of the dialog close button (top-right) */
+  right: 3.5rem;
 }
 
 .modal-cards-hero-title {
@@ -479,6 +480,7 @@
   position: absolute;
   top: 0.72rem;
   right: 0.72rem;
+  z-index: 5;
   width: 2rem;
   height: 2rem;
   border: 0;

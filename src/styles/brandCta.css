@@ -1,0 +1,187 @@
+/**
+ * Sitewide Honeywell brand CTA look (red ↔ blue), matching Featured Japan “Book now”.
+ * Applied to public marketing / booking actions only — not admin, ghosts, or icon toggles.
+ */
+
+:root {
+  --hw-cta-red: #c41230;
+  --hw-cta-red-deep: #9f1239;
+  --hw-cta-blue: #1d4ed8;
+  --hw-cta-blue-bright: #2563eb;
+  --hw-cta-ink: #fffef7;
+  --hw-cta-border: rgba(254, 243, 199, 0.28);
+}
+
+@keyframes hw-brand-cta-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.22) inset,
+      0 14px 32px rgba(196, 18, 48, 0.35),
+      0 0 0 0 rgba(37, 99, 235, 0.25);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.22) inset,
+      0 16px 34px rgba(37, 99, 235, 0.38),
+      0 0 0 8px rgba(37, 99, 235, 0);
+  }
+}
+
+.hero-btn,
+.featured-japan-promo__cta,
+.popular-packages-link:not(.secondary),
+.tour-category-row__view-all,
+.tour-category-row__nav-btn,
+.full-tab.active,
+.hotel-filter-reset,
+.cruises-hero-cta,
+.hotel-cta-btn,
+.booking-form .search-btn,
+.submit-btn,
+.submit-button,
+.enquiry-submit-btn,
+.flight-booking-submit-btn,
+.flight-book-now-btn,
+.dmc-btn-primary,
+.paris-lm-footer-cta-btn,
+.paris-lm-hero-cta,
+.newsletter-button,
+.hero-cta,
+.hero-cta-button,
+.hero-request-submit,
+.form-submit,
+.cta-button,
+.cruise-enquiry-submit,
+.cruise-package-card-btn,
+.header-build-trip,
+.mobile-link.mobile-build-trip,
+.dropdown-item-cta,
+.header-cruises-cta {
+  color: var(--hw-cta-ink) !important;
+  background: linear-gradient(
+    120deg,
+    var(--hw-cta-red) 0%,
+    var(--hw-cta-red-deep) 28%,
+    var(--hw-cta-blue) 72%,
+    var(--hw-cta-blue-bright) 100%
+  ) !important;
+  background-size: 220% 220% !important;
+  border-color: var(--hw-cta-border) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 14px 32px rgba(196, 18, 48, 0.35) !important;
+  animation: hw-brand-cta-shift 3.4s ease-in-out infinite;
+  text-shadow: none;
+  -webkit-text-fill-color: var(--hw-cta-ink);
+}
+
+.hero-btn:hover,
+.featured-japan-promo__cta:hover,
+.popular-packages-link:not(.secondary):hover,
+.tour-category-row__view-all:hover,
+.tour-category-row__nav-btn:hover,
+.full-tab.active:hover,
+.hotel-filter-reset:hover,
+.cruises-hero-cta:hover,
+.hotel-cta-btn:hover,
+.booking-form .search-btn:hover,
+.submit-btn:hover:not(:disabled),
+.submit-button:hover:not(:disabled),
+.enquiry-submit-btn:hover:not(:disabled),
+.flight-booking-submit-btn:hover:not(:disabled),
+.flight-book-now-btn:hover,
+.dmc-btn-primary:hover,
+.paris-lm-footer-cta-btn:hover,
+.paris-lm-hero-cta:hover,
+.newsletter-button:hover,
+.hero-cta:hover,
+.hero-cta-button:hover,
+.hero-request-submit:hover,
+.form-submit:hover:not(:disabled),
+.cta-button:hover,
+.cruise-enquiry-submit:hover:not(:disabled),
+.cruise-package-card-btn:hover,
+.header-build-trip:hover,
+.mobile-link.mobile-build-trip:hover,
+.dropdown-item-cta:hover,
+.header-cruises-cta:hover {
+  filter: brightness(1.06);
+  color: var(--hw-cta-ink) !important;
+  -webkit-text-fill-color: var(--hw-cta-ink);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 18px 36px rgba(37, 99, 235, 0.4) !important;
+}
+
+.hero-btn:focus-visible,
+.featured-japan-promo__cta:focus-visible,
+.popular-packages-link:not(.secondary):focus-visible,
+.tour-category-row__view-all:focus-visible,
+.tour-category-row__nav-btn:focus-visible,
+.full-tab.active:focus-visible,
+.hotel-filter-reset:focus-visible,
+.cruises-hero-cta:focus-visible,
+.hotel-cta-btn:focus-visible,
+.booking-form .search-btn:focus-visible,
+.submit-btn:focus-visible,
+.submit-button:focus-visible,
+.enquiry-submit-btn:focus-visible,
+.flight-booking-submit-btn:focus-visible,
+.flight-book-now-btn:focus-visible,
+.dmc-btn-primary:focus-visible,
+.paris-lm-footer-cta-btn:focus-visible,
+.paris-lm-hero-cta:focus-visible,
+.newsletter-button:focus-visible,
+.hero-cta:focus-visible,
+.hero-cta-button:focus-visible,
+.hero-request-submit:focus-visible,
+.form-submit:focus-visible,
+.cta-button:focus-visible,
+.cruise-enquiry-submit:focus-visible,
+.cruise-package-card-btn:focus-visible,
+.header-build-trip:focus-visible,
+.mobile-link.mobile-build-trip:focus-visible,
+.dropdown-item-cta:focus-visible,
+.header-cruises-cta:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-btn,
+  .featured-japan-promo__cta,
+  .popular-packages-link:not(.secondary),
+  .tour-category-row__view-all,
+  .tour-category-row__nav-btn,
+  .full-tab.active,
+  .hotel-filter-reset,
+  .cruises-hero-cta,
+  .hotel-cta-btn,
+  .booking-form .search-btn,
+  .submit-btn,
+  .submit-button,
+  .enquiry-submit-btn,
+  .flight-booking-submit-btn,
+  .flight-book-now-btn,
+  .dmc-btn-primary,
+  .paris-lm-footer-cta-btn,
+  .paris-lm-hero-cta,
+  .newsletter-button,
+  .hero-cta,
+  .hero-cta-button,
+  .hero-request-submit,
+  .form-submit,
+  .cta-button,
+  .cruise-enquiry-submit,
+  .cruise-package-card-btn,
+  .header-build-trip,
+  .mobile-link.mobile-build-trip,
+  .dropdown-item-cta,
+  .header-cruises-cta {
+    animation: none;
+    background-size: 100% 100% !important;
+  }
+}

@@ -1,5 +1,18 @@
 .header {
-  background: #153a63;
+  --header-brand-red: #c41230;
+  --header-brand-red-deep: #9f1239;
+  --header-brand-blue: #1d4ed8;
+  --header-brand-blue-deep: #153a63;
+
+  background: linear-gradient(
+    120deg,
+    var(--header-brand-red) 0%,
+    var(--header-brand-red-deep) 28%,
+    var(--header-brand-blue) 68%,
+    var(--header-brand-blue-deep) 100%
+  );
+  background-size: 220% 220%;
+  animation: header-brand-shift 7s ease-in-out infinite;
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   color: white;
@@ -12,6 +25,16 @@
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: box-shadow 0.3s ease;
+}
+
+@keyframes header-brand-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .header::before {
@@ -31,8 +54,9 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
-    radial-gradient(220px 90px at 84% 0%, rgba(56, 189, 248, 0.12), transparent 72%);
+    linear-gradient(115deg, rgba(255, 255, 255, 0.1) 0%, transparent 38%),
+    radial-gradient(240px 100px at 86% 0%, rgba(37, 99, 235, 0.22), transparent 72%),
+    radial-gradient(200px 90px at 12% 0%, rgba(196, 18, 48, 0.2), transparent 70%);
 }
 
 /* Top tagline bar - Honeywell Travel left, #LivetheExperience center */
@@ -47,14 +71,96 @@
   min-height: 36px;
 }
 
+.header-autumn-leaves {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.header-autumn-leaf {
+  --leaf-size: 10px;
+  --leaf-delay: calc(var(--leaf-i) * -0.85s);
+  --leaf-duration: calc(7s + (var(--leaf-i) * 0.35s));
+  --leaf-x: calc((var(--leaf-i) * 7.1%) + 2%);
+  --leaf-drift: calc(12px + (var(--leaf-i) * 2px));
+  --leaf-spin: calc(180deg + (var(--leaf-i) * 40deg));
+
+  position: absolute;
+  top: -18px;
+  left: var(--leaf-x);
+  width: var(--leaf-size);
+  height: calc(var(--leaf-size) * 1.35);
+  border-radius: 2% 80% 20% 80%;
+  opacity: 0.78;
+  transform-origin: center center;
+  animation: headerAutumnFall var(--leaf-duration) linear var(--leaf-delay) infinite;
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.header-autumn-leaf::before {
+  content: '';
+  position: absolute;
+  inset: 18% 46% 12% 46%;
+  background: rgba(255, 247, 237, 0.45);
+  border-radius: 999px;
+}
+
+.header-autumn-leaf--1 {
+  background: linear-gradient(145deg, #f59e0b 0%, #ea580c 55%, #b45309 100%);
+  --leaf-size: 9px;
+}
+
+.header-autumn-leaf--2 {
+  background: linear-gradient(145deg, #fb923c 0%, #c2410c 60%, #7c2d12 100%);
+  --leaf-size: 12px;
+}
+
+.header-autumn-leaf--3 {
+  background: linear-gradient(145deg, #fde68a 0%, #f59e0b 50%, #d97706 100%);
+  --leaf-size: 8px;
+}
+
+.header-autumn-leaf--4 {
+  background: linear-gradient(145deg, #fdba74 0%, #dc2626 55%, #991b1b 100%);
+  --leaf-size: 11px;
+}
+
+.header-autumn-leaf--5 {
+  background: linear-gradient(145deg, #fbbf24 0%, #b45309 45%, #78350f 100%);
+  --leaf-size: 10px;
+}
+
+@keyframes headerAutumnFall {
+  0% {
+    transform: translate3d(0, -140%, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  55% {
+    transform: translate3d(var(--leaf-drift), 36px, 0) rotate(var(--leaf-spin));
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(calc(var(--leaf-drift) * -0.55), 78px, 0) rotate(calc(var(--leaf-spin) * 1.7));
+    opacity: 0;
+  }
+}
+
 .tagline-bar .tagline-brand {
   position: absolute;
   left: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .tagline-bar .tagline-text {
+  position: relative;
+  z-index: 1;
   flex: 0 0 auto;
   max-width: 100%;
   overflow: hidden;
@@ -303,6 +409,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header,
+  .header-container {
+    animation: none;
+    background: linear-gradient(120deg, #c41230 0%, #1d4ed8 55%, #153a63 100%);
+    background-size: 100% 100%;
+  }
+
+  .header-autumn-leaves {
+    display: none;
+  }
+
   .tagline-esim-link,
   .tagline-esim-link::after,
   .tagline-esim-link__label,
@@ -427,7 +544,15 @@
   min-height: 64px;
   position: relative;
   box-sizing: border-box;
-  background: #153a63;
+  background: linear-gradient(
+    120deg,
+    var(--header-brand-red) 0%,
+    var(--header-brand-red-deep) 28%,
+    var(--header-brand-blue) 68%,
+    var(--header-brand-blue-deep) 100%
+  );
+  background-size: 220% 220%;
+  animation: header-brand-shift 7s ease-in-out infinite;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   border-bottom: 1px solid rgba(2, 6, 23, 0.45);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 10px 24px rgba(2, 6, 23, 0.26);
@@ -645,6 +770,8 @@
   -webkit-backdrop-filter: none;
   overflow-x: visible;
   overflow-y: visible;
+  position: relative;
+  z-index: 2;
 }
 
 .nav::-webkit-scrollbar {
@@ -746,7 +873,8 @@
   align-items: center;
   white-space: nowrap;
   background: transparent;
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   flex-shrink: 0;
 }
 
@@ -1284,6 +1412,49 @@
 
 .dropdown-item--autumn-premium:hover .dropdown-item-icon {
   color: #fed7aa;
+}
+
+/* Holiday Types – Music & Sports (premium stage) */
+.dropdown-item--music-premium {
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.052em;
+  text-transform: uppercase;
+  color: #faf5ff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  background:
+    linear-gradient(
+      125deg,
+      rgba(196, 18, 48, 0.28) 0%,
+      rgba(124, 58, 237, 0.2) 48%,
+      rgba(14, 165, 233, 0.14) 100%
+    );
+  border-color: rgba(196, 18, 48, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    0 2px 16px rgba(124, 58, 237, 0.14);
+}
+
+.dropdown-item--music-premium .dropdown-item-icon {
+  color: #f9a8d4;
+  opacity: 1;
+  font-size: 0.8rem;
+}
+
+.dropdown-item--music-premium:hover {
+  background:
+    linear-gradient(
+      125deg,
+      rgba(196, 18, 48, 0.38) 0%,
+      rgba(124, 58, 237, 0.28) 48%,
+      rgba(14, 165, 233, 0.2) 100%
+    );
+  color: #fdf4ff;
+  border-color: rgba(244, 114, 182, 0.5);
+}
+
+.dropdown-item--music-premium:hover .dropdown-item-icon {
+  color: #fbcfe8;
 }
 
 /* Holiday Types – Christmas Packages (premium festive) */
@@ -1945,6 +2116,38 @@
 
 .mobile-dropdown-item--autumn-premium:hover .dropdown-item-icon {
   color: #fed7aa;
+}
+
+.mobile-dropdown-item--music-premium {
+  font-weight: 600;
+  font-size: 0.91rem;
+  letter-spacing: 0.048em;
+  text-transform: uppercase;
+  color: #faf5ff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.38);
+  background:
+    linear-gradient(125deg, rgba(196, 18, 48, 0.3), rgba(124, 58, 237, 0.22)),
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.14), transparent 55%);
+  border: 1px solid rgba(196, 18, 48, 0.42);
+  box-shadow:
+    0 4px 18px rgba(2, 6, 23, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mobile-dropdown-item--music-premium .dropdown-item-icon {
+  color: #f9a8d4;
+}
+
+.mobile-dropdown-item--music-premium:hover {
+  background:
+    linear-gradient(125deg, rgba(196, 18, 48, 0.4), rgba(124, 58, 237, 0.3)),
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.2), transparent 55%);
+  color: #fdf4ff;
+  border-color: rgba(244, 114, 182, 0.55);
+}
+
+.mobile-dropdown-item--music-premium:hover .dropdown-item-icon {
+  color: #fbcfe8;
 }
 
 .mobile-dropdown-item--christmas-premium {

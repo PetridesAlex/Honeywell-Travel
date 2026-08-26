@@ -29,6 +29,7 @@
   background-repeat: no-repeat;
   transform: scale(1.02);
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: featured-japan-kenburns 18s ease-in-out infinite alternate;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -38,6 +39,7 @@
 
   .featured-japan-promo:hover .featured-japan-promo__media {
     transform: scale(1.06);
+    animation-play-state: paused;
   }
 }
 
@@ -71,6 +73,23 @@
     rgba(196, 18, 48, 0.55) 82%,
     transparent 100%
   );
+  background-size: 200% 100%;
+  animation: featured-japan-topline 4.5s linear infinite;
+}
+
+.featured-japan-promo__shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(254, 243, 199, 0.08) 48%,
+    transparent 62%
+  );
+  background-size: 220% 100%;
+  animation: featured-japan-shine 7s ease-in-out infinite;
+  mix-blend-mode: soft-light;
 }
 
 .featured-japan-promo__inner {
@@ -112,6 +131,82 @@
   pointer-events: none;
 }
 
+.featured-japan-promo__urgency {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.7rem;
+  margin: 0 0 1rem;
+  padding: 0.62rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(252, 211, 77, 0.42);
+  background:
+    linear-gradient(105deg, rgba(196, 18, 48, 0.92) 0%, rgba(127, 29, 29, 0.9) 55%, rgba(88, 18, 28, 0.88) 100%);
+  box-shadow:
+    0 0 0 1px rgba(254, 243, 199, 0.12) inset,
+    0 10px 24px rgba(196, 18, 48, 0.28);
+  overflow: hidden;
+  animation: featured-japan-urgency-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.featured-japan-promo__urgency::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(254, 243, 199, 0.18) 48%,
+    transparent 76%
+  );
+  background-size: 220% 100%;
+  animation: featured-japan-shine 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.featured-japan-promo__urgency-pulse {
+  position: relative;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #fef3c7;
+  box-shadow: 0 0 0 0 rgba(254, 243, 199, 0.65);
+  flex-shrink: 0;
+  animation: featured-japan-pulse 1.8s ease-out infinite;
+}
+
+.featured-japan-promo__urgency-label {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fef3c7;
+}
+
+.featured-japan-promo__urgency-divider {
+  position: relative;
+  width: 1px;
+  height: 0.9rem;
+  background: rgba(254, 243, 199, 0.35);
+  flex-shrink: 0;
+}
+
+.featured-japan-promo__urgency-copy {
+  position: relative;
+  flex: 1 1 12rem;
+  min-width: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  color: #fffef7;
+}
+
 @keyframes featured-japan-rise {
   from {
     opacity: 0;
@@ -120,6 +215,56 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes featured-japan-urgency-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes featured-japan-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(254, 243, 199, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(254, 243, 199, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(254, 243, 199, 0);
+  }
+}
+
+@keyframes featured-japan-shine {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -40% 0;
+  }
+}
+
+@keyframes featured-japan-topline {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes featured-japan-kenburns {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
   }
 }
 
@@ -235,35 +380,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 1.55rem;
+  padding: 0.95rem 1.7rem;
   border-radius: 999px;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-decoration: none;
-  color: #1a1218;
-  background: linear-gradient(135deg, #fef3c7 0%, #e8c547 48%, #d4af37 100%);
-  border: 1px solid rgba(254, 243, 199, 0.65);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.45) inset,
-    0 14px 32px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(254, 243, 199, 0.28);
   transition:
     transform 0.28s cubic-bezier(0.34, 1.15, 0.64, 1),
-    box-shadow 0.28s ease,
     filter 0.28s ease;
 }
 
 .featured-japan-promo__cta:hover {
   transform: translateY(-2px);
-  filter: brightness(1.04);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 18px 36px rgba(0, 0, 0, 0.32);
 }
 
 .featured-japan-promo__cta:focus-visible {
-  outline: 2px solid #fef3c7;
+  outline: 2px solid #93c5fd;
   outline-offset: 3px;
 }
 
@@ -317,6 +453,15 @@
     inset: 6px;
   }
 
+  .featured-japan-promo__urgency {
+    margin-bottom: 0.85rem;
+    padding: 0.58rem 0.75rem;
+  }
+
+  .featured-japan-promo__urgency-divider {
+    display: none;
+  }
+
   .featured-japan-promo__meta {
     grid-template-columns: 1fr;
   }
@@ -328,16 +473,27 @@
   .featured-japan-promo__title {
     font-size: clamp(1.85rem, 8vw, 2.35rem);
   }
+
+  .featured-japan-promo__cta {
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .featured-japan-promo__copy {
+  .featured-japan-promo__copy,
+  .featured-japan-promo__urgency,
+  .featured-japan-promo__cta {
     animation: none;
   }
 
   .featured-japan-promo__media,
   .featured-japan-promo:hover .featured-japan-promo__media,
-  .featured-japan-promo__cta {
+  .featured-japan-promo__cta,
+  .featured-japan-promo__shine,
+  .featured-japan-promo__veil::after,
+  .featured-japan-promo__urgency::before,
+  .featured-japan-promo__urgency-pulse {
+    animation: none;
     transition: none;
     transform: none;
   }

@@ -1,0 +1,109 @@
+.autumn-leaves {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout style paint;
+}
+
+.autumn-leaf {
+  --leaf-size: 12px;
+  --leaf-delay: calc(var(--leaf-i) * -0.72s);
+  --leaf-duration: calc(9.5s + (var(--leaf-i) * 0.42s));
+  --leaf-x: calc((var(--leaf-i) * 4.35%) + 1.5%);
+  --leaf-drift: calc(18px + (var(--leaf-i) * 3.2px));
+  --leaf-spin: calc(160deg + (var(--leaf-i) * 37deg));
+  --leaf-fall: 110vh;
+
+  position: absolute;
+  top: -28px;
+  left: var(--leaf-x);
+  width: var(--leaf-size);
+  height: calc(var(--leaf-size) * 1.35);
+  border-radius: 2% 80% 20% 80%;
+  opacity: 0.72;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  animation: autumnLeafFall var(--leaf-duration) linear var(--leaf-delay) infinite;
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.autumn-leaf::before {
+  content: '';
+  position: absolute;
+  inset: 18% 46% 12% 46%;
+  background: rgba(255, 247, 237, 0.45);
+  border-radius: 999px;
+}
+
+.autumn-leaf--1 {
+  background: linear-gradient(145deg, #f59e0b 0%, #ea580c 55%, #b45309 100%);
+  --leaf-size: 10px;
+}
+
+.autumn-leaf--2 {
+  background: linear-gradient(145deg, #fb923c 0%, #c2410c 60%, #7c2d12 100%);
+  --leaf-size: 14px;
+}
+
+.autumn-leaf--3 {
+  background: linear-gradient(145deg, #fde68a 0%, #f59e0b 50%, #d97706 100%);
+  --leaf-size: 9px;
+}
+
+.autumn-leaf--4 {
+  background: linear-gradient(145deg, #fdba74 0%, #dc2626 55%, #991b1b 100%);
+  --leaf-size: 13px;
+}
+
+.autumn-leaf--5 {
+  background: linear-gradient(145deg, #fbbf24 0%, #b45309 45%, #78350f 100%);
+  --leaf-size: 11px;
+}
+
+.autumn-leaf--near {
+  opacity: 0.82;
+  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.18));
+}
+
+.autumn-leaf--far {
+  opacity: 0.42;
+  --leaf-duration: calc(14s + (var(--leaf-i) * 0.55s));
+  --leaf-size: 8px;
+}
+
+@keyframes autumnLeafFall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  55% {
+    transform: translate3d(var(--leaf-drift), 55vh, 0) rotate(var(--leaf-spin));
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(calc(var(--leaf-drift) * -0.65), var(--leaf-fall), 0)
+      rotate(calc(var(--leaf-spin) * 1.85));
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .autumn-leaf--extra {
+    display: none;
+  }
+
+  .autumn-leaf {
+    opacity: 0.58;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .autumn-leaves {
+    display: none;
+  }
+}

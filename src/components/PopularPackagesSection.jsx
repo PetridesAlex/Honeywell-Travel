@@ -9,10 +9,10 @@ import ModalCards from './ModalCards'
 import './PopularPackagesSection.css'
 
 const popularCategories = [
-  { value: 'Summer Packages', label: 'Summer Packages' },
-  { value: 'Summer Packages to Greece', label: 'Summer Packages to Greece' },
-  { value: 'Music & Sports', label: 'Music & Sports' },
-  { value: 'Exotic Packages', label: 'Exotic Packages' }
+  { value: 'Autumn Packages', label: 'Autumn Packages' },
+  { value: 'Christmas Packages', label: 'Christmas Packages' },
+  { value: 'Exotic Packages', label: 'Exotic Packages' },
+  { value: 'Music & Sports', label: 'Music & Sports' }
 ]
 
 const PRIORITY_IMAGE_COUNT = 6
