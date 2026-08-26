@@ -76,6 +76,12 @@
   animation: hw-brand-cta-shift 3.4s ease-in-out infinite;
   text-shadow: none;
   -webkit-text-fill-color: var(--hw-cta-ink);
+  opacity: 1;
+}
+
+.mobile-link.mobile-build-trip {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .hero-btn:hover,

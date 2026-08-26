@@ -124,6 +124,12 @@ function Header() {
     if (!isMobileMenuOpen) return undefined
 
     const updateMenuTop = () => {
+      const container = headerContainerRef.current
+      if (container) {
+        const bottom = Math.ceil(container.getBoundingClientRect().bottom)
+        setMobileMenuTop(Math.max(bottom, 0))
+        return
+      }
       const taglineHeight = taglineRef.current?.offsetHeight || 0
       const containerHeight = headerContainerRef.current?.offsetHeight || 0
       setMobileMenuTop(taglineHeight + containerHeight)
@@ -131,6 +137,8 @@ function Header() {
 
     updateMenuTop()
     window.addEventListener('resize', updateMenuTop)
+    window.visualViewport?.addEventListener('resize', updateMenuTop)
+    window.visualViewport?.addEventListener('scroll', updateMenuTop)
 
     const { overflow: bodyOverflow, paddingRight: bodyPaddingRight } = document.body.style
     const htmlOverflow = document.documentElement.style.overflow
@@ -145,6 +153,8 @@ function Header() {
 
     return () => {
       window.removeEventListener('resize', updateMenuTop)
+      window.visualViewport?.removeEventListener('resize', updateMenuTop)
+      window.visualViewport?.removeEventListener('scroll', updateMenuTop)
       document.body.style.overflow = bodyOverflow
       document.body.style.paddingRight = bodyPaddingRight
       document.documentElement.style.overflow = htmlOverflow
