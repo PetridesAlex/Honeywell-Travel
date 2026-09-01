@@ -1,10 +1,14 @@
+import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import { siteTermsAndConditions } from '../data/siteTermsAndConditions'
+import { getLocalizedTerms } from '../utils/localizedContent'
 import './TermsAndConditions.css'
 
 function TermsAndConditions() {
-  const { heroTitle, heroSubtitle, lastUpdated, sections } = siteTermsAndConditions
+  const { t, i18n } = useTranslation()
+  const { heroTitle, heroSubtitle, lastUpdated, sections } =
+    getLocalizedTerms(siteTermsAndConditions, i18n.language) || siteTermsAndConditions.en
 
   return (
     <>
@@ -19,7 +23,7 @@ function TermsAndConditions() {
             <h1>{heroTitle}</h1>
             {heroSubtitle ? <p>{heroSubtitle}</p> : null}
             {lastUpdated ? (
-              <p className="terms-hero-updated">Last updated: {lastUpdated}</p>
+              <p className="terms-hero-updated">{t('terms.lastUpdated')}: {lastUpdated}</p>
             ) : null}
           </div>
         </section>

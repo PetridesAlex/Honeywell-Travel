@@ -2167,6 +2167,53 @@
   justify-content: center;
 }
 
+/* —— Bilingual content tabs —— */
+.cms-lang-tabs {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0.15rem;
+  padding: 0.18rem;
+  margin-bottom: 0.65rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cms-lang-tabs__btn {
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(30, 45, 60, 0.72);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cms-lang-tabs__btn:hover {
+  color: rgba(30, 45, 60, 0.95);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.cms-lang-tabs__btn--active {
+  color: #1a2b3c;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cms-i18n-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cms-story-editor__toolbar .cms-lang-tabs {
+  margin-bottom: 0;
+}
+
 /* —— Section filter tabs (color-coded) —— */
 .cms-section-tabs {
   position: sticky;

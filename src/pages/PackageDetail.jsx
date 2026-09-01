@@ -1,24 +1,26 @@
 import { Navigate, useParams, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getPackageById } from '../data/packages'
 import SEO from '../components/SEO'
 import './PackageDetail.css'
 
 function PackageDetail() {
   const { id } = useParams()
+  const { t } = useTranslation()
   const pkg = getPackageById(id)
 
   if (!pkg) {
     return (
       <div className="package-detail-page">
         <SEO
-          title="Package Not Found | Honeywell Travel"
-          description="The requested package could not be found."
+          title={`${t('packagesPage.notFoundTitle')} | Honeywell Travel`}
+          description={t('packagesPage.notFoundText')}
           noindex
         />
         <div className="package-detail-container">
-          <h1>Package Not Found</h1>
-          <p>The package you're looking for doesn't exist.</p>
-          <Link to="/packages" className="back-link">← Back to Packages</Link>
+          <h1>{t('packagesPage.notFoundTitle')}</h1>
+          <p>{t('packagesPage.notFoundText')}</p>
+          <Link to="/packages" className="back-link">{t('packagesPage.backToPackages')}</Link>
         </div>
       </div>
     )
@@ -37,9 +39,3 @@ function PackageDetail() {
 }
 
 export default PackageDetail
-
-
-
-
-
-

@@ -1,12 +1,20 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import './Corporate.css'
 
+const SERVICE_KEYS = [
+  'airTickets', 'accommodation', 'transfers', 'accountManagement', 'tours', 'carRental',
+  'groupTravel', 'lowCostAir', 'cruises', 'summerPackages', 'conferenceIncentive',
+  'travelInsurance', 'specialPackages',
+]
+
 function Corporate() {
+  const { t } = useTranslation()
   const [showQuoteModal, setShowQuoteModal] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -71,28 +79,12 @@ function Corporate() {
     setIsSubmitting(false)
   }
 
-  const services = [
-    'Air tickets',
-    'Accommodation',
-    'Transfers and Transport',
-    'Corporate account management',
-    'Tours and Excursions',
-    'Car Rental worldwide',
-    'Group Travel',
-    'Air tickets on low cost carriers',
-    'Cruises',
-    'Summer packages',
-    'Conference and Incentive packages abroad',
-    'Travel Insurance',
-    'Special packages and/or entrance tickets (football match, concerts, theaters, Athens by night etc)'
-  ]
-
   return (
     <div className="corporate-page">
       <SEO
-        title="Corporate Travel Services | Honeywell Travel"
-        description="Professional business travel management solutions, corporate accounts, and incentive trips by Honeywell Travel."
-        keywords="corporate travel cyprus, business travel management, incentive trips"
+        title={t('corporate.seoTitle')}
+        description={t('corporate.seoDescription')}
+        keywords={t('corporate.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/our-services"
       />
       {/* Hero Section */}
@@ -109,13 +101,13 @@ function Corporate() {
         </video>
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <h1>CORPORATE TRIPS</h1>
-          <p>Professional Business Travel Management Solutions</p>
+          <h1>{t('corporate.heroTitle')}</h1>
+          <p>{t('corporate.heroSubtitle')}</p>
           <button 
             className="hero-cta-button"
             onClick={() => setShowQuoteModal(true)}
           >
-            Get Quote
+            {t('corporate.getQuote')}
           </button>
         </div>
       </section>
@@ -131,13 +123,13 @@ function Corporate() {
             >
               ×
             </button>
-            <h2>Request a Corporate Travel Quote</h2>
-            <p className="quote-modal-subtitle">Fill out the form below and we'll get back to you with a customized quote</p>
+            <h2>{t('corporate.quoteModalTitle')}</h2>
+            <p className="quote-modal-subtitle">{t('corporate.quoteModalSubtitle')}</p>
             
             <form onSubmit={handleSubmitQuote} className="quote-form">
               <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
               <div className="form-group">
-                <label htmlFor="name">Your Name *</label>
+                <label htmlFor="name">{t('corporate.yourName')} *</label>
                 <input
                   type="text"
                   id="name"
@@ -145,13 +137,13 @@ function Corporate() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter your full name"
+                  placeholder={t('forms.namePlaceholder')}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="companyName">Company Name *</label>
+                <label htmlFor="companyName">{t('corporate.companyName')} *</label>
                 <input
                   type="text"
                   id="companyName"
@@ -159,13 +151,13 @@ function Corporate() {
                   value={formData.companyName}
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter your company name"
+                  placeholder={t('forms.companyName')}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email Address *</label>
+                <label htmlFor="email">{t('corporate.emailAddress')} *</label>
                 <input
                   type="email"
                   id="email"
@@ -173,13 +165,13 @@ function Corporate() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  placeholder="your@email.com"
+                  placeholder={t('forms.emailPlaceholder')}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="contactNumber">Contact Number *</label>
+                <label htmlFor="contactNumber">{t('corporate.contactNumber')} *</label>
                 <input
                   type="tel"
                   id="contactNumber"
@@ -187,13 +179,13 @@ function Corporate() {
                   value={formData.contactNumber}
                   onChange={handleInputChange}
                   required
-                  placeholder="+357 XX XXX XXX"
+                  placeholder={t('forms.phonePlaceholder')}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Tell us about your travel needs *</label>
+                <label htmlFor="message">{t('corporate.travelNeeds')} *</label>
                 <textarea
                   id="message"
                   name="message"
@@ -201,20 +193,20 @@ function Corporate() {
                   onChange={handleInputChange}
                   required
                   rows="5"
-                  placeholder="Please provide details about your corporate travel requirements, number of travelers, destinations, dates, and any specific needs..."
+                  placeholder={t('corporate.travelNeedsPlaceholder')}
                   disabled={isSubmitting}
                 />
               </div>
 
               {submitStatus === 'success' && (
                 <div className="form-success">
-                  ✓ {FORM_SUCCESS_MESSAGE}
+                  ✓ {t('forms.success')}
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className="form-error">
-                  ✗ {FORM_ERROR_MESSAGE}
+                  ✗ {t('forms.error')}
                 </div>
               )}
 
@@ -225,14 +217,14 @@ function Corporate() {
                   onClick={() => setShowQuoteModal(false)}
                   disabled={isSubmitting}
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button 
                   type="submit" 
                   className="form-submit"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Sending...' : 'Request Quote'}
+                  {isSubmitting ? t('contact.sending') : t('corporate.requestQuote')}
                 </button>
               </div>
             </form>
@@ -247,27 +239,18 @@ function Corporate() {
           <div className="cwt-content">
             <div className="cwt-text">
               <div className="cwt-logo">
-                <h2>CWT</h2>
-                <p className="cwt-subtitle">(Independently owned and operated by Honeywell Travel Asg - Ltd)</p>
+                <h2>{t('corporate.cwtTitle')}</h2>
+                <p className="cwt-subtitle">{t('corporate.cwtSubtitle')}</p>
               </div>
               <div className="cwt-description">
+                <p>{t('corporate.cwtP1')}</p>
+                <p>{t('corporate.cwtP2')}</p>
                 <p>
-                  Honeywell Travel is a leading travel agency in Cyprus, specializing in world-class business travel management. 
-                  We are proud to be the official partner of <strong>CWT</strong>, a global leader in managing business travel and events 
-                  across nearly 150 countries.
+                  {t('corporate.cwtP3Prefix')}{' '}
+                  <a href="https://www.mycwt.com" target="_blank" rel="noopener noreferrer">www.myCWT.com</a>{' '}
+                  {t('corporate.cwtP3Suffix')}
                 </p>
-                <p>
-                  CWT focuses on four key pillars: <strong>Savings, Service, Security, and Sustainability</strong>. Through our partnership, 
-                  we provide comprehensive travel management solutions that help businesses optimize their travel programs while ensuring 
-                  the best possible experience for their employees.
-                </p>
-                <p>
-                  Visit <a href="https://www.mycwt.com" target="_blank" rel="noopener noreferrer">www.myCWT.com</a> to learn more about 
-                  CWT's global capabilities and services.
-                </p>
-                <p>
-                  <strong>Honeywell Travel is the international partner representative of CWT Global Partner Network in Cyprus.</strong>
-                </p>
+                <p><strong>{t('corporate.cwtP4')}</strong></p>
               </div>
             </div>
             <div className="cwt-image">
@@ -283,8 +266,8 @@ function Corporate() {
       <section className="exotic-destinations-section">
         <div className="container">
           <div className="section-header">
-            <h2>World-Class Destinations</h2>
-            <p>From exotic paradises to business hubs, we manage corporate travel to destinations worldwide</p>
+            <h2>{t('corporate.destinationsTitle')}</h2>
+            <p>{t('corporate.destinationsSubtitle')}</p>
           </div>
           <div className="destinations-grid">
             <div className="destination-card">
@@ -376,35 +359,21 @@ function Corporate() {
         <div className="container">
           <div className="what-we-do-content">
             <div className="what-we-do-image">
-              <div className="what-we-do-image-cover" role="img" aria-label="Incentive trips – professionals celebrating on a rooftop terrace overlooking the city"></div>
+              <div className="what-we-do-image-cover" role="img" aria-label={t('corporate.incentiveTripsAria')}></div>
             </div>
             <div className="what-we-do-text">
-              <h2>WHAT WE DO</h2>
+              <h2>{t('corporate.whatWeDo')}</h2>
               <div className="what-we-do-description">
-                <p>
-                  Honeywell Travel is a professional, well-established and licensed IATA Travel Agency, offering top-level travel 
-                  consulting and services through its partnerships and a network of travel experts and professionals around the world.
-                </p>
-                <p>
-                  Since 1987, our company has been the official Partner of CWT, the biggest network of travel management companies worldwide. 
-                  Our offices in Limassol and Nicosia are part of the A.S.G. (Andy Spyrou Group), providing comprehensive travel solutions 
-                  to businesses across Cyprus.
-                </p>
-                <p>
-                  Our corporate clientele comprises multinational and local companies from all industries: the marine, pharmaceutical, 
-                  banking, educational and telecommunications sectors, as well as public organizations.
-                </p>
-                <p>
-                  Our business travel management services go far beyond merely handling travel arrangements and taking care of transportation 
-                  needs for our corporate clients. Our passionate, highly trained, dedicated team of travel consultants will ensure flawless 
-                  conduction of all travel processes and requirements.
-                </p>
+                <p>{t('corporate.whatWeDoP1')}</p>
+                <p>{t('corporate.whatWeDoP2')}</p>
+                <p>{t('corporate.whatWeDoP3')}</p>
+                <p>{t('corporate.whatWeDoP4')}</p>
               </div>
               <div className="services-list">
-                <h3>Amongst others, our services include:</h3>
+                <h3>{t('corporate.servicesInclude')}</h3>
                 <ul>
-                  {services.map((service, index) => (
-                    <li key={index}>{service}</li>
+                  {SERVICE_KEYS.map((key) => (
+                    <li key={key}>{t(`corporate.services.${key}`)}</li>
                   ))}
                 </ul>
               </div>
@@ -416,19 +385,13 @@ function Corporate() {
       {/* Extra Services Section */}
       <section className="extra-services-section">
         <div className="container">
-          <h2 className="section-title">EXTRA SERVICES</h2>
+          <h2 className="section-title">{t('corporate.extraServices')}</h2>
           <div className="extra-services-grid">
             <div className="extra-service-card">
               <div className="service-icon">🛡️</div>
-              <h3>Travel Insurance</h3>
-              <p>
-                We know that you'd rather not think about all the things that may go wrong on your trip, but these things can and do happen. 
-                This is why here at Honeywell Travel we offer travel insurance, so that you can relax and enjoy your holiday knowing that 
-                we've got you covered!
-              </p>
-              <p>
-                We don't just keep you and your family protected, with us, you'll travel smarter and safer.
-              </p>
+              <h3>{t('corporate.travelInsurance')}</h3>
+              <p>{t('corporate.travelInsuranceP1')}</p>
+              <p>{t('corporate.travelInsuranceP2')}</p>
             </div>
           </div>
         </div>
@@ -439,25 +402,15 @@ function Corporate() {
         <div className="container">
           <div className="incentive-content">
             <div className="incentive-text">
-              <h2>INCENTIVE TRIPS</h2>
+              <h2>{t('corporate.incentiveTrips')}</h2>
               <div className="incentive-description">
-                <p>
-                  Incentive travel is business-related travel designed to reward employees, integrate new team members, and motivate existing ones. 
-                  These trips are carefully crafted to provide unique experiences that strengthen community, foster new ideas, and promote teamwork.
-                </p>
-                <p>
-                  From the magical reindeer sleigh rides in Lapland to sailing adventures in the Mediterranean, or stargazing under the desert sky, 
-                  we offer diverse locations and atmospheres for any event. Each incentive trip is customized to meet your company's specific goals 
-                  and budget.
-                </p>
-                <p>
-                  These experiences not only reward your team but also increase employee loyalty and success. At Honeywell Travel, we offer suitable 
-                  locations and atmospheres for any event, ensuring your incentive trip creates lasting memories and drives performance.
-                </p>
+                <p>{t('corporate.incentiveTripsP1')}</p>
+                <p>{t('corporate.incentiveTripsP2')}</p>
+                <p>{t('corporate.incentiveTripsP3')}</p>
               </div>
             </div>
             <div className="incentive-image">
-              <div className="incentive-image-cover" role="img" aria-label="Incentive trips – professionals celebrating on a rooftop terrace overlooking the city"></div>
+              <div className="incentive-image-cover" role="img" aria-label={t('corporate.incentiveTripsAria')}></div>
             </div>
           </div>
         </div>
@@ -469,33 +422,16 @@ function Corporate() {
           <div className="awards-content">
             <div className="awards-logo">
               <div className="awards-icon">🏆</div>
-              <h2>WORLD TRAVEL AWARDS</h2>
+              <h2>{t('corporate.awardsTitle')}</h2>
             </div>
             <div className="awards-text">
-              <h3>CYPRUS LEADING TRAVEL MANAGEMENT COMPANY 2025</h3>
+              <h3>{t('corporate.awardsHeading')}</h3>
               <div className="awards-description">
-                <p>
-                  We are thrilled to announce that Honeywell Travel has been voted by the 27th World Travel Awards as 
-                  <strong> Cyprus' Leading Travel Management Company for 2020</strong>.
-                </p>
-                <p className="quote">
-                  "This prestigious award came at an excellent time for us, inspiring us to never give up, regardless of the 
-                  difficulties and the adversities." - <strong>Mary Spyrou, Executive Director of Honeywell Travel</strong>
-                </p>
-                <p>
-                  World Travel Awards serves to acknowledge, reward, and celebrate excellence across all sectors of the global travel 
-                  and tourism industry. On the 2nd November, the European winners were announced on a virtual ceremony.
-                </p>
-                <p>
-                  <strong>Graham Cooke, Founder, World Travel Awards</strong>, says: "Our winners represent the very best of Europe's 
-                  travel and tourism sector and my congratulations to each of them. They have all demonstrated remarkable resilience in 
-                  a year of unprecedented challenges. The World Travel Awards 2020 programme received a record number of votes cast by the 
-                  public. This shows that the appetite for travel and tourism has never been stronger and bodes well for the Industry's 
-                  future as the global recovery begins."
-                </p>
-                <p className="signature">
-                  <strong>Honeywell Travel - A signature of Travel Management Excellence!</strong>
-                </p>
+                <p>{t('corporate.awardsP1')}</p>
+                <p className="quote">{t('corporate.awardsQuote')}</p>
+                <p>{t('corporate.awardsP2')}</p>
+                <p>{t('corporate.awardsP3')}</p>
+                <p className="signature"><strong>{t('corporate.awardsSignature')}</strong></p>
               </div>
             </div>
           </div>
@@ -508,9 +444,9 @@ function Corporate() {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
-          <h2>Ready to Transform Your Business Travel?</h2>
-          <p>Contact our corporate travel experts today and discover how we can optimize your travel program.</p>
-          <a href="/contact/" className="cta-button">Get in Touch</a>
+          <h2>{t('corporate.ctaTitle')}</h2>
+          <p>{t('corporate.ctaText')}</p>
+          <a href="/contact/" className="cta-button">{t('common.getInTouch')}</a>
         </div>
       </section>
       </RevealOnScroll>

@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync:cms-packages": "node scripts/sync-cms-packages.mjs"
+    "sync:cms-packages": "node scripts/sync-cms-packages.mjs",
+    "check:i18n": "node scripts/check-i18n-parity.js",
+    "generate:locales": "node scripts/generate-locales.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.6.1",

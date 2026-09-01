@@ -1,7 +1,25 @@
 // Blog posts data structure
-// Add new blog posts by adding objects to the blogPosts array
+// Add new blog posts by adding objects to the blogPostsRaw array
 
-export const blogPosts = [
+const attachBlogPostI18n = (post) => ({
+  ...post,
+  i18n: post.i18n || {
+    en: {
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content,
+      category: post.category,
+    },
+    el: post.i18nEl || {
+      title: post.titleEl || post.title,
+      excerpt: post.excerptEl || post.excerpt,
+      content: post.contentEl || post.content,
+      category: post.categoryEl || post.category,
+    },
+  },
+})
+
+const blogPostsRaw = [
   {
     id: 1,
     title: 'Rome in 4 Days : Must-See Attractions of the Eternal City',
@@ -69,6 +87,9 @@ In the afternoon I visited the Orange Garden (Giardino degli Aranci) on the Aven
 
 Rome in 4 days is intense but doable. You won't see everything, and that's okay. The Eternal City will be there for your next visit—especially if you throw that coin in the Trevi Fountain. 🇮🇹`,
     category: 'City Guides',
+    categoryEl: 'Οδηγοί Πόλεων',
+    titleEl: 'Ρώμη σε 4 Μέρες: Τα Αξιοθέατα της Αιώνιας Πόλης',
+    excerptEl: 'Η Emma, 22 ετών, μοιράζεται το ταξίδι της στη Ρώμη — city break 4 ημερών μέσα από την πρακτική της στην Honeywell Travel.',
     author: 'Emma',
     image: '/images/blog/rome.webp',
     featured: true,
@@ -99,6 +120,9 @@ Rome in 4 days is intense but doable. You won't see everything, and that's okay.
 
 Solo travel teaches you independence, confidence, and the joy of meeting new people from different cultures.`,
     category: 'Travel Tips',
+    categoryEl: 'Συμβουλές Ταξιδιού',
+    titleEl: 'ΤΑΞΙΔΙ ΜΟΝΟΣ/ΜΟΝΗ: ΣΥΜΒΟΥΛΕΣ ΚΑΙ ΠΡΟΟΡΙΣΜΟΙ',
+    excerptEl: 'Όλα όσα χρειάζεστε για ταξίδια solo — από συμβουλές ασφαλείας έως τους καλύτερους προορισμούς για ανεξάρτητες εξερευνήσεις.',
     author: 'Honeywell Travel Team',
     image: '/images/blog/solo-travel.webp',
     featured: true,
@@ -127,12 +151,17 @@ Solo travel teaches you independence, confidence, and the joy of meeting new peo
 
 Traveling for food allows you to connect with locals, understand traditions, and create unforgettable memories through taste.`,
     category: 'Food & Culture',
+    categoryEl: 'Φαγητό & Πολιτισμός',
+    titleEl: 'ΑΝΑΚΑΛΥΨΤΕ ΤΟΝ ΚΟΣΜΟ ΜΕΣΩ ΤΗΣ ΓΑΣΤΡΟΝΟΜΙΑΣ',
+    excerptEl: 'Εξερευνήστε διαφορετικούς πολιτισμούς μέσα από μοναδικές γαστρονομικές παραδόσεις — από street food έως fine dining.',
     author: 'Honeywell Travel Team',
     image: '/images/blog/gastronomy.webp',
     featured: false,
     tags: ['Food', 'Culture', 'Culinary', 'Dining', 'Local Experience']
   }
 ]
+
+export const blogPosts = blogPostsRaw.map(attachBlogPostI18n)
 
 // Helper function to get blog post by slug
 export const getBlogPostBySlug = (slug) => {

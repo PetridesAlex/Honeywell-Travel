@@ -15,7 +15,7 @@ function TourCategoryPackageRow({ slug, category, title, description }) {
       .sort((a, b) => getPackageLeadPrice(a) - getPackageLeadPrice(b))
   }, [category])
 
-  const cards = useMemo(() => mapPackagesToModalCards(packages, i18n), [packages, i18n])
+  const cards = useMemo(() => mapPackagesToModalCards(packages, i18n), [packages, i18n.language])
 
   const scrollByCard = useCallback((direction = 1) => {
     const track = trackRef.current

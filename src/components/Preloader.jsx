@@ -1,28 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useTranslation } from 'react-i18next'
 import { hasCompletedPreloaderThisSession } from '../lib/preloaderSession'
 import './Preloader.css'
 
 const EXIT_FADE_MS = 480
 const LINE_ROTATE_MS = 2100
 
-const PRELOADER_LINES = [
-  {
-    id: 'expertise',
-    text: '30 years of expertise in the travel industry',
-    tone: 'serif',
-  },
-  {
-    id: 'live',
-    text: '#LIVETHEEXPERIENCE',
-    tone: 'accent',
-  },
-  {
-    id: 'welcome',
-    text: 'Welcome to Honeywell Travel',
-    tone: 'serif',
-  },
-]
+const PRELOADER_LINE_IDS = ['expertise', 'live', 'welcome']
 
 function Preloader({
   loading,
@@ -32,6 +17,7 @@ function Preloader({
   className = '',
   zIndex = 9999,
 }) {
+  const { t } = useTranslation()
   const skipSession = hasCompletedPreloaderThisSession()
   const [showPreloader, setShowPreloader] = useState(Boolean(loading) && !skipSession)
   const [exiting, setExiting] = useState(false)
@@ -66,7 +52,7 @@ function Preloader({
     if (reducedMotion) return undefined
 
     const timer = window.setInterval(() => {
-      setLineIndex((prev) => (prev + 1) % PRELOADER_LINES.length)
+      setLineIndex((prev) => (prev + 1) % PRELOADER_LINE_IDS.length)
     }, LINE_ROTATE_MS)
 
     return () => window.clearInterval(timer)
@@ -125,7 +111,9 @@ function Preloader({
   )
 
   const contentCovered = showPreloader
-  const activeLine = PRELOADER_LINES[lineIndex]
+  const activeLineId = PRELOADER_LINE_IDS[lineIndex]
+  const activeTone = activeLineId === 'live' ? 'accent' : 'serif'
+  const activeText = t(`preloader.${activeLineId}`)
 
   return (
     <div className={['preloader', className, showPreloader ? 'preloader--active' : ''].filter(Boolean).join(' ')}>
@@ -146,7 +134,7 @@ function Preloader({
               <div className="preloader__simple-brand">
                 <img
                   src="/images/icons/honeywell-travel-logo.webp"
-                  alt="Honeywell Travel"
+                  alt={t('preloader.logoAlt')}
                   className="preloader__simple-logo"
                   width={280}
                   height={280}
@@ -159,14 +147,14 @@ function Preloader({
               <div className="preloader__simple-lines">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.p
-                    key={activeLine.id}
-                    className={`preloader__simple-line preloader__simple-line--${activeLine.tone}`}
+                    key={activeLineId}
+                    className={`preloader__simple-line preloader__simple-line--${activeTone}`}
                     initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, y: -12, filter: 'blur(4px)' }}
                     transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    {activeLine.text}
+                    {activeText}
                   </motion.p>
                 </AnimatePresence>
               </div>

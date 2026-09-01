@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
@@ -65,6 +66,7 @@ const WHY_PARTNER = [
 ]
 
 function DmcCyprus() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     companyName: '',
     contactPerson: '',
@@ -130,7 +132,7 @@ function DmcCyprus() {
     })
 
     if (result.ok) {
-      setStatus({ type: 'success', text: result.message })
+      setStatus({ type: 'success', text: t('forms.success') })
       setFormData({
         companyName: '',
         contactPerson: '',
@@ -143,7 +145,7 @@ function DmcCyprus() {
       })
       setHoneypot('')
     } else {
-      setStatus({ type: 'error', text: result.error })
+      setStatus({ type: 'error', text: result.error || t('forms.error') })
     }
     setSending(false)
   }
@@ -155,9 +157,9 @@ function DmcCyprus() {
   return (
     <div className="dmc-page">
       <SEO
-        title="DMC Cyprus | Destination Management Company – Honeywell Travel"
-        description="Professional DMC services in Cyprus covering Limassol, Nicosia, Larnaca & Paphos. Hotels, transfers, flights, excursions, MICE & luxury travel management."
-        keywords="DMC Cyprus, destination management company Cyprus, Limassol Nicosia Larnaca Paphos DMC, MICE Cyprus, group travel Cyprus"
+        title={t('dmc.seoTitle')}
+        description={t('dmc.seoDescription')}
+        keywords={t('dmc.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/dmc-cyprus"
       />
 
@@ -166,12 +168,12 @@ function DmcCyprus() {
         <div className="dmc-hero-bg" style={{ backgroundImage: 'url(/images/dmc-cyprus/cyprus-cover-dmc.webp)' }} />
         <div className="dmc-hero-overlay" />
         <div className="dmc-hero-content">
-          <h1 className="dmc-hero-title">Destination Management Cyprus</h1>
-          <p className="dmc-hero-tagline">Your Trusted Destination Management Partner in Cyprus</p>
-          <p className="dmc-hero-subtitle">Professional ground handling services across Limassol, Nicosia, Larnaca & Paphos.</p>
+          <h1 className="dmc-hero-title">{t('dmc.heroTitle')}</h1>
+          <p className="dmc-hero-tagline">{t('dmc.heroTagline')}</p>
+          <p className="dmc-hero-subtitle">{t('dmc.heroSubtitle')}</p>
           <div className="dmc-hero-buttons">
-            <button type="button" className="dmc-btn dmc-btn-primary" onClick={scrollToForm}>Request Partnership</button>
-            <a href="mailto:limassol@honeywelltravel.com.cy" className="dmc-btn dmc-btn-outline">Contact Our DMC Team</a>
+            <button type="button" className="dmc-btn dmc-btn-primary" onClick={scrollToForm}>{t('dmc.requestPartnership')}</button>
+            <a href="mailto:limassol@honeywelltravel.com.cy" className="dmc-btn dmc-btn-outline">{t('dmc.contactTeam')}</a>
           </div>
         </div>
       </section>
@@ -180,9 +182,9 @@ function DmcCyprus() {
       <RevealOnScroll direction="up">
         <section className="dmc-section dmc-about">
           <div className="dmc-container">
-            <h2 className="dmc-section-title">Why Choose Honeywell Travel as Your Cyprus DMC?</h2>
-            <p className="dmc-about-lead">Honeywell Travel provides full destination management services across Cyprus. With strong local partnerships, operational expertise, and premium supplier networks, we deliver seamless travel experiences for leisure, corporate, educational, and luxury groups.</p>
-            <p className="dmc-about-cities">We operate in:</p>
+            <h2 className="dmc-section-title">{t('dmc.aboutTitle')}</h2>
+            <p className="dmc-about-lead">{t('dmc.aboutLead')}</p>
+            <p className="dmc-about-cities">{t('dmc.aboutCities')}</p>
             <ul className="dmc-cities-list">
               <li>Limassol</li>
               <li>Nicosia</li>
@@ -196,7 +198,7 @@ function DmcCyprus() {
       {/* SECTION 3 – SERVICES GRID */}
       <section className="dmc-section dmc-services">
         <div className="dmc-container">
-          <h2 className="dmc-section-title">Our DMC Services</h2>
+          <h2 className="dmc-section-title">{t('dmc.servicesTitle')}</h2>
           <div className="dmc-services-grid">
             {SERVICES.map((service, i) => (
               <RevealOnScroll key={service.title} direction="up" delay={i * 50}>
@@ -227,7 +229,7 @@ function DmcCyprus() {
       {/* SECTION 4 – DESTINATIONS */}
       <section className="dmc-section dmc-destinations">
         <div className="dmc-container">
-          <h2 className="dmc-section-title">Destinations We Cover</h2>
+          <h2 className="dmc-section-title">{t('dmc.destinationsCover')}</h2>
           <div className="dmc-cards-grid">
             {CITIES.map((city, i) => (
               <RevealOnScroll key={city.name} direction="up" delay={i * 80}>
@@ -235,7 +237,7 @@ function DmcCyprus() {
                   {city.image && <div className="dmc-city-card-image" style={{ backgroundImage: `url(${city.image})` }} aria-hidden />}
                   <h3 className="dmc-city-name">{city.name}</h3>
                   <p className="dmc-city-desc">{city.desc}</p>
-                  <button type="button" className="dmc-btn dmc-btn-small" onClick={scrollToForm}>Explore Services in {city.name}</button>
+                  <button type="button" className="dmc-btn dmc-btn-small" onClick={scrollToForm}>{t('dmc.exploreServices', { city: city.name })}</button>
                 </div>
               </RevealOnScroll>
             ))}
@@ -247,7 +249,7 @@ function DmcCyprus() {
       <RevealOnScroll direction="up">
         <section className="dmc-section dmc-why">
           <div className="dmc-container">
-            <h2 className="dmc-section-title">Why Partner With Us</h2>
+            <h2 className="dmc-section-title">{t('dmc.whyPartner')}</h2>
             <div className="dmc-why-grid">
               {WHY_PARTNER.map((item, i) => (
                 <div key={item} className="dmc-why-card">
@@ -263,62 +265,62 @@ function DmcCyprus() {
       {/* SECTION 6 – B2B FORM */}
       <section id="dmc-contact-form" className="dmc-section dmc-form-section">
         <div className="dmc-container dmc-form-container">
-          <h2 className="dmc-section-title">Partner With Our Cyprus DMC Team</h2>
+          <h2 className="dmc-section-title">{t('dmc.formTitle')}</h2>
           <form className="dmc-form" onSubmit={handleSubmit}>
             <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="dmc-form-row">
-              <label htmlFor="dmc-company">Company Name</label>
-              <input id="dmc-company" name="companyName" type="text" value={formData.companyName} onChange={handleChange} required placeholder="Your company name" />
+              <label htmlFor="dmc-company">{t('dmc.companyName')}</label>
+              <input id="dmc-company" name="companyName" type="text" value={formData.companyName} onChange={handleChange} required placeholder={t('dmc.companyPlaceholder')} />
             </div>
             <div className="dmc-form-row">
-              <label htmlFor="dmc-person">Contact Person</label>
-              <input id="dmc-person" name="contactPerson" type="text" value={formData.contactPerson} onChange={handleChange} required placeholder="Full name" />
+              <label htmlFor="dmc-person">{t('dmc.contactPerson')}</label>
+              <input id="dmc-person" name="contactPerson" type="text" value={formData.contactPerson} onChange={handleChange} required placeholder={t('dmc.personPlaceholder')} />
             </div>
             <div className="dmc-form-row">
-              <label htmlFor="dmc-email">Email</label>
-              <input id="dmc-email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="email@company.com" />
+              <label htmlFor="dmc-email">{t('forms.email')}</label>
+              <input id="dmc-email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder={t('dmc.emailPlaceholder')} />
             </div>
             <div className="dmc-form-row">
-              <label htmlFor="dmc-country">Country</label>
-              <input id="dmc-country" name="country" type="text" value={formData.country} onChange={handleChange} placeholder="Country" />
+              <label htmlFor="dmc-country">{t('dmc.country')}</label>
+              <input id="dmc-country" name="country" type="text" value={formData.country} onChange={handleChange} placeholder={t('dmc.countryPlaceholder')} />
             </div>
             <div className="dmc-form-row">
-              <label htmlFor="dmc-type">Type of Business</label>
+              <label htmlFor="dmc-type">{t('dmc.businessType')}</label>
               <select id="dmc-type" name="businessType" value={formData.businessType} onChange={handleChange}>
-                <option value="Agency">Agency</option>
-                <option value="School">School</option>
-                <option value="Corporate">Corporate</option>
-                <option value="Other">Other</option>
+                <option value="Agency">{t('dmc.agency')}</option>
+                <option value="School">{t('dmc.school')}</option>
+                <option value="Corporate">{t('dmc.corporate')}</option>
+                <option value="Other">{t('dmc.other')}</option>
               </select>
             </div>
             <div className="dmc-form-row">
-              <label htmlFor="dmc-size">Expected Group Size</label>
-              <input id="dmc-size" name="groupSize" type="text" value={formData.groupSize} onChange={handleChange} placeholder="e.g. 20–50 pax" />
+              <label htmlFor="dmc-size">{t('dmc.groupSize')}</label>
+              <input id="dmc-size" name="groupSize" type="text" value={formData.groupSize} onChange={handleChange} placeholder={t('dmc.groupSizePlaceholder')} />
             </div>
             <div className="dmc-form-row">
-              <label htmlFor="dmc-dates">Travel Dates</label>
-              <input id="dmc-dates" name="travelDates" type="text" value={formData.travelDates} onChange={handleChange} placeholder="Preferred dates or season" />
+              <label htmlFor="dmc-dates">{t('dmc.travelDates')}</label>
+              <input id="dmc-dates" name="travelDates" type="text" value={formData.travelDates} onChange={handleChange} placeholder={t('dmc.datesPlaceholder')} />
             </div>
             <div className="dmc-form-row dmc-form-full">
-              <label htmlFor="dmc-message">Message</label>
-              <textarea id="dmc-message" name="message" rows={5} value={formData.message} onChange={handleChange} placeholder="Tell us about your requirements..." />
+              <label htmlFor="dmc-message">{t('forms.message')}</label>
+              <textarea id="dmc-message" name="message" rows={5} value={formData.message} onChange={handleChange} placeholder={t('dmc.messagePlaceholder')} />
             </div>
             {status && (
               <p className={`dmc-form-status ${status.type}`}>{status.text}</p>
             )}
             <button type="submit" className="dmc-btn dmc-btn-primary dmc-btn-submit" disabled={sending}>
-              {sending ? 'Sending...' : 'Submit DMC Request'}
+              {sending ? t('contact.sending') : t('dmc.submitRequest')}
             </button>
           </form>
-          <p className="dmc-form-note">Or email us directly: <a href="mailto:limassol@honeywelltravel.com.cy">limassol@honeywelltravel.com.cy</a></p>
+          <p className="dmc-form-note">{t('dmc.emailDirect')} <a href="mailto:limassol@honeywelltravel.com.cy">limassol@honeywelltravel.com.cy</a></p>
         </div>
       </section>
 
       {/* FOOTER CTA */}
       <section className="dmc-cta">
         <div className="dmc-cta-inner">
-          <p className="dmc-cta-text">Looking for a reliable Cyprus DMC partner?</p>
-          <Link to="/contact" className="dmc-btn dmc-btn-white">Contact Our DMC Department</Link>
+          <p className="dmc-cta-text">{t('dmc.footerCta')}</p>
+          <Link to="/contact" className="dmc-btn dmc-btn-white">{t('dmc.contactDepartment')}</Link>
         </div>
       </section>
     </div>

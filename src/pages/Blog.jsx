@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { blogPosts, getCategories } from '../data/blog'
 import RevealOnScroll from '../components/RevealOnScroll'
@@ -6,6 +7,7 @@ import SEO from '../components/SEO'
 import './Blog.css'
 
 function Blog() {
+  const { t } = useTranslation()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const categories = ['All', ...getCategories()]
 
@@ -29,8 +31,8 @@ function Blog() {
       {/* Hero Section */}
       <div className="blog-hero">
         <div className="blog-hero-content">
-          <h1>Travel Blog</h1>
-          <p className="blog-hero-subtitle">Stories, tips, and inspiration from around the world</p>
+          <h1>{t('blog.title')}</h1>
+          <p className="blog-hero-subtitle">{t('blog.subtitle')}</p>
         </div>
       </div>
 
@@ -44,7 +46,7 @@ function Blog() {
               className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
               onClick={() => setSelectedCategory(category)}
             >
-              {category}
+              {category === 'All' ? t('common.all') : category}
             </button>
           ))}
         </div>
@@ -60,7 +62,7 @@ function Blog() {
                     style={{ backgroundImage: `url(${post.image})` }}
                   />
                   {post.featured && (
-                    <span className="blog-featured-badge">Featured</span>
+                    <span className="blog-featured-badge">{t('common.featured')}</span>
                   )}
                 </div>
               )}
@@ -73,7 +75,7 @@ function Blog() {
                 <p className="blog-excerpt">{post.excerpt}</p>
                 <div className="blog-card-footer">
                   <Link to={`/our-blog/${post.slug}`} className="blog-link">
-                    Read More →
+                    {t('blog.readMore')}
                   </Link>
                   {post.tags && post.tags.length > 0 && (
                     <div className="blog-tags">
@@ -90,7 +92,7 @@ function Blog() {
 
         {sortedPosts.length === 0 && (
           <div className="blog-no-posts">
-            <p>No blog posts found in this category.</p>
+            <p>{t('blog.noPosts')}</p>
           </div>
         )}
       </div>

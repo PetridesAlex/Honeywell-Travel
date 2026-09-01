@@ -1,5 +1,7 @@
 import { packageCardImageUrl } from './packageCardImage'
-import { getEnglishPackageTitle } from './packageTranslations'
+import { localizePackage } from './packageTranslations'
+import { translatePackageDuration } from './packageTitleI18n'
+import { getCategoryLabel } from './categoryI18n'
 import { getPackageDepartureCountdown } from './packageDepartureCountdown'
 import { getPackageDepartureDatesFromPkg } from './packageDepartureDates'
 import { getPackageLeadPrice } from './packageLeadPrice'
@@ -7,21 +9,21 @@ import { getPackageLeadPrice } from './packageLeadPrice'
 export { getPackageLeadPrice }
 
 export function mapPackageToModalCard(pkg, i18n) {
-  const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
-  const hasAlternateTitle = Boolean(englishTitle && englishTitle.trim() !== pkg.title.trim())
+  const localized = localizePackage(pkg, i18n)
   const imageUrl = packageCardImageUrl(pkg)
   const isGroup = (pkg.packageType || 'individual') === 'group'
+  const t = i18n?.t?.bind(i18n)
 
   return {
     id: String(pkg.id),
     imageUrl,
-    title: pkg.title,
-    secondaryTitle: hasAlternateTitle ? englishTitle : '',
-    description: pkg.description,
+    title: localized.title,
+    secondaryTitle: '',
+    description: localized.description,
     gradientColor: isGroup ? '#0d5c2e' : '#c41230',
     destination: pkg.destination,
-    category: pkg.category,
-    duration: pkg.duration,
+    category: t ? getCategoryLabel(pkg.category, t) : pkg.category,
+    duration: translatePackageDuration(pkg.duration, i18n?.language),
     supplier: pkg.supplier || '',
     packageType: isGroup ? 'group' : 'individual',
     price: getPackageLeadPrice(pkg),
@@ -29,7 +31,8 @@ export function mapPackageToModalCard(pkg, i18n) {
     link: `/packages/${pkg.id}/details`,
     departureCountdown:
       pkg.details?.packageStatus === 'completed' ? null : getPackageDepartureCountdown(pkg),
-    statusBadge: pkg.details?.packageStatus === 'completed' ? 'completed' : null
+    statusBadge: pkg.details?.packageStatus === 'completed' ? 'completed' : null,
+    translationPending: Boolean(localized._i18nMissing),
   }
 }
 

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById } from '../data/packages'
 import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
-import { getTranslatedPackageTitle } from '../utils/packageTranslations'
+import { localizePackage } from '../utils/packageTranslations'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import {
   getDepartureDates,
@@ -311,20 +311,20 @@ const formatProgramNoteAmount = (amount) =>
   `€${Number(amount).toLocaleString('de-DE')}`
 
 /** Premium program notes: group size + twin/single rates when hotel prices are hidden. */
-const getProgramNoteHighlights = (details) => {
+const getProgramNoteHighlights = (details, tr) => {
   if (!details?.hideHotelPrices) return null
   const prices = details.hotels?.[0]?.prices
   if (!prices) return null
 
   const highlights = []
   if (details.groupSize) {
-    highlights.push({ label: 'Ομάδα', value: details.groupSize })
+    highlights.push({ label: tr('package.groupSize'), value: details.groupSize })
   }
   if (prices.double != null) {
-    highlights.push({ label: 'Δίκλινο', value: `${formatProgramNoteAmount(prices.double)} / άτομο` })
+    highlights.push({ label: tr('package.double'), value: `${formatProgramNoteAmount(prices.double)} / ${tr('package.perPerson')}` })
   }
   if (prices.single != null) {
-    highlights.push({ label: 'Μονόκλινο', value: `${formatProgramNoteAmount(prices.single)} / άτομο` })
+    highlights.push({ label: tr('package.single'), value: `${formatProgramNoteAmount(prices.single)} / ${tr('package.perPerson')}` })
   }
   return highlights.length ? highlights : null
 }
@@ -397,7 +397,7 @@ const alignHotelVariantsToDepartures = (variants, details, baseHotel) => {
   })
 }
 
-const FlightLegSegment = ({ leg }) => (
+const FlightLegSegment = ({ leg, tr }) => (
   <div className="flight-leg">
     <div className="flight-leg__endpoint">
       <span className="flight-leg__time">{leg.depart}</span>
@@ -419,12 +419,12 @@ const FlightLegSegment = ({ leg }) => (
     </div>
     <div className="flight-leg__meta">
       <span className="flight-leg__meta-item">
-        <span className="flight-label">Flight</span>
+        <span className="flight-label">{tr('package.flight')}</span>
         <span className="flight-value">{leg.flight}</span>
       </span>
       {leg.luggage ? (
         <span className="flight-leg__meta-item">
-          <span className="flight-label">Luggage</span>
+          <span className="flight-label">{tr('package.luggage')}</span>
           <span className="flight-value">{leg.luggage}</span>
         </span>
       ) : null}
@@ -434,6 +434,7 @@ const FlightLegSegment = ({ leg }) => (
 )
 
 const PackageFlightsSection = ({ details }) => {
+  const { t } = useTranslation()
   if (!details.flights?.length) return null
   const departureDates = getPackageDepartureDates(details)
   return (
@@ -444,12 +445,12 @@ const PackageFlightsSection = ({ details }) => {
         ) : (
           <span className="icon-badge flights">✈️</span>
         )}
-        Flights — {details.airline || 'Sky Express'}
+        {t('package.flights')} — {details.airline || 'Sky Express'}
       </h3>
       {departureDates.length > 0 && (
-        <div className="flights-departures" aria-label="Package departure dates">
+        <div className="flights-departures" aria-label={t('package.flightsDeparturesAria')}>
           <p className="flights-departures__label">
-            {departureDates.length > 1 ? 'Departure Dates' : 'Departure Date'}
+            {departureDates.length > 1 ? t('package.departureDates') : t('package.departureDate')}
           </p>
           <div className="flights-departures__list">
             {departureDates.map((date) => (
@@ -466,10 +467,10 @@ const PackageFlightsSection = ({ details }) => {
           const isDomestic = flight.direction === 'Domestic'
           const hasLegs = Array.isArray(flight.legs) && flight.legs.length > 0
           const directionLabel = isReturn
-            ? 'Return'
+            ? t('package.return')
             : isDomestic
-              ? 'Domestic'
-              : 'Departure'
+              ? t('package.domestic')
+              : t('common.departure')
           const DirectionIcon = isReturn ? PlaneLanding : PlaneTakeoff
           return (
             <div
@@ -493,12 +494,12 @@ const PackageFlightsSection = ({ details }) => {
                     {flight.stops != null && flight.stops !== '' ? (
                       <div className="flight-info flight-info--summary">
                         <div className="flight-info-row">
-                          <span className="flight-label">Στάσεις</span>
+                          <span className="flight-label">{t('package.stops')}</span>
                           <span className="flight-value">{flight.stops}</span>
                         </div>
                         {flight.luggage ? (
                           <div className="flight-info-row">
-                            <span className="flight-label">Luggage</span>
+                            <span className="flight-label">{t('package.luggage')}</span>
                             <span className="flight-value">{flight.luggage}</span>
                           </div>
                         ) : null}
@@ -514,7 +515,7 @@ const PackageFlightsSection = ({ details }) => {
                           )
                         }
                         if (leg.type === 'segment') {
-                          return <FlightLegSegment key={legIndex} leg={leg} />
+                          return <FlightLegSegment key={legIndex} leg={leg} tr={t} />
                         }
                         return null
                       })}
@@ -524,25 +525,25 @@ const PackageFlightsSection = ({ details }) => {
                   <div className="flight-info">
                     {flight.flight ? (
                       <div className="flight-info-row">
-                        <span className="flight-label">Flight</span>
+                        <span className="flight-label">{t('package.flight')}</span>
                         <span className="flight-value">{flight.flight}</span>
                       </div>
                     ) : null}
                     {flight.time ? (
                       <div className="flight-info-row">
-                        <span className="flight-label">Time</span>
+                        <span className="flight-label">{t('package.time')}</span>
                         <span className="flight-value flight-value--time">{flight.time}</span>
                       </div>
                     ) : null}
                     {flight.stops != null && flight.stops !== '' ? (
                       <div className="flight-info-row">
-                        <span className="flight-label">Στάσεις</span>
+                        <span className="flight-label">{t('package.stops')}</span>
                         <span className="flight-value">{flight.stops}</span>
                       </div>
                     ) : null}
                     {flight.luggage ? (
                       <div className="flight-info-row">
-                        <span className="flight-label">Luggage</span>
+                        <span className="flight-label">{t('package.luggage')}</span>
                         <span className="flight-value">{flight.luggage}</span>
                       </div>
                     ) : null}
@@ -578,7 +579,9 @@ const CancellationPolicyBody = ({ policy }) => {
 const PACKAGE_CONTACT_PHONE = '+357 77771234'
 const PACKAGE_CONTACT_EMAIL = 'info@honeywelltravel.com'
 
-const PackageContactCard = ({ className = '' }) => (
+const PackageContactCard = ({ className = '' }) => {
+  const { t } = useTranslation()
+  return (
   <div className={`contact-card ${className}`.trim()}>
     <div className="contact-card-glow" aria-hidden="true" />
     <div className="contact-card-header">
@@ -586,8 +589,8 @@ const PackageContactCard = ({ className = '' }) => (
         <Headphones size={18} strokeWidth={1.75} />
       </span>
       <div className="contact-card-heading">
-        <h3>Concierge assistance</h3>
-        <p className="contact-card-lead">Speak with a travel specialist</p>
+        <h3>{t('package.concierge')}</h3>
+        <p className="contact-card-lead">{t('package.speakSpecialist')}</p>
       </div>
     </div>
     <div className="contact-card-links">
@@ -600,7 +603,7 @@ const PackageContactCard = ({ className = '' }) => (
           <Phone size={16} strokeWidth={2} />
         </span>
         <span className="contact-link-copy">
-          <span className="contact-link-label">Call us</span>
+          <span className="contact-link-label">{t('package.callUs')}</span>
           <span className="contact-link-value">{PACKAGE_CONTACT_PHONE}</span>
         </span>
         <ArrowRight className="contact-link-arrow" size={15} strokeWidth={2} aria-hidden="true" />
@@ -614,14 +617,15 @@ const PackageContactCard = ({ className = '' }) => (
           <Mail size={16} strokeWidth={2} />
         </span>
         <span className="contact-link-copy">
-          <span className="contact-link-label">Email us</span>
+          <span className="contact-link-label">{t('package.emailUs')}</span>
           <span className="contact-link-value">{PACKAGE_CONTACT_EMAIL}</span>
         </span>
         <ArrowRight className="contact-link-arrow" size={15} strokeWidth={2} aria-hidden="true" />
       </a>
     </div>
   </div>
-)
+  )
+}
 
 function getCheapestPriceFromPkg(pkg) {
   return getPackageLeadPrice(pkg)
@@ -637,7 +641,6 @@ function PackageFullDetail() {
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const [pkg, setPkg] = useState(() => getPackageById(id))
-  const translatedTitle = pkg ? getTranslatedPackageTitle(pkg.id, pkg.title, i18n) : ''
   const [activeTab, setActiveTab] = useState('price')
   const [hotelSelections, setHotelSelections] = useState({})
   const [showReserveModal, setShowReserveModal] = useState(false)
@@ -657,6 +660,35 @@ function PackageFullDetail() {
   const [selectedDepartureFilter, setSelectedDepartureFilter] = useState('')
   const [selectedHotelFilter, setSelectedHotelFilter] = useState('')
   const [relatedTours, setRelatedTours] = useState([])
+
+  const displayPkg = useMemo(() => (pkg ? localizePackage(pkg, i18n) : null), [pkg, i18n])
+  const details = displayPkg?.details || {}
+  const gallery = details.gallery || []
+  const itineraryHotels = isItineraryStyleHotels(details)
+  const hotelDateLabel = itineraryHotels ? t('package.checkIn') : t('package.departureDate')
+  const displayTitle = displayPkg?.title || ''
+  const priceTabDestination = useMemo(
+    () => getPriceTabDestinationLine(details, displayPkg || {}, displayTitle),
+    [details, displayPkg, displayTitle]
+  )
+  const filteredHotelsForDeparture = useMemo(() => {
+    if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
+    const source = selectedDepartureFilter
+      ? details.hotels.filter((hotel) => hotel?.departureDate === selectedDepartureFilter)
+      : details.hotels
+    return [...new Set(source.map((hotel) => hotel?.name).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, 'el'))
+  }, [details.hotels, selectedDepartureFilter])
+
+  const filteredDeparturesForHotel = useMemo(() => {
+    if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
+    const source = selectedHotelFilter
+      ? details.hotels.filter((hotel) => hotel?.name === selectedHotelFilter)
+      : details.hotels
+    return sortDepartureDateStrings(
+      [...new Set(source.map((hotel) => hotel?.departureDate).filter(Boolean))]
+    )
+  }, [details.hotels, selectedHotelFilter])
 
   useEffect(() => {
     let cancelled = false
@@ -707,80 +739,54 @@ function PackageFullDetail() {
     return () => clearTimeout(t)
   }, [reserveToast])
 
+  useEffect(() => {
+    if (selectedHotelFilter && !filteredHotelsForDeparture.includes(selectedHotelFilter)) {
+      setSelectedHotelFilter('')
+    }
+  }, [selectedHotelFilter, filteredHotelsForDeparture])
+
+  useEffect(() => {
+    if (selectedDepartureFilter && !filteredDeparturesForHotel.includes(selectedDepartureFilter)) {
+      setSelectedDepartureFilter('')
+    }
+  }, [selectedDepartureFilter, filteredDeparturesForHotel])
+
   if (!pkg) {
     return (
       <div className="package-full-page">
         <div className="package-full-container">
-          <h1>Package Not Found</h1>
+          <h1>{t('package.notFoundTitle')}</h1>
           <Link to="/packages" className="package-back-nav">
             <PackageBackChevron />
-            <span className="package-back-nav__label">Back to packages</span>
+            <span className="package-back-nav__label">{t('package.backToPackages')}</span>
           </Link>
         </div>
       </div>
     )
   }
 
-      const details = pkg.details || {}
-      const gallery = details.gallery || []
-      const itineraryHotels = isItineraryStyleHotels(details)
-      const hotelDateLabel = itineraryHotels ? t('package.checkIn') : t('package.departureDate')
-      const priceTabDestination = getPriceTabDestinationLine(details, pkg, translatedTitle)
-      const filteredHotelsForDeparture = useMemo(() => {
-        if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
-        const source = selectedDepartureFilter
-          ? details.hotels.filter((hotel) => hotel?.departureDate === selectedDepartureFilter)
-          : details.hotels
-        return [...new Set(source.map((hotel) => hotel?.name).filter(Boolean))]
-          .sort((a, b) => a.localeCompare(b, 'el'))
-      }, [details.hotels, selectedDepartureFilter])
+  const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
+  const formatPackagePrice = () => {
+    const cheapest = getCheapestPriceFromPkg(pkg)
+    return priceOnRequest || !(cheapest > 0)
+      ? t('package.priceOnRequest')
+      : `${t('package.from')} €${cheapest.toLocaleString()}`
+  }
 
-      const filteredDeparturesForHotel = useMemo(() => {
-        if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
-        const source = selectedHotelFilter
-          ? details.hotels.filter((hotel) => hotel?.name === selectedHotelFilter)
-          : details.hotels
-        return sortDepartureDateStrings(
-          [...new Set(source.map((hotel) => hotel?.departureDate).filter(Boolean))]
-        )
-      }, [details.hotels, selectedHotelFilter])
-
-      useEffect(() => {
-        if (selectedHotelFilter && !filteredHotelsForDeparture.includes(selectedHotelFilter)) {
-          setSelectedHotelFilter('')
-        }
-      }, [selectedHotelFilter, filteredHotelsForDeparture])
-
-      useEffect(() => {
-        if (selectedDepartureFilter && !filteredDeparturesForHotel.includes(selectedDepartureFilter)) {
-          setSelectedDepartureFilter('')
-        }
-      }, [selectedDepartureFilter, filteredDeparturesForHotel])
-
-      // From price = lowest double room price per person across all hotels
-      const getCheapestPrice = (pkg) => getCheapestPriceFromPkg(pkg)
-
-      const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
-      const formatPackagePrice = () => {
-        const cheapest = getCheapestPrice(pkg)
-        return priceOnRequest || !(cheapest > 0) ? 'Price on request' : `From €${cheapest.toLocaleString()}`
-      }
-
-      // Unique hotel options for "Book this package" (same grouping as hotels grid)
-      const packageHotelOptions = details.hotels && details.hotels.length > 0
-        ? (() => {
-            const grouped = {}
-            details.hotels.forEach((h, idx) => {
-              if (!grouped[h.name]) grouped[h.name] = []
-              grouped[h.name].push({ ...h, originalIndex: idx })
-            })
-            return Object.entries(grouped).map(([hotelName, variants], i) => ({
-              hotelKey: `hotel-${i}`,
-              hotelName: hotelName || variants[0]?.location || 'Package',
-              variants
-            }))
-          })()
-        : []
+  const packageHotelOptions = details.hotels && details.hotels.length > 0
+    ? (() => {
+        const grouped = {}
+        details.hotels.forEach((h, idx) => {
+          if (!grouped[h.name]) grouped[h.name] = []
+          grouped[h.name].push({ ...h, originalIndex: idx })
+        })
+        return Object.entries(grouped).map(([hotelName, variants], i) => ({
+          hotelKey: `hotel-${i}`,
+          hotelName: hotelName || variants[0]?.location || t('package.packageLabel'),
+          variants
+        }))
+      })()
+    : []
 
   // Calculate price for a single room based on selection
   const calculateRoomPrice = (hotel, selection) => {
@@ -855,7 +861,7 @@ function PackageFullDetail() {
       }
       lines.push({
         key: 'quadruple',
-        label: `Quadruple (${selection.adults} ${selection.adults !== 1 ? tr('package.adults') : tr('package.adult')})`,
+        label: `${tr('package.quadruple')} (${selection.adults} ${selection.adults !== 1 ? tr('package.adults') : tr('package.adult')})`,
         amount,
       })
     } else if (hotel.prices?.double != null) {
@@ -905,12 +911,12 @@ function PackageFullDetail() {
   // SEO data
   const packageUrl = `https://www.honeywelltravel.com.cy/packages/${pkg.id}/details`
   const packageImage = heroImage.startsWith('http') ? heroImage : `https://www.honeywelltravel.com.cy${heroImage}`
-  const packageDescription = pkg.longDescription || pkg.description || `Book ${translatedTitle} - ${pkg.duration} from €${getCheapestPrice(pkg).toLocaleString()}. Complete travel package details including hotels, itinerary, and pricing.`
+  const packageDescription = displayPkg?.longDescription || displayPkg?.description || `Book ${displayTitle} - ${pkg.duration} from €${getCheapestPriceFromPkg(pkg).toLocaleString()}. Complete travel package details including hotels, itinerary, and pricing.`
 
   return (
     <div className="package-full-page">
       <SEO 
-        title={`${translatedTitle} - Complete Package Details | Honeywell Travel`}
+        title={`${displayTitle} - Complete Package Details | Honeywell Travel`}
         description={packageDescription}
         keywords={`${pkg.destination}, ${pkg.category}, Travel Package, Holiday Package, ${pkg.duration}, Hotels, Itinerary, Honeywell Travel`}
         image={packageImage}
@@ -934,7 +940,7 @@ function PackageFullDetail() {
         </div>
         <div className="package-full-hero-content">
           <h1>
-            {translatedTitle}
+            {displayTitle}
             {pkg.supplier ? (
               <span className="hero-supplier-badge">
                 {pkg.supplier}
@@ -943,7 +949,7 @@ function PackageFullDetail() {
           </h1>
           <div className="hero-meta">
             <span className={`hero-package-type ${(pkg.packageType || 'individual').toLowerCase()}`}>
-              {(pkg.packageType || 'individual').toLowerCase() === 'group' ? 'Group' : 'Individual'}
+              {(pkg.packageType || 'individual').toLowerCase() === 'group' ? t('common.group') : t('common.individual')}
             </span>
             {pkg.supplier ? (
               <span className="hero-meta-supplier">
@@ -972,6 +978,12 @@ function PackageFullDetail() {
           <span className="package-back-nav__label">{t('package.backToOverview')}</span>
         </button>
 
+        {displayPkg?._i18nMissing ? (
+          <p className="package-translation-pending" role="status">
+            {t('package.translationPending')}
+          </p>
+        ) : null}
+
         <div className="layout-grid">
           <main className="layout-main">
             {/* Tabs */}
@@ -998,7 +1010,7 @@ function PackageFullDetail() {
                 className={`full-tab ${activeTab === 'flights' ? 'active' : ''}`}
                 onClick={() => setActiveTab('flights')}
               >
-                Flights
+                {t('package.flights')}
               </button>
             </div>
 
@@ -1011,7 +1023,7 @@ function PackageFullDetail() {
                     {(details.thumbnailImage || details.coverImage || gallery[0]) ? (
                       <img
                         src={details.thumbnailImage || details.coverImage || gallery[0]}
-                        alt={priceTabDestination || translatedTitle || ''}
+                        alt={priceTabDestination || displayTitle || ''}
                         className="price-thumb-img"
                         loading="lazy"
                         decoding="async"
@@ -1041,7 +1053,7 @@ function PackageFullDetail() {
                           value={selectedDepartureFilter}
                           onChange={(e) => setSelectedDepartureFilter(e.target.value)}
                         >
-                          <option value="">All Departure Dates</option>
+                          <option value="">{t('package.allDepartureDates')}</option>
                           {filteredDeparturesForHotel.map((date) => (
                             <option key={date} value={date}>{date}</option>
                           ))}
@@ -1054,7 +1066,7 @@ function PackageFullDetail() {
                           value={selectedHotelFilter}
                           onChange={(e) => setSelectedHotelFilter(e.target.value)}
                         >
-                          <option value="">All Hotels</option>
+                          <option value="">{t('package.allHotels')}</option>
                           {filteredHotelsForDeparture.map((hotelName) => (
                             <option key={hotelName} value={hotelName}>{hotelName}</option>
                           ))}
@@ -1069,7 +1081,7 @@ function PackageFullDetail() {
                             setSelectedHotelFilter('')
                           }}
                         >
-                          Clear Filters
+                          {t('common.clearFilters')}
                         </button>
                       ) : null}
                     </div>
@@ -1166,13 +1178,13 @@ function PackageFullDetail() {
                                 {baseHotel.name ? <h3 className="hotel-single-title">{baseHotel.name}</h3> : null}
                                 {baseHotel.location && (
                                   <p className="hotel-single-location">
-                                    <span className="hotel-single-location__label">Location</span>
+                                    <span className="hotel-single-location__label">{t('package.location')}</span>
                                     <span className="hotel-single-location__text">{baseHotel.location}</span>
                                   </p>
                                 )}
                                 {baseHotel.description && details.hideHotelPrices ? (
                                   <div className="hotel-single-description hotel-single-description--premium">
-                                    <span className="hotel-single-description__eyebrow">About the stay</span>
+                                    <span className="hotel-single-description__eyebrow">{t('package.aboutStay')}</span>
                                     <p className="hotel-single-description__text">{baseHotel.description}</p>
                                   </div>
                                 ) : null}
@@ -1195,7 +1207,7 @@ function PackageFullDetail() {
                                         {variant.nights != null ? (
                                           <div className="hotel-included-note hotel-included-note--premium">
                                             <div className="hotel-included-note__top">
-                                              <span className="hotel-included-note__badge">Included stay</span>
+                                              <span className="hotel-included-note__badge">{t('package.includedStay')}</span>
                                               <span className="hotel-included-note__nights">
                                                 {variant.nights}{' '}
                                                 {variant.nights === 1 ? 'νύχτα' : 'νύχτες'}
@@ -1221,7 +1233,7 @@ function PackageFullDetail() {
                                   // For the Scandinavia Mary Special trip, hide prices for the 2nd/3rd hotels
                                   <div className="hotel-variant-block">
                                     <p className="section-text hotel-included-note">
-                                      Included in the package price.
+                                      {t('package.includedInPrice')}
                                     </p>
                                   </div>
                                 ) : (
@@ -1289,7 +1301,7 @@ function PackageFullDetail() {
                                                   })
                                                 }}
                                                 disabled={variant.prices?.double == null}
-                                                title="Click to select Double room (2 adults)"
+                                                title={t('package.selectDouble')}
                                               >
                                                 <span className="hotel-variant-price-label">{t('package.double')}</span>
                                                 <span className="hotel-variant-price-value">{variant.prices?.double != null ? `€${variant.prices.double}` : '–'}</span>
@@ -1314,7 +1326,7 @@ function PackageFullDetail() {
                                                   })
                                                 }}
                                                 disabled={variant.prices?.single == null}
-                                                title="Click to select Single room (1 adult)"
+                                                title={t('package.selectSingle')}
                                               >
                                                 <span className="hotel-variant-price-label">{t('package.single')}</span>
                                                 <span className="hotel-variant-price-value">{variant.prices?.single != null ? `€${variant.prices.single}` : '–'}</span>
@@ -1339,7 +1351,7 @@ function PackageFullDetail() {
                                                       }
                                                     })
                                                   }}
-                                                  title="Click to select Triple room (3 adults)"
+                                                  title={t('package.selectTriple')}
                                                 >
                                                   <span className="hotel-variant-price-label">{t('package.triple')}</span>
                                                   <span className="hotel-variant-price-value">€{variant.prices.triple}</span>
@@ -1365,9 +1377,9 @@ function PackageFullDetail() {
                                                       }
                                                     })
                                                   }}
-                                                  title="Click to select Quadruple room (4 adults)"
+                                                  title={t('package.selectQuadruple')}
                                                 >
-                                                  <span className="hotel-variant-price-label">Quadruple</span>
+                                                  <span className="hotel-variant-price-label">{t('package.quadruple')}</span>
                                                   <span className="hotel-variant-price-value">€{variant.prices.quadruple}</span>
                                                 </button>
                                               )}
@@ -1508,7 +1520,7 @@ function PackageFullDetail() {
                   </>
                 ) : (
                   <p className="section-text muted">
-                    Add room types and rates for this package in the data file.
+                    {t('package.priceTabNoHotelsPlaceholder')}
                   </p>
                 )}
 
@@ -1516,7 +1528,7 @@ function PackageFullDetail() {
                   <div className="details-section price-tab-cancellation-wrap">
                     <h3 className="details-section-title">
                       <span className="icon-badge cancellation">⚠️</span>
-                      Cancellation Policy
+                      {t('package.cancellationPolicy')}
                     </h3>
                     <div className="cancellation-policy">
                       <CancellationPolicyBody policy={details.cancellationPolicy} />
@@ -1531,7 +1543,7 @@ function PackageFullDetail() {
               <section className="full-section">
                 <h2>{t('package.program')}</h2>
                 {details.note && (() => {
-                  const noteHighlights = getProgramNoteHighlights(details)
+                  const noteHighlights = getProgramNoteHighlights(details, t)
                   const premiumNote = isPremiumProgramNote(details, noteHighlights)
                   return (
                     <aside
@@ -1541,7 +1553,7 @@ function PackageFullDetail() {
                       <div className="program-premium-note__content">
                         <div className="program-premium-note__eyebrow">
                           {premiumNote ? (
-                            <span className="program-premium-note__badge">Premium</span>
+                            <span className="program-premium-note__badge">{t('package.premium')}</span>
                           ) : null}
                           <span className="program-premium-note__title">{t('package.note')}</span>
                         </div>
@@ -1821,7 +1833,7 @@ function PackageFullDetail() {
                   </div>
                 ) : (
                   <p className="section-text muted">
-                    Program information will be available here.
+                    {t('package.programPlaceholder')}
                   </p>
                 )}
               </section>
@@ -1830,13 +1842,13 @@ function PackageFullDetail() {
             {/* PACKAGE DETAILS TAB */}
             {activeTab === 'details' && (
               <section className="full-section">
-                <h2>Package Details</h2>
+                <h2>{t('package.packageDetails')}</h2>
 
                 {/* What's Included */}
                 <div className="details-section">
                   <h3 className="details-section-title">
                     <span className="icon-badge included">✓</span>
-                    What's Included
+                    {t('package.whatsIncluded')}
                   </h3>
                   {details.included && details.included.length > 0 ? (
                     <ul className="icon-list included-list">
@@ -1849,7 +1861,7 @@ function PackageFullDetail() {
                     </ul>
                   ) : (
                     <p className="section-text muted">
-                      Add all services that are included in this package (flights, hotel, transfers, etc.).
+                      {t('package.includedPlaceholder')}
                     </p>
                   )}
                 </div>
@@ -1858,7 +1870,7 @@ function PackageFullDetail() {
                 <div className="details-section">
                   <h3 className="details-section-title">
                     <span className="icon-badge not-included">✕</span>
-                    What's Not Included
+                    {t('package.whatsNotIncluded')}
                   </h3>
                   {details.notIncluded && details.notIncluded.length > 0 ? (
                     <ul className="icon-list not-included-list">
@@ -1871,7 +1883,7 @@ function PackageFullDetail() {
                     </ul>
                   ) : (
                     <p className="section-text muted">
-                      Add here what is not included (city tax, meals, insurance, optional excursions, etc.).
+                      {t('package.notIncludedPlaceholder')}
                     </p>
                   )}
                 </div>
@@ -1881,7 +1893,7 @@ function PackageFullDetail() {
                   <div className="details-section">
                     <h3 className="details-section-title">
                       <span className="icon-badge terms">📌</span>
-                      Terms & Conditions
+                      {t('package.termsAndConditions')}
                     </h3>
                     <ul className="terms-list">
                       {details.termsAndConditions.map((term, index) => (
@@ -1922,7 +1934,7 @@ function PackageFullDetail() {
                   <div className="details-section">
                     <h3 className="details-section-title">
                       <span className="icon-badge hotel-stay">🏨</span>
-                      Hotel Stay
+                      {t('package.hotelStay')}
                     </h3>
                     <div className="hotel-stay-note-box">
                       {details.hotelStayNote}
@@ -1934,7 +1946,7 @@ function PackageFullDetail() {
                 <div className="details-section">
                   <h3 className="details-section-title">
                     <span className="icon-badge cancellation">⚠️</span>
-                    Cancellation Policy
+                    {t('package.cancellationPolicy')}
                   </h3>
                   {details.cancellationPolicy ? (
                     <div className="cancellation-policy">
@@ -1942,7 +1954,7 @@ function PackageFullDetail() {
                     </div>
                   ) : (
                     <p className="section-text muted">
-                      Add the cancellation policy here (deadlines, fees, and special conditions).
+                      {t('package.cancellationPlaceholder')}
                     </p>
                   )}
                 </div>
@@ -1952,12 +1964,12 @@ function PackageFullDetail() {
             {/* FLIGHTS TAB */}
             {activeTab === 'flights' && (
               <section className="full-section">
-                <h2>Flights</h2>
+                <h2>{t('package.flights')}</h2>
                 {details.flights?.length ? (
                   <PackageFlightsSection details={details} />
                 ) : (
                   <p className="section-text muted">
-                    Flight information will be available here.
+                    {t('package.flightsPlaceholder')}
                   </p>
                 )}
               </section>
@@ -1966,8 +1978,8 @@ function PackageFullDetail() {
             {/* Related tours */}
             {relatedTours.length > 0 && (
               <section className="full-section related-section">
-                <h2 className="related-section-title">Related Tours</h2>
-                <p className="related-section-subtitle">More packages in the same category</p>
+                <h2 className="related-section-title">{t('package.relatedTours')}</h2>
+                <p className="related-section-subtitle">{t('package.moreInCategory')}</p>
                 <div className="related-grid">
                   {relatedTours.map((tour) => {
                     const thumbSrc = tour.details?.thumbnailImage || tour.details?.coverImage || tour.details?.gallery?.[0] || '/images/destinations/riviera-hero.webp'
@@ -1990,8 +2002,8 @@ function PackageFullDetail() {
                           />
                           <span className="related-card-badge">
                             {tour.priceOnRequest || tour.details?.priceOnRequest || !(tour.cheapestPrice > 0)
-                              ? 'Price on request'
-                              : `From €${tour.cheapestPrice.toLocaleString()}`}
+                              ? t('package.priceOnRequest')
+                              : `${t('package.from')} €${tour.cheapestPrice.toLocaleString()}`}
                           </span>
                         </div>
                         <div className="related-card-body">
@@ -2008,7 +2020,7 @@ function PackageFullDetail() {
 
             {/* Mobile-only sidebar cards at the end */}
             <div className="summary-card mobile-sidebar-card">
-              <p className="summary-card-label">Summary</p>
+              <p className="summary-card-label">{t('package.summary')}</p>
               <p className="summary-price">{formatPackagePrice()}</p>
               <div className="summary-meta">
                 <p className="summary-duration">
@@ -2026,25 +2038,25 @@ function PackageFullDetail() {
                   className="book-button full-book-button"
                   onClick={() => details.hotels?.length > 0 && setShowBookSelection(true)}
                 >
-                  Book this package
+                  {t('package.bookThisPackage')}
                 </button>
               ) : (
                 <div className="book-selection-form">
-                  <label className="book-selection-label">Adults</label>
+                  <label className="book-selection-label">{t('package.adults')}</label>
                   <div className="book-selection-controls">
-                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.max(1, a - 1))} aria-label="Fewer adults">−</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.max(1, a - 1))} aria-label={t('package.fewerAdults')}>−</button>
                     <span className="book-selection-value">{bookAdults}</span>
-                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.min(8, a + 1))} aria-label="More adults">+</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.min(8, a + 1))} aria-label={t('package.moreAdults')}>+</button>
                   </div>
-                  <label className="book-selection-label">Rooms</label>
+                  <label className="book-selection-label">{t('package.rooms')}</label>
                   <div className="book-selection-controls">
-                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.max(1, r - 1))} aria-label="Fewer rooms">−</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.max(1, r - 1))} aria-label={t('package.fewerRooms')}>−</button>
                     <span className="book-selection-value">{bookRooms}</span>
-                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.min(5, r + 1))} aria-label="More rooms">+</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.min(5, r + 1))} aria-label={t('package.moreRooms')}>+</button>
                   </div>
                   {packageHotelOptions.length > 0 && (
                     <>
-                      <label className="book-selection-label" htmlFor="book-hotel-select-mobile">Hotel</label>
+                      <label className="book-selection-label" htmlFor="book-hotel-select-mobile">{t('package.hotel')}</label>
                       <select
                         id="book-hotel-select-mobile"
                         className="book-selection-select"
@@ -2087,21 +2099,21 @@ function PackageFullDetail() {
                       setShowBookSelection(false)
                     }}
                   >
-                    Reserve now
+                    {t('package.reserveNow')}
                   </button>
                   <button type="button" className="book-selection-cancel" onClick={() => setShowBookSelection(false)}>
-                    Cancel
+                    {t('common.cancel')}
                   </button>
                 </div>
               )}
             </div>
 
             <div className="why-card mobile-sidebar-card">
-              <h3>Why book with us</h3>
+              <h3>{t('package.whyBook')}</h3>
               <ul>
-                <li>Local Cyprus travel experts</li>
-                <li>Tailor‑made packages for every budget</li>
-                <li>Support before, during & after your trip</li>
+                <li>{t('package.whyBookItem1')}</li>
+                <li>{t('package.whyBookItem2')}</li>
+                <li>{t('package.whyBookItem3')}</li>
               </ul>
             </div>
 
@@ -2109,14 +2121,14 @@ function PackageFullDetail() {
             <PackageBrochureCard
               className="mobile-sidebar-card"
               pkg={pkg}
-              title={translatedTitle || pkg.title}
+              title={displayTitle}
               priceLabel={formatPackagePrice()}
             />
           </main>
 
           <aside className="layout-aside">
             <div className="summary-card">
-              <p className="summary-card-label">Summary</p>
+              <p className="summary-card-label">{t('package.summary')}</p>
               <p className="summary-price">{formatPackagePrice()}</p>
               <div className="summary-meta">
                 <p className="summary-duration">
@@ -2134,25 +2146,25 @@ function PackageFullDetail() {
                   className="book-button full-book-button"
                   onClick={() => details.hotels?.length > 0 && setShowBookSelection(true)}
                 >
-                  Book this package
+                  {t('package.bookThisPackage')}
                 </button>
               ) : (
                 <div className="book-selection-form">
-                  <label className="book-selection-label">Adults</label>
+                  <label className="book-selection-label">{t('package.adults')}</label>
                   <div className="book-selection-controls">
-                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.max(1, a - 1))} aria-label="Fewer adults">−</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.max(1, a - 1))} aria-label={t('package.fewerAdults')}>−</button>
                     <span className="book-selection-value">{bookAdults}</span>
-                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.min(8, a + 1))} aria-label="More adults">+</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookAdults(a => Math.min(8, a + 1))} aria-label={t('package.moreAdults')}>+</button>
                   </div>
-                  <label className="book-selection-label">Rooms</label>
+                  <label className="book-selection-label">{t('package.rooms')}</label>
                   <div className="book-selection-controls">
-                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.max(1, r - 1))} aria-label="Fewer rooms">−</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.max(1, r - 1))} aria-label={t('package.fewerRooms')}>−</button>
                     <span className="book-selection-value">{bookRooms}</span>
-                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.min(5, r + 1))} aria-label="More rooms">+</button>
+                    <button type="button" className="book-selection-btn" onClick={() => setBookRooms(r => Math.min(5, r + 1))} aria-label={t('package.moreRooms')}>+</button>
                   </div>
                   {packageHotelOptions.length > 0 && (
                     <>
-                      <label className="book-selection-label" htmlFor="book-hotel-select">Hotel</label>
+                      <label className="book-selection-label" htmlFor="book-hotel-select">{t('package.hotel')}</label>
                       <select
                         id="book-hotel-select"
                         className="book-selection-select"
@@ -2195,28 +2207,28 @@ function PackageFullDetail() {
                       setShowBookSelection(false)
                     }}
                   >
-                    Reserve now
+                    {t('package.reserveNow')}
                   </button>
                   <button type="button" className="book-selection-cancel" onClick={() => setShowBookSelection(false)}>
-                    Cancel
+                    {t('common.cancel')}
                   </button>
                 </div>
               )}
             </div>
 
             <div className="why-card">
-              <h3>Why book with us</h3>
+              <h3>{t('package.whyBook')}</h3>
               <ul>
-                <li>Local Cyprus travel experts</li>
-                <li>Tailor‑made packages for every budget</li>
-                <li>Support before, during & after your trip</li>
+                <li>{t('package.whyBookItem1')}</li>
+                <li>{t('package.whyBookItem2')}</li>
+                <li>{t('package.whyBookItem3')}</li>
               </ul>
             </div>
 
             <PackageContactCard />
             <PackageBrochureCard
               pkg={pkg}
-              title={translatedTitle || pkg.title}
+              title={displayTitle}
               priceLabel={formatPackagePrice()}
             />
           </aside>
@@ -2237,9 +2249,9 @@ function PackageFullDetail() {
             <button className="modal-close-btn" onClick={() => setShowReserveModal(false)}>×</button>
             
             <div className="modal-header">
-              <p className="modal-eyebrow">Honeywell Travel</p>
-              <h2>Reservation Request</h2>
-              <p className="modal-subtitle">Please provide your contact information to complete your reservation</p>
+              <p className="modal-eyebrow">{t('common.brandName')}</p>
+              <h2>{t('package.reservationRequest')}</h2>
+              <p className="modal-subtitle">{t('package.reservationIntro')}</p>
             </div>
 
             {(() => {
@@ -2256,44 +2268,44 @@ function PackageFullDetail() {
                 <>
                   <div className="reservation-summary">
                     <div className="reservation-summary-header">
-                      <h3 className="summary-title">Your Selection</h3>
+                      <h3 className="summary-title">{t('package.yourSelection')}</h3>
                     </div>
                     <div className="summary-content">
                       <div className="summary-item">
-                        <span className="summary-label">Package</span>
-                        <span className="summary-value">{pkg.title}</span>
+                        <span className="summary-label">{t('package.packageLabel')}</span>
+                        <span className="summary-value">{displayTitle}</span>
                       </div>
                       <div className="summary-item">
-                        <span className="summary-label">Hotel</span>
+                        <span className="summary-label">{t('package.hotel')}</span>
                         <span className="summary-value">{reserveFormData.hotelName}</span>
                       </div>
                       {reserveFormData.departureDate && (
                         <div className="summary-item">
-                          <span className="summary-label">Departure Date</span>
+                          <span className="summary-label">{t('package.departureDateLabel')}</span>
                           <span className="summary-value">{reserveFormData.departureDate}</span>
                         </div>
                       )}
                       <div className="summary-item">
-                        <span className="summary-label">Room Type</span>
+                        <span className="summary-label">{t('package.roomType')}</span>
                         <span className="summary-value">
                           {selection.roomType.charAt(0).toUpperCase() + selection.roomType.slice(1)}
                           {selectedHotel && selectedHotel.prices && selectedHotel.prices[selection.roomType] && (
                             <span className="summary-value-note">
-                              €{selectedHotel.prices[selection.roomType]}/person
+                              €{selectedHotel.prices[selection.roomType]}/{t('package.perPerson')}
                             </span>
                           )}
                         </span>
                       </div>
                       <div className="summary-item">
-                        <span className="summary-label">Guests</span>
+                        <span className="summary-label">{t('package.guests')}</span>
                         <span className="summary-value">
-                          {selection.adults} Adult{selection.adults !== 1 ? 's' : ''}
-                          {selection.children > 0 && `, ${selection.children} Child${selection.children !== 1 ? 'ren' : ''} (Child 1)`}
-                          {selection.children2 > 0 && `, ${selection.children2} Child${selection.children2 !== 1 ? 'ren' : ''} (Child 2)`}
+                          {selection.adults} {selection.adults !== 1 ? t('package.adults') : t('package.adult')}
+                          {selection.children > 0 && `, ${selection.children} ${selection.children !== 1 ? t('package.children') : t('package.child')} (${t('package.child1')})`}
+                          {selection.children2 > 0 && `, ${selection.children2} ${selection.children2 !== 1 ? t('package.children') : t('package.child')} (${t('package.child2')})`}
                         </span>
                       </div>
                       <div className="summary-item summary-total">
-                        <span className="summary-label">Total Price</span>
+                        <span className="summary-label">{t('package.totalPrice')}</span>
                         <span className="summary-value">€{totalPrice.toLocaleString()}</span>
                       </div>
                     </div>
@@ -2305,11 +2317,11 @@ function PackageFullDetail() {
                       e.preventDefault()
                       setReserveSending(true)
                       setReserveToast(null)
-                      const peopleStr = `${selection.adults} Adult${selection.adults !== 1 ? 's' : ''}${selection.children > 0 ? `, ${selection.children} Child${selection.children !== 1 ? 'ren' : ''} (Child 1)` : ''}${selection.children2 > 0 ? `, ${selection.children2} Child${selection.children2 !== 1 ? 'ren' : ''} (Child 2)` : ''}`
+                      const peopleStr = `${selection.adults} ${selection.adults !== 1 ? t('package.adults') : t('package.adult')}${selection.children > 0 ? `, ${selection.children} ${selection.children !== 1 ? t('package.children') : t('package.child')} (${t('package.child1')})` : ''}${selection.children2 > 0 ? `, ${selection.children2} ${selection.children2 !== 1 ? t('package.children') : t('package.child')} (${t('package.child2')})` : ''}`
                       const emailBody = `
 RESERVATION REQUEST
 
-Package: ${pkg.title}
+Package: ${displayTitle}
 Hotel: ${reserveFormData.hotelName}
 ${reserveFormData.departureDate ? `Departure Date: ${reserveFormData.departureDate}\n` : ''}Room Type: ${selection.roomType.charAt(0).toUpperCase() + selection.roomType.slice(1)}
 Guests: ${peopleStr}
@@ -2329,7 +2341,7 @@ This reservation request was submitted through the Honeywell Travel website.
                         name: reserveFormData.name || 'Guest',
                         email: reserveFormData.email,
                         phone: reserveFormData.phone || '',
-                        destination: pkg.title || '',
+                        destination: displayTitle || '',
                         travelDates: reserveFormData.departureDate || '',
                         passengers: peopleStr,
                         message: emailBody,
@@ -2343,7 +2355,7 @@ This reservation request was submitted through the Honeywell Travel website.
                           full_name: reserveFormData.name || '',
                           phone: reserveFormData.phone || '',
                           email: reserveFormData.email || '',
-                          destination: pkg.title || '',
+                          destination: displayTitle || '',
                           travel_dates: reserveFormData.departureDate || '',
                           number_of_travelers: peopleStr,
                           budget: String(totalPrice || ''),
@@ -2381,43 +2393,43 @@ This reservation request was submitted through the Honeywell Travel website.
                   >
                     <HoneypotField value={reserveHoneypot} onChange={(e) => setReserveHoneypot(e.target.value)} />
                     <div className="form-group">
-                      <label htmlFor="reserve-name">Full Name</label>
+                      <label htmlFor="reserve-name">{t('package.fullName')}</label>
                       <input
                         type="text"
                         id="reserve-name"
                         required
                         value={reserveFormData.name || ''}
                         onChange={(e) => setReserveFormData({ ...reserveFormData, name: e.target.value })}
-                        placeholder="John Doe"
+                        placeholder={t('package.namePlaceholder')}
                       />
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="reserve-phone">Contact Number</label>
+                      <label htmlFor="reserve-phone">{t('package.contactNumber')}</label>
                       <input
                         type="tel"
                         id="reserve-phone"
                         required
                         value={reserveFormData.phone}
                         onChange={(e) => setReserveFormData({ ...reserveFormData, phone: e.target.value })}
-                        placeholder="+357 123456789"
+                        placeholder={t('forms.phonePlaceholder')}
                       />
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="reserve-email">Email Address</label>
+                      <label htmlFor="reserve-email">{t('package.emailAddress')}</label>
                       <input
                         type="email"
                         id="reserve-email"
                         required
                         value={reserveFormData.email}
                         onChange={(e) => setReserveFormData({ ...reserveFormData, email: e.target.value })}
-                        placeholder="your.email@example.com"
+                        placeholder={t('forms.emailPlaceholder')}
                       />
                     </div>
 
                     <button type="submit" className="submit-reservation-btn" disabled={reserveSending}>
-                      {reserveSending ? 'Sending…' : 'Send Reservation Request'}
+                      {reserveSending ? t('common.sending') : t('package.sendReservation')}
                     </button>
                   </form>
                 </>

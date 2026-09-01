@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
@@ -7,6 +8,7 @@ import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Contact.css'
 
 function Contact() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,11 +51,11 @@ function Contact() {
     })
 
     if (result.ok) {
-      setStatus({ type: 'success', message: result.message })
+      setStatus({ type: 'success', message: t('forms.success') })
       setFormData({ name: '', email: '', phone: '', message: '' })
       setHoneypot('')
     } else {
-      setStatus({ type: 'error', message: result.error })
+      setStatus({ type: 'error', message: t('forms.error') })
     }
     setSending(false)
   }
@@ -68,8 +70,8 @@ function Contact() {
       <div className="contact-page">
       <div className="contact-hero">
         <div className="contact-hero-content">
-          <h1>Contact Us</h1>
-          <p>We're here to help you plan your perfect getaway</p>
+          <h1>{t('contact.title')}</h1>
+          <p>{t('contact.subtitle')}</p>
         </div>
       </div>
 
@@ -80,7 +82,7 @@ function Contact() {
             <div className="contact-icon-wrapper">
               <div className="contact-icon">📍</div>
             </div>
-            <h3>Address</h3>
+            <h3>{t('contact.address')}</h3>
             <p>9 Anastasi Shioukri street</p>
             <p>Limassol, 3035</p>
             <a 
@@ -89,7 +91,7 @@ function Contact() {
               rel="noopener noreferrer"
               className="contact-link-btn"
             >
-              View on Map →
+              {t('contact.viewOnMap')}
             </a>
           </div>
 
@@ -97,10 +99,10 @@ function Contact() {
             <div className="contact-icon-wrapper">
               <div className="contact-icon">📞</div>
             </div>
-            <h3>Phone</h3>
+            <h3>{t('contact.phone')}</h3>
             <p>+357 25828848</p>
             <a href="tel:+35725828848" className="contact-link-btn">
-              Call Now →
+              {t('contact.callNow')}
             </a>
           </div>
 
@@ -108,10 +110,10 @@ function Contact() {
             <div className="contact-icon-wrapper">
               <div className="contact-icon">✉️</div>
             </div>
-            <h3>Email</h3>
+            <h3>{t('contact.email')}</h3>
             <p>info@honeywelltravel.com.cy</p>
             <a href="mailto:info@honeywelltravel.com.cy" className="contact-link-btn">
-              Send Email →
+              {t('contact.sendEmail')}
             </a>
           </div>
 
@@ -119,16 +121,16 @@ function Contact() {
             <div className="contact-icon-wrapper">
               <div className="contact-icon">🕒</div>
             </div>
-            <h3>Opening Hours</h3>
-            <p><strong>Monday - Friday:</strong> 09:00 - 17:00</p>
-            <p><strong>Saturday - Sunday:</strong> Closed</p>
+            <h3>{t('contact.openingHours')}</h3>
+            <p>{t('contact.weekdays')}</p>
+            <p>{t('contact.weekend')}</p>
           </div>
         </div>
 
         <div className="contact-form-section">
           <div className="form-header">
-            <h2>Send us a Message</h2>
-            <p>Fill out the form below and we'll get back to you as soon as possible</p>
+            <h2>{t('contact.formTitle')}</h2>
+            <p>{t('contact.formSubtitle')}</p>
           </div>
           <form className="contact-form" onSubmit={handleSubmit}>
             <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
@@ -136,13 +138,13 @@ function Contact() {
               <div className="form-group">
                 <label htmlFor="name">
                   <span className="label-icon">👤</span>
-                  Name <span className="required">*</span>
+                  {t('forms.name')} <span className="required">*</span>
                 </label>
                 <input 
                   type="text" 
                   id="name" 
                   name="name" 
-                  placeholder="Enter your full name"
+                  placeholder={t('forms.namePlaceholder')}
                   value={formData.name}
                   onChange={handleChange}
                   required 
@@ -151,13 +153,13 @@ function Contact() {
               <div className="form-group">
                 <label htmlFor="email">
                   <span className="label-icon">✉️</span>
-                  Email <span className="required">*</span>
+                  {t('forms.email')} <span className="required">*</span>
                 </label>
                 <input 
                   type="email" 
                   id="email" 
                   name="email" 
-                  placeholder="your.email@example.com"
+                  placeholder={t('forms.emailPlaceholder')}
                   value={formData.email}
                   onChange={handleChange}
                   required 
@@ -167,13 +169,13 @@ function Contact() {
             <div className="form-group">
               <label htmlFor="phone">
                 <span className="label-icon">📱</span>
-                Phone
+                {t('forms.phone')}
               </label>
               <input 
                 type="tel" 
                 id="phone" 
                 name="phone" 
-                placeholder="+357 1234 5678"
+                placeholder={t('forms.phonePlaceholder')}
                 value={formData.phone}
                 onChange={handleChange}
               />
@@ -181,13 +183,13 @@ function Contact() {
             <div className="form-group">
               <label htmlFor="message">
                 <span className="label-icon">💬</span>
-                Message <span className="required">*</span>
+                {t('forms.message')} <span className="required">*</span>
               </label>
               <textarea 
                 id="message" 
                 name="message" 
                 rows="6" 
-                placeholder="Tell us how we can help you..."
+                placeholder={t('forms.messagePlaceholder')}
                 value={formData.message}
                 onChange={handleChange}
                 required
@@ -199,7 +201,7 @@ function Contact() {
               </div>
             )}
             <button type="submit" className="submit-button" disabled={sending}>
-              <span>{sending ? 'Sending…' : 'Send Request'}</span>
+              <span>{sending ? t('common.sending') : t('contact.sendRequest')}</span>
               <span className="button-icon">→</span>
             </button>
           </form>

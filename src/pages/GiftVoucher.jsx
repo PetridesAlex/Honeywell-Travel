@@ -1,11 +1,13 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import HoneypotField from '../components/HoneypotField'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitGiftVoucherForm } from '../lib/submitWebsiteForm'
+import { submitGiftVoucherForm } from '../lib/submitWebsiteForm'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import './GiftVoucher.css'
 
 function GiftVoucher() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     recipientName: '',
     amount: '',
@@ -31,91 +33,67 @@ function GiftVoucher() {
 
   const faqs = [
     {
-      category: 'I HAVE A GIFT VOUCHER',
+      category: t('giftVoucher.faq.haveVoucher'),
       questions: [
         {
-          question: 'What can I do with my gift voucher?',
+          question: t('giftVoucher.faq.q1'),
           answer: (
             <>
-              <p>Contact us by phone, email, or visit our office directly and present your gift voucher (physical or e-gift format) to choose from all of Honeywell Travel's services:</p>
+              <p>{t('giftVoucher.faq.q1Intro')}</p>
               <ul className="faq-service-list">
-                <li>Hotel</li>
-                <li>Spa</li>
-                <li>Flight ticket</li>
-                <li>Transfer</li>
-                <li>Car rental</li>
-                <li>Insurances</li>
-                <li>Travel Packages</li>
-                <li>Customized trip (anniversary, honeymoon, etc.)</li>
+                <li>{t('giftVoucher.faq.services.hotel')}</li>
+                <li>{t('giftVoucher.faq.services.spa')}</li>
+                <li>{t('giftVoucher.faq.services.flight')}</li>
+                <li>{t('giftVoucher.faq.services.transfer')}</li>
+                <li>{t('giftVoucher.faq.services.carRental')}</li>
+                <li>{t('giftVoucher.faq.services.insurance')}</li>
+                <li>{t('giftVoucher.faq.services.packages')}</li>
+                <li>{t('giftVoucher.faq.services.custom')}</li>
               </ul>
             </>
           )
         },
-        {
-          question: 'How long can I keep my gift voucher?',
-          answer: <p>Your voucher is valid for 1 year from the date of purchase.</p>
-        },
-        {
-          question: 'Can I use my gift voucher multiple times?',
-          answer: <p>Of course, you can use your voucher all at once or in multiple transactions if the amount of your gift voucher is higher than the service you have chosen. The remaining balance will then be available for a future booking.</p>
-        },
-        {
-          question: 'Is my voucher refundable or exchangeable?',
-          answer: <p>Your gift voucher is neither refundable nor exchangeable.</p>
-        }
+        { question: t('giftVoucher.faq.q2'), answer: <p>{t('giftVoucher.faq.q2Answer')}</p> },
+        { question: t('giftVoucher.faq.q3'), answer: <p>{t('giftVoucher.faq.q3Answer')}</p> },
+        { question: t('giftVoucher.faq.q4'), answer: <p>{t('giftVoucher.faq.q4Answer')}</p> },
       ]
     },
     {
-      category: 'I WANT TO OFFER A GIFT VOUCHER',
+      category: t('giftVoucher.faq.wantVoucher'),
       questions: [
-        {
-          question: 'How do I order my gift voucher?',
-          answer: <p>You can fill out the form below with the necessary information or contact us directly, and we will be happy to do it for you.</p>
-        },
-        {
-          question: 'How and when will I receive my gift voucher?',
-          answer: <p>You will receive your voucher immediately via email after purchase if you have chosen the e-gift voucher version or a printable voucher. If you have chosen a physical voucher, it will be sent to you as soon as possible by postal mail, or you can pick it up at the office.</p>
-        },
-        {
-          question: 'Can I choose the amount of the gift voucher?',
-          answer: <p>Of course, we do not impose any limit on the amount you wish to put on your gift voucher. The choice is yours.</p>
-        },
-        {
-          question: 'I would like to offer a gift voucher for my company, is it possible?',
-          answer: <p>It is entirely possible to offer a gift voucher for a company committee. You can choose the quantity of gift vouchers you wish to offer in the questionnaire below.</p>
-        },
-        {
-          question: 'What payment methods can I use to purchase my gift voucher?',
-          answer: <p>We accept all modes of payment, of course.</p>
-        }
+        { question: t('giftVoucher.faq.q5'), answer: <p>{t('giftVoucher.faq.q5Answer')}</p> },
+        { question: t('giftVoucher.faq.q6'), answer: <p>{t('giftVoucher.faq.q6Answer')}</p> },
+        { question: t('giftVoucher.faq.q7'), answer: <p>{t('giftVoucher.faq.q7Answer')}</p> },
+        { question: t('giftVoucher.faq.q8'), answer: <p>{t('giftVoucher.faq.q8Answer')}</p> },
+        { question: t('giftVoucher.faq.q9'), answer: <p>{t('giftVoucher.faq.q9Answer')}</p> },
       ]
     }
   ]
 
   const services = {
     flights: {
-      name: 'Flights',
+      name: t('giftVoucher.flights'),
       icon: '✈️',
       image: '/images/vouchers/flight.webp',
-      description: 'Book domestic and international flights to any destination worldwide. Use your voucher for economy, business, or first-class tickets.'
+      description: t('giftVoucher.services.flightsDesc')
     },
     hotels: {
-      name: 'Hotels',
+      name: t('giftVoucher.hotels'),
       icon: '🏨',
       image: '/images/vouchers/hotel.webp',
-      description: 'Reserve accommodation at luxury resorts, boutique hotels, or budget-friendly options. Perfect for any type of stay.'
+      description: t('giftVoucher.services.hotelsDesc')
     },
     packages: {
-      name: 'Travel Packages',
+      name: t('giftVoucher.travelPackages'),
       icon: '🌴',
       image: '/images/vouchers/travel-search.webp',
-      description: 'Purchase complete holiday packages including flights, hotels, and activities. All-inclusive deals available.'
+      description: t('giftVoucher.services.packagesDesc')
     },
     cruises: {
-      name: 'Cruises',
+      name: t('giftVoucher.cruises'),
       icon: '🚢',
       image: '/images/vouchers/cruise.webp',
-      description: 'Set sail on luxury cruises to exotic destinations. Your voucher can be used for cruise bookings and onboard experiences.'
+      description: t('giftVoucher.services.cruisesDesc')
     }
   }
 
@@ -131,12 +109,12 @@ function GiftVoucher() {
     e.preventDefault()
     
     if (!formData.recipientName || !formData.amount || !formData.fromName || !formData.fromEmail) {
-      alert('Please fill in all required fields')
+      alert(t('giftVoucher.fillRequired'))
       return
     }
 
     if (parseFloat(formData.amount) < 30) {
-      alert('Minimum amount is €30.00')
+      alert(t('giftVoucher.minAmountError'))
       return
     }
 
@@ -179,21 +157,21 @@ function GiftVoucher() {
   return (
     <div className="gift-voucher-page">
       <SEO
-        title="Gift Vouchers | Honeywell Travel"
-        description="Buy and redeem Honeywell Travel gift vouchers for flights, hotels, packages, and tailor-made trips."
-        keywords="travel gift voucher cyprus, honeywell gift voucher"
+        title={t('giftVoucher.seoTitle')}
+        description={t('giftVoucher.seoDescription')}
+        keywords={t('giftVoucher.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/gift-vouchers"
       />
       {/* Hero Section */}
       <section className="voucher-hero">
         <div className="voucher-hero-content">
-          <h1 className="voucher-hero-title animated-title">GIFT VOUCHER</h1>
+          <h1 className="voucher-hero-title animated-title">{t('giftVoucher.heroTitle')}</h1>
           <button 
             className="scroll-down-btn" 
             onClick={scrollToForm}
-            aria-label="Scroll to form"
+            aria-label={t('giftVoucher.scrollToForm')}
           >
-            <span className="scroll-down-text">Get Started</span>
+            <span className="scroll-down-text">{t('giftVoucher.getStarted')}</span>
             <span className="scroll-down-arrow">↓</span>
           </button>
         </div>
@@ -204,13 +182,13 @@ function GiftVoucher() {
         <div className="voucher-content">
           {/* Form Section */}
           <section ref={formSectionRef} className="voucher-form-section">
-            <h2 className="section-title">Create Your Gift Voucher</h2>
+            <h2 className="section-title">{t('giftVoucher.createTitle')}</h2>
             <form className="voucher-form" onSubmit={handleSubmit}>
               <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
               <div className="form-grid">
                 <div className="form-group">
                   <label htmlFor="recipientName">
-                    Recipient Name <span className="required">*</span>
+                    {t('giftVoucher.recipientName')} <span className="required">*</span>
                   </label>
                   <input
                     type="text"
@@ -218,7 +196,7 @@ function GiftVoucher() {
                     name="recipientName"
                     value={formData.recipientName}
                     onChange={handleChange}
-                    placeholder="Enter the recipient's full name"
+                    placeholder={t('giftVoucher.recipientPlaceholder')}
                     required
                     className="form-input"
                   />
@@ -226,7 +204,7 @@ function GiftVoucher() {
 
                 <div className="form-group">
                   <label htmlFor="amount">
-                    Voucher Amount (€) <span className="required">*</span>
+                    {t('giftVoucher.voucherAmount')} <span className="required">*</span>
                   </label>
                   <div className="amount-input-wrapper">
                     <span className="currency-symbol">€</span>
@@ -243,12 +221,12 @@ function GiftVoucher() {
                       className="form-input amount-input"
                     />
                   </div>
-                  <small className="input-hint">Minimum amount: €30.00</small>
+                  <small className="input-hint">{t('giftVoucher.minimumAmount')}</small>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="fromName">
-                    Your Name <span className="required">*</span>
+                    {t('giftVoucher.yourName')} <span className="required">*</span>
                   </label>
                   <input
                     type="text"
@@ -256,7 +234,7 @@ function GiftVoucher() {
                     name="fromName"
                     value={formData.fromName}
                     onChange={handleChange}
-                    placeholder="Enter your full name"
+                    placeholder={t('forms.namePlaceholder')}
                     required
                     className="form-input"
                   />
@@ -264,7 +242,7 @@ function GiftVoucher() {
 
                 <div className="form-group">
                   <label htmlFor="fromEmail">
-                    Your Email <span className="required">*</span>
+                    {t('giftVoucher.yourEmail')} <span className="required">*</span>
                   </label>
                   <input
                     type="email"
@@ -272,21 +250,21 @@ function GiftVoucher() {
                     name="fromEmail"
                     value={formData.fromEmail}
                     onChange={handleChange}
-                    placeholder="your.email@example.com"
+                    placeholder={t('forms.emailPlaceholder')}
                     required
                     className="form-input"
                   />
                 </div>
 
                 <div className="form-group full-width">
-                  <label htmlFor="message">Personal Message (Optional)</label>
+                  <label htmlFor="message">{t('giftVoucher.personalMessage')}</label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows="4"
-                    placeholder="Add a heartfelt message to make it extra special..."
+                    placeholder={t('giftVoucher.personalMessagePlaceholder')}
                     className="form-input form-textarea"
                   />
                 </div>
@@ -294,13 +272,13 @@ function GiftVoucher() {
 
               {submitStatus === 'success' && (
                 <div className="alert alert-success">
-                  {FORM_SUCCESS_MESSAGE}
+                  {t('forms.success')}
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className="alert alert-error">
-                  {FORM_ERROR_MESSAGE}
+                  {t('forms.error')}
                 </div>
               )}
 
@@ -309,14 +287,14 @@ function GiftVoucher() {
                 className="submit-btn"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Processing...' : 'Create Gift Voucher'}
+                {isSubmitting ? t('common.processing') : t('giftVoucher.createButton')}
               </button>
             </form>
           </section>
 
           {/* What You Can Use It For Section */}
           <section className="what-you-can-use-section">
-            <h2 className="section-title">What You Can Use It For</h2>
+            <h2 className="section-title">{t('giftVoucher.whatYouCanUse')}</h2>
             <div className="service-display-container">
               <div className="main-service-image">
                 <img 
@@ -337,7 +315,7 @@ function GiftVoucher() {
                     key={serviceKey}
                     className={`service-switch-btn ${selectedService === serviceKey ? 'active' : ''}`}
                     onClick={() => setSelectedService(serviceKey)}
-                    aria-label={`Switch to ${services[serviceKey].name}`}
+                    aria-label={t('giftVoucher.switchService', { name: services[serviceKey].name })}
                   >
                     <img 
                       src={services[serviceKey].image} 
@@ -353,7 +331,7 @@ function GiftVoucher() {
 
           {/* How Does It Work Section */}
           <section className="how-to-use-section">
-            <h2 className="section-title">HOW DOES IT WORK?</h2>
+            <h2 className="section-title">{t('giftVoucher.howItWorks')}</h2>
             <div className="faq-accordion-container">
               {faqs.map((category, categoryIndex) => (
                 <div key={categoryIndex} className="faq-category">

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import './ModalCards.css'
 import { FALLBACK_PACKAGE_CARD_IMAGE } from '../utils/packageCardImage'
 import DepartureCountdownBadge from './DepartureCountdownBadge'
@@ -25,9 +26,10 @@ const getCardGradient = (card, defaultGradient) => {
 }
 
 function ModalCardDepartureDates({ dates, className = '' }) {
+  const { t } = useTranslation()
   if (!Array.isArray(dates) || dates.length === 0) return null
 
-  const label = dates.length > 1 ? 'Departures' : 'Departure'
+  const label = dates.length > 1 ? t('modalCards.departures') : t('modalCards.departure')
 
   return (
     <div className={`modal-card-departures ${className}`.trim()} aria-label={label}>
@@ -51,13 +53,16 @@ function ModalCards({
   closeOnBackdropClick = true,
   closeOnEscape = true,
   showCloseButton = true,
-  ariaLabel = 'Package details modal',
+  ariaLabel,
   backdropGradientPosition = '50% 10%',
   /** 'lazy' (default) or 'eager' for all card images */
   imageLoading = 'lazy',
   /** First N cards use eager + high fetch priority (above-the-fold strips) */
   priorityImageCount = 0
 }) {
+  const { t } = useTranslation()
+  const resolvedAriaLabel = ariaLabel ?? t('modalCards.modalAria')
+
   const [preferLiteMotion, setPreferLiteMotion] = useState(() => {
     if (typeof window === 'undefined') return false
     return (
@@ -158,8 +163,10 @@ function ModalCards({
       <ModalCardDepartureDates dates={card.departureDates} />
 
       <div className="modal-card-footer">
-        <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
-        <span className="modal-card-cta">Open</span>
+        <span className="modal-card-price">
+          {t('modalCards.fromEur', { price: Number(card.price || 0).toLocaleString() })}
+        </span>
+        <span className="modal-card-cta">{t('modalCards.open')}</span>
       </div>
     </div>
   )
@@ -210,7 +217,7 @@ function ModalCards({
                 <DepartureCountdownBadge countdown={card.departureCountdown} variant="card" />
               ) : null}
               <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
-                {card.packageType === 'group' ? 'Group' : 'Individual'}
+                {card.packageType === 'group' ? t('common.group') : t('common.individual')}
               </span>
               {renderCardOverlay(card)}
             </button>
@@ -244,7 +251,7 @@ function ModalCards({
                 <DepartureCountdownBadge countdown={card.departureCountdown} variant="card" />
               ) : null}
               <span className={`modal-card-type modal-card-type--${card.packageType || 'individual'}`}>
-                {card.packageType === 'group' ? 'Group' : 'Individual'}
+                {card.packageType === 'group' ? t('common.group') : t('common.individual')}
               </span>
               <motion.div layoutId={`overlay-${card.id}`} className="modal-card-overlay">
                 {card.supplier ? (
@@ -267,8 +274,10 @@ function ModalCards({
                 <ModalCardDepartureDates dates={card.departureDates} />
 
                 <div className="modal-card-footer">
-                  <span className="modal-card-price">From EUR {Number(card.price || 0).toLocaleString()}</span>
-                  <span className="modal-card-cta">Open</span>
+                  <span className="modal-card-price">
+                    {t('modalCards.fromEur', { price: Number(card.price || 0).toLocaleString() })}
+                  </span>
+                  <span className="modal-card-cta">{t('modalCards.open')}</span>
                 </div>
               </motion.div>
             </motion.button>
@@ -290,10 +299,10 @@ function ModalCards({
                     }}
                     role="button"
                     tabIndex={closeOnBackdropClick ? 0 : -1}
-                    aria-label={closeOnBackdropClick ? 'Close package modal' : undefined}
+                    aria-label={closeOnBackdropClick ? t('modalCards.closeModal') : undefined}
                   />
 
-                  <div className="modal-cards-dialog-wrap" role="dialog" aria-modal="true" aria-label={ariaLabel}>
+                  <div className="modal-cards-dialog-wrap" role="dialog" aria-modal="true" aria-label={resolvedAriaLabel}>
                     <article className="modal-cards-dialog" onClick={(event) => event.stopPropagation()}>
                       <div className="modal-cards-hero">
                         <img
@@ -320,7 +329,7 @@ function ModalCards({
                           <DepartureCountdownBadge countdown={selectedCard.departureCountdown} variant="hero" />
                         ) : null}
                         <span className={`modal-card-type modal-card-type--${selectedCard.packageType || 'individual'}`}>
-                          {selectedCard.packageType === 'group' ? 'Group' : 'Individual'}
+                          {selectedCard.packageType === 'group' ? t('common.group') : t('common.individual')}
                         </span>
                         <div className="modal-cards-hero-overlay">
                           {selectedCard.supplier ? (
@@ -349,7 +358,7 @@ function ModalCards({
                           className="modal-cards-highlight"
                           style={{ background: getCardGradient(selectedCard, gradientColor) }}
                         >
-                          <span className="modal-cards-highlight-label">From</span>
+                          <span className="modal-cards-highlight-label">{t('common.from')}</span>
                           <strong>EUR {Number(selectedCard.price || 0).toLocaleString()}</strong>
                         </div>
 
@@ -362,16 +371,16 @@ function ModalCards({
                               closeModal()
                             }}
                           >
-                            View full package details
+                            {t('modalCards.viewFullDetails')}
                           </Link>
                           <button type="button" className="modal-cards-action secondary" onClick={closeModal}>
-                            Close
+                            {t('common.close')}
                           </button>
                         </div>
                       </div>
 
                       {showCloseButton ? (
-                        <button type="button" className="modal-cards-close-btn" onClick={closeModal} aria-label="Close modal">
+                        <button type="button" className="modal-cards-close-btn" onClick={closeModal} aria-label={t('common.close')}>
                           <span />
                           <span />
                         </button>
@@ -397,10 +406,10 @@ function ModalCards({
                   }}
                   role="button"
                   tabIndex={closeOnBackdropClick ? 0 : -1}
-                  aria-label={closeOnBackdropClick ? 'Close package modal' : undefined}
+                  aria-label={closeOnBackdropClick ? t('modalCards.closeModal') : undefined}
                 />
 
-                <div className="modal-cards-dialog-wrap" role="dialog" aria-modal="true" aria-label={ariaLabel}>
+                <div className="modal-cards-dialog-wrap" role="dialog" aria-modal="true" aria-label={resolvedAriaLabel}>
                   <motion.article
                     layoutId={`card-${selectedCard.id}`}
                     className="modal-cards-dialog"
@@ -438,7 +447,7 @@ function ModalCards({
                         <DepartureCountdownBadge countdown={selectedCard.departureCountdown} variant="hero" />
                       ) : null}
                       <span className={`modal-card-type modal-card-type--${selectedCard.packageType || 'individual'}`}>
-                        {selectedCard.packageType === 'group' ? 'Group' : 'Individual'}
+                        {selectedCard.packageType === 'group' ? t('common.group') : t('common.individual')}
                       </span>
                       <motion.div layoutId={`overlay-${selectedCard.id}`} className="modal-cards-hero-overlay">
                         {selectedCard.supplier ? (
@@ -469,7 +478,7 @@ function ModalCards({
                         className="modal-cards-highlight"
                         style={{ background: getCardGradient(selectedCard, gradientColor) }}
                       >
-                        <span className="modal-cards-highlight-label">From</span>
+                        <span className="modal-cards-highlight-label">{t('common.from')}</span>
                         <strong>EUR {Number(selectedCard.price || 0).toLocaleString()}</strong>
                       </div>
 
@@ -484,16 +493,16 @@ function ModalCards({
                             closeModal()
                           }}
                         >
-                          View full package details
+                          {t('modalCards.viewFullDetails')}
                         </Link>
                         <button type="button" className="modal-cards-action secondary" onClick={closeModal}>
-                          Close
+                          {t('common.close')}
                         </button>
                       </div>
                     </div>
 
                     {showCloseButton ? (
-                      <button type="button" className="modal-cards-close-btn" onClick={closeModal} aria-label="Close modal">
+                      <button type="button" className="modal-cards-close-btn" onClick={closeModal} aria-label={t('common.close')}>
                         <span />
                         <span />
                       </button>

@@ -197,6 +197,48 @@ function ImageUrlField({
   )
 }
 
+const CONTENT_LANGS = [
+  { id: 'en', label: 'English' },
+  { id: 'el', label: 'Greek (EL)' }
+]
+
+function getI18nBlock(row, lang) {
+  return row?.details?.i18n?.[lang] || {}
+}
+
+function getLocalizedFieldValue(row, lang, field) {
+  const block = getI18nBlock(row, lang)
+  const fromI18n = block[field]
+  if (fromI18n != null && String(fromI18n).trim() !== '') {
+    return fromI18n
+  }
+  if (lang === 'el') {
+    if (field === 'title') return row?.title || ''
+    if (field === 'description') return row?.description || ''
+    if (field === 'longDescription') return row?.long_description || ''
+  }
+  return ''
+}
+
+function ContentLangTabs({ active, onChange }) {
+  return (
+    <div className="cms-lang-tabs" role="tablist" aria-label="Content language">
+      {CONTENT_LANGS.map(({ id, label }) => (
+        <button
+          key={id}
+          type="button"
+          role="tab"
+          className={`cms-lang-tabs__btn${active === id ? ' cms-lang-tabs__btn--active' : ''}`}
+          aria-selected={active === id}
+          onClick={() => onChange(id)}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 function createBlankPackage(legacyId) {
   return {
     id: null,
@@ -223,7 +265,8 @@ function createBlankPackage(legacyId) {
       coverImage: '',
       thumbnailImage: '',
       note: '',
-      cancellationPolicy: ''
+      cancellationPolicy: '',
+      i18n: { en: {}, el: {} }
     },
     updated_at: null
   }
@@ -247,6 +290,7 @@ function PackageCmsDetail() {
   const [notIncludedText, setNotIncludedText] = useState('')
   const [expandedHotel, setExpandedHotel] = useState(null)
   const [activeSection, setActiveSection] = useState('basics')
+  const [contentLangTab, setContentLangTab] = useState('el')
 
   const pushToast = useCallback((message, type = 'info') => {
     const toastId = crypto.randomUUID()
@@ -297,6 +341,9 @@ function PackageCmsDetail() {
     if (!Array.isArray(details.hotels)) details.hotels = []
     if (!Array.isArray(details.departureDates)) details.departureDates = []
     if (!Array.isArray(details.gallery)) details.gallery = []
+    if (!details.i18n || typeof details.i18n !== 'object') details.i18n = { en: {}, el: {} }
+    if (!details.i18n.en || typeof details.i18n.en !== 'object') details.i18n.en = {}
+    if (!details.i18n.el || typeof details.i18n.el !== 'object') details.i18n.el = {}
     setRow({ ...data, details })
     setDatesText((details.departureDates || []).join(', '))
     setGalleryText((details.gallery || []).join('\n'))
@@ -373,6 +420,29 @@ function PackageCmsDetail() {
           }
         : prev
     )
+  }
+
+  const updateI18nField = (lang, field, value) => {
+    setRow((prev) => {
+      if (!prev) return prev
+      const i18n = cloneJson(prev.details?.i18n || { en: {}, el: {} })
+      if (!i18n.en || typeof i18n.en !== 'object') i18n.en = {}
+      if (!i18n.el || typeof i18n.el !== 'object') i18n.el = {}
+      i18n[lang] = { ...i18n[lang], [field]: value }
+
+      const next = {
+        ...prev,
+        details: { ...prev.details, i18n }
+      }
+
+      if (lang === 'el') {
+        if (field === 'title') next.title = value
+        if (field === 'description') next.description = value
+        if (field === 'longDescription') next.long_description = value
+      }
+
+      return next
+    })
   }
 
   const updateProgram = (patch) => {
@@ -605,6 +675,9 @@ function PackageCmsDetail() {
       included: Array.isArray(data.details?.included) ? data.details.included : [],
       notIncluded: Array.isArray(data.details?.notIncluded) ? data.details.notIncluded : []
     }
+    if (!details.i18n || typeof details.i18n !== 'object') details.i18n = { en: {}, el: {} }
+    if (!details.i18n.en || typeof details.i18n.en !== 'object') details.i18n.en = {}
+    if (!details.i18n.el || typeof details.i18n.el !== 'object') details.i18n.el = {}
     setRow({ ...data, details })
     setDatesText((details.departureDates || []).join(', '))
     setGalleryText((details.gallery || []).join('\n'))
@@ -855,14 +928,21 @@ function PackageCmsDetail() {
                   : 'Fixed after create — matches the public package URL.'}
               </span>
             </label>
-            <label className="cms-field cms-form-grid--full">
-              <span className="cms-field__label">Title</span>
-              <input
-                value={row.title || ''}
-                onChange={(e) => updateField('title', e.target.value)}
-                placeholder="e.g. Christmas weekend in Vienna"
-              />
-            </label>
+            <div className="cms-field cms-form-grid--full cms-i18n-fields">
+              <ContentLangTabs active={contentLangTab} onChange={setContentLangTab} />
+              <label className="cms-field">
+                <span className="cms-field__label">Title</span>
+                <input
+                  value={getLocalizedFieldValue(row, contentLangTab, 'title')}
+                  onChange={(e) => updateI18nField(contentLangTab, 'title', e.target.value)}
+                  placeholder={
+                    contentLangTab === 'en'
+                      ? 'e.g. Christmas weekend in Vienna'
+                      : 'π.χ. Σαββατοκύριακο Χριστουγέννων στη Βιέννη'
+                  }
+                />
+              </label>
+            </div>
             <label className="cms-field">
               <span className="cms-field__label">Destination / country</span>
               <input value={row.destination || ''} onChange={(e) => updateField('destination', e.target.value)} />
@@ -914,14 +994,21 @@ function PackageCmsDetail() {
                 placeholder="e.g. 4 Days / 3 Nights"
               />
             </label>
-            <label className="cms-field cms-form-grid--full">
-              <span className="cms-field__label">Short description</span>
-              <textarea
-                value={row.description || ''}
-                onChange={(e) => updateField('description', e.target.value)}
-                placeholder="One or two lines for the package card…"
-              />
-            </label>
+            <div className="cms-field cms-form-grid--full cms-i18n-fields">
+              <label className="cms-field">
+                <span className="cms-field__label">Short description</span>
+                <textarea
+                  value={getLocalizedFieldValue(row, contentLangTab, 'description')}
+                  onChange={(e) => updateI18nField(contentLangTab, 'description', e.target.value)}
+                  placeholder="One or two lines for the package card…"
+                />
+              </label>
+              {contentLangTab === 'el' ? (
+                <span className="cms-field__hint">
+                  Greek content is saved as the site fallback (title, description, long description).
+                </span>
+              ) : null}
+            </div>
           </div>
         </section>
         ) : null}
@@ -1410,16 +1497,16 @@ function PackageCmsDetail() {
                 </div>
               </header>
               <div className="cms-story-editor">
-                <div className="cms-story-editor__toolbar" aria-hidden="true">
-                  <span>Website copy</span>
+                <div className="cms-story-editor__toolbar">
+                  <ContentLangTabs active={contentLangTab} onChange={setContentLangTab} />
                   <span>Shown on package detail</span>
                 </div>
                 <label className="cms-field">
                   <span className="visually-hidden">Long description</span>
                   <textarea
                     className="cms-textarea cms-textarea--story"
-                    value={row.long_description || ''}
-                    onChange={(e) => updateField('long_description', e.target.value)}
+                    value={getLocalizedFieldValue(row, contentLangTab, 'longDescription')}
+                    onChange={(e) => updateI18nField(contentLangTab, 'longDescription', e.target.value)}
                     placeholder="Tell the full story of this trip — atmosphere, highlights, who it’s for…"
                     rows={8}
                   />

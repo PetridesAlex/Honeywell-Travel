@@ -288,6 +288,69 @@ export const flightTicketOffers = [
   },
 ]
 
+const LUGGAGE_EN = {
+  '1 αποσκευή 23kg και μία χειραποσκευή 10kg': '1 checked bag 23kg and 1 cabin bag 10kg',
+  '1 αποσκευή 23kg και μία χειραποσκευή 8kg': '1 checked bag 23kg and 1 cabin bag 8kg',
+}
+
+const ROUTE_EN = [
+  ['Λάρνακα', 'Larnaca'],
+  ['Παρίσι', 'Paris'],
+  ['Νάπολη', 'Naples'],
+  ['Ρόδος', 'Rhodes'],
+  ['Σκιάθος', 'Skiathos'],
+  ['Σαντορίνη', 'Santorini'],
+  ['Πρέβεζα', 'Preveza'],
+  ['Ηράκλειο', 'Heraklion'],
+  ['Αθήνα', 'Athens'],
+]
+
+const translateRouteEn = (route) => {
+  let out = String(route || '')
+  for (const [gr, en] of ROUTE_EN) {
+    out = out.split(gr).join(en)
+  }
+  return out
+}
+
+const translateTitleEn = (title) =>
+  String(title || '')
+    .replace(/ΠΑΡΙΣΙ/g, 'PARIS')
+    .replace(/ΝΑΠΟΛΗ/g, 'NAPLES')
+    .replace(/ΡΟΔΟΣ/g, 'RHODES')
+    .replace(/ΣΚΙΑΘΟΣ/g, 'SKIATHOS')
+    .replace(/ΣΑΝΤΟΡΙΝΗ/g, 'SANTORINI')
+    .replace(/ΠΡΕΒΕΖΑ/g, 'PREVEZA')
+    .replace(/ΗΡΑΚΛΕΙΟ/g, 'HERAKLION')
+    .replace(/ΑΘΗΝΑ/g, 'ATHENS')
+    .replace(/ημέρες/g, 'days')
+
+const attachFlightOfferI18n = (offer) => ({
+  ...offer,
+  i18n: offer.i18n || {
+    el: {
+      title: offer.title,
+      duration: offer.duration,
+      luggage: offer.luggage,
+      departureFlight: offer.departureFlight,
+      returnFlight: offer.returnFlight,
+    },
+    en: {
+      title: translateTitleEn(offer.title),
+      duration: String(offer.duration || '').replace(/ημέρες/g, 'days'),
+      luggage: LUGGAGE_EN[offer.luggage] || offer.luggage,
+      departureFlight: offer.departureFlight
+        ? { ...offer.departureFlight, route: translateRouteEn(offer.departureFlight.route) }
+        : offer.departureFlight,
+      returnFlight: offer.returnFlight
+        ? { ...offer.returnFlight, route: translateRouteEn(offer.returnFlight.route) }
+        : offer.returnFlight,
+    },
+  },
+})
+
+const flightTicketOffersLocalized = flightTicketOffers.map(attachFlightOfferI18n)
+
 const destinationCardImages = {
   paris: '/images/flights-only-top-kinisis/paris-flight-only-6-days.webp',
   naples: '/images/flights-only-top-kinisis/Naples-flights-only.webp',
@@ -314,7 +377,7 @@ const destinationOrder = [
 export const getDestinationSummaries = () => {
   const grouped = new Map()
 
-  flightTicketOffers.forEach((offer) => {
+  flightTicketOffersLocalized.forEach((offer) => {
     const current = grouped.get(offer.destinationSlug)
     const offerMin = Math.min(...offer.pricing.map((p) => p.price))
     if (!current || offerMin < current.fromPrice) {
@@ -342,5 +405,5 @@ export const getDestinationSummaries = () => {
 }
 
 export const getOffersByDestination = (destinationSlug) => {
-  return flightTicketOffers.filter((offer) => offer.destinationSlug === destinationSlug)
+  return flightTicketOffersLocalized.filter((offer) => offer.destinationSlug === destinationSlug)
 }

@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getEnglishPackageTitle } from '../utils/packageTranslations'
+import { localizePackage } from '../utils/packageTranslations'
+import { getCategoryLabel } from '../utils/categoryI18n'
+import { translatePackageDuration } from '../utils/packageTitleI18n'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import './PackageCard.css'
 
 function PackageCard({ package: pkg }) {
-  const { i18n } = useTranslation()
-  const [showEnglishTitle, setShowEnglishTitle] = useState(false)
-  const primaryTitle = pkg.title
-  const englishTitle = getEnglishPackageTitle(pkg.id, pkg.title, pkg.destination, i18n)
-  const canToggleLanguage = Boolean(englishTitle && englishTitle.trim() !== primaryTitle.trim())
-  const displayTitle = showEnglishTitle && canToggleLanguage ? englishTitle : primaryTitle
+  const { t, i18n } = useTranslation()
+  const localized = localizePackage(pkg, i18n)
 
   const displayPrice = getPackageLeadPrice(pkg)
   const priceOnRequest = pkg.priceOnRequest || pkg.details?.priceOnRequest
@@ -28,14 +25,13 @@ function PackageCard({ package: pkg }) {
       to={`/packages/${pkg.id}/details`}
       className="package-card"
       onClick={() => {
-        // Ensure destination page always opens at hero/top.
         resetScrollTop()
         requestAnimationFrame(resetScrollTop)
         setTimeout(resetScrollTop, 60)
       }}
     >
       <span className={`package-type-badge package-type-badge--${isGroup ? 'group' : 'individual'}`} aria-hidden="true">
-        {isGroup ? 'Group' : 'Individual'}
+        {isGroup ? t('packageCard.group') : t('packageCard.individual')}
       </span>
       <div className={`package-image${imageUrl ? ' package-image-bg' : ''}`}>
         {imageUrl ? (
@@ -55,37 +51,24 @@ function PackageCard({ package: pkg }) {
         <div className="package-header-row">
           <div className="package-badge">{pkg.destination}</div>
           {pkg.supplier ? (
-            <span className="package-supplier-badge" aria-label={`Supplier ${pkg.supplier}`}>
+            <span className="package-supplier-badge" aria-label={t('search.supplierAria', { name: pkg.supplier })}>
               {pkg.supplier}
             </span>
           ) : null}
-          {canToggleLanguage ? (
-            <button
-              type="button"
-              className="package-language-toggle"
-              onClick={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
-                setShowEnglishTitle((prev) => !prev)
-              }}
-              aria-label={showEnglishTitle ? 'Show Greek title' : 'Show English title'}
-              title={showEnglishTitle ? 'Show Greek title' : 'Show English title'}
-            >
-              {showEnglishTitle ? 'GR' : 'EN'}
-            </button>
-          ) : null}
         </div>
-        <h3 className="package-title">{displayTitle}</h3>
-        <p className="package-description">{pkg.description}</p>
+        <h3 className="package-title">{localized.title}</h3>
+        <p className="package-description">{localized.description}</p>
         <div className="package-details">
-          <span className="package-duration">{pkg.duration}</span>
-          <span className="package-category">{pkg.category}</span>
+          <span className="package-duration">{translatePackageDuration(pkg.duration, i18n.language)}</span>
+          <span className="package-category">{getCategoryLabel(pkg.category, t)}</span>
         </div>
         <div className="package-footer">
           <span className="package-price">
-            {priceOnRequest || !(displayPrice > 0) ? 'Price on request' : `From €${displayPrice.toLocaleString()}`}
+            {priceOnRequest || !(displayPrice > 0)
+              ? t('packageCard.priceOnRequest')
+              : t('packageCard.fromPrice', { price: displayPrice.toLocaleString() })}
           </span>
-          <span className="package-button">View Details →</span>
+          <span className="package-button">{t('packageCard.viewDetails')}</span>
         </div>
       </div>
     </Link>
@@ -93,9 +76,3 @@ function PackageCard({ package: pkg }) {
 }
 
 export default PackageCard
-
-
-
-
-
-

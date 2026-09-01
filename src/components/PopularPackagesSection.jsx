@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPackagesByCategory } from '../data/packages'
+import { categoryToSlug, getCategoryLabel } from '../utils/categoryI18n'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import { packageCardImageUrl } from '../utils/packageCardImage'
@@ -9,17 +10,14 @@ import ModalCards from './ModalCards'
 import './PopularPackagesSection.css'
 
 const popularCategories = [
-  { value: 'Autumn Packages', label: 'Autumn Packages' },
-  { value: 'Christmas Packages', label: 'Christmas Packages' },
-  { value: 'Exotic Packages', label: 'Exotic Packages' },
-  { value: 'Music & Sports', label: 'Music & Sports' }
+  'Autumn Packages',
+  'Christmas Packages',
+  'Exotic Packages',
+  'Music & Sports',
 ]
 
 const PRIORITY_IMAGE_COUNT = 6
 const preloadedImageUrls = new Set()
-
-const categoryToSlug = (category) =>
-  category.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '')
 
 function getLeadPrice(pkg) {
   const price = getPackageLeadPrice(pkg)
@@ -47,12 +45,12 @@ function preloadPackageImages(packages, limit = PRIORITY_IMAGE_COUNT) {
 }
 
 // Start downloading default Summer card images during module load (while preloader runs).
-preloadPackageImages(getSortedCategoryPackages(popularCategories[0].value))
+preloadPackageImages(getSortedCategoryPackages(popularCategories[0]))
 
 function PopularPackagesSection() {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const trackRef = useRef(null)
-  const [selectedCategory, setSelectedCategory] = useState(popularCategories[0].value)
+  const [selectedCategory, setSelectedCategory] = useState(popularCategories[0])
 
   const packagesForCategory = useMemo(
     () => getSortedCategoryPackages(selectedCategory),
@@ -61,7 +59,7 @@ function PopularPackagesSection() {
 
   const modalCards = useMemo(
     () => mapPackagesToModalCards(packagesForCategory, i18n),
-    [packagesForCategory, i18n]
+    [packagesForCategory, i18n.language]
   )
 
   useEffect(() => {
@@ -106,31 +104,31 @@ function PopularPackagesSection() {
   }, [])
 
   return (
-    <section className="popular-packages-section" aria-label="Popular packages">
+    <section className="popular-packages-section" aria-label={t('home.popularPackages')}>
       <div className="popular-packages-container">
         <div className="popular-packages-toolbar">
-          <div className="popular-category-chips" role="tablist" aria-label="Popular package categories">
+          <div className="popular-category-chips" role="tablist" aria-label={t('home.popularCategoryTabs')}>
             {popularCategories.map((cat) => (
               <button
-                key={cat.value}
+                key={cat}
                 type="button"
-                className={`popular-category-chip${selectedCategory === cat.value ? ' active' : ''}`}
-                onClick={() => selectCategory(cat.value)}
+                className={`popular-category-chip${selectedCategory === cat ? ' active' : ''}`}
+                onClick={() => selectCategory(cat)}
                 role="tab"
-                aria-selected={selectedCategory === cat.value}
+                aria-selected={selectedCategory === cat}
               >
-                {cat.label}
+                {getCategoryLabel(cat, t)}
               </button>
             ))}
           </div>
 
           {packagesForCategory.length > 1 ? (
-            <div className="popular-packages-nav" aria-label="Browse popular packages">
+            <div className="popular-packages-nav" aria-label={t('home.browsePopularPackages')}>
               <button
                 type="button"
                 className="popular-packages-nav__btn"
                 onClick={() => scrollByCard(-1)}
-                aria-label="Previous packages"
+                aria-label={t('home.prevPackages')}
               >
                 ←
               </button>
@@ -138,7 +136,7 @@ function PopularPackagesSection() {
                 type="button"
                 className="popular-packages-nav__btn"
                 onClick={() => scrollByCard(1)}
-                aria-label="Next packages"
+                aria-label={t('home.nextPackages')}
               >
                 →
               </button>
@@ -147,7 +145,7 @@ function PopularPackagesSection() {
         </div>
 
         {packagesForCategory.length === 0 ? (
-          <p className="popular-packages-empty">No packages available in this category right now.</p>
+          <p className="popular-packages-empty">{t('search.noPackages')}</p>
         ) : (
           <div className="popular-packages-scroll-shell">
             <div className="popular-packages-fade popular-packages-fade--left" aria-hidden="true" />
@@ -166,10 +164,10 @@ function PopularPackagesSection() {
 
         <div className="popular-packages-actions">
           <Link to={`/tour-category/${categoryToSlug(selectedCategory)}/`} className="popular-packages-link">
-            View all {selectedCategory}
+            {t('search.viewAllCategory', { category: getCategoryLabel(selectedCategory, t) })}
           </Link>
           <Link to="/packages" className="popular-packages-link secondary">
-            Browse all packages
+            {t('search.browseAll')}
           </Link>
         </div>
       </div>

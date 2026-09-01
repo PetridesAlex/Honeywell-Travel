@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Download, FileText, Loader2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { downloadPackageBrochure } from '../utils/packageBrochure'
 import './PackageBrochureCard.css'
 
 function PackageBrochureCard({ pkg, title, priceLabel, className = '' }) {
+  const { t } = useTranslation()
   const [busy, setBusy] = useState(false)
   const [progress, setProgress] = useState(null)
   const [error, setError] = useState('')
@@ -21,7 +23,7 @@ function PackageBrochureCard({ pkg, title, priceLabel, className = '' }) {
       })
     } catch (err) {
       console.error(err)
-      setError('Could not create the PDF. Please try again.')
+      setError(t('brochure.error'))
     } finally {
       setBusy(false)
       setProgress(null)
@@ -36,8 +38,8 @@ function PackageBrochureCard({ pkg, title, priceLabel, className = '' }) {
           <FileText size={18} strokeWidth={1.75} />
         </span>
         <div className="package-brochure-card__heading">
-          <h3>Download brochure</h3>
-          <p>Full package PDF for your PC — cover, hotels, program &amp; flights</p>
+          <h3>{t('brochure.title')}</h3>
+          <p>{t('brochure.description')}</p>
         </div>
       </div>
 
@@ -51,14 +53,14 @@ function PackageBrochureCard({ pkg, title, priceLabel, className = '' }) {
           <>
             <Loader2 className="package-brochure-card__spinner" size={16} aria-hidden="true" />
             <span>
-              Preparing PDF
+              {t('brochure.preparing')}
               {progress?.total ? ` (${progress.current}/${progress.total})` : '…'}
             </span>
           </>
         ) : (
           <>
             <Download size={16} aria-hidden="true" />
-            <span>Download PDF brochure</span>
+            <span>{t('brochure.download')}</span>
           </>
         )}
       </button>
@@ -69,7 +71,7 @@ function PackageBrochureCard({ pkg, title, priceLabel, className = '' }) {
         </p>
       ) : (
         <p className="package-brochure-card__hint">
-          Pages are split by section so hotels, itinerary and flights stay readable when printed or saved.
+          {t('brochure.hint')}
         </p>
       )}
     </div>

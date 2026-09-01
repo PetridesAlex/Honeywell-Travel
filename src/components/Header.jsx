@@ -45,15 +45,7 @@ function HeaderUtilityControls() {
 }
 
 import FavoritesPanel from './FavoritesPanel'
-
-// Helper function to convert category name to URL-friendly slug
-const categoryToSlug = (category) => {
-  return category
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/&/g, 'and')
-    .replace(/[^a-z0-9-]/g, '')
-}
+import { categoryToSlug, getCategoryLabel, getHoneymoonLabel } from '../utils/categoryI18n'
 
 /** Desktop vs mobile Holiday Types link modifiers for featured rows. */
 const holidayTypesLinkClass = (item, mode) => {
@@ -232,7 +224,7 @@ function Header() {
               window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
             }}
           >
-            <span className="header-build-trip-text">Build Your Trip</span>
+            <span className="header-build-trip-text">{t('header.buildYourTrip')}</span>
             <span className="header-build-trip-icon">→</span>
           </Link>
 
@@ -244,7 +236,7 @@ function Header() {
             }}
           >
             <span className="header-flight-tickets-icon" aria-hidden>✈</span>
-            <span className="header-flight-tickets-text">Flight Tickets</span>
+            <span className="header-flight-tickets-text">{t('header.flightTickets')}</span>
           </Link>
 
           <Link
@@ -255,12 +247,12 @@ function Header() {
             }}
           >
             <span className="header-cruises-cta-icon" aria-hidden>🚢</span>
-            <span className="header-cruises-cta-text">Cruises</span>
+            <span className="header-cruises-cta-text">{t('header.cruises')}</span>
           </Link>
         </div>
         
         <nav className="nav">
-          <Link to="/ourworld/" className="nav-link">Our World</Link>
+          <Link to="/ourworld/" className="nav-link">{t('header.ourWorld')}</Link>
           
           <div 
             className="nav-dropdown"
@@ -268,7 +260,7 @@ function Header() {
             onMouseLeave={handleDropdownLeave}
           >
             <span className="nav-link dropdown-trigger">
-              Holiday Types
+              {t('header.holidayTypes')}
               <span className="dropdown-arrow">▼</span>
             </span>
             {activeDropdown === 'holiday' && (
@@ -287,7 +279,7 @@ function Header() {
                     }}
                   >
                     <span className="dropdown-item-icon">→</span>
-                    {item}
+                    {getCategoryLabel(item, t)}
                   </Link>
                 ))}
               </div>
@@ -319,7 +311,7 @@ function Header() {
                     className="dropdown-item"
                   >
                     <span className="dropdown-item-icon">→</span>
-                    {item}
+                    {getHoneymoonLabel(item, t)}
                   </Link>
                 ))}
               </div>
@@ -339,7 +331,7 @@ function Header() {
             onMouseLeave={handleDropdownLeave}
           >
             <span className="nav-link dropdown-trigger">
-              Services
+              {t('header.services')}
               <span className="dropdown-arrow">▼</span>
             </span>
             {activeDropdown === 'services' && (
@@ -386,7 +378,7 @@ function Header() {
             onMouseLeave={handleDropdownLeave}
           >
             <span className="nav-link dropdown-trigger">
-              Inspiration
+              {t('header.inspiration')}
               <span className="dropdown-arrow">▼</span>
             </span>
             {activeDropdown === 'inspiration' && (
@@ -440,7 +432,7 @@ function Header() {
               setIsMobileMenuOpen((prev) => !prev)
               setActiveMobileDropdown(null)
             }}
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={isMobileMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
             aria-expanded={isMobileMenuOpen}
           >
             <span className="hamburger-icon" aria-hidden="true">
@@ -462,7 +454,7 @@ function Header() {
             <button
               type="button"
               className="mobile-menu-backdrop"
-              aria-label="Close menu"
+              aria-label={t('header.closeMenu')}
               onClick={closeMobileMenu}
             />
             <div
@@ -472,17 +464,17 @@ function Header() {
             >
               <div className="mobile-menu__body" ref={mobileMenuBodyRef}>
                 <Link to="/build-your-trip" className="mobile-link mobile-build-trip" onClick={closeMobileMenu}>
-                  <span>Build Your Trip</span>
+                  <span>{t('header.buildYourTrip')}</span>
                   <span className="mobile-build-trip-icon">→</span>
                 </Link>
                 <Link to="/flight-tickets/" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
                   <span className="mobile-flight-tickets-icon" aria-hidden>✈</span>
-                  <span>Flight Tickets</span>
+                  <span>{t('header.flightTickets')}</span>
                   <span className="mobile-flight-tickets-arrow">→</span>
                 </Link>
                 <Link to="/cruises/" className="mobile-link mobile-cruises-cta" onClick={closeMobileMenu}>
                   <span className="mobile-cruises-cta-icon" aria-hidden>🚢</span>
-                  <span>Cruises</span>
+                  <span>{t('header.cruises')}</span>
                   <span className="mobile-cruises-cta-arrow">→</span>
                 </Link>
                 <Link to="/ourworld/" className="mobile-link" onClick={closeMobileMenu}>{t('header.ourWorld')}</Link>
@@ -511,7 +503,7 @@ function Header() {
                           }}
                         >
                           <span className="dropdown-item-icon">→</span>
-                          {item}
+                          {getCategoryLabel(item, t)}
                         </Link>
                       ))}
                     </div>
@@ -542,7 +534,7 @@ function Header() {
                           onClick={closeMobileMenu}
                         >
                           <span className="dropdown-item-icon">→</span>
-                          {item}
+                          {getHoneymoonLabel(item, t)}
                         </Link>
                       ))}
                     </div>
@@ -582,26 +574,26 @@ function Header() {
                     className="mobile-link mobile-social-link mobile-social-link--facebook"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Facebook"
+                    aria-label={t('header.facebook')}
                     onClick={closeMobileMenu}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
-                    <span>Facebook</span>
+                    <span>{t('header.facebook')}</span>
                   </a>
                   <a
                     href="https://www.instagram.com/honeywell_travel/"
                     className="mobile-link mobile-social-link mobile-social-link--instagram"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Instagram"
+                    aria-label={t('header.instagram')}
                     onClick={closeMobileMenu}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
-                    <span>Instagram</span>
+                    <span>{t('header.instagram')}</span>
                   </a>
                 </div>
               </div>

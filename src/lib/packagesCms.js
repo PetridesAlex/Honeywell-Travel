@@ -58,6 +58,8 @@ export function resolvePackageCoverImage(pkgOrRow) {
 /** Map a cms_packages row to the website package shape. */
 export function cmsRowToSitePackage(row) {
   if (!row) return null
+  const details = row.details || {}
+  const i18n = details.i18n || row.i18n || {}
   return {
     id: Number(row.legacy_id),
     title: row.title,
@@ -71,7 +73,8 @@ export function cmsRowToSitePackage(row) {
     featured: Boolean(row.featured),
     packageType: row.package_type || 'individual',
     hidden: Boolean(row.hidden),
-    details: row.details || {},
+    details,
+    i18n,
     _cmsId: row.id,
     _cmsUpdatedAt: row.updated_at
   }
@@ -80,6 +83,9 @@ export function cmsRowToSitePackage(row) {
 /** Map a static website package into a cms_packages row payload. */
 export function staticPackageToCmsRow(pkg) {
   const details = cloneJson(pkg.details || {})
+  if (pkg.i18n && !details.i18n) {
+    details.i18n = cloneJson(pkg.i18n)
+  }
   const cover = resolvePackageCoverImage({ ...pkg, details })
   if (cover) {
     if (!isUsableImageSrc(details.coverImage)) details.coverImage = cover

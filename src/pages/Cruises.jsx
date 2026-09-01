@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { travelPackages } from '../data/packages'
 import PackageCard from '../components/PackageCard'
@@ -6,7 +7,7 @@ import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Cruises.css'
 
 const cruisePackagesData = [
@@ -1974,7 +1975,7 @@ const CRUISE_LINES = [
   { id: 'celestyal', label: 'Celestyal Cruises', description: 'Celestyal Journey cruise packages from Piraeus, Athens.', coverImage: '/images/cruises/celestyal-cruises/celestyal-cruises-logo.webp', coverPosition: 'center center', coverSize: 'cover' }
 ]
 
-function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIncludedItems, getExcludedItems }) {
+function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIncludedItems, getExcludedItems, t }) {
   return (
     <article className={`cruise-package-card ${isActive ? 'is-active' : ''}`}>
                     <div
@@ -1994,25 +1995,25 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
                       <div className="cruise-package-card-meta">
                         <span>{cruise.nightsText}</span>
                         <span>{cruise.season}</span>
-                        <strong>{typeof cruise.fromPrice === 'number' && cruise.fromPrice > 0 ? `From EUR ${cruise.fromPrice}` : 'Price On Request'}</strong>
+                        <strong>{typeof cruise.fromPrice === 'number' && cruise.fromPrice > 0 ? t('cruises.fromEur', { price: cruise.fromPrice }) : t('cruises.priceOnRequest')}</strong>
                       </div>
         <button type="button" className="cruise-package-card-btn" onClick={onToggle}>
-          {isActive ? 'Hide Cruise Details' : 'View Cruise Details'}
+          {isActive ? t('cruises.hideDetails') : t('cruises.viewDetails')}
                       </button>
                     </div>
       {isActive ? (
                       <div className="cruise-package-expanded">
                         <div className="cruise-featured-head">
-                          <span className="cruise-featured-region">Region: {cruise.region}</span>
+                          <span className="cruise-featured-region">{t('cruises.region')} {cruise.region}</span>
                           <h2>{cruise.title}</h2>
                           <p className="cruise-featured-subtitle">{cruise.season}</p>
                           <p className="cruise-featured-highlight">{cruise.highlightText}</p>
             <p className="cruise-featured-intro">{cruise.introPrimary}</p>
             <p className="cruise-featured-intro">{cruise.introSecondary}</p>
                           <div className="cruise-featured-price">
-                            <span>{cruise.nightsText} from</span>
-              <strong className={typeof cruise.fromPrice === 'number' && cruise.fromPrice > 0 ? '' : 'cruise-featured-price__value--on-request'}>{typeof cruise.fromPrice === 'number' && cruise.fromPrice > 0 ? `EUR ${cruise.fromPrice}` : 'On Request'}</strong>
-                            <span>per person</span>
+                            <span>{t('cruises.nightsFrom', { nights: cruise.nightsText })}</span>
+              <strong className={typeof cruise.fromPrice === 'number' && cruise.fromPrice > 0 ? '' : 'cruise-featured-price__value--on-request'}>{typeof cruise.fromPrice === 'number' && cruise.fromPrice > 0 ? `EUR ${cruise.fromPrice}` : t('cruises.onRequest')}</strong>
+                            <span>{t('cruises.perPerson')}</span>
                           </div>
                         </div>
                         <div className="cruise-featured-gallery">
@@ -2031,7 +2032,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
                           {cruise.itineraries.map((itinerary, itineraryIndex) => (
                             <article className="cruise-itinerary-card" key={itinerary.name}>
                               <div className="cruise-itinerary-header">
-                                <span className="cruise-itinerary-badge">Itinerary {itineraryIndex + 1}</span>
+                                <span className="cruise-itinerary-badge">{t('cruises.itinerary', { n: itineraryIndex + 1 })}</span>
                                 <h3>{itinerary.name}</h3>
                               </div>
                               <ul>
@@ -2040,7 +2041,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
                                 ))}
                               </ul>
                               <div className="cruise-itinerary-dates">
-                                <strong>Available Dates</strong>
+                                <strong>{t('cruises.availableDates')}</strong>
                                 <div className="cruise-itinerary-dates-list">
                                   {itinerary.availableDates.split(' / ').map((date) => (
                                     <span key={date} className="cruise-itinerary-date-chip">{date}</span>
@@ -2053,7 +2054,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
           <p className="cruise-featured-note">{cruise.note}</p>
                         <div className="cruise-details-grid">
                           <div className="cruise-details-card">
-                            <h3>What&apos;s Included?</h3>
+                            <h3>{t('cruises.whatsIncluded')}</h3>
                             <ul>
                               {getIncludedItems(cruise).map((item) => (
                                 <li key={item}>{item}</li>
@@ -2062,7 +2063,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
                           </div>
                           {getExcludedItems(cruise).length ? (
                             <div className="cruise-details-card">
-                              <h3>What&apos;s Excluded?</h3>
+                              <h3>{t('cruises.whatsExcluded')}</h3>
                               <ul>
                                 {getExcludedItems(cruise).map((item) => (
                                   <li key={item}>{item}</li>
@@ -2071,7 +2072,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
                             </div>
                           ) : null}
                           <div className="cruise-details-card">
-                            <h3>Additional Information</h3>
+                            <h3>{t('cruises.additionalInfo')}</h3>
                             <ul>
                               {cruise.additionalInfo.map((item) => (
                                 <li key={item}>{item}</li>
@@ -2079,7 +2080,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
                             </ul>
                           </div>
                           <div className="cruise-details-card">
-                            <h3>Pricing / Accommodation</h3>
+                            <h3>{t('cruises.pricingAccommodation')}</h3>
                             <ul>
                               {cruise.pricingAccommodation.map((item) => (
                                 <li key={item}>{item}</li>
@@ -2094,6 +2095,7 @@ function CruiseHubCruiseCard({ cruise, isActive, onToggle, onPreviewImage, getIn
 }
 
 function Cruises() {
+  const { t } = useTranslation()
   const [selectedPort, setSelectedPort] = useState('Any')
   const [selectedDuration, setSelectedDuration] = useState('Any')
   const [openCruiseLineHubs, setOpenCruiseLineHubs] = useState(() =>
@@ -2127,7 +2129,7 @@ function Cruises() {
   }, [selectedCruiseId])
 
   const departurePorts = [
-    { value: 'Any', label: 'All Ports', icon: '🌍' },
+    { value: 'Any', label: t('cruises.filters.allPorts'), icon: '🌍' },
     { value: 'Limassol', label: 'Limassol, Cyprus', icon: '🇨🇾' },
     { value: 'Piraeus', label: 'Piraeus, Greece', icon: '🇬🇷' },
     { value: 'Genoa', label: 'Genoa, Italy', icon: '🇮🇹' },
@@ -2139,11 +2141,11 @@ function Cruises() {
   ]
 
   const durations = [
-    { value: 'Any', label: 'Any Duration' },
-    { value: '3-5', label: '3-5 Days' },
-    { value: '6-8', label: '6-8 Days' },
-    { value: '9-12', label: '9-12 Days' },
-    { value: '13+', label: '13+ Days' }
+    { value: 'Any', label: t('cruises.filters.anyDuration') },
+    { value: '3-5', label: t('cruises.filters.days3to5') },
+    { value: '6-8', label: t('cruises.filters.days6to8') },
+    { value: '9-12', label: t('cruises.filters.days9to12') },
+    { value: '13+', label: t('cruises.filters.days13plus') }
   ]
 
   // Filter for cruises only
@@ -2176,7 +2178,7 @@ function Cruises() {
                               <button
                                 type="button"
           className="cruise-image-preview-close"
-          aria-label="Close image preview"
+          aria-label={t('cruises.closePreview')}
           onClick={() => setPreviewImage(null)}
         >
           ×
@@ -2207,17 +2209,17 @@ function Cruises() {
   return (
     <div className="cruises-page">
       <SEO
-        title="Cruise Holidays | Honeywell Travel"
-        description="Browse luxury cruise holiday packages and discover top cruise destinations with Honeywell Travel."
-        keywords="cruise holidays cyprus, luxury cruises, cruise packages"
+        title={t('cruises.seoTitle')}
+        description={t('cruises.seoDescription')}
+        keywords={t('cruises.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/cruises"
       />
       {/* Hero Section */}
       <div className="cruises-hero">
         <div className="cruises-hero-overlay"></div>
         <div className="cruises-hero-content">
-          <h1>Discover the World by Sea</h1>
-          <p>Set sail on an unforgettable journey across the world&apos;s most beautiful waters.</p>
+          <h1>{t('cruises.heroTitle')}</h1>
+          <p>{t('cruises.heroSubtitle')}</p>
           <button
             type="button"
             className="cruises-hero-cta"
@@ -2234,7 +2236,7 @@ function Cruises() {
               }
             }}
           >
-            Explore Cruise Packages
+            {t('cruises.exploreCta')}
           </button>
                             </div>
         <div className="cruises-hero-waves">
@@ -2248,12 +2250,12 @@ function Cruises() {
       <div className="cruises-container">
         {/* Filters Section */}
         <section className="cruises-filters-section">
-          <h2 className="section-title">Find Your Perfect Cruise</h2>
+          <h2 className="section-title">{t('cruises.findCruise')}</h2>
           <div className="cruises-filters">
             <div className="filter-group">
               <label htmlFor="port-filter">
                 <span className="filter-icon">⚓</span>
-                Departure Port
+                {t('cruises.departurePort')}
               </label>
               <select 
                 id="port-filter"
@@ -2272,7 +2274,7 @@ function Cruises() {
             <div className="filter-group">
               <label htmlFor="duration-filter">
                 <span className="filter-icon">⏱️</span>
-                Duration
+                {t('cruises.duration')}
               </label>
               <select 
                 id="duration-filter"
@@ -2291,7 +2293,7 @@ function Cruises() {
         </section>
 
         <section className="cruise-packages-overview">
-          <h2 className="section-title">Cruises by Cruise Line</h2>
+          <h2 className="section-title">{t('cruises.byCruiseLine')}</h2>
           {CRUISE_LINES.filter((line) => cruisesByLine[line.id]?.length > 0).map((line) => {
             const cruises = cruisesByLine[line.id]
             const prices = cruises.map((c) => c.fromPrice).filter((v) => typeof v === 'number' && v > 0)
@@ -2311,11 +2313,11 @@ function Cruises() {
                   <h3>{line.label}</h3>
                   <p>{line.description}</p>
                   <div className="cruise-package-card-meta">
-                    <span>{cruises.length} Cruise Package{cruises.length !== 1 ? 's' : ''}</span>
-                    <strong>{prices.length ? `From EUR ${Math.min(...prices)}` : (cruises.length ? 'Price On Request' : 'Coming Soon')}</strong>
+                    <span>{t(cruises.length === 1 ? 'cruises.cruisePackage' : 'cruises.cruisePackages', { count: cruises.length })}</span>
+                    <strong>{prices.length ? t('cruises.fromEur', { price: Math.min(...prices) }) : (cruises.length ? t('cruises.priceOnRequest') : t('cruises.comingSoon'))}</strong>
                   </div>
                   <button type="button" className="cruise-package-card-btn" onClick={() => toggleCruiseLineHub(line.id)}>
-                    {isOpen ? 'Hide Cruises' : 'View Cruises'}
+                    {isOpen ? t('cruises.hideCruises') : t('cruises.viewCruises')}
                   </button>
                 </div>
                 {isOpen ? (
@@ -2329,6 +2331,7 @@ function Cruises() {
                         onPreviewImage={setPreviewImage}
                         getIncludedItems={getIncludedItems}
                         getExcludedItems={getExcludedItems}
+                        t={t}
                       />
                     ))}
                   </div>
@@ -2343,27 +2346,27 @@ function Cruises() {
 
         {/* Why Choose Cruises Section */}
         <section className="cruises-benefits">
-          <h2 className="section-title">Why Choose a Cruise?</h2>
+          <h2 className="section-title">{t('cruises.whyChoose')}</h2>
           <div className="benefits-grid">
             <div className="benefit-card">
               <div className="benefit-icon">🏝️</div>
-              <h3>Multiple Destinations</h3>
-              <p>Visit several stunning destinations in one trip without the hassle of packing and unpacking</p>
+              <h3>{t('cruises.benefits.multipleDestinations')}</h3>
+              <p>{t('cruises.benefits.multipleDestinationsText')}</p>
             </div>
             <div className="benefit-card">
               <div className="benefit-icon">🍽️</div>
-              <h3>All-Inclusive Dining</h3>
-              <p>Enjoy world-class cuisine with unlimited dining options included in your cruise package</p>
+              <h3>{t('cruises.benefits.dining')}</h3>
+              <p>{t('cruises.benefits.diningText')}</p>
             </div>
             <div className="benefit-card">
               <div className="benefit-icon">🎭</div>
-              <h3>Entertainment & Activities</h3>
-              <p>From Broadway shows to spa treatments, enjoy endless entertainment and relaxation</p>
+              <h3>{t('cruises.benefits.entertainment')}</h3>
+              <p>{t('cruises.benefits.entertainmentText')}</p>
             </div>
             <div className="benefit-card">
               <div className="benefit-icon">🌊</div>
-              <h3>Ocean Views</h3>
-              <p>Wake up to breathtaking ocean views and stunning sunsets from your private balcony</p>
+              <h3>{t('cruises.benefits.oceanViews')}</h3>
+              <p>{t('cruises.benefits.oceanViewsText')}</p>
             </div>
           </div>
         </section>
@@ -2373,7 +2376,7 @@ function Cruises() {
           {filteredCruises.length > 0 ? (
           <div className="results-header">
             <h2 className="results-title">
-              {filteredCruises.length} {filteredCruises.length === 1 ? 'Cruise' : 'Cruises'} Available
+              {t('cruises.resultsAvailable', { count: filteredCruises.length })} {filteredCruises.length === 1 ? t('cruises.cruiseSingular') : t('cruises.cruisesPlural')}
             </h2>
             {(selectedPort !== 'Any' || selectedDuration !== 'Any') && (
               <div className="active-filters">
@@ -2415,38 +2418,38 @@ function Cruises() {
 
         {/* Popular Destinations */}
         <section className="popular-destinations">
-          <h2 className="section-title">Popular Cruise Destinations</h2>
+          <h2 className="section-title">{t('cruises.popularDestinations')}</h2>
           <div className="destinations-grid">
             <div className="destination-card">
               <div className="destination-icon">🏝️</div>
-              <h3>Mediterranean</h3>
-              <p>Explore the stunning coasts of Greece, Italy, Spain, and more</p>
+              <h3>{t('cruises.destinations.mediterranean')}</h3>
+              <p>{t('cruises.destinations.mediterraneanText')}</p>
             </div>
             <div className="destination-card">
               <div className="destination-icon">🌴</div>
-              <h3>Caribbean</h3>
-              <p>Discover tropical paradise with crystal-clear waters and white sand beaches</p>
+              <h3>{t('cruises.destinations.caribbean')}</h3>
+              <p>{t('cruises.destinations.caribbeanText')}</p>
             </div>
             <div className="destination-card">
               <div className="destination-icon">🏔️</div>
-              <h3>Alaska</h3>
-              <p>Witness breathtaking glaciers and wildlife in America's last frontier</p>
+              <h3>{t('cruises.destinations.alaska')}</h3>
+              <p>{t('cruises.destinations.alaskaText')}</p>
             </div>
             <div className="destination-card">
               <div className="destination-icon">🌊</div>
-              <h3>Northern Europe</h3>
-              <p>Experience the beauty of Scandinavian fjords and Baltic capitals</p>
+              <h3>{t('cruises.destinations.northernEurope')}</h3>
+              <p>{t('cruises.destinations.northernEuropeText')}</p>
             </div>
           </div>
         </section>
 
         {/* Cruise Enquiry Form */}
         <section className="cruise-enquiry-section">
-          <h2 className="section-title">Cruise Enquiry</h2>
-          <p className="cruise-enquiry-intro">Tell us which cruise line you&apos;re interested in and we&apos;ll get back to you with availability and the best prices.</p>
+          <h2 className="section-title">{t('cruises.enquiryTitle')}</h2>
+          <p className="cruise-enquiry-intro">{t('cruises.enquiryIntro')}</p>
           {cruiseEnquirySent ? (
             <div className="cruise-enquiry-success">
-              <p>{FORM_SUCCESS_MESSAGE}</p>
+              <p>{t('forms.success')}</p>
             </div>
           ) : (
             <form
@@ -2491,7 +2494,7 @@ function Cruises() {
                   setCruiseEnquiryForm({ cruiseLine: '', name: '', email: '', phone: '', message: '' })
                   setCruiseEnquiryHoneypot('')
                 } else {
-                  setCruiseEnquiryError(result.error || FORM_ERROR_MESSAGE)
+                  setCruiseEnquiryError(result.error || t('forms.error'))
                 }
                 setCruiseEnquirySending(false)
               }}
@@ -2501,7 +2504,7 @@ function Cruises() {
                 <div className="filter-group cruise-enquiry-field">
                   <label htmlFor="cruise-enquiry-line">
                     <span className="filter-icon">🚢</span>
-                    Cruise line
+                    {t('cruises.cruiseLine')}
                   </label>
                   <select
                     id="cruise-enquiry-line"
@@ -2510,7 +2513,7 @@ function Cruises() {
                     className="filter-select"
                     required
                   >
-                    <option value="">Select a cruise line</option>
+                    <option value="">{t('cruises.selectCruiseLine')}</option>
                     {CRUISE_LINES.filter((line) => cruisesByLine[line.id]?.length > 0).map((line) => (
                       <option key={line.id} value={line.id}>
                         {line.label}
@@ -2519,7 +2522,7 @@ function Cruises() {
                   </select>
                 </div>
                 <div className="filter-group cruise-enquiry-field">
-                  <label htmlFor="cruise-enquiry-name">Name</label>
+                  <label htmlFor="cruise-enquiry-name">{t('forms.name')}</label>
                   <input
                     id="cruise-enquiry-name"
                     type="text"
@@ -2527,12 +2530,12 @@ function Cruises() {
                     value={cruiseEnquiryForm.name}
                     onChange={(e) => setCruiseEnquiryForm((prev) => ({ ...prev, name: e.target.value }))}
                     className="filter-select cruise-enquiry-input"
-                    placeholder="Your name"
+                    placeholder={t('forms.namePlaceholder')}
                     required
                   />
                 </div>
                 <div className="filter-group cruise-enquiry-field">
-                  <label htmlFor="cruise-enquiry-email">Email</label>
+                  <label htmlFor="cruise-enquiry-email">{t('forms.email')}</label>
                   <input
                     id="cruise-enquiry-email"
                     type="email"
@@ -2540,12 +2543,12 @@ function Cruises() {
                     value={cruiseEnquiryForm.email}
                     onChange={(e) => setCruiseEnquiryForm((prev) => ({ ...prev, email: e.target.value }))}
                     className="filter-select cruise-enquiry-input"
-                    placeholder="your@email.com"
+                    placeholder={t('forms.emailPlaceholder')}
                     required
                   />
                 </div>
                 <div className="filter-group cruise-enquiry-field">
-                  <label htmlFor="cruise-enquiry-phone">Phone (optional)</label>
+                  <label htmlFor="cruise-enquiry-phone">{t('cruises.phoneOptional')}</label>
                   <input
                     id="cruise-enquiry-phone"
                     type="tel"
@@ -2558,14 +2561,14 @@ function Cruises() {
                 </div>
               </div>
               <div className="filter-group cruise-enquiry-field cruise-enquiry-message-wrap">
-                <label htmlFor="cruise-enquiry-message">Message (optional)</label>
+                <label htmlFor="cruise-enquiry-message">{t('cruises.messageOptional')}</label>
                 <textarea
                   id="cruise-enquiry-message"
                   name="message"
                   value={cruiseEnquiryForm.message}
                   onChange={(e) => setCruiseEnquiryForm((prev) => ({ ...prev, message: e.target.value }))}
                   className="filter-select cruise-enquiry-textarea"
-                  placeholder="e.g. preferred dates, number of guests, cabin preference..."
+                  placeholder={t('cruises.messagePlaceholder')}
                   rows={4}
                 />
               </div>
@@ -2579,7 +2582,7 @@ function Cruises() {
                 className="cruise-package-card-btn cruise-enquiry-submit"
                 disabled={cruiseEnquirySending}
               >
-                {cruiseEnquirySending ? 'Sending...' : 'Send Cruise Enquiry'}
+                {cruiseEnquirySending ? t('contact.sending') : t('cruises.sendEnquiry')}
               </button>
             </form>
           )}

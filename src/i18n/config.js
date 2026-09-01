@@ -4,29 +4,37 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import enTranslations from './locales/en.json'
 import elTranslations from './locales/el.json'
+import { normalizeLang } from '../utils/localizedContent'
+
+const applyDocumentLang = (lng) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.lang = normalizeLang(lng)
+}
+
+const storedLng = typeof localStorage !== 'undefined' ? localStorage.getItem('i18nextLng') : null
 
 i18n
-  .use(LanguageDetector) // Detects user language from browser
-  .use(initReactI18next) // Passes i18n down to react-i18next
+  .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
     resources: {
-      en: {
-        translation: enTranslations
-      },
-      el: {
-        translation: elTranslations
-      }
+      en: { translation: enTranslations },
+      el: { translation: elTranslations },
     },
-    fallbackLng: 'en', // Default language
-    lng: localStorage.getItem('i18nextLng') || 'en', // Use stored preference or default to English
-    interpolation: {
-      escapeValue: false // React already escapes values
-    },
+    fallbackLng: 'en',
+    lng: normalizeLang(storedLng || 'en'),
+    supportedLngs: ['en', 'el'],
+    nonExplicitSupportedLngs: true,
+    interpolation: { escapeValue: false },
     detection: {
-      order: ['localStorage', 'navigator'], // Check localStorage first, then browser
-      caches: ['localStorage'], // Cache language preference
-      lookupLocalStorage: 'i18nextLng'
-    }
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng',
+      convertDetectedLanguage: (lng) => normalizeLang(lng),
+    },
   })
+
+applyDocumentLang(i18n.language)
+i18n.on('languageChanged', applyDocumentLang)
 
 export default i18n

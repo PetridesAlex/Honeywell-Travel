@@ -6,53 +6,25 @@ import { getPackagesByFilter } from '../data/packages'
 import ModalCards from './ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import { useMobileLite } from '../hooks/useMobileLite'
+import {
+  categoryToSlug,
+  getCategoryLabel,
+  getDestinationLabel,
+  SEARCH_CATEGORIES,
+  SEARCH_DESTINATIONS,
+} from '../utils/categoryI18n'
 import './SearchSection.css'
-
-// Helper function to convert category name to URL-friendly slug
-const categoryToSlug = (category) => {
-  if (category === 'Any') return null
-  return category
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/&/g, 'and')
-    .replace(/[^a-z0-9-]/g, '')
-}
 
 function SearchSection() {
   const navigate = useNavigate()
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const isMobileLite = useMobileLite()
   const [category, setCategory] = useState('Any')
   const [destination, setDestination] = useState('Any')
   const [travelers, setTravelers] = useState('2')
 
-  const categories = [
-    { value: 'Any', label: 'Any Category', icon: '🌍' },
-    { value: 'Summer Packages', label: 'Summer Packages', icon: '☀️' },
-    { value: 'Summer Packages to Greece', label: 'Summer Packages to Greece', icon: '🇬🇷' },
-    { value: 'Winter Packages', label: 'Winter Packages', icon: '❄️' },
-    { value: 'Spring Packages', label: 'Spring Packages', icon: '🌸' },
-    { value: 'City Breaks', label: 'City Breaks', icon: '🏙️' },
-    { value: 'Cruises', label: 'Cruises', icon: '🚢' },
-    { value: 'Exotic Packages', label: 'Exotic Packages', icon: '🌴' },
-    { value: 'Christmas Packages', label: 'Christmas Packages', icon: '🎄' },
-    { value: 'Easter Packages', label: 'Easter Packages', icon: '🐰' },
-    { value: 'Autumn Packages', label: 'Autumn Packages', icon: '🍂' },
-    { value: 'Green Monday', label: 'Green Monday', icon: '🌿' },
-    { value: 'Group Travel', label: 'Group Travel', icon: '👥' },
-    { value: 'Mary Special Trips', label: 'Mary Special Trips', icon: '✨' },
-    { value: 'SPORTS EVENTS & CONCERTS', label: 'Sports & Events', icon: '🎫' }
-  ]
-
-  const destinations = [
-    { value: 'Any', label: 'Any Destination', icon: '🌐' },
-    { value: 'Greece', label: 'Greece', icon: '🇬🇷' },
-    { value: 'Europe', label: 'Europe', icon: '🇪🇺' },
-    { value: 'Asia', label: 'Asia', icon: '🌏' },
-    { value: 'America', label: 'America', icon: '🇺🇸' },
-    { value: 'Africa', label: 'Africa', icon: '🦁' },
-    { value: 'Middle East', label: 'Middle East', icon: '🏜️' }
-  ]
+  const categories = SEARCH_CATEGORIES
+  const destinations = SEARCH_DESTINATIONS
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -68,19 +40,17 @@ function SearchSection() {
     }
   }
 
-  // Helper to convert category to slug for navigation
-  const getCategorySlug = (cat) => {
-    if (cat === 'Any') return null
-    return cat.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '')
-  }
+  const getCategorySlug = (cat) => categoryToSlug(cat)
 
-  // Packages for the selected category (and destination)
   const packagesForSelection = useMemo(() => {
     if (category === 'Any') return []
     return getPackagesByFilter(category, destination)
   }, [category, destination])
 
-  const categoryLabel = categories.find(c => c.value === category)?.label ?? category
+  const categoryLabel = getCategoryLabel(category, t)
+  const destinationSuffix = destination !== 'Any'
+    ? t('search.inDestination', { destination: getDestinationLabel(destination, t) })
+    : ''
 
   const visiblePackages = useMemo(
     () => packagesForSelection.slice(0, 6),
@@ -89,7 +59,7 @@ function SearchSection() {
 
   const modalCards = useMemo(
     () => mapPackagesToModalCards(visiblePackages, i18n),
-    [visiblePackages, i18n]
+    [visiblePackages, i18n.language]
   )
 
   const hasCategorySelected = category !== 'Any'
@@ -108,11 +78,9 @@ function SearchSection() {
     <section className={`search-section${hasCategorySelected ? ' search-section--category-selected' : ''}`}>
       <div className="search-container">
         <div className="search-header">
-          <p className="search-eyebrow">Plan your journey</p>
-          <h2 className="search-title">Find Your Perfect Trip</h2>
-          <p className="search-subtitle">
-            Search through our travel packages and discover your next adventure with Honeywell Travel.
-          </p>
+          <p className="search-eyebrow">{t('search.eyebrow')}</p>
+          <h2 className="search-title">{t('search.title')}</h2>
+          <p className="search-subtitle">{t('search.subtitle')}</p>
         </div>
 
         <form className="search-form" onSubmit={handleSearch}>
@@ -122,7 +90,7 @@ function SearchSection() {
                 <span className="form-icon form-icon--svg" aria-hidden="true">
                   <MapPin size={18} strokeWidth={2.25} />
                 </span>
-                <label htmlFor="destination" className="form-label">Where to?</label>
+                <label htmlFor="destination" className="form-label">{t('search.whereTo')}</label>
               </div>
               <div className="form-field-wrapper">
                 <select
@@ -133,7 +101,7 @@ function SearchSection() {
                 >
                   {destinations.map((dest) => (
                     <option key={dest.value} value={dest.value}>
-                      {dest.icon} {dest.label}
+                      {dest.icon} {getDestinationLabel(dest.value, t)}
                     </option>
                   ))}
                 </select>
@@ -145,7 +113,7 @@ function SearchSection() {
                 <span className="form-icon form-icon--svg" aria-hidden="true">
                   <Plane size={18} strokeWidth={2.25} />
                 </span>
-                <label htmlFor="category" className="form-label">What type?</label>
+                <label htmlFor="category" className="form-label">{t('search.whatType')}</label>
               </div>
               <div className="form-field-wrapper">
                 <select
@@ -156,7 +124,7 @@ function SearchSection() {
                 >
                   {categories.map((cat) => (
                     <option key={cat.value} value={cat.value}>
-                      {cat.icon} {cat.label}
+                      {cat.icon} {getCategoryLabel(cat.value, t)}
                     </option>
                   ))}
                 </select>
@@ -168,7 +136,7 @@ function SearchSection() {
                 <span className="form-icon form-icon--svg" aria-hidden="true">
                   <Users size={18} strokeWidth={2.25} />
                 </span>
-                <label htmlFor="travelers" className="form-label">Travelers</label>
+                <label htmlFor="travelers" className="form-label">{t('search.travelers')}</label>
               </div>
               <div className="form-field-wrapper">
                 <select
@@ -177,11 +145,11 @@ function SearchSection() {
                   onChange={(e) => setTravelers(e.target.value)}
                   className="form-select"
                 >
-                  <option value="1">1 Traveler</option>
-                  <option value="2">2 Travelers</option>
-                  <option value="3">3 Travelers</option>
-                  <option value="4">4 Travelers</option>
-                  <option value="5+">5+ Travelers</option>
+                  <option value="1">{t('search.travelerCount', { count: 1 })}</option>
+                  <option value="2">{t('search.travelersCount', { count: 2 })}</option>
+                  <option value="3">{t('search.travelersCount', { count: 3 })}</option>
+                  <option value="4">{t('search.travelersCount', { count: 4 })}</option>
+                  <option value="5+">{t('search.travelersPlus')}</option>
                 </select>
               </div>
             </div>
@@ -189,7 +157,7 @@ function SearchSection() {
 
           <button type="submit" className="search-button">
             <Search size={20} strokeWidth={2.35} aria-hidden />
-            <span>Search packages</span>
+            <span>{t('search.searchButton')}</span>
           </button>
         </form>
       </div>
@@ -198,23 +166,26 @@ function SearchSection() {
       <div className={packagesSectionClass}>
           {category === 'Any' ? (
             <>
-              <p className="packages-by-category-eyebrow">Discover packages</p>
-              <h3 className="packages-by-category-title">See packages by category</h3>
-              <p className="packages-by-category-subtitle">Select a category above to view available packages for Summer, Winter, City Breaks, and more.</p>
+              <p className="packages-by-category-eyebrow">{t('search.discoverEyebrow')}</p>
+              <h3 className="packages-by-category-title">{t('search.byCategoryTitle')}</h3>
+              <p className="packages-by-category-subtitle">{t('search.byCategorySubtitle')}</p>
             </>
           ) : (
             <>
               <p className="packages-by-category-eyebrow">
-                {hasPackageResults ? 'Tap a card to explore' : 'No matches yet'}
+                {hasPackageResults ? t('search.tapExplore') : t('search.noMatches')}
               </p>
               <h3 className="packages-by-category-title">
                 {categories.find(c => c.value === category)?.icon} {categoryLabel}
               </h3>
               <p className="packages-by-category-subtitle">
                 {packagesForSelection.length === 0
-                  ? `No packages found for ${categoryLabel}${destination !== 'Any' ? ` in ${destination}` : ''}. Try another category or destination.`
-                  : `Showing ${packagesForSelection.length} package${packagesForSelection.length === 1 ? '' : 's'} for ${categoryLabel}${destination !== 'Any' ? ` in ${destination}` : ''}.`
-                }
+                  ? t('search.noPackagesFor', { category: categoryLabel, destination: destinationSuffix })
+                  : t('search.showingPackages', {
+                      count: packagesForSelection.length,
+                      category: categoryLabel,
+                      destination: destinationSuffix,
+                    })}
               </p>
               {packagesForSelection.length > 0 && (
                 <>
@@ -236,7 +207,7 @@ function SearchSection() {
                           if (document.body) document.body.scrollTop = 0
                         }}
                       >
-                        View all {packagesForSelection.length} packages →
+                        {t('search.viewAllCount', { count: packagesForSelection.length })}
                       </Link>
                     </div>
                   )}

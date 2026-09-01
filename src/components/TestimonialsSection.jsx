@@ -1,8 +1,10 @@
 import { ArrowRight } from 'lucide-react'
 import { useEffect, useMemo, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import './TestimonialsSection.css'
 
 function TestimonialsSection() {
+  const { t } = useTranslation()
   const reviews = [
     {
       id: 'stephanie-michael',
@@ -215,13 +217,13 @@ function TestimonialsSection() {
     <section ref={sectionRef} className="testimonials-section">
       <div className="testimonials-container">
         <div className="testimonials-header">
-          <span className="testimonials-kicker">Trusted By Travelers</span>
-          <h2 className="section-title">Clients Review</h2>
+          <span className="testimonials-kicker">{t('home.testimonialsKicker')}</span>
+          <h2 className="section-title">{t('home.testimonialsTitle')}</h2>
           <p className="testimonials-subtitle">
-            Real feedback from travelers who booked unforgettable journeys with Honeywell Travel.
+            {t('home.testimonialsSubtitle')}
           </p>
           <a href="/packages" className="testimonials-wall-link">
-            Explore Packages <ArrowRight size={16} />
+            {t('home.explorePackages')} <ArrowRight size={16} />
           </a>
         </div>
 
@@ -239,7 +241,7 @@ function TestimonialsSection() {
                     <div className="reviewer-info">
                       <div className="reviewer-name-row">
                         <h3 className="reviewer-name">{review.name}</h3>
-                        {review.verified ? <span className="verified-pill">Verified</span> : null}
+                        {review.verified ? <span className="verified-pill">{t('common.verified')}</span> : null}
                       </div>
                       <p className="review-date">{review.date}</p>
                     </div>
@@ -271,7 +273,7 @@ function TestimonialsSection() {
                       <div className="reviewer-info">
                         <div className="reviewer-name-row">
                           <h3 className="reviewer-name">{review.name}</h3>
-                          {review.verified ? <span className="verified-pill">Verified</span> : null}
+                          {review.verified ? <span className="verified-pill">{t('common.verified')}</span> : null}
                         </div>
                         <p className="review-date">{review.date}</p>
                       </div>
@@ -289,11 +291,11 @@ function TestimonialsSection() {
         <div className="testimonials-summary-row">
           <div className="summary-chip rating-chip">
             <strong>4.8/5</strong>
-            <span>Average rating</span>
+            <span>{t('home.averageRatingLabel')}</span>
           </div>
           <div className="summary-chip reviews-chip">
             <strong>200+</strong>
-            <span>Featured reviews</span>
+            <span>{t('home.featuredReviewsLabel')}</span>
           </div>
         </div>
       </div>

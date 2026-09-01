@@ -1,44 +1,47 @@
 import { Award, Star, Users } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import './StatsRewardsSection.css'
 
-const STATS = [
-  {
-    value: '50,000+',
-    label: 'Happy Clients',
-    detail: 'Journeys planned with care',
-    Icon: Users
-  },
-  {
-    value: '35+',
-    label: 'Years of Expertise',
-    detail: 'Trusted Cyprus travel partners',
-    Icon: Star
-  },
-  {
-    value: 'Cyprus Leading',
-    label: 'Travel Management Company',
-    detail: 'Recognised industry excellence',
-    Icon: Award
-  }
-]
-
 function StatsRewardsSection() {
+  const { t } = useTranslation()
+
+  const stats = [
+    {
+      value: t('home.statsClientsValue'),
+      label: t('home.happyClients'),
+      detail: t('home.happyClientsDetail'),
+      Icon: Users,
+    },
+    {
+      value: t('home.statsYearsValue'),
+      label: t('home.yearsExpertise'),
+      detail: t('home.trustedPartners'),
+      Icon: Star,
+    },
+    {
+      value: t('home.statsLeadingValue'),
+      label: t('home.travelManagement'),
+      detail: t('home.industryExcellence'),
+      Icon: Award,
+    },
+  ]
+
   return (
     <section className="stats-rewards-section" aria-labelledby="stats-rewards-title">
       <div className="stats-rewards-atmosphere" aria-hidden="true" />
       <div className="stats-rewards-container">
         <header className="stats-rewards-header">
-          <p className="stats-rewards-eyebrow">Recognition & trust</p>
+          <p className="stats-rewards-eyebrow">{t('home.statsEyebrow')}</p>
           <h2 id="stats-rewards-title" className="stats-rewards-title">
-            Our Rewards
+            {t('home.statsTitle')}
           </h2>
           <p className="stats-rewards-subtitle">
-            Trusted by travellers and recognised by the industry
+            {t('home.statsSubtitle')}
           </p>
         </header>
 
         <div className="stats-rewards-grid">
-          {STATS.map(({ value, label, detail, Icon }, index) => (
+          {stats.map(({ value, label, detail, Icon }, index) => (
             <article key={label} className={`stats-rewards-card stats-rewards-card--${index + 1}`}>
               <span className="stats-rewards-icon" aria-hidden="true">
                 <Icon size={22} strokeWidth={1.6} />

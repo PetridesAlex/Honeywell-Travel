@@ -1,16 +1,10 @@
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
 import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './BuildYourTrip.css'
-
-const FORM_STEPS = [
-  { id: 'trip', label: 'Where & when', hint: 'Destination and dates' },
-  { id: 'stay', label: 'Accommodation', hint: 'Where you want to stay' },
-  { id: 'transport', label: 'Transport', hint: 'Car, transfers & cover' },
-  { id: 'contact', label: 'Your details', hint: 'How we reach you' },
-]
 
 function ChoiceToggle({ name, value, checked, onChange, children }) {
   return (
@@ -22,6 +16,7 @@ function ChoiceToggle({ name, value, checked, onChange, children }) {
 }
 
 function BuildYourTrip() {
+  const { t } = useTranslation()
   const [sending, setSending] = useState(false)
   const [status, setStatus] = useState(null)
   const [honeypot, setHoneypot] = useState('')
@@ -39,6 +34,16 @@ function BuildYourTrip() {
     phone: '',
     message: '',
   })
+
+  const FORM_STEPS = useMemo(
+    () => [
+      { id: 'trip', label: t('buildYourTrip.stepWhere'), hint: t('buildYourTrip.stepWhereHint') },
+      { id: 'stay', label: t('buildYourTrip.stepAccommodation'), hint: t('buildYourTrip.stepAccommodationHint') },
+      { id: 'transport', label: t('buildYourTrip.stepTransport'), hint: t('buildYourTrip.stepTransportHint') },
+      { id: 'contact', label: t('buildYourTrip.stepDetails'), hint: t('buildYourTrip.stepDetailsHint') },
+    ],
+    [t],
+  )
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -58,7 +63,7 @@ function BuildYourTrip() {
 
   const completedSteps = useMemo(
     () => FORM_STEPS.filter((step) => stepCompletion[step.id]).length,
-    [stepCompletion],
+    [FORM_STEPS, stepCompletion],
   )
 
   const progressPercent = Math.round((completedSteps / FORM_STEPS.length) * 100)
@@ -66,22 +71,23 @@ function BuildYourTrip() {
   const activeStepIndex = useMemo(() => {
     const firstIncomplete = FORM_STEPS.findIndex((step) => !stepCompletion[step.id])
     return firstIncomplete === -1 ? FORM_STEPS.length - 1 : firstIncomplete
-  }, [stepCompletion])
+  }, [FORM_STEPS, stepCompletion])
 
   const buildMessage = () => {
+    const dash = '—'
     const lines = [
-      '--- Build Your Trip Request ---',
+      t('buildYourTrip.messageHeader'),
       '',
-      'Destination: ' + (form.destination || '—'),
-      'Hotel preference: ' + (form.hotelPreference || '—'),
-      'Rent a car: ' + (form.rentCar || '—'),
-      'Taxi services from/to the Airport: ' + (form.transferServices || '—'),
-      'Travel Insurance: ' + (form.travelInsurance || '—'),
-      'Number of travelers: ' + (form.travelers || '—'),
-      'Date from: ' + (form.dateFrom || '—'),
-      'Date to: ' + (form.dateTo || '—'),
+      `${t('buildYourTrip.messageDestination')}: ${form.destination || dash}`,
+      `${t('buildYourTrip.messageHotel')}: ${form.hotelPreference || dash}`,
+      `${t('buildYourTrip.messageRentCar')}: ${form.rentCar || dash}`,
+      `${t('buildYourTrip.messageTransfers')}: ${form.transferServices || dash}`,
+      `${t('buildYourTrip.messageInsurance')}: ${form.travelInsurance || dash}`,
+      `${t('buildYourTrip.messageTravelers')}: ${form.travelers || dash}`,
+      `${t('buildYourTrip.messageDateFrom')}: ${form.dateFrom || dash}`,
+      `${t('buildYourTrip.messageDateTo')}: ${form.dateTo || dash}`,
       '',
-      form.message ? 'Additional message: ' + form.message : '',
+      form.message ? `${t('buildYourTrip.messageAdditional')}: ${form.message}` : '',
     ]
     return lines.filter(Boolean).join('\n')
   }
@@ -105,10 +111,10 @@ function BuildYourTrip() {
       message: messageBody,
       honeypot,
       extraFields: {
-        'Hotel preference': form.hotelPreference || '—',
-        'Rent a car': form.rentCar || '—',
-        'Airport transfers': form.transferServices || '—',
-        'Travel insurance': form.travelInsurance || '—',
+        [t('buildYourTrip.messageHotel')]: form.hotelPreference || '—',
+        [t('buildYourTrip.messageRentCar')]: form.rentCar || '—',
+        [t('buildYourTrip.messageTransfers')]: form.transferServices || '—',
+        [t('buildYourTrip.messageInsurance')]: form.travelInsurance || '—',
       },
       leadData: {
         full_name: form.name || 'Not provided',
@@ -124,7 +130,7 @@ function BuildYourTrip() {
     })
 
     if (result.ok) {
-      setStatus({ type: 'success', message: result.message })
+      setStatus({ type: 'success', message: result.message || t('forms.success') })
       setForm({
         destination: '',
         hotelPreference: '',
@@ -141,7 +147,7 @@ function BuildYourTrip() {
       })
       setHoneypot('')
     } else {
-      setStatus({ type: 'error', message: result.error })
+      setStatus({ type: 'error', message: result.error || t('forms.error') })
     }
     setSending(false)
   }
@@ -149,50 +155,44 @@ function BuildYourTrip() {
   return (
     <>
       <SEO
-        title="Build Your Trip - Honeywell Travel | Plan Your Perfect Getaway"
-        description="Plan your trip your way: choose your destination, accommodation, car hire, transfers and more. Tell us what you want and we'll put together a tailor-made offer."
-        keywords="Build your trip, custom holiday, tailor-made travel, Honeywell Travel, plan your trip"
+        title={t('buildYourTrip.seoTitle')}
+        description={t('buildYourTrip.seoDescription')}
+        keywords={t('buildYourTrip.seoKeywords')}
       />
       <div className="build-your-trip-page">
         <div className="bytp-hero">
           <div className="bytp-hero-content">
-            <p className="bytp-hero-eyebrow">Tailor-made travel</p>
-            <h1>Build Your Trip</h1>
-            <p>
-              Share your vision — destination, stay, and how you travel. Our specialists craft a bespoke
-              itinerary and send you a personalised proposal.
-            </p>
+            <p className="bytp-hero-eyebrow">{t('buildYourTrip.eyebrow')}</p>
+            <h1>{t('buildYourTrip.title')}</h1>
+            <p>{t('buildYourTrip.heroIntro')}</p>
           </div>
         </div>
 
         <div className="bytp-container">
           <div className="bytp-form-layout">
-            <aside className="bytp-aside" aria-label="How it works">
+            <aside className="bytp-aside" aria-label={t('buildYourTrip.asideHowItWorks')}>
               <div className="bytp-aside-card">
-                <p className="bytp-aside-eyebrow">Honeywell Travel</p>
-                <h2>Your journey, designed by experts</h2>
-                <p className="bytp-aside-lead">
-                  Complete the brief below and our team will respond with options matched to your dates,
-                  style, and budget.
-                </p>
+                <p className="bytp-aside-eyebrow">{t('common.brandName')}</p>
+                <h2>{t('buildYourTrip.asideTitle')}</h2>
+                <p className="bytp-aside-lead">{t('buildYourTrip.asideLead')}</p>
                 <ol className="bytp-aside-steps">
                   <li>
-                    <strong>Tell us your plans</strong>
-                    <span>Destination, dates, and who is travelling.</span>
+                    <strong>{t('buildYourTrip.asideStep1Title')}</strong>
+                    <span>{t('buildYourTrip.asideStep1Text')}</span>
                   </li>
                   <li>
-                    <strong>Shape the experience</strong>
-                    <span>Hotels, car hire, transfers, and insurance preferences.</span>
+                    <strong>{t('buildYourTrip.asideStep2Title')}</strong>
+                    <span>{t('buildYourTrip.asideStep2Text')}</span>
                   </li>
                   <li>
-                    <strong>Receive your proposal</strong>
-                    <span>A dedicated advisor follows up with a tailored offer.</span>
+                    <strong>{t('buildYourTrip.asideStep3Title')}</strong>
+                    <span>{t('buildYourTrip.asideStep3Text')}</span>
                   </li>
                 </ol>
                 <div className="bytp-aside-trust">
-                  <span>✓ Personal travel advisors</span>
-                  <span>✓ Competitive hotel rates</span>
-                  <span>✓ Limassol &amp; Nicosia offices</span>
+                  <span>✓ {t('buildYourTrip.trustAdvisors')}</span>
+                  <span>✓ {t('buildYourTrip.trustRates')}</span>
+                  <span>✓ {t('buildYourTrip.trustOffices')}</span>
                 </div>
               </div>
             </aside>
@@ -203,18 +203,20 @@ function BuildYourTrip() {
 
               <header className="bytp-form-header">
                 <div>
-                  <p className="bytp-form-eyebrow">Trip brief</p>
-                  <h2 className="bytp-form-title">Create your request</h2>
+                  <p className="bytp-form-eyebrow">{t('buildYourTrip.tripBrief')}</p>
+                  <h2 className="bytp-form-title">{t('buildYourTrip.createRequest')}</h2>
                 </div>
                 <div className="bytp-progress-meta">
-                  <span className="bytp-progress-label">{progressPercent}% complete</span>
+                  <span className="bytp-progress-label">
+                    {t('buildYourTrip.progressComplete', { percent: progressPercent })}
+                  </span>
                   <div className="bytp-progress-bar" role="progressbar" aria-valuenow={progressPercent} aria-valuemin={0} aria-valuemax={100}>
                     <span className="bytp-progress-fill" style={{ width: `${progressPercent}%` }} />
                   </div>
                 </div>
               </header>
 
-              <nav className="bytp-stepper" aria-label="Form steps">
+              <nav className="bytp-stepper" aria-label={t('buildYourTrip.asideHowItWorks')}>
                 {FORM_STEPS.map((step, index) => {
                   const isComplete = stepCompletion[step.id]
                   const isActive = index === activeStepIndex
@@ -236,12 +238,12 @@ function BuildYourTrip() {
               <section className="bytp-section-card" id="bytp-step-trip">
                 <div className="bytp-section-head">
                   <span className="bytp-section-badge">01</span>
-                  <h3 className="bytp-section-title">Where &amp; when</h3>
+                  <h3 className="bytp-section-title">{t('buildYourTrip.stepWhere')}</h3>
                 </div>
                 <div className="bytp-fields">
                   <div className="bytp-field">
                     <label htmlFor="bytp-destination">
-                      Destination <span className="bytp-required">*</span>
+                      {t('buildYourTrip.destination')} <span className="bytp-required">*</span>
                     </label>
                     <input
                       id="bytp-destination"
@@ -249,12 +251,12 @@ function BuildYourTrip() {
                       name="destination"
                       value={form.destination}
                       onChange={handleChange}
-                      placeholder="e.g. Paris, Santorini, Bali"
+                      placeholder={t('buildYourTrip.destinationPlaceholder')}
                       required
                     />
                   </div>
                   <div className="bytp-field bytp-field-half">
-                    <label htmlFor="bytp-dateFrom">Date from</label>
+                    <label htmlFor="bytp-dateFrom">{t('buildYourTrip.dateFrom')}</label>
                     <input
                       id="bytp-dateFrom"
                       type="date"
@@ -264,7 +266,7 @@ function BuildYourTrip() {
                     />
                   </div>
                   <div className="bytp-field bytp-field-half">
-                    <label htmlFor="bytp-dateTo">Date to</label>
+                    <label htmlFor="bytp-dateTo">{t('buildYourTrip.dateTo')}</label>
                     <input
                       id="bytp-dateTo"
                       type="date"
@@ -275,7 +277,7 @@ function BuildYourTrip() {
                   </div>
                   <div className="bytp-field">
                     <label htmlFor="bytp-travelers">
-                      Number of travelers <span className="bytp-required">*</span>
+                      {t('buildYourTrip.travelers')} <span className="bytp-required">*</span>
                     </label>
                     <input
                       id="bytp-travelers"
@@ -285,7 +287,7 @@ function BuildYourTrip() {
                       max="99"
                       value={form.travelers}
                       onChange={handleChange}
-                      placeholder="e.g. 2"
+                      placeholder={t('buildYourTrip.travelersPlaceholder')}
                       required
                     />
                   </div>
@@ -295,41 +297,41 @@ function BuildYourTrip() {
               <section className="bytp-section-card" id="bytp-step-stay">
                 <div className="bytp-section-head">
                   <span className="bytp-section-badge">02</span>
-                  <h3 className="bytp-section-title">Accommodation</h3>
+                  <h3 className="bytp-section-title">{t('buildYourTrip.stepAccommodation')}</h3>
                 </div>
                 <div className="bytp-field">
-                  <label htmlFor="bytp-hotel">Hotel or accommodation preference</label>
+                  <label htmlFor="bytp-hotel">{t('buildYourTrip.hotelLabel')}</label>
                   <input
                     id="bytp-hotel"
                     type="text"
                     name="hotelPreference"
                     value={form.hotelPreference}
                     onChange={handleChange}
-                    placeholder='e.g. Hilton Athens, or "4-star near the beach"'
+                    placeholder={t('buildYourTrip.hotelPlaceholder')}
                   />
-                  <p className="bytp-field-hint">Share a hotel name, star rating, or the kind of stay you prefer.</p>
+                  <p className="bytp-field-hint">{t('buildYourTrip.hotelHint')}</p>
                 </div>
               </section>
 
               <section className="bytp-section-card" id="bytp-step-transport">
                 <div className="bytp-section-head">
                   <span className="bytp-section-badge">03</span>
-                  <h3 className="bytp-section-title">Transport &amp; extras</h3>
+                  <h3 className="bytp-section-title">{t('buildYourTrip.transportExtras')}</h3>
                 </div>
                 <div className="bytp-options">
                   <div className="bytp-option-block">
-                    <p className="bytp-option-label">Rent a car?</p>
+                    <p className="bytp-option-label">{t('buildYourTrip.rentCar')}</p>
                     <div className="bytp-choice-row">
                       <ChoiceToggle name="rentCar" value="yes" checked={form.rentCar === 'yes'} onChange={handleChange}>
-                        Yes
+                        {t('common.yes')}
                       </ChoiceToggle>
                       <ChoiceToggle name="rentCar" value="no" checked={form.rentCar === 'no'} onChange={handleChange}>
-                        No
+                        {t('common.no')}
                       </ChoiceToggle>
                     </div>
                   </div>
                   <div className="bytp-option-block">
-                    <p className="bytp-option-label">Taxi services from/to the airport?</p>
+                    <p className="bytp-option-label">{t('buildYourTrip.taxiAirport')}</p>
                     <div className="bytp-choice-row">
                       <ChoiceToggle
                         name="transferServices"
@@ -337,7 +339,7 @@ function BuildYourTrip() {
                         checked={form.transferServices === 'yes'}
                         onChange={handleChange}
                       >
-                        Yes
+                        {t('common.yes')}
                       </ChoiceToggle>
                       <ChoiceToggle
                         name="transferServices"
@@ -345,12 +347,12 @@ function BuildYourTrip() {
                         checked={form.transferServices === 'no'}
                         onChange={handleChange}
                       >
-                        No
+                        {t('common.no')}
                       </ChoiceToggle>
                     </div>
                   </div>
                   <div className="bytp-option-block">
-                    <p className="bytp-option-label">Travel insurance</p>
+                    <p className="bytp-option-label">{t('buildYourTrip.travelInsurance')}</p>
                     <div className="bytp-choice-row">
                       <ChoiceToggle
                         name="travelInsurance"
@@ -358,7 +360,7 @@ function BuildYourTrip() {
                         checked={form.travelInsurance === 'yes'}
                         onChange={handleChange}
                       >
-                        Yes
+                        {t('common.yes')}
                       </ChoiceToggle>
                       <ChoiceToggle
                         name="travelInsurance"
@@ -366,7 +368,7 @@ function BuildYourTrip() {
                         checked={form.travelInsurance === 'no'}
                         onChange={handleChange}
                       >
-                        No
+                        {t('common.no')}
                       </ChoiceToggle>
                     </div>
                   </div>
@@ -376,24 +378,24 @@ function BuildYourTrip() {
               <section className="bytp-section-card" id="bytp-step-contact">
                 <div className="bytp-section-head">
                   <span className="bytp-section-badge">04</span>
-                  <h3 className="bytp-section-title">Your details</h3>
+                  <h3 className="bytp-section-title">{t('buildYourTrip.stepDetails')}</h3>
                 </div>
                 <div className="bytp-fields bytp-details">
                   <div className="bytp-field">
                     <label htmlFor="bytp-name">
-                      Name <span className="bytp-required">*</span>
+                      {t('forms.name')} <span className="bytp-required">*</span>
                     </label>
                     <input id="bytp-name" type="text" name="name" value={form.name} onChange={handleChange} required />
                   </div>
                   <div className="bytp-field">
                     <label htmlFor="bytp-email">
-                      Email <span className="bytp-required">*</span>
+                      {t('forms.email')} <span className="bytp-required">*</span>
                     </label>
                     <input id="bytp-email" type="email" name="email" value={form.email} onChange={handleChange} required />
                   </div>
                   <div className="bytp-field">
                     <label htmlFor="bytp-phone">
-                      Phone <span className="bytp-required">*</span>
+                      {t('forms.phone')} <span className="bytp-required">*</span>
                     </label>
                     <input
                       id="bytp-phone"
@@ -401,19 +403,19 @@ function BuildYourTrip() {
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
-                      placeholder="e.g. +357 99 123456"
+                      placeholder={t('forms.phonePlaceholder')}
                       required
                     />
                   </div>
                   <div className="bytp-field bytp-field-full">
-                    <label htmlFor="bytp-message">Anything else?</label>
+                    <label htmlFor="bytp-message">{t('buildYourTrip.anythingElse')}</label>
                     <textarea
                       id="bytp-message"
                       name="message"
                       value={form.message}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="Special requests, budget range, celebrations, or other preferences..."
+                      placeholder={t('buildYourTrip.messagePlaceholder')}
                     />
                   </div>
                 </div>
@@ -427,10 +429,12 @@ function BuildYourTrip() {
 
               <div className="bytp-submit-wrap">
                 <button type="submit" className="bytp-submit" disabled={sending}>
-                  <span>{sending ? 'Sending your request…' : 'Send my trip request'}</span>
+                  <span>
+                    {sending ? t('buildYourTrip.sendingRequest') : t('buildYourTrip.sendTripRequest')}
+                  </span>
                   {!sending ? <span className="bytp-submit-arrow" aria-hidden="true">→</span> : null}
                 </button>
-                <p className="bytp-submit-note">A Honeywell Travel advisor will contact you shortly.</p>
+                <p className="bytp-submit-note">{t('buildYourTrip.advisorNoteShort')}</p>
               </div>
             </form>
           </div>

@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import { travelPackages } from '../data/packages'
@@ -64,6 +65,7 @@ function useGalleryFromPackages() {
 }
 
 function Gallery() {
+  const { t } = useTranslation()
   const galleryItems = useGalleryFromPackages()
 
   return (
@@ -76,8 +78,8 @@ function Gallery() {
       />
       <RevealOnScroll direction="up">
       <div className="gallery-container">
-        <h1>Gallery</h1>
-        <p className="gallery-subtitle">Explore our travel destinations through stunning photography</p>
+        <h1>{t('gallery.title')}</h1>
+        <p className="gallery-subtitle">{t('gallery.subtitle')}</p>
         <div className="gallery-grid">
           {galleryItems.map((item) => (
             <div key={item.id} className="gallery-item">

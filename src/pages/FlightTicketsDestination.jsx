@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getDestinationSummaries, getOffersByDestination } from '../data/flightTickets'
+import { localizeFlightOffers } from '../utils/flightTicketI18n'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './FlightTickets.css'
 
 function splitRoute(route) {
@@ -53,8 +55,12 @@ function FlightLeg({ label, flight }) {
 }
 
 function FlightTicketsDestination() {
+  const { t, i18n } = useTranslation()
   const { destination } = useParams()
-  const offers = getOffersByDestination(destination)
+  const offers = useMemo(
+    () => localizeFlightOffers(getOffersByDestination(destination), i18n.language),
+    [destination, i18n.language]
+  )
   const destinationName = offers[0]?.destination || 'Destination'
   const destinationMeta = getDestinationSummaries().find((item) => item.destinationSlug === destination)
   const fromPrice = destinationMeta?.fromPrice
@@ -106,7 +112,7 @@ function FlightTicketsDestination() {
       bookingForm.contactNumber.trim()
 
     if (!isValid) {
-      setFormError('Παρακαλώ συμπληρώστε όνομα, επίθετο, έγκυρο email και αριθμό επικοινωνίας.')
+      setFormError(t('flights.formErrorDetails'))
       return
     }
 
@@ -115,7 +121,7 @@ function FlightTicketsDestination() {
     const departure = selectedDeparture?.departure
 
     if (!offer || !departure) {
-      setFormError('Παρουσιάστηκε πρόβλημα με την επιλογή πτήσης. Παρακαλώ δοκιμάστε ξανά.')
+      setFormError(t('flights.formErrorFlight'))
       return
     }
 
@@ -130,7 +136,7 @@ function FlightTicketsDestination() {
       `Departure: ${departure.departureDate} | ${offer.departureFlight.route} | ${offer.departureFlight.time}`,
       `Return: ${departure.returnDate} | ${offer.returnFlight.route} | ${offer.returnFlight.time}`,
       `Price: EUR ${departure.price}`,
-      `Availability: ${departure.availability || 'Μόνο 6 καθίσματα!'}`,
+      `Availability: ${departure.availability || t('flights.seatsLeft')}`,
       `Contact Number: ${bookingForm.contactNumber.trim()}`,
     ].join('\n')
 
@@ -166,9 +172,9 @@ function FlightTicketsDestination() {
     if (result.ok) {
       closeBookingForm()
       setHoneypot('')
-      window.alert(FORM_SUCCESS_MESSAGE)
+      window.alert(t('forms.success'))
     } else {
-      setFormError(result.error || FORM_ERROR_MESSAGE)
+      setFormError(result.error || t('forms.error'))
     }
     setIsSubmitting(false)
   }
@@ -188,19 +194,21 @@ function FlightTicketsDestination() {
             <div className="flight-detail-hero__shade" aria-hidden="true" />
             <div className="flight-detail-hero__content">
               <Link to="/flight-tickets/" className="flight-back-link flight-back-link--on-dark">
-                ← All destinations
+                {t('flights.backToAll')}
               </Link>
-              <p className="flight-detail-hero__eyebrow">Flight deals</p>
+              <p className="flight-detail-hero__eyebrow">{t('flights.deals')}</p>
               <h1>{destinationName}</h1>
               <p className="flight-detail-hero__summary">
-                {offers.length} {offers.length === 1 ? 'επιλογή πτήσης' : 'επιλογές πτήσεων'}
-                {fromPrice != null ? ` · από €${fromPrice}` : ''}
+                {offers.length === 1
+                  ? t('flights.offerOption', { count: offers.length })
+                  : t('flights.offersCount', { count: offers.length })}
+                {fromPrice != null ? ` · ${t('flights.from').toLowerCase()} €${fromPrice}` : ''}
               </p>
             </div>
           </header>
 
           {offers.length === 0 ? (
-            <p className="flight-detail-empty">Δεν βρέθηκαν προσφορές για αυτό τον προορισμό.</p>
+            <p className="flight-detail-empty">{t('flights.emptyOffers')}</p>
           ) : (
             <div className="flight-offers-stack">
               {offers.map((offer) => {
@@ -218,7 +226,7 @@ function FlightTicketsDestination() {
                         {offer.note ? <p className="flight-offer-note">{offer.note}</p> : null}
                       </div>
                       <div className="flight-offer-card__from">
-                        <span>Από</span>
+                        <span>{t('flights.from')}</span>
                         <strong>€{offerFrom}</strong>
                       </div>
                     </div>
@@ -226,14 +234,14 @@ function FlightTicketsDestination() {
                     <p className="flight-offer-luggage">{offer.luggage}</p>
 
                     <div className="flight-itinerary">
-                      <FlightLeg label="Αναχώρηση" flight={offer.departureFlight} />
-                      <FlightLeg label="Επιστροφή" flight={offer.returnFlight} />
+                      <FlightLeg label={t('flights.departure')} flight={offer.departureFlight} />
+                      <FlightLeg label={t('flights.return')} flight={offer.returnFlight} />
                     </div>
 
                     <div className="flight-pricing-table flight-pricing-table--premium">
                       <div className="flight-pricing-head">
-                        <span>Αναχωρήσεις</span>
-                        <span>Τιμές</span>
+                        <span>{t('flights.departures')}</span>
+                        <span>{t('flights.prices')}</span>
                       </div>
                       {offer.pricing.map((row, idx) => (
                         <div key={`${offer.id}-${idx}`} className="flight-pricing-row">
@@ -246,32 +254,32 @@ function FlightTicketsDestination() {
                     {offer.departures?.length ? (
                       <div className="flight-departure-list">
                         <div className="flight-departure-list__head">
-                          <h3>Επιλέξτε αναχώρηση</h3>
-                          <span>{offer.departures.length} διαθέσιμες</span>
+                          <h3>{t('flights.selectDepartureTitle')}</h3>
+                          <span>{t('flights.availableCount', { count: offer.departures.length })}</span>
                         </div>
                         {offer.departures.map((departure, idx) => (
                           <div key={`${offer.id}-dep-${idx}`} className="flight-departure-item flight-departure-item--premium">
                             <div className="flight-departure-dates">
                               <div className="flight-departure-date-block">
-                                <span className="flight-departure-date-label">Αναχώρηση</span>
+                                <span className="flight-departure-date-label">{t('flights.departure')}</span>
                                 <strong>{departure.departureDate}</strong>
                               </div>
                               <span className="flight-departure-date-arrow" aria-hidden="true">→</span>
                               <div className="flight-departure-date-block">
-                                <span className="flight-departure-date-label">Επιστροφή</span>
+                                <span className="flight-departure-date-label">{t('flights.return')}</span>
                                 <strong>{departure.returnDate}</strong>
                               </div>
                             </div>
                             <div className="flight-departure-meta">
                               <div className="flight-departure-tags">
                                 <span className="flight-tag flight-tag--alert">
-                                  {departure.availability || 'Μόνο 6 καθίσματα!'}
+                                  {departure.availability || t('flights.seatsLeft')}
                                 </span>
-                                <span className="flight-tag">Charter</span>
+                                <span className="flight-tag">{t('flights.charter')}</span>
                               </div>
                               <div className="flight-departure-actions">
                                 <div className="flight-departure-price">
-                                  <span>Τιμή</span>
+                                  <span>{t('flights.price')}</span>
                                   <strong>€{departure.price}</strong>
                                 </div>
                                 <button
@@ -279,7 +287,7 @@ function FlightTicketsDestination() {
                                   className="flight-book-now-btn"
                                   onClick={() => openBookingForm(offer, departure)}
                                 >
-                                  Book Now
+                                  {t('flights.bookNow')}
                                 </button>
                               </div>
                             </div>
@@ -297,8 +305,8 @@ function FlightTicketsDestination() {
             <div className="flight-booking-modal-backdrop" role="dialog" aria-modal="true">
               <div className="flight-booking-modal flight-booking-modal--premium">
                 <div className="flight-booking-modal__header">
-                  <p className="flight-booking-modal__eyebrow">Booking request</p>
-                  <h2>Book Flight Ticket</h2>
+                  <p className="flight-booking-modal__eyebrow">{t('flights.bookingRequest')}</p>
+                  <h2>{t('flights.bookFlightTicket')}</h2>
                   <p className="flight-booking-modal-summary">
                     {selectedDeparture.offer.title}
                     <span>
@@ -312,7 +320,7 @@ function FlightTicketsDestination() {
                   <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                   <div className="flight-booking-form__grid">
                     <label>
-                      Name
+                      {t('forms.firstName')}
                       <input
                         type="text"
                         name="name"
@@ -323,7 +331,7 @@ function FlightTicketsDestination() {
                     </label>
 
                     <label>
-                      Surname
+                      {t('flights.surname')}
                       <input
                         type="text"
                         name="surname"
@@ -334,7 +342,7 @@ function FlightTicketsDestination() {
                     </label>
 
                     <label>
-                      Email
+                      {t('forms.email')}
                       <input
                         type="email"
                         name="email"
@@ -345,7 +353,7 @@ function FlightTicketsDestination() {
                     </label>
 
                     <label>
-                      Contact Number
+                      {t('forms.contactNumber')}
                       <input
                         type="tel"
                         name="contactNumber"
@@ -360,10 +368,10 @@ function FlightTicketsDestination() {
 
                   <div className="flight-booking-form-actions">
                     <button type="button" className="flight-booking-cancel-btn" onClick={closeBookingForm}>
-                      Cancel
+                      {t('flights.cancel')}
                     </button>
                     <button type="submit" className="flight-booking-submit-btn" disabled={isSubmitting}>
-                      {isSubmitting ? 'Sending...' : 'Submit request'}
+                      {isSubmitting ? t('flights.sending') : t('flights.submitRequest')}
                     </button>
                   </div>
                 </form>

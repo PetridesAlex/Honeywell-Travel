@@ -1,167 +1,92 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
+import { getCategoryLabel } from '../utils/categoryI18n'
 import './HolidayTypes.css'
 
+const HOLIDAY_CATEGORIES = [
+  { id: 'destinations', category: 'Destinations', icon: '🌍' },
+  { id: 'summer-packages', category: 'Summer Packages', icon: '☀️' },
+  { id: 'autumn-packages', category: 'Autumn Packages', icon: '🍂' },
+  { id: 'winter-packages', category: 'Winter Packages', icon: '❄️' },
+  { id: 'christmas-packages', category: 'Christmas Packages', icon: '🎄' },
+  { id: 'easter-packages', category: 'Easter Packages', icon: '🐰' },
+  { id: 'green-monday', category: 'Green Monday', icon: '🌿' },
+  { id: 'cruises', category: 'Cruises', icon: '🚢' },
+  { id: 'city-breaks', category: 'City Breaks', icon: '🏙️' },
+  { id: 'exotic-packages', category: 'Exotic Packages', icon: '🌴' },
+  { id: 'mary-special-trips', category: 'Mary Special Trips', icon: '✨' },
+]
+
+const FEATURE_KEYS = [
+  { icon: '✨', titleKey: 'features.tailoredTitle', textKey: 'features.tailoredText' },
+  { icon: '🌍', titleKey: 'features.knowledgeTitle', textKey: 'features.knowledgeText' },
+  { icon: '⭐', titleKey: 'features.serviceTitle', textKey: 'features.serviceText' },
+  { icon: '🏖️', titleKey: 'features.holidaysTitle', textKey: 'features.holidaysText' },
+  { icon: '💰', titleKey: 'features.valueTitle', textKey: 'features.valueText' },
+]
+
 function HolidayTypes() {
-  const holidayCategories = [
-    {
-      id: 'destinations',
-      title: 'Destinations',
-      icon: '🌍',
-      description: 'Explore amazing destinations around the world'
-    },
-    {
-      id: 'summer-packages',
-      title: 'Summer Packages',
-      icon: '☀️',
-      description: 'Perfect summer getaways for your vacation'
-    },
-    {
-      id: 'autumn-packages',
-      title: 'Autumn Packages',
-      icon: '🍂',
-      description: 'Experience the beauty of autumn destinations'
-    },
-    {
-      id: 'winter-packages',
-      title: 'Winter Packages',
-      icon: '❄️',
-      description: 'Winter wonderlands and cozy escapes'
-    },
-    {
-      id: 'christmas-packages',
-      title: 'Christmas Packages',
-      icon: '🎄',
-      description: 'Magical Christmas holidays and celebrations'
-    },
-    {
-      id: 'easter-packages',
-      title: 'Easter Packages',
-      icon: '🐰',
-      description: 'Easter breaks in beautiful locations'
-    },
-    {
-      id: 'green-monday',
-      title: 'Green Monday',
-      icon: '🌿',
-      description: 'Special Green Monday travel deals'
-    },
-    {
-      id: 'cruises',
-      title: 'Cruises',
-      icon: '🚢',
-      description: 'Luxury cruises to exotic destinations'
-    },
-    {
-      id: 'city-breaks',
-      title: 'City Breaks',
-      icon: '🏙️',
-      description: 'Urban adventures in vibrant cities'
-    },
-    {
-      id: 'exotic-packages',
-      title: 'Exotic Packages',
-      icon: '🌴',
-      description: 'Discover exotic and tropical paradises'
-    },
-    {
-      id: 'mary-special-trips',
-      title: 'Mary Special Trips',
-      icon: '✨',
-      description: 'Exclusive curated travel experiences'
-    }
-  ]
+  const { t } = useTranslation()
 
   return (
     <div className="holiday-types-page">
       <SEO
-        title="Holiday Types | Honeywell Travel"
-        description="Explore Honeywell Travel holiday categories including cruises, city breaks, seasonal and exotic packages."
-        keywords="holiday types, cruise holidays, city breaks, exotic packages"
+        title={t('holidayTypes.seoTitle')}
+        description={t('holidayTypes.seoDescription')}
+        keywords={t('holidayTypes.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/holiday-types"
       />
       <RevealOnScroll direction="up">
       <div className="holiday-types-container">
         <div className="page-header">
-          <h1>Holiday Types</h1>
-          <p className="page-subtitle">Discover the perfect holiday experience tailored just for you</p>
+          <h1>{t('holidayTypes.title')}</h1>
+          <p className="page-subtitle">{t('holidayTypes.subtitle')}</p>
         </div>
 
         <div className="categories-grid">
-          {holidayCategories.map((category) => (
+          {HOLIDAY_CATEGORIES.map((item) => (
             <Link
-              key={category.id}
-              to={`/tour-category/${category.id}/`}
+              key={item.id}
+              to={`/tour-category/${item.id}/`}
               className="category-card"
             >
-              <div className="category-icon">{category.icon}</div>
-              <h3 className="category-title">{category.title}</h3>
-              <p className="category-description">{category.description}</p>
-              <span className="category-link">View Packages →</span>
+              <div className="category-icon">{item.icon}</div>
+              <h3 className="category-title">{getCategoryLabel(item.category, t)}</h3>
+              <p className="category-description">{t(`holidayTypes.categories.${item.id}`)}</p>
+              <span className="category-link">{t('common.viewPackages')} →</span>
             </Link>
           ))}
         </div>
 
         <section className="content-section">
-          <h2>What we do</h2>
-          <p className="intro-text">
-            A honeymoon is the most romantic holiday you will ever experience, and we can help you create your dream getaway with our experienced honeymoon experts who arrange tailor-made honeymoons every day!
-          </p>
-          <p>
-            Whether you are after luxury and romance, relaxation, entertainment or sightseeing, the one thing that a honeymoon should do is give you an unforgettable experience, this is why here at Honeywell Travel we have made this our sole aim.
-          </p>
-          <p>
-            The world is waiting. Full of sights, sounds, colour and life. Travel with us to deserted beaches, cosmopolitan cities, ancient temples, exotic bazaars, vivid coral reefs, vibrant rain forests and majestic mountains.
-          </p>
-          <p>
-            Our team of specialists have compiled a list of our favorite places from around the world for your perusal. From idyllic jewel islands to thrilling adventure tours, Honeywell Travel has the potential to fulfill all of your desires and make your dreams a reality.
-          </p>
+          <h2>{t('holidayTypes.whatWeDo')}</h2>
+          <p className="intro-text">{t('holidayTypes.whatWeDoP1')}</p>
+          <p>{t('holidayTypes.whatWeDoP2')}</p>
+          <p>{t('holidayTypes.whatWeDoP3')}</p>
+          <p>{t('holidayTypes.whatWeDoP4')}</p>
         </section>
 
         <section className="content-section why-section">
-          <h2>Why Honeywell Travel?</h2>
-          <p className="intro-text">
-            We take the time to get to know you and your vision of the perfect honeymoon. It's our service, our attention to detail and our vast and varied array of destinations and holiday experiences that sets us apart from the rest.
-          </p>
+          <h2>{t('holidayTypes.whyHoneywell')}</h2>
+          <p className="intro-text">{t('holidayTypes.whyIntro')}</p>
 
           <div className="features-grid">
-            <div className="feature-item">
-              <div className="feature-icon">✨</div>
-              <h3>Tailored to you</h3>
-              <p>We build your holiday around what you want, not our preferences. We take the time to understand what you enjoy so we can create the perfect holiday for you.</p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon">🌍</div>
-              <h3>First-hand knowledge</h3>
-              <p>Our specialists have visited many of the destinations that we offer and so we know our product inside out.</p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon">⭐</div>
-              <h3>Renowned service</h3>
-              <p>You can trust us, not only to tailor the right holiday for you, but to look after you from the moment you speak to one of our consultants, until after you have returned home. We take care of you every step of the way, whatever happens.</p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon">🏖️</div>
-              <h3>Our holidays</h3>
-              <p>We offer everything, from romantic city breaks to deserted beaches on a tropical paradise to enchanting, lush forests and jungles. We have something for everyone's taste.</p>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon">💰</div>
-              <h3>We believe in value</h3>
-              <p>Our quality of service and expertise makes our value for money hard to beat.</p>
-            </div>
+            {FEATURE_KEYS.map((feature) => (
+              <div key={feature.titleKey} className="feature-item">
+                <div className="feature-icon">{feature.icon}</div>
+                <h3>{t(`holidayTypes.${feature.titleKey}`)}</h3>
+                <p>{t(`holidayTypes.${feature.textKey}`)}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         <section className="cta-section">
-          <h2>Ready to Plan Your Perfect Holiday?</h2>
-          <p>Contact our travel experts today and let us create an unforgettable experience for you.</p>
-          <a href="/contact/" className="cta-button">Get in Touch</a>
+          <h2>{t('holidayTypes.readyTitle')}</h2>
+          <p>{t('holidayTypes.readyText')}</p>
+          <a href="/contact/" className="cta-button">{t('common.getInTouch')}</a>
         </section>
       </div>
       </RevealOnScroll>
@@ -170,4 +95,3 @@ function HolidayTypes() {
 }
 
 export default HolidayTypes
-

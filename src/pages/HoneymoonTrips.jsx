@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './HoneymoonTrips.css'
 
 const HONEYMOON_DESTINATIONS = [
@@ -93,6 +94,7 @@ const COUNTRY_CODES = [
 ]
 
 function HoneymoonTrips() {
+  const { t } = useTranslation()
   const [showHeroForm, setShowHeroForm] = useState(false)
   const [heroRequest, setHeroRequest] = useState({
     name: '',
@@ -165,17 +167,17 @@ function HoneymoonTrips() {
     const { name, surname, email, phone, startDate, endDate, destination } = heroRequest
 
     if (!name.trim() || !surname.trim() || !email.trim() || !phone.trim() || !startDate || !endDate || !destination) {
-      alert('Please complete all fields before sending your request.')
+      alert(t('honeymoon.validationComplete'))
       return
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      alert('Please enter a valid email address.')
+      alert(t('honeymoon.validationEmail'))
       return
     }
 
     if (new Date(endDate) < new Date(startDate)) {
-      alert('Travel To date cannot be earlier than Travel From date.')
+      alert(t('honeymoon.validationDates'))
       return
     }
 
@@ -207,7 +209,7 @@ function HoneymoonTrips() {
     })
 
     if (result.ok) {
-      alert(FORM_SUCCESS_MESSAGE)
+      alert(t('forms.success'))
       setHeroRequest({
         name: '',
         surname: '',
@@ -221,30 +223,30 @@ function HoneymoonTrips() {
       setHeroHoneypot('')
       setShowHeroForm(false)
     } else {
-      alert(result.error || FORM_ERROR_MESSAGE)
+      alert(result.error || t('forms.error'))
     }
   }
 
   const handleMainRequestSubmit = async (e) => {
     e.preventDefault()
     if (!fullName.trim()) {
-      alert('Please enter your full name.')
+      alert(t('honeymoon.validationName'))
       return
     }
     if (!email.trim()) {
-      alert('Please enter your email address.')
+      alert(t('honeymoon.validationEmailRequired'))
       return
     }
     if (!selectedDestination || !HONEYMOON_DESTINATIONS.includes(selectedDestination)) {
-      alert('Please select a valid destination from the list.')
+      alert(t('honeymoon.validationDestination'))
       return
     }
     if (!phoneNumber.trim()) {
-      alert('Please enter your phone number.')
+      alert(t('honeymoon.validationPhone'))
       return
     }
     if (!message.trim()) {
-      alert('Please tell us what you would like to plan.')
+      alert(t('honeymoon.validationMessage'))
       return
     }
 
@@ -271,7 +273,7 @@ function HoneymoonTrips() {
     })
 
     if (result.ok) {
-      alert(FORM_SUCCESS_MESSAGE)
+      alert(t('forms.success'))
       setFullName('')
       setEmail('')
       setDestinationSearch('')
@@ -281,29 +283,26 @@ function HoneymoonTrips() {
       setCountryCode('+357')
       setMainHoneypot('')
     } else {
-      alert(result.error || FORM_ERROR_MESSAGE)
+      alert(result.error || t('forms.error'))
     }
   }
 
   return (
     <>
       <SEO 
-        title="Honeymoon Trips - Tailor-Made Honeymoon Packages | Honeywell Travel"
-        description="Plan your perfect honeymoon with Honeywell Travel. Tailor-made honeymoon packages to exotic destinations including Maldives, Seychelles, Bora Bora, and more. Award-winning service."
-        keywords="Honeymoon Packages Cyprus, Honeymoon Trips, Maldives Honeymoon, Seychelles Honeymoon, Bora Bora Honeymoon, Luxury Honeymoon Packages"
+        title={t('honeymoon.seoTitle')}
+        description={t('honeymoon.seoDescription')}
+        keywords={t('honeymoon.seoKeywords')}
       />
       <div className="honeymoon-trips-page">
       {/* Hero */}
       <section className="honeymoon-trips-hero">
         <div className="hero-overlay" />
         <div className="hero-content">
-          <h1>HONEYMOON TRIPS</h1>
-          <p>
-            Tailor‑made honeymoons designed around you – from idyllic islands and romantic cities
-            to once‑in‑a‑lifetime adventures across the globe.
-          </p>
+          <h1>{t('honeymoon.heroTitle')}</h1>
+          <p>{t('honeymoon.heroSubtitle')}</p>
           <button className="hero-cta" onClick={() => setShowHeroForm(true)}>
-            Start Planning Your Honeymoon
+            {t('honeymoon.startPlanning')}
           </button>
         </div>
       </section>
@@ -319,57 +318,57 @@ function HoneymoonTrips() {
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Honeymoon request form"
+            aria-label={t('honeymoon.planModalTitle')}
           >
             <button
               type="button"
               className="hero-request-close"
               onClick={() => setShowHeroForm(false)}
-              aria-label="Close form"
+              aria-label={t('honeymoon.closeForm')}
             >
               ×
             </button>
-            <h3>Plan Your Honeymoon</h3>
+            <h3>{t('honeymoon.planModalTitle')}</h3>
             <form className="hero-request-form" onSubmit={handleHeroRequestSubmit}>
               <HoneypotField value={heroHoneypot} onChange={(e) => setHeroHoneypot(e.target.value)} />
               <div className="hero-request-row">
                 <label>
-                  Name
+                  {t('forms.firstName')}
                   <input
                     type="text"
                     name="name"
                     value={heroRequest.name}
                     onChange={handleHeroRequestChange}
-                    placeholder="Enter your name"
+                    placeholder={t('forms.namePlaceholder')}
                     required
                   />
                 </label>
                 <label>
-                  Surname
+                  {t('honeymoon.surname')}
                   <input
                     type="text"
                     name="surname"
                     value={heroRequest.surname}
                     onChange={handleHeroRequestChange}
-                    placeholder="Enter your surname"
+                    placeholder={t('forms.lastName')}
                     required
                   />
                 </label>
               </div>
               <div className="hero-request-row">
                 <label>
-                  Email
+                  {t('forms.email')}
                   <input
                     type="email"
                     name="email"
                     value={heroRequest.email}
                     onChange={handleHeroRequestChange}
-                    placeholder="you@example.com"
+                    placeholder={t('forms.emailPlaceholder')}
                     required
                   />
                 </label>
                 <label className="phone-input-wrapper">
-                  Contact Number
+                  {t('forms.contactNumber')}
                   <div className="phone-input-container">
                     <select
                       className="country-code-select"
@@ -389,7 +388,7 @@ function HoneymoonTrips() {
                       name="phone"
                       value={heroRequest.phone}
                       onChange={handleHeroRequestChange}
-                      placeholder="Enter your phone number"
+                      placeholder={t('forms.phonePlaceholder')}
                       required
                       className="phone-number-input"
                     />
@@ -398,7 +397,7 @@ function HoneymoonTrips() {
               </div>
               <div className="hero-request-row">
                 <label>
-                  Travel From
+                  {t('honeymoon.travelFrom')}
                   <input
                     type="date"
                     name="startDate"
@@ -409,7 +408,7 @@ function HoneymoonTrips() {
                   />
                 </label>
                 <label>
-                  Travel To
+                  {t('honeymoon.travelTo')}
                   <input
                     type="date"
                     name="endDate"
@@ -421,14 +420,14 @@ function HoneymoonTrips() {
                 </label>
               </div>
               <label className="hero-request-full">
-                Destination
+                {t('honeymoon.destination')}
                 <select
                   name="destination"
                   value={heroRequest.destination}
                   onChange={handleHeroRequestChange}
                   required
                 >
-                  <option value="">Select destination</option>
+                  <option value="">{t('honeymoon.selectDestination')}</option>
                   {HONEYMOON_DESTINATIONS.map((dest) => (
                     <option key={dest} value={dest}>
                       {dest}
@@ -437,7 +436,7 @@ function HoneymoonTrips() {
                 </select>
               </label>
               <button type="submit" className="hero-request-submit">
-                Send Request
+                {t('common.sendRequest')}
               </button>
             </form>
           </div>
@@ -449,22 +448,10 @@ function HoneymoonTrips() {
         {/* What we do */}
         <section className="what-we-do">
           <div className="what-text">
-            <h2>What we do</h2>
-            <p>
-              Your honeymoon should feel completely unique – a celebration of your story together.
-              At Honeywell Travel we create tailor‑made honeymoons that balance romance, discovery
-              and just the right amount of luxury.
-            </p>
-            <p>
-              Whether you are dreaming of an overwater villa in the Maldives, a chic city break
-              in Paris, or a multi‑centre adventure that takes in more than one destination,
-              our consultants will guide you to the perfect combination.
-            </p>
-            <p>
-              We work with trusted hotels and partners around the world, hand‑picking each stay
-              and experience so your honeymoon flows smoothly from the moment you leave home until
-              the day you return.
-            </p>
+            <h2>{t('honeymoon.whatWeDo')}</h2>
+            <p>{t('honeymoon.whatWeDoP1')}</p>
+            <p>{t('honeymoon.whatWeDoP2')}</p>
+            <p>{t('honeymoon.whatWeDoP3')}</p>
           </div>
           <div className="what-image">
             <img 
@@ -485,31 +472,14 @@ function HoneymoonTrips() {
             />
           </div>
           <div className="why-text">
-            <h2>Why Honeywell Travel?</h2>
-            <p className="intro">
-              We take the time to get to know you and your vision of the perfect honeymoon.
-            </p>
+            <h2>{t('honeymoon.whyHoneywell')}</h2>
+            <p className="intro">{t('honeymoon.whyIntro')}</p>
             <ul className="why-list">
-              <li>
-                <span className="icon">✨</span>
-                <span><strong>Tailor‑made honeymoons</strong> built around your style, budget and dates.</span>
-              </li>
-              <li>
-                <span className="icon">🌍</span>
-                <span><strong>First‑hand knowledge</strong> of worldwide honeymoon destinations.</span>
-              </li>
-              <li>
-                <span className="icon">💌</span>
-                <span><strong>Renowned service</strong> and support before, during and after your trip.</span>
-              </li>
-              <li>
-                <span className="icon">🏝️</span>
-                <span><strong>Wide range of holidays</strong> from beach escapes to city breaks and safaris.</span>
-              </li>
-              <li>
-                <span className="icon">💰</span>
-                <span><strong>Excellent value</strong> without compromising on those special touches.</span>
-              </li>
+              <li><span className="icon">✨</span><span>{t('honeymoon.whyTailored')}</span></li>
+              <li><span className="icon">🌍</span><span>{t('honeymoon.whyKnowledge')}</span></li>
+              <li><span className="icon">💌</span><span>{t('honeymoon.whyService')}</span></li>
+              <li><span className="icon">🏝️</span><span>{t('honeymoon.whyRange')}</span></li>
+              <li><span className="icon">💰</span><span>{t('honeymoon.whyValue')}</span></li>
             </ul>
           </div>
         </section>
@@ -517,11 +487,8 @@ function HoneymoonTrips() {
         {/* Send us your request */}
         <section className="honeymoon-request">
           <div className="honeymoon-request-header">
-            <h2>Send us your request</h2>
-            <p>
-              Tell us what you&apos;re dreaming of – destination, dates, budget and any special ideas.
-              Our team will come back to you with tailored honeymoon suggestions.
-            </p>
+            <h2>{t('honeymoon.sendRequest')}</h2>
+            <p>{t('honeymoon.sendRequestIntro')}</p>
           </div>
           <div className="honeymoon-request-content">
             <div className="honeymoon-request-image">
@@ -537,31 +504,31 @@ function HoneymoonTrips() {
             <HoneypotField value={mainHoneypot} onChange={(e) => setMainHoneypot(e.target.value)} />
             <div className="form-row">
               <label>
-                Full Name
+                {t('forms.fullName')}
                 <input
                   type="text"
                   name="fullName"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Enter your full name"
+                  placeholder={t('forms.namePlaceholder')}
                   required
                 />
               </label>
               <label>
-                Email
+                {t('forms.email')}
                 <input
                   type="email"
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder={t('forms.emailPlaceholder')}
                   required
                 />
               </label>
             </div>
             <div className="form-row">
               <label className="phone-input-wrapper">
-                Contact Number
+                {t('forms.contactNumber')}
                 <div className="phone-input-container">
                   <select
                     className="country-code-select"
@@ -588,7 +555,7 @@ function HoneymoonTrips() {
               </label>
             </div>
             <label className="destination-select-wrapper">
-              Choose your Honeymoon Destination
+              {t('honeymoon.chooseDestination')}
               <div className="destination-input-container">
                 <input
                   ref={inputRef}
@@ -597,7 +564,7 @@ function HoneymoonTrips() {
                   value={destinationSearch}
                   onChange={handleDestinationChange}
                   onFocus={() => setShowDropdown(true)}
-                  placeholder="Start typing a country or island..."
+                  placeholder={t('honeymoon.selectDestinationPlaceholder')}
                   required
                   autoComplete="off"
                 />
@@ -615,7 +582,7 @@ function HoneymoonTrips() {
                     ))}
                     {filteredDestinations.length > 8 && (
                       <div className="destination-more">
-                        +{filteredDestinations.length - 8} more
+                        {t('honeymoon.moreDestinations', { count: filteredDestinations.length - 8 })}
                       </div>
                     )}
                   </div>
@@ -623,18 +590,18 @@ function HoneymoonTrips() {
               </div>
             </label>
             <label className="full-width">
-              What would you like to ask or plan?
+              {t('honeymoon.whatToPlan')}
               <textarea
                 name="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows="5"
-                placeholder="Tell us briefly what you have in mind..."
+                placeholder={t('honeymoon.whatToPlanPlaceholder')}
                 required
               />
             </label>
             <button type="submit" className="honeymoon-request-button">
-              Send request
+              {t('common.sendRequest')}
             </button>
           </form>
           </div>

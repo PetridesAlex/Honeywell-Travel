@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+import { getCategoryLabel } from '../utils/categoryI18n'
 import TourCategoryPackageRow from './TourCategoryPackageRow'
 import './TourPackagesSection.css'
 
@@ -5,75 +7,65 @@ const CATEGORY_ROWS = [
   {
     slug: 'autumn-packages',
     category: 'Autumn Packages',
-    title: 'Autumn Packages',
-    description: 'Golden-season travel across Europe and beyond.'
   },
   {
     slug: 'christmas-packages',
     category: 'Christmas Packages',
-    title: 'Christmas Packages',
-    description: 'Festive holidays and magical Christmas market itineraries.'
   },
   {
     slug: 'exotic-packages',
     category: 'Exotic Packages',
-    title: 'Exotic Packages',
-    description: 'Tropical paradises and far-flung destinations for unforgettable adventures.'
   },
   {
     slug: 'music-sports',
     category: 'Music & Sports',
-    title: 'Music & Sports',
-    description: 'Live events, concerts, and sporting experiences abroad.'
   },
   {
     slug: 'summer-packages',
     category: 'Summer Packages',
-    title: 'Summer Packages',
-    description: 'Curated European and worldwide escapes for the summer season.'
   },
   {
     slug: 'summer-packages-to-greece',
     category: 'Summer Packages to Greece',
-    title: 'Summer Packages to Greece',
-    description: 'Island and mainland holidays across Greece, crafted for sun-filled getaways.'
   },
   {
     slug: 'cruises',
     category: 'Cruises',
-    title: 'Cruises',
-    description: 'Luxury sailing experiences to iconic ports and scenic coastlines.'
   },
   {
     slug: 'winter-packages',
     category: 'Winter Packages',
-    title: 'Winter Packages',
-    description: 'Cozy winter escapes and seasonal city experiences.'
   },
   {
     slug: 'ski-packages',
     category: 'Ski Packages',
-    title: 'Ski Packages',
-    description: 'Alpine adventures at world-class ski resorts.'
-  }
+  },
 ]
 
 function TourPackagesSection() {
+  const { t } = useTranslation()
+
   return (
     <section className="tour-packages-section" aria-labelledby="tour-packages-heading">
       <div className="tour-packages-container">
         <header className="section-header">
           <h2 id="tour-packages-heading" className="section-title">
-            Tour Packages
+            {t('home.tourPackagesTitle')}
           </h2>
           <p className="section-subtitle">
-            Browse by category — each collection features handpicked packages that rotate as you explore.
+            {t('home.tourPackagesSubtitle')}
           </p>
         </header>
 
         <div className="tour-category-rows">
           {CATEGORY_ROWS.map((row) => (
-            <TourCategoryPackageRow key={row.slug} {...row} />
+            <TourCategoryPackageRow
+              key={row.slug}
+              slug={row.slug}
+              category={row.category}
+              title={getCategoryLabel(row.category, t)}
+              description={t(`home.categoryDescriptions.${row.slug}`)}
+            />
           ))}
         </div>
       </div>

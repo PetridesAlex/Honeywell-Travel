@@ -7,6 +7,7 @@ import ModalCards from '../components/ModalCards'
 import { mapPackagesToModalCards } from '../utils/modalCardFromPackage'
 import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice'
 import SEO from '../components/SEO'
+import { getCategoryLabel } from '../utils/categoryI18n'
 import './Packages.css'
 
 // Helper function to convert slug back to category name
@@ -39,71 +40,74 @@ const slugToCategory = (slug) => {
   return slugCategoryMap[slug] || null
 }
 
+const CATEGORY_TILE_KEYS = {
+  'Summer Packages': 'tileSummer',
+  'Summer Packages to Greece': 'tileSummerGreece',
+  'Autumn Packages': 'tileAutumn',
+  'Winter Packages': 'tileWinter',
+  'Spring Packages': 'tileSpring',
+  'Christmas Packages': 'tileChristmas',
+  'City Breaks': 'tileCity',
+  Cruises: 'tileCruises',
+  'Easter Packages': 'tileEaster',
+  'Exotic Packages': 'tileExotic',
+  'Green Monday': 'tileGreenMonday',
+  'Group Travel': 'tileGroup',
+  'Mary Special Trips': 'tileMary',
+  'Music & Sports': 'tileMusic',
+  'Sports Events & Concerts': 'tileSports',
+  'Ski Packages': 'tileSki',
+}
+
 const CATEGORY_TILES = {
   'Summer Packages': {
     image: '/images/bali/bali-hero.webp',
-    blurb: 'Sun-filled getaways'
   },
   'Summer Packages to Greece': {
     image: '/images/kerkyra-greece/corfu-cover-hero.webp',
-    blurb: 'Islands & mainland'
   },
   'Autumn Packages': {
     image: '/images/Georgia/Georgia-hero.webp',
-    blurb: 'Golden-season journeys'
   },
   'Winter Packages': {
     image: '/images/lapland/lapland-cover-1.webp',
-    blurb: 'Cozy winter escapes'
   },
   'Spring Packages': {
     image: '/images/Hraklio-crete/crete-cover-spring.webp',
-    blurb: 'Fresh spring breaks'
   },
   'Christmas Packages': {
     image: '/images/christmas-packages/vienna/cover-vienna-christmas.webp',
-    blurb: 'Festive holidays'
   },
   'City Breaks': {
     image: '/images/barcelona-package/barcelona-cover-one.webp',
-    blurb: 'Urban weekends'
   },
   Cruises: {
     image: '/images/cruises/msc-world-europa/msc-world-europa-5.webp',
-    blurb: 'Voyages at sea'
   },
   'Easter Packages': {
     image: '/images/easter-packages/kerkyra-easter-packages/kerkyra-easter-package-cover-hero.webp',
-    blurb: 'Spring celebrations'
   },
   'Exotic Packages': {
     image: '/images/south-africa/south-africa-hero.webp',
-    blurb: 'Faraway paradises'
   },
   'Green Monday': {
     image: '/images/Arachova/Arachova-cover.webp',
-    blurb: 'Seasonal escapes'
   },
   'Group Travel': {
     image: '/images/Balcans-countries/balcans-hero.webp',
-    blurb: 'Shared adventures'
   },
   'Mary Special Trips': {
     image: '/images/mary-special-trip/japan-2026/japan-6.webp',
-    blurb: 'Exclusive curated trips'
   },
   'Music & Sports': {
     image: '/images/categories/music-events-travel-package-cover.webp',
-    blurb: 'Live events abroad'
   },
   'Sports Events & Concerts': {
     image: '/images/athens-marathon/athens-marathon-hero.webp',
-    blurb: 'Matches & concerts'
   },
   'Ski Packages': {
     image: '/images/Arachova/arachova-town-.webp',
-    blurb: 'Alpine slopes'
-  }
+  },
 }
 
 const GALLERY_CATEGORIES = [
@@ -126,7 +130,7 @@ const GALLERY_CATEGORIES = [
 ]
 
 function Packages() {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { slug } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const [catalog, setCatalog] = useState(() => getVisiblePackages())
@@ -255,7 +259,7 @@ function Packages() {
 
   const modalCards = useMemo(
     () => mapPackagesToModalCards(filteredPackages, i18n),
-    [filteredPackages, i18n]
+    [filteredPackages, i18n.language]
   )
 
   const applyFilters = (nextCategory, nextDestination) => {
@@ -306,34 +310,34 @@ function Packages() {
   return (
     <div className="packages-page">
       <SEO
-        title="Tour Packages | Honeywell Travel"
-        description="Browse all Honeywell Travel holiday packages by destination, season, and category."
-        keywords="tour packages cyprus, holiday packages, travel deals"
+        title={t('packagesPage.seoTitle')}
+        description={t('packagesPage.seoDescription')}
+        keywords={t('packagesPage.seoKeywords')}
         url={slug ? `https://www.honeywelltravel.com.cy/tour-category/${slug.replace(/\/$/, '')}` : 'https://www.honeywelltravel.com.cy/packages'}
       />
       {/* Hero Section */}
       <div className="packages-hero">
         <div className="packages-hero-content">
-          <p className="packages-hero-label">Tour Packages</p>
-          <h1 className="packages-hero-title">Find Your Perfect Trip</h1>
-          <p className="packages-hero-subtitle">Browse by destination and season</p>
+          <p className="packages-hero-label">{t('packagesPage.title')}</p>
+          <h1 className="packages-hero-title">{t('packagesPage.subtitle')}</h1>
+          <p className="packages-hero-subtitle">{t('packagesPage.description')}</p>
         </div>
       </div>
 
       {/* Browse by Category – premium image gallery */}
       <div className="category-gallery-wrapper">
         <div className="category-gallery-header">
-          <h2 className="category-gallery-title">Browse by Category</h2>
+          <h2 className="category-gallery-title">{t('packagesPage.browseByCategory')}</h2>
           <p className="category-gallery-lead">
-            Select a collection to explore carefully curated journeys.
+            {t('packagesPage.categoryIntro')}
           </p>
         </div>
         <div className="category-gallery" role="list">
           {GALLERY_CATEGORIES.map((cat) => {
             const tile = CATEGORY_TILES[cat] || {
               image: '/images/destinations/paris-hero.webp',
-              blurb: 'Travel collection'
             }
+            const tileKey = CATEGORY_TILE_KEYS[cat] || 'tileDefault'
             const count = categoryCounts[cat] || 0
             const isActive = category === cat
             return (
@@ -352,12 +356,14 @@ function Packages() {
                 />
                 <span className="category-tile__veil" aria-hidden="true" />
                 <span className="category-tile__content">
-                  {isActive ? <span className="category-tile__badge">Selected</span> : null}
-                  <span className="category-tile__name">{cat}</span>
+                  {isActive ? <span className="category-tile__badge">{t('common.selected')}</span> : null}
+                  <span className="category-tile__name">{getCategoryLabel(cat, t)}</span>
                   <span className="category-tile__meta">
-                    <span className="category-tile__blurb">{tile.blurb}</span>
+                    <span className="category-tile__blurb">{t(`packagesPage.${tileKey}`)}</span>
                     <span className="category-tile__count">
-                      {count} {count === 1 ? 'package' : 'packages'}
+                      {count === 1
+                        ? t('packagesPage.packageCount', { count })
+                        : t('packagesPage.packagesCount', { count })}
                     </span>
                   </span>
                 </span>
@@ -381,10 +387,12 @@ function Packages() {
             <div className="results-title-block">
               <h2 className="results-title">
                 <span className="results-title-category">
-                  {category !== 'Any' ? category : 'All Packages'}
+                  {category !== 'Any' ? getCategoryLabel(category, t) : t('packagesPage.allPackages')}
                 </span>
-                <span className="results-title-count" aria-label={`${filteredPackages.length} packages found`}>
-                  {filteredPackages.length} {filteredPackages.length === 1 ? 'package' : 'packages'} found
+                <span className="results-title-count" aria-label={filteredPackages.length === 1 ? t('packagesPage.packageFound', { count: filteredPackages.length }) : t('packagesPage.packagesFound', { count: filteredPackages.length })}>
+                  {filteredPackages.length === 1
+                    ? t('packagesPage.packageFound', { count: filteredPackages.length })
+                    : t('packagesPage.packagesFound', { count: filteredPackages.length })}
                 </span>
               </h2>
             </div>
@@ -392,7 +400,7 @@ function Packages() {
               <div className="active-filters">
                 {category !== 'Any' && (
                   <span className="active-filter-tag">
-                    {category}
+                    {getCategoryLabel(category, t)}
                     <button
                       onClick={() => {
                         setCategory('Any')
@@ -420,7 +428,9 @@ function Packages() {
                 )}
                 {travelType !== 'Any' && (
                   <span className="active-filter-tag">
-                    {travelType}
+                    {travelType === 'Group Travel'
+                      ? t('packagesPage.groupTravel')
+                      : t('packagesPage.individualTravel')}
                     <button
                       onClick={() => setTravelType('Any')}
                       className="remove-filter"
@@ -431,7 +441,7 @@ function Packages() {
                 )}
                 {(minPrice || maxPrice) && (
                   <span className="active-filter-tag">
-                    Price: {minPrice || '0'} - {maxPrice || '∞'}
+                    {t('packagesPage.priceFilter', { min: minPrice || '0', max: maxPrice || '∞' })}
                     <button
                       onClick={() => {
                         setMinPrice('')
@@ -455,7 +465,7 @@ function Packages() {
                   </span>
                 )}
                 <button onClick={clearAllFilters} className="clear-all-filters">
-                  Clear All
+                  {t('common.clearAll')}
                 </button>
               </div>
             )}
@@ -466,10 +476,10 @@ function Packages() {
           ) : (
             <div className="no-results">
               <div className="no-results-icon">🔍</div>
-              <h3>No packages found</h3>
-              <p>Try adjusting your filters to see more results</p>
+              <h3>{t('packagesPage.noPackages')}</h3>
+              <p>{t('packagesPage.adjustFilters')}</p>
               <button onClick={clearAllFilters} className="reset-filters-btn">
-                Reset Filters
+                {t('common.resetFilters')}
               </button>
             </div>
           )}

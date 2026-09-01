@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useTranslation } from 'react-i18next'
 import HoneypotField from './HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './CruisesSection.css'
 
 const FEATURED_CHAINS = [
-  { name: 'Marriott', note: 'Global collection' },
-  { name: 'Hilton', note: 'Worldwide stays' },
-  { name: 'Sheraton', note: 'Signature comfort' },
-  { name: 'Hyatt', note: 'Refined hospitality' },
-  { name: 'InterContinental', note: 'Landmark hotels' },
-  { name: 'Four Seasons', note: 'Ultra luxury' },
-  { name: 'The Ritz-Carlton', note: 'Iconic service' },
-  { name: 'Accor', note: 'Sofitel · Pullman' },
-  { name: 'Fairmont', note: 'Grand addresses' },
-  { name: 'Mandarin Oriental', note: 'Boutique luxury' },
-  { name: 'St. Regis', note: 'Timeless elegance' },
-  { name: 'Kempinski', note: 'European heritage' }
+  { name: 'Marriott', noteKey: 'marriott' },
+  { name: 'Hilton', noteKey: 'hilton' },
+  { name: 'Sheraton', noteKey: 'sheraton' },
+  { name: 'Hyatt', noteKey: 'hyatt' },
+  { name: 'InterContinental', noteKey: 'intercontinental' },
+  { name: 'Four Seasons', noteKey: 'four-seasons' },
+  { name: 'The Ritz-Carlton', noteKey: 'ritz-carlton' },
+  { name: 'Accor', noteKey: 'accor' },
+  { name: 'Fairmont', noteKey: 'fairmont' },
+  { name: 'Mandarin Oriental', noteKey: 'mandarin-oriental' },
+  { name: 'St. Regis', noteKey: 'st-regis' },
+  { name: 'Kempinski', noteKey: 'kempinski' },
 ]
 
 const MARQUEE_CHAINS = [
@@ -38,10 +39,29 @@ const MARQUEE_CHAINS = [
   'Crowne Plaza',
   'Kempinski',
   'Mövenpick',
-  'Pullman'
+  'Pullman',
+]
+
+const HOTEL_VALUE_ITEMS = [
+  {
+    index: '01',
+    labelKey: 'negotiatedRates',
+    copyKey: 'negotiatedRatesCopy',
+  },
+  {
+    index: '02',
+    labelKey: 'expertMatching',
+    copyKey: 'expertMatchingCopy',
+  },
+  {
+    index: '03',
+    labelKey: 'humanSupport',
+    copyKey: 'humanSupportCopy',
+  },
 ]
 
 function CruisesSection() {
+  const { t } = useTranslation()
   const [modalOpen, setModalOpen] = useState(false)
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -53,7 +73,7 @@ function CruisesSection() {
     checkIn: '',
     checkOut: '',
     name: '',
-    email: ''
+    email: '',
   })
 
   const openModal = () => setModalOpen(true)
@@ -98,7 +118,7 @@ function CruisesSection() {
       `Hotel name: ${form.hotelName || '—'}`,
       `City: ${form.city || '—'}`,
       `Check-in: ${form.checkIn || '—'}`,
-      `Check-out: ${form.checkOut || '—'}`
+      `Check-out: ${form.checkOut || '—'}`,
     ].join('\n')
 
     const result = await submitWebsiteForm({
@@ -110,7 +130,7 @@ function CruisesSection() {
       message,
       honeypot,
       extraFields: {
-        'Hotel name': form.hotelName || '—'
+        'Hotel name': form.hotelName || '—',
       },
       leadData: {
         full_name: form.name || 'Not provided',
@@ -121,8 +141,8 @@ function CruisesSection() {
         number_of_travelers: '',
         budget: '',
         message,
-        source: 'Website'
-      }
+        source: 'Website',
+      },
     })
 
     if (result.ok) {
@@ -140,14 +160,12 @@ function CruisesSection() {
 
       <div className="cruises-container hotel-partners-container">
         <header className="hotel-partners-header">
-          <p className="hotel-partners-eyebrow">Preferred worldwide partners</p>
+          <p className="hotel-partners-eyebrow">{t('home.hotelPartnersEyebrow')}</p>
           <h2 id="hotel-partners-title" className="hotel-partners-title">
-            Stay with the world&apos;s great hotel houses
+            {t('home.hotelPartnersTitle')}
           </h2>
           <p className="hotel-partners-subtitle">
-            From Marriott and Hilton to Four Seasons and The Ritz-Carlton — we secure
-            preferential rates across leading chains, with specialist support before and
-            during your stay.
+            {t('home.hotelPartnersSubtitle')}
           </p>
         </header>
 
@@ -165,48 +183,36 @@ function CruisesSection() {
           {FEATURED_CHAINS.map((chain) => (
             <li key={chain.name} className="hotel-partners-brand">
               <span className="hotel-partners-brand-name">{chain.name}</span>
-              <span className="hotel-partners-brand-note">{chain.note}</span>
+              <span className="hotel-partners-brand-note">
+                {t(`home.hotelPartnerNotes.${chain.noteKey}`)}
+              </span>
             </li>
           ))}
         </ul>
 
         <div className="hotel-partners-value">
-          <p className="hotel-partners-value-item">
-            <span className="hotel-partners-value-index" aria-hidden="true">
-              01
-            </span>
-            <span className="hotel-partners-value-copy">
-              <span className="hotel-partners-value-label">Negotiated rates</span>
-              Often stronger than public booking platforms
-            </span>
-          </p>
-          <p className="hotel-partners-value-item">
-            <span className="hotel-partners-value-index" aria-hidden="true">
-              02
-            </span>
-            <span className="hotel-partners-value-copy">
-              <span className="hotel-partners-value-label">Expert matching</span>
-              The right property for your trip, city, and style
-            </span>
-          </p>
-          <p className="hotel-partners-value-item">
-            <span className="hotel-partners-value-index" aria-hidden="true">
-              03
-            </span>
-            <span className="hotel-partners-value-copy">
-              <span className="hotel-partners-value-label">Human support</span>
-              Room preferences, changes, and on-trip assistance
-            </span>
-          </p>
+          {HOTEL_VALUE_ITEMS.map((item) => (
+            <p key={item.index} className="hotel-partners-value-item">
+              <span className="hotel-partners-value-index" aria-hidden="true">
+                {item.index}
+              </span>
+              <span className="hotel-partners-value-copy">
+                <span className="hotel-partners-value-label">
+                  {t(`home.hotelPartnersValue.${item.labelKey}`)}
+                </span>
+                {t(`home.hotelPartnersValue.${item.copyKey}`)}
+              </span>
+            </p>
+          ))}
         </div>
 
         <div className="hotel-partners-cta">
           <p className="hotel-partners-cta-text">
-            Tell us the hotel or city — we&apos;ll quote the best available rate.
+            {t('home.hotelPartnersCtaText')}
           </p>
           <button type="button" className="hotel-cta-btn" onClick={openModal}>
             <span className="hotel-cta-btn__sheen" aria-hidden="true" />
-            <span>Request a hotel quote</span>
+            <span>{t('home.hotelQuoteCta')}</span>
             <span className="btn-icon" aria-hidden="true">
               →
             </span>
@@ -226,52 +232,51 @@ function CruisesSection() {
             <div className="hotel-quote-modal" onClick={(e) => e.stopPropagation()}>
               <div className="hotel-quote-modal-header">
                 <h2 id="hotel-quote-title" className="hotel-quote-modal-title">
-                  Request a hotel quote
+                  {t('home.hotelQuoteModalTitle')}
                 </h2>
-                <button type="button" className="hotel-quote-close" onClick={closeModal} aria-label="Close">
+                <button type="button" className="hotel-quote-close" onClick={closeModal} aria-label={t('common.close')}>
                   ×
                 </button>
               </div>
               {sent ? (
                 <div className="hotel-quote-success">
-                  <p>{FORM_SUCCESS_MESSAGE}</p>
+                  <p>{t('forms.success')}</p>
                   <button type="button" className="hotel-cta-btn" onClick={closeModal}>
-                    Close
+                    {t('common.close')}
                   </button>
                 </div>
               ) : (
                 <form className="hotel-quote-form" onSubmit={handleSubmit}>
                   <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                   <p className="hotel-quote-intro">
-                    Share the details below and we&apos;ll email you a quote for Marriott, Hilton,
-                    Sheraton, and other leading hotels.
+                    {t('home.hotelQuoteIntro')}
                   </p>
                   <label className="hotel-quote-label">
-                    Hotel name
+                    {t('home.hotelName')}
                     <input
                       type="text"
                       name="hotelName"
                       value={form.hotelName}
                       onChange={handleChange}
-                      placeholder="e.g. Hilton Paris Opéra"
+                      placeholder={t('home.hotelNamePlaceholder')}
                       className="hotel-quote-input"
                     />
                   </label>
                   <label className="hotel-quote-label">
-                    City
+                    {t('home.city')}
                     <input
                       type="text"
                       name="city"
                       value={form.city}
                       onChange={handleChange}
-                      placeholder="e.g. Paris"
+                      placeholder={t('home.cityPlaceholder')}
                       className="hotel-quote-input"
                       required
                     />
                   </label>
                   <div className="hotel-quote-row">
                     <label className="hotel-quote-label">
-                      Check-in date
+                      {t('home.checkInDate')}
                       <input
                         type="date"
                         name="checkIn"
@@ -282,7 +287,7 @@ function CruisesSection() {
                       />
                     </label>
                     <label className="hotel-quote-label">
-                      Check-out date
+                      {t('home.checkOutDate')}
                       <input
                         type="date"
                         name="checkOut"
@@ -294,25 +299,25 @@ function CruisesSection() {
                     </label>
                   </div>
                   <label className="hotel-quote-label">
-                    Your name
+                    {t('home.yourName')}
                     <input
                       type="text"
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      placeholder="Full name"
+                      placeholder={t('home.fullNamePlaceholder')}
                       className="hotel-quote-input"
                       required
                     />
                   </label>
                   <label className="hotel-quote-label">
-                    Your email
+                    {t('home.yourEmail')}
                     <input
                       type="email"
                       name="email"
                       value={form.email}
                       onChange={handleChange}
-                      placeholder="you@example.com"
+                      placeholder={t('home.emailPlaceholder')}
                       className="hotel-quote-input"
                       required
                     />
@@ -320,10 +325,10 @@ function CruisesSection() {
                   {error && <p className="hotel-quote-error">{error}</p>}
                   <div className="hotel-quote-actions">
                     <button type="button" className="hotel-quote-btn secondary" onClick={closeModal}>
-                      Cancel
+                      {t('common.cancel')}
                     </button>
                     <button type="submit" className="hotel-quote-btn primary" disabled={sending}>
-                      {sending ? 'Sending…' : 'Send request'}
+                      {sending ? t('common.sending') : t('home.sendRequest')}
                     </button>
                   </div>
                 </form>

@@ -7,11 +7,12 @@ import { useFavorites } from '../context/FavoritesContext'
 import { getPackageById } from '../data/packages'
 import { loadMergedPackages } from '../lib/packagesCatalog'
 import { packageCardImageUrl } from '../utils/packageCardImage'
-import { getPackageLeadPrice } from '../utils/packageLeadPrice'
+import { localizePackage } from '../utils/packageTranslations'
+import { translatePackageDuration } from '../utils/packageTitleI18n'
 import './FavoritesPanel.css'
 
 function FavoritesPanel() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { panelOpen, closePanel, favoriteIds, removeFavorite, clearFavorites } = useFavorites()
   const [catalog, setCatalog] = useState([])
 
@@ -60,19 +61,20 @@ function FavoritesPanel() {
             link: `/packages/${id}/details`,
           }
         }
+        const localized = localizePackage(pkg, i18n)
         return {
           id: String(pkg.id),
           missing: false,
-          title: pkg.title,
+          title: localized.title,
           imageUrl: packageCardImageUrl(pkg),
           destination: pkg.destination || '',
-          duration: pkg.duration || '',
+          duration: translatePackageDuration(pkg.duration, i18n.language),
           price: getPackageLeadPrice(pkg),
           link: `/packages/${pkg.id}/details`,
         }
       })
       .filter(Boolean)
-  }, [favoriteIds, catalog, t])
+  }, [favoriteIds, catalog, t, i18n.language])
 
   if (!panelOpen || typeof document === 'undefined') return null
 

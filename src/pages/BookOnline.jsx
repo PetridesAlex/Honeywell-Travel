@@ -1,16 +1,35 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import { loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
+import { getCategoryLabel } from '../utils/categoryI18n'
 import './BookOnline.css'
 
+const PACKAGE_TYPE_KEYS = {
+  'Any Type': 'anyType',
+  'Group Tour': 'groupTour',
+  'Private Tour': 'privateTour',
+  'Self-Guided': 'selfGuided',
+  'Adventure': 'adventure',
+  'Relaxation': 'relaxation',
+  'Family Friendly': 'familyFriendly',
+  'Luxury': 'luxury',
+}
+
 function BookOnline() {
+  const { t } = useTranslation()
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedType, setSelectedType] = useState('Any Type')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [catalog, setCatalog] = useState([])
   const resultsRef = useRef(null)
+
+  const getPackageTypeLabel = (type) => {
+    const key = PACKAGE_TYPE_KEYS[type]
+    return key ? t(`bookOnline.types.${key}`) : type
+  }
 
   // Check if any filters are active
   const hasActiveFilters = selectedCategory || selectedType !== 'Any Type' || startDate || endDate
@@ -49,16 +68,7 @@ function BookOnline() {
     'Mary Special Trips'
   ]
 
-  const packageTypes = [
-    'Any Type',
-    'Group Tour',
-    'Private Tour',
-    'Self-Guided',
-    'Adventure',
-    'Relaxation',
-    'Family Friendly',
-    'Luxury'
-  ]
+  const packageTypes = Object.keys(PACKAGE_TYPE_KEYS)
 
   // Filter packages based on selections (exclude hidden via CMS merge)
   const filteredPackages = useMemo(() => {
@@ -155,9 +165,9 @@ function BookOnline() {
   return (
     <div className="book-online-page">
       <SEO
-        title="Book Online Travel Packages | Honeywell Travel"
-        description="Search and book travel packages online by category, type, and departure date with Honeywell Travel."
-        keywords="book online travel, holiday packages cyprus, honeywell travel booking"
+        title={t('bookOnline.seoTitle')}
+        description={t('bookOnline.seoDescription')}
+        keywords={t('bookOnline.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/book-online"
       />
       <video
@@ -177,29 +187,29 @@ function BookOnline() {
         <section className="booking-hero-filters">
           <div className="container">
             <div className="hero-content">
-              <h1>Book Your Perfect Trip</h1>
-              <p>Choose your preferences and find the ideal travel package for you</p>
+              <h1>{t('bookOnline.title')}</h1>
+              <p>{t('bookOnline.subtitle')}</p>
             </div>
             <form className="booking-form" onSubmit={handleSearch}>
               <div className="filter-row">
                 <div className="filter-group">
-                  <label htmlFor="category">Travel Category</label>
+                  <label htmlFor="category">{t('bookOnline.travelCategory')}</label>
                   <select
                     id="category"
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                   >
-                    <option value="">All Categories</option>
+                    <option value="">{t('bookOnline.allCategories')}</option>
                     {categories.map((cat) => (
                       <option key={cat} value={cat}>
-                        {cat}
+                        {getCategoryLabel(cat, t)}
                       </option>
                     ))}
                   </select>
                 </div>
 
                 <div className="filter-group">
-                  <label htmlFor="type">Package Type</label>
+                  <label htmlFor="type">{t('bookOnline.packageType')}</label>
                   <select
                     id="type"
                     value={selectedType}
@@ -207,14 +217,14 @@ function BookOnline() {
                   >
                     {packageTypes.map((type) => (
                       <option key={type} value={type}>
-                        {type}
+                        {getPackageTypeLabel(type)}
                       </option>
                     ))}
                   </select>
                 </div>
 
                 <div className="filter-group">
-                  <label htmlFor="start-date">Travel From</label>
+                  <label htmlFor="start-date">{t('bookOnline.travelFrom')}</label>
                   <input
                     type="date"
                     id="start-date"
@@ -225,7 +235,7 @@ function BookOnline() {
                 </div>
 
                 <div className="filter-group">
-                  <label htmlFor="end-date">Travel To</label>
+                  <label htmlFor="end-date">{t('bookOnline.travelTo')}</label>
                   <input
                     type="date"
                     id="end-date"
@@ -239,14 +249,14 @@ function BookOnline() {
               {hasActiveFilters && (
                 <div className="form-actions">
                   <button type="submit" className="search-btn">
-                    View Results ↓
+                    {t('bookOnline.viewResults')}
                   </button>
                   <button 
                     type="button" 
                     className="clear-btn"
                     onClick={handleClearFilters}
                   >
-                    Clear Filters
+                    {t('common.clearFilters')}
                   </button>
                 </div>
               )}
@@ -259,20 +269,38 @@ function BookOnline() {
             <div className="container">
               <div className="results-header">
                 <h2 className="results-title">
-                  {filteredPackages.length} travel package{filteredPackages.length !== 1 ? 's' : ''} found
+                  {filteredPackages.length === 1
+                    ? t('bookOnline.packageFound', { count: filteredPackages.length })
+                    : t('bookOnline.packagesFound', { count: filteredPackages.length })}
                 </h2>
                 <div className="active-filters">
-                  {selectedCategory && <span className="filter-tag">Category: {selectedCategory}</span>}
-                  {selectedType && selectedType !== 'Any Type' && <span className="filter-tag">Type: {selectedType}</span>}
-                  {startDate && <span className="filter-tag">From: {new Date(startDate).toLocaleDateString()}</span>}
-                  {endDate && <span className="filter-tag">To: {new Date(endDate).toLocaleDateString()}</span>}
+                  {selectedCategory && (
+                    <span className="filter-tag">
+                      {t('bookOnline.categoryLabel')} {getCategoryLabel(selectedCategory, t)}
+                    </span>
+                  )}
+                  {selectedType && selectedType !== 'Any Type' && (
+                    <span className="filter-tag">
+                      {t('bookOnline.typeLabel')} {getPackageTypeLabel(selectedType)}
+                    </span>
+                  )}
+                  {startDate && (
+                    <span className="filter-tag">
+                      {t('bookOnline.fromLabel')} {new Date(startDate).toLocaleDateString()}
+                    </span>
+                  )}
+                  {endDate && (
+                    <span className="filter-tag">
+                      {t('bookOnline.toLabel')} {new Date(endDate).toLocaleDateString()}
+                    </span>
+                  )}
                 </div>
               </div>
 
               {filteredPackages.length === 0 ? (
                 <div className="no-results">
-                  <p>😔 No packages found matching your criteria.</p>
-                  <p>Try adjusting your filters to see more options.</p>
+                  <p>{t('bookOnline.noMatch')}</p>
+                  <p>{t('bookOnline.tryAdjust')}</p>
                 </div>
               ) : (
                 <div className="packages-grid">
@@ -300,7 +328,7 @@ function BookOnline() {
                           <div className="package-emoji">{pkg.image}</div>
                         )}
                         <div className="package-content">
-                          <p className="package-category">{pkg.category}</p>
+                          <p className="package-category">{getCategoryLabel(pkg.category, t)}</p>
                           <h3 className="package-title">{pkg.title}</h3>
                           <p className="package-destination">{pkg.destination}</p>
                           <div className="package-footer">

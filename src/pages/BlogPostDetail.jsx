@@ -1,20 +1,24 @@
 import { useParams, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getBlogPostBySlug, blogPosts } from '../data/blog'
+import { getLocalizedBlogPost } from '../utils/localizedContent'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import './BlogPostDetail.css'
 
 function BlogPostDetail() {
   const { slug } = useParams()
-  const post = getBlogPostBySlug(slug)
+  const { t, i18n } = useTranslation()
+  const rawPost = getBlogPostBySlug(slug)
+  const post = getLocalizedBlogPost(rawPost, i18n.language)
 
   if (!post) {
     return (
       <div className="blog-post-page">
         <div className="blog-post-container">
-          <h1>Post Not Found</h1>
-          <p>The blog post you're looking for doesn't exist.</p>
-          <Link to="/our-blog/" className="back-link">← Back to Blog</Link>
+          <h1>{t('blog.postNotFound')}</h1>
+          <p>{t('blog.postNotFoundText')}</p>
+          <Link to="/our-blog/" className="back-link">{t('blog.backToBlog')}</Link>
         </div>
       </div>
     )
@@ -22,8 +26,9 @@ function BlogPostDetail() {
 
   // Get related posts (same category, excluding current)
   const relatedPosts = blogPosts
-    .filter(p => p.category === post.category && p.id !== post.id)
+    .filter((p) => p.category === rawPost.category && p.id !== rawPost.id)
     .slice(0, 3)
+    .map((p) => getLocalizedBlogPost(p, i18n.language))
 
   // Format content with paragraphs
   const formatContent = (content) => {
@@ -50,14 +55,14 @@ function BlogPostDetail() {
         >
           <div className="blog-post-hero-overlay"></div>
           <div className="blog-post-hero-content">
-            <Link to="/our-blog/" className="back-to-blog">← Back to Blog</Link>
+            <Link to="/our-blog/" className="back-to-blog">{t('blog.backToBlog')}</Link>
             <div className="blog-post-meta-hero">
               <span className="blog-post-category-hero">{post.category}</span>
               <span className="blog-post-date-hero">{post.formattedDate}</span>
             </div>
             <h1 className="blog-post-title-hero">{post.title}</h1>
             {post.author && (
-              <p className="blog-post-author">By {post.author}</p>
+              <p className="blog-post-author">{t('blog.byAuthor', { author: post.author })}</p>
             )}
           </div>
         </div>
@@ -69,14 +74,14 @@ function BlogPostDetail() {
         <article className="blog-post-content">
           {!post.image && (
             <div className="blog-post-header-no-image">
-              <Link to="/our-blog/" className="back-to-blog">← Back to Blog</Link>
+              <Link to="/our-blog/" className="back-to-blog">{t('blog.backToBlog')}</Link>
               <div className="blog-post-meta-hero">
                 <span className="blog-post-category-hero">{post.category}</span>
                 <span className="blog-post-date-hero">{post.formattedDate}</span>
               </div>
               <h1 className="blog-post-title-hero">{post.title}</h1>
               {post.author && (
-                <p className="blog-post-author">By {post.author}</p>
+                <p className="blog-post-author">{t('blog.byAuthor', { author: post.author })}</p>
               )}
             </div>
           )}
@@ -111,7 +116,7 @@ function BlogPostDetail() {
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
             <div className="blog-post-tags">
-              <h3>Tags:</h3>
+              <h3>{t('blog.tags')}</h3>
               <div className="tags-list">
                 {post.tags.map((tag, index) => (
                   <span key={index} className="blog-post-tag">{tag}</span>
@@ -124,7 +129,7 @@ function BlogPostDetail() {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <aside className="blog-post-sidebar">
-            <h2 className="related-posts-title">Related Posts</h2>
+            <h2 className="related-posts-title">{t('blog.relatedPosts')}</h2>
             <div className="related-posts">
               {relatedPosts.map((relatedPost) => (
                 <Link 

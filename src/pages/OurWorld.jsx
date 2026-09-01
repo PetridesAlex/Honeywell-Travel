@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './OurWorld.css'
 
 function OurWorld() {
+  const { t } = useTranslation()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [formStatus, setFormStatus] = useState(null)
   const [sending, setSending] = useState(false)
@@ -78,17 +80,17 @@ function OurWorld() {
   return (
     <div className="our-world-page">
       <SEO
-        title="Our World | Honeywell Travel"
-        description="Meet the Honeywell Travel team and discover our story, values, and travel inspiration."
-        keywords="honeywell travel team, our world, travel experts cyprus"
+        title={t('ourWorld.seoTitle')}
+        description={t('ourWorld.seoDescription')}
+        keywords={t('ourWorld.seoKeywords')}
         url="https://www.honeywelltravel.com.cy/ourworld"
       />
       {/* Hero Section */}
       <section className="section-hero">
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <h1 className="hero-title">Our World</h1>
-          <p className="hero-subtitle">Discovering the world, one journey at a time</p>
+          <h1 className="hero-title">{t('ourWorld.heroTitle')}</h1>
+          <p className="hero-subtitle">{t('ourWorld.heroSubtitle')}</p>
         </div>
         <button
           type="button"
@@ -96,9 +98,9 @@ function OurWorld() {
           onClick={() => {
             document.getElementById('our-world-content')?.scrollIntoView({ behavior: 'smooth' })
           }}
-          aria-label="Scroll down to content"
+          aria-label={t('ourWorld.scrollDownAria')}
         >
-          <span className="hero-scroll-btn-text">Scroll to explore</span>
+          <span className="hero-scroll-btn-text">{t('ourWorld.scrollToExplore')}</span>
           <span className="hero-scroll-btn-arrow" aria-hidden>↓</span>
         </button>
       </section>
@@ -108,38 +110,30 @@ function OurWorld() {
         <div className="container">
           <div className="introduction-content">
             <h2 className="section-heading">
-              {['Discover', 'Our', 'World'].map((word, index) => (
+              {t('ourWorld.discoverTitle').split(' ').map((word, index, arr) => (
                 <span key={index} className="heading-word" style={{ animationDelay: `${index * 0.2}s` }}>
                   {word}
-                  {index < 2 && <span> </span>}
+                  {index < arr.length - 1 && <span> </span>}
                 </span>
               ))}
             </h2>
             <div className="introduction-image">
               <img
                 src="/images/our-world-people.png"
-                alt="Honeywell Travel team"
+                alt={t('ourWorld.teamPhotoAlt')}
                 className="introduction-photo"
               />
             </div>
             <div className="content-placeholder">
-              <p>Here at Honeywell Travel, we are real people in a real workplace ready to offer you the best travel services.</p>
-              
-              <p>We believe in authenticity, and we create experiences that excite you, challenge you and inspire you. We aspire to connect you with the world and make memories that will stay with you for life.</p>
-              
-              <p>Our team of travel experts are people who share the same passion – a passion for traveling and discovering beautiful corners of the world. We are all traveling souls! We love exploring new destinations, living new experiences and sharing them with you all.</p>
-              
-              <p>We strive to find the heart of every city and location, to find out what makes each place so special so that we can offer you the very best that every country has to offer.</p>
-              
-              <p>With plenty of personal experience, the help of state of art technology, and with the advice of our trusted partners in various destinations, we provide you with the best travel recommendations tailored to your taste and preferences!</p>
-              
-              <p>When it comes to business travel, we give our corporate clients a chance to concentrate on their own fields of expertise only, by offering them our own know-how on how to arrange sensible and cost efficient travel as well as comprehensive travel management.</p>
-              
-              <p>We contribute to our client's traveler's success by putting everything they need at their fingertips and providing recommendations to help them navigate unfamiliar locations.</p>
-              
-              <p>For meetings and events, it means delivering the perfect event so attendees have an enhanced experience and your company sees better return investment.</p>
-              
-              <p>We believe that every trip should be as unique as you are, and therefore we have made it our main aim to provide you with an unforgettable, hassle-free, awe-inspiring and once-in-a-lifetime experience! And we always do this with a smile. 😊</p>
+              <p>{t('ourWorld.introP1')}</p>
+              <p>{t('ourWorld.introP2')}</p>
+              <p>{t('ourWorld.introP3')}</p>
+              <p>{t('ourWorld.introP4')}</p>
+              <p>{t('ourWorld.introP5')}</p>
+              <p>{t('ourWorld.introP6')}</p>
+              <p>{t('ourWorld.introP7')}</p>
+              <p>{t('ourWorld.introP8')}</p>
+              <p>{t('ourWorld.introP9')}</p>
             </div>
           </div>
         </div>
@@ -148,33 +142,21 @@ function OurWorld() {
       {/* Awards Section */}
       <section className="section-awards">
         <div className="container">
-          <h2 className="section-heading">Award-Winning Travel Excellence</h2>
+          <h2 className="section-heading">{t('ourWorld.awardsTitle')}</h2>
           <div className="awards-intro">
-            <p className="awards-intro-text">
-              At Honeywell Travel, excellence is not a goal — it is our standard.
-            </p>
-            <p className="awards-intro-text">
-              We are proud to be recognized for delivering exceptional travel experiences, outstanding customer service, and tailor-made journeys worldwide.
-            </p>
-            <p className="awards-intro-text">
-              Our dedication to quality, reliability, and client satisfaction has earned us the trust of travelers, corporate clients, and institutions alike.
-            </p>
-            <p className="awards-intro-text">
-              Beyond leisure travel, we specialize in corporate travel management, business trips, conferences, and incentive programs, ensuring seamless planning, cost efficiency, and premium service for companies and organizations.
-            </p>
-            <p className="awards-intro-text">
-              Every award and recognition we receive reflects our passion for creating unforgettable journeys, successful business trips, and lifelong memories for our clients.
-            </p>
-            <p className="awards-intro-text awards-intro-final">
-              When you travel with Honeywell Travel, you travel with confidence.
-            </p>
+            <p className="awards-intro-text">{t('ourWorld.awardsIntroP1')}</p>
+            <p className="awards-intro-text">{t('ourWorld.awardsIntroP2')}</p>
+            <p className="awards-intro-text">{t('ourWorld.awardsIntroP3')}</p>
+            <p className="awards-intro-text">{t('ourWorld.awardsIntroP4')}</p>
+            <p className="awards-intro-text">{t('ourWorld.awardsIntroP5')}</p>
+            <p className="awards-intro-text awards-intro-final">{t('ourWorld.awardsIntroP6')}</p>
           </div>
           <div className="awards-grid">
             <div className="award-card">
               <div className="award-icon">🏅</div>
-              <h3>Best Travel Management</h3>
-              <div className="award-times">5× Award Winner</div>
-              <p>Recognised for excellence in travel management services and customer experience.</p>
+              <h3>{t('ourWorld.bestTravelManagement')}</h3>
+              <div className="award-times">{t('ourWorld.awardWinner')}</div>
+              <p>{t('ourWorld.awardRecognised')}</p>
               <p className="award-years-inline">
                 {['2025', '2024', '2022', '2021', '2020'].map((year) => (
                   <span key={year} className="award-year-pill">
@@ -198,9 +180,9 @@ function OurWorld() {
               playsInline
               preload="metadata"
               poster="/images/destinations/honeywell-travel.webp"
-              aria-label="Honeywell Travel Awards 2024"
+              aria-label={t('ourWorld.videoAria')}
             >
-              Your browser does not support the video tag.
+              {t('ourWorld.videoUnsupported')}
             </video>
           </div>
         </div>
@@ -209,8 +191,8 @@ function OurWorld() {
       {/* Meet Our Team Section */}
       <section className="section-team">
         <div className="container">
-          <h2 className="section-heading">Meet Our Team</h2>
-          <p className="section-subtitle">The passionate people behind your perfect journey</p>
+          <h2 className="section-heading">{t('ourWorld.meetTeam')}</h2>
+          <p className="section-subtitle">{t('ourWorld.teamSubtitle')}</p>
           <div className="team-grid">
             {teamMembers.map((member) => (
               <div key={member.id} className="team-card">
@@ -218,7 +200,7 @@ function OurWorld() {
                   {member.image ? (
                     <img src={member.image} alt={member.name} className="team-member-photo" />
                   ) : (
-                    <div className="team-image-placeholder">Photo</div>
+                    <div className="team-image-placeholder">{t('ourWorld.photoPlaceholder')}</div>
                   )}
                 </div>
                 <div className="team-info">
@@ -237,8 +219,8 @@ function OurWorld() {
       {/* We Love Traveling Section - Image Slider */}
       <section className="section-gallery-traveling">
         <div className="container">
-          <h2 className="section-heading">We Love Traveling</h2>
-          <p className="section-subtitle">A glimpse of the destinations and experiences we design for our travellers</p>
+          <h2 className="section-heading">{t('ourWorld.weLoveTraveling')}</h2>
+          <p className="section-subtitle">{t('ourWorld.gallerySubtitle')}</p>
           <div className="travel-slider">
             <div className="slider-container">
               <div 
@@ -249,7 +231,7 @@ function OurWorld() {
                   <div key={index} className="slider-slide">
                     <img 
                       src={image} 
-                      alt={`Travel destination ${index + 1}`}
+                      alt={t('ourWorld.travelDestinationAlt', { n: index + 1 })}
                       className="slide-image"
                       loading="lazy"
                     />
@@ -261,7 +243,7 @@ function OurWorld() {
               <button 
                 className="slider-btn prev"
                 onClick={() => setCurrentSlide((prev) => (prev === 0 ? travelImages.length - 1 : prev - 1))}
-                aria-label="Previous slide"
+                aria-label={t('ourWorld.prevSlide')}
               >
                 ←
               </button>
@@ -271,14 +253,14 @@ function OurWorld() {
                     key={index}
                     className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
                     onClick={() => setCurrentSlide(index)}
-                    aria-label={`Go to slide ${index + 1}`}
+                    aria-label={t('ourWorld.goToSlide', { n: index + 1 })}
                   />
                 ))}
               </div>
               <button 
                 className="slider-btn next"
                 onClick={() => setCurrentSlide((prev) => (prev === travelImages.length - 1 ? 0 : prev + 1))}
-                aria-label="Next slide"
+                aria-label={t('ourWorld.nextSlide')}
               >
                 →
               </button>
@@ -290,8 +272,8 @@ function OurWorld() {
       {/* Contact Form Section */}
       <section className="section-contact-form">
         <div className="container">
-          <h2 className="section-heading">Get in Touch</h2>
-          <p className="section-subtitle">We'd love to hear from you</p>
+          <h2 className="section-heading">{t('contact.getInTouch')}</h2>
+          <p className="section-subtitle">{t('contact.loveToHear')}</p>
           <form 
             className="contact-form"
             onSubmit={async (e) => {
@@ -326,11 +308,11 @@ function OurWorld() {
               })
 
               if (result.ok) {
-                setFormStatus({ type: 'success', message: result.message })
+                setFormStatus({ type: 'success', message: t('forms.success') })
                 e.target.reset()
                 setHoneypot('')
               } else {
-                setFormStatus({ type: 'error', message: result.error })
+                setFormStatus({ type: 'error', message: t('forms.error') })
               }
               setSending(false)
             }}
@@ -338,47 +320,47 @@ function OurWorld() {
             <HoneypotField value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="contact-name">Name <span className="required">*</span></label>
+                <label htmlFor="contact-name">{t('contact.name')} <span className="required">*</span></label>
                 <input 
                   type="text" 
                   id="contact-name" 
                   name="name" 
                   required 
                   className="form-input"
-                  placeholder="Your full name"
+                  placeholder={t('forms.namePlaceholder')}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="contact-email">Email <span className="required">*</span></label>
+                <label htmlFor="contact-email">{t('contact.email')} <span className="required">*</span></label>
                 <input 
                   type="email" 
                   id="contact-email" 
                   name="email" 
                   required 
                   className="form-input"
-                  placeholder="your.email@example.com"
+                  placeholder={t('forms.emailPlaceholder')}
                 />
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="contact-subject">Subject</label>
+              <label htmlFor="contact-subject">{t('forms.subject')}</label>
               <input 
                 type="text" 
                 id="contact-subject" 
                 name="subject" 
                 className="form-input"
-                placeholder="What is this regarding?"
+                placeholder={t('ourWorld.subjectPlaceholder')}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="contact-message">Message <span className="required">*</span></label>
+              <label htmlFor="contact-message">{t('contact.message')} <span className="required">*</span></label>
               <textarea 
                 id="contact-message" 
                 name="message" 
                 rows="6" 
                 required 
                 className="form-input form-textarea"
-                placeholder="Tell us what's on your mind..."
+                placeholder={t('ourWorld.messagePlaceholder')}
               ></textarea>
             </div>
             {formStatus && (
@@ -387,7 +369,7 @@ function OurWorld() {
               </p>
             )}
             <button type="submit" className="submit-button" disabled={sending}>
-              {sending ? 'Sending…' : 'Send Message'}
+              {sending ? t('common.sending') : t('common.sendMessage')}
             </button>
           </form>
         </div>
