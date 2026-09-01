@@ -270,6 +270,56 @@
       "winter-packages": "Ζεστές χειμερινές αποδράσεις και εποχιακές εμπειρίες πόλης.",
       "ski-packages": "Αλπικές περιπέτειες σε κορυφαία ski resorts."
     },
+    "heroCarousel": {
+      "ariaLabel": "Κύρια εικόνα",
+      "slide1": {
+        "title": "Καλώς ήρθατε στην Honeywell Travel",
+        "subtitle": "#Live the Experience",
+        "location": "Παγκόσμια"
+      },
+      "slide2": {
+        "title": "Περιπέτεια Βόρειου Σέλας",
+        "subtitle": "Ζήστε τη μαγική Aurora Borealis σε ανέγγιχτη φύση",
+        "location": "Ισλανδία & Νορβηγία"
+      },
+      "slide3": {
+        "title": "Ορεινές Αποδράσεις",
+        "subtitle": "Ανακαλύψτε εντυπωσιακά τοπία και φυσικά θαύματα",
+        "location": "Ορεινοί Προορισμοί"
+      },
+      "slide4": {
+        "title": "Παράδεισος Ακτών",
+        "subtitle": "Χαλαρώστε σε παρθένες παραλίες με κρυστάλλινα νερά",
+        "location": "Τροπικοί Προορισμοί"
+      },
+      "slide5": {
+        "title": "Αμsterdam & πέρα",
+        "subtitle": "Κανάλια, πολιτισμός και city breaks στην καρδιά της Ευρώπης",
+        "location": "Ολλανδία & Ευρώπη"
+      }
+    },
+    "circularGallery": {
+      "topline": "Εξερευνήστε τον Κόσμο",
+      "title": "Εμβληματικοί Προορισμοί",
+      "subtitleDesktop": "Κινήστε τον δρομέα σας στη γκαλερί και κάντε κλικ σε μια κάρτα για να εστιάσετε σε κάθε προορισμό.",
+      "subtitleMobile": "Σαρώστε τη γκαλερί και πατήστε έναν προορισμό για να εξερευνήσετε."
+    },
+    "featuredJapan": {
+      "limitedSeats": "Περιορισμένες θέσεις",
+      "reserveQuickly": "Κρατήστε γρήγορα — οι θέσεις εξαντλούνται",
+      "featured": "Προτεινόμενο",
+      "category": "Mary Special Trips",
+      "lead": "Οι μαγευτικές αποχρώσεις του φθινοπώρου — Momiji, ιστορικές πρωτεύουσες, Ιαπωνικές Άλπεις και Τόκιο, σε συνοδεία της Μαίρης Σπύρου.",
+      "datesLabel": "Ημερομηνίες",
+      "durationLabel": "Διάρκεια",
+      "routeLabel": "Διαδρομή",
+      "fromLabel": "Από",
+      "bookNow": "Κράτηση τώρα",
+      "allTrips": "Όλα τα Mary Special Trips",
+      "datesValue": "31 Οκτωβρίου – 12 Νοεμβρίου 2026"
+    },
+    "scrollPackagesLeft": "Κύλιση πακέτων {{title}} αριστερά",
+    "scrollPackagesRight": "Κύλιση πακέτων {{title}} δεξιά",
     "hotelPartnersEyebrow": "Προτιμώμενοι παγκόσμιοι συνεργάτες",
     "hotelPartnersTitle": "Διαμονή στα κορυφαία ξενοδοχεία του κόσμου",
     "hotelPartnersSubtitle": "Από Marriott και Hilton έως Four Seasons και The Ritz-Carlton — εξασφαλίζουμε προνομιακές τιμές σε κορυφαίες αλυσίδες, με εξειδικευμένη υποστήριξη πριν και κατά τη διαμονή σας.",

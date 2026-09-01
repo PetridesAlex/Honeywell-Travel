@@ -1,54 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import './ImageCarousel.css'
 
+const SLIDE_META = [
+  { id: 0, image: '/images/destinations/tour-packages-travel-view.webp', key: 'slide1' },
+  { id: 1, image: '/images/destinations/northern-lights.webp', key: 'slide2' },
+  { id: 2, image: '/images/destinations/mountain.webp', key: 'slide3' },
+  { id: 3, image: '/images/destinations/cliftonbay.webp', key: 'slide4' },
+  { id: 4, image: '/images/destinations/amsterdam-hero.webp', key: 'slide5' },
+]
+
 function ImageCarousel() {
+  const { t, i18n } = useTranslation()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [nextIndex, setNextIndex] = useState(null)
   const navigate = useNavigate()
 
-  const slides = [
-    {
-      id: 0,
-      image: '/images/destinations/tour-packages-travel-view.webp',
-      title: 'Welcome to Honeywell Travel',
-      subtitle: '#Live the Experience',
-      location: 'Worldwide'
-    },
-    {
-      id: 1,
-      image: '/images/destinations/northern-lights.webp',
-      title: 'Northern Lights Adventure',
-      subtitle: 'Experience the magical Aurora Borealis in pristine wilderness',
-      location: 'Iceland & Norway'
-    },
-    {
-      id: 2,
-      image: '/images/destinations/mountain.webp',
-      title: 'Mountain Escapes',
-      subtitle: 'Discover breathtaking landscapes and natural wonders',
-      location: 'Mountain Destinations'
-    },
-    {
-      id: 3,
-      image: '/images/destinations/cliftonbay.webp',
-      title: 'Coastal Paradise',
-      subtitle: 'Relax on pristine beaches with crystal-clear turquoise waters',
-      location: 'Tropical Destinations'
-    },
-    {
-      id: 4,
-      image: '/images/destinations/amsterdam-hero.webp',
-      title: 'Amsterdam & Beyond',
-      subtitle: 'Canals, culture and city breaks in the heart of Europe',
-      location: 'Netherlands & Europe'
-    }
-  ]
+  const slides = useMemo(
+    () =>
+      SLIDE_META.map((slide) => ({
+        id: slide.id,
+        image: slide.image,
+        title: t(`home.heroCarousel.${slide.key}.title`),
+        subtitle: t(`home.heroCarousel.${slide.key}.subtitle`),
+        location: t(`home.heroCarousel.${slide.key}.location`),
+      })),
+    [t, i18n.language],
+  )
 
-  // Keep the welcome slide longer as the primary first impression
   const getSlideDuration = (index) => (index === 0 ? 9000 : 7000)
 
-  // Smoothly rotate slides with a crossfade transition
   useEffect(() => {
     if (slides.length <= 1 || nextIndex !== null) return
     const timeout = setTimeout(() => {
@@ -72,8 +54,7 @@ function ImageCarousel() {
   const incomingImage = incoming?.image ? `url(${incoming.image})` : null
 
   return (
-    <section className="hero-section" aria-label="Hero">
-      {/* Media clipped here so the section never acts as a nested scroll/overscroll boundary */}
+    <section className="hero-section" aria-label={t('home.heroCarousel.ariaLabel')}>
       <div className="hero-section__media" aria-hidden="true">
         <div
           className="hero-bg-single hero-bg-base"
@@ -95,7 +76,7 @@ function ImageCarousel() {
           className="hero-btn"
           onClick={() => navigate('/book-online')}
         >
-          Book Online
+          {t('header.bookOnline')}
         </button>
       </div>
     </section>

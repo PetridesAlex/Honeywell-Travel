@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import './i18n/config' // Initialize i18n
 import Header from './components/Header'
 import Preloader from './components/Preloader'
@@ -45,6 +46,18 @@ import {
   hasCompletedPreloaderThisSession,
   markPreloaderComplete,
 } from './lib/preloaderSession'
+import { normalizeLang } from './utils/localizedContent'
+
+function AppShell({ children }) {
+  const { i18n } = useTranslation()
+  const langKey = normalizeLang(i18n.resolvedLanguage || i18n.language)
+
+  return (
+    <div className="app" key={langKey}>
+      {children}
+    </div>
+  )
+}
 
 /** Minimum time before revealing the app (preloader exit tied to `window` load + this delay). */
 function getMinLoaderMs() {
@@ -238,11 +251,11 @@ function App() {
       <ScrollToTop />
       <Preloader loading={loading} duration={preloaderDuration}>
         <FavoritesProvider>
-          <div className="app">
+          <AppShell>
             <AutumnLeaves />
             <AppContent />
             <FloatingContactDock />
-          </div>
+          </AppShell>
         </FavoritesProvider>
       </Preloader>
     </Router>

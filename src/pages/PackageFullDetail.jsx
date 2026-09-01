@@ -5,6 +5,7 @@ import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding
 import { getPackageById } from '../data/packages'
 import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import { localizePackage } from '../utils/packageTranslations'
+import { translatePackageDuration } from '../utils/packageTitleI18n'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
 import {
   getDepartureDates,
@@ -661,7 +662,11 @@ function PackageFullDetail() {
   const [selectedHotelFilter, setSelectedHotelFilter] = useState('')
   const [relatedTours, setRelatedTours] = useState([])
 
-  const displayPkg = useMemo(() => (pkg ? localizePackage(pkg, i18n) : null), [pkg, i18n])
+  const displayPkg = useMemo(() => (pkg ? localizePackage(pkg, i18n) : null), [pkg, i18n.language])
+  const localizedRelatedTours = useMemo(
+    () => relatedTours.map((tour) => localizePackage(tour, i18n)),
+    [relatedTours, i18n.language],
+  )
   const details = displayPkg?.details || {}
   const gallery = details.gallery || []
   const itineraryHotels = isItineraryStyleHotels(details)
@@ -1976,12 +1981,12 @@ function PackageFullDetail() {
             )}
 
             {/* Related tours */}
-            {relatedTours.length > 0 && (
+            {localizedRelatedTours.length > 0 && (
               <section className="full-section related-section">
                 <h2 className="related-section-title">{t('package.relatedTours')}</h2>
                 <p className="related-section-subtitle">{t('package.moreInCategory')}</p>
                 <div className="related-grid">
-                  {relatedTours.map((tour) => {
+                  {localizedRelatedTours.map((tour) => {
                     const thumbSrc = tour.details?.thumbnailImage || tour.details?.coverImage || tour.details?.gallery?.[0] || '/images/destinations/riviera-hero.webp'
                     return (
                       <Link
@@ -2009,7 +2014,9 @@ function PackageFullDetail() {
                         <div className="related-card-body">
                           <span className="related-destination">{tour.destination}</span>
                           <h3 className="related-card-title">{tour.title}</h3>
-                          <p className="related-card-duration">{tour.duration}</p>
+                          <p className="related-card-duration">
+                            {translatePackageDuration(tour.duration, i18n.language)}
+                          </p>
                         </div>
                       </Link>
                     )

@@ -270,6 +270,56 @@
       "winter-packages": "Cozy winter escapes and seasonal city experiences.",
       "ski-packages": "Alpine adventures at world-class ski resorts."
     },
+    "heroCarousel": {
+      "ariaLabel": "Hero",
+      "slide1": {
+        "title": "Welcome to Honeywell Travel",
+        "subtitle": "#Live the Experience",
+        "location": "Worldwide"
+      },
+      "slide2": {
+        "title": "Northern Lights Adventure",
+        "subtitle": "Experience the magical Aurora Borealis in pristine wilderness",
+        "location": "Iceland & Norway"
+      },
+      "slide3": {
+        "title": "Mountain Escapes",
+        "subtitle": "Discover breathtaking landscapes and natural wonders",
+        "location": "Mountain Destinations"
+      },
+      "slide4": {
+        "title": "Coastal Paradise",
+        "subtitle": "Relax on pristine beaches with crystal-clear turquoise waters",
+        "location": "Tropical Destinations"
+      },
+      "slide5": {
+        "title": "Amsterdam & Beyond",
+        "subtitle": "Canals, culture and city breaks in the heart of Europe",
+        "location": "Netherlands & Europe"
+      }
+    },
+    "circularGallery": {
+      "topline": "Explore Worldwide",
+      "title": "Signature Destinations",
+      "subtitleDesktop": "Move your cursor through the gallery and click a card to focus on each destination.",
+      "subtitleMobile": "Swipe through the gallery and tap a destination to explore."
+    },
+    "featuredJapan": {
+      "limitedSeats": "Limited seats",
+      "reserveQuickly": "Reserve quickly — seats are filling fast",
+      "featured": "Featured",
+      "category": "Mary Special Trips",
+      "lead": "The magical hues of autumn — Momiji, historic capitals, Japanese Alps and Tokyo, escorted by Mary Spyrou.",
+      "datesLabel": "Dates",
+      "durationLabel": "Duration",
+      "routeLabel": "Route",
+      "fromLabel": "From",
+      "bookNow": "Book now",
+      "allTrips": "All Mary Special Trips",
+      "datesValue": "31 October – 12 November 2026"
+    },
+    "scrollPackagesLeft": "Scroll {{title}} packages left",
+    "scrollPackagesRight": "Scroll {{title}} packages right",
     "hotelPartnersEyebrow": "Preferred worldwide partners",
     "hotelPartnersTitle": "Stay with the world's great hotel houses",
     "hotelPartnersSubtitle": "From Marriott and Hilton to Four Seasons and The Ritz-Carlton — we secure preferential rates across leading chains, with specialist support before and during your stay.",

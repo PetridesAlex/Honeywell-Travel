@@ -26,6 +26,9 @@ i18n
     supportedLngs: ['en', 'el'],
     nonExplicitSupportedLngs: true,
     interpolation: { escapeValue: false },
+    react: {
+      useSuspense: false,
+    },
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],

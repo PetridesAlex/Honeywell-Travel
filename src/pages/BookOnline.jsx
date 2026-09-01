@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import { loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
 import { getCategoryLabel } from '../utils/categoryI18n'
+import { localizePackage } from '../utils/packageTranslations'
+import { translatePackageDuration } from '../utils/packageTitleI18n'
 import './BookOnline.css'
 
 const PACKAGE_TYPE_KEYS = {
@@ -18,7 +20,7 @@ const PACKAGE_TYPE_KEYS = {
 }
 
 function BookOnline() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedType, setSelectedType] = useState('Any Type')
   const [startDate, setStartDate] = useState('')
@@ -305,6 +307,7 @@ function BookOnline() {
               ) : (
                 <div className="packages-grid">
                   {filteredPackages.map((pkg) => {
+                    const localized = localizePackage(pkg, i18n)
                     const imageUrl = pkg.details?.thumbnailImage || pkg.details?.coverImage || pkg.details?.gallery?.[0]
                     return (
                     <Link
@@ -329,10 +332,12 @@ function BookOnline() {
                         )}
                         <div className="package-content">
                           <p className="package-category">{getCategoryLabel(pkg.category, t)}</p>
-                          <h3 className="package-title">{pkg.title}</h3>
+                          <h3 className="package-title">{localized.title}</h3>
                           <p className="package-destination">{pkg.destination}</p>
                           <div className="package-footer">
-                            <span className="package-duration">{pkg.duration}</span>
+                            <span className="package-duration">
+                              {translatePackageDuration(pkg.duration, i18n.language)}
+                            </span>
                             <span className="package-price">€{pkg.price}</span>
                           </div>
                         </div>

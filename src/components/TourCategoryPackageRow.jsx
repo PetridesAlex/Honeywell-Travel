@@ -6,7 +6,7 @@ import { getPackageLeadPrice, mapPackagesToModalCards } from '../utils/modalCard
 import ModalCards from './ModalCards'
 
 function TourCategoryPackageRow({ slug, category, title, description }) {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const trackRef = useRef(null)
 
   const packages = useMemo(() => {
@@ -55,7 +55,7 @@ function TourCategoryPackageRow({ slug, category, title, description }) {
             <button
               type="button"
               className="tour-category-row__nav-btn"
-              aria-label={`Scroll ${title} packages left`}
+              aria-label={t('home.scrollPackagesLeft', { title })}
               onClick={() => scrollByCard(-1)}
             >
               ←
@@ -63,14 +63,14 @@ function TourCategoryPackageRow({ slug, category, title, description }) {
             <button
               type="button"
               className="tour-category-row__nav-btn"
-              aria-label={`Scroll ${title} packages right`}
+              aria-label={t('home.scrollPackagesRight', { title })}
               onClick={() => scrollByCard(1)}
             >
               →
             </button>
           </div>
           <Link to={`/tour-category/${slug}/`} className="tour-category-row__view-all">
-            View all
+            {t('common.viewAll')}
           </Link>
         </div>
       </div>

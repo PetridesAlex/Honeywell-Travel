@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import ParallaxCards from './ParallaxCards'
 import { useMobileLite } from '../hooks/useMobileLite'
 import './CircularGallery.css'
 
 function CircularGallery() {
+  const { t } = useTranslation()
   const headerRef = useRef(null)
   const [headerVisible, setHeaderVisible] = useState(false)
   const isMobileLite = useMobileLite()
@@ -46,13 +48,13 @@ function CircularGallery() {
         className={`circular-gallery-header${headerVisible ? ' circular-gallery-header--visible' : ''}`}
       >
         <div className="circular-gallery-topline">
-          <span className="circular-gallery-topline__text">Explore Worldwide</span>
+          <span className="circular-gallery-topline__text">{t('home.circularGallery.topline')}</span>
         </div>
-        <h2 className="circular-gallery-title">Signature Destinations</h2>
+        <h2 className="circular-gallery-title">{t('home.circularGallery.title')}</h2>
         <p className="circular-gallery-subtitle">
           {isMobileLite
-            ? 'Swipe through the gallery and tap a destination to explore.'
-            : 'Move your cursor through the gallery and click a card to focus on each destination.'}
+            ? t('home.circularGallery.subtitleMobile')
+            : t('home.circularGallery.subtitleDesktop')}
         </p>
       </div>
 
@@ -71,4 +73,3 @@ function CircularGallery() {
 }
 
 export default CircularGallery
-
