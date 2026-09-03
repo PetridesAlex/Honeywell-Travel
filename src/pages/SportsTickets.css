@@ -99,6 +99,60 @@
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
 }
 
+.sports-tickets-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.sports-tickets-featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 150px;
+  padding: 1.2rem 1.25rem;
+  border: 1px solid var(--st-line);
+  background:
+    linear-gradient(160deg, rgba(196, 18, 48, 0.06), transparent 55%),
+    #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sports-tickets-featured-card:hover {
+  border-color: var(--st-red);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.sports-tickets-featured-card.is-muted {
+  opacity: 0.78;
+}
+
+.sports-tickets-featured-card__label {
+  font-size: 1.2rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.sports-tickets-featured-card__blurb {
+  font-size: 0.9rem;
+  color: var(--st-muted);
+}
+
+.sports-tickets-featured-card__meta {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: var(--st-muted);
+}
+
+.sports-tickets-subheading {
+  margin: 0 0 0.65rem;
+  font-size: 1.25rem;
+}
+
 .sports-tickets-card__label {
   font-size: 1.15rem;
   font-weight: 700;

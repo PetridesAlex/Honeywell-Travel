@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getEventsAllPages } from '../services/xs2event'
+import {
+  eventMatchesTournamentNames,
+  getFeaturedBySlug,
+} from '../utils/xs2eventFeatured'
 import { expandSportTypes, formatEventWhen, formatSportLabel } from '../utils/xs2eventUi'
 import './SportsTickets.css'
 
@@ -17,9 +21,16 @@ function dedupeEvents(events) {
 }
 
 function SportsTicketsEvents() {
-  const { sportType } = useParams()
+  const { sportType, featuredSlug } = useParams()
   const decodedSport = decodeURIComponent(sportType || '')
-  const relatedTypes = useMemo(() => expandSportTypes(decodedSport), [decodedSport])
+  const decodedFeatured = decodeURIComponent(featuredSlug || '')
+  const featured = useMemo(
+    () => (decodedFeatured ? getFeaturedBySlug(decodedFeatured) : null),
+    [decodedFeatured],
+  )
+
+  const browseSport = featured?.sport_type || decodedSport
+  const relatedTypes = useMemo(() => expandSportTypes(browseSport), [browseSport])
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -27,14 +38,14 @@ function SportsTicketsEvents() {
 
   useEffect(() => {
     let cancelled = false
-    if (!decodedSport) return undefined
+    if (!browseSport && !featured) return undefined
 
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset UI before fetch
     setLoading(true)
     setError('')
     setTruncated(false)
 
-    const types = expandSportTypes(decodedSport)
+    const types = expandSportTypes(browseSport || 'soccer')
 
     Promise.all(
       types.map((sport_type) =>
@@ -49,14 +60,19 @@ function SportsTicketsEvents() {
     )
       .then((results) => {
         if (cancelled) return
-        const merged = dedupeEvents(results.flatMap((r) => r.events))
+        let merged = dedupeEvents(results.flatMap((r) => r.events))
+        if (featured?.kind === 'tournament' && featured.tournament_names?.length) {
+          merged = merged.filter((event) =>
+            eventMatchesTournamentNames(event, featured.tournament_names),
+          )
+        }
         merged.sort((a, b) => String(a.date_start || '').localeCompare(String(b.date_start || '')))
         setEvents(merged)
         const mayTruncate = results.some((r) => {
           const total = Number(r.pagination?.total_size)
           return Number.isFinite(total) && r.events.length < total
         })
-        setTruncated(mayTruncate)
+        setTruncated(mayTruncate && featured?.kind !== 'tournament')
       })
       .catch((err) => {
         if (cancelled) return
@@ -70,10 +86,13 @@ function SportsTicketsEvents() {
     return () => {
       cancelled = true
     }
-  }, [decodedSport])
+  }, [browseSport, featured])
 
+  const title = featured?.label || formatSportLabel(decodedSport)
   const showRelatedNote =
-    relatedTypes.length > 1 && relatedTypes.some((t) => t !== decodedSport.toLowerCase())
+    !featured &&
+    relatedTypes.length > 1 &&
+    relatedTypes.some((t) => t !== String(decodedSport).toLowerCase())
 
   return (
     <div className="sports-tickets-page">
@@ -82,11 +101,12 @@ function SportsTicketsEvents() {
           <Link to="/sports-tickets" className="sports-tickets-back">
             ← All sports
           </Link>
-          <h1>{formatSportLabel(decodedSport)} events</h1>
+          <h1>{title} events</h1>
           <p className="sports-tickets-lead">
             Upcoming events with available tickets
             {!loading && !error ? ` · ${events.length} found` : ''}.
           </p>
+          {featured?.blurb ? <p className="sports-tickets-status">{featured.blurb}</p> : null}
           {showRelatedNote ? (
             <p className="sports-tickets-status">
               Also including related catalogs:{' '}
@@ -102,7 +122,35 @@ function SportsTicketsEvents() {
           {error ? <p className="sports-tickets-error">{error}</p> : null}
 
           {!loading && !error && events.length === 0 ? (
-            <p className="sports-tickets-status">No upcoming events found for this sport.</p>
+            <div className="sports-tickets-notice">
+              {featured?.slug === 'champions-league' ? (
+                <>
+                  <strong>Champions League is not in the current XS2Event TEST feed.</strong>
+                  <br />
+                  The partner portal can show marketing tiles for competitions that are not (yet)
+                  present on <code>testapi.xs2event.com</code>. When XS2Event adds Champions League
+                  events to this API environment — or when you switch to the live XS2Event host —
+                  they will appear here automatically.
+                  <br />
+                  <br />
+                  Meanwhile, try{' '}
+                  <Link to="/sports-tickets/featured/premier-league">Premier League</Link>,{' '}
+                  <Link to="/sports-tickets/featured/la-liga">La Liga</Link>, or{' '}
+                  <Link to="/sports-tickets/soccer">all Soccer</Link>.
+                </>
+              ) : (
+                <>
+                  No upcoming ticketed events found for {title}.
+                  {featured?.kind === 'tournament' ? (
+                    <>
+                      {' '}
+                      This competition may exist on the XS2Event portal but have no ticketed events
+                      in the current API feed.
+                    </>
+                  ) : null}
+                </>
+              )}
+            </div>
           ) : null}
 
           {truncated ? (
@@ -125,7 +173,7 @@ function SportsTicketsEvents() {
                         event.tournament_name,
                         event.venue_name,
                         event.city,
-                        event.sport_type && event.sport_type !== decodedSport
+                        event.sport_type && event.sport_type !== browseSport
                           ? formatSportLabel(event.sport_type)
                           : null,
                       ]

@@ -171,6 +171,7 @@ function AppContent() {
           <Route path="/sports-tickets/event/:eventId" element={<SportsTicketsEventDetail />} />
           <Route path="/sports-tickets/reservation/:reservationId" element={<SportsTicketsReservation />} />
           <Route path="/sports-tickets/booking/:bookingId" element={<SportsTicketsBooking />} />
+          <Route path="/sports-tickets/featured/:featuredSlug" element={<SportsTicketsEvents />} />
           <Route path="/sports-tickets/:sportType" element={<SportsTicketsEvents />} />
           <Route path="/build-your-trip" element={<BuildYourTrip />} />
           <Route path="/build-your-trip/" element={<BuildYourTrip />} />

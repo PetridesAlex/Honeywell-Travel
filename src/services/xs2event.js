@@ -56,6 +56,16 @@ async function honeywellXs2Fetch(path, params) {
     headers: { Accept: 'application/json' },
   })
 
+  const contentType = response.headers.get('content-type') || ''
+  if (!contentType.includes('application/json')) {
+    const error = new Error(
+      'Sports tickets API is not reachable. Run `npm run dev:api` (keep it running), then use that URL — or keep Vite on :5173 with the API proxy after restarting `npm run dev`.',
+    )
+    error.status = response.status
+    error.code = 'xs2event_api_unreachable'
+    throw error
+  }
+
   let data = null
   try {
     data = await response.json()
@@ -261,6 +271,16 @@ async function honeywellXs2Json(path, { method = 'GET', body, params } = {}) {
     },
     body: body !== undefined ? JSON.stringify(body) : undefined,
   })
+
+  const contentType = response.headers.get('content-type') || ''
+  if (!contentType.includes('application/json')) {
+    const error = new Error(
+      'Sports tickets API is not reachable. Run `npm run dev:api` and use that server (or Vite with API proxy).',
+    )
+    error.status = response.status
+    error.code = 'xs2event_api_unreachable'
+    throw error
+  }
 
   let data = null
   try {
