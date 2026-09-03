@@ -219,7 +219,7 @@ function SportsTickets() {
                       className={`st-featured-tile${hasTickets ? '' : ' is-muted'}`}
                     >
                       <div className="st-featured-tile__art">
-                        <SportArt sportType={item.sport_type} iconSize={28} />
+                        <SportArt sportType={item.sport_type} iconSize={36} />
                       </div>
                       <div className="st-featured-tile__body">
                         <span className="st-featured-tile__label">{item.label}</span>
@@ -254,9 +254,16 @@ function SportsTickets() {
               )}
 
               <div className="sports-tickets-toolbar">
-                <h2 className="sports-tickets-subheading" style={{ margin: 0 }}>
-                  All sports
-                </h2>
+                <div className="sports-tickets-toolbar__copy">
+                  <h2 className="sports-tickets-subheading" style={{ margin: 0 }}>
+                    All sports
+                  </h2>
+                  <p className="sports-tickets-status sports-tickets-status--inline">
+                    {visibleSports.length} sport{visibleSports.length === 1 ? '' : 's'}
+                    {!showEmpty && Object.keys(counts).length > 0 ? ' with available tickets' : ''}.
+                    {countsLoading ? ' Updating counts…' : ''}
+                  </p>
+                </div>
                 <label className="sports-tickets-toggle">
                   <input
                     type="checkbox"
@@ -266,34 +273,33 @@ function SportsTickets() {
                   Show sports with no tickets
                 </label>
               </div>
-              <p className="sports-tickets-status">
-                {visibleSports.length} sport{visibleSports.length === 1 ? '' : 's'}
-                {!showEmpty && Object.keys(counts).length > 0 ? ' with available tickets' : ''}.
-                {countsLoading ? ' Updating counts…' : ''}
-              </p>
 
               <div className="sports-tickets-grid">
                 {visibleSports.map((sport) => {
                   const id = sport.sport_id || sport.id
                   if (!id) return null
                   const total = counts[id]
+                  const label = id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
                   return (
                     <Link
                       key={id}
                       to={`/sports-tickets/${encodeURIComponent(id)}`}
                       className="sports-tickets-card"
                     >
-                      <span className="sports-tickets-card__label">
-                        {id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
-                      </span>
-                      <span className="sports-tickets-card__meta">
-                        {typeof total === 'number'
-                          ? total > 0
-                            ? `${total} events`
-                            : 'No tickets yet'
-                          : '…'}
-                      </span>
-                      <span className="sports-tickets-card__cta">View events →</span>
+                      <div className="sports-tickets-card__art">
+                        <SportArt sportType={id} iconSize={30} />
+                      </div>
+                      <div className="sports-tickets-card__body">
+                        <span className="sports-tickets-card__label">{label}</span>
+                        <span className="sports-tickets-card__meta">
+                          {typeof total === 'number'
+                            ? total > 0
+                              ? `${total} event${total === 1 ? '' : 's'}`
+                              : 'No tickets yet'
+                            : '…'}
+                        </span>
+                        <span className="sports-tickets-card__cta">View events →</span>
+                      </div>
                     </Link>
                   )
                 })}
