@@ -36,6 +36,7 @@ import SportsTicketsEvents from './pages/SportsTicketsEvents'
 import SportsTicketsEventDetail from './pages/SportsTicketsEventDetail'
 import SportsTicketsReservation from './pages/SportsTicketsReservation'
 import SportsTicketsBooking from './pages/SportsTicketsBooking'
+import SportsTicketsMaintenance from './pages/SportsTicketsMaintenance'
 import TermsAndConditions from './pages/TermsAndConditions'
 import Xs2EventConnectionTest from './pages/Xs2EventConnectionTest'
 import PackagesCms from './pages/admin/PackagesCms'
@@ -47,6 +48,7 @@ import ForgotPassword from './pages/admin/ForgotPassword'
 import AdminGuestRoute from './pages/admin/components/AdminGuestRoute'
 import AdminProtectedRoute from './pages/admin/components/AdminProtectedRoute'
 import { ADMIN_LOGIN_PATH, ADMIN_PACKAGES_PATH } from './lib/adminAuth'
+import { isSportsTicketsPublicEnabled } from './utils/sportsTicketsAccess'
 import './App.css'
 import {
   hasCompletedPreloaderThisSession,
@@ -166,13 +168,22 @@ function AppContent() {
           <Route path="/flight-tickets" element={<FlightTickets />} />
           <Route path="/flight-tickets/" element={<FlightTickets />} />
           <Route path="/flight-tickets/:destination" element={<FlightTicketsDestination />} />
-          <Route path="/sports-tickets" element={<SportsTickets />} />
-          <Route path="/sports-tickets/" element={<SportsTickets />} />
-          <Route path="/sports-tickets/event/:eventId" element={<SportsTicketsEventDetail />} />
-          <Route path="/sports-tickets/reservation/:reservationId" element={<SportsTicketsReservation />} />
-          <Route path="/sports-tickets/booking/:bookingId" element={<SportsTicketsBooking />} />
-          <Route path="/sports-tickets/featured/:featuredSlug" element={<SportsTicketsEvents />} />
-          <Route path="/sports-tickets/:sportType" element={<SportsTicketsEvents />} />
+          {isSportsTicketsPublicEnabled() ? (
+            <>
+              <Route path="/sports-tickets" element={<SportsTickets />} />
+              <Route path="/sports-tickets/" element={<SportsTickets />} />
+              <Route path="/sports-tickets/event/:eventId" element={<SportsTicketsEventDetail />} />
+              <Route path="/sports-tickets/reservation/:reservationId" element={<SportsTicketsReservation />} />
+              <Route path="/sports-tickets/booking/:bookingId" element={<SportsTicketsBooking />} />
+              <Route path="/sports-tickets/featured/:featuredSlug" element={<SportsTicketsEvents />} />
+              <Route path="/sports-tickets/:sportType" element={<SportsTicketsEvents />} />
+            </>
+          ) : (
+            <>
+              <Route path="/sports-tickets/*" element={<SportsTicketsMaintenance />} />
+              <Route path="/sports-tickets" element={<SportsTicketsMaintenance />} />
+            </>
+          )}
           <Route path="/build-your-trip" element={<BuildYourTrip />} />
           <Route path="/build-your-trip/" element={<BuildYourTrip />} />
           <Route path="/last-minute-flights/paris" element={<ParisLastMinuteFlights />} />

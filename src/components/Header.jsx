@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import FavoritesTrigger from './FavoritesTrigger'
+import { isSportsTicketsPublicEnabled } from '../utils/sportsTicketsAccess'
 import './Header.css'
 
 const ESIM_AFFILIATE_URL =
@@ -59,6 +60,7 @@ const holidayTypesLinkClass = (item, mode) => {
 
 function Header() {
   const { t } = useTranslation()
+  const sportsTicketsEnabled = isSportsTicketsPublicEnabled()
   const [activeDropdown, setActiveDropdown] = useState(null) // desktop dropdowns
   const [closeTimeout, setCloseTimeout] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -239,16 +241,28 @@ function Header() {
             <span className="header-flight-tickets-text">{t('header.flightTickets')}</span>
           </Link>
 
-          <Link
-            to="/sports-tickets"
-            className="header-flight-tickets"
-            onClick={() => {
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-            }}
-          >
-            <span className="header-flight-tickets-icon" aria-hidden>🎟</span>
-            <span className="header-flight-tickets-text">{t('header.sportsTickets')}</span>
-          </Link>
+          {sportsTicketsEnabled ? (
+            <Link
+              to="/sports-tickets"
+              className="header-flight-tickets"
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+              }}
+            >
+              <span className="header-flight-tickets-icon" aria-hidden>🎟</span>
+              <span className="header-flight-tickets-text">{t('header.sportsTickets')}</span>
+            </Link>
+          ) : (
+            <span
+              className="header-flight-tickets header-flight-tickets--soon"
+              aria-disabled="true"
+              title={t('header.sportsTicketsMaintenanceTitle')}
+            >
+              <span className="header-flight-tickets-icon" aria-hidden>🎟</span>
+              <span className="header-flight-tickets-text">{t('header.sportsTickets')}</span>
+              <span className="header-flight-tickets-soon">{t('header.sportsTicketsSoon')}</span>
+            </span>
+          )}
 
           <Link
             to="/cruises/"
@@ -483,11 +497,23 @@ function Header() {
                   <span>{t('header.flightTickets')}</span>
                   <span className="mobile-flight-tickets-arrow">→</span>
                 </Link>
-                <Link to="/sports-tickets" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
-                  <span className="mobile-flight-tickets-icon" aria-hidden>🎟</span>
-                  <span>{t('header.sportsTickets')}</span>
-                  <span className="mobile-flight-tickets-arrow">→</span>
-                </Link>
+                {sportsTicketsEnabled ? (
+                  <Link to="/sports-tickets" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
+                    <span className="mobile-flight-tickets-icon" aria-hidden>🎟</span>
+                    <span>{t('header.sportsTickets')}</span>
+                    <span className="mobile-flight-tickets-arrow">→</span>
+                  </Link>
+                ) : (
+                  <span
+                    className="mobile-link mobile-flight-tickets mobile-flight-tickets--soon"
+                    aria-disabled="true"
+                    title={t('header.sportsTicketsMaintenanceTitle')}
+                  >
+                    <span className="mobile-flight-tickets-icon" aria-hidden>🎟</span>
+                    <span>{t('header.sportsTickets')}</span>
+                    <span className="mobile-flight-tickets-soon">{t('header.sportsTicketsSoon')}</span>
+                  </span>
+                )}
                 <Link to="/cruises/" className="mobile-link mobile-cruises-cta" onClick={closeMobileMenu}>
                   <span className="mobile-cruises-cta-icon" aria-hidden>🚢</span>
                   <span>{t('header.cruises')}</span>
