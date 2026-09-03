@@ -11,6 +11,7 @@ import {
   todayUtcDate,
   EVENTS_QUERY_ALLOWLIST,
 } from '../_lib/xs2event.js'
+import { decorateEventsWithSalesPrice, getXs2EventMarkupPercent } from '../_lib/xs2eventPricing.js'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -34,7 +35,14 @@ export default async function handler(req, res) {
     }
 
     const data = await xs2eventGet('/v1/events', params)
-    return res.status(200).json(data)
+    const events = decorateEventsWithSalesPrice(data?.events)
+    return res.status(200).json({
+      ...data,
+      events,
+      honeywell_pricing: {
+        markup_percent: getXs2EventMarkupPercent(),
+      },
+    })
   } catch (err) {
     return sendXs2EventError(res, err)
   }

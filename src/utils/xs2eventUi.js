@@ -63,22 +63,23 @@ export function formatXs2Money(amount, currency = 'EUR') {
 }
 
 export function ticketDisplayPrice(ticket) {
-  const local = ticket?.local_rates || {}
   const currency = ticket?.currency_code || ticket?.currency || 'EUR'
   return (
     formatXs2Money(
-      ticket?.honeywell_sales_price ??
-        ticket?.sales_price ??
-        ticket?.salesprice ??
-        local.face_value_eur ??
-        ticket?.face_value_eur ??
-        local.net_rate_eur ??
-        ticket?.net_rate_eur,
+      ticket?.honeywell_sales_price ?? ticket?.sales_price ?? ticket?.salesprice,
       currency,
-    ) ||
-    formatXs2Money(ticket?.face_value ?? ticket?.net_rate, currency) ||
-    null
+    ) || null
   )
+}
+
+/** Event list "From" price — minor units (cents), same scale as ticket prices. */
+export function eventDisplayFromPrice(event) {
+  if (!event) return null
+  const amount =
+    event.honeywell_min_ticket_price ??
+    event.min_ticket_price_eur
+  if (amount == null || amount === '') return null
+  return formatXs2Money(amount, 'EUR')
 }
 
 /**
@@ -96,14 +97,7 @@ export function groupTicketsForDisplay(tickets = []) {
     ].join('::')
 
     const price = Number(
-      ticket.honeywell_sales_price ??
-        ticket.sales_price ??
-        ticket.salesprice ??
-        ticket.face_value_eur ??
-        ticket.net_rate_eur ??
-        ticket.face_value ??
-        ticket.net_rate ??
-        Infinity,
+      ticket.honeywell_sales_price ?? ticket.sales_price ?? ticket.salesprice ?? Infinity,
     )
     const existing = map.get(key)
     if (!existing || price < existing.price) {

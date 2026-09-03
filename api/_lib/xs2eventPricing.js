@@ -44,3 +44,28 @@ export function decorateTicketsWithSalesPrice(tickets) {
     }
   })
 }
+
+/**
+ * XS2Event event.min_ticket_price_eur / max_ticket_price_eur are minor units (cents),
+ * despite the `_eur` suffix — same integer scale as ticket.net_rate.
+ * Attach Honeywell sell "from" price for list cards.
+ */
+export function decorateEventsWithSalesPrice(events) {
+  const markupPercent = getXs2EventMarkupPercent()
+  const list = Array.isArray(events) ? events : []
+  return list.map((event) => {
+    if (!event || typeof event !== 'object') return event
+    const minMinor = Number(event.min_ticket_price_eur)
+    const maxMinor = Number(event.max_ticket_price_eur)
+    return {
+      ...event,
+      honeywell_markup_percent: markupPercent,
+      honeywell_min_ticket_price: Number.isFinite(minMinor)
+        ? applyHoneywellMarkup(minMinor, markupPercent)
+        : null,
+      honeywell_max_ticket_price: Number.isFinite(maxMinor)
+        ? applyHoneywellMarkup(maxMinor, markupPercent)
+        : null,
+    }
+  })
+}

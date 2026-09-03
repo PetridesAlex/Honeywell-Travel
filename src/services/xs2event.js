@@ -136,15 +136,29 @@ export async function getEventsAllPages(params = {}, options = {}) {
 }
 
 /**
- * Lightweight total from pagination (one request).
+ * Lightweight total from pagination (one request). Short-lived cache for snappy UI.
  * @param {Record<string, string | number | boolean | undefined | null>} [params]
  * @returns {Promise<number>}
  */
+const eventsTotalCache = new Map()
+const EVENTS_TOTAL_TTL_MS = 90_000
+
 export async function getEventsTotal(params = {}) {
+  const key = JSON.stringify(params)
+  const cached = eventsTotalCache.get(key)
+  if (cached && Date.now() - cached.at < EVENTS_TOTAL_TTL_MS) {
+    return cached.value
+  }
+
   const data = await getEvents({ ...params, page_size: 1, page: 1 })
   const total = Number(data?.pagination?.total_size)
-  if (Number.isFinite(total)) return total
-  return Array.isArray(data?.events) ? data.events.length : 0
+  const value = Number.isFinite(total)
+    ? total
+    : Array.isArray(data?.events)
+      ? data.events.length
+      : 0
+  eventsTotalCache.set(key, { at: Date.now(), value })
+  return value
 }
 
 /**

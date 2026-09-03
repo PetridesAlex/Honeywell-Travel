@@ -98,3 +98,52 @@ export function eventMatchesTournamentNames(event, tournamentNames = []) {
     return c && (name === c || name.includes(c) || c.includes(name))
   })
 }
+
+/** Prefer server-side tournament_name filter when a single primary name is enough. */
+export function featuredEventsQuery(featured) {
+  if (!featured) return null
+  if (featured.kind === 'sport') {
+    return { sport_type: featured.sport_type, tickets_available: 'gt:0' }
+  }
+  const primary = featured.tournament_names?.[0]
+  if (primary) {
+    return {
+      sport_type: featured.sport_type,
+      tournament_name: primary,
+      tickets_available: 'gt:0',
+    }
+  }
+  return { sport_type: featured.sport_type, tickets_available: 'gt:0' }
+}
+
+/** Category options for the sports search dropdown (featured + live sports). */
+export function buildSportsSearchCategories(sportsList = [], countsMap = {}) {
+  const featured = FEATURED_BROWSE.map((item) => ({
+    id: `featured-${item.slug}`,
+    label: item.label,
+    href: `/sports-tickets/featured/${encodeURIComponent(item.slug)}`,
+    group: 'Popular competitions',
+    blurb: item.blurb,
+    sportType: item.sport_type,
+  }))
+
+  const sports = sportsList
+    .map((sport) => {
+      const id = sport.sport_id || sport.id
+      if (!id) return null
+      const total = countsMap[id]
+      return {
+        id: `sport-${id}`,
+        label: String(id)
+          .replace(/_/g, ' ')
+          .replace(/\b\w/g, (c) => c.toUpperCase()),
+        href: `/sports-tickets/${encodeURIComponent(id)}`,
+        group: 'All sports',
+        sportType: id,
+        meta: typeof total === 'number' && total > 0 ? `${total} events` : undefined,
+      }
+    })
+    .filter(Boolean)
+
+  return [...featured, ...sports]
+}

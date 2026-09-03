@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import SportsHero from '../components/sports/SportsHero'
 import {
   createBooking,
   getReservationGuestData,
@@ -118,7 +119,7 @@ function SportsTicketsReservation() {
       })
       storeBookingSession(result)
       const id = result?.booking?.booking_id
-      if (!id) throw new Error('Booking created but no booking_id was returned.')
+      if (!id) throw new Error('Booking created but no confirmation was returned.')
       navigate(`/sports-tickets/booking/${encodeURIComponent(id)}`)
     } catch (err) {
       setActionError(err?.message || 'Unable to finalize booking.')
@@ -129,51 +130,39 @@ function SportsTicketsReservation() {
 
   return (
     <div className="sports-tickets-page">
-      <section className="sports-tickets-hero sports-tickets-hero--compact">
-        <div className="sports-tickets-container">
-          <Link to="/sports-tickets" className="sports-tickets-back">
-            ← Sports tickets
-          </Link>
-          <h1>Complete booking</h1>
-          <p className="sports-tickets-lead">
-            Provide any required guest details, then finalize your booking. Payment method is
-            invoice — Honeywell Travel will send payment instructions (no card charge on this site).
-          </p>
-        </div>
-      </section>
+      <SportsHero
+        compact
+        title="Complete booking"
+        lead="Provide any required guest details, then finalize your booking. Payment is by invoice — Honeywell Travel will send payment instructions separately."
+        eyebrow="Sports & Events"
+        backHref="/sports-tickets"
+        backLabel="Sports & Events"
+      />
 
       <section className="sports-tickets-section">
-        <div className="sports-tickets-container">
+        <div className="sports-tickets-container sports-tickets-container--narrow">
           <div className="sports-tickets-notice">
-            Reservation ID: <strong>{decodedId}</strong>
             {validUntil ? (
               <>
-                <br />
                 Hold valid until: <strong>{formatEventWhen(validUntil)}</strong>
               </>
-            ) : null}
-            {matches && reservation?.status ? (
-              <>
-                <br />
-                Status: <strong>{reservation.status}</strong>
-              </>
-            ) : null}
+            ) : (
+              <>Your tickets are held temporarily while you complete this step.</>
+            )}
           </div>
 
           {items.length > 0 ? (
             <ul className="sports-tickets-ticket-list" style={{ marginBottom: '1.5rem' }}>
               {items.map((item, index) => (
-                <li key={`${item.ticket_id}-${index}`} className="sports-tickets-ticket-card">
+                <li key={`${item.ticket_id || index}-${index}`} className="sports-tickets-ticket-card">
                   <div>
-                    <h2>{item.ticket_name || item.ticket_id}</h2>
-                    <p>{[item.event_name, `Qty ${item.quantity}`].filter(Boolean).join(' · ')}</p>
+                    <h2>{item.ticket_name || item.event_name || 'Ticket'}</h2>
+                    <p>{[item.event_name, item.quantity ? `Qty ${item.quantity}` : null].filter(Boolean).join(' · ')}</p>
                   </div>
                   <div className="sports-tickets-ticket-card__aside">
                     <span className="sports-tickets-ticket-card__price">
-                      {formatXs2Money(
-                        item.salesprice ?? item.sales_price ?? item.net_rate,
-                        item.currency || 'EUR',
-                      ) || '—'}
+                      {formatXs2Money(item.salesprice ?? item.sales_price, item.currency || 'EUR') ||
+                        '—'}
                     </span>
                   </div>
                 </li>
@@ -189,59 +178,69 @@ function SportsTicketsReservation() {
             <p className="sports-tickets-status">No guest fields required for this reservation.</p>
           ) : null}
 
-          {!guestLoading && guestItems.map((item, itemIndex) => (
-            <div key={`${item.ticket_id}-${itemIndex}`} className="sports-tickets-guest-block">
-              <p className="sports-tickets-guest-block__title">
-                Ticket {item.ticket_id} · {item.guests.length} guest(s)
-              </p>
-              {item.guests.map((guest, guestIndex) => (
-                <div key={`${guest.guest_id || guestIndex}`} className="sports-tickets-guest-card">
-                  <h3>
-                    {guest.lead_guest ? 'Lead guest' : `Guest ${guestIndex + 1}`}
-                  </h3>
-                  <div className="sports-tickets-guest-grid">
-                    {guest.fields.map((field) => (
-                      <label key={field}>
-                        {fieldLabel(field)}
-                        {guest.conditions?.[field] === 'pre_checkout' ? ' *' : ''}
-                        {field === 'gender' ? (
-                          <select
-                            value={guest.values?.[field] || ''}
-                            onChange={(e) =>
-                              updateGuestValue(itemIndex, guestIndex, field, e.target.value)
-                            }
-                          >
-                            <option value="">Select…</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="unknown">Unknown</option>
-                          </select>
-                        ) : (
-                          <input
-                            type={field === 'date_of_birth' ? 'date' : field.includes('email') ? 'email' : 'text'}
-                            value={guest.values?.[field] || ''}
-                            onChange={(e) =>
-                              updateGuestValue(itemIndex, guestIndex, field, e.target.value)
-                            }
-                          />
-                        )}
-                      </label>
-                    ))}
+          {!guestLoading &&
+            guestItems.map((item, itemIndex) => (
+              <div key={`${item.ticket_id || itemIndex}-${itemIndex}`} className="sports-tickets-guest-block">
+                <p className="sports-tickets-guest-block__title">
+                  Guest party {itemIndex + 1}
+                  {item.guests.length ? ` · ${item.guests.length} guest(s)` : ''}
+                </p>
+                {item.guests.map((guest, guestIndex) => (
+                  <div key={`${guest.guest_id || guestIndex}`} className="sports-tickets-guest-card">
+                    <h3>{guest.lead_guest ? 'Lead guest' : `Guest ${guestIndex + 1}`}</h3>
+                    <div className="sports-tickets-guest-grid">
+                      {guest.fields.map((field) => (
+                        <label key={field}>
+                          {fieldLabel(field)}
+                          {guest.conditions?.[field] === 'pre_checkout' ? ' *' : ''}
+                          {field === 'gender' ? (
+                            <select
+                              value={guest.values?.[field] || ''}
+                              onChange={(e) =>
+                                updateGuestValue(itemIndex, guestIndex, field, e.target.value)
+                              }
+                            >
+                              <option value="">Select…</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                              <option value="unknown">Unknown</option>
+                            </select>
+                          ) : (
+                            <input
+                              type={
+                                field === 'date_of_birth'
+                                  ? 'date'
+                                  : field.includes('email')
+                                    ? 'email'
+                                    : 'text'
+                              }
+                              value={guest.values?.[field] || ''}
+                              onChange={(e) =>
+                                updateGuestValue(itemIndex, guestIndex, field, e.target.value)
+                              }
+                            />
+                          )}
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ))}
+                ))}
+              </div>
+            ))}
 
           {needsGuestInput ? (
             <button
               type="button"
-              className="sports-tickets-reserve-btn"
+              className="st-btn st-btn--primary"
               disabled={savingGuests || guestLoading}
               onClick={submitGuests}
               style={{ marginTop: '0.75rem' }}
             >
-              {savingGuests ? 'Saving guests…' : guestsSaved ? 'Guest data saved — update again' : 'Save guest data'}
+              {savingGuests
+                ? 'Saving guests…'
+                : guestsSaved
+                  ? 'Guest data saved — update again'
+                  : 'Save guest data'}
             </button>
           ) : null}
 
@@ -260,12 +259,12 @@ function SportsTicketsReservation() {
             </label>
             <p className="sports-tickets-status">
               Payment method: <strong>invoice</strong>. You will receive a confirmation email; Honeywell
-              Travel will follow up with payment instructions. No card payment is taken on this website.
+              Travel will follow up with payment instructions.
             </p>
             {actionError ? <p className="sports-tickets-error">{actionError}</p> : null}
             <button
               type="button"
-              className="sports-tickets-reserve-btn"
+              className="st-btn st-btn--primary"
               disabled={booking || guestLoading}
               onClick={finalizeBooking}
             >

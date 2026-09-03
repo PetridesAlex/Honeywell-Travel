@@ -1,11 +1,17 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState, useTransition } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getEventsAllPages } from '../services/xs2event'
+import { RefreshCw } from 'lucide-react'
+import EventFilters from '../components/sports/EventFilters'
+import EventGrid from '../components/sports/EventGrid'
+import SportSelector from '../components/sports/SportSelector'
+import SportsHero from '../components/sports/SportsHero'
+import { getEvents, getSports } from '../services/xs2event'
 import {
+  buildSportsSearchCategories,
   eventMatchesTournamentNames,
   getFeaturedBySlug,
 } from '../utils/xs2eventFeatured'
-import { expandSportTypes, formatEventWhen, formatSportLabel } from '../utils/xs2eventUi'
+import { expandSportTypes, formatSportLabel } from '../utils/xs2eventUi'
 import './SportsTickets.css'
 
 function dedupeEvents(events) {
@@ -20,6 +26,28 @@ function dedupeEvents(events) {
   return out
 }
 
+function uniqueSorted(values) {
+  return [...new Set(values.filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b)))
+}
+
+const EMPTY_FILTERS = {
+  competitions: [],
+  country: '',
+  city: '',
+  month: '',
+  team: '',
+}
+
+async function fetchEventsPage(params, page, pageSize) {
+  const data = await getEvents({ ...params, page_size: pageSize, page })
+  const batch = Array.isArray(data?.events) ? data.events : []
+  const pagination = data?.pagination || null
+  const total = Number(pagination?.total_size)
+  const hasNext =
+    Boolean(pagination?.next_page) || (Number.isFinite(total) && page * pageSize < total)
+  return { batch, hasNext, total: Number.isFinite(total) ? total : null }
+}
+
 function SportsTicketsEvents() {
   const { sportType, featuredSlug } = useParams()
   const decodedSport = decodeURIComponent(sportType || '')
@@ -30,165 +58,298 @@ function SportsTicketsEvents() {
   )
 
   const browseSport = featured?.sport_type || decodedSport
-  const relatedTypes = useMemo(() => expandSportTypes(browseSport), [browseSport])
+  const [sports, setSports] = useState([])
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [error, setError] = useState('')
-  const [truncated, setTruncated] = useState(false)
+  const [search, setSearch] = useState('')
+  const [sort, setSort] = useState('date')
+  const [filters, setFilters] = useState(EMPTY_FILTERS)
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [reloadKey, setReloadKey] = useState(0)
+  const [, startTransition] = useTransition()
+
+  useEffect(() => {
+    getSports({ page_size: 100 })
+      .then((data) => setSports(Array.isArray(data?.sports) ? data.sports : []))
+      .catch(() => setSports([]))
+  }, [])
 
   useEffect(() => {
     let cancelled = false
     if (!browseSport && !featured) return undefined
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset UI before fetch
     setLoading(true)
+    setLoadingMore(false)
     setError('')
-    setTruncated(false)
+    setEvents([])
+    setFilters(EMPTY_FILTERS)
 
-    const types = expandSportTypes(browseSport || 'soccer')
+    ;(async () => {
+      try {
+        const pageSize = 50
+        const maxPages = 12
+        const queries = []
 
-    Promise.all(
-      types.map((sport_type) =>
-        getEventsAllPages(
-          {
-            sport_type,
-            tickets_available: 'gt:0',
-          },
-          { pageSize: 100, maxPages: 20 },
-        ),
-      ),
-    )
-      .then((results) => {
+        if (featured?.kind === 'tournament' && featured.tournament_names?.length) {
+          // Prefer API tournament filters for speed (aliases in parallel).
+          const names = featured.tournament_names.slice(0, 3)
+          for (const tournament_name of names) {
+            queries.push({
+              sport_type: featured.sport_type,
+              tournament_name,
+              tickets_available: 'gt:0',
+            })
+          }
+        } else {
+          const types = expandSportTypes(browseSport || 'soccer')
+          for (const sport_type of types) {
+            queries.push({ sport_type, tickets_available: 'gt:0' })
+          }
+        }
+
+        // First page of each query → paint quickly
+        const firstPages = await Promise.all(
+          queries.map((params) => fetchEventsPage(params, 1, pageSize).catch(() => ({ batch: [], hasNext: false }))),
+        )
         if (cancelled) return
-        let merged = dedupeEvents(results.flatMap((r) => r.events))
+
+        let merged = dedupeEvents(firstPages.flatMap((r) => r.batch))
         if (featured?.kind === 'tournament' && featured.tournament_names?.length) {
           merged = merged.filter((event) =>
             eventMatchesTournamentNames(event, featured.tournament_names),
           )
         }
-        merged.sort((a, b) => String(a.date_start || '').localeCompare(String(b.date_start || '')))
         setEvents(merged)
-        const mayTruncate = results.some((r) => {
-          const total = Number(r.pagination?.total_size)
-          return Number.isFinite(total) && r.events.length < total
-        })
-        setTruncated(mayTruncate && featured?.kind !== 'tournament')
-      })
-      .catch((err) => {
+        setLoading(false)
+
+        const needsMore = firstPages.some((r) => r.hasNext)
+        if (!needsMore) return
+
+        setLoadingMore(true)
+        const collected = [...merged]
+
+        for (let page = 2; page <= maxPages; page += 1) {
+          const pages = await Promise.all(
+            queries.map((params) =>
+              fetchEventsPage(params, page, pageSize).catch(() => ({
+                batch: [],
+                hasNext: false,
+              })),
+            ),
+          )
+          if (cancelled) return
+
+          let anyNext = false
+          let anyBatch = false
+          for (const pageResult of pages) {
+            if (pageResult.batch.length) {
+              anyBatch = true
+              collected.push(...pageResult.batch)
+            }
+            if (pageResult.hasNext) anyNext = true
+          }
+          if (!anyBatch) break
+
+          let next = dedupeEvents(collected)
+          if (featured?.kind === 'tournament' && featured.tournament_names?.length) {
+            next = next.filter((event) =>
+              eventMatchesTournamentNames(event, featured.tournament_names),
+            )
+          }
+          setEvents(next)
+          if (!anyNext) break
+        }
+      } catch (err) {
         if (cancelled) return
         setError(err?.message || 'Unable to load events.')
         setEvents([])
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false)
-      })
+        setLoading(false)
+      } finally {
+        if (!cancelled) setLoadingMore(false)
+      }
+    })()
 
     return () => {
       cancelled = true
     }
-  }, [browseSport, featured])
+  }, [browseSport, featured, reloadKey])
+
+  const competitions = useMemo(
+    () => uniqueSorted(events.map((e) => e.tournament_name)),
+    [events],
+  )
+  const countries = useMemo(
+    () => uniqueSorted(events.map((e) => e.iso_country || e.country)),
+    [events],
+  )
+  const cities = useMemo(() => uniqueSorted(events.map((e) => e.city)), [events])
+
+  const onFilterChange = useCallback((key, value) => {
+    startTransition(() => {
+      setFilters((prev) => {
+        if (key === 'competitions') {
+          const next = prev.competitions.includes(value)
+            ? prev.competitions.filter((item) => item !== value)
+            : [...prev.competitions, value]
+          return { ...prev, competitions: next }
+        }
+        return { ...prev, [key]: value }
+      })
+    })
+  }, [startTransition])
+
+  const clearFilters = useCallback(() => {
+    startTransition(() => {
+      setFilters(EMPTY_FILTERS)
+      setSearch('')
+    })
+  }, [startTransition])
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase()
+    let list = events.filter((event) => {
+      if (filters.competitions.length && !filters.competitions.includes(event.tournament_name)) {
+        return false
+      }
+      if (filters.country) {
+        const country = event.iso_country || event.country
+        if (country !== filters.country) return false
+      }
+      if (filters.city && event.city !== filters.city) return false
+      if (filters.month) {
+        const start = String(event.date_start || '')
+        if (!start.startsWith(filters.month)) return false
+      }
+      if (filters.team) {
+        const teamQ = filters.team.trim().toLowerCase()
+        const teams = `${event.hometeam_name || ''} ${event.visiting_name || ''} ${event.event_name || ''}`.toLowerCase()
+        if (!teams.includes(teamQ)) return false
+      }
+      if (q) {
+        const hay = [
+          event.event_name,
+          event.tournament_name,
+          event.city,
+          event.venue_name,
+          event.hometeam_name,
+          event.visiting_name,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase()
+        if (!hay.includes(q)) return false
+      }
+      return true
+    })
+
+    list = [...list]
+    if (sort === 'price') {
+      list.sort(
+        (a, b) =>
+          Number(a.honeywell_min_ticket_price ?? a.min_ticket_price_eur ?? Infinity) -
+          Number(b.honeywell_min_ticket_price ?? b.min_ticket_price_eur ?? Infinity),
+      )
+    } else {
+      list.sort((a, b) => String(a.date_start || '').localeCompare(String(b.date_start || '')))
+    }
+    return list
+  }, [events, filters, search, sort])
 
   const title = featured?.label || formatSportLabel(decodedSport)
-  const showRelatedNote =
-    !featured &&
-    relatedTypes.length > 1 &&
-    relatedTypes.some((t) => t !== String(decodedSport).toLowerCase())
+  const activeSport = featured ? featured.sport_type : decodedSport
+  const searchCategories = useMemo(() => buildSportsSearchCategories(sports), [sports])
+  const activeFilterCount =
+    filters.competitions.length +
+    (filters.country ? 1 : 0) +
+    (filters.city ? 1 : 0) +
+    (filters.month ? 1 : 0) +
+    (filters.team.trim() ? 1 : 0)
 
   return (
     <div className="sports-tickets-page">
-      <section className="sports-tickets-hero sports-tickets-hero--compact">
-        <div className="sports-tickets-container">
-          <Link to="/sports-tickets" className="sports-tickets-back">
-            ← All sports
-          </Link>
-          <h1>{title} events</h1>
-          <p className="sports-tickets-lead">
-            Upcoming events with available tickets
-            {!loading && !error ? ` · ${events.length} found` : ''}.
-          </p>
-          {featured?.blurb ? <p className="sports-tickets-status">{featured.blurb}</p> : null}
-          {showRelatedNote ? (
-            <p className="sports-tickets-status">
-              Also including related catalogs:{' '}
-              {relatedTypes.map((t) => formatSportLabel(t)).join(', ')}.
-            </p>
-          ) : null}
-        </div>
-      </section>
+      <SportsHero
+        compact
+        title={`${title} events`}
+        lead={
+          featured?.blurb ||
+          'Upcoming events with available tickets. Filter by competition, destination or team.'
+        }
+        eyebrow="Honeywell Travel"
+        backHref="/sports-tickets"
+        backLabel="All sports"
+        searchValue={search}
+        onSearchChange={(v) => startTransition(() => setSearch(v))}
+        searchCategories={searchCategories}
+      />
 
       <section className="sports-tickets-section">
         <div className="sports-tickets-container">
-          {loading ? <p className="sports-tickets-status">Loading events…</p> : null}
-          {error ? <p className="sports-tickets-error">{error}</p> : null}
+          <SportSelector sports={sports} activeSport={activeSport} />
 
-          {!loading && !error && events.length === 0 ? (
-            <div className="sports-tickets-notice">
-              {featured?.slug === 'champions-league' ? (
-                <>
-                  <strong>Champions League is not in the current XS2Event TEST feed.</strong>
-                  <br />
-                  The partner portal can show marketing tiles for competitions that are not (yet)
-                  present on <code>testapi.xs2event.com</code>. When XS2Event adds Champions League
-                  events to this API environment — or when you switch to the live XS2Event host —
-                  they will appear here automatically.
-                  <br />
-                  <br />
-                  Meanwhile, try{' '}
-                  <Link to="/sports-tickets/featured/premier-league">Premier League</Link>,{' '}
-                  <Link to="/sports-tickets/featured/la-liga">La Liga</Link>, or{' '}
-                  <Link to="/sports-tickets/soccer">all Soccer</Link>.
-                </>
-              ) : (
-                <>
-                  No upcoming ticketed events found for {title}.
-                  {featured?.kind === 'tournament' ? (
-                    <>
-                      {' '}
-                      This competition may exist on the XS2Event portal but have no ticketed events
-                      in the current API feed.
-                    </>
-                  ) : null}
-                </>
-              )}
+          {error ? (
+            <div className="st-error-panel">
+              <h3>We couldn&apos;t load sporting events right now</h3>
+              <p>Please try again in a moment.</p>
+              <button type="button" className="st-btn st-btn--primary" onClick={() => setReloadKey((n) => n + 1)}>
+                <RefreshCw size={16} aria-hidden />
+                Try again
+              </button>
             </div>
           ) : null}
 
-          {truncated ? (
-            <p className="sports-tickets-status">
-              Showing the first {events.length} events. Narrow by sport if you need a smaller list.
-            </p>
-          ) : null}
+          {!error ? (
+            <div className="st-marketplace">
+              <EventFilters
+                competitions={competitions}
+                countries={countries}
+                cities={cities}
+                filters={filters}
+                onChange={onFilterChange}
+                onClear={clearFilters}
+                activeCount={activeFilterCount}
+                mobileOpen={mobileFiltersOpen}
+                onMobileOpen={() => setMobileFiltersOpen(true)}
+                onMobileClose={() => setMobileFiltersOpen(false)}
+              />
 
-          <ul className="sports-tickets-event-list">
-            {events.map((event) => (
-              <li key={event.event_id || event.slug}>
-                <Link
-                  to={`/sports-tickets/event/${encodeURIComponent(event.event_id)}`}
-                  className="sports-tickets-event-row"
-                >
-                  <div className="sports-tickets-event-row__main">
-                    <h2>{event.event_name || event.event_id}</h2>
-                    <p>
-                      {[
-                        event.tournament_name,
-                        event.venue_name,
-                        event.city,
-                        event.sport_type && event.sport_type !== browseSport
-                          ? formatSportLabel(event.sport_type)
-                          : null,
-                      ]
-                        .filter(Boolean)
-                        .join(' · ')}
-                    </p>
+              <div>
+                <div className="st-results-header">
+                  <p className="st-results-header__count">
+                    <strong>{loading ? '…' : filtered.length}</strong> events
+                    {loadingMore ? <span className="st-results-header__loading"> · loading more…</span> : null}
+                  </p>
+                  <label className="st-sort">
+                    Sort
+                    <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                      <option value="date">Date</option>
+                      <option value="price">Price</option>
+                    </select>
+                  </label>
+                </div>
+
+                {!loading && featured?.slug === 'champions-league' && filtered.length === 0 ? (
+                  <div className="sports-tickets-notice">
+                    Champions League fixtures are not available in the current ticket feed. Try{' '}
+                    <Link to="/sports-tickets/featured/premier-league">Premier League</Link>,{' '}
+                    <Link to="/sports-tickets/featured/la-liga">La Liga</Link>, or{' '}
+                    <Link to="/sports-tickets/soccer">all Football</Link>.
                   </div>
-                  <div className="sports-tickets-event-row__meta">
-                    <span>{formatEventWhen(event.date_start)}</span>
-                    <span className="sports-tickets-event-row__cta">Tickets →</span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+                ) : null}
+
+                <EventGrid
+                  events={filtered}
+                  loading={loading}
+                  emptyAction={
+                    <button type="button" className="st-btn st-btn--primary" onClick={clearFilters}>
+                      Clear filters
+                    </button>
+                  }
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
     </div>

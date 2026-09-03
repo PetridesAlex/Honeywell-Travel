@@ -1,176 +1,843 @@
+/* Premium Honeywell Sports & Events marketplace */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .sports-tickets-page {
   --st-red: #c41230;
-  --st-ink: #1a1a1f;
+  --st-red-deep: #9f1239;
+  --st-blue: #1d4ed8;
+  --st-blue-bright: #2563eb;
+  --st-navy: #153a63;
+  --st-ink: #0f2d4a;
   --st-muted: #64748b;
   --st-line: #e2e8f0;
   --st-bg: #f8fafc;
+  --st-surface: #ffffff;
+  --st-cream: #fffef7;
+  --st-gradient: linear-gradient(120deg, #c41230 0%, #9f1239 28%, #1d4ed8 72%, #2563eb 100%);
+  --st-radius-sm: 10px;
+  --st-radius: 14px;
+  --st-radius-lg: 18px;
+  --st-pill: 999px;
+  --st-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  --st-shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.12);
+  --st-ease: 0.22s ease;
+  --st-focus: #93c5fd;
   min-height: 60vh;
   background:
-    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(196, 18, 48, 0.06), transparent 55%),
-    linear-gradient(180deg, #fff 0%, var(--st-bg) 40%, #fff 100%);
+    radial-gradient(ellipse 70% 45% at 8% 0%, rgba(196, 18, 48, 0.07), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 92% 8%, rgba(29, 78, 216, 0.06), transparent 50%),
+    linear-gradient(180deg, #fff 0%, var(--st-bg) 42%, #fff 100%);
   color: var(--st-ink);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+}
+
+.sports-tickets-page *:focus-visible {
+  outline: 2px solid var(--st-focus);
+  outline-offset: 3px;
 }
 
 .sports-tickets-container {
-  width: min(1100px, calc(100% - 2rem));
+  width: min(1240px, calc(100% - 2rem));
   margin: 0 auto;
 }
 
-.sports-tickets-hero {
-  padding: 3.5rem 0 2rem;
+.sports-tickets-container--narrow {
+  width: min(1100px, calc(100% - 2rem));
 }
 
-.sports-tickets-hero--compact {
-  padding: 2.25rem 0 1.25rem;
+/* —— Hero —— */
+.st-hero {
+  position: relative;
+  padding: 3.5rem 0 2.75rem;
+  overflow: visible;
+  color: #fff;
+  background: #0f2d4a;
+  z-index: 30;
 }
 
-.sports-tickets-eyebrow {
-  margin: 0 0 0.5rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--st-red);
-  font-weight: 700;
+.st-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.sports-tickets-hero h1 {
-  margin: 0 0 0.75rem;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  line-height: 1.15;
+.st-hero__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 58% 78% at 12% 35%, rgba(196, 18, 48, 0.5), transparent 58%),
+    radial-gradient(ellipse 48% 68% at 88% 28%, rgba(29, 78, 216, 0.42), transparent 55%),
+    linear-gradient(125deg, #c41230 0%, #9f1239 26%, #153a63 62%, #1d4ed8 100%);
+  background-size: 180% 180%;
+  animation: st-hero-shift 12s ease-in-out infinite;
+  opacity: 0.92;
 }
 
-.sports-tickets-lead {
-  margin: 0;
-  max-width: 40rem;
-  color: var(--st-muted);
-  font-size: 1.05rem;
-  line-height: 1.55;
+.st-hero__mesh {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 85%);
+  opacity: 0.55;
 }
 
-.sports-tickets-back {
-  display: inline-block;
-  margin-bottom: 0.85rem;
-  color: var(--st-red);
-  text-decoration: none;
+.st-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(15, 45, 74, 0.55) 0%, rgba(15, 45, 74, 0.22) 55%, rgba(15, 45, 74, 0.4) 100%),
+    linear-gradient(180deg, rgba(15, 45, 74, 0.15) 0%, rgba(15, 45, 74, 0.55) 100%);
+}
+
+.st-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.st-hero__topline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.35rem;
+  animation: st-hero-rise 480ms ease both;
+}
+
+.st-hero__copy {
+  max-width: 42rem;
+  animation: st-hero-rise 560ms ease 60ms both;
+}
+
+.st-hero__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.85rem 0.45rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 0.86rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease,
+    transform 180ms ease, box-shadow 180ms ease;
 }
 
-.sports-tickets-back:hover {
-  text-decoration: underline;
+.st-hero__back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  transition: transform 180ms ease, background 180ms ease;
 }
 
-.sports-tickets-section {
-  padding: 0 0 4rem;
+.st-hero__back-text {
+  padding-right: 0.15rem;
 }
 
-.sports-tickets-status,
-.sports-tickets-error {
-  margin: 0 0 1.25rem;
+.st-hero__back:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.38);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  text-decoration: none;
 }
 
-.sports-tickets-error {
-  color: #b91c1c;
+.st-hero__back:hover .st-hero__back-icon {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(-2px);
 }
 
-.sports-tickets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
+.st-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 0.85rem;
+  padding: 0.38rem 0.85rem 0.38rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(15, 45, 74, 0.28);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.sports-tickets-card {
+.st-hero__eyebrow-mark {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff6b7a, #c41230 45%, #2563eb);
+  box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.22);
+  animation: st-hero-pulse 2.4s ease-in-out infinite;
+}
+
+.st-hero__eyebrow-text {
+  line-height: 1;
+}
+
+.st-hero__title,
+.st-hero h1.st-hero__title {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif) !important;
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #ffffff !important;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28);
+}
+
+.st-hero__lead {
+  margin: 0 0 1.6rem;
+  max-width: 34rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.st-hero--compact {
+  padding: 2.5rem 0 2.15rem;
+}
+
+.st-hero--compact .st-hero__topline {
+  margin-bottom: 1.15rem;
+}
+
+.st-hero--compact .st-hero__copy {
+  max-width: 40rem;
+}
+
+.st-hero--compact .st-hero__eyebrow {
+  margin-bottom: 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
+.st-hero--compact .st-hero__title,
+.st-hero--compact h1.st-hero__title {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.85rem, 3.4vw, 2.55rem);
+  letter-spacing: -0.035em;
+}
+
+.st-hero--compact .st-hero__lead {
+  margin-bottom: 1.35rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.st-hero--compact .st-search {
+  max-width: 36rem;
+  animation: st-hero-rise 620ms ease 110ms both;
+}
+
+@keyframes st-hero-shift {
+  0%,
+  100% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+}
+
+@keyframes st-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes st-hero-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.2);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 5px rgba(196, 18, 48, 0.12);
+  }
+}
+
+/* —— Search —— */
+.st-search {
+  position: relative;
+  max-width: 40rem;
+  z-index: 5;
+}
+
+.st-search.is-open {
+  z-index: 80;
+}
+
+.st-search__icon {
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  color: var(--st-muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.st-search__input {
+  width: 100%;
+  padding: 0.95rem 1.15rem 0.95rem 2.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--st-shadow);
+  font: inherit;
+  font-size: 0.98rem;
+  color: var(--st-ink);
+  transition: border-color var(--st-ease), box-shadow var(--st-ease), border-radius var(--st-ease);
+}
+
+.st-search.is-open .st-search__input {
+  border-radius: 1.1rem 1.1rem 0.35rem 0.35rem;
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.28), 0 14px 32px rgba(15, 45, 74, 0.18);
+}
+
+.st-search__input::placeholder {
+  color: #94a3b8;
+}
+
+.st-search__input:focus {
+  outline: none;
+  border-color: var(--st-blue);
+  box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.45), var(--st-shadow);
+}
+
+.st-search--plain .st-search__input {
+  border-color: var(--st-line);
+  box-shadow: none;
+}
+
+.st-search-panel {
+  overflow: auto;
+  padding: 0.7rem 0.55rem 0.8rem;
+  border: 1px solid rgba(15, 45, 74, 0.1);
+  border-radius: 0 0 1.15rem 1.15rem;
+  background: #ffffff;
+  box-shadow: 0 28px 56px rgba(15, 45, 74, 0.28);
+  -webkit-overflow-scrolling: touch;
+  animation: st-search-panel-in 160ms ease-out;
+}
+
+.st-search-panel--portal {
+  border-radius: 0 0 1.15rem 1.15rem;
+  border-top: 0;
+}
+
+@keyframes st-search-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.st-search-panel__group + .st-search-panel__group {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(15, 45, 74, 0.08);
+}
+
+.st-search-panel__label {
+  margin: 0 0.65rem 0.45rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.st-search-panel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.st-search-panel__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.72rem 0.75rem;
+  border: 0;
+  border-radius: 0.8rem;
+  background: transparent;
+  color: var(--st-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.st-search-panel__option:hover,
+.st-search-panel__option.is-active {
+  background: rgba(15, 45, 74, 0.055);
+}
+
+.st-search-panel__option.is-active {
+  box-shadow: inset 0 0 0 1px rgba(15, 45, 74, 0.06);
+}
+
+.st-search-panel__option-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.7rem;
+  background: linear-gradient(145deg, rgba(15, 45, 74, 0.07), rgba(196, 18, 48, 0.1));
+  color: var(--st-navy, #0f2d4a);
+}
+
+.st-search-panel__option-text {
+  flex: 1 1 auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1.25rem;
-  min-height: 120px;
-  padding: 1.15rem 1.2rem;
+  gap: 0.14rem;
+}
+
+.st-search-panel__option-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #0f172a;
+}
+
+.st-search-panel__option-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.st-search-panel__option-chevron {
+  flex: 0 0 auto;
+  color: #94a3b8;
+  opacity: 0.9;
+}
+
+.st-search-panel__empty,
+.st-search-panel__hint {
+  margin: 0.4rem 0.75rem 0.2rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.st-search-panel__empty {
+  padding: 0.95rem 0.35rem;
+}
+
+/* —— Sport selector rail —— */
+.st-sport-rail {
+  display: flex;
+  gap: 0.55rem;
+  overflow-x: auto;
+  padding: 0.35rem 0 0.65rem;
+  margin: 0 0 1.5rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.st-sport-rail::-webkit-scrollbar {
+  height: 4px;
+}
+
+.st-sport-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.95rem;
   border: 1px solid var(--st-line);
-  background: #fff;
+  border-radius: var(--st-pill);
+  background: var(--st-surface);
+  color: var(--st-ink);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
   text-decoration: none;
-  color: inherit;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: border-color var(--st-ease), background var(--st-ease), color var(--st-ease),
+    box-shadow var(--st-ease), transform var(--st-ease);
 }
 
-.sports-tickets-card:hover {
-  border-color: var(--st-red);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+.st-sport-pill:hover {
+  border-color: rgba(196, 18, 48, 0.45);
+  transform: translateY(-1px);
 }
 
-.sports-tickets-featured-grid {
+.st-sport-pill.is-active {
+  border-color: transparent;
+  background: var(--st-gradient);
+  background-size: 180% 180%;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(196, 18, 48, 0.28);
+}
+
+.st-sport-pill__icon {
+  display: inline-flex;
+  opacity: 0.9;
+}
+
+/* —— Marketplace layout —— */
+.st-marketplace {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(220px, 24%) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.st-filters {
+  position: sticky;
+  top: calc(var(--header-height, 100px) + 1rem);
+  padding: 1.25rem 1.2rem 1.35rem;
+  border: 1px solid rgba(15, 45, 74, 0.08);
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(165deg, rgba(196, 18, 48, 0.035), transparent 42%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 40px rgba(15, 45, 74, 0.08);
+}
+
+.st-filters__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(15, 45, 74, 0.08);
+}
+
+.st-filters__title,
+.st-filters h2.st-filters__title {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif) !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--st-navy) !important;
+  text-shadow: none;
+}
+
+.st-filters__badge,
+.st-filters-mobile-toggle__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45rem;
+  height: 1.45rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: var(--st-gradient);
+  background-size: 160% 160%;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.st-filters__active {
+  margin-bottom: 1.05rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.85rem;
+  background: rgba(15, 45, 74, 0.04);
+  border: 1px solid rgba(15, 45, 74, 0.06);
+  animation: st-filter-in 180ms ease-out;
+}
+
+@keyframes st-filter-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.st-filters__active-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.st-filters__active-clear {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 0;
+  background: transparent;
+  color: var(--st-red);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.st-filters__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.st-filters__chip {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(196, 18, 48, 0.2);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--st-ink);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.st-filters__chip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.st-filters__chip:hover {
+  border-color: rgba(196, 18, 48, 0.45);
+  background: rgba(196, 18, 48, 0.06);
+  transform: translateY(-1px);
+}
+
+.st-filters__group {
+  margin-bottom: 1.2rem;
+}
+
+.st-filters__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.sports-tickets-featured-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  min-height: 150px;
-  padding: 1.2rem 1.25rem;
-  border: 1px solid var(--st-line);
-  background:
-    linear-gradient(160deg, rgba(196, 18, 48, 0.06), transparent 55%),
-    #fff;
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.sports-tickets-featured-card:hover {
-  border-color: var(--st-red);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
-}
-
-.sports-tickets-featured-card.is-muted {
-  opacity: 0.78;
-}
-
-.sports-tickets-featured-card__label {
-  font-size: 1.2rem;
-  font-weight: 750;
-  line-height: 1.2;
-}
-
-.sports-tickets-featured-card__blurb {
-  font-size: 0.9rem;
-  color: var(--st-muted);
-}
-
-.sports-tickets-featured-card__meta {
-  margin-top: auto;
-  font-size: 0.85rem;
-  color: var(--st-muted);
-}
-
-.sports-tickets-subheading {
-  margin: 0 0 0.65rem;
-  font-size: 1.25rem;
-}
-
-.sports-tickets-card__label {
-  font-size: 1.15rem;
+.st-filters__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
 }
 
-.sports-tickets-card__meta {
-  margin-top: auto;
-  font-size: 0.85rem;
-  color: var(--st-muted);
+.st-filters__label-row .st-filters__label {
+  margin-bottom: 0;
 }
 
-.sports-tickets-card__cta {
-  color: var(--st-red);
+.st-filters__count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.st-filters__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+  padding: 0.1rem 0.15rem 0.15rem 0;
+}
+
+.st-filters__pill {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(15, 45, 74, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--st-ink);
+  font: inherit;
+  font-size: 0.82rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease,
+    box-shadow 150ms ease, transform 150ms ease;
 }
 
-.sports-tickets-toolbar {
+.st-filters__pill:hover {
+  border-color: rgba(196, 18, 48, 0.35);
+  transform: translateY(-1px);
+}
+
+.st-filters__pill.is-selected {
+  border-color: transparent;
+  background: var(--st-gradient);
+  background-size: 180% 180%;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(196, 18, 48, 0.22);
+}
+
+.st-filters__empty {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.st-filters__field {
+  position: relative;
+}
+
+.st-filters select,
+.st-filters input[type='search'],
+.st-filters input[type='month'] {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(15, 45, 74, 0.12);
+  border-radius: 0.75rem;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--st-ink);
+  background: #fff;
+  transition: border-color var(--st-ease), box-shadow var(--st-ease);
+}
+
+.st-filters select:focus,
+.st-filters input[type='search']:focus,
+.st-filters input[type='month']:focus {
+  outline: none;
+  border-color: rgba(29, 78, 216, 0.45);
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.35);
+}
+
+.st-filters__clear {
+  appearance: none;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(196, 18, 48, 0.22);
+  border-radius: 0.8rem;
+  background: rgba(196, 18, 48, 0.04);
+  color: var(--st-red);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background var(--st-ease), border-color var(--st-ease), opacity var(--st-ease);
+}
+
+.st-filters__clear:hover:not(:disabled) {
+  background: rgba(196, 18, 48, 0.1);
+  border-color: rgba(196, 18, 48, 0.4);
+}
+
+.st-filters__clear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.st-filters__drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.st-filters-mobile-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  padding: 0.7rem 1.05rem;
+  border: 1px solid rgba(15, 45, 74, 0.1);
+  border-radius: var(--st-pill);
+  background: #fff;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--st-ink);
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(15, 45, 74, 0.06);
+}
+
+.st-filters-drawer-backdrop {
+  display: none;
+}
+
+.st-results-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -179,8 +846,533 @@
   margin-bottom: 1.25rem;
 }
 
-.sports-tickets-toolbar .sports-tickets-status {
+.st-results-header__count {
   margin: 0;
+  font-size: 1rem;
+  color: var(--st-muted);
+}
+
+.st-results-header__count strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--st-ink);
+  letter-spacing: -0.02em;
+}
+
+.st-results-header__loading {
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+.st-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--st-muted);
+}
+
+.st-sort select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(15, 45, 74, 0.12);
+  border-radius: 0.7rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--st-ink);
+  background: #fff;
+}
+
+/* —— Event grid & cards —— */
+.st-event-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.35rem;
+}
+
+.st-event-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(15, 45, 74, 0.08);
+  border-radius: 1.2rem;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 10px 28px rgba(15, 45, 74, 0.06);
+  transition: transform var(--st-ease), box-shadow var(--st-ease), border-color var(--st-ease);
+}
+
+.st-event-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(196, 18, 48, 0.28);
+  box-shadow: 0 22px 48px rgba(15, 45, 74, 0.12);
+}
+
+.st-event-card:hover .st-event-card__art-inner {
+  transform: scale(1.05);
+}
+
+.st-event-card__art {
+  position: relative;
+  height: 156px;
+  overflow: hidden;
+}
+
+.st-event-card__art-inner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease;
+}
+
+.st-event-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  padding: 1.25rem 1.3rem 1.3rem;
+}
+
+.st-event-card__competition {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st-red);
+}
+
+.st-event-card__title,
+.st-event-card h2.st-event-card__title {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif) !important;
+  font-size: clamp(1.2rem, 2.2vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--st-ink) !important;
+  text-shadow: none;
+}
+
+.st-event-card__vs {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.15rem 0 0.1rem;
+  text-align: left;
+}
+
+.st-event-card__team {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: #0b1f33;
+}
+
+.st-event-card__vs-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--st-red);
+}
+
+.st-event-card__vs-label::before,
+.st-event-card__vs-label::after {
+  content: '';
+  width: 1.1rem;
+  height: 1px;
+  background: rgba(196, 18, 48, 0.35);
+}
+
+.st-event-card__meta-row {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  margin-top: 0.15rem;
+}
+
+.st-event-card__meta {
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.st-event-card__meta-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.st-event-card__meta-text--when {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.st-event-card__meta-text--where {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.st-event-card__availability {
+  margin-top: 0.35rem;
+}
+
+.st-event-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15, 45, 74, 0.08);
+}
+
+.st-event-card__cta {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--st-red);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.st-event-card:hover .st-event-card__cta {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* —— Date badge —— */
+.st-date-badge {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.55rem;
+  padding: 0.55rem 0.45rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(165deg, rgba(21, 58, 99, 0.07), rgba(196, 18, 48, 0.08));
+  border: 1px solid rgba(15, 45, 74, 0.08);
+  text-align: center;
+  line-height: 1.05;
+}
+
+.st-date-badge__month {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--st-red);
+}
+
+.st-date-badge__day {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--st-navy);
+}
+
+.st-date-badge__weekday {
+  margin-top: 0.1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+/* —— Price & availability —— */
+.st-price {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.st-price__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--st-muted);
+}
+
+.st-price__value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0b1f33;
+}
+
+.st-price--lg .st-price__value {
+  font-size: 1.45rem;
+}
+
+.st-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.6rem;
+  border-radius: var(--st-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.st-availability--ok {
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
+}
+
+.st-availability--limited {
+  background: rgba(217, 119, 6, 0.12);
+  color: #b45309;
+}
+
+/* —— Sport art —— */
+.st-sport-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.st-sport-art__mesh {
+  position: absolute;
+  inset: 0;
+}
+
+.st-sport-art__icon {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.88);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+}
+
+.st-sport-art__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.st-sport-art--soccer .st-sport-art__mesh {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.18), transparent 45%),
+    linear-gradient(135deg, #0f766e 0%, #153a63 55%, #c41230 100%);
+}
+
+.st-sport-art--formula1 .st-sport-art__mesh {
+  background:
+    repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(255, 255, 255, 0.05) 12px, rgba(255, 255, 255, 0.05) 24px),
+    linear-gradient(135deg, #111827 0%, #c41230 50%, #1d4ed8 100%);
+}
+
+.st-sport-art--tennis .st-sport-art__mesh {
+  background:
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.2), transparent 40%),
+    linear-gradient(135deg, #166534 0%, #14532d 40%, #153a63 100%);
+}
+
+.st-sport-art--motogp .st-sport-art__mesh {
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(251, 191, 36, 0.35), transparent 50%),
+    linear-gradient(135deg, #0f172a 0%, #9f1239 55%, #2563eb 100%);
+}
+
+.st-sport-art--rugby .st-sport-art__mesh {
+  background: linear-gradient(135deg, #365314 0%, #153a63 55%, #c41230 100%);
+}
+
+.st-sport-art--boxing .st-sport-art__mesh,
+.st-sport-art--combatsport .st-sport-art__mesh {
+  background: linear-gradient(135deg, #1c1917 0%, #c41230 45%, #153a63 100%);
+}
+
+.st-sport-art--basketball .st-sport-art__mesh,
+.st-sport-art--nba .st-sport-art__mesh {
+  background: linear-gradient(135deg, #9a3412 0%, #c2410c 40%, #1d4ed8 100%);
+}
+
+.st-sport-art--golf .st-sport-art__mesh {
+  background: linear-gradient(135deg, #3f6212 0%, #4d7c0f 40%, #153a63 100%);
+}
+
+.st-sport-art--cricket .st-sport-art__mesh {
+  background: linear-gradient(135deg, #14532d 0%, #166534 35%, #0f766e 100%);
+}
+
+.st-sport-art--default .st-sport-art__mesh {
+  background: var(--st-gradient);
+}
+
+.st-sport-art--darts .st-sport-art__mesh,
+.st-sport-art--horseracing .st-sport-art__mesh,
+.st-sport-art--icehockey .st-sport-art__mesh,
+.st-sport-art--nfl .st-sport-art__mesh,
+.st-sport-art--mlb .st-sport-art__mesh,
+.st-sport-art--padel .st-sport-art__mesh,
+.st-sport-art--handball .st-sport-art__mesh,
+.st-sport-art--cycling .st-sport-art__mesh,
+.st-sport-art--rowing .st-sport-art__mesh,
+.st-sport-art--dtm .st-sport-art__mesh,
+.st-sport-art--superbike .st-sport-art__mesh,
+.st-sport-art--motorsport .st-sport-art__mesh {
+  background: var(--st-gradient);
+}
+
+/* —— Featured horizontal —— */
+.st-featured-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 280px);
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.25rem 0 0.85rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.st-featured-tile {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  min-height: 168px;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-radius-lg);
+  overflow: hidden;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--st-ease), box-shadow var(--st-ease);
+}
+
+.st-featured-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--st-shadow);
+}
+
+.st-featured-tile.is-muted {
+  opacity: 0.78;
+}
+
+.st-featured-tile__art {
+  height: 72px;
+}
+
+.st-featured-tile__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.st-featured-tile__label {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.st-featured-tile__blurb,
+.st-featured-tile__meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--st-muted);
+}
+
+.st-featured-tile__cta {
+  margin-top: auto;
+  padding-top: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--st-red);
+}
+
+/* —— Section chrome —— */
+.sports-tickets-section {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 0 4rem;
+}
+
+.sports-tickets-subheading {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  color: var(--st-ink);
+  text-shadow: none;
+}
+
+.sports-tickets-section-lead {
+  margin: 0 0 1.15rem;
+  max-width: 40rem;
+  color: var(--st-muted);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.sports-tickets-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+  color: rgba(255, 254, 247, 0.92);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.sports-tickets-back:hover {
+  text-decoration: underline;
+}
+
+.sports-tickets-back--dark {
+  color: var(--st-red);
+}
+
+.sports-tickets-status,
+.sports-tickets-error {
+  margin: 0 0 1.15rem;
+}
+
+.sports-tickets-error {
+  color: #b91c1c;
+}
+
+.sports-tickets-notice {
+  margin: 0 0 1.25rem;
+  padding: 0.9rem 1.05rem;
+  background: rgba(196, 18, 48, 0.06);
+  border-left: 3px solid var(--st-red);
+  border-radius: 0 var(--st-radius-sm) var(--st-radius-sm) 0;
+  color: #4a1c24;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.sports-tickets-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  margin: 2rem 0 1rem;
 }
 
 .sports-tickets-toggle {
@@ -193,70 +1385,286 @@
   user-select: none;
 }
 
-.sports-tickets-event-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
+/* —— Skeletons —— */
+.st-skeleton {
+  border-radius: var(--st-radius-lg);
+  background: linear-gradient(90deg, #eef2f7 0%, #f8fafc 45%, #eef2f7 100%);
+  background-size: 200% 100%;
+  animation: st-shimmer 1.2s ease-in-out infinite;
 }
 
-.sports-tickets-event-row {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1.1rem 1.2rem;
+.st-skeleton-card {
+  height: 320px;
+}
+
+.st-skeleton-pill {
+  height: 2.4rem;
+  width: 7.5rem;
+  border-radius: var(--st-pill);
+  flex: 0 0 auto;
+}
+
+.st-skeleton-ticket {
+  height: 6.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@keyframes st-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* —— Empty / error panels —— */
+.st-empty,
+.st-error-panel {
+  padding: 2rem 1.5rem;
+  border: 1px dashed var(--st-line);
+  border-radius: var(--st-radius-lg);
+  background: rgba(248, 250, 252, 0.8);
+  text-align: center;
+}
+
+.st-empty h3,
+.st-error-panel h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.25rem;
+  color: var(--st-ink);
+  text-shadow: none;
+}
+
+.st-empty p,
+.st-error-panel p {
+  margin: 0 0 1rem;
+  color: var(--st-muted);
+}
+
+.st-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.15rem;
+  border: none;
+  border-radius: var(--st-pill);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--st-ease), filter var(--st-ease), box-shadow var(--st-ease);
+}
+
+.st-btn--primary {
+  background: var(--st-gradient);
+  background-size: 180% 180%;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(196, 18, 48, 0.28);
+}
+
+.st-btn--primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.st-btn--primary:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+}
+
+.st-btn--ghost {
   background: #fff;
   border: 1px solid var(--st-line);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.15s ease;
-}
-
-.sports-tickets-event-row:hover {
-  border-color: var(--st-red);
-}
-
-.sports-tickets-event-row__main h2 {
-  margin: 0 0 0.35rem;
-  font-size: 1.1rem;
-}
-
-.sports-tickets-event-row__main p,
-.sports-tickets-ticket-card p {
-  margin: 0;
   color: var(--st-muted);
-  font-size: 0.92rem;
-  line-height: 1.45;
 }
 
-.sports-tickets-event-row__meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.4rem;
-  text-align: right;
-  color: var(--st-muted);
-  font-size: 0.88rem;
-  white-space: nowrap;
-}
-
-.sports-tickets-event-row__cta {
+.st-btn--ghost:hover {
+  border-color: rgba(196, 18, 48, 0.35);
   color: var(--st-red);
+}
+
+/* —— Trust —— */
+.st-trust {
+  margin-top: 3rem;
+  padding: 2rem 1.5rem;
+  border-radius: var(--st-radius-lg);
+  background:
+    linear-gradient(135deg, rgba(196, 18, 48, 0.05), rgba(29, 78, 216, 0.06)),
+    #fff;
+  border: 1px solid var(--st-line);
+}
+
+.st-trust__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.st-trust__item {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
+}
+
+.st-trust__icon {
+  display: inline-flex;
+  padding: 0.55rem;
+  border-radius: 12px;
+  background: rgba(196, 18, 48, 0.08);
+  color: var(--st-red);
+}
+
+.st-trust__item h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
   font-weight: 700;
+  color: var(--st-ink);
+  text-shadow: none;
 }
 
-.sports-tickets-notice {
-  margin: 0 0 1.25rem;
-  padding: 0.85rem 1rem;
-  background: rgba(196, 18, 48, 0.06);
-  border-left: 3px solid var(--st-red);
-  color: #4a1c24;
+.st-trust__item p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--st-muted);
+}
+
+/* —— Event detail —— */
+.st-detail-hero {
+  position: relative;
+  min-height: 300px;
+  color: #fff;
+  overflow: hidden;
+  background: #0f2d4a;
+}
+
+.st-detail-hero__art {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+}
+
+.st-detail-hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(15, 45, 74, 0.92) 0%, rgba(15, 45, 74, 0.72) 48%, rgba(196, 18, 48, 0.45) 100%),
+    linear-gradient(180deg, rgba(15, 45, 74, 0.35) 0%, rgba(15, 45, 74, 0.88) 100%);
+}
+
+.st-detail-hero__inner {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem 0 2.35rem;
+  max-width: 48rem;
+}
+
+.st-detail-hero .sports-tickets-back {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: none;
+}
+
+.st-detail-hero .sports-tickets-back:hover {
+  color: #fff;
+}
+
+.st-detail-hero__competition {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: none;
+}
+
+.st-detail-hero__teams,
+.st-detail-hero h1.st-detail-hero__teams {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif) !important;
+  font-size: clamp(1.75rem, 3.6vw, 2.55rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.st-detail-hero__vs {
+  display: inline-block;
+  margin: 0 0.45rem;
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.st-detail-hero__meta {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+
+.st-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: 1.75rem;
+  align-items: start;
+  padding-top: 1.75rem;
+}
+
+.st-detail-aside {
+  position: sticky;
+  top: calc(var(--header-height, 100px) + 1rem);
+  padding: 1.2rem;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-radius-lg);
+  background: #fff;
+  box-shadow: var(--st-shadow);
+}
+
+.st-detail-aside h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  text-shadow: none;
+}
+
+.st-detail-aside dl {
+  margin: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.st-detail-aside dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--st-muted);
+}
+
+.st-detail-aside dd {
+  margin: 0.15rem 0 0;
   font-size: 0.95rem;
+  color: var(--st-ink);
 }
 
-.sports-tickets-ticket-list {
+.st-ticket-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -264,79 +1672,48 @@
   gap: 0.85rem;
 }
 
-.sports-tickets-ticket-card {
+.st-ticket-option {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-radius-lg);
+  background: #fff;
+  transition: border-color var(--st-ease), box-shadow var(--st-ease);
+}
+
+.st-ticket-option.is-open {
+  border-color: rgba(196, 18, 48, 0.4);
+  box-shadow: var(--st-shadow);
+}
+
+.st-ticket-option__row {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   align-items: flex-start;
-  padding: 1.15rem 1.2rem;
-  background: #fff;
-  border: 1px solid var(--st-line);
 }
 
-.sports-tickets-ticket-card h2 {
-  margin: 0 0 0.4rem;
+.st-ticket-option__title {
+  margin: 0 0 0.3rem;
   font-size: 1.05rem;
-}
-
-.sports-tickets-ticket-card__stock {
-  margin-top: 0.45rem !important;
-  font-size: 0.85rem !important;
-}
-
-.sports-tickets-ticket-card__aside {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.55rem;
-}
-
-.sports-tickets-ticket-card__price {
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--st-ink);
-}
-
-.sports-tickets-ticket-card__disabled {
-  display: inline-block;
-  padding: 0.45rem 0.8rem;
-  border: 1px dashed #cbd5e1;
-  color: #94a3b8;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: not-allowed;
-  user-select: none;
-}
-
-.sports-tickets-reserve-btn {
-  appearance: none;
-  border: none;
-  background: var(--st-red);
-  color: #fff;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
   font-weight: 700;
+  text-shadow: none;
+}
+
+.st-ticket-option__meta {
+  margin: 0;
   font-size: 0.88rem;
-  padding: 0.55rem 0.95rem;
-  cursor: pointer;
-}
-
-.sports-tickets-reserve-btn:disabled {
-  opacity: 0.65;
-  cursor: wait;
-}
-
-.sports-tickets-reserve-cancel {
-  appearance: none;
-  border: 1px solid var(--st-line);
-  background: #fff;
   color: var(--st-muted);
-  font-weight: 600;
-  font-size: 0.88rem;
-  padding: 0.55rem 0.95rem;
-  cursor: pointer;
+}
+
+.st-sticky-bar {
+  display: none;
 }
 
 .sports-tickets-reserve-form {
-  margin-top: 1rem;
+  margin-top: 0.25rem;
   display: grid;
   gap: 0.75rem;
   max-width: 22rem;
@@ -353,6 +1730,7 @@
 .sports-tickets-reserve-form input {
   padding: 0.55rem 0.65rem;
   border: 1px solid var(--st-line);
+  border-radius: var(--st-radius-sm);
   font: inherit;
   font-weight: 400;
 }
@@ -363,11 +1741,38 @@
   gap: 0.5rem;
 }
 
-.sports-tickets-subheading {
-  margin: 0 0 0.85rem;
-  font-size: 1.2rem;
+.sports-tickets-reserve-btn {
+  appearance: none;
+  border: none;
+  border-radius: var(--st-pill);
+  background: var(--st-gradient);
+  background-size: 180% 180%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.6rem 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(196, 18, 48, 0.25);
 }
 
+.sports-tickets-reserve-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.sports-tickets-reserve-cancel {
+  appearance: none;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-pill);
+  background: #fff;
+  color: var(--st-muted);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.6rem 1.05rem;
+  cursor: pointer;
+}
+
+/* —— Guest / booking leftovers —— */
 .sports-tickets-guest-block {
   margin-bottom: 1.25rem;
 }
@@ -384,11 +1789,14 @@
   margin-bottom: 0.75rem;
   background: #fff;
   border: 1px solid var(--st-line);
+  border-radius: var(--st-radius);
 }
 
 .sports-tickets-guest-card h3 {
   margin: 0 0 0.75rem;
   font-size: 1rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  text-shadow: none;
 }
 
 .sports-tickets-guest-grid {
@@ -408,19 +1816,254 @@
 .sports-tickets-guest-grid select {
   padding: 0.5rem 0.6rem;
   border: 1px solid var(--st-line);
+  border-radius: var(--st-radius-sm);
   font: inherit;
   font-weight: 400;
 }
 
-@media (max-width: 720px) {
-  .sports-tickets-event-row,
+.sports-tickets-ticket-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.sports-tickets-ticket-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.15rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-radius);
+}
+
+.sports-tickets-ticket-card h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  text-shadow: none;
+}
+
+.sports-tickets-ticket-card p {
+  margin: 0;
+  color: var(--st-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.sports-tickets-ticket-card__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+
+.sports-tickets-ticket-card__price {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--st-ink);
+}
+
+.sports-tickets-lead {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--st-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.sports-tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.sports-tickets-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 120px;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-radius);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--st-ease), transform var(--st-ease), box-shadow var(--st-ease);
+}
+
+.sports-tickets-card:hover {
+  border-color: var(--st-red);
+  transform: translateY(-2px);
+  box-shadow: var(--st-shadow);
+}
+
+.sports-tickets-card__label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.sports-tickets-card__meta {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: var(--st-muted);
+}
+
+.sports-tickets-card__cta {
+  color: var(--st-red);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* —— Responsive —— */
+@media (max-width: 1024px) {
+  .st-marketplace {
+    grid-template-columns: 1fr;
+  }
+
+  .st-filters-desktop {
+    display: none;
+  }
+
+  .st-filters-mobile-toggle {
+    display: inline-flex;
+  }
+
+  .st-filters-drawer-backdrop.is-open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  .st-filters-drawer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1201;
+    max-height: min(82vh, 640px);
+    overflow: auto;
+    padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
+    border-radius: 18px 18px 0 0;
+    background: #fff;
+    box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.18);
+    transform: translateY(110%);
+    transition: transform 0.28s ease;
+  }
+
+  .st-filters-drawer.is-open {
+    transform: translateY(0);
+  }
+
+  .st-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .st-detail-aside {
+    position: static;
+  }
+
+  .st-trust__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .st-event-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .st-hero {
+    padding: 2.5rem 0 1.85rem;
+  }
+
+  .st-sticky-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem calc(0.85rem + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid var(--st-line);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .st-detail-layout {
+    padding-bottom: 5.5rem;
+  }
+
   .sports-tickets-ticket-card {
     flex-direction: column;
   }
 
-  .sports-tickets-event-row__meta,
   .sports-tickets-ticket-card__aside {
     align-items: flex-start;
-    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .st-trust__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .st-ticket-option__row {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-hero__glow,
+  .st-skeleton,
+  .st-search-panel,
+  .st-filters__active {
+    animation: none;
+  }
+
+  .st-hero__back:hover .st-hero__back-icon,
+  .st-hero__back:hover .st-hero__back-arrow {
+    transform: none;
+  }
+
+  .st-hero__eyebrow-mark,
+  .st-hero__topline,
+  .st-hero__copy,
+  .st-hero--compact .st-search {
+    animation: none;
+  }
+
+  .st-filters__pill,
+  .st-filters__chip,
+  .st-event-card,
+  .st-featured-tile,
+  .st-sport-pill,
+  .st-btn,
+  .st-event-card__art-inner,
+  .st-filters-drawer {
+    transition: none;
+  }
+
+  .st-filters__pill:hover,
+  .st-filters__chip:hover,
+  .st-event-card:hover,
+  .st-featured-tile:hover,
+  .st-sport-pill:hover,
+  .st-btn--primary:hover {
+    transform: none;
+  }
+
+  .st-event-card:hover .st-event-card__art-inner {
+    transform: none;
   }
 }
