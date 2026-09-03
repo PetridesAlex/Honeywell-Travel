@@ -12,6 +12,8 @@ function SportsTicketsBooking() {
     stored?.booking?.booking_id === decodedId ? stored.booking : stored?.booking || null
   const matches = booking?.booking_id === decodedId
   const items = matches && Array.isArray(booking?.items) ? booking.items : []
+  const payment = stored?.payment
+  const isTest = Boolean(payment?.is_test)
 
   return (
     <div className="sports-tickets-page">
@@ -22,8 +24,11 @@ function SportsTicketsBooking() {
           </Link>
           <h1>Booking confirmed</h1>
           <p className="sports-tickets-lead">
-            Your XS2Event TEST booking was created. E-ticket delivery and live payments are not wired
-            in this phase.
+            {isTest
+              ? 'Your TEST sports tickets booking was created. A confirmation email is on the way.'
+              : 'Your sports tickets booking was created. A confirmation email is on the way.'}{' '}
+            Payment is by invoice — Honeywell Travel will send payment instructions separately. E-ticket
+            delivery follows once settlement and supplier logistics are complete.
           </p>
         </div>
       </section>
@@ -78,8 +83,10 @@ function SportsTicketsBooking() {
                   </div>
                   <div className="sports-tickets-ticket-card__aside">
                     <span className="sports-tickets-ticket-card__price">
-                      {formatXs2Money(item.net_rate ?? item.salesprice, item.currency || 'EUR') ||
-                        '—'}
+                      {formatXs2Money(
+                        item.salesprice ?? item.sales_price ?? item.net_rate,
+                        item.currency || 'EUR',
+                      ) || '—'}
                     </span>
                   </div>
                 </li>
@@ -90,6 +97,10 @@ function SportsTicketsBooking() {
               Booking created. Line items are shown when available in this browser session.
             </p>
           )}
+
+          <p className="sports-tickets-status" style={{ marginTop: '1.5rem' }}>
+            Need help? Email limassol@honeywelltravel.com.cy or call +357 25828848.
+          </p>
         </div>
       </section>
     </div>

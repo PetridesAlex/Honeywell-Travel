@@ -64,9 +64,19 @@ export function formatXs2Money(amount, currency = 'EUR') {
 
 export function ticketDisplayPrice(ticket) {
   const local = ticket?.local_rates || {}
+  const currency = ticket?.currency_code || ticket?.currency || 'EUR'
   return (
-    formatXs2Money(local.face_value_eur ?? ticket?.face_value_eur ?? local.net_rate_eur ?? ticket?.net_rate_eur) ||
-    formatXs2Money(ticket?.face_value ?? ticket?.net_rate) ||
+    formatXs2Money(
+      ticket?.honeywell_sales_price ??
+        ticket?.sales_price ??
+        ticket?.salesprice ??
+        local.face_value_eur ??
+        ticket?.face_value_eur ??
+        local.net_rate_eur ??
+        ticket?.net_rate_eur,
+      currency,
+    ) ||
+    formatXs2Money(ticket?.face_value ?? ticket?.net_rate, currency) ||
     null
   )
 }
@@ -85,7 +95,16 @@ export function groupTicketsForDisplay(tickets = []) {
       ticket.sub_category || 'default',
     ].join('::')
 
-    const price = Number(ticket.face_value_eur ?? ticket.net_rate_eur ?? ticket.face_value ?? ticket.net_rate ?? Infinity)
+    const price = Number(
+      ticket.honeywell_sales_price ??
+        ticket.sales_price ??
+        ticket.salesprice ??
+        ticket.face_value_eur ??
+        ticket.net_rate_eur ??
+        ticket.face_value ??
+        ticket.net_rate ??
+        Infinity,
+    )
     const existing = map.get(key)
     if (!existing || price < existing.price) {
       map.set(key, { key, ticket, price, options: existing ? existing.options + 1 : 1 })

@@ -148,8 +148,25 @@ Env vars must still be set in the Vercel dashboard (or via `vercel env add`).
   - `CRM_AGENCY_API_KEY` (Travel Hub → Settings → Agency Profile for **Honeywell Travel**)
   - `CRM_INBOUND_URL` = `https://travel-hub-crm.vercel.app/api/leads/inbound`
   - `XS2EVENT_API_URL` + `XS2EVENT_API_KEY` (TEST API; server-only)
+  - `XS2EVENT_MARKUP_PERCENT` (optional; default **15** — Honeywell sell markup on net rate)
+- [ ] Run Supabase migration `supabase/migrations/20260903_xs2event_bookings.sql` on Travel Hub project
 - [ ] Supabase Site URL + Redirect URLs include production domain
 - [ ] Redeploy after env changes
 - [ ] `/admin/login` works on live site
 - [ ] Form submission creates a lead in Travel Hub CRM
+- [ ] Sports Tickets booking creates `xs2event_bookings` row + confirmation email + CRM lead
 - [ ] Optional: `npm run sync:cms-packages` locally after package data changes
+
+---
+
+## XS2Event sports tickets
+
+| Concern | Current behavior |
+|---------|------------------|
+| Catalog | Live from XS2Event on each page load (new sports/dates appear automatically) |
+| Prices | `sales_price = net_rate × (1 + XS2EVENT_MARKUP_PERCENT/100)` set server-side on reserve |
+| Payment | **Invoice only** (no Stripe on this site yet) |
+| After booking | Persist to `xs2event_bookings`, Resend email to customer + staff, CRM inbound lead |
+| TEST vs live | `XS2EVENT_API_URL=https://testapi.xs2event.com` forces `is_test_booking`. Switch URL/key to production host when XS2Event provides live credentials; then redeploy |
+
+E-ticket PDF delivery is handled by XS2Event / Honeywell ops after settlement — not automated on the website yet.

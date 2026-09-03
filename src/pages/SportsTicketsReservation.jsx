@@ -136,8 +136,8 @@ function SportsTicketsReservation() {
           </Link>
           <h1>Complete booking</h1>
           <p className="sports-tickets-lead">
-            Provide any required guest details, then finalize the TEST booking. Payment method is
-            invoice (no card charge in this step).
+            Provide any required guest details, then finalize your booking. Payment method is
+            invoice — Honeywell Travel will send payment instructions (no card charge on this site).
           </p>
         </div>
       </section>
@@ -170,7 +170,10 @@ function SportsTicketsReservation() {
                   </div>
                   <div className="sports-tickets-ticket-card__aside">
                     <span className="sports-tickets-ticket-card__price">
-                      {formatXs2Money(item.net_rate ?? item.salesprice, item.currency || 'EUR') || '—'}
+                      {formatXs2Money(
+                        item.salesprice ?? item.sales_price ?? item.net_rate,
+                        item.currency || 'EUR',
+                      ) || '—'}
                     </span>
                   </div>
                 </li>
@@ -243,7 +246,7 @@ function SportsTicketsReservation() {
           ) : null}
 
           <h2 className="sports-tickets-subheading" style={{ marginTop: '2rem' }}>
-            Finalize TEST booking
+            Finalize booking
           </h2>
           <div className="sports-tickets-reserve-form" style={{ maxWidth: '28rem' }}>
             <label>
@@ -256,7 +259,8 @@ function SportsTicketsReservation() {
               />
             </label>
             <p className="sports-tickets-status">
-              Payment method: <strong>invoice</strong> (XS2Event TEST — no card payment).
+              Payment method: <strong>invoice</strong>. You will receive a confirmation email; Honeywell
+              Travel will follow up with payment instructions. No card payment is taken on this website.
             </p>
             {actionError ? <p className="sports-tickets-error">{actionError}</p> : null}
             <button

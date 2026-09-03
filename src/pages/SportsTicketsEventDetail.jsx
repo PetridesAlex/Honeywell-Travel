@@ -81,7 +81,7 @@ function SportsTicketsEventDetail() {
         ticket_id: ticket.ticket_id,
         quantity,
         booking_email: email,
-        notes: `Honeywell Travel TEST hold — ${event?.event_name || decodedEventId}`,
+        notes: `Honeywell Travel hold — ${event?.event_name || decodedEventId}`,
       })
       storeReservationSession({ ...result, booking_email: email })
       const id = result?.reservation?.reservation_id
@@ -124,8 +124,9 @@ function SportsTicketsEventDetail() {
           {!loading && event ? (
             <>
               <div className="sports-tickets-notice">
-                You can place a temporary TEST reservation (ticket hold). Guest checkout and payment are
-                not enabled yet. Holds expire after about 10 minutes.
+                You can place a temporary reservation (ticket hold). Complete guest details and confirm
+                booking next. Payment is by invoice — Honeywell will bill you separately (no card charge
+                on this site). Holds expire after about 10 minutes.
               </div>
 
               {grouped.length === 0 ? (

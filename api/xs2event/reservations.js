@@ -10,6 +10,7 @@ import {
   sendXs2EventError,
   Xs2EventError,
 } from '../_lib/xs2event.js'
+import { applyHoneywellMarkup, getXs2EventMarkupPercent } from '../_lib/xs2eventPricing.js'
 
 function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim())
@@ -91,7 +92,10 @@ export default async function handler(req, res) {
       )
     }
 
-    // No Honeywell markup in this phase — sales_price mirrors net_rate.
+    // Honeywell sell price = XS2Event net_rate + configured markup (server-side only).
+    const markupPercent = getXs2EventMarkupPercent()
+    const salesPrice = applyHoneywellMarkup(netRate, markupPercent)
+
     const payload = {
       items: [
         {
@@ -99,7 +103,7 @@ export default async function handler(req, res) {
           quantity,
           net_rate: netRate,
           currency_code: currencyCode,
-          sales_price: netRate,
+          sales_price: salesPrice,
         },
       ],
       booking_email: bookingEmail,
@@ -115,12 +119,20 @@ export default async function handler(req, res) {
       success: true,
       message: 'Reservation created successfully',
       reservation,
+      pricing: {
+        markup_percent: markupPercent,
+        net_rate: netRate,
+        sales_price: salesPrice,
+        currency_code: currencyCode,
+      },
       ticket_snapshot: {
         ticket_id: ticket.ticket_id,
         ticket_title: ticket.ticket_title || ticket.category_name || null,
         event_id: ticket.event_id || null,
         currency_code: currencyCode,
         net_rate: netRate,
+        sales_price: salesPrice,
+        markup_percent: markupPercent,
         stock: ticket.stock ?? null,
         min_order: ticket.min_order ?? null,
       },

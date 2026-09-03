@@ -1,13 +1,15 @@
 /**
  * POST /api/xs2event/bookings
- * Finalizes an XS2Event reservation into a booking (invoice / TEST).
- * No card payment processing — uses XS2Event payment_method from contract (default invoice).
+ * Finalizes an XS2Event reservation into a booking (invoice settlement).
+ * No Stripe/card processing — Honeywell invoices the customer.
+ * After success: persist to Supabase, email customer+staff, sync CRM (non-blocking).
  */
 import {
   xs2eventPost,
   sendXs2EventError,
   Xs2EventError,
 } from '../_lib/xs2event.js'
+import { afterXs2EventBookingCreated } from '../_lib/xs2eventNotify.js'
 
 function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim())
@@ -43,14 +45,15 @@ export default async function handler(req, res) {
     }
 
     const stamp = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14)
-    const invoiceReference =
-      String(body.invoice_reference || '').trim().slice(0, 80) || `HW-TEST-${stamp}`
-    const bookingReference =
-      String(body.booking_reference || '').trim().slice(0, 80) || `HW-BOOK-${stamp}`
-
-    // TEST-safe defaults: invoice settlement, flag as test booking when on test API.
     const apiUrl = String(process.env.XS2EVENT_API_URL || '').toLowerCase()
     const isTestHost = apiUrl.includes('testapi') || apiUrl.includes('test')
+    const invoicePrefix = isTestHost ? 'HW-TEST' : 'HW-INV'
+    const bookingPrefix = isTestHost ? 'HW-TEST-BOOK' : 'HW-BOOK'
+
+    const invoiceReference =
+      String(body.invoice_reference || '').trim().slice(0, 80) || `${invoicePrefix}-${stamp}`
+    const bookingReference =
+      String(body.booking_reference || '').trim().slice(0, 80) || `${bookingPrefix}-${stamp}`
 
     const payload = {
       reservation_id: reservationId,
@@ -63,10 +66,29 @@ export default async function handler(req, res) {
 
     const booking = await xs2eventPost('/v1/bookings', payload)
 
+    const sideEffects = await afterXs2EventBookingCreated({
+      booking,
+      reservationId,
+      bookingEmail,
+      isTestHost,
+    })
+
     return res.status(201).json({
       success: true,
       message: 'Booking created successfully',
       booking,
+      payment: {
+        method: 'invoice',
+        is_test: isTestHost,
+        note: isTestHost
+          ? 'XS2Event TEST booking — invoice method, no live card charge.'
+          : 'Settled by invoice. Honeywell Travel will send payment instructions separately.',
+      },
+      side_effects: {
+        persisted: Boolean(sideEffects?.persist?.ok),
+        emailed: Boolean(sideEffects?.email?.ok),
+        crm_synced: Boolean(sideEffects?.crm?.ok),
+      },
     })
   } catch (err) {
     return sendXs2EventError(res, err)

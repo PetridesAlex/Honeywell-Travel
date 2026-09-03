@@ -85,8 +85,8 @@ function SportsTickets() {
           <p className="sports-tickets-eyebrow">Honeywell Travel</p>
           <h1>Sports Tickets</h1>
           <p className="sports-tickets-lead">
-            Browse official sports events and ticket options. Booking uses XS2Event TEST invoice
-            settlement (no card charge in this phase).
+            Browse official sports events and ticket options. Prices include Honeywell Travel
+            service markup. Payment is by invoice (no card charge online).
           </p>
         </div>
       </section>
