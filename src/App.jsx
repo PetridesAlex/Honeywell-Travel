@@ -31,7 +31,13 @@ import OurWorld from './pages/OurWorld'
 import BlogPostDetail from './pages/BlogPostDetail'
 import FlightTickets from './pages/FlightTickets'
 import FlightTicketsDestination from './pages/FlightTicketsDestination'
+import SportsTickets from './pages/SportsTickets'
+import SportsTicketsEvents from './pages/SportsTicketsEvents'
+import SportsTicketsEventDetail from './pages/SportsTicketsEventDetail'
+import SportsTicketsReservation from './pages/SportsTicketsReservation'
+import SportsTicketsBooking from './pages/SportsTicketsBooking'
 import TermsAndConditions from './pages/TermsAndConditions'
+import Xs2EventConnectionTest from './pages/Xs2EventConnectionTest'
 import PackagesCms from './pages/admin/PackagesCms'
 import PackageCmsDetail from './pages/admin/PackageCmsDetail'
 import AdminIndexRedirect from './pages/admin/components/AdminIndexRedirect'
@@ -160,6 +166,12 @@ function AppContent() {
           <Route path="/flight-tickets" element={<FlightTickets />} />
           <Route path="/flight-tickets/" element={<FlightTickets />} />
           <Route path="/flight-tickets/:destination" element={<FlightTicketsDestination />} />
+          <Route path="/sports-tickets" element={<SportsTickets />} />
+          <Route path="/sports-tickets/" element={<SportsTickets />} />
+          <Route path="/sports-tickets/event/:eventId" element={<SportsTicketsEventDetail />} />
+          <Route path="/sports-tickets/reservation/:reservationId" element={<SportsTicketsReservation />} />
+          <Route path="/sports-tickets/booking/:bookingId" element={<SportsTicketsBooking />} />
+          <Route path="/sports-tickets/:sportType" element={<SportsTicketsEvents />} />
           <Route path="/build-your-trip" element={<BuildYourTrip />} />
           <Route path="/build-your-trip/" element={<BuildYourTrip />} />
           <Route path="/last-minute-flights/paris" element={<ParisLastMinuteFlights />} />
@@ -168,6 +180,12 @@ function AppContent() {
           <Route path="/insurance" element={<div className="page-placeholder"><h1>Insurance</h1><p>Coming soon...</p></div>} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/terms-and-conditions/" element={<TermsAndConditions />} />
+          {import.meta.env.DEV ? (
+            <>
+              <Route path="/xs2event-test" element={<Xs2EventConnectionTest />} />
+              <Route path="/xs2event-test/" element={<Xs2EventConnectionTest />} />
+            </>
+          ) : null}
         </Routes>
         <Footer />
       </main>

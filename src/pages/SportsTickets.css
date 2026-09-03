@@ -1,0 +1,372 @@
+.sports-tickets-page {
+  --st-red: #c41230;
+  --st-ink: #1a1a1f;
+  --st-muted: #64748b;
+  --st-line: #e2e8f0;
+  --st-bg: #f8fafc;
+  min-height: 60vh;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(196, 18, 48, 0.06), transparent 55%),
+    linear-gradient(180deg, #fff 0%, var(--st-bg) 40%, #fff 100%);
+  color: var(--st-ink);
+}
+
+.sports-tickets-container {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.sports-tickets-hero {
+  padding: 3.5rem 0 2rem;
+}
+
+.sports-tickets-hero--compact {
+  padding: 2.25rem 0 1.25rem;
+}
+
+.sports-tickets-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st-red);
+  font-weight: 700;
+}
+
+.sports-tickets-hero h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.sports-tickets-lead {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--st-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.sports-tickets-back {
+  display: inline-block;
+  margin-bottom: 0.85rem;
+  color: var(--st-red);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sports-tickets-back:hover {
+  text-decoration: underline;
+}
+
+.sports-tickets-section {
+  padding: 0 0 4rem;
+}
+
+.sports-tickets-status,
+.sports-tickets-error {
+  margin: 0 0 1.25rem;
+}
+
+.sports-tickets-error {
+  color: #b91c1c;
+}
+
+.sports-tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.sports-tickets-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  min-height: 120px;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--st-line);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sports-tickets-card:hover {
+  border-color: var(--st-red);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.sports-tickets-card__label {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.sports-tickets-card__meta {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: var(--st-muted);
+}
+
+.sports-tickets-card__cta {
+  color: var(--st-red);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sports-tickets-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.sports-tickets-toolbar .sports-tickets-status {
+  margin: 0;
+}
+
+.sports-tickets-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  color: var(--st-muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.sports-tickets-event-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sports-tickets-event-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.1rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--st-line);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease;
+}
+
+.sports-tickets-event-row:hover {
+  border-color: var(--st-red);
+}
+
+.sports-tickets-event-row__main h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.sports-tickets-event-row__main p,
+.sports-tickets-ticket-card p {
+  margin: 0;
+  color: var(--st-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.sports-tickets-event-row__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  text-align: right;
+  color: var(--st-muted);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.sports-tickets-event-row__cta {
+  color: var(--st-red);
+  font-weight: 700;
+}
+
+.sports-tickets-notice {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  background: rgba(196, 18, 48, 0.06);
+  border-left: 3px solid var(--st-red);
+  color: #4a1c24;
+  font-size: 0.95rem;
+}
+
+.sports-tickets-ticket-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.sports-tickets-ticket-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.15rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--st-line);
+}
+
+.sports-tickets-ticket-card h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+}
+
+.sports-tickets-ticket-card__stock {
+  margin-top: 0.45rem !important;
+  font-size: 0.85rem !important;
+}
+
+.sports-tickets-ticket-card__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+
+.sports-tickets-ticket-card__price {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--st-ink);
+}
+
+.sports-tickets-ticket-card__disabled {
+  display: inline-block;
+  padding: 0.45rem 0.8rem;
+  border: 1px dashed #cbd5e1;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.sports-tickets-reserve-btn {
+  appearance: none;
+  border: none;
+  background: var(--st-red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.55rem 0.95rem;
+  cursor: pointer;
+}
+
+.sports-tickets-reserve-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.sports-tickets-reserve-cancel {
+  appearance: none;
+  border: 1px solid var(--st-line);
+  background: #fff;
+  color: var(--st-muted);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.55rem 0.95rem;
+  cursor: pointer;
+}
+
+.sports-tickets-reserve-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  max-width: 22rem;
+}
+
+.sports-tickets-reserve-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--st-ink);
+}
+
+.sports-tickets-reserve-form input {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--st-line);
+  font: inherit;
+  font-weight: 400;
+}
+
+.sports-tickets-reserve-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sports-tickets-subheading {
+  margin: 0 0 0.85rem;
+  font-size: 1.2rem;
+}
+
+.sports-tickets-guest-block {
+  margin-bottom: 1.25rem;
+}
+
+.sports-tickets-guest-block__title {
+  margin: 0 0 0.65rem;
+  color: var(--st-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sports-tickets-guest-card {
+  padding: 1rem 1.1rem;
+  margin-bottom: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--st-line);
+}
+
+.sports-tickets-guest-card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.sports-tickets-guest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.sports-tickets-guest-grid label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.sports-tickets-guest-grid input,
+.sports-tickets-guest-grid select {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--st-line);
+  font: inherit;
+  font-weight: 400;
+}
+
+@media (max-width: 720px) {
+  .sports-tickets-event-row,
+  .sports-tickets-ticket-card {
+    flex-direction: column;
+  }
+
+  .sports-tickets-event-row__meta,
+  .sports-tickets-ticket-card__aside {
+    align-items: flex-start;
+    text-align: left;
+  }
+}

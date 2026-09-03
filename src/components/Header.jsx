@@ -240,6 +240,17 @@ function Header() {
           </Link>
 
           <Link
+            to="/sports-tickets"
+            className="header-flight-tickets"
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+            }}
+          >
+            <span className="header-flight-tickets-icon" aria-hidden>🎟</span>
+            <span className="header-flight-tickets-text">{t('header.sportsTickets')}</span>
+          </Link>
+
+          <Link
             to="/cruises/"
             className="header-cruises-cta"
             onClick={() => {
@@ -470,6 +481,11 @@ function Header() {
                 <Link to="/flight-tickets/" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
                   <span className="mobile-flight-tickets-icon" aria-hidden>✈</span>
                   <span>{t('header.flightTickets')}</span>
+                  <span className="mobile-flight-tickets-arrow">→</span>
+                </Link>
+                <Link to="/sports-tickets" className="mobile-link mobile-flight-tickets" onClick={closeMobileMenu}>
+                  <span className="mobile-flight-tickets-icon" aria-hidden>🎟</span>
+                  <span>{t('header.sportsTickets')}</span>
                   <span className="mobile-flight-tickets-arrow">→</span>
                 </Link>
                 <Link to="/cruises/" className="mobile-link mobile-cruises-cta" onClick={closeMobileMenu}>

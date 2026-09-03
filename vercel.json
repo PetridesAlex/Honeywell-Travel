@@ -4,9 +4,19 @@
   "framework": "vite",
   "functions": {
     "api/crm-lead.js": { "maxDuration": 15 },
-    "api/submit-form.js": { "maxDuration": 15 }
+    "api/submit-form.js": { "maxDuration": 15 },
+    "api/xs2event/test.js": { "maxDuration": 15 },
+    "api/xs2event/sports.js": { "maxDuration": 15 },
+    "api/xs2event/events.js": { "maxDuration": 15 },
+    "api/xs2event/tickets.js": { "maxDuration": 15 },
+    "api/xs2event/reservations.js": { "maxDuration": 15 },
+    "api/xs2event/reservations/[reservationId]/guestdata.js": { "maxDuration": 15 },
+    "api/xs2event/bookings.js": { "maxDuration": 15 }
   },
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api/|@vite|@react-refresh|@fs|@id|src/)(?!.*\\.).*)",
+      "destination": "/index.html"
+    }
   ]
 }

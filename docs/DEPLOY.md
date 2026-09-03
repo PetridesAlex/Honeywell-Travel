@@ -32,8 +32,10 @@ In [Vercel Dashboard](https://vercel.com) → your project → **Settings** → 
 | `SUPABASE_SECRET_KEY` | JWT `service_role` key | Server-side only — `website_submissions` logging (legacy JWT preferred; `SUPABASE_SERVICE_ROLE_KEY` also works) |
 | `CRM_AGENCY_API_KEY` | From Travel Hub → Settings → Agency Profile | Server-side only — lead sync |
 | `CRM_INBOUND_URL` | `https://travel-hub-crm.vercel.app/api/leads/inbound` | Optional if using the default |
+| `XS2EVENT_API_URL` | `https://testapi.xs2event.com` | Server-side only — XS2Event TEST API base URL |
+| `XS2EVENT_API_KEY` | Your XS2Event TEST API key | Server-side only — never use a `VITE_` prefix |
 
-**Do not add** `SUPABASE_SECRET_KEY`, `RESEND_API_KEY`, or `CRM_AGENCY_API_KEY` with a `VITE_` prefix (browser build must not include them).
+**Do not add** `SUPABASE_SECRET_KEY`, `RESEND_API_KEY`, `CRM_AGENCY_API_KEY`, `XS2EVENT_API_KEY`, or `XS2EVENT_API_URL` with a `VITE_` prefix (browser build must not include them).
 
 Copy values from your local `.env` (except secrets — paste those from Supabase / Travel Hub Settings).
 
@@ -102,6 +104,27 @@ Quick CRM test: add a client → add a lead with the same email → confirm they
 
 ---
 
+## Local API development (Vite + Vercel serverless)
+
+`npm run dev` starts **Vite only**. It does **not** execute files under `/api`.
+
+To test Honeywell serverless routes (including XS2Event) locally:
+
+1. Add to local `.env` (server-only names, no `VITE_` prefix):
+   - `XS2EVENT_API_URL=https://testapi.xs2event.com`
+   - `XS2EVENT_API_KEY=your_test_key`
+2. Link the project once: `npx vercel link`
+3. Run: `npm run dev:api` (or `npx vercel dev`)
+
+Then open the DEV-only page: `/xs2event-test`  
+Or hit the API directly: `/api/xs2event/test`
+
+**Note:** SPA rewrites in `vercel.json` intentionally skip `/api`, `/src`, Vite HMR paths (`@vite`, etc.), and any path that contains a file extension, so `vercel dev` does not rewrite JS modules to `index.html`.
+
+On Vercel, add `XS2EVENT_*` for **Development**, **Preview**, and **Production** if you want `vercel env pull` / `vercel dev` to pick them up automatically.
+
+---
+
 ## CLI deploy (optional)
 
 If [Vercel CLI](https://vercel.com/docs/cli) is installed and logged in:
@@ -124,6 +147,7 @@ Env vars must still be set in the Vercel dashboard (or via `vercel env add`).
   - `RESEND_API_KEY`
   - `CRM_AGENCY_API_KEY` (Travel Hub → Settings → Agency Profile for **Honeywell Travel**)
   - `CRM_INBOUND_URL` = `https://travel-hub-crm.vercel.app/api/leads/inbound`
+  - `XS2EVENT_API_URL` + `XS2EVENT_API_KEY` (TEST API; server-only)
 - [ ] Supabase Site URL + Redirect URLs include production domain
 - [ ] Redeploy after env changes
 - [ ] `/admin/login` works on live site
