@@ -58,6 +58,64 @@ const holidayTypesLinkClass = (item, mode) => {
   return `${base} ${base}--holiday-caps`
 }
 
+const TRAVEL_QUOTE_INTERVAL_MS = 5500
+const TRAVEL_QUOTE_FADE_MS = 450
+
+function HeaderTravelQuote() {
+  const { t, i18n } = useTranslation()
+  const quotes = t('header.travelQuotes', { returnObjects: true })
+  const quoteList = Array.isArray(quotes) ? quotes.filter(Boolean) : []
+  const [quoteIndex, setQuoteIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    if (quoteList.length <= 1) return undefined
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return undefined
+
+    const intervalId = window.setInterval(() => {
+      setIsVisible(false)
+      window.setTimeout(() => {
+        setQuoteIndex((prev) => (prev + 1) % quoteList.length)
+        setIsVisible(true)
+      }, TRAVEL_QUOTE_FADE_MS)
+    }, TRAVEL_QUOTE_INTERVAL_MS)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [quoteList.length, i18n.language])
+
+  useEffect(() => {
+    setQuoteIndex(0)
+    setIsVisible(true)
+  }, [i18n.language])
+
+  if (quoteList.length === 0) return null
+
+  return (
+    <div className="header-travel-quote" aria-live="polite" aria-atomic="true">
+      <div className="header-travel-quote__inner">
+        <span className="header-travel-quote__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+        <div className="header-travel-quote__copy">
+          <span className="header-travel-quote__eyebrow">{t('header.travelQuoteEyebrow')}</span>
+          <p className={`header-travel-quote__text${isVisible ? ' is-visible' : ''}`}>
+            {quoteList[quoteIndex]}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Header() {
   const { t } = useTranslation()
   const sportsTicketsEnabled = isSportsTicketsPublicEnabled()
@@ -210,15 +268,18 @@ function Header() {
         </div>
       </div>
       <div className="header-container">
-        <Link to="/" className="logo">
-          <img 
-            src="/images/icons/honeywell-travel-logo.webp" 
-            alt="Honeywell Travel Logo" 
-            className="logo-image"
-          />
-        </Link>
+        <div className="header-top-row">
+          <Link to="/" className="logo">
+            <img 
+              src="/images/icons/honeywell-travel-logo.webp" 
+              alt="Honeywell Travel Logo" 
+              className="logo-image"
+            />
+          </Link>
 
-        <div className="header-cta-group">
+          <HeaderTravelQuote />
+
+          <div className="header-cta-group">
           <Link 
             to="/build-your-trip" 
             className="header-build-trip"
@@ -274,9 +335,32 @@ function Header() {
             <span className="header-cruises-cta-icon" aria-hidden>🚢</span>
             <span className="header-cruises-cta-text">{t('header.cruises')}</span>
           </Link>
+          </div>
+
+          <div className="header-mobile-actions">
+            <div className="header-utility-controls">
+              <HeaderUtilityControls />
+            </div>
+
+            <button
+              className={`mobile-menu-btn ${isMobileMenuOpen ? 'is-open' : ''}`}
+              onClick={() => {
+                setIsMobileMenuOpen((prev) => !prev)
+                setActiveMobileDropdown(null)
+              }}
+              aria-label={isMobileMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span className="hamburger-icon" aria-hidden="true">
+                <span className="hamburger-line hamburger-line--top" />
+                <span className="hamburger-line hamburger-line--middle" />
+                <span className="hamburger-line hamburger-line--bottom" />
+              </span>
+            </button>
+          </div>
         </div>
-        
-        <nav className="nav">
+
+        <nav className="nav" aria-label="Main navigation">
           <Link to="/ourworld/" className="nav-link">{t('header.ourWorld')}</Link>
           
           <div 
@@ -445,28 +529,6 @@ function Header() {
 
           <Link to="/contact/" className="nav-link">{t('header.contact')}</Link>
         </nav>
-
-        <div className="header-mobile-actions">
-          <div className="header-utility-controls">
-            <HeaderUtilityControls />
-          </div>
-
-          <button
-            className={`mobile-menu-btn ${isMobileMenuOpen ? 'is-open' : ''}`}
-            onClick={() => {
-              setIsMobileMenuOpen((prev) => !prev)
-              setActiveMobileDropdown(null)
-            }}
-            aria-label={isMobileMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
-            aria-expanded={isMobileMenuOpen}
-          >
-            <span className="hamburger-icon" aria-hidden="true">
-              <span className="hamburger-line hamburger-line--top" />
-              <span className="hamburger-line hamburger-line--middle" />
-              <span className="hamburger-line hamburger-line--bottom" />
-            </span>
-          </button>
-        </div>
       </div>
 
       {isMobileMenuOpen &&

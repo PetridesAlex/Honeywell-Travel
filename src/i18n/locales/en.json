@@ -105,7 +105,20 @@
     "bookOnline": "Book Online",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "inspiration": "Inspiration"
+    "inspiration": "Inspiration",
+    "travelQuoteEyebrow": "Travel inspiration",
+    "travelQuotes": [
+      "The world is waiting — where will you go next?",
+      "Collect moments, not things.",
+      "Adventure begins the moment you say yes.",
+      "Explore. Dream. Discover.",
+      "Life is short — the world is wide.",
+      "Escape the ordinary. Live the experience.",
+      "Your next chapter starts with a destination.",
+      "From Cyprus to the world — curated with care.",
+      "Travel far, travel wide, travel well.",
+      "Every journey begins with a single step."
+    ]
   },
   "categories": {
     "anyCategory": "Any Category",
