@@ -1,6 +1,5 @@
-import { createElement } from 'react'
 import { Link } from 'react-router-dom'
-import { getSportIcon } from '../../utils/sportsArt'
+import SportIcon, { SportIconAll } from './SportIcon'
 import { formatSportLabel } from '../../utils/xs2eventUi'
 
 function SportSelector({ sports = [], activeSport = '', basePath = '/sports-tickets' }) {
@@ -9,6 +8,9 @@ function SportSelector({ sports = [], activeSport = '', basePath = '/sports-tick
   return (
     <nav className="st-sport-rail" aria-label="Sports categories">
       <Link to={basePath} className={`st-sport-pill${!activeSport ? ' is-active' : ''}`}>
+        <span className="st-sport-pill__icon">
+          <SportIconAll size={18} />
+        </span>
         All
       </Link>
       {sports.map((sport) => {
@@ -23,7 +25,7 @@ function SportSelector({ sports = [], activeSport = '', basePath = '/sports-tick
             aria-current={active ? 'page' : undefined}
           >
             <span className="st-sport-pill__icon">
-              {createElement(getSportIcon(id), { size: 16, strokeWidth: 2.1, 'aria-hidden': true })}
+              <SportIcon sportType={id} size={18} />
             </span>
             {formatSportLabel(id)}
           </Link>

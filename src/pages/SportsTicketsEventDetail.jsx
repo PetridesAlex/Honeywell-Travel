@@ -187,8 +187,11 @@ function SportsTicketsEventDetail() {
 
                 {!loading && grouped.length === 0 ? (
                   <div className="st-empty">
-                    <h3>No tickets available</h3>
-                    <p>There are no available ticket categories for this event right now.</p>
+                    <h3>Tickets coming soon</h3>
+                    <p>
+                      This fixture is listed but ticket categories are not available yet. Check
+                      back later or contact Honeywell Travel for availability.
+                    </p>
                   </div>
                 ) : null}
 

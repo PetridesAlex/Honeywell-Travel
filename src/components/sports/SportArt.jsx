@@ -1,5 +1,5 @@
-import { createElement } from 'react'
-import { getSportArtClass, getSportIcon, getSportPhoto } from '../../utils/sportsArt'
+import SportIcon from './SportIcon'
+import { getSportArtClass, getSportPhoto } from '../../utils/sportsArt'
 
 function SportArt({ sportType, className = '', iconSize = 42 }) {
   const artClass = getSportArtClass(sportType)
@@ -12,7 +12,7 @@ function SportArt({ sportType, className = '', iconSize = 42 }) {
         <img className="st-sport-art__photo" src={photo} alt="" loading="lazy" decoding="async" />
       ) : null}
       <span className="st-sport-art__icon">
-        {createElement(getSportIcon(sportType), { size: iconSize, strokeWidth: 1.6 })}
+        <SportIcon sportType={sportType} size={iconSize} />
       </span>
     </div>
   )

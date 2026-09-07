@@ -1,21 +1,25 @@
 /**
- * Sport-specific visual art + lucide icon mapping for Sports & Events UI.
- * Drop real photos into SPORT_PHOTOS later (e.g. soccer: '/images/sports/soccer.webp').
+ * Sport-specific visual art + icon mapping for Sports & Events UI.
  */
-import {
-  Bike,
-  CircleDot,
-  Flag,
-  Flame,
-  Footprints,
-  Gauge,
-  Goal,
-  Sailboat,
-  Shield,
-  Swords,
-  Target,
-  Trophy,
-} from 'lucide-react'
+import SportIcon, {
+  SportIconAll,
+  SportIconBasketball,
+  SportIconBoxing,
+  SportIconCricket,
+  SportIconCycling,
+  SportIconDarts,
+  SportIconDefault,
+  SportIconFormula1,
+  SportIconGolf,
+  SportIconHorseracing,
+  SportIconMotogp,
+  SportIconNfl,
+  SportIconRugby,
+  SportIconSoccer,
+  SportIconTennis,
+} from '../components/sports/SportIcon'
+
+export { SportIcon, SportIconAll }
 
 /** Optional real image paths keyed by sport_type — leave empty until assets exist. */
 export const SPORT_PHOTOS = {
@@ -23,31 +27,28 @@ export const SPORT_PHOTOS = {
 }
 
 const ICON_MAP = {
-  soccer: Goal,
-  football: Goal,
-  formula1: Gauge,
-  motorsport: Gauge,
-  motogp: Bike,
-  dtm: Gauge,
-  superbike: Bike,
-  tennis: CircleDot,
-  padel: CircleDot,
-  rugby: Shield,
-  boxing: Swords,
-  combatsport: Swords,
-  basketball: CircleDot,
-  nba: CircleDot,
-  cricket: Target,
-  golf: Flag,
-  horseracing: Footprints,
-  darts: Target,
-  icehockey: Flame,
-  nfl: Shield,
-  mlb: CircleDot,
-  handball: CircleDot,
-  cycling: Bike,
-  rowing: Sailboat,
-  default: Trophy,
+  soccer: SportIconSoccer,
+  football: SportIconSoccer,
+  formula1: SportIconFormula1,
+  motorsport: SportIconFormula1,
+  motogp: SportIconMotogp,
+  dtm: SportIconFormula1,
+  superbike: SportIconMotogp,
+  tennis: SportIconTennis,
+  padel: SportIconTennis,
+  rugby: SportIconRugby,
+  boxing: SportIconBoxing,
+  combatsport: SportIconBoxing,
+  basketball: SportIconBasketball,
+  nba: SportIconBasketball,
+  cricket: SportIconCricket,
+  golf: SportIconGolf,
+  horseracing: SportIconHorseracing,
+  darts: SportIconDarts,
+  nfl: SportIconNfl,
+  mlb: SportIconNfl,
+  cycling: SportIconCycling,
+  default: SportIconDefault,
 }
 
 const ART_CLASS_ALIASES = {
@@ -88,16 +89,11 @@ export function getSportArtClass(sportType) {
     'cricket',
     'darts',
     'horseracing',
-    'icehockey',
     'nfl',
-    'mlb',
-    'padel',
-    'handball',
     'cycling',
-    'rowing',
+    'motorsport',
     'dtm',
     'superbike',
-    'motorsport',
   ])
   return known.has(mapped) ? mapped : 'default'
 }

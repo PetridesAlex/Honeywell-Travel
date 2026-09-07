@@ -57,7 +57,10 @@ function EventCard({ event }) {
                 <p className="st-event-card__meta-text st-event-card__meta-text--where">{location}</p>
               ) : null}
               <div className="st-event-card__availability">
-                <AvailabilityBadge numberOfTickets={event.number_of_tickets} />
+                <AvailabilityBadge
+                  numberOfTickets={event.number_of_tickets}
+                  hasPrice={Boolean(listPrice)}
+                />
               </div>
             </div>
           </div>

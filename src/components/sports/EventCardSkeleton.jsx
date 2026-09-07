@@ -20,6 +20,16 @@ export function SportRailSkeleton() {
   )
 }
 
+export function SportCategoryGridSkeleton({ count = 6 }) {
+  return (
+    <div className="st-sport-categories" aria-hidden>
+      {Array.from({ length: count }).map((_, index) => (
+        <div key={index} className="st-skeleton st-skeleton-category-card" />
+      ))}
+    </div>
+  )
+}
+
 export function TicketListSkeleton({ count = 4 }) {
   return (
     <div aria-hidden>

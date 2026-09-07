@@ -1,8 +1,8 @@
-import { createElement, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { ChevronRight, Search } from 'lucide-react'
-import { getSportIcon } from '../../utils/sportsArt'
+import SportIcon from './SportIcon'
 
 function SportsSearch({
   value,
@@ -23,16 +23,29 @@ function SportsSearch({
 
   const query = String(value || '').trim().toLowerCase()
 
+  const searchAllItem = useMemo(() => {
+    if (query.length < 2) return null
+    return {
+      id: `search-all-${query}`,
+      label: `Search all football for “${value.trim()}”`,
+      href: `/sports-tickets/soccer?q=${encodeURIComponent(value.trim())}`,
+      group: 'Search events',
+      sportType: 'soccer',
+      blurb: 'Teams, fixtures and competitions',
+    }
+  }, [query, value])
+
   const filtered = useMemo(() => {
     if (!query) return categories
-    return categories.filter((item) => {
+    const matched = categories.filter((item) => {
       const hay = [item.label, item.blurb, item.meta, item.sportType]
         .filter(Boolean)
         .join(' ')
         .toLowerCase()
       return hay.includes(query)
     })
-  }, [categories, query])
+    return searchAllItem ? [searchAllItem, ...matched] : matched
+  }, [categories, query, searchAllItem])
 
   const groups = useMemo(() => {
     const map = new Map()
@@ -161,7 +174,6 @@ function SportsSearch({
                 {items.map((item) => {
                   const flatIdx = flatItems.indexOf(item)
                   const active = flatIdx === highlightIndex
-                  const Icon = getSportIcon(item.sportType || item.id)
                   return (
                     <li key={item.id}>
                       <button
@@ -173,7 +185,7 @@ function SportsSearch({
                         onClick={() => selectCategory(item)}
                       >
                         <span className="st-search-panel__option-icon">
-                          {createElement(Icon, { size: 17, strokeWidth: 2.1, 'aria-hidden': true })}
+                          <SportIcon sportType={item.sportType || item.id} size={17} />
                         </span>
                         <span className="st-search-panel__option-text">
                           <span className="st-search-panel__option-title">{item.label}</span>

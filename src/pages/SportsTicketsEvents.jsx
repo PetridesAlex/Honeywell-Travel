@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { RefreshCw } from 'lucide-react'
 import EventFilters from '../components/sports/EventFilters'
 import EventGrid from '../components/sports/EventGrid'
@@ -12,6 +12,7 @@ import {
   getFeaturedBySlug,
 } from '../utils/xs2eventFeatured'
 import { expandSportTypes, formatSportLabel } from '../utils/xs2eventUi'
+import { formatSportsApiError } from '../utils/sportsApiErrorMessage'
 import './SportsTickets.css'
 
 function dedupeEvents(events) {
@@ -50,6 +51,7 @@ async function fetchEventsPage(params, page, pageSize) {
 
 function SportsTicketsEvents() {
   const { sportType, featuredSlug } = useParams()
+  const [searchParams] = useSearchParams()
   const decodedSport = decodeURIComponent(sportType || '')
   const decodedFeatured = decodeURIComponent(featuredSlug || '')
   const featured = useMemo(
@@ -62,7 +64,8 @@ function SportsTicketsEvents() {
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [error, setError] = useState('')
+  const [truncated, setTruncated] = useState(false)
+  const [error, setError] = useState(null)
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('date')
   const [filters, setFilters] = useState(EMPTY_FILTERS)
@@ -77,35 +80,40 @@ function SportsTicketsEvents() {
   }, [])
 
   useEffect(() => {
+    const q = searchParams.get('q')?.trim()
+    if (q) setSearch(q)
+  }, [searchParams, decodedSport, decodedFeatured])
+
+  useEffect(() => {
     let cancelled = false
     if (!browseSport && !featured) return undefined
 
     setLoading(true)
     setLoadingMore(false)
-    setError('')
+    setTruncated(false)
+    setError(null)
     setEvents([])
     setFilters(EMPTY_FILTERS)
 
     ;(async () => {
       try {
         const pageSize = 50
-        const maxPages = 12
+        const maxPages = 28
         const queries = []
 
         if (featured?.kind === 'tournament' && featured.tournament_names?.length) {
           // Prefer API tournament filters for speed (aliases in parallel).
-          const names = featured.tournament_names.slice(0, 3)
+          const names = featured.tournament_names
           for (const tournament_name of names) {
             queries.push({
               sport_type: featured.sport_type,
               tournament_name,
-              tickets_available: 'gt:0',
             })
           }
         } else {
           const types = expandSportTypes(browseSport || 'soccer')
           for (const sport_type of types) {
-            queries.push({ sport_type, tickets_available: 'gt:0' })
+            queries.push({ sport_type })
           }
         }
 
@@ -160,10 +168,11 @@ function SportsTicketsEvents() {
           }
           setEvents(next)
           if (!anyNext) break
+          if (page === maxPages && anyNext) setTruncated(true)
         }
       } catch (err) {
         if (cancelled) return
-        setError(err?.message || 'Unable to load events.')
+        setError(err)
         setEvents([])
         setLoading(false)
       } finally {
@@ -274,7 +283,7 @@ function SportsTicketsEvents() {
         title={`${title} events`}
         lead={
           featured?.blurb ||
-          'Upcoming events with available tickets. Filter by competition, destination or team.'
+          'Upcoming fixtures from the ticket catalogue. Filter by competition, destination or team.'
         }
         eyebrow="Honeywell Travel"
         backHref="/sports-tickets"
@@ -291,7 +300,7 @@ function SportsTicketsEvents() {
           {error ? (
             <div className="st-error-panel">
               <h3>We couldn&apos;t load sporting events right now</h3>
-              <p>Please try again in a moment.</p>
+              <p>{formatSportsApiError(error)}</p>
               <button type="button" className="st-btn st-btn--primary" onClick={() => setReloadKey((n) => n + 1)}>
                 <RefreshCw size={16} aria-hidden />
                 Try again
@@ -331,10 +340,20 @@ function SportsTicketsEvents() {
 
                 {!loading && featured?.slug === 'champions-league' && filtered.length === 0 ? (
                   <div className="sports-tickets-notice">
-                    Champions League fixtures are not available in the current ticket feed. Try{' '}
-                    <Link to="/sports-tickets/featured/premier-league">Premier League</Link>,{' '}
-                    <Link to="/sports-tickets/featured/la-liga">La Liga</Link>, or{' '}
-                    <Link to="/sports-tickets/soccer">all Football</Link>.
+                    UEFA Champions League is not included in the current XS2Event catalogue (test
+                    inventory). Milan and Barcelona fixtures are listed under their domestic
+                    leagues — try{' '}
+                    <Link to="/sports-tickets/featured/serie-a">Serie A</Link> (AC Milan,
+                    Internazionale),{' '}
+                    <Link to="/sports-tickets/featured/la-liga">La Liga</Link> (FC Barcelona), or{' '}
+                    <Link to="/sports-tickets/soccer?q=milan">search all football</Link>.
+                  </div>
+                ) : null}
+
+                {!loading && truncated ? (
+                  <div className="sports-tickets-notice">
+                    Showing the first {events.length} events — refine with filters or search to
+                    narrow results.
                   </div>
                 ) : null}
 

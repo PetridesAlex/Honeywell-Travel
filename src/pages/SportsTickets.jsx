@@ -2,25 +2,25 @@ import { useEffect, useMemo, useState, useTransition } from 'react'
 import { Link } from 'react-router-dom'
 import { RefreshCw } from 'lucide-react'
 import EventCard from '../components/sports/EventCard'
-import EventCardSkeleton from '../components/sports/EventCardSkeleton'
-import { SportRailSkeleton } from '../components/sports/EventCardSkeleton'
-import SportSelector from '../components/sports/SportSelector'
+import EventCardSkeleton, { SportCategoryGridSkeleton } from '../components/sports/EventCardSkeleton'
 import SportsHero from '../components/sports/SportsHero'
 import SportsTrustSection from '../components/sports/SportsTrustSection'
 import SportArt from '../components/sports/SportArt'
+import PremiumSectionHead from '../components/sports/PremiumSectionHead'
 import { getEvents, getEventsTotal, getSports } from '../services/xs2event'
 import {
   FEATURED_BROWSE,
   buildSportsSearchCategories,
 } from '../utils/xs2eventFeatured'
 import { expandSportTypes } from '../utils/xs2eventUi'
+import { formatSportsApiError } from '../utils/sportsApiErrorMessage'
 import './SportsTickets.css'
 
 async function countEventsForSport(sportId) {
   const types = expandSportTypes(sportId)
   const totals = await Promise.all(
     types.map((sport_type) =>
-      getEventsTotal({ sport_type, tickets_available: 'gt:0' }).catch(() => 0),
+      getEventsTotal({ sport_type }).catch(() => 0),
     ),
   )
   return totals.reduce((sum, n) => sum + Number(n || 0), 0)
@@ -35,15 +35,13 @@ async function countFeaturedItem(item) {
   if (!names.length) {
     return getEventsTotal({
       sport_type: item.sport_type,
-      tickets_available: 'gt:0',
     }).catch(() => 0)
   }
   const totals = await Promise.all(
-    names.slice(0, 2).map((tournament_name) =>
+    names.map((tournament_name) =>
       getEventsTotal({
         sport_type: item.sport_type,
         tournament_name,
-        tickets_available: 'gt:0',
       }).catch(() => 0),
     ),
   )
@@ -57,7 +55,7 @@ function SportsTickets() {
   const [popular, setPopular] = useState([])
   const [loading, setLoading] = useState(true)
   const [countsLoading, setCountsLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState(null)
   const [search, setSearch] = useState('')
   const [showEmpty, setShowEmpty] = useState(false)
   const [reloadKey, setReloadKey] = useState(0)
@@ -66,7 +64,7 @@ function SportsTickets() {
   useEffect(() => {
     let cancelled = false
     setLoading(true)
-    setError('')
+    setError(null)
     setCounts({})
     setFeaturedCounts({})
 
@@ -113,7 +111,7 @@ function SportsTickets() {
         setCounts(next)
       } catch (err) {
         if (cancelled) return
-        setError(err?.message || 'Unable to load sports.')
+        setError(err)
         setSports([])
         setLoading(false)
       } finally {
@@ -174,6 +172,15 @@ function SportsTickets() {
     startTransition(() => setSearch(value))
   }
 
+  const featuredWithEvents = useMemo(
+    () =>
+      FEATURED_BROWSE.filter((item) => {
+        const total = featuredCounts[item.slug]
+        return typeof total === 'number' && total > 0
+      }).length,
+    [featuredCounts],
+  )
+
   return (
     <div className="sports-tickets-page">
       <SportsHero
@@ -186,15 +193,12 @@ function SportsTickets() {
 
       <section className="sports-tickets-section">
         <div className="sports-tickets-container">
-          {loading ? <SportRailSkeleton /> : null}
-          {!loading && !error ? (
-            <SportSelector sports={visibleSports.length ? visibleSports : sports} />
-          ) : null}
+          {loading ? <SportCategoryGridSkeleton count={6} /> : null}
 
           {error ? (
             <div className="st-error-panel">
               <h3>We couldn&apos;t load sporting events right now</h3>
-              <p>Please try again in a moment.</p>
+              <p>{formatSportsApiError(error)}</p>
               <button type="button" className="st-btn st-btn--primary" onClick={() => setReloadKey((n) => n + 1)}>
                 <RefreshCw size={16} aria-hidden />
                 Try again
@@ -204,11 +208,80 @@ function SportsTickets() {
 
           {!loading && !error ? (
             <>
-              <h2 className="sports-tickets-subheading">Popular competitions</h2>
-              <p className="sports-tickets-section-lead">
-                Browse featured leagues and series available in the current ticket catalogue.
-              </p>
-              <div className="st-featured-strip">
+              <PremiumSectionHead
+                eyebrow="Explore"
+                title="Browse by sport"
+                lead="Choose a category to explore upcoming fixtures, leagues and ticket availability across our catalogue."
+                badge={
+                  visibleSports.length > 0
+                    ? `${visibleSports.length} sport${visibleSports.length === 1 ? '' : 's'}`
+                    : undefined
+                }
+                actions={
+                  <label className="sports-tickets-toggle">
+                    <input
+                      type="checkbox"
+                      checked={showEmpty}
+                      onChange={(e) => setShowEmpty(e.target.checked)}
+                    />
+                    Show sports with no events
+                  </label>
+                }
+              />
+
+              <div className="st-sport-categories">
+                {visibleSports.map((sport) => {
+                  const id = sport.sport_id || sport.id
+                  if (!id) return null
+                  const total = counts[id]
+                  const label = id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+                  return (
+                    <Link
+                      key={id}
+                      to={`/sports-tickets/${encodeURIComponent(id)}`}
+                      className="st-sport-category-card"
+                    >
+                      <div className="st-sport-category-card__visual">
+                        <SportArt sportType={id} iconSize={64} />
+                      </div>
+                      <div className="st-sport-category-card__body">
+                        <h3 className="st-sport-category-card__label">{label}</h3>
+                        <p className="st-sport-category-card__meta">
+                          {typeof total === 'number'
+                            ? total > 0
+                              ? `${total} upcoming event${total === 1 ? '' : 's'}`
+                              : 'No events listed yet'
+                            : countsLoading
+                              ? 'Checking availability…'
+                              : '…'}
+                        </p>
+                        <span className="st-sport-category-card__cta">Explore events →</span>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+
+              {countsLoading ? (
+                <p className="sports-tickets-status sports-tickets-status--inline st-sport-categories__footnote">
+                  Updating event counts…
+                </p>
+              ) : null}
+
+              <PremiumSectionHead
+                spaced
+                eyebrow="Featured leagues"
+                title="Popular competitions"
+                lead="Curated leagues and series — from Premier League and La Liga to Formula 1 and MotoGP."
+                badge={
+                  featuredWithEvents > 0
+                    ? `${featuredWithEvents} live now`
+                    : countsLoading
+                      ? undefined
+                      : 'Browse all'
+                }
+              />
+              <div className="st-featured-strip st-featured-strip--premium">
                 {FEATURED_BROWSE.map((item) => {
                   const total = featuredCounts[item.slug]
                   const hasTickets = typeof total === 'number' ? total > 0 : true
@@ -216,10 +289,10 @@ function SportsTickets() {
                     <Link
                       key={item.slug}
                       to={`/sports-tickets/featured/${encodeURIComponent(item.slug)}`}
-                      className={`st-featured-tile${hasTickets ? '' : ' is-muted'}`}
+                      className={`st-featured-tile st-featured-tile--premium${hasTickets ? '' : ' is-muted'}`}
                     >
                       <div className="st-featured-tile__art">
-                        <SportArt sportType={item.sport_type} iconSize={36} />
+                        <SportArt sportType={item.sport_type} iconSize={52} />
                       </div>
                       <div className="st-featured-tile__body">
                         <span className="st-featured-tile__label">{item.label}</span>
@@ -227,8 +300,8 @@ function SportsTickets() {
                         <p className="st-featured-tile__meta">
                           {typeof total === 'number'
                             ? total > 0
-                              ? `${total} events with tickets`
-                              : 'No tickets available yet'
+                              ? `${total} upcoming event${total === 1 ? '' : 's'}`
+                              : 'No upcoming events'
                             : countsLoading
                               ? 'Checking availability…'
                               : '…'}
@@ -240,9 +313,17 @@ function SportsTickets() {
                 })}
               </div>
 
-              <h2 className="sports-tickets-subheading" style={{ marginTop: '2.5rem' }}>
-                Popular events
-              </h2>
+              <PremiumSectionHead
+                spaced
+                eyebrow="Trending now"
+                title="Popular events"
+                lead="Hand-picked fixtures fans are exploring right now — from derby days to championship weekends."
+                badge={
+                  filteredPopular.length > 0
+                    ? `${filteredPopular.length} event${filteredPopular.length === 1 ? '' : 's'}`
+                    : undefined
+                }
+              />
               {filteredPopular.length === 0 ? (
                 <p className="sports-tickets-status">No popular events to show right now.</p>
               ) : (
@@ -252,58 +333,6 @@ function SportsTickets() {
                   ))}
                 </ul>
               )}
-
-              <div className="sports-tickets-toolbar">
-                <div className="sports-tickets-toolbar__copy">
-                  <h2 className="sports-tickets-subheading" style={{ margin: 0 }}>
-                    All sports
-                  </h2>
-                  <p className="sports-tickets-status sports-tickets-status--inline">
-                    {visibleSports.length} sport{visibleSports.length === 1 ? '' : 's'}
-                    {!showEmpty && Object.keys(counts).length > 0 ? ' with available tickets' : ''}.
-                    {countsLoading ? ' Updating counts…' : ''}
-                  </p>
-                </div>
-                <label className="sports-tickets-toggle">
-                  <input
-                    type="checkbox"
-                    checked={showEmpty}
-                    onChange={(e) => setShowEmpty(e.target.checked)}
-                  />
-                  Show sports with no tickets
-                </label>
-              </div>
-
-              <div className="sports-tickets-grid">
-                {visibleSports.map((sport) => {
-                  const id = sport.sport_id || sport.id
-                  if (!id) return null
-                  const total = counts[id]
-                  const label = id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
-                  return (
-                    <Link
-                      key={id}
-                      to={`/sports-tickets/${encodeURIComponent(id)}`}
-                      className="sports-tickets-card"
-                    >
-                      <div className="sports-tickets-card__art">
-                        <SportArt sportType={id} iconSize={30} />
-                      </div>
-                      <div className="sports-tickets-card__body">
-                        <span className="sports-tickets-card__label">{label}</span>
-                        <span className="sports-tickets-card__meta">
-                          {typeof total === 'number'
-                            ? total > 0
-                              ? `${total} event${total === 1 ? '' : 's'}`
-                              : 'No tickets yet'
-                            : '…'}
-                        </span>
-                        <span className="sports-tickets-card__cta">View events →</span>
-                      </div>
-                    </Link>
-                  )
-                })}
-              </div>
 
               <SportsTrustSection />
             </>

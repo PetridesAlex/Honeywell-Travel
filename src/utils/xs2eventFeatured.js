@@ -103,17 +103,16 @@ export function eventMatchesTournamentNames(event, tournamentNames = []) {
 export function featuredEventsQuery(featured) {
   if (!featured) return null
   if (featured.kind === 'sport') {
-    return { sport_type: featured.sport_type, tickets_available: 'gt:0' }
+    return { sport_type: featured.sport_type }
   }
   const primary = featured.tournament_names?.[0]
   if (primary) {
     return {
       sport_type: featured.sport_type,
       tournament_name: primary,
-      tickets_available: 'gt:0',
     }
   }
-  return { sport_type: featured.sport_type, tickets_available: 'gt:0' }
+  return { sport_type: featured.sport_type }
 }
 
 /** Category options for the sports search dropdown (featured + live sports). */

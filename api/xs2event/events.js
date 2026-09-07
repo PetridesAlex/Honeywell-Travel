@@ -30,7 +30,11 @@ export default async function handler(req, res) {
       Boolean(params.updated) ||
       Boolean(params.created)
 
-    if (!hasDateFilter) {
+    // Direct event lookups must not inherit the future-only default — linked
+    // events can otherwise 404 once date_stop passes UTC midnight.
+    const isDirectEventLookup = Boolean(params.event_id)
+
+    if (!hasDateFilter && !isDirectEventLookup) {
       params.date_stop = `ge:${todayUtcDate()}`
     }
 
