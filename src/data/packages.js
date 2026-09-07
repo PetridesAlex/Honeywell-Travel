@@ -4070,8 +4070,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
       includedLuggage: '1 checked bag 20kg + 1 hand luggage 8kg',
-      coverImage: '/images/summer/skg-thessaloniki-hero.png',
-      thumbnailImage: '/images/summer/skg-trikala-thumb.png',
+      coverImage: '/images/autumn/ioannina-greece/ioannina-cover.webp',
+      thumbnailImage: '/images/autumn/ioannina-greece/ioannina-thumb.webp',
       flights: [
         {
           direction: 'Departure',
@@ -4095,7 +4095,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 659,
@@ -4109,7 +4109,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 659,
@@ -4123,7 +4123,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 679,
@@ -4137,7 +4137,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 679,
@@ -4151,7 +4151,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 679,
@@ -4165,7 +4165,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 679,
@@ -4179,7 +4179,7 @@ export const travelPackages = [
           name: '3* Hotel - Trikala & 4* Hotel - Thessaloniki',
           stars: 3,
           roomType: 'Standard Room',
-          image: '/images/hotels/trikala-thessaloniki-hotel.png',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Trikala & Thessaloniki, Greece',
           prices: {
             double: 679,
@@ -4228,7 +4228,7 @@ export const travelPackages = [
         day6: '6η Μέρα: Θεσσαλονίκη – Λάρνακα\n\nΠρόγευμα και αναχώρηση για το αεροδρόμιο Θεσσαλονίκης. Πτήση επιστροφής για Λάρνακα, με τις καλύτερες εντυπώσεις από ένα υπέροχο ταξίδι γεμάτο εικόνες, εμπειρίες και αναμνήσεις από Θεσσαλονίκη, Θεσσαλία και την αλπική ελληνική φύση.'
       },
       gallery: [
-        '/images/summer/skg-thessaloniki-hero.png'
+        '/images/autumn/ioannina-greece/ioannina-cover.webp'
       ]
     }
   },
@@ -4253,8 +4253,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
       includedLuggage: '1 checked bag 20kg + 1 hand luggage 8kg',
-      coverImage: '/images/summer/lefkos-pirgos-thessaloniki-hero.png',
-      thumbnailImage: '/images/summer/skg-kastoria-thumb.png',
+      coverImage: '/images/autumn/ioannina-greece/ioannina-cover.webp',
+      thumbnailImage: '/images/autumn/ioannina-greece/ioannina-thumb.webp',
       flights: [
         {
           direction: 'Departure',
@@ -4278,7 +4278,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 699,
@@ -4293,7 +4293,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 699,
@@ -4308,7 +4308,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 729,
@@ -4323,7 +4323,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 729,
@@ -4338,7 +4338,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 749,
@@ -4353,7 +4353,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 749,
@@ -4368,7 +4368,7 @@ export const travelPackages = [
           name: 'Kastoria Hotel – Kastoria',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Kastoria Hotel, Kastoria, Greece',
           prices: {
             double: 729,
@@ -4418,7 +4418,7 @@ export const travelPackages = [
         day6: '6η Μέρα: Θεσσαλονίκη – Λάρνακα\n\nΠρωινό σε πακέτο και αναχώρηση νωρίς το πρωί για το αεροδρόμιο Θεσσαλονίκης.\nΠτήση επιστροφής για Λάρνακα με τις ωραιότερες αναμνήσεις από:\n\n• Θεσσαλονίκη\n• Καστοριά\n• Φλώρινα\n• Πρέσπες\n• Νυμφαίο\n• Έδεσσα\n• Λίμνη Κερκίνη\n\nΈνα ταξίδι γεμάτο φύση, εικόνες και ιστορία.'
       },
       gallery: [
-        '/images/summer/lefkos-pirgos-thessaloniki-hero.png'
+        '/images/autumn/ioannina-greece/ioannina-cover.webp'
       ]
     }
   },
@@ -5046,8 +5046,8 @@ export const travelPackages = [
       boardBasis: 'Bed and Breakfast (Thessaloniki / Kastoria) & Halfboard (Ioannina)',
       airline: 'Sky Express',
       includedLuggage: '1 checked bag 20kg + 1 hand luggage 8kg',
-      coverImage: '/images/summer/thessaloniki-kastoria-ioannina-hero.webp',
-      thumbnailImage: '/images/summer/thessaloniki-kastoria-ioannina-hero.webp',
+      coverImage: '/images/autumn/ioannina-greece/ioannina-cover.webp',
+      thumbnailImage: '/images/autumn/ioannina-greece/ioannina-cover.webp',
       flights: [
         {
           direction: 'Departure',
@@ -5072,7 +5072,7 @@ export const travelPackages = [
           stars: 4,
           roomType: 'Standard Room',
           boardBasis: 'Bed and Breakfast (Thessaloniki / Kastoria) & Halfboard (Ioannina)',
-          image: '/images/hotels/4-5-Hotels-Thessaloniki-Kastoria.webp',
+          image: '/images/autumn/ioannina-greece/ioannina-cover.webp',
           location: 'Thessaloniki, Kastoria & Ioannina, Greece',
           prices: {
             double: 785,
@@ -5121,7 +5121,7 @@ export const travelPackages = [
         day6: '6η Μέρα: Ιωάννινα - Μέτσοβο – Θεσσαλονίκη - Λάρνακα\n\nΠρωινό και αναχώρηση για το γραφικό Μέτσοβο, το ορεινό κεφαλοχώρι της Πίνδου, χτισμένο αμφιθεατρικά μέσα σε ένα καταπράσινο τοπίο. Ελεύθερος χρόνος για περίπατο στα λιθόστρωτα δρομάκια, καφέ στην πλατεία με τα παραδοσιακά αρχοντικά. Στη συνέχεια, αναχώρηση για το αεροδρόμιο Θεσσαλονίκης για να πάρουμε τη πτήση της επιστροφής για Λάρνακα.'
       },
       gallery: [
-        '/images/summer/thessaloniki-kastoria-ioannina-hero.webp'
+        '/images/autumn/ioannina-greece/ioannina-cover.webp'
       ]
     }
   },
@@ -5146,8 +5146,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Smartwings',
       includedLuggage: '1 checked bag 23kg + 1 hand luggage 10kg',
-      coverImage: '/images/destinations/skg-kastoria-ioanina-hero.webp',
-      thumbnailImage: '/images/destinations/skg-kastoria-ioanina-hero.webp',
+      coverImage: '/images/christmas-packages/parga/praque-cover-christmas.webp',
+      thumbnailImage: '/images/christmas-packages/parga/praque-cover-christmas.webp',
       flights: [
         {
           direction: 'Departure',
@@ -5171,7 +5171,7 @@ export const travelPackages = [
           name: 'Prague Hotel – Prague',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
           location: 'Prague Hotel, Prague, Czech Republic',
           prices: {
             double: 899,
@@ -5186,7 +5186,7 @@ export const travelPackages = [
           name: 'Prague Hotel – Prague',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
           location: 'Prague Hotel, Prague, Czech Republic',
           prices: {
             double: 899,
@@ -5201,7 +5201,7 @@ export const travelPackages = [
           name: 'Prague Hotel – Prague',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
           location: 'Prague Hotel, Prague, Czech Republic',
           prices: {
             double: 929,
@@ -5216,7 +5216,7 @@ export const travelPackages = [
           name: 'Prague Hotel – Prague',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
           location: 'Prague Hotel, Prague, Czech Republic',
           prices: {
             double: 929,
@@ -5231,7 +5231,7 @@ export const travelPackages = [
           name: 'Prague Hotel – Prague',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
           location: 'Prague Hotel, Prague, Czech Republic',
           prices: {
             double: 929,
@@ -5246,7 +5246,7 @@ export const travelPackages = [
           name: 'Prague Hotel – Prague',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/destinations/skg-kastoria-ioanina-hotel.webp',
+          image: '/images/christmas-packages/parga/Astoria-Hotel-Prague.webp',
           location: 'Prague Hotel, Prague, Czech Republic',
           prices: {
             double: 929,
@@ -5294,7 +5294,7 @@ export const travelPackages = [
         day5: '5η Μέρα: Πράγα – Λάρνακα\n\nΠρόγευμα (breakfast box) και, λίγο μετά τα μεσάνυχτα, μεταφορά στο αεροδρόμιο της Πράγας για την πτήση επιστροφής στη Λάρνακα.\n\nΕπιστροφή με όμορφες εικόνες, εμπειρίες και αναμνήσεις από την παραμυθένια πρωτεύουσα της Τσεχίας, γεμάτο πολιτισμό, ιστορία και ευρωπαϊκή κομψότητα.'
       },
       gallery: [
-        '/images/destinations/skg-kastoria-ioanina-hero.webp'
+        '/images/christmas-packages/parga/praque-cover-christmas.webp'
       ]
     }
   },
@@ -10636,7 +10636,7 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
       includedLuggage: '1 αποσκευή 20kg + 1 χειραποσκευή 8kg',
-      coverImage: '/images/thessaloniki/thessaloinki-cover-castle.webp',
+      coverImage: '/images/autumn/ioannina-greece/ioannina-cover.webp',
       flights: [
         {
           direction: 'Departure',
@@ -10660,7 +10660,7 @@ export const travelPackages = [
           name: 'Imperial Palace Hotel – Thessaloniki',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/thessaloniki/Imperial-hotel-palace-thessaloniki.webp',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Andigonidon 13, 54630, Thessaloniki',
           boardBasis: 'Bed & Breakfast',
           prices: {
@@ -10677,7 +10677,7 @@ export const travelPackages = [
           name: 'Imperial Plus Urban Smart Hotel – Thessaloniki',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/thessaloniki/imperial-plus-urban-smart-hotel-thessaloniki.webp',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Egnatia Str. 8, 54626, Thessaloniki',
           boardBasis: 'Bed & Breakfast',
           prices: {
@@ -10694,7 +10694,7 @@ export const travelPackages = [
           name: 'Egnatia Palace Hotel – Thessaloniki',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/thessaloniki/egnatia-palace-hotel-thessaloniki.webp',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Egnatia Str. 61, 54631, Thessaloniki',
           boardBasis: 'Bed & Breakfast',
           prices: {
@@ -10711,7 +10711,7 @@ export const travelPackages = [
           name: 'Elisabeth Boutique Hotel – Thessaloniki',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/thessaloniki/elisabeth-boutique-hotel%20-.webp',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Katholikon 2, 54625, Thessaloniki',
           boardBasis: 'Bed & Breakfast',
           prices: {
@@ -10726,7 +10726,7 @@ export const travelPackages = [
           name: 'NYX Hotel – Thessaloniki',
           stars: 4,
           roomType: 'Standard Room',
-          image: '/images/thessaloniki/nyx-hotel.webp',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Tsimiski 1, 54625, Thessaloniki',
           boardBasis: 'Bed & Breakfast',
           prices: {
@@ -10743,7 +10743,7 @@ export const travelPackages = [
           name: 'Electra Palace Hotel – Thessaloniki',
           stars: 5,
           roomType: 'Standard Room',
-          image: '/images/thessaloniki/electra-palace.webp',
+          image: '/images/hotels/sinaia-hotel.webp',
           location: 'Aristotelous Square 9, 54624, Thessaloniki',
           boardBasis: 'Bed & Breakfast',
           prices: {
@@ -10788,7 +10788,7 @@ export const travelPackages = [
         entertainment: '🎶 ΔΙΑΣΚΕΔΑΣΗ\n\nΗ Θεσσαλονίκη δεν κοιμάται ποτέ. Καφέ, μπαρ, club, μπουζούκια και ζωντανή μουσική:\n• Λαδάδικα\n• Λεωφόρος Νίκης\n• Πλατεία Αριστοτέλους\n• Πλατεία Ναυαρίνου\n• Περιοχή Αεροδρομίου (μεγάλες πίστες)'
       },
       gallery: [
-        '/images/thessaloniki/thessaloinki-cover-castle.webp'
+        '/images/autumn/ioannina-greece/ioannina-cover.webp'
       ]
     }
   },
@@ -12461,19 +12461,19 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
       includedLuggage: '1 αποσκευή 20 κιλών και 1 χειραποσκευή 8 κιλών',
-      coverImage: '/images/greek-packages-summer/Macedonia-thassos/xanthi-thrassos-cover.webp',
-      thumbnailImage: '/images/greek-packages-summer/Macedonia-thassos/xanthi-thrassos-thumb.webp',
+      coverImage: '/images/greek-packages-summer/rhodes/rhodes-cover.webp',
+      thumbnailImage: '/images/greek-packages-summer/rhodes/rhodes-second-package-summer-thumbnail.webp',
       flights: [
         { direction: 'Departure', date: '—', route: 'Larnaca (LCA) → Thessaloniki (SKG)', flight: 'GQ 650', time: '20:25 → 22:25', luggage: '1 αποσκευή 20 kg + χειραποσκευή 8 kg' },
         { direction: 'Return', date: '—', route: 'Thessaloniki (SKG) → Larnaca (LCA)', flight: 'GQ 651', time: '08:55 → 10:45', luggage: '1 αποσκευή 20 kg + χειραποσκευή 8 kg' }
       ],
       hotels: [
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/Macedonia-thassos/Hotel-Xanthi-Hotel-thessaloniki.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 789, single: 999, child1: 629 }, packagePrice: 1578, departureDate: '13/07', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/Macedonia-thassos/Hotel-Xanthi-Hotel-thessaloniki.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 789, single: 999, child1: 629 }, packagePrice: 1578, departureDate: '20/07', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/Macedonia-thassos/Hotel-Xanthi-Hotel-thessaloniki.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 829, single: 1039, child1: 659 }, packagePrice: 1658, departureDate: '27/07', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/Macedonia-thassos/Hotel-Xanthi-Hotel-thessaloniki.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 1059, child1: 669 }, packagePrice: 1698, departureDate: '10/08', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/Macedonia-thassos/Hotel-Xanthi-Hotel-thessaloniki.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 1059, child1: 669 }, packagePrice: 1698, departureDate: '17/08', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/Macedonia-thassos/Hotel-Xanthi-Hotel-thessaloniki.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 829, single: 1039, child1: 659 }, packagePrice: 1658, departureDate: '24/08', nights: 7 }
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/rhodes/rhodes-cover.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 789, single: 999, child1: 629 }, packagePrice: 1578, departureDate: '13/07', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/rhodes/rhodes-cover.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 789, single: 999, child1: 629 }, packagePrice: 1578, departureDate: '20/07', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/rhodes/rhodes-cover.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 829, single: 1039, child1: 659 }, packagePrice: 1658, departureDate: '27/07', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/rhodes/rhodes-cover.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 1059, child1: 669 }, packagePrice: 1698, departureDate: '10/08', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/rhodes/rhodes-cover.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 1059, child1: 669 }, packagePrice: 1698, departureDate: '17/08', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/rhodes/rhodes-cover.webp', location: '5* Hotel - Xanthi & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 829, single: 1039, child1: 659 }, packagePrice: 1658, departureDate: '24/08', nights: 7 }
       ],
       included: ['Αεροπορικά εισιτήρια Λάρνακα – Θεσσαλονίκη – Λάρνακα με πτήσεις Sky Express', 'Φόροι αεροδρομίων', 'Μια αποσκευή 20 κιλών και μια χειραποσκευή 8 κιλών', 'Τέσσερις διανυκτερεύσεις σε ξενοδοχείο 4* με πρωινό στη Θεσσαλονίκη', 'Δύο διανυκτερεύσεις σε ξενοδοχείο 5* στη Ξάνθη', 'Κρουαζιέρα Αγίου Όρους', 'Ακτοπλοϊκό εισιτήριο για τη Θάσο', 'Τέλος ανθεκτικότητας στην Κλιματική Κρίση', 'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα', 'Τοπικός Αρχηγός / Συνοδός', 'Υπηρεσίες των αντιπροσώπων μας'],
       notIncluded: ['Δικαιώματα εισόδων προαιρετικά', 'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'],
@@ -12491,7 +12491,7 @@ export const travelPackages = [
       program: {
         introduction: 'Ένα ολοκληρωμένο ταξίδι στη Βόρεια Ελλάδα με βάση τη Θεσσαλονίκη και την Ξάνθη, που συνδυάζει φυσικά τοπία, ιστορικές πόλεις και μοναδικές εμπειρίες.\n\nΑναχωρήσεις: 13/07, 20/07, 27/07, 10/08, 17/08, 24/08\n\nΠτήσεις: GQ 650 Λάρνακα – Θεσσαλονίκη 20:25 - 22:25 · GQ 651 Θεσσαλονίκη – Λάρνακα 08:55 - 10:45\n\nΔιανυκτερεύσεις: Θεσσαλονίκη (4), Ξάνθη (2).'
       },
-      gallery: ['/images/greek-packages-summer/Macedonia-thassos/xanthi-thrassos-cover.webp']
+      gallery: ['/images/greek-packages-summer/rhodes/rhodes-cover.webp']
     }
   },
   {
@@ -12515,19 +12515,19 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
       includedLuggage: '1 αποσκευή 23 κιλών και 1 χειραποσκευή 10 κιλών',
-      coverImage: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-cover.webp',
-      thumbnailImage: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/white-castle-thesaloniki.webp',
+      coverImage: '/images/christmas-packages/sofia/sofia-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/sofia/sofia-christmas-thumb.webp',
       flights: [
         { direction: 'Departure', date: '—', route: 'Larnaca (LCA) → Thessaloniki (SKG)', flight: 'GQ 650', time: '20:25 → 22:25', luggage: '1 αποσκευή 23 kg + χειραποσκευή 10 kg' },
         { direction: 'Return', date: '—', route: 'Thessaloniki (SKG) → Larnaca (LCA)', flight: 'GQ 651', time: '08:55 → 10:45', luggage: '1 αποσκευή 23 kg + χειραποσκευή 10 kg' }
       ],
       hotels: [
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-hotel.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 819, single: 969, child1: 659 }, packagePrice: 1638, departureDate: '13/07', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-hotel.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 819, single: 969, child1: 659 }, packagePrice: 1638, departureDate: '20/07', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-hotel.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 999, child1: 689 }, packagePrice: 1698, departureDate: '27/07', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-hotel.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 869, single: 1019, child1: 699 }, packagePrice: 1738, departureDate: '10/08', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-hotel.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 869, single: 1019, child1: 699 }, packagePrice: 1738, departureDate: '17/08', nights: 7 },
-        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-hotel.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 999, child1: 689 }, packagePrice: 1698, departureDate: '24/08', nights: 7 }
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 819, single: 969, child1: 659 }, packagePrice: 1638, departureDate: '13/07', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 819, single: 969, child1: 659 }, packagePrice: 1638, departureDate: '20/07', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 999, child1: 689 }, packagePrice: 1698, departureDate: '27/07', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 869, single: 1019, child1: 699 }, packagePrice: 1738, departureDate: '10/08', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 869, single: 1019, child1: 699 }, packagePrice: 1738, departureDate: '17/08', nights: 7 },
+        { name: '', stars: 4, roomType: 'Δίκλινο', image: '/images/christmas-packages/sofia/amar-design-hotel-sofia.webp', location: '4* Hotel - Sofia & 4* Hotel - Thessaloniki', boardBasis: 'Πρωινό', prices: { double: 849, single: 999, child1: 689 }, packagePrice: 1698, departureDate: '24/08', nights: 7 }
       ],
       included: ['Αεροπορικά εισιτήρια Λάρνακα – Θεσσαλονίκη – Λάρνακα με πτήσεις Sky Express', 'Φόροι αεροδρομίων', 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών', 'Τρεις διανυκτερεύσεις σε ξενοδοχείο 4* με πρωινό στη Σόφια', 'Τρεις διανυκτερεύσεις σε ξενοδοχείο 4* με πρωινό στη Θεσσαλονίκη', 'Εισιτήριο κρουαζιέρας Αγ. Όρους', 'Τέλος ανθεκτικότητας στην Κλιματική Κρίση', 'Μεταφορές, εκδρομές και περιηγήσεις σύμφωνα με το πρόγραμμα', 'Τοπικός Αρχηγός / Συνοδός', 'Υπηρεσίες των αντιπροσώπων μας'],
       notIncluded: ['Δικαιώματα εισόδων προαιρετικά', 'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται σαν προαιρετικό ή προτεινόμενο'],
@@ -12545,7 +12545,7 @@ export const travelPackages = [
       program: {
         introduction: 'Θεσσαλονίκη – Σόφια – Λίμνη Κερκίνη – Κρουαζιέρα Αγίου Όρους. Επτά ημέρες στη Βόρεια Ελλάδα και τη Βουλγαρία με βάση τη Θεσσαλονίκη και τη Σόφια.\n\nΑναχωρήσεις: 13/07, 20/07, 27/07, 10/08, 17/08, 24/08\n\nΠτήσεις: GQ 650 Λάρνακα – Θεσσαλονίκη 20:25 - 22:25 · GQ 651 Θεσσαλονίκη – Λάρνακα 08:55 - 10:45\n\nΔιανυκτερεύσεις: Σόφια (3), Θεσσαλονίκη (3).'
       },
-      gallery: ['/images/greek-packages-summer/thesalloniki-sofia-lake-kerkini/sofia-thesaloniki-cover.webp']
+      gallery: ['/images/christmas-packages/sofia/sofia-christmas-cover.webp']
     }
   },
   {

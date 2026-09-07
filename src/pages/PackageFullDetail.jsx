@@ -983,12 +983,6 @@ function PackageFullDetail() {
           <span className="package-back-nav__label">{t('package.backToOverview')}</span>
         </button>
 
-        {displayPkg?._i18nMissing ? (
-          <p className="package-translation-pending" role="status">
-            {t('package.translationPending')}
-          </p>
-        ) : null}
-
         <div className="layout-grid">
           <main className="layout-main">
             {/* Tabs */}

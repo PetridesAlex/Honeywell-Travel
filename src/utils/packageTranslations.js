@@ -3,8 +3,8 @@ import { greekPackageTitleToEnglish, hasGreekCharacters } from './packageTitleI1
 
 const jsonTitleForLang = (packageId, lang, i18n) => {
   const translationKey = `packages.${packageId}.title`
-  const tFn = lang === 'en' ? i18n?.getFixedT?.('en') : i18n?.getFixedT?.('el')
-  const fromJson = tFn ? tFn(translationKey, { defaultValue: null }) : null
+  if (!i18n?.t) return null
+  const fromJson = i18n.t(translationKey, { lng: lang, defaultValue: null })
   if (fromJson && fromJson !== translationKey) return fromJson
   return null
 }
@@ -58,11 +58,13 @@ export const localizePackage = (pkg, i18n) => {
 
   const description = getTranslatedPackageDescription(pkg.id, localized.description, i18n)
 
+  // Only flag missing English when the displayed title is still Greek-only.
+  // Program/details may remain in Greek as fallback — no user-facing warning needed.
   const missingRequestedLang =
     lang === 'en' &&
     !pkg.i18n?.en?.title &&
     !jsonTitleForLang(pkg.id, 'en', i18n) &&
-    hasGreekCharacters(localized.title || localized.description)
+    hasGreekCharacters(title)
 
   return {
     ...localized,
