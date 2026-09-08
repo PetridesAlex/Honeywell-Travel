@@ -8910,6 +8910,7 @@ export const travelPackages = [
     longDescription: 'Ένα ολοκληρωμένο ταξίδι 8 ημερών στο αυτοκρατορικό Μαρόκο με Ταγγέρη. Από την κοσμοπολίτικη Καζαμπλάνκα και την πρωτεύουσα Ραμπάτ, στην «μπλε πόλη» Σεφσαουέν, την πνευματική Φεζ και την ατμοσφαιρική Μαρακές. Περιλαμβάνονται πτήσεις με Aegean μέσω Αθήνας, ξεναγήσεις, είσοδοι σε επιλεγμένα αξιοθέατα και διαμονή σε επιλεγμένα 4★ & 5★ ξενοδοχεία.',
     image: '🇲🇦',
     featured: true,
+    hidden: true,
     packageType: 'group',
     details: {
       departureDate: '14/05, 15/09, 06/10, 01/10',
@@ -9071,6 +9072,7 @@ export const travelPackages = [
     longDescription: 'Ένα ολοκληρωμένο ταξίδι 8 ημερών στο αυτοκρατορικό Μαρόκο με έρημο. Από την κοσμοπολίτικη Καζαμπλάνκα και την πρωτεύουσα Ραμπάτ, στην πνευματική Φεζ, την έρημο Ερφούντ, την Ουαρζαζάτ και την ατμοσφαιρική Μαρακές. Περιλαμβάνονται πτήσεις με Aegean μέσω Αθήνας, ξεναγήσεις, είσοδοι σε επιλεγμένα αξιοθέατα και διαμονή σε επιλεγμένα 4★ & 5★ ξενοδοχεία.',
     image: '🇲🇦',
     featured: true,
+    hidden: true,
     packageType: 'group',
     details: {
       departureDate: '14/05, 15/09, 06/10, 01/10',
@@ -19722,6 +19724,7 @@ export const travelPackages = [
       'Ένα ολοκληρωμένο ταξίδι 8 ημερών στο αυτοκρατορικό Μαρόκο με Ταγγέρη. Από την κοσμοπολίτικη Καζαμπλάνκα και την πρωτεύουσα Ραμπάτ, στην «μπλε πόλη» Σεφσαουέν, την πνευματική Φεζ και την ατμοσφαιρική Μαρακές. Περιλαμβάνονται πτήσεις Aegean μέσω Αθήνας, ημιδιατροφή, ξεναγήσεις και διαμονή σε 4★ & 5★ ξενοδοχεία.',
     image: '🇲🇦',
     featured: true,
+    hidden: true,
     packageType: 'group',
     details: {
       departureDate: '15/09, 06/10',
@@ -19865,29 +19868,30 @@ export const travelPackages = [
     price: 1819,
     duration: '8 days / 7 nights',
     description:
-      'Φθινοπωρινό οργανωμένο πακέτο 8 ημερών στον αυτοκρατορικό γύρο του Μαρόκου με έρημο. Καζαμπλάνκα, Ραμπάτ, Μεκνές, Φεζ, Ερφούντ, Ουαρζαζάτ και Μαρακές. Αναχωρήσεις 15/09 και 06/10.',
+      'Φθινοπωρινό οργανωμένο πακέτο 8 ημερών στον αυτοκρατορικό γύρο του Μαρόκου με έρημο. Καζαμπλάνκα, Ραμπάτ, Μεκνές, Φεζ, Ερφούντ, Ουαρζαζάτ και Μαρακές. Αναχώρηση 06/10.',
     longDescription:
       'Ένα ολοκληρωμένο ταξίδι 8 ημερών στο αυτοκρατορικό Μαρόκο με έρημο. Από την κοσμοπολίτικη Καζαμπλάνκα και την πρωτεύουσα Ραμπάτ, στην πνευματική Φεζ, την έρημο Ερφούντ, την Ουαρζαζάτ και την ατμοσφαιρική Μαρακές. Περιλαμβάνονται πτήσεις Aegean μέσω Αθήνας, ημιδιατροφή, ξεναγήσεις και διαμονή σε 4★ & 5★ ξενοδοχεία.',
     image: '🇲🇦',
     featured: true,
     packageType: 'group',
     details: {
-      departureDate: '15/09, 06/10',
-      departureDates: ['15/09', '06/10'],
+      codeUpdatedAt: '2026-09-08T12:30:00.000Z',
+      departureDate: '06/10',
+      departureDates: ['06/10'],
       departureFrom: 'Larnaca',
       destinationFull: 'Casablanca, Rabat, Meknes, Fes, Erfoud, Ouarzazate, Marrakech – Morocco',
-      monthAvailability: 'September – October',
+      monthAvailability: 'October',
       roomType: 'Standard Room',
       boardBasis: 'Half Board',
       airline: 'Aegean Airlines',
       includedLuggage: '1 αποσκευή 23Kg και 1 χειραποσκευή 8Kg.',
-      coverImage: '/images/marocco/maroco-church.webp',
+      coverImage: '/images/marocco/marrakesh.webp',
       thumbnailImage: '/images/marocco/marroco-town.webp',
       note: 'Ξενοδοχεία: Καζαμπλάνκα GRAND MOGADOR CENTER 5* OR SIMILAR · Φες PALAIS MEDINA 5* OR SIMILAR · Ερφούντ HOTEL KASBAH YASMINA 4* OR SIMILAR · Ουαρζαζάτ KARAM HOTEL 4* OR SIMILAR · Μαρακές KENZI FARAH ROSE GARDEN 5* OR SIMILAR',
       flights: [
         {
           direction: 'Departure',
-          date: '15/09, 06/10',
+          date: '06/10',
           route: 'Larnaca (LCA) → Marrakech (RAK)',
           stops: 'Athens (ATH)',
           luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
@@ -19926,7 +19930,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '22/09, 13/10',
+          date: '13/10',
           route: 'Marrakech (RAK) → Larnaca (LCA)',
           stops: 'Athens (ATH)',
           luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
@@ -25205,14 +25209,33 @@ export const travelPackages = [
 // Seasonal categories hidden from listings until republished (remove from array to restore).
 export const EXPIRED_PACKAGE_CATEGORIES = ['Easter Packages']
 
+/** Newer package ids supersede older duplicates (same tour, different id/category). */
+export const SUPERSEDED_PACKAGE_IDS = new Set([44, 45, 335])
+
+function dedupePackagesByTitleDestination(packages) {
+  const byKey = new Map()
+  for (const pkg of packages) {
+    const key = `${String(pkg.destination || '').trim().toLowerCase()}|${String(pkg.title || '').trim().toLowerCase()}`
+    const existing = byKey.get(key)
+    if (!existing || Number(pkg.id) > Number(existing.id)) {
+      byKey.set(key, pkg)
+    }
+  }
+  return [...byKey.values()]
+}
+
 export const isPackageVisible = (pkg) =>
   Boolean(pkg) &&
   !pkg.hidden &&
+  !SUPERSEDED_PACKAGE_IDS.has(Number(pkg.id)) &&
   !EXPIRED_PACKAGE_CATEGORIES.includes(pkg.category) &&
   pkg.details?.packageStatus !== 'completed' &&
   hasUpcomingPackageDepartures(pkg)
 
-const visiblePackages = () => sortPackagesByLeadPriceAsc(travelPackages.filter(isPackageVisible))
+const visiblePackages = () =>
+  sortPackagesByLeadPriceAsc(
+    dedupePackagesByTitleDestination(travelPackages.filter(isPackageVisible)),
+  )
 
 export const getVisiblePackages = () => visiblePackages()
 

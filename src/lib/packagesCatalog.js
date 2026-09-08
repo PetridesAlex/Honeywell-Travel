@@ -32,6 +32,31 @@ function resetCatalogMemory() {
  * unless the static package sets details.codeUpdatedAt newer than the CMS row.
  * suppressedIds = CMS draft/hidden packages that must not fall back to static data.
  */
+/**
+ * When code marks a package schedule as updated, static departure/hotel/flight data wins over CMS.
+ */
+export function applyStaticScheduleOverlay(mergedPkg, staticPkg) {
+  if (!mergedPkg || !staticPkg?.details) return mergedPkg
+
+  const staticTs = Date.parse(staticPkg.details.codeUpdatedAt || '')
+  const cmsTs = Date.parse(mergedPkg._cmsUpdatedAt || '')
+  const staticIsNewer =
+    Number.isFinite(staticTs) && (!Number.isFinite(cmsTs) || staticTs > cmsTs)
+
+  if (!staticIsNewer) return mergedPkg
+
+  return {
+    ...mergedPkg,
+    ...staticPkg,
+    details: {
+      ...(mergedPkg.details || {}),
+      ...(staticPkg.details || {}),
+    },
+    _cmsId: mergedPkg._cmsId,
+    _cmsUpdatedAt: mergedPkg._cmsUpdatedAt,
+  }
+}
+
 export function mergeStaticWithCms(staticList, cmsList, suppressedIds = []) {
   const map = new Map()
 
@@ -55,18 +80,9 @@ export function mergeStaticWithCms(staticList, cmsList, suppressedIds = []) {
       Number.isFinite(staticTs) && (!Number.isFinite(cmsTs) || staticTs > cmsTs)
 
     if (staticIsNewer) {
-      map.set(id, {
-        ...pkg,
-        ...staticPkg,
-        details: {
-          ...(pkg.details || {}),
-          ...(staticPkg.details || {})
-        },
-        _cmsId: pkg._cmsId,
-        _cmsUpdatedAt: pkg._cmsUpdatedAt
-      })
+      map.set(id, applyStaticScheduleOverlay({ ...pkg, _cmsId: pkg._cmsId, _cmsUpdatedAt: pkg._cmsUpdatedAt }, staticPkg))
     } else {
-      map.set(id, pkg)
+      map.set(id, applyStaticScheduleOverlay(pkg, staticPkg))
     }
   }
 

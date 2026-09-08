@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById } from '../data/packages'
-import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh } from '../lib/packagesCatalog'
+import { getMergedPackageById, loadMergedPackages, subscribePackagesCatalogRefresh, applyStaticScheduleOverlay } from '../lib/packagesCatalog'
 import { localizePackage } from '../utils/packageTranslations'
 import { translatePackageDuration } from '../utils/packageTitleI18n'
 import { getPackageLeadPrice } from '../utils/packageLeadPrice'
@@ -12,6 +12,7 @@ import {
   getHotelStayDate,
   getPackageDepartureDates,
   isItineraryStyleHotels,
+  parseDateTokenList,
   sortDepartureDateStrings,
 } from '../utils/packageDepartureDates'
 import HoneypotField from '../components/HoneypotField'
@@ -368,23 +369,24 @@ const getAirlineLogo = (airlineName) => {
 const alignHotelVariantsToDepartures = (variants, details, baseHotel) => {
   if (isItineraryStyleHotels(details)) return variants
 
-  const fromCanonical = getDepartureDates(details)
+  // Package-level departures only — do not synthesize rows from stale flight/hotel union dates.
+  const fromCanonical = getPackageDepartureDates(details)
   const unionKeys = new Map()
   fromCanonical.forEach((d) => unionKeys.set(d.toLowerCase(), d))
-  variants.forEach((v) => {
-    const d = typeof v.departureDate === 'string' ? v.departureDate.trim() : ''
-    if (d && d !== '—' && d !== '-') unionKeys.set(d.toLowerCase(), d)
-  })
+  if (fromCanonical.length === 0) {
+    variants.forEach((v) => {
+      parseDateTokenList(v.departureDate).forEach((d) => unionKeys.set(d.toLowerCase(), d))
+    })
+  }
   const ordered = sortDepartureDateStrings([...unionKeys.values()])
   if (ordered.length === 0) return variants
 
   const byKey = new Map()
   variants.forEach((v) => {
-    const d = typeof v.departureDate === 'string' ? v.departureDate.trim() : ''
-    if (d) {
+    parseDateTokenList(v.departureDate).forEach((d) => {
       const k = d.toLowerCase()
-      if (!byKey.has(k)) byKey.set(k, v)
-    }
+      if (!byKey.has(k)) byKey.set(k, { ...v, departureDate: d })
+    })
   })
 
   const template = variants[0] || baseHotel
@@ -485,6 +487,7 @@ const PackageFlightsSection = ({ details }) => {
                   <DirectionIcon size={15} strokeWidth={2.25} aria-hidden="true" />
                   {directionLabel}
                 </span>
+                {flight.date ? <span className="flight-date">{flight.date}</span> : null}
               </div>
               <div className="flight-details">
                 <div className="flight-route">
@@ -686,14 +689,16 @@ function PackageFullDetail() {
   }, [details.hotels, selectedDepartureFilter])
 
   const filteredDeparturesForHotel = useMemo(() => {
+    const packageDates = getPackageDepartureDates(details)
+    if (packageDates.length > 0) return packageDates
     if (!Array.isArray(details.hotels) || details.hotels.length === 0) return []
     const source = selectedHotelFilter
       ? details.hotels.filter((hotel) => hotel?.name === selectedHotelFilter)
       : details.hotels
     return sortDepartureDateStrings(
-      [...new Set(source.map((hotel) => hotel?.departureDate).filter(Boolean))]
+      [...new Set(source.flatMap((hotel) => parseDateTokenList(hotel?.departureDate)))]
     )
-  }, [details.hotels, selectedHotelFilter])
+  }, [details, selectedHotelFilter])
 
   useEffect(() => {
     let cancelled = false
@@ -702,7 +707,10 @@ function PackageFullDetail() {
 
     const refresh = (force = true) => {
       getMergedPackageById(id, { force }).then((merged) => {
-        if (!cancelled) setPkg(merged || fallback)
+        if (!cancelled) {
+          const staticPkg = getPackageById(id)
+          setPkg(applyStaticScheduleOverlay(merged || fallback, staticPkg) || fallback)
+        }
       })
 
       loadMergedPackages({ force }).then((all) => {
@@ -1267,7 +1275,7 @@ function PackageFullDetail() {
                                         <div className="hotel-variant-body">
                                           <div className="hotel-variant-head">
                                             <span className="hotel-variant-room-type">{baseHotel.roomType || 'Standard Room'}</span>
-                                            <span className="hotel-variant-board">{baseHotel.boardBasis || 'Bed & Breakfast'}</span>
+                                            <span className="hotel-variant-board">{variant.boardBasis || baseHotel.boardBasis || details.boardBasis || 'Bed & Breakfast'}</span>
                                           </div>
                                           <div className="hotel-variant-summary">
                                             <span className="hotel-variant-room-label">{t('package.room')} 1</span>

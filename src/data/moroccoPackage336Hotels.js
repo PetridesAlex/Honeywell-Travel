@@ -9,7 +9,7 @@ export const moroccoPackage336Hotels = [
     boardBasis: 'Half Board',
     prices: { double: 1819, single: 2449 },
     packagePrice: 3638,
-    departureDate: '15/09, 06/10',
+    departureDate: '06/10',
     nights: 7
   }
 ]
