@@ -110,13 +110,13 @@
   border: 1px solid rgba(227, 30, 36, 0.1);
 }
 
-.filter-group {
+.quick-filters .filter-group {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.filter-label {
+.quick-filters .filter-label {
   font-weight: 700;
   color: #C41230;
   font-size: 1.1rem;

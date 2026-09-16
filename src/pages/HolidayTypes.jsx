@@ -11,6 +11,7 @@ const HOLIDAY_CATEGORIES = [
   { id: 'autumn-packages', category: 'Autumn Packages', icon: '🍂' },
   { id: 'winter-packages', category: 'Winter Packages', icon: '❄️' },
   { id: 'christmas-packages', category: 'Christmas Packages', icon: '🎄' },
+  { id: 'christmas-markets', category: 'Christmas Markets', icon: '🎄' },
   { id: 'easter-packages', category: 'Easter Packages', icon: '🐰' },
   { id: 'green-monday', category: 'Green Monday', icon: '🌿' },
   { id: 'cruises', category: 'Cruises', icon: '🚢' },

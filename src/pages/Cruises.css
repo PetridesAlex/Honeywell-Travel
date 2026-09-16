@@ -948,14 +948,14 @@
   box-shadow: 0 14px 30px rgba(2, 6, 23, 0.3);
 }
 
-.filter-group {
+.cruises-filters .filter-group {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.filter-group label {
+.cruises-filters .filter-group label {
   font-weight: 700;
   color: #e2e8f0;
   font-size: 0.9rem;
@@ -966,11 +966,11 @@
   gap: 0.5rem;
 }
 
-.filter-icon {
+.cruises-filters .filter-icon {
   font-size: 1.2rem;
 }
 
-.filter-select {
+.cruises-filters .filter-select {
   padding: 0.82rem 1rem;
   border: 1px solid rgba(125, 211, 252, 0.35);
   border-radius: 10px;
@@ -982,19 +982,19 @@
   font-weight: 600;
 }
 
-.filter-select:hover {
+.cruises-filters .filter-select:hover {
   border-color: rgba(56, 189, 248, 0.6);
   background: rgba(15, 23, 42, 0.55);
 }
 
-.filter-select:focus {
+.cruises-filters .filter-select:focus {
   outline: none;
   border-color: rgba(56, 189, 248, 0.85);
   background: rgba(15, 23, 42, 0.58);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.24);
 }
 
-.filter-select option {
+.cruises-filters .filter-select option {
   background: #1a3a5a;
   color: #ffffff;
 }
@@ -1037,6 +1037,32 @@
 
 .cruise-enquiry-field.cruise-enquiry-message-wrap {
   grid-column: 1 / -1;
+}
+
+.cruise-enquiry-field label {
+  font-weight: 700;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cruise-enquiry-field .filter-icon {
+  font-size: 1.2rem;
+}
+
+.cruise-enquiry-field .filter-select {
+  padding: 0.82rem 1rem;
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  border-radius: 10px;
+  font-size: 0.96rem;
+  background: rgba(15, 23, 42, 0.35);
+  color: #f8fafc;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .cruise-enquiry-input,

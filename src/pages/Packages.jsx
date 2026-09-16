@@ -20,6 +20,7 @@ const slugToCategory = (slug) => {
     'winter-packages': 'Winter Packages',
     'spring-packages': 'Spring Packages',
     'christmas-packages': 'Christmas Packages',
+    'christmas-markets': 'Christmas Markets',
     'easter-packages': 'Easter Packages',
     'green-monday-packages': 'Green Monday Packages',
     'cruises': 'Cruises',
@@ -117,6 +118,7 @@ const GALLERY_CATEGORIES = [
   'Winter Packages',
   'Spring Packages',
   'Christmas Packages',
+  'Christmas Markets',
   'City Breaks',
   'Cruises',
   'Easter Packages',
@@ -324,52 +326,195 @@ function Packages() {
         </div>
       </div>
 
-      {/* Browse by Category – premium image gallery */}
-      <div className="category-gallery-wrapper">
-        <div className="category-gallery-header">
-          <h2 className="category-gallery-title">{t('packagesPage.browseByCategory')}</h2>
-          <p className="category-gallery-lead">
-            {t('packagesPage.categoryIntro')}
-          </p>
-        </div>
-        <div className="category-gallery" role="list">
-          {GALLERY_CATEGORIES.map((cat) => {
-            const tile = CATEGORY_TILES[cat] || {
-              image: '/images/destinations/paris-hero.webp',
-            }
-            const tileKey = CATEGORY_TILE_KEYS[cat] || 'tileDefault'
-            const count = categoryCounts[cat] || 0
-            const isActive = category === cat
-            return (
-              <button
-                key={cat}
-                type="button"
-                role="listitem"
-                className={`category-tile${isActive ? ' is-active' : ''}`}
-                aria-pressed={isActive}
-                onClick={() => selectCategory(cat)}
+      {/* Premium Filter Section */}
+      <div className="filter-section">
+        <div className="filter-container">
+          <div className="filter-header">
+            <h2 className="filter-title">{t('packagesPage.findYourPerfectTrip')}</h2>
+            <p className="filter-subtitle">{t('packagesPage.filterDescription')}</p>
+          </div>
+          
+          <div className="filters-grid">
+            {/* Category Filter */}
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">📂</span>
+                {t('packagesPage.category')}
+              </label>
+              <select
+                className="filter-select"
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value)
+                  applyFilters(e.target.value, destination)
+                  scrollToResults()
+                }}
+                spellCheck="false"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
               >
-                <span
-                  className="category-tile__media"
-                  style={{ backgroundImage: `url(${tile.image})` }}
-                  aria-hidden="true"
+                <option value="Any">{t('packagesPage.allCategories')}</option>
+                {[...GALLERY_CATEGORIES]
+                  .sort((a, b) => {
+                    const countA = categoryCounts[a] || 0
+                    const countB = categoryCounts[b] || 0
+                    return countB - countA
+                  })
+                  .map((cat) => {
+                    const count = categoryCounts[cat] || 0
+                    return (
+                      <option key={cat} value={cat}>
+                        {getCategoryLabel(cat, t)} ({count})
+                      </option>
+                    )
+                  })}
+              </select>
+            </div>
+
+            {/* Destination Filter */}
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">🌍</span>
+                {t('packagesPage.destination')}
+              </label>
+              <select
+                className="filter-select"
+                value={destination}
+                onChange={(e) => {
+                  setDestination(e.target.value)
+                  applyFilters(category, e.target.value)
+                  scrollToResults()
+                }}
+                spellCheck="false"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
+              >
+                <option value="Any">{t('packagesPage.allDestinations')}</option>
+                {Object.keys(REGION_DESTINATIONS).map((region) => (
+                  <option key={region} value={region}>
+                    {region}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Month Filter */}
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">📅</span>
+                {t('packagesPage.month')}
+              </label>
+              <select
+                className="filter-select"
+                value={departureMonth}
+                onChange={(e) => setDepartureMonth(e.target.value)}
+                spellCheck="false"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
+              >
+                <option value="Any">{t('packagesPage.anyMonth')}</option>
+                <option value="January">{t('months.january')}</option>
+                <option value="February">{t('months.february')}</option>
+                <option value="March">{t('months.march')}</option>
+                <option value="April">{t('months.april')}</option>
+                <option value="May">{t('months.may')}</option>
+                <option value="June">{t('months.june')}</option>
+                <option value="July">{t('months.july')}</option>
+                <option value="August">{t('months.august')}</option>
+                <option value="September">{t('months.september')}</option>
+                <option value="October">{t('months.october')}</option>
+                <option value="November">{t('months.november')}</option>
+                <option value="December">{t('months.december')}</option>
+              </select>
+            </div>
+
+            {/* Price Range Filter */}
+            <div className="filter-group filter-group-double">
+              <label className="filter-label">
+                <span className="filter-icon">💰</span>
+                {t('packagesPage.priceRange')}
+              </label>
+              <div className="filter-range-inputs">
+                <input
+                  type="number"
+                  className="filter-input"
+                  placeholder={t('packagesPage.minPrice')}
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                  min="0"
+                  spellCheck="false"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  data-gramm="false"
+                  data-gramm_editor="false"
+                  data-enable-grammarly="false"
                 />
-                <span className="category-tile__veil" aria-hidden="true" />
-                <span className="category-tile__content">
-                  {isActive ? <span className="category-tile__badge">{t('common.selected')}</span> : null}
-                  <span className="category-tile__name">{getCategoryLabel(cat, t)}</span>
-                  <span className="category-tile__meta">
-                    <span className="category-tile__blurb">{t(`packagesPage.${tileKey}`)}</span>
-                    <span className="category-tile__count">
-                      {count === 1
-                        ? t('packagesPage.packageCount', { count })
-                        : t('packagesPage.packagesCount', { count })}
-                    </span>
-                  </span>
-                </span>
-              </button>
-            )
-          })}
+                <span className="filter-range-separator">—</span>
+                <input
+                  type="number"
+                  className="filter-input"
+                  placeholder={t('packagesPage.maxPrice')}
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                  min="0"
+                  spellCheck="false"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  data-gramm="false"
+                  data-gramm_editor="false"
+                  data-enable-grammarly="false"
+                />
+              </div>
+            </div>
+
+            {/* Travel Type Filter */}
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">👥</span>
+                {t('packagesPage.travelType')}
+              </label>
+              <select
+                className="filter-select"
+                value={travelType}
+                onChange={(e) => setTravelType(e.target.value)}
+                spellCheck="false"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
+              >
+                <option value="Any">{t('packagesPage.anyType')}</option>
+                <option value="Group Travel">{t('packagesPage.groupTravel')}</option>
+                <option value="Individual Travel">{t('packagesPage.individualTravel')}</option>
+              </select>
+            </div>
+
+            {/* Clear Filters Button */}
+            {(category !== 'Any' || destination !== 'Any' || minPrice || maxPrice || departureMonth !== 'Any' || travelType !== 'Any') && (
+              <div className="filter-group filter-actions">
+                <button onClick={clearAllFilters} className="filter-clear-btn">
+                  <span>🔄</span>
+                  {t('common.clearFilters')}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

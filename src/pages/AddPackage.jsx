@@ -31,6 +31,7 @@ function AddPackage() {
   const categories = [
     'Autumn Packages',
     'Christmas Packages',
+    'Christmas Markets',
     'City Breaks',
     'Cruises',
     'Easter Packages',

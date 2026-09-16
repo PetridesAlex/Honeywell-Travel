@@ -74,6 +74,7 @@ export const SEARCH_CATEGORIES = [
   { value: 'Cruises', icon: '🚢' },
   { value: 'Exotic Packages', icon: '🌴' },
   { value: 'Christmas Packages', icon: '🎄' },
+  { value: 'Christmas Markets', icon: '🎄' },
   { value: 'Easter Packages', icon: '🐰' },
   { value: 'Autumn Packages', icon: '🍂' },
   { value: 'Green Monday', icon: '🌿' },

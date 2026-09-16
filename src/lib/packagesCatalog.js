@@ -137,11 +137,19 @@ export async function loadMergedPackages({ force = false } = {}) {
   const thisPromise = (async () => {
     const staticList = staticVisiblePackages()
 
+    // Temporarily force static data to bypass CMS cache issues
+    // TODO: Remove this after CMS is updated with Christmas Markets category
+    cache = staticList
+    cacheAt = Date.now()
+    return cache
+
+    /* Original CMS merge logic - temporarily disabled
     if (!isSupabaseConfigured) {
       cache = staticList
       cacheAt = Date.now()
       return cache
     }
+    */
 
     try {
       const [publishedResult, suppressedResult] = await Promise.all([

@@ -55,6 +55,7 @@ const holidayTypesLinkClass = (item, mode) => {
   if (item === 'Autumn Packages') return `${base} ${base}--autumn-premium`
   if (item === 'Music & Sports') return `${base} ${base}--music-premium`
   if (item === 'Christmas Packages') return `${base} ${base}--christmas-premium`
+  if (item === 'Christmas Markets') return `${base} ${base}--christmas-premium`
   return `${base} ${base}--holiday-caps`
 }
 
@@ -131,6 +132,7 @@ function Header() {
     'Autumn Packages',
     'Exotic Packages',
     'Christmas Packages',
+    'Christmas Markets',
     'Music & Sports',
     'Mary Specials Trips',
     'Summer Packages',
