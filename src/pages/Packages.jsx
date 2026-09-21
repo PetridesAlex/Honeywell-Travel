@@ -309,6 +309,15 @@ function Packages() {
     applyFilters('Any', 'Any')
   }
 
+  const hasActiveFilters = Boolean(
+    category !== 'Any' ||
+      destination !== 'Any' ||
+      minPrice ||
+      maxPrice ||
+      departureMonth !== 'Any' ||
+      travelType !== 'Any'
+  )
+
   return (
     <div className="packages-page">
       <SEO
@@ -334,186 +343,253 @@ function Packages() {
             <p className="filter-subtitle">{t('packagesPage.filterDescription')}</p>
           </div>
           
-          <div className="filters-grid">
-            {/* Category Filter */}
-            <div className="filter-group">
-              <label className="filter-label">
-                <span className="filter-icon">📂</span>
-                {t('packagesPage.category')}
-              </label>
-              <select
-                className="filter-select"
-                value={category}
-                onChange={(e) => {
-                  setCategory(e.target.value)
-                  applyFilters(e.target.value, destination)
-                  scrollToResults()
-                }}
-                spellCheck="false"
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                data-gramm="false"
-                data-gramm_editor="false"
-                data-enable-grammarly="false"
-              >
-                <option value="Any">{t('packagesPage.allCategories')}</option>
-                {[...GALLERY_CATEGORIES]
-                  .sort((a, b) => {
-                    const countA = categoryCounts[a] || 0
-                    const countB = categoryCounts[b] || 0
-                    return countB - countA
-                  })
-                  .map((cat) => {
-                    const count = categoryCounts[cat] || 0
-                    return (
-                      <option key={cat} value={cat}>
-                        {getCategoryLabel(cat, t)} ({count})
+          <div className="filters-panel">
+            <section className="filters-row" aria-labelledby="filters-trip-heading">
+              <div className="filters-row__heading">
+                <h3 id="filters-trip-heading" className="filters-row__title">
+                  {t('packagesPage.filterTripDetails')}
+                </h3>
+                <span className="filters-row__rule" aria-hidden="true" />
+              </div>
+              <div className="filters-grid filters-grid--trip">
+                <div className="filter-group">
+                  <label className="filter-label" htmlFor="filter-category">
+                    <span className="filter-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 7.5h16M7 12h10M9.5 16.5h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                    {t('packagesPage.category')}
+                  </label>
+                  <select
+                    id="filter-category"
+                    className="filter-select"
+                    value={category}
+                    onChange={(e) => {
+                      setCategory(e.target.value)
+                      applyFilters(e.target.value, destination)
+                      scrollToResults()
+                    }}
+                    spellCheck="false"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    data-gramm="false"
+                    data-gramm_editor="false"
+                    data-enable-grammarly="false"
+                  >
+                    <option value="Any">{t('packagesPage.allCategories')}</option>
+                    {[...GALLERY_CATEGORIES]
+                      .sort((a, b) => {
+                        const countA = categoryCounts[a] || 0
+                        const countB = categoryCounts[b] || 0
+                        return countB - countA
+                      })
+                      .map((cat) => {
+                        const count = categoryCounts[cat] || 0
+                        return (
+                          <option key={cat} value={cat}>
+                            {getCategoryLabel(cat, t)} ({count})
+                          </option>
+                        )
+                      })}
+                  </select>
+                </div>
+
+                <div className="filter-group">
+                  <label className="filter-label" htmlFor="filter-destination">
+                    <span className="filter-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" stroke="currentColor" strokeWidth="1.8" />
+                        <circle cx="12" cy="11" r="2.2" stroke="currentColor" strokeWidth="1.8" />
+                      </svg>
+                    </span>
+                    {t('packagesPage.destination')}
+                  </label>
+                  <select
+                    id="filter-destination"
+                    className="filter-select"
+                    value={destination}
+                    onChange={(e) => {
+                      setDestination(e.target.value)
+                      applyFilters(category, e.target.value)
+                      scrollToResults()
+                    }}
+                    spellCheck="false"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    data-gramm="false"
+                    data-gramm_editor="false"
+                    data-enable-grammarly="false"
+                  >
+                    <option value="Any">{t('packagesPage.allDestinations')}</option>
+                    {Object.keys(REGION_DESTINATIONS).map((region) => (
+                      <option key={region} value={region}>
+                        {region}
                       </option>
-                    )
-                  })}
-              </select>
-            </div>
+                    ))}
+                  </select>
+                </div>
 
-            {/* Destination Filter */}
-            <div className="filter-group">
-              <label className="filter-label">
-                <span className="filter-icon">🌍</span>
-                {t('packagesPage.destination')}
-              </label>
-              <select
-                className="filter-select"
-                value={destination}
-                onChange={(e) => {
-                  setDestination(e.target.value)
-                  applyFilters(category, e.target.value)
-                  scrollToResults()
-                }}
-                spellCheck="false"
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                data-gramm="false"
-                data-gramm_editor="false"
-                data-enable-grammarly="false"
-              >
-                <option value="Any">{t('packagesPage.allDestinations')}</option>
-                {Object.keys(REGION_DESTINATIONS).map((region) => (
-                  <option key={region} value={region}>
-                    {region}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Month Filter */}
-            <div className="filter-group">
-              <label className="filter-label">
-                <span className="filter-icon">📅</span>
-                {t('packagesPage.month')}
-              </label>
-              <select
-                className="filter-select"
-                value={departureMonth}
-                onChange={(e) => setDepartureMonth(e.target.value)}
-                spellCheck="false"
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                data-gramm="false"
-                data-gramm_editor="false"
-                data-enable-grammarly="false"
-              >
-                <option value="Any">{t('packagesPage.anyMonth')}</option>
-                <option value="January">{t('months.january')}</option>
-                <option value="February">{t('months.february')}</option>
-                <option value="March">{t('months.march')}</option>
-                <option value="April">{t('months.april')}</option>
-                <option value="May">{t('months.may')}</option>
-                <option value="June">{t('months.june')}</option>
-                <option value="July">{t('months.july')}</option>
-                <option value="August">{t('months.august')}</option>
-                <option value="September">{t('months.september')}</option>
-                <option value="October">{t('months.october')}</option>
-                <option value="November">{t('months.november')}</option>
-                <option value="December">{t('months.december')}</option>
-              </select>
-            </div>
-
-            {/* Price Range Filter */}
-            <div className="filter-group filter-group-double">
-              <label className="filter-label">
-                <span className="filter-icon">💰</span>
-                {t('packagesPage.priceRange')}
-              </label>
-              <div className="filter-range-inputs">
-                <input
-                  type="number"
-                  className="filter-input"
-                  placeholder={t('packagesPage.minPrice')}
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                  min="0"
-                  spellCheck="false"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  data-gramm="false"
-                  data-gramm_editor="false"
-                  data-enable-grammarly="false"
-                />
-                <span className="filter-range-separator">—</span>
-                <input
-                  type="number"
-                  className="filter-input"
-                  placeholder={t('packagesPage.maxPrice')}
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  min="0"
-                  spellCheck="false"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  data-gramm="false"
-                  data-gramm_editor="false"
-                  data-enable-grammarly="false"
-                />
+                <div className="filter-group">
+                  <label className="filter-label" htmlFor="filter-month">
+                    <span className="filter-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <rect x="3.5" y="5" width="17" height="15" rx="2.5" stroke="currentColor" strokeWidth="1.8" />
+                        <path d="M8 3.5v3M16 3.5v3M3.5 10h17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                    {t('packagesPage.month')}
+                  </label>
+                  <select
+                    id="filter-month"
+                    className="filter-select"
+                    value={departureMonth}
+                    onChange={(e) => setDepartureMonth(e.target.value)}
+                    spellCheck="false"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    data-gramm="false"
+                    data-gramm_editor="false"
+                    data-enable-grammarly="false"
+                  >
+                    <option value="Any">{t('packagesPage.anyMonth')}</option>
+                    <option value="January">{t('months.january')}</option>
+                    <option value="February">{t('months.february')}</option>
+                    <option value="March">{t('months.march')}</option>
+                    <option value="April">{t('months.april')}</option>
+                    <option value="May">{t('months.may')}</option>
+                    <option value="June">{t('months.june')}</option>
+                    <option value="July">{t('months.july')}</option>
+                    <option value="August">{t('months.august')}</option>
+                    <option value="September">{t('months.september')}</option>
+                    <option value="October">{t('months.october')}</option>
+                    <option value="November">{t('months.november')}</option>
+                    <option value="December">{t('months.december')}</option>
+                  </select>
+                </div>
               </div>
-            </div>
+            </section>
 
-            {/* Travel Type Filter */}
-            <div className="filter-group">
-              <label className="filter-label">
-                <span className="filter-icon">👥</span>
-                {t('packagesPage.travelType')}
-              </label>
-              <select
-                className="filter-select"
-                value={travelType}
-                onChange={(e) => setTravelType(e.target.value)}
-                spellCheck="false"
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                data-gramm="false"
-                data-gramm_editor="false"
-                data-enable-grammarly="false"
-              >
-                <option value="Any">{t('packagesPage.anyType')}</option>
-                <option value="Group Travel">{t('packagesPage.groupTravel')}</option>
-                <option value="Individual Travel">{t('packagesPage.individualTravel')}</option>
-              </select>
-            </div>
-
-            {/* Clear Filters Button */}
-            {(category !== 'Any' || destination !== 'Any' || minPrice || maxPrice || departureMonth !== 'Any' || travelType !== 'Any') && (
-              <div className="filter-group filter-actions">
-                <button onClick={clearAllFilters} className="filter-clear-btn">
-                  <span>🔄</span>
-                  {t('common.clearFilters')}
-                </button>
+            <section className="filters-row" aria-labelledby="filters-budget-heading">
+              <div className="filters-row__heading">
+                <h3 id="filters-budget-heading" className="filters-row__title">
+                  {t('packagesPage.filterBudgetStyle')}
+                </h3>
+                <span className="filters-row__rule" aria-hidden="true" />
               </div>
-            )}
+              <div className="filters-grid filters-grid--budget">
+                <div className="filter-group filter-group-double">
+                  <label className="filter-label" htmlFor="filter-min-price">
+                    <span className="filter-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 7.5h7.5a3.25 3.25 0 0 1 0 6.5H9.5M9.5 14H15a3 3 0 0 1 0 6H7M12 4v16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    {t('packagesPage.priceRange')}
+                  </label>
+                  <div className="filter-range-inputs">
+                    <input
+                      id="filter-min-price"
+                      type="number"
+                      className="filter-input"
+                      placeholder={t('packagesPage.minPrice')}
+                      value={minPrice}
+                      onChange={(e) => setMinPrice(e.target.value)}
+                      min="0"
+                      spellCheck="false"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      data-gramm="false"
+                      data-gramm_editor="false"
+                      data-enable-grammarly="false"
+                    />
+                    <span className="filter-range-separator" aria-hidden="true">—</span>
+                    <input
+                      id="filter-max-price"
+                      type="number"
+                      className="filter-input"
+                      placeholder={t('packagesPage.maxPrice')}
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                      min="0"
+                      spellCheck="false"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      data-gramm="false"
+                      data-gramm_editor="false"
+                      data-enable-grammarly="false"
+                    />
+                  </div>
+                </div>
+
+                <div className="filter-group">
+                  <label className="filter-label" htmlFor="filter-travel-type">
+                    <span className="filter-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <circle cx="9" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+                        <circle cx="16" cy="9" r="2" stroke="currentColor" strokeWidth="1.8" />
+                        <path d="M4.5 18.5c.6-3 2.6-4.5 4.5-4.5s3.9 1.5 4.5 4.5M13 14.2c1.1-.5 2.4-.6 3.6.1 1.5.9 2.4 2.5 2.7 4.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                    {t('packagesPage.travelType')}
+                  </label>
+                  <select
+                    id="filter-travel-type"
+                    className="filter-select"
+                    value={travelType}
+                    onChange={(e) => setTravelType(e.target.value)}
+                    spellCheck="false"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    data-gramm="false"
+                    data-gramm_editor="false"
+                    data-enable-grammarly="false"
+                  >
+                    <option value="Any">{t('packagesPage.anyType')}</option>
+                    <option value="Group Travel">{t('packagesPage.groupTravel')}</option>
+                    <option value="Individual Travel">{t('packagesPage.individualTravel')}</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div className="filter-toolbar">
+            {hasActiveFilters ? (
+              <div className="filter-toolbar__meta" aria-live="polite">
+                <span className="filter-toolbar__status">
+                  {filteredPackages.length === 1
+                    ? t('packagesPage.packageFound', { count: filteredPackages.length })
+                    : t('packagesPage.packagesFound', { count: filteredPackages.length })}
+                </span>
+              </div>
+            ) : null}
+            <button
+              type="button"
+              onClick={clearAllFilters}
+              className={`filter-clear-all ${hasActiveFilters ? 'is-active' : ''}`}
+              disabled={!hasActiveFilters}
+              aria-disabled={!hasActiveFilters}
+            >
+              <span className="filter-clear-all__icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M4.5 7.5h15M9.5 7.5V6.25A1.75 1.75 0 0 1 11.25 4.5h1.5A1.75 1.75 0 0 1 14.5 6.25V7.5m1.5 0V18.25A1.75 1.75 0 0 1 14.25 20H9.75A1.75 1.75 0 0 1 8 18.25V7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="filter-clear-all__label">{t('common.clearAll')}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -609,8 +685,30 @@ function Packages() {
                     </button>
                   </span>
                 )}
-                <button onClick={clearAllFilters} className="clear-all-filters">
-                  {t('common.clearAll')}
+                <button
+                  type="button"
+                  onClick={clearAllFilters}
+                  className="clear-all-filters"
+                  aria-label={t('common.clearAll')}
+                  title={t('common.clearAll')}
+                >
+                  <svg
+                    className="clear-all-filters__icon"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4.5 7.5h15M9.5 7.5V6.25A1.75 1.75 0 0 1 11.25 4.5h1.5A1.75 1.75 0 0 1 14.5 6.25V7.5m1.5 0V18.25A1.75 1.75 0 0 1 14.25 20H9.75A1.75 1.75 0 0 1 8 18.25V7.5"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </button>
               </div>
             )}

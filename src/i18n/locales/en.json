@@ -442,6 +442,8 @@
     "description": "Browse by destination and season",
     "findYourPerfectTrip": "Search & Discover Your Trip",
     "filterDescription": "Use the filters below to discover your ideal travel package",
+    "filterTripDetails": "Trip details",
+    "filterBudgetStyle": "Budget & style",
     "category": "Category",
     "destination": "Destination",
     "month": "Travel Month",

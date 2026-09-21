@@ -4,19 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { hasCompletedPreloaderThisSession } from '../lib/preloaderSession'
 import './Preloader.css'
 
-const EXIT_FADE_MS = 480
-const LINE_ROTATE_MS = 2100
+const EXIT_FADE_MS = 520
+const LINE_ROTATE_MS = 2000
 
 const PRELOADER_LINE_IDS = ['expertise', 'live', 'welcome']
 
-function Preloader({
-  loading,
-  duration = 7000,
-  onComplete,
-  children,
-  className = '',
-  zIndex = 9999,
-}) {
+function Preloader({ loading, onComplete, children, className = '', zIndex = 9999 }) {
   const { t } = useTranslation()
   const skipSession = hasCompletedPreloaderThisSession()
   const [showPreloader, setShowPreloader] = useState(Boolean(loading) && !skipSession)
@@ -27,6 +20,7 @@ function Preloader({
   const doneTimerRef = useRef(null)
   const onCompleteRef = useRef(onComplete)
   const showPreloaderRef = useRef(showPreloader)
+  const exitStartedRef = useRef(false)
 
   useEffect(() => {
     onCompleteRef.current = onComplete
@@ -60,32 +54,36 @@ function Preloader({
 
   useEffect(() => {
     if (!loading || hasCompletedPreloaderThisSession()) return undefined
+    exitStartedRef.current = false
     setShowPreloader(true)
     setExiting(false)
     setLineIndex(0)
     return undefined
-  }, [loading, duration])
+  }, [loading])
 
   useEffect(() => {
     if (loading) return undefined
     if (!showPreloaderRef.current) return undefined
+    if (exitStartedRef.current) return undefined
 
     let cancelled = false
+    exitStartedRef.current = true
 
     const startExit = () => {
       if (cancelled) return
       setExiting(true)
-      hideTimerRef.current = setTimeout(() => {
+      hideTimerRef.current = window.setTimeout(() => {
         hideTimerRef.current = null
         if (cancelled) return
         setShowPreloader(false)
-        doneTimerRef.current = setTimeout(() => {
+        doneTimerRef.current = window.setTimeout(() => {
           doneTimerRef.current = null
           if (!cancelled) onCompleteRef.current?.()
-        }, 80)
+        }, 40)
       }, EXIT_FADE_MS)
     }
 
+    // Reveal app under the overlay on the next frame, then fade the overlay out.
     const startRaf = requestAnimationFrame(startExit)
 
     return () => {
@@ -110,7 +108,9 @@ function Preloader({
     [],
   )
 
-  const contentCovered = showPreloader
+  // Keep page unpainted while fully covering; unlock painting as soon as exit begins
+  // so the first content frame sits under the fading overlay (no blank flash).
+  const contentCovered = showPreloader && !exiting
   const activeLineId = PRELOADER_LINE_IDS[lineIndex]
   const activeTone = activeLineId === 'live' ? 'accent' : 'serif'
   const activeText = t(`preloader.${activeLineId}`)
@@ -123,10 +123,10 @@ function Preloader({
             key="preloader-simple"
             className="preloader__simple"
             style={{ zIndex }}
-            initial={{ opacity: 1 }}
+            initial={false}
             animate={{ opacity: exiting ? 0 : 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: EXIT_FADE_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: EXIT_FADE_MS / 1000, ease: [0.33, 1, 0.68, 1] }}
             aria-busy="true"
             aria-live="polite"
           >
@@ -138,7 +138,7 @@ function Preloader({
                   className="preloader__simple-logo"
                   width={280}
                   height={280}
-                  decoding="async"
+                  decoding="sync"
                   fetchPriority="high"
                   draggable={false}
                 />
@@ -149,10 +149,10 @@ function Preloader({
                   <motion.p
                     key={activeLineId}
                     className={`preloader__simple-line preloader__simple-line--${activeTone}`}
-                    initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, y: -12, filter: 'blur(4px)' }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {activeText}
                   </motion.p>

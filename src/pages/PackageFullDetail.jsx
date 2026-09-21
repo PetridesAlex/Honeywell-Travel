@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useId } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById } from '../data/packages'
@@ -255,6 +255,50 @@ const ItineraryDescription = ({ text }) => {
   )
 }
 
+const ItineraryDayItem = ({ dayLabel, title, description, image }) => {
+  const [open, setOpen] = useState(false)
+  const reactId = useId()
+  const panelId = `itinerary-panel-${reactId.replace(/:/g, '')}`
+
+  return (
+    <li className={`itinerary-item ${open ? 'is-open' : ''}`}>
+      <button
+        type="button"
+        className="itinerary-header"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
+      >
+        <span className="itinerary-day">{dayLabel}</span>
+        <span className="itinerary-title">{title}</span>
+        <span className={`itinerary-chevron ${open ? 'is-open' : ''}`} aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 8L10 13L15 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+      </button>
+      <div
+        id={panelId}
+        className={`itinerary-panel ${open ? 'is-open' : ''}`}
+        role="region"
+        aria-hidden={!open}
+      >
+        <div className="itinerary-panel__inner">
+          <ItineraryDescription text={description} />
+          {image ? (
+            <div
+              className="itinerary-image"
+              style={{ backgroundImage: `url(${image})` }}
+            >
+              <div className="itinerary-image-overlay" />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </li>
+  )
+}
+
 /** Single line for Price tab hero: where the trip goes (not full program copy). */
 const getPriceTabDestinationLine = (details, pkg, translatedTitle) => {
   const df = details.destinationFull?.trim()
@@ -311,6 +355,265 @@ const programIntroParagraphClass = (text) => {
 
 const formatProgramNoteAmount = (amount) =>
   `€${Number(amount).toLocaleString('de-DE')}`
+
+const PROGRAM_NOTE_DISCLAIMER_SPLIT = /(?=\b(?:Οι τιμές|Prices?\s+listed|Prices?\s+are|The prices)\b)/i
+const PROGRAM_NOTE_FACT_SPLIT = /\s*[·•]\s*/
+const PROGRAM_NOTE_AVAILABILITY =
+  /^(Διαθέσιμο σε ζήτηση|Available on request|On request)\.?$/i
+const PROGRAM_NOTE_HOTEL_HEADER =
+  /^(ΞΕΝΟΔΟΧΕΙΑ\s*ΔΙΑΜΟΝΗΣ|Hotels?(?:\s+of\s+stay)?|Accommodation)\s*:?\s*$/i
+const PROGRAM_NOTE_HOTEL_LINE =
+  /^([A-ZΑ-ΩΆ-Ώ][A-ZΑ-ΩΆ-Ώ\s.'-]{1,40}?)\s*[-–—]\s*(.+?)(?:\s+(\d+\s*\*))?\s*$/
+const PROGRAM_NOTE_NIGHTS_ONLY =
+  /^((?:[A-Za-zΑ-Ωα-ωΆ-ώ][A-Za-zΑ-Ωα-ωΆ-ώ\s.'-]{1,40}\s*\(\d+\)\s*,\s*)+[A-Za-zΑ-Ωα-ωΆ-ώ][A-Za-zΑ-Ωα-ωΆ-ώ\s.'-]{1,40}\s*\(\d+\))$/
+const PROGRAM_IMPORTANT_TOKEN =
+  /(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?|\d+\s*\*|\d+\s*(?:νύχτ(?:ες|α)|nights?)|€\s*[\d.,]+|\b(?:LOT|Aegean|Emirates|Lufthansa|Cyprus Airways|Sky Express|British Airways|Austrian Airlines)\b)/gi
+
+const highlightImportantText = (text) => {
+  const source = String(text || '')
+  if (!source) return source
+  const nodes = []
+  let lastIndex = 0
+  let match
+  const re = new RegExp(PROGRAM_IMPORTANT_TOKEN.source, PROGRAM_IMPORTANT_TOKEN.flags)
+  while ((match = re.exec(source)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(source.slice(lastIndex, match.index))
+    }
+    nodes.push(
+      <mark key={`hi-${match.index}`} className="program-text-highlight">
+        {match[0]}
+      </mark>
+    )
+    lastIndex = match.index + match[0].length
+  }
+  if (lastIndex < source.length) nodes.push(source.slice(lastIndex))
+  return nodes.length ? nodes : source
+}
+
+const titleCaseCity = (value) => {
+  const raw = String(value || '').trim()
+  if (!raw) return raw
+  if (/[a-zα-ωάέήίόύώ]/.test(raw)) return raw
+  return raw
+    .toLocaleLowerCase('el-GR')
+    .replace(/(^|[\s.'-])([\p{L}])/gu, (_, sep, ch) => `${sep}${ch.toLocaleUpperCase('el-GR')}`)
+}
+
+const parseHotelLine = (line) => {
+  const trimmed = String(line || '').trim()
+  if (!trimmed || PROGRAM_NOTE_HOTEL_HEADER.test(trimmed)) return null
+  const match = trimmed.match(PROGRAM_NOTE_HOTEL_LINE)
+  if (!match) return null
+  const city = titleCaseCity(match[1])
+  let hotel = String(match[2] || '').trim()
+  let stars = (match[3] || '').replace(/\s+/g, '')
+  if (!stars) {
+    const starMatch = hotel.match(/(\d+)\s*\*$/)
+    if (starMatch) {
+      stars = `${starMatch[1]}*`
+      hotel = hotel.replace(/\s*\d+\s*\*$/, '').trim()
+    }
+  }
+  hotel = titleCaseCity(hotel)
+  return { city, hotel, stars }
+}
+
+const parseProgramNoteStructure = (text) => {
+  const raw = String(text || '').trim()
+  if (!raw) return null
+
+  const [mainPart, ...disclaimerParts] = raw.split(PROGRAM_NOTE_DISCLAIMER_SPLIT)
+  const main = (mainPart || raw).trim()
+  const disclaimer = disclaimerParts.join(' ').trim()
+
+  const lines = main
+    .split(/\n+/)
+    .flatMap((line) => line.split(PROGRAM_NOTE_FACT_SPLIT))
+    .map((part) => part.trim())
+    .filter(Boolean)
+
+  const facts = []
+  const hotels = []
+  const statuses = []
+  let hotelMode = false
+
+  for (const line of lines) {
+    const availabilityInline = line.match(
+      /^(.*?)(?:\.\s*)?(Διαθέσιμο σε ζήτηση|Available on request|On request)\.?\s*(.*)$/i
+    )
+
+    if (PROGRAM_NOTE_AVAILABILITY.test(line)) {
+      statuses.push(line.replace(/\.$/, ''))
+      continue
+    }
+
+    if (PROGRAM_NOTE_HOTEL_HEADER.test(line)) {
+      hotelMode = true
+      continue
+    }
+
+    // "Διαθέσιμο σε ζήτηση. ΞΕΝΟΔΟΧΕΙΑ ΔΙΑΜΟΝΗΣ: ΠΡΕΒΕΖΑ - HOTEL 4*"
+    if (availabilityInline && (availabilityInline[1] || availabilityInline[3])) {
+      const before = (availabilityInline[1] || '').trim()
+      const after = (availabilityInline[3] || '').trim()
+      statuses.push(availabilityInline[2].replace(/\.$/, ''))
+
+      const remainder = [before, after].filter(Boolean).join(' ').trim()
+      if (!remainder) continue
+
+      const headerAndHotel = remainder.match(
+        /^(ΞΕΝΟΔΟΧΕΙΑ\s*ΔΙΑΜΟΝΗΣ|Hotels?(?:\s+of\s+stay)?|Accommodation)\s*:?\s*(.+)$/i
+      )
+      if (headerAndHotel) {
+        hotelMode = true
+        const hotel = parseHotelLine(headerAndHotel[2])
+        if (hotel) hotels.push(hotel)
+        else if (headerAndHotel[2].trim()) {
+          // fall through as possible fact if not a hotel line
+          const kv = headerAndHotel[2].match(/^([^:]{2,36}):\s*(.+)$/)
+          if (kv) facts.push({ label: kv[1], value: kv[2] })
+        }
+        continue
+      }
+
+      const hotel = parseHotelLine(remainder)
+      if (hotel) {
+        hotelMode = true
+        hotels.push(hotel)
+        continue
+      }
+    }
+
+    const hotel = parseHotelLine(line)
+    if (hotel && (hotelMode || /hotel|ξενοδοχ/i.test(line) || /\d+\s*\*/.test(line))) {
+      hotelMode = true
+      hotels.push(hotel)
+      continue
+    }
+
+    if (hotelMode && !line.includes(':') && /\d+\s*\*/.test(line)) {
+      hotels.push({ city: '', hotel: line.replace(/\s*\d+\s*\*$/, '').trim(), stars: (line.match(/(\d+)\s*\*$/) || [])[1] ? `${(line.match(/(\d+)\s*\*$/) || [])[1]}*` : '' })
+      continue
+    }
+
+    hotelMode = false
+
+    const kv =
+      line.match(/^([^:]{2,36}):\s*(.+)$/) ||
+      line.match(/^(Αναχώρηση|Επιστροφή|Διαμονή|Διανυκτερεύσεις|Departure|Return|Stay|Nights)\s+(.+)$/i)
+
+    if (kv) {
+      facts.push({ label: kv[1], value: kv[2] })
+      continue
+    }
+
+    if (PROGRAM_NOTE_NIGHTS_ONLY.test(line)) {
+      facts.push({ label: 'Διανυκτερεύσεις', value: line })
+      continue
+    }
+
+    facts.push({ label: '', value: line })
+  }
+
+  return { facts, hotels, statuses, disclaimer }
+}
+
+const renderProgramParagraph = (text, key, className) => {
+  const trimmed = String(text || '').trim()
+  const cls = className || programParagraphClass(trimmed)
+  if (cls.includes('program-text-subheading')) {
+    const kv = trimmed.match(/^([^:]{2,48}):\s*(.+)$/)
+    if (kv) {
+      return (
+        <p key={key} className={`${cls} program-text-subheading--fact`}>
+          <span className="program-text-subheading__label">{kv[1]}</span>
+          <span className="program-text-subheading__value">{highlightImportantText(kv[2])}</span>
+        </p>
+      )
+    }
+  }
+  return (
+    <p key={key} className={cls}>
+      {trimmed}
+    </p>
+  )
+}
+
+const ProgramNoteBody = ({ text }) => {
+  const { t } = useTranslation()
+  const parsed = parseProgramNoteStructure(text)
+  if (!parsed) return null
+
+  const { facts, hotels, statuses, disclaimer } = parsed
+  const meaningfulFacts = facts.filter((fact) => fact.value)
+  const hasStructuredContent = meaningfulFacts.length > 0 || hotels.length > 0 || statuses.length > 0
+
+  if (!hasStructuredContent) {
+    return (
+      <div className="program-premium-note__body">
+        <p className="program-premium-note__text">{highlightImportantText(text)}</p>
+        {disclaimer ? (
+          <p className="program-premium-note__disclaimer">{disclaimer}</p>
+        ) : null}
+      </div>
+    )
+  }
+
+  return (
+    <div className="program-premium-note__body">
+      {statuses.length > 0 ? (
+        <div className="program-premium-note__statuses">
+          {statuses.map((status, index) => (
+            <span key={`status-${index}`} className="program-premium-note__status">
+              {status}
+            </span>
+          ))}
+        </div>
+      ) : null}
+
+      {meaningfulFacts.length > 0 ? (
+        <ul className="program-premium-note__facts">
+          {meaningfulFacts.map((fact, index) => (
+            <li key={`fact-${index}`} className="program-premium-note__fact">
+              {fact.label ? (
+                <span className="program-premium-note__fact-label">{fact.label}</span>
+              ) : null}
+              <span className="program-premium-note__fact-value">
+                {highlightImportantText(fact.value)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      {hotels.length > 0 ? (
+        <div className="program-premium-note__hotels">
+          <p className="program-premium-note__hotels-title">{t('package.hotels')}</p>
+          <ul className="program-premium-note__hotel-list">
+            {hotels.map((hotel, index) => (
+              <li key={`hotel-${index}`} className="program-premium-note__hotel">
+                {hotel.city ? (
+                  <span className="program-premium-note__hotel-city">{hotel.city}</span>
+                ) : null}
+                <span className="program-premium-note__hotel-name">
+                  {hotel.hotel}
+                  {hotel.stars ? (
+                    <span className="program-premium-note__hotel-stars">{hotel.stars}</span>
+                  ) : null}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {disclaimer ? (
+        <p className="program-premium-note__disclaimer">{disclaimer}</p>
+      ) : null}
+    </div>
+  )
+}
 
 /** Premium program notes: group size + twin/single rates when hotel prices are hidden. */
 const getProgramNoteHighlights = (details, tr) => {
@@ -1574,7 +1877,7 @@ function PackageFullDetail() {
                             ))}
                           </div>
                         ) : null}
-                        <p className="program-premium-note__text">{details.note}</p>
+                        <ProgramNoteBody text={details.note} />
                       </div>
                     </aside>
                   )
@@ -1584,21 +1887,13 @@ function PackageFullDetail() {
                   <div className="program-content">
                     <ol className="itinerary-list">
                       {details.itinerary.map((day, index) => (
-                        <li key={index} className="itinerary-item">
-                          <div className="itinerary-header">
-                            <span className="itinerary-day">{day.day}</span>
-                            <h3 className="itinerary-title">{day.title}</h3>
-                          </div>
-                          <ItineraryDescription text={day.description} />
-                          {day.image && (
-                            <div 
-                              className="itinerary-image"
-                              style={{ backgroundImage: `url(${day.image})` }}
-                            >
-                              <div className="itinerary-image-overlay"></div>
-                            </div>
-                          )}
-                        </li>
+                        <ItineraryDayItem
+                          key={index}
+                          dayLabel={day.day}
+                          title={day.title}
+                          description={day.description}
+                          image={day.image}
+                        />
                       ))}
                     </ol>
                     {details.program && details.program.optional && (
@@ -1624,26 +1919,30 @@ function PackageFullDetail() {
                           )}
                           <div className="program-text">
                             {isTitle ? (
-                              // Render remaining paragraphs
                               paragraphs.slice(1).map((para, idx) => {
-                                const t = para.trim()
-                                const isBoldHeading = t === 'Η ριβιέρα της Ηπείρου' || t === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
-                                return (
-                                  <p key={idx} className={programIntroParagraphClass(t)}>
-                                    {isBoldHeading ? <strong>{t}</strong> : t}
-                                  </p>
-                                )
+                                const line = para.trim()
+                                const isBoldHeading = line === 'Η ριβιέρα της Ηπείρου' || line === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
+                                if (isBoldHeading) {
+                                  return (
+                                    <p key={idx} className={programIntroParagraphClass(line)}>
+                                      <strong>{line}</strong>
+                                    </p>
+                                  )
+                                }
+                                return renderProgramParagraph(line, idx, programIntroParagraphClass(line))
                               })
                             ) : (
-                              // Render all paragraphs
                               paragraphs.map((para, idx) => {
-                                const t = para.trim()
-                                const isBoldHeading = t === 'Η ριβιέρα της Ηπείρου' || t === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
-                                return (
-                                  <p key={idx} className={programIntroParagraphClass(t)}>
-                                    {isBoldHeading ? <strong>{t}</strong> : t}
-                                  </p>
-                                )
+                                const line = para.trim()
+                                const isBoldHeading = line === 'Η ριβιέρα της Ηπείρου' || line === 'Σύβοτα. Τα φιόρδ του Ιονίου!'
+                                if (isBoldHeading) {
+                                  return (
+                                    <p key={idx} className={programIntroParagraphClass(line)}>
+                                      <strong>{line}</strong>
+                                    </p>
+                                  )
+                                }
+                                return renderProgramParagraph(line, idx, programIntroParagraphClass(line))
                               })
                             )}
                           </div>
@@ -1667,21 +1966,13 @@ function PackageFullDetail() {
                             const description = contentParas.join('\n\n')
                             const dayImage = details.program.dayImages?.[key]
                             return (
-                              <li key={key} className="itinerary-item">
-                                <div className="itinerary-header">
-                                  <span className="itinerary-day">{dayNum}η Μέρα</span>
-                                  <h3 className="itinerary-title">{title || `${dayNum}η Μέρα`}</h3>
-                                </div>
-                                <ItineraryDescription text={description} />
-                                {dayImage ? (
-                                  <div
-                                    className="itinerary-image"
-                                    style={{ backgroundImage: `url(${dayImage})` }}
-                                  >
-                                    <div className="itinerary-image-overlay"></div>
-                                  </div>
-                                ) : null}
-                              </li>
+                              <ItineraryDayItem
+                                key={key}
+                                dayLabel={`${dayNum}η Μέρα`}
+                                title={title || `${dayNum}η Μέρα`}
+                                description={description}
+                                image={dayImage}
+                              />
                             )
                           })}
                         </ol>
@@ -1692,7 +1983,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Ηράκλειο: πόλη θαλασσινή, γεμάτη ζωή και ιστορία</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.heraklionCity).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1702,7 +1993,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Οι Ενετοί στον μόλο</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.venetians).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1712,7 +2003,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Τα τείχη της παλιάς πόλης: μεταίχμιο του σήμερα και του χθες</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.walls).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1722,7 +2013,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Η «μυθική» Κνωσός</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.knossos).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1732,7 +2023,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Αρχαιολογικό Μουσείο Ηρακλείου: «πανόραμα» Μινωικής Κρήτης</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.museum).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1742,7 +2033,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Cretaquarium: υδάτινη κιβωτός της Μεσογείου</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.cretaquarium).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1752,7 +2043,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Πανδαισία γεύσεων και απολαύσεων</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.food).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1762,7 +2053,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Αναρίθμητες επιλογές διαμονής</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.accommodation).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1772,7 +2063,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Παραλίες με χαρακτήρα και ομορφιά</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.beaches).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1782,7 +2073,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Το Μουσείο Φυσικής Ιστορίας: πλούσιο, δραστήριο, διασκεδαστικό</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.naturalHistory).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1792,7 +2083,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Ιστορικό Μουσείο Κρήτης: η Κρήτη της ιστορίας</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.historicalMuseum).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1802,7 +2093,7 @@ function PackageFullDetail() {
                         <h3 className="program-heading">Στην καρδιά της πόλης</h3>
                         <div className="program-text">
                           {formatProgramText(details.program.cityCenter).map((para, idx) => (
-                            <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                            renderProgramParagraph(para, idx)
                           ))}
                         </div>
                       </div>
@@ -1816,7 +2107,7 @@ function PackageFullDetail() {
                           {title && <h3 className="program-heading">{title}</h3>}
                           <div className="program-text">
                             {contentParas.map((para, idx) => (
-                              <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                              renderProgramParagraph(para, idx)
                             ))}
                           </div>
                         </div>
@@ -1831,7 +2122,7 @@ function PackageFullDetail() {
                           {title && <h3 className="program-heading">{title}</h3>}
                           <div className="program-text">
                             {contentParas.map((para, idx) => (
-                              <p key={idx} className={programParagraphClass(para)}>{para}</p>
+                              renderProgramParagraph(para, idx)
                             ))}
                           </div>
                         </div>

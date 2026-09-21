@@ -79,12 +79,8 @@ function getMinLoaderMs() {
     return 400
   }
 
-  return 7000
-}
-
-function getPreloaderDurationMs() {
-  const minMs = getMinLoaderMs()
-  return minMs > 0 ? minMs : 7000
+  // Long enough for brand moment; short enough to feel responsive once assets are ready.
+  return 4200
 }
 
 function AppContent() {
@@ -207,17 +203,19 @@ function AppContent() {
 
 function App() {
   const [loading, setLoading] = useState(() => !hasCompletedPreloaderThisSession())
-  const [preloaderDuration] = useState(() => getPreloaderDurationMs())
 
   useEffect(() => {
     // Safety cleanup in case old cursor styling class remains after HMR / bfcache.
-    document.documentElement.classList.remove('cursor-accent-enabled', 'preloader-active')
+    // Do NOT strip preloader-active here — Preloader owns that class while visible.
+    document.documentElement.classList.remove('cursor-accent-enabled')
     document.body.classList.remove('cursor-accent-enabled')
   }, [])
 
   useEffect(() => {
     const unlockScroll = () => {
-      document.documentElement.classList.remove('preloader-active')
+      if (hasCompletedPreloaderThisSession()) {
+        document.documentElement.classList.remove('preloader-active')
+      }
     }
 
     const handlePageShow = (event) => {
@@ -241,7 +239,12 @@ function App() {
     const maybeStartExit = () => {
       if (!isMounted || !minDurationDone || !pageReady) return
       markPreloaderComplete()
-      setLoading(false)
+      // Double-rAF so the browser can paint one stable preloader frame before exit.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (isMounted) setLoading(false)
+        })
+      })
     }
 
     if (minLoaderMs <= 0) {
@@ -279,12 +282,12 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Preloader loading={loading} duration={preloaderDuration}>
+      <Preloader loading={loading}>
         <FavoritesProvider>
           <AppShell>
-            <AutumnLeaves />
+            {!loading ? <AutumnLeaves /> : null}
             <AppContent />
-            <FloatingContactDock />
+            {!loading ? <FloatingContactDock /> : null}
           </AppShell>
         </FavoritesProvider>
       </Preloader>
