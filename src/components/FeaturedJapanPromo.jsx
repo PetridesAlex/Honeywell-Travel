@@ -1,89 +1,126 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { getPackageById } from '../data/packages'
-import { localizePackage } from '../utils/packageTranslations'
-import { getCategoryLabel } from '../utils/categoryI18n'
-import { translatePackageDuration } from '../utils/packageTitleI18n'
 import './FeaturedJapanPromo.css'
 
-const FEATURED_PACKAGE_ID = 357
+const GALLERY_IMAGES = [
+  {
+    id: 'aurora',
+    src: '/images/winter-promo/aurora-hero.webp?v=2',
+    labelKey: 'home.winterPromo.auroraLabel',
+    altKey: 'home.winterPromo.auroraAlt',
+    className: 'winter-promo__hero-image',
+    frameClass: 'winter-promo__media-frame winter-promo__media-frame--hero',
+    imgClass: 'winter-promo__img winter-promo__img--aurora',
+  },
+  {
+    id: 'ski',
+    src: '/images/winter-promo/ski-destinations.webp?v=5',
+    labelKey: 'home.winterPromo.skiLabel',
+    altKey: 'home.winterPromo.skiAlt',
+    className: 'winter-promo__gallery-card winter-promo__gallery-card--ski',
+    frameClass: 'winter-promo__media-frame winter-promo__media-frame--ski',
+    imgClass: 'winter-promo__img winter-promo__img--ski',
+  },
+  {
+    id: 'christmas',
+    src: '/images/winter-promo/christmas-markets.webp?v=2',
+    labelKey: 'home.winterPromo.christmasLabel',
+    altKey: 'home.winterPromo.christmasAlt',
+    className: 'winter-promo__gallery-card winter-promo__gallery-card--christmas',
+    frameClass: 'winter-promo__media-frame winter-promo__media-frame--christmas',
+    imgClass: 'winter-promo__img winter-promo__img--christmas',
+  },
+]
+
+const SNOW_PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  left: `${(i * 5.7 + 3) % 100}%`,
+  delay: `${(i % 9) * 0.7}s`,
+  duration: `${10 + (i % 6) * 1.4}s`,
+  size: `${2 + (i % 4)}px`,
+  opacity: 0.25 + (i % 5) * 0.1,
+}))
 
 function FeaturedJapanPromo() {
-  const { t, i18n } = useTranslation()
-  const pkg = getPackageById(FEATURED_PACKAGE_ID)
-  if (!pkg) return null
-
-  const localized = localizePackage(pkg, i18n)
-  const cover =
-    pkg.details?.coverImage || pkg.image || '/images/mary-special-trip/japan-2026/japan-6.webp'
-  const destination =
-    pkg.details?.destinationFull || 'Osaka – Kyoto – Kanazawa – Matsumoto – Tokyo'
-  const price = pkg.price
+  const { t } = useTranslation()
 
   return (
-    <section className="featured-japan-promo" aria-labelledby="featured-japan-promo-title">
-      <div
-        className="featured-japan-promo__media"
-        style={{ backgroundImage: `url(${cover})` }}
-        role="img"
-        aria-label={localized.title}
-      />
-      <div className="featured-japan-promo__veil" aria-hidden="true" />
-      <div className="featured-japan-promo__shine" aria-hidden="true" />
-      <div className="featured-japan-promo__inner">
-        <div className="featured-japan-promo__copy">
-          <div
-            className="featured-japan-promo__urgency"
-            role="status"
-            aria-live="polite"
-          >
-            <span className="featured-japan-promo__urgency-pulse" aria-hidden="true" />
-            <span className="featured-japan-promo__urgency-label">{t('home.featuredJapan.limitedSeats')}</span>
-            <span className="featured-japan-promo__urgency-divider" aria-hidden="true" />
-            <span className="featured-japan-promo__urgency-copy">
-              {t('home.featuredJapan.reserveQuickly')}
-            </span>
+    <section className="featured-japan-promo winter-promo" aria-labelledby="winter-promo-title">
+      <div className="winter-promo__atmosphere" aria-hidden="true">
+        {SNOW_PARTICLES.map((particle) => (
+          <span
+            key={particle.id}
+            className="winter-promo__snow-particle"
+            style={{
+              left: particle.left,
+              width: particle.size,
+              height: particle.size,
+              opacity: particle.opacity,
+              animationDelay: particle.delay,
+              animationDuration: particle.duration,
+            }}
+          />
+        ))}
+        <span className="winter-promo__sparkle winter-promo__sparkle--1" />
+        <span className="winter-promo__sparkle winter-promo__sparkle--2" />
+        <span className="winter-promo__sparkle winter-promo__sparkle--3" />
+      </div>
+
+      <div className="featured-japan-promo__inner winter-promo__inner">
+        <div className="winter-promo__content">
+          <p className="winter-promo__eyebrow">
+            <span className="winter-promo__badge">{t('home.winterPromo.badge')}</span>
+          </p>
+
+          <h2 id="winter-promo-title" className="winter-promo__title">
+            {t('home.winterPromo.headline')}
+          </h2>
+
+          <p className="winter-promo__supporting">{t('home.winterPromo.supportingText')}</p>
+
+          <p className="winter-promo__description">{t('home.winterPromo.description')}</p>
+
+          <div className="winter-promo__actions">
+            <Link to="/tour-category/christmas-packages/" className="winter-promo__cta">
+              {t('home.winterPromo.primaryCta')}
+            </Link>
+            <Link to="/tour-category/christmas-markets/" className="winter-promo__link">
+              {t('home.winterPromo.secondaryCta')}
+            </Link>
+          </div>
+        </div>
+
+        <div className="winter-promo__gallery" role="list" aria-label={t('home.winterPromo.galleryLabel')}>
+          <div className={GALLERY_IMAGES[0].className} role="listitem">
+            <div className={GALLERY_IMAGES[0].frameClass}>
+              <img
+                src={GALLERY_IMAGES[0].src}
+                alt={t(GALLERY_IMAGES[0].altKey)}
+                className={GALLERY_IMAGES[0].imgClass}
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="winter-promo__img-gradient" aria-hidden="true" />
+              <span className="winter-promo__image-label">{t(GALLERY_IMAGES[0].labelKey)}</span>
+            </div>
           </div>
 
-          <p className="featured-japan-promo__eyebrow">
-            <span className="featured-japan-promo__badge">{t('home.featuredJapan.featured')}</span>
-            <span>{getCategoryLabel('Mary Special Trips', t)}</span>
-          </p>
-          <h2 id="featured-japan-promo-title" className="featured-japan-promo__title">
-            {localized.title}
-          </h2>
-          <p className="featured-japan-promo__lead">
-            {t('home.featuredJapan.lead')}
-          </p>
-          <ul className="featured-japan-promo__meta">
-            <li>
-              <span className="featured-japan-promo__meta-label">{t('home.featuredJapan.datesLabel')}</span>
-              <span className="featured-japan-promo__meta-value">{t('home.featuredJapan.datesValue')}</span>
-            </li>
-            <li>
-              <span className="featured-japan-promo__meta-label">{t('home.featuredJapan.durationLabel')}</span>
-              <span className="featured-japan-promo__meta-value">
-                {translatePackageDuration(pkg.duration, i18n.language)}
-              </span>
-            </li>
-            <li>
-              <span className="featured-japan-promo__meta-label">{t('home.featuredJapan.routeLabel')}</span>
-              <span className="featured-japan-promo__meta-value">{destination}</span>
-            </li>
-            <li>
-              <span className="featured-japan-promo__meta-label">{t('home.featuredJapan.fromLabel')}</span>
-              <span className="featured-japan-promo__meta-value featured-japan-promo__meta-value--price">
-                €{Number(price).toLocaleString('de-DE')}
-              </span>
-            </li>
-          </ul>
-          <div className="featured-japan-promo__actions">
-            <Link to={`/packages/${FEATURED_PACKAGE_ID}/details`} className="featured-japan-promo__cta">
-              {t('home.featuredJapan.bookNow')}
-            </Link>
-            <Link to="/packages?category=Mary%20Special%20Trips" className="featured-japan-promo__link">
-              {t('home.featuredJapan.allTrips')}
-            </Link>
+          <div className="winter-promo__secondary-grid">
+            {GALLERY_IMAGES.slice(1).map((item) => (
+              <div key={item.id} className={item.className} role="listitem">
+                <div className={item.frameClass}>
+                  <img
+                    src={item.src}
+                    alt={t(item.altKey)}
+                    className={item.imgClass}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="winter-promo__img-gradient" aria-hidden="true" />
+                  <span className="winter-promo__image-label">{t(item.labelKey)}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

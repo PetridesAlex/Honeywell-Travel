@@ -5,6 +5,7 @@ export const prevezaLefkadaAthensAutumnPackage385Hotels = [
     name: 'Dioni Boutique Hotel 4* Preveza / Athens Cypria 4* Athens',
     stars: 4,
     roomType: 'Standard Room',
+    image: '/images/autumn/preveza-lefkada-athens/dioni-athens-cypria-hotel.webp',
     location: 'Preveza & Athens, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {

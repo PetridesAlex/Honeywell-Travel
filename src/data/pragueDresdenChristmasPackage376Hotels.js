@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 376 (ΓΙΟΡΤΙΝΗ ΠΡΑΓΑ & ΔΡΕΣΔΗ) — 6 Days Christmas package.
 const IMG = {
-  fourStarPrague: '/images/christmas-packages/prague/4-star-hotel-prague.webp'
+  fourStarPrague: '/images/christmas-packages/praque-dresdi/prague-dresden-hotel.webp'
 }
 
 export const pragueDresdenChristmasPackage376Hotels = [

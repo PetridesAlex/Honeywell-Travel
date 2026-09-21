@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 380 (ΜΑΓΙΚΑ ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΗΝ ΑΛΣΑΤΙΑ) — 6 Days Christmas package.
 const IMG = {
-  fourStarAlsace: '/images/christmas-packages/alsace/4-star-hotel-alsace.webp'
+  fourStarAlsace: '/images/christmas-packages/alsatia/alsatia-hotel.webp'
 }
 
 export const alsaceChristmasPackage380Hotels = [

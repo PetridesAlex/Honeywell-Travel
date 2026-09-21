@@ -1,10 +1,15 @@
 // Hotel inventory & tariffs for package 383 (ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΘΕΣΣΑΛΟΝΙΚΗ) — Christmas city break
+const IMG = {
+  oscarOlympic: '/images/christmas-packages/thessaloniki-christmas/the-oscar-olympic-hotel.webp',
+  nyx: '/images/christmas-packages/thessaloniki-christmas/nyx-hotel-thessaloniki.webp'
+}
 
 export const thessalonikiChristmasPackage383Hotels = [
   {
     name: 'The Oscar Olympic Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.oscarOlympic,
     location: '25, Egnatia str., Thessaloniki, 546 30, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -20,6 +25,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'The Oscar Olympic Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.oscarOlympic,
     location: '25, Egnatia str., Thessaloniki, 546 30, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -35,6 +41,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'The Oscar Olympic Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.oscarOlympic,
     location: '25, Egnatia str., Thessaloniki, 546 30, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -50,6 +57,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'The Oscar Olympic Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.oscarOlympic,
     location: '25, Egnatia str., Thessaloniki, 546 30, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -65,6 +73,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'Nyx Hotel',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nyx,
     location: 'Tsimiski 1, Thessaloniki, 54625, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -80,6 +89,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'Nyx Hotel',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nyx,
     location: 'Tsimiski 1, Thessaloniki, 54625, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -95,6 +105,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'Nyx Hotel',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nyx,
     location: 'Tsimiski 1, Thessaloniki, 54625, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -110,6 +121,7 @@ export const thessalonikiChristmasPackage383Hotels = [
     name: 'Nyx Hotel',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nyx,
     location: 'Tsimiski 1, Thessaloniki, 54625, Greece',
     boardBasis: 'Bed & Breakfast',
     prices: {

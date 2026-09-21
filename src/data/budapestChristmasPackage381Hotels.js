@@ -1,10 +1,16 @@
 // Hotel inventory & tariffs for package 381 (ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΒΟΥΔΑΠΕΣΤΗ) — Christmas city break
+const IMG = {
+  president: '/images/christmas-packages/christmas-bucharest/president-hotel.webp',
+  intercity: '/images/christmas-packages/christmas-bucharest/intercityhotel.webp',
+  youHotel: '/images/christmas-packages/christmas-bucharest/you-hotel-budapest.webp'
+}
 
 export const budapestChristmasPackage381Hotels = [
   {
     name: 'President Hotel Budapest',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.president,
     location: 'Hold utca 5., 1054, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -20,6 +26,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'President Hotel Budapest',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.president,
     location: 'Hold utca 5., 1054, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -35,6 +42,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'President Hotel Budapest',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.president,
     location: 'Hold utca 5., 1054, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -50,6 +58,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'President Hotel Budapest',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.president,
     location: 'Hold utca 5., 1054, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -65,6 +74,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'IntercityHotel Budapest',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.intercity,
     location: 'Baross tér 7-8, 1087, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -80,6 +90,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'IntercityHotel Budapest',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.intercity,
     location: 'Baross tér 7-8, 1087, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -95,6 +106,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'IntercityHotel Budapest',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.intercity,
     location: 'Baross tér 7-8, 1087, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -110,6 +122,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'IntercityHotel Budapest',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.intercity,
     location: 'Baross tér 7-8, 1087, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -125,6 +138,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'You Hotel Budapest - Handwritten Collection',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.youHotel,
     location: 'Szentkiralyi u 8, 1088, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -140,6 +154,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'You Hotel Budapest - Handwritten Collection',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.youHotel,
     location: 'Szentkiralyi u 8, 1088, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -155,6 +170,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'You Hotel Budapest - Handwritten Collection',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.youHotel,
     location: 'Szentkiralyi u 8, 1088, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -170,6 +186,7 @@ export const budapestChristmasPackage381Hotels = [
     name: 'You Hotel Budapest - Handwritten Collection',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.youHotel,
     location: 'Szentkiralyi u 8, 1088, Budapest, Hungary',
     boardBasis: 'Bed & Breakfast',
     prices: {

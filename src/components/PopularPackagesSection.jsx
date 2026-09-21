@@ -9,10 +9,11 @@ import { packageCardImageUrl } from '../utils/packageCardImage'
 import ModalCards from './ModalCards'
 import './PopularPackagesSection.css'
 
-const popularCategories = [
-  'Autumn Packages',
+/** Preferred homepage tabs — only categories with visible packages are shown. */
+const PREFERRED_POPULAR_CATEGORIES = [
   'Christmas Packages',
-  'Exotic Packages',
+  'Christmas Markets',
+  'Autumn Packages',
   'Music & Sports',
 ]
 
@@ -30,6 +31,12 @@ function getSortedCategoryPackages(category) {
     .sort((a, b) => getLeadPrice(a) - getLeadPrice(b))
 }
 
+function getAvailablePopularCategories() {
+  return PREFERRED_POPULAR_CATEGORIES.filter(
+    (category) => getSortedCategoryPackages(category).length > 0
+  )
+}
+
 function preloadPackageImages(packages, limit = PRIORITY_IMAGE_COUNT) {
   if (typeof window === 'undefined' || !Array.isArray(packages)) return
 
@@ -44,13 +51,27 @@ function preloadPackageImages(packages, limit = PRIORITY_IMAGE_COUNT) {
   })
 }
 
-// Start downloading default Summer card images during module load (while preloader runs).
-preloadPackageImages(getSortedCategoryPackages(popularCategories[0]))
+const availablePopularCategories = getAvailablePopularCategories()
+const defaultPopularCategory = availablePopularCategories[0] || PREFERRED_POPULAR_CATEGORIES[0]
+
+// Start downloading default category card images during module load (while preloader runs).
+if (defaultPopularCategory) {
+  preloadPackageImages(getSortedCategoryPackages(defaultPopularCategory))
+}
 
 function PopularPackagesSection() {
   const { t, i18n } = useTranslation()
   const trackRef = useRef(null)
-  const [selectedCategory, setSelectedCategory] = useState(popularCategories[0])
+  const popularCategories = useMemo(() => getAvailablePopularCategories(), [])
+  const [selectedCategory, setSelectedCategory] = useState(
+    () => popularCategories[0] || defaultPopularCategory
+  )
+
+  useEffect(() => {
+    if (!popularCategories.includes(selectedCategory) && popularCategories[0]) {
+      setSelectedCategory(popularCategories[0])
+    }
+  }, [popularCategories, selectedCategory])
 
   const packagesForCategory = useMemo(
     () => getSortedCategoryPackages(selectedCategory),
@@ -102,6 +123,10 @@ function PopularPackagesSection() {
 
     track.scrollBy({ left: direction * step, behavior: 'smooth' })
   }, [])
+
+  if (popularCategories.length === 0) {
+    return null
+  }
 
   return (
     <section className="popular-packages-section" aria-label={t('home.popularPackages')}>

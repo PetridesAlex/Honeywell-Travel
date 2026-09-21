@@ -5,6 +5,7 @@ export const armeniaAutumnPackage386Hotels = [
     name: 'Ramada Hotel & Suites by Wyndham - Yerevan',
     stars: 4,
     roomType: 'Standard Room',
+    image: '/images/christmas-packages/armenia-christmas/ramada-hotel-armenia.webp',
     location: '15 Pavstos Busand St, 00010, Yerevan, Armenia',
     boardBasis: 'Bed & Breakfast',
     prices: {

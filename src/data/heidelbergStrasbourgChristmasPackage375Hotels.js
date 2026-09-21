@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 375 (ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΗ ΧΑΪΔΕΛΒΕΡΓΗ – ΣΤΡΑΣΒΟΥΡΓΟ & ΚΟΛΜΑΡ) — 5 Days New Year package.
 const IMG = {
-  fourStarHeidelberg: '/images/christmas-packages/heidelberg/4-star-hotel-heidelberg.webp'
+  fourStarHeidelberg: '/images/christmas-packages/heidelberg-strasbourg-colmar/heidelberg-strasbourg-hotel.webp'
 }
 
 export const heidelbergStrasbourgChristmasPackage375Hotels = [

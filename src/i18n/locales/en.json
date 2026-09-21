@@ -176,8 +176,8 @@
     "travelers": "Travelers",
     "searchButton": "Search packages",
     "discoverEyebrow": "Discover packages",
-    "byCategoryTitle": "See packages by category",
-    "byCategorySubtitle": "Select a category above to view available packages for Summer, Winter, City Breaks, and more.",
+    "byCategoryTitle": "Explore by travel style",
+    "byCategorySubtitle": "Choose Winter, Christmas, City Breaks and more — then discover our seasonal highlights below.",
     "tapExplore": "Tap a card to explore",
     "noMatches": "No matches yet",
     "noPackagesFor": "No packages found for {{category}}{{destination}}. Try another category or destination.",
@@ -337,6 +337,21 @@
       "title": "Signature Destinations",
       "subtitleDesktop": "Move your cursor through the gallery and click a card to focus on each destination.",
       "subtitleMobile": "Swipe through the gallery and tap a destination to explore."
+    },
+    "winterPromo": {
+      "badge": "Winter Collection",
+      "headline": "Experience the Magic of Winter",
+      "supportingText": "Christmas, New Year, Ski & unique winter getaways.",
+      "description": "From enchanting European Christmas markets to the Northern Lights and snowy slopes, discover your next winter adventure.",
+      "primaryCta": "Discover Christmas Packages",
+      "secondaryCta": "Browse Christmas Markets",
+      "galleryLabel": "Winter destinations",
+      "auroraLabel": "Aurora Experiences",
+      "skiLabel": "Ski Holidays",
+      "christmasLabel": "Christmas Getaways",
+      "auroraAlt": "Northern Lights over a snowy landscape",
+      "skiAlt": "Snowy ski slopes",
+      "christmasAlt": "Festive Christmas atmosphere in a European city"
     },
     "featuredJapan": {
       "limitedSeats": "Limited seats",

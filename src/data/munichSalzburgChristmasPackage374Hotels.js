@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 374 (ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΟ ΜΟΝΑΧΟ - ΣΑΛΤΣΜΠΟΥΡΓΚ) — 5 Days Christmas package.
 const IMG = {
-  fourStarMunich: '/images/christmas-packages/munich/4-star-hotel-munich.webp'
+  fourStarMunich: '/images/christmas-packages/munich-sultzburg/munich-hotel.webp'
 }
 
 export const munichSalzburgChristmasPackage374Hotels = [

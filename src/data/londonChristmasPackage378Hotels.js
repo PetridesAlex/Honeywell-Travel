@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 378 (ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΟ ΛΟΝΔΙΝΟ) — 5 Days Christmas package.
 const IMG = {
-  fourPointsShoreditch: '/images/christmas-packages/london/four-points-sheraton-london.webp'
+  fourPointsShoreditch: '/images/christmas-packages/london-christmas-pakcage/four-points-flex-hotel-london.webp'
 }
 
 export const londonChristmasPackage378Hotels = [

@@ -5,6 +5,7 @@ export const heraklionAutumnPackage384Hotels = [
     name: 'Vanisko Hotel - Ammoudara',
     stars: 3,
     roomType: 'Standard Room',
+    image: '/images/hotels/vanisko-hotel-ammoudara.png',
     location: '7, Andrea Papandreou Street, Amoudara Herakliou, 71414, Greece',
     boardBasis: 'Bed & breakfast',
     prices: {
@@ -20,6 +21,7 @@ export const heraklionAutumnPackage384Hotels = [
     name: 'Castello City Hotel - Heraklion',
     stars: 4,
     roomType: 'Standard Room',
+    image: '/images/hotels/castello-city-heraklion.png',
     location: '1, 62 Martyron Avenue, 71304, Heraklion, Greece',
     boardBasis: 'Bed & breakfast',
     prices: {
@@ -35,6 +37,7 @@ export const heraklionAutumnPackage384Hotels = [
     name: 'Lato Boutique Hotel - Heraklion',
     stars: 4,
     roomType: 'Standard Room',
+    image: '/images/hotels/lato-boutique-heraklion.png',
     location: '15 Epimenidou Street, Heraklio Town, 71202, Heraklion, Greece',
     boardBasis: 'Bed & breakfast',
     prices: {

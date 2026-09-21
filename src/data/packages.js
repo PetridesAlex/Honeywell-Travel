@@ -122,6 +122,8 @@ import { thessalonikiChristmasPackage383Hotels } from './thessalonikiChristmasPa
 import { heraklionAutumnPackage384Hotels } from './heraklionAutumnPackage384Hotels.js'
 import { prevezaLefkadaAthensAutumnPackage385Hotels } from './prevezaLefkadaAthensAutumnPackage385Hotels.js'
 import { armeniaAutumnPackage386Hotels } from './armeniaAutumnPackage386Hotels.js'
+import { harryPotterLondonPackage387Hotels } from './harryPotterLondonPackage387Hotels.js'
+import { harryPotterLondonPackage387Program } from './harryPotterLondonPackage387Program.js'
 import { hasUpcomingPackageDepartures } from '../utils/packageDepartureDates.js'
 import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice.js'
 
@@ -19076,6 +19078,7 @@ export const travelPackages = [
     category: 'Autumn Packages',
     price: 519,
     duration: '4 days / 3 nights',
+    hidden: true,
     description:
       'Φθινοπωρινό αεροπορικό πακέτο Λάρνακα – Ηράκλειο – Λάρνακα με Cyprus Airways· επιλογή ξενοδοχείου στο Ηράκλειο ή την Αμμουδάρα με πρωινό. Αναχώρηση 02/10.',
     longDescription:
@@ -22692,18 +22695,18 @@ export const travelPackages = [
     title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΛΟΝΔΙΝΟ',
     destination: 'United Kingdom',
     category: 'Christmas Markets',
-    price: 539,
+    price: 529,
     duration: '4 days / 3 nights',
     description:
-      'Γιορτινή απόδραση 4 ημερών στο Λονδίνο από Πάφο με Ryanair: Winter Wonderland στο Hyde Park, Oxford Street και Christmas Markets, διαμονή Bed & Breakfast. Αναχωρήσεις 26/11, 03/12, 10/12.',
+      'Γιορτινή απόδραση 4 ημερών στο Λονδίνο από Πάφο με Ryanair: Winter Wonderland στο Hyde Park, Oxford Street και Christmas Markets, διαμονή Bed & Breakfast. Αναχωρήσεις 26/11, 04/12.',
     longDescription:
       'Ζήστε τη μαγεία των Χριστουγέννων στο Λονδίνο. Oxford Street, Regent Street, Covent Garden, Winter Wonderland στο Hyde Park και αγορές σε Leicester Square, Southbank και Trafalgar Square. Ξενοδοχεία: Royal National, President και Tavistock.',
     image: '🇬🇧🎄',
     featured: true,
     packageType: 'individual',
     details: {
-      departureDate: '26/11',
-      departureDates: ['26/11', '03/12', '10/12'],
+      departureDate: '26/11, 04/12',
+      departureDates: ['26/11', '04/12'],
       departureFrom: 'Paphos',
       destinationFull: 'London – United Kingdom',
       monthAvailability: 'November, December',
@@ -22711,13 +22714,13 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Ryanair',
       includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
-      coverImage: '/images/christmas-packages/london/christmas-cover-london.webp',
-      thumbnailImage: '/images/christmas-packages/london/christmas-cover-london.webp',
-      note: 'Αναχωρήσεις: 26/11, 03/12, 10/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό · Winter Wonderland / Christmas Markets\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      coverImage: '/images/christmas-packages/london-christmas-pakcage/london-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/london-christmas-pakcage/london-festive-thumb.webp',
+      note: 'Αναχωρήσεις: 26/11, 04/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό · Winter Wonderland / Christmas Markets\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
           direction: 'Departure',
-          date: '26/11, 03/12, 10/12',
+          date: '26/11, 04/12',
           route: 'Paphos (PFO) → London Stansted (STN)',
           luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
           legs: [
@@ -22738,7 +22741,7 @@ export const travelPackages = [
         },
         {
           direction: 'Return',
-          date: '29/11, 06/12, 13/12',
+          date: '29/11, 07/12',
           route: 'London Stansted (STN) → Paphos (PFO)',
           luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
           legs: [
@@ -22787,10 +22790,11 @@ export const travelPackages = [
       itinerary: [],
       program: londonChristmasPackage354Program,
       gallery: [
-        '/images/christmas-packages/london/christmas-cover-london.webp',
-        '/images/music-events/arsenal-city-soccer/royal-national-hotel-london.webp',
+        '/images/christmas-packages/london-christmas-pakcage/london-christmas-cover.webp',
+        '/images/christmas-packages/london-christmas-pakcage/london-festive-thumb.webp',
+        '/images/christmas-packages/london-christmas-pakcage/royal-national-hotel.webp',
         '/images/christmas-packages/london/president-hotel-london.webp',
-        '/images/music-events/arsenal-city-soccer/tavistock-hotel-london.webp'
+        '/images/christmas-packages/london-christmas-pakcage/tavistock-hotel-london.webp'
       ]
     }
   },
@@ -25361,8 +25365,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Discover Airlines (Lufthansa Group)',
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/munich/munich-christmas-cover.webp',
-      thumbnailImage: '/images/christmas-packages/munich/munich-christmas-thumb.webp',
+      coverImage: '/images/christmas-packages/munich-sultzburg/munich-sulzburg-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/munich-sultzburg/munich-thumbnail.webp',
       note: 'Αναχωρήσεις: 23/12, 26/12 από Λάρνακα με Discover Airlines · Διαμονή 4 νύχτες στο Μόναχο με πρωινό · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΣημείωση: Η επίσκεψη στο Ingolstadt Village δεν πραγματοποιείται στην αναχώρηση 23/12, λόγω εορταστικού ωραρίου.\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -25481,9 +25485,9 @@ export const travelPackages = [
       itinerary: [],
       program: munichSalzburgChristmasPackage374Program,
       gallery: [
-        '/images/christmas-packages/munich/munich-christmas-cover.webp',
-        '/images/christmas-packages/munich/munich-christmas-thumb.webp',
-        '/images/christmas-packages/munich/4-star-hotel-munich.webp'
+        '/images/christmas-packages/munich-sultzburg/munich-sulzburg-christmas-cover.webp',
+        '/images/christmas-packages/munich-sultzburg/munich-thumbnail.webp',
+        '/images/christmas-packages/munich-sultzburg/munich-hotel.webp'
       ]
     }
   },
@@ -25511,8 +25515,8 @@ export const travelPackages = [
       boardBasis: 'Bed and Breakfast',
       airline: 'Discover Airlines (Lufthansa Group)',
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/heidelberg/heidelberg-cover.webp',
-      thumbnailImage: '/images/christmas-packages/heidelberg/heidelberg-thumb.webp',
+      coverImage: '/images/christmas-packages/heidelberg-strasbourg-colmar/heidelberg-strasbourg-cover.webp',
+      thumbnailImage: '/images/christmas-packages/heidelberg-strasbourg-colmar/heidelberg-strasbourg-thumb.webp',
       note: 'Αναχώρηση: 29/12 από Λάρνακα με Discover Airlines · Διαμονή 4 νύχτες στη Χαϊδελβέργη με πρωινό · Παραμονή Πρωτοχρονιάς στη Χαϊδελβέργη · Ξενάγηση με ελληνόφωνο αρχηγό/συνοδό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -25587,9 +25591,9 @@ export const travelPackages = [
       itinerary: [],
       program: heidelbergStrasbourgChristmasPackage375Program,
       gallery: [
-        '/images/christmas-packages/heidelberg/heidelberg-cover.webp',
-        '/images/christmas-packages/heidelberg/heidelberg-thumb.webp',
-        '/images/christmas-packages/heidelberg/4-star-hotel-heidelberg.webp'
+        '/images/christmas-packages/heidelberg-strasbourg-colmar/heidelberg-strasbourg-cover.webp',
+        '/images/christmas-packages/heidelberg-strasbourg-colmar/heidelberg-strasbourg-thumb.webp',
+        '/images/christmas-packages/heidelberg-strasbourg-colmar/heidelberg-strasbourg-hotel.webp'
       ]
     }
   },
@@ -25617,8 +25621,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'LOT Polish Airlines',
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/prague/prague-christmas-cover.webp',
-      thumbnailImage: '/images/christmas-packages/prague/prague-christmas-thumb.webp',
+      coverImage: '/images/christmas-packages/praque-dresdi/prague-dresden-cover.webp',
+      thumbnailImage: '/images/christmas-packages/praque-dresdi/prague-dresden-thumb.webp',
       note: 'Αναχώρηση: 28/12 από Λάρνακα με LOT Polish Airlines (μέσω Βαρσοβίας) · Διαμονή 5 νύχτες στην Πράγα με πρωινό · Παραμονή Πρωτοχρονιάς στην Πράγα · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΣημείωση: Για οικογένειες 2 ενηλίκων + 2 παιδιών, προσφέρονται δύο δίκλινα δωμάτια με ενδιάμεση πόρτα (connecting rooms), με διαφορετική τιμολόγηση.\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -25721,9 +25725,9 @@ export const travelPackages = [
       itinerary: [],
       program: pragueDresdenChristmasPackage376Program,
       gallery: [
-        '/images/christmas-packages/prague/prague-christmas-cover.webp',
-        '/images/christmas-packages/prague/prague-christmas-thumb.webp',
-        '/images/christmas-packages/prague/4-star-hotel-prague.webp'
+        '/images/christmas-packages/praque-dresdi/prague-dresden-cover.webp',
+        '/images/christmas-packages/praque-dresdi/prague-dresden-thumb.webp',
+        '/images/christmas-packages/praque-dresdi/prague-dresden-hotel.webp'
       ]
     }
   },
@@ -25751,8 +25755,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'LOT Polish Airlines',
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/warsaw-krakow/warsaw-krakow-cover.webp',
-      thumbnailImage: '/images/christmas-packages/warsaw-krakow/warsaw-krakow-thumb.webp',
+      coverImage: '/images/christmas-packages/waw-krakow/warsaw-krakow-cover.webp',
+      thumbnailImage: '/images/christmas-packages/waw-krakow/warsaw-krakow-thumb.webp',
       note: 'Αναχώρηση: 23/12 από Λάρνακα με LOT Polish Airlines · Διαμονή 2 νύχτες στη Βαρσοβία και 3 νύχτες στην Κρακοβία με πρωινό · Χριστούγεννα στην Κρακοβία · Ξενάγηση με ελληνόφωνο ξεναγό\n\nΞενοδοχεία: Novotel Warszawa Centrum 4* (Βαρσοβία) & INX Design Hotel 4* (Κρακοβία)\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -25842,9 +25846,9 @@ export const travelPackages = [
       itinerary: [],
       program: warsawKrakowChristmasPackage377Program,
       gallery: [
-        '/images/christmas-packages/warsaw-krakow/warsaw-krakow-cover.webp',
-        '/images/christmas-packages/warsaw-krakow/warsaw-krakow-thumb.webp',
-        '/images/christmas-packages/warsaw-krakow/4-star-hotels-warsaw-krakow.webp'
+        '/images/christmas-packages/waw-krakow/warsaw-krakow-cover.webp',
+        '/images/christmas-packages/waw-krakow/warsaw-krakow-thumb.webp',
+        '/images/christmas-packages/waw-krakow/warsaw-krakow-hotel.webp'
       ]
     }
   },
@@ -25872,8 +25876,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'British Airways',
       includedLuggage: '1 αποσκευή 23 κιλών και 1 χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/london/london-christmas-cover-new.webp',
-      thumbnailImage: '/images/christmas-packages/london/london-christmas-thumb-new.webp',
+      coverImage: '/images/christmas-packages/london-christmas-pakcage/london-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/london-christmas-pakcage/london-thumbnail.webp',
       note: 'Αναχώρηση: 23/12 από Λάρνακα με British Airways · Διαμονή 4 νύχτες με πρωινό · Χριστούγεννα στο Λονδίνο · Μεταφορές από/προς αεροδρόμιο\n\nΣΗΜΑΝΤΙΚΟ: Απαιτείται ETA (Electronic Travel Authorisation) £20 μέσω GOV.UK πριν το ταξίδι.\n\nΣημείωση: Την 25/12 πολλά καταστήματα και αξιοθέατα λειτουργούν με διαφορετικό ή περιορισμένο ωράριο.\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -25957,9 +25961,9 @@ export const travelPackages = [
       itinerary: [],
       program: londonChristmasPackage378Program,
       gallery: [
-        '/images/christmas-packages/london/london-christmas-cover-new.webp',
-        '/images/christmas-packages/london/london-christmas-thumb-new.webp',
-        '/images/christmas-packages/london/four-points-sheraton-london.webp'
+        '/images/christmas-packages/london-christmas-pakcage/london-christmas-cover.webp',
+        '/images/christmas-packages/london-christmas-pakcage/london-thumbnail.webp',
+        '/images/christmas-packages/london-christmas-pakcage/four-points-flex-hotel-london.webp'
       ]
     }
   },
@@ -25987,8 +25991,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Cyprus Airways / Discover Airlines',
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/munich/munich-alps-cover.webp',
-      thumbnailImage: '/images/christmas-packages/munich/munich-alps-thumb.webp',
+      coverImage: '/images/christmas-packages/munich-afstriakes-alpis/munich-austrian-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/munich-afstriakes-alpis/munich-austrian-thumb.webp',
       note: 'Αναχωρήσεις: 27/12 (Cyprus Airways), 30/12 (Discover Airlines) από Λάρνακα · Διαμονή 4 νύχτες στο Μόναχο με πρωινό · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26105,9 +26109,9 @@ export const travelPackages = [
       itinerary: [],
       program: munichAlpsChristmasPackage379Program,
       gallery: [
-        '/images/christmas-packages/munich/munich-alps-cover.webp',
-        '/images/christmas-packages/munich/munich-alps-thumb.webp',
-        '/images/christmas-packages/munich/4-star-hotel-munich-alps.webp'
+        '/images/christmas-packages/munich-afstriakes-alpis/munich-austrian-christmas-cover.webp',
+        '/images/christmas-packages/munich-afstriakes-alpis/munich-austrian-thumb.webp',
+        '/images/christmas-packages/munich-afstriakes-alpis/munich-hotel.webp'
       ]
     }
   },
@@ -26135,8 +26139,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'SWISS (Edelweiss Air)',
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
-      coverImage: '/images/christmas-packages/alsace/alsace-cover.webp',
-      thumbnailImage: '/images/christmas-packages/alsace/alsace-thumb.webp',
+      coverImage: '/images/christmas-packages/alsatia/alsatia-cover.webp',
+      thumbnailImage: '/images/christmas-packages/alsatia/alsatia-thumbnail.webp',
       note: 'Αναχώρηση: 23/12 από Λάρνακα με SWISS (Edelweiss Air) · Διαμονή 4 νύχτες στο Στρασβούργο και 1 νύχτα στη Ζυρίχη · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΣτο Στρασβούργο δεν διατίθενται τρίκλινα δωμάτια ή δίκλινα δωμάτια με επιπλέον κρεβάτι. Για οικογένεια 2 ενηλίκων και 1 παιδιού θα παρέχεται ένα δίκλινο και ένα μονόκλινο δωμάτιο χωρίς επιπλέον χρέωση.\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26210,9 +26214,9 @@ export const travelPackages = [
       itinerary: [],
       program: alsaceChristmasPackage380Program,
       gallery: [
-        '/images/christmas-packages/alsace/alsace-cover.webp',
-        '/images/christmas-packages/alsace/alsace-thumb.webp',
-        '/images/christmas-packages/alsace/4-star-hotel-alsace.webp'
+        '/images/christmas-packages/alsatia/alsatia-cover.webp',
+        '/images/christmas-packages/alsatia/alsatia-thumbnail.webp',
+        '/images/christmas-packages/alsatia/alsatia-hotel.webp'
       ]
     }
   },
@@ -26240,8 +26244,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Wizz Air',
       includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
-      coverImage: '/images/christmas-packages/budapest/budapest-christmas-cover.webp',
-      thumbnailImage: '/images/christmas-packages/budapest/budapest-christmas-thumb.webp',
+      coverImage: '/images/christmas-packages/christmas-bucharest/budapest-cover.webp',
+      thumbnailImage: '/images/christmas-packages/christmas-bucharest/budapest-thumb.webp',
       note: 'Αναχωρήσεις: 20/11, 04/12, 11/12, 18/12 από Λάρνακα με Wizz Air · Διαμονή 3 νύχτες με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26316,8 +26320,11 @@ export const travelPackages = [
           'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΒΟΥΔΑΠΕΣΤΗ – 4 Μέρες\n\nΑναχωρήσεις: 20/11, 04/12, 11/12, 18/12 από Λάρνακα (Wizz Air W6 2452 / W6 2451)\n\nΖήστε τη μαγεία των γιορτών στην Βουδαπέστη!\n\nΗ Βουδαπέστη τα Χριστούγεννα αποκτά μια μοναδική, παραμυθένια ομορφιά, με τις στολισμένες πλατείες, τα λαμπερά κτίρια και τις παραδοσιακές χριστουγεννιάτικες αγορές να δημιουργούν ένα μαγευτικό σκηνικό. Οι βόλτες στις όχθες του Δούναβη, με θέα το φωτισμένο Κοινοβούλιο και την επιβλητική Αλυσιδωτή Γέφυρα, χαρίζουν μοναδικές εικόνες, ενώ οι μυρωδιές από ζεστό κρασί, γλυκά και ουγγρικές λιχουδιές γεμίζουν τους δρόμους.\n\nΗ γιορτινή εμπειρία ολοκληρώνεται με μια επίσκεψη στα περίφημα θερμά λουτρά της πόλης, αλλά και με βόλτες στις όμορφα φωτισμένες γειτονιές και τα ιστορικά αξιοθέατα. Ρομαντική, ατμοσφαιρική και γεμάτη ζωή, η Βουδαπέστη αποτελεί ιδανική επιλογή για μια ξεχωριστή χριστουγεννιάτικη απόδραση στην καρδιά της Ευρώπης.\n\nΞΕΝΟΔΟΧΕΙΑ:\n• President Hotel Budapest (4*) - Hold utca 5, Budapest\n• IntercityHotel Budapest (3*) - Baross tér 7-8, Budapest\n• You Hotel Budapest - Handwritten Collection (4*) - Szentkiralyi u 8, Budapest'
       },
       gallery: [
-        '/images/christmas-packages/budapest/budapest-christmas-cover.webp',
-        '/images/christmas-packages/budapest/budapest-christmas-thumb.webp'
+        '/images/christmas-packages/christmas-bucharest/budapest-cover.webp',
+        '/images/christmas-packages/christmas-bucharest/budapest-thumb.webp',
+        '/images/christmas-packages/christmas-bucharest/president-hotel.webp',
+        '/images/christmas-packages/christmas-bucharest/intercityhotel.webp',
+        '/images/christmas-packages/christmas-bucharest/you-hotel-budapest.webp'
       ]
     }
   },
@@ -26345,8 +26352,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Easy Jet',
       includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
-      coverImage: '/images/christmas-packages/berlin/berlin-christmas-cover.webp',
-      thumbnailImage: '/images/christmas-packages/berlin/berlin-christmas-thumb.webp',
+      coverImage: '/images/christmas-packages/berlin-christmas/berlin-cover.webp',
+      thumbnailImage: '/images/christmas-packages/berlin-christmas/berlin-thumb.webp',
       note: 'Αναχωρήσεις: 21/11, 28/11, 05/12, 12/12 από Λάρνακα με Easy Jet · Διαμονή 3 νύχτες με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26421,8 +26428,12 @@ export const travelPackages = [
           'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΕΡΟΛΙΝΟ – 4 Μέρες\n\nΑναχωρήσεις: 21/11, 28/11, 05/12, 12/12\n\nΖήστε τη μαγεία των γιορτών στο Βερολίνο!\n\nΤο Βερολίνο, η πρωτεύουσα της Γερμανίας, είναι μια πόλη με πλούσια ιστορία, έντονο πολιτιστικό χαρακτήρα και σύγχρονη δημιουργική ενέργεια. Γνωστό για εμβληματικά αξιοθέατα όπως η Πύλη του Βρανδεμβούργου, το Κτήριο του Ράιχσταγκ, το Νησί των Μουσείων και τα απομεινάρια του Τείχους του Βερολίνου, προσφέρει έναν μοναδικό συνδυασμό ιστορίας, τέχνης και μοντέρνου τρόπου ζωής. Οι πολυάριθμες γκαλερί, τα μουσεία, τα πάρκα και η ζωντανή γαστρονομική σκηνή καθιστούν το Βερολίνο έναν από τους πιο δημοφιλείς προορισμούς της Ευρώπης.\n\nΤο Βερολίνο φιλοξενεί περισσότερες από 60 χριστουγεννιάτικες αγορές, καθεμία με τον δικό της ξεχωριστό χαρακτήρα και εορταστική ατμόσφαιρα. Από τη διάσημη αγορά στο Gendarmenmarkt και την ιστορική αγορά μπροστά από το Ανάκτορο Charlottenburg έως τις πιο σύγχρονες γιορτινές εκδηλώσεις στο κέντρο της πόλης, οι επισκέπτες μπορούν να απολαύσουν χειροποίητες δημιουργίες, παραδοσιακά γερμανικά εδέσματα, ζεστό κρασί (Glühwein) και εντυπωσιακούς χριστουγεννιάτικους στολισμούς. Οι συναυλίες, τα παγοδρόμια και οι χιλιάδες λαμπεροί φωτισμοί δημιουργούν μια μαγευτική εμπειρία που κάνει το Βερολίνο ιδανικό προορισμό για τις γιορτές.\n\nΞΕΝΟΔΟΧΕΙΑ:\n• Holiday Inn Berlin Centre Alexanderplatz (4*) - Stralauer Strasse 45, Mitte\n• Titanic Comfort Mitte Hotel (3*) - Elisabeth Mara Strasse 4\n• NH Berlin Potsdamer Platz (4*) - Stresemannstr. 47\n• NH Collection Berlin Mitte am Checkpoint Charlie (4*) - Leipziger Str. 106-111'
       },
       gallery: [
-        '/images/christmas-packages/berlin/berlin-christmas-cover.webp',
-        '/images/christmas-packages/berlin/berlin-christmas-thumb.webp'
+        '/images/christmas-packages/berlin-christmas/berlin-cover.webp',
+        '/images/christmas-packages/berlin-christmas/berlin-thumb.webp',
+        '/images/christmas-packages/berlin-christmas/holiday-inn-berlin.webp',
+        '/images/christmas-packages/berlin-christmas/titanic-comfort-hotel.webp',
+        '/images/christmas-packages/berlin-christmas/nh-berlin-hotel.webp',
+        '/images/christmas-packages/berlin-christmas/nh-collection-berlin.webp'
       ]
     }
   },
@@ -26450,8 +26461,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Wizzair',
       includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
-      coverImage: '/images/christmas-packages/thessaloniki/thessaloniki-christmas-cover.webp',
-      thumbnailImage: '/images/christmas-packages/thessaloniki/thessaloniki-christmas-thumb.webp',
+      coverImage: '/images/christmas-packages/thessaloniki-christmas/thessaloniki-cover.webp',
+      thumbnailImage: '/images/christmas-packages/thessaloniki-christmas/thessaloniki-thumb.webp',
       note: 'Αναχωρήσεις: 27/11, 04/12, 11/12, 18/12 από Λάρνακα με Wizzair · Διαμονή 3 νύχτες με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26526,8 +26537,10 @@ export const travelPackages = [
           'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗΝ ΘΕΣΣΑΛΟΝΙΚΗ – 4 Μέρες\n\nΑναχωρήσεις: 27/11, 04/12, 11/12, 18/12\n\nΖήστε τη μαγεία των γιορτών στη Θεσσαλονίκη!\n\nΤα Χριστούγεννα στη Θεσσαλονίκη έχουν μια ξεχωριστή μαγεία, με την πόλη να γεμίζει φώτα, γιορτινές μελωδίες και ζεστή ατμόσφαιρα. Η στολισμένη πλατεία Αριστοτέλους, οι βόλτες στην παραλία με θέα τον Θερμαϊκό και τα φωτισμένα καταστήματα δημιουργούν το ιδανικό σκηνικό για μια χριστουγεννιάτικη απόδραση. Παραδοσιακές γεύσεις, γλυκά, ζεστά καφέ και η ζωντάνια της πόλης συνθέτουν μια όμορφη εμπειρία για μικρούς και μεγάλους.\n\nΚαθώς η μέρα δίνει τη θέση της στη νύχτα, τα γιορτινά φώτα κάνουν την πόλη ακόμη πιο εντυπωσιακή, προσκαλώντας τους επισκέπτες να ανακαλύψουν κάθε γωνιά της. Από μια ζεστή σοκολάτα με θέα τον Λευκό Πύργο μέχρι ένα παραδοσιακό γεύμα στα αγαπημένα Λαδάδικα, η Θεσσαλονίκη προσφέρει αμέτρητες επιλογές για όμορφες στιγμές. Ένας προορισμός που συνδυάζει γιορτή, παράδοση και διασκέδαση, δημιουργώντας τις ιδανικές συνθήκες για Χριστούγεννα γεμάτα χαμόγελα και ξεχωριστές αναμνήσεις.\n\nΞΕΝΟΔΟΧΕΙΑ:\n• The Oscar Olympic Hotel (3*) - 25, Egnatia str., Thessaloniki\n• Nyx Hotel (4*) - Tsimiski 1, Thessaloniki\n• Imperial Plus Urban Smart Hotel (4*) - Egnatia Str. 8, Thessaloniki'
       },
       gallery: [
-        '/images/christmas-packages/thessaloniki/thessaloniki-christmas-cover.webp',
-        '/images/christmas-packages/thessaloniki/thessaloniki-christmas-thumb.webp'
+        '/images/christmas-packages/thessaloniki-christmas/thessaloniki-cover.webp',
+        '/images/christmas-packages/thessaloniki-christmas/thessaloniki-thumb.webp',
+        '/images/christmas-packages/thessaloniki-christmas/the-oscar-olympic-hotel.webp',
+        '/images/christmas-packages/thessaloniki-christmas/nyx-hotel-thessaloniki.webp'
       ]
     }
   },
@@ -26555,8 +26568,8 @@ export const travelPackages = [
       boardBasis: 'Bed & breakfast',
       airline: 'Cyprus Airways',
       includedLuggage: 'Μια αποσκευή 10kg και ένα προσωπικό αντικείμενο',
-      coverImage: '/images/autumn-packages/heraklion/heraklion-autumn-cover.webp',
-      thumbnailImage: '/images/autumn-packages/heraklion/heraklion-autumn-thumb.webp',
+      coverImage: '/images/Hraklio-crete/hraklio-cover.webp',
+      thumbnailImage: '/images/Hraklio-crete/hraklio-city-centre.webp',
       note: 'Αναχώρηση: 02/10 από Λάρνακα με Cyprus Airways · Διαμονή 3 νύχτες με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26629,8 +26642,9 @@ export const travelPackages = [
           'ΗΡΑΚΛΕΙΟ – 4 Μέρες\n\nΑναχώρηση: 02/10\n\nΑνακαλύψτε το Ηράκλειο Κρήτης!\n\nΤο Ηράκλειο είναι η μεγαλύτερη πόλη της Κρήτης και ένα από τα σημαντικότερα αστικά και πολιτιστικά κέντρα της Ελλάδας. Βρίσκεται στη βόρεια ακτή του νησιού και αποτελεί βασική πύλη εισόδου, χάρη στο λιμάνι και το διεθνές αεροδρόμιό του. Η πόλη συνδυάζει τη σύγχρονη ζωή με μια πλούσια ιστορία που ξεκινά από τη μινωική εποχή, καθώς κοντά της βρίσκεται το περίφημο ανάκτορο της Κνωσού. Στο Ηράκλειο μπορεί κανείς να επισκεφθεί σημαντικά αξιοθέατα όπως το Αρχαιολογικό Μουσείο, τα ενετικά τείχη και το φρούριο Κούλες, ενώ παράλληλα να απολαύσει τη ζωντανή αγορά, την τοπική κουζίνα και τη φιλοξενία των κατοίκων.\n\nΞΕΝΟΔΟΧΕΙΑ:\n• Vanisko Hotel - Ammoudara (3*) - 7, Andrea Papandreou Street, Amoudara Herakliou\n• Castello City Hotel (4*) - 1, 62 Martyron Avenue, Heraklion\n• Lato Boutique Hotel (4*) - 15 Epimenidou Street, Heraklio Town'
       },
       gallery: [
-        '/images/autumn-packages/heraklion/heraklion-autumn-cover.webp',
-        '/images/autumn-packages/heraklion/heraklion-autumn-thumb.webp'
+        '/images/Hraklio-crete/hraklio-cover.webp',
+        '/images/Hraklio-crete/hraklio-city-centre.webp',
+        '/images/Hraklio-crete/hraklio-town.webp'
       ]
     }
   },
@@ -26641,6 +26655,7 @@ export const travelPackages = [
     category: 'Autumn Packages',
     price: 765,
     duration: '6 days / 5 nights',
+    hidden: true,
     description:
       'Ταξίδι 6 ημερών στην Πρέβεζα, Λευκάδα και Αθήνα: Εξερεύνηση, πολιτισμός και διαμονή Bed & Breakfast. Αναχώρηση 26/09. Διαθέσιμο σε ζήτηση.',
     longDescription:
@@ -26658,8 +26673,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Sky Express',
       includedLuggage: 'Μια αποσκευή 20 κιλών και μια χειραποσκευή 8 κιλών',
-      coverImage: '/images/autumn-packages/preveza-lefkada-athens/preveza-lefkada-athens-cover.webp',
-      thumbnailImage: '/images/autumn-packages/preveza-lefkada-athens/preveza-lefkada-athens-thumb.webp',
+      coverImage: '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-cover.webp',
+      thumbnailImage: '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-thumb.webp',
       note: 'Αναχώρηση: 26/09 από Λάρνακα με Sky Express · Διανυκτερεύσεις: Αθήνα (3), Πρέβεζα (2) · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26778,8 +26793,9 @@ export const travelPackages = [
           'ΠΡΕΒΕΖΑ - ΛΕΥΚΑΔΑ - ΑΘΗΝΑ – 6 Μέρες\n\nΑναχώρηση: 26/09\n\nΔιανυκτερεύσεις: Αθήνα (3), Πρέβεζα (2)\n\nΞΕΝΟΔΟΧΕΙΑ ΔΙΑΜΟΝΗΣ:\nΠΡΕΒΕΖΑ - DIONI BOUTIQUE HOTEL 4*\nΑΘΗΝΑ - ATHENS CYPRIA 4*'
       },
       gallery: [
-        '/images/autumn-packages/preveza-lefkada-athens/preveza-lefkada-athens-cover.webp',
-        '/images/autumn-packages/preveza-lefkada-athens/preveza-lefkada-athens-thumb.webp'
+        '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-cover.webp',
+        '/images/autumn/preveza-lefkada-athens/preveza-lefkada-athens-thumb.webp',
+        '/images/autumn/preveza-lefkada-athens/dioni-athens-cypria-hotel.webp'
       ]
     }
   },
@@ -26807,8 +26823,8 @@ export const travelPackages = [
       boardBasis: 'Bed & Breakfast',
       airline: 'Wizz Air',
       includedLuggage: 'Μία αποσκευή 20 κιλών και προσωπική τσάντα',
-      coverImage: '/images/autumn-packages/armenia/armenia-cover.webp',
-      thumbnailImage: '/images/autumn-packages/armenia/armenia-thumb.webp',
+      coverImage: '/images/christmas-packages/armenia-christmas/armenia-cover.webp',
+      thumbnailImage: '/images/christmas-packages/armenia-christmas/armenia-yerevan-thumb.webp',
       note: 'Αναχώρηση: 07/11 από Λάρνακα με Wizz Air · Διαμονή 4 νύχτες στο Γερεβάν · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
@@ -26896,6 +26912,7 @@ export const travelPackages = [
             'Συνάντηση στο αεροδρόμιο της Λάρνακας και επιβίβαση στην απευθείας πτήση της Wizz Air με προορισμό το Γερεβάν, την πρωτεύουσα της Αρμενίας. Άφιξη στο διεθνές αεροδρόμιο του Γερεβάν στις 11:20. Μετά την παραλαβή των αποσκευών, θα ξεκινήσουμε την πρώτη μας γνωριμία με την πόλη. Η περιήγησή μας θα μας οδηγήσει στο κέντρο του Γερεβάν, μια από τις αρχαιότερες συνεχώς κατοικημένες πόλεις στον κόσμο, όπου η ιστορία συναντά τη σύγχρονη ζωή. Θα γνωρίσουμε την εντυπωσιακή Πλατεία Δημοκρατίας, το αρχιτεκτονικό σύμβολο της πόλης, θα περπατήσουμε στους όμορφους πεζόδρομους με τα υπαίθρια καφέ και θα απολαύσουμε την ατμόσφαιρα της αρμενικής πρωτεύουσας. Θα επισκεφθούμε το εντυπωσιακό Συγκρότημα Cascade, ένα από τα πιο χαρακτηριστικά σημεία του Γερεβάν, με μοναδική θέα προς την πόλη και, όταν ο καιρός το επιτρέπει, προς το επιβλητικό όρος Αραράτ. Θα ακολουθήσει επίσκεψη στη Βερνισάζ, τη διάσημη υπαίθρια αγορά χειροτεχνίας. Μεταφορά στο ξενοδοχείο, τακτοποίηση και δείπνο σε παραδοσιακό εστιατόριο. Διανυκτέρευση.',
           activities: ['Πτήση προς Γερεβάν', 'Περιήγηση πόλης', 'Πλατεία Δημοκρατίας', 'Cascade Complex', 'Αγορά Βερνισάζ', 'Δείπνο']
         },
+
         {
           day: 2,
           title: 'ΜΟΝΗ ΧΟΡ ΒΙΡΑΠ – ΣΥΜΦΩΝΙΑ ΤΩΝ ΛΙΘΩΝ – ΝΑΟΣ ΓΚΑΡΝΙ – ΜΟΝΗ ΓΚΕΓΚΑΡΝΤ',
@@ -26930,8 +26947,113 @@ export const travelPackages = [
           'ΑΡΜΕΝΙΑ – 5 Μέρες\n\nΑναχώρηση: 07/11\n\nΑρμενία - ένας τόπος γεμάτος ιστορία, μνήμες και έντονες αντιθέσεις. Χτισμένη ανάμεσα στην Ευρώπη και την Ασία, αποτελεί μια χώρα με βαθιές ρίζες στον χρόνο, όπου η παράδοση συναντά τη σύγχρονη ζωή και κάθε γωνιά αφηγείται τη δική της ιστορία. Επιβλητικά βουνά, αρχαία μοναστήρια, πέτρινα χωριά και η ζεστή φιλοξενία των ανθρώπων συνθέτουν τη μοναδική ταυτότητα αυτού του τόπου.\n\nΞΕΝΟΔΟΧΕΙΟ ΔΙΑΜΟΝΗΣ:\nRAMADA HOTEL & SUITES BY WYNDHAM - YEREVAN 4*'
       },
       gallery: [
-        '/images/autumn-packages/armenia/armenia-cover.webp',
-        '/images/autumn-packages/armenia/armenia-thumb.webp'
+        '/images/christmas-packages/armenia-christmas/armenia-cover.webp',
+        '/images/christmas-packages/armenia-christmas/armenia-yerevan-thumb.webp',
+        '/images/christmas-packages/armenia-christmas/ramada-hotel-armenia.webp'
+      ]
+    }
+  },
+  {
+    id: 387,
+    title: 'HARRY POTTER ΣΤΟ ΛΟΝΔΙΝΟ',
+    destination: 'United Kingdom',
+    category: 'Christmas Markets',
+    price: 619,
+    duration: '4 days / 3 nights',
+    description:
+      'Απόδραση 4 ημερών στο Λονδίνο από Λάρνακα με Wizz Air: τόποι γυρισμάτων Χάρι Πότερ και εισιτήριο Warner Bros. Studios. Διαμονή Bed & Breakfast. Αναχωρήσεις 06/11, 13/11, 20/11.',
+    longDescription:
+      'Ζήστε το Λονδίνο μέσα από τον κόσμο του Χάρι Πότερ. King’s Cross Platform 9¾, Leadenhall Market, Millennium Bridge και είσοδος στα Warner Bros. Studios. Διαμονή σε 3* ξενοδοχεία με πρόγευμα: Royal National, Tavistock και President Hotel.',
+    image: '🇬🇧🪄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-09-21T13:26:00+03:00',
+      departureDate: '06/11, 13/11, 20/11',
+      departureDates: ['06/11', '13/11', '20/11'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'London – United Kingdom',
+      monthAvailability: 'November',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μια μικρή χειραποσκευή και μια χειραποσκευή 10 κιλών',
+      coverImage: '/images/christmas-packages/london-christmas-pakcage/harry-potter-london.webp',
+      thumbnailImage: '/images/christmas-packages/london-christmas-pakcage/harry-potter-london.webp',
+      note: 'Αναχωρήσεις: 06/11, 13/11, 20/11 από Λάρνακα με Wizz Air · Διαμονή 3 νύχτες με πρωινό · Περιλαμβάνεται είσοδος στα Warner Bros. Studios\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '06/11, 13/11, 20/11',
+          route: 'Larnaca (LCA) → London Gatwick (LGW)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '14:20',
+              toCode: 'LGW',
+              toName: 'Gatwick',
+              toCity: 'London, United Kingdom',
+              arrive: '17:30',
+              flight: 'W6 4557',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '09/11, 16/11, 23/11',
+          route: 'London Gatwick (LGW) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LGW',
+              fromName: 'Gatwick',
+              fromCity: 'London, United Kingdom',
+              depart: '18:15',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '00:50',
+              flight: 'W6 4558',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        }
+      ],
+      hotels: harryPotterLondonPackage387Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Λονδίνο - Λάρνακα με πτήσεις της Wizzair.',
+        'Φόροι αεροδρομίων.',
+        '3 διανυκτερεύσεις σε ένα από τα πιο πάνω ξενοδοχεία με πρόγευμα.',
+        'Μια μικρή χειραποσκευή και μια χειραποσκευή 10 κιλών.',
+        'Εισιτήριο εισόδου στα WarnerBros Studios στο Λονδίνο.'
+      ],
+      notIncluded: [
+        'Ασφάλεια ταξιδιού.'
+      ],
+      notes: [
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας.'
+      ],
+      itinerary: [],
+      program: harryPotterLondonPackage387Program,
+      gallery: [
+        '/images/christmas-packages/london-christmas-pakcage/harry-potter-london.webp',
+        '/images/christmas-packages/london-christmas-pakcage/royal-national-hotel.webp',
+        '/images/christmas-packages/london-christmas-pakcage/tavistock-hotel-london.webp',
+        '/images/christmas-packages/london-christmas-pakcage/president-hotel-london.webp'
       ]
     }
   }
@@ -26942,7 +27064,12 @@ export const travelPackages = [
 export const EXPIRED_PACKAGE_CATEGORIES = ['Easter Packages']
 
 /** Newer package ids supersede older duplicates (same tour, different id/category). */
-export const SUPERSEDED_PACKAGE_IDS = new Set([44, 45, 335])
+export const SUPERSEDED_PACKAGE_IDS = new Set([
+  44, 45, 335, 336, 385,
+  // Removed exotic / long-haul listings (user request)
+  26, 40, 43, 46, 48, 50, 52, 53, 54, 303, 323, 331,
+  333, 334, 337, 338, 339, 341, 342, 343, 345, 346, 347,
+])
 
 function dedupePackagesByTitleDestination(packages) {
   const byKey = new Map()

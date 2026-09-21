@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 379 (ΜΑΓΕΥΤΙΚΟ ΜΟΝΑΧΟ & ΑΥΣΤΡΙΑΚΕΣ ΑΛΠΕΙΣ) — 5 Days Christmas package.
 const IMG = {
-  fourStarMunich: '/images/christmas-packages/munich/4-star-hotel-munich-alps.webp'
+  fourStarMunich: '/images/christmas-packages/munich-afstriakes-alpis/munich-hotel.webp'
 }
 
 export const munichAlpsChristmasPackage379Hotels = [

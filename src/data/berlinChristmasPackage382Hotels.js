@@ -1,10 +1,17 @@
 // Hotel inventory & tariffs for package 382 (ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΕΡΟΛΙΝΟ) — Christmas city break
+const IMG = {
+  holidayInn: '/images/christmas-packages/berlin-christmas/holiday-inn-berlin.webp',
+  titanic: '/images/christmas-packages/berlin-christmas/titanic-comfort-hotel.webp',
+  nhPotsdamer: '/images/christmas-packages/berlin-christmas/nh-berlin-hotel.webp',
+  nhCollection: '/images/christmas-packages/berlin-christmas/nh-collection-berlin.webp'
+}
 
 export const berlinChristmasPackage382Hotels = [
   {
     name: 'Holiday Inn Berlin Centre Alexanderplatz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.holidayInn,
     location: 'Stralauer Strasse 45, Mitte, Berlin, 10179, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -20,6 +27,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Holiday Inn Berlin Centre Alexanderplatz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.holidayInn,
     location: 'Stralauer Strasse 45, Mitte, Berlin, 10179, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -35,6 +43,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Holiday Inn Berlin Centre Alexanderplatz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.holidayInn,
     location: 'Stralauer Strasse 45, Mitte, Berlin, 10179, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -50,6 +59,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Holiday Inn Berlin Centre Alexanderplatz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.holidayInn,
     location: 'Stralauer Strasse 45, Mitte, Berlin, 10179, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -65,6 +75,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Titanic Comfort Mitte Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.titanic,
     location: 'Elisabeth Mara Strasse 4, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -80,6 +91,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Titanic Comfort Mitte Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.titanic,
     location: 'Elisabeth Mara Strasse 4, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -95,6 +107,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Titanic Comfort Mitte Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.titanic,
     location: 'Elisabeth Mara Strasse 4, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -110,6 +123,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'Titanic Comfort Mitte Hotel',
     stars: 3,
     roomType: 'Standard Room',
+    image: IMG.titanic,
     location: 'Elisabeth Mara Strasse 4, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -125,6 +139,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Berlin Potsdamer Platz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhPotsdamer,
     location: 'Stresemannstr. 47, 10963, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -140,6 +155,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Berlin Potsdamer Platz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhPotsdamer,
     location: 'Stresemannstr. 47, 10963, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -155,6 +171,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Berlin Potsdamer Platz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhPotsdamer,
     location: 'Stresemannstr. 47, 10963, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -170,6 +187,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Berlin Potsdamer Platz',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhPotsdamer,
     location: 'Stresemannstr. 47, 10963, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -185,6 +203,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Collection Berlin Mitte am Checkpoint Charlie',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhCollection,
     location: 'Leipziger Str. 106-111, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -200,6 +219,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Collection Berlin Mitte am Checkpoint Charlie',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhCollection,
     location: 'Leipziger Str. 106-111, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -215,6 +235,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Collection Berlin Mitte am Checkpoint Charlie',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhCollection,
     location: 'Leipziger Str. 106-111, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {
@@ -230,6 +251,7 @@ export const berlinChristmasPackage382Hotels = [
     name: 'NH Collection Berlin Mitte am Checkpoint Charlie',
     stars: 4,
     roomType: 'Standard Room',
+    image: IMG.nhCollection,
     location: 'Leipziger Str. 106-111, 10117, Berlin, Germany',
     boardBasis: 'Bed & Breakfast',
     prices: {

@@ -1,6 +1,6 @@
 // Hotel inventory & tariffs for package 377 (ΜΑΓΙΚΑ ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΕ ΒΑΡΣΟΒΙΑ & ΚΡΑΚΟΒΙΑ) — 6 Days Christmas package.
 const IMG = {
-  fourStarKrakowWarsaw: '/images/christmas-packages/warsaw-krakow/4-star-hotels-warsaw-krakow.webp'
+  fourStarKrakowWarsaw: '/images/christmas-packages/waw-krakow/warsaw-krakow-hotel.webp'
 }
 
 export const warsawKrakowChristmasPackage377Hotels = [

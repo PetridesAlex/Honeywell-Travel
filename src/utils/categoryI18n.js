@@ -4,6 +4,7 @@ export const CATEGORY_KEYS = {
   'Autumn Packages': 'autumn-packages',
   'Exotic Packages': 'exotic-packages',
   'Christmas Packages': 'christmas-packages',
+  'Christmas Markets': 'christmas-markets',
   'Music & Sports': 'music-and-sports',
   'Mary Specials Trips': 'mary-specials-trips',
   'Mary Special Trips': 'mary-special-trips',
