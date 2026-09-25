@@ -124,6 +124,14 @@ import { prevezaLefkadaAthensAutumnPackage385Hotels } from './prevezaLefkadaAthe
 import { armeniaAutumnPackage386Hotels } from './armeniaAutumnPackage386Hotels.js'
 import { harryPotterLondonPackage387Hotels } from './harryPotterLondonPackage387Hotels.js'
 import { harryPotterLondonPackage387Program } from './harryPotterLondonPackage387Program.js'
+import { yerevanChristmasPackage388Hotels } from './yerevanChristmasPackage388Hotels.js'
+import { yerevanChristmasPackage388Program } from './yerevanChristmasPackage388Program.js'
+import { banskoChristmasPackage389Hotels } from './banskoChristmasPackage389Hotels.js'
+import { banskoChristmasPackage389Program } from './banskoChristmasPackage389Program.js'
+import { gdanskChristmasPackage390Hotels } from './gdanskChristmasPackage390Hotels.js'
+import { gdanskChristmasPackage390Program } from './gdanskChristmasPackage390Program.js'
+import { rigaChristmasPackage391Hotels } from './rigaChristmasPackage391Hotels.js'
+import { rigaChristmasPackage391Program } from './rigaChristmasPackage391Program.js'
 import { hasUpcomingPackageDepartures } from '../utils/packageDepartureDates.js'
 import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice.js'
 
@@ -26333,16 +26341,17 @@ export const travelPackages = [
     title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΕΡΟΛΙΝΟ',
     destination: 'Germany',
     category: 'Christmas Markets',
-    price: 519,
-    duration: '4 days / 3 nights',
+    price: 599,
+    duration: '4 Μέρες',
     description:
-      'Γιορτινή απόδραση 4 ημερών στο Βερολίνο: Christmas Markets, ιστορικά μνημεία και διαμονή Bed & Breakfast. Αναχωρήσεις 21/11, 28/11, 05/12, 12/12.',
+      'Γιορτινή απόδραση 4 ημερών στο Βερολίνο από Λάρνακα με Easy Jet: Christmas Markets, ιστορικά μνημεία και διαμονή Bed & Breakfast. Αναχωρήσεις 21/11, 28/11, 05/12, 12/12. Διαθέσιμο σε ζήτηση.',
     longDescription:
-      'Ζήστε τη μαγεία των γιορτών στο Βερολίνο. Διαμονή σε 3* ή 4* ξενοδοχεία με πρόγευμα. Επιλογές ξενοδοχείων: Holiday Inn Berlin Centre Alexanderplatz, Titanic Comfort Mitte, NH Berlin Potsdamer Platz και NH Collection Berlin Mitte am Checkpoint Charlie.',
+      'Ζήστε τη μαγεία των γιορτών στο Βερολίνο. Διαμονή σε Holiday Inn Berlin Centre Alexanderplatz 4*, Titanic Comfort Mitte 3*, NH Berlin Potsdamer Platz 4* ή NH Collection Berlin Mitte am Checkpoint Charlie 4* με πρόγευμα.',
     image: '🇩🇪🎄',
     featured: true,
     packageType: 'individual',
     details: {
+      codeUpdatedAt: '2026-09-25T11:56:00+03:00',
       departureDate: '21/11, 28/11, 05/12, 12/12',
       departureDates: ['21/11', '28/11', '05/12', '12/12'],
       departureFrom: 'Larnaca',
@@ -26354,7 +26363,7 @@ export const travelPackages = [
       includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
       coverImage: '/images/christmas-packages/berlin-christmas/berlin-cover.webp',
       thumbnailImage: '/images/christmas-packages/berlin-christmas/berlin-thumb.webp',
-      note: 'Αναχωρήσεις: 21/11, 28/11, 05/12, 12/12 από Λάρνακα με Easy Jet · Διαμονή 3 νύχτες με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      note: 'Διαθέσιμο σε ζήτηση · Αναχωρήσεις: 21/11, 28/11, 05/12, 12/12 από Λάρνακα με Easy Jet · Διαμονή 3 νύχτες με πρωινό · Ξενοδοχεία: Holiday Inn Alexanderplatz 4* / Titanic Comfort Mitte 3* / NH Potsdamer Platz 4* / NH Collection Checkpoint Charlie 4*\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
       flights: [
         {
           direction: 'Departure',
@@ -26425,7 +26434,7 @@ export const travelPackages = [
       itinerary: [],
       program: {
         introduction:
-          'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΕΡΟΛΙΝΟ – 4 Μέρες\n\nΑναχωρήσεις: 21/11, 28/11, 05/12, 12/12\n\nΖήστε τη μαγεία των γιορτών στο Βερολίνο!\n\nΤο Βερολίνο, η πρωτεύουσα της Γερμανίας, είναι μια πόλη με πλούσια ιστορία, έντονο πολιτιστικό χαρακτήρα και σύγχρονη δημιουργική ενέργεια. Γνωστό για εμβληματικά αξιοθέατα όπως η Πύλη του Βρανδεμβούργου, το Κτήριο του Ράιχσταγκ, το Νησί των Μουσείων και τα απομεινάρια του Τείχους του Βερολίνου, προσφέρει έναν μοναδικό συνδυασμό ιστορίας, τέχνης και μοντέρνου τρόπου ζωής. Οι πολυάριθμες γκαλερί, τα μουσεία, τα πάρκα και η ζωντανή γαστρονομική σκηνή καθιστούν το Βερολίνο έναν από τους πιο δημοφιλείς προορισμούς της Ευρώπης.\n\nΤο Βερολίνο φιλοξενεί περισσότερες από 60 χριστουγεννιάτικες αγορές, καθεμία με τον δικό της ξεχωριστό χαρακτήρα και εορταστική ατμόσφαιρα. Από τη διάσημη αγορά στο Gendarmenmarkt και την ιστορική αγορά μπροστά από το Ανάκτορο Charlottenburg έως τις πιο σύγχρονες γιορτινές εκδηλώσεις στο κέντρο της πόλης, οι επισκέπτες μπορούν να απολαύσουν χειροποίητες δημιουργίες, παραδοσιακά γερμανικά εδέσματα, ζεστό κρασί (Glühwein) και εντυπωσιακούς χριστουγεννιάτικους στολισμούς. Οι συναυλίες, τα παγοδρόμια και οι χιλιάδες λαμπεροί φωτισμοί δημιουργούν μια μαγευτική εμπειρία που κάνει το Βερολίνο ιδανικό προορισμό για τις γιορτές.\n\nΞΕΝΟΔΟΧΕΙΑ:\n• Holiday Inn Berlin Centre Alexanderplatz (4*) - Stralauer Strasse 45, Mitte\n• Titanic Comfort Mitte Hotel (3*) - Elisabeth Mara Strasse 4\n• NH Berlin Potsdamer Platz (4*) - Stresemannstr. 47\n• NH Collection Berlin Mitte am Checkpoint Charlie (4*) - Leipziger Str. 106-111'
+          'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΕΡΟΛΙΝΟ – 4 Μέρες\n\nΑναχωρήσεις: 21/11, 28/11, 05/12, 12/12 από Λάρνακα (Easy Jet U2 5368 / U2 5367)\nΔιαθέσιμο σε ζήτηση\n\nΖήστε τη μαγεία των γιορτών στο Βερολίνο!\n\nΤο Βερολίνο, η πρωτεύουσα της Γερμανίας, είναι μια πόλη με πλούσια ιστορία, έντονο πολιτιστικό χαρακτήρα και σύγχρονη δημιουργική ενέργεια. Γνωστό για εμβληματικά αξιοθέατα όπως η Πύλη του Βρανδεμβούργου, το Κτήριο του Ράιχσταγκ, το Νησί των Μουσείων και τα απομεινάρια του Τείχους του Βερολίνου, προσφέρει έναν μοναδικό συνδυασμό ιστορίας, τέχνης και μοντέρνου τρόπου ζωής. Οι πολυάριθμες γκαλερί, τα μουσεία, τα πάρκα και η ζωντανή γαστρονομική σκηνή καθιστούν το Βερολίνο έναν από τους πιο δημοφιλείς προορισμούς της Ευρώπης.\n\nΤο Βερολίνο φιλοξενεί περισσότερες από 60 χριστουγεννιάτικες αγορές, καθεμία με τον δικό της ξεχωριστό χαρακτήρα και εορταστική ατμόσφαιρα. Από τη διάσημη αγορά στο Gendarmenmarkt και την ιστορική αγορά μπροστά από το Ανάκτορο Charlottenburg έως τις πιο σύγχρονες γιορτινές εκδηλώσεις στο κέντρο της πόλης, οι επισκέπτες μπορούν να απολαύσουν χειροποίητες δημιουργίες, παραδοσιακά γερμανικά εδέσματα, ζεστό κρασί (Glühwein) και εντυπωσιακούς χριστουγεννιάτικους στολισμούς. Οι συναυλίες, τα παγοδρόμια και οι χιλιάδες λαμπεροί φωτισμοί δημιουργούν μια μαγευτική εμπειρία που κάνει το Βερολίνο ιδανικό προορισμό για τις γιορτές.\n\nΞΕΝΟΔΟΧΕΙΑ:\n• Holiday Inn Berlin Centre Alexanderplatz Hotel - Berlin (4*) - Stralauer Strasse 45, Mitte — Bed & Breakfast\n• Titanic Comfort Mitte Hotel (3*) - Elisabeth Mara Strasse 4 — Bed & Breakfast\n• NH Berlin Potsdamer Platz Hotel (4*) - Stresemannstr. 47 — Bed & Breakfast\n• Hotel NH Collection Berlin Mitte am Checkpoint Charlie Hotel (4*) - Leipziger Str. 106-111 — Bed & Breakfast'
       },
       gallery: [
         '/images/christmas-packages/berlin-christmas/berlin-cover.webp',
@@ -26433,7 +26442,9 @@ export const travelPackages = [
         '/images/christmas-packages/berlin-christmas/holiday-inn-berlin.webp',
         '/images/christmas-packages/berlin-christmas/titanic-comfort-hotel.webp',
         '/images/christmas-packages/berlin-christmas/nh-berlin-hotel.webp',
-        '/images/christmas-packages/berlin-christmas/nh-collection-berlin.webp'
+        '/images/christmas-packages/berlin-christmas/nh-collection-berlin.webp',
+        '/images/christmas-packages/berlin-christmas/mercure-hotel-berlin-checkpoint-charlie.webp',
+        '/images/christmas-packages/berlin-christmas/arcotel-john-f-berlin.webp'
       ]
     }
   },
@@ -27054,6 +27065,424 @@ export const travelPackages = [
         '/images/christmas-packages/london-christmas-pakcage/royal-national-hotel.webp',
         '/images/christmas-packages/london-christmas-pakcage/tavistock-hotel-london.webp',
         '/images/christmas-packages/london-christmas-pakcage/president-hotel-london.webp'
+      ]
+    }
+  },
+  {
+    id: 388,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΓΙΕΡΕΒΑΝ',
+    destination: 'Armenia',
+    category: 'Christmas Markets',
+    price: 259,
+    duration: '4 days / 3 nights',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στο Γιερεβάν από Λάρνακα με Wizz Air: Christmas Markets, Πλατεία Δημοκρατίας και διαμονή Bed & Breakfast. Αναχωρήσεις 20/11, 04/12, 18/12. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Ανακαλύψτε τη μαγεία των Χριστουγέννων στο Γιερεβάν. Διαμονή στο Kantar Hotel 3* ή στο Holiday Inn Yerevan - Republic Square 4* με πρόγευμα. Γιορτινή ατμόσφαιρα στην Πλατεία Δημοκρατίας, Cascade και αρμενική φιλοξενία.',
+    image: '🇦🇲🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-09-25T11:25:00+03:00',
+      departureDate: '20/11, 04/12, 18/12',
+      departureDates: ['20/11', '04/12', '18/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Yerevan – Armenia',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/yerevan-christmas/yerevan-cover-christmas.webp',
+      thumbnailImage: '/images/christmas-packages/yerevan-christmas/yerevan-thumbnail.webp',
+      note: 'Διαθέσιμο σε ζήτηση · Αναχωρήσεις: 20/11, 04/12, 18/12 από Λάρνακα με Wizz Air · Διαμονή 3 νύχτες με πρωινό · Ξενοδοχεία: Kantar Hotel 3* / Holiday Inn Yerevan - Republic Square 4*\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '20/11, 04/12, 18/12',
+          route: 'Larnaca (LCA) → Yerevan (EVN)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '07:55',
+              toCode: 'EVN',
+              toName: 'Zvartnots Intl',
+              toCity: 'Yerevan, Armenia',
+              arrive: '12:00',
+              flight: 'W6 7838',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '23/11, 07/12, 21/12',
+          route: 'Yerevan (EVN) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'EVN',
+              fromName: 'Zvartnots Intl',
+              fromCity: 'Yerevan, Armenia',
+              depart: '07:00',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '07:20',
+              flight: 'W6 7837',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: yerevanChristmasPackage388Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Γιερεβάν - Λάρνακα με πτήσεις της Wizz Air.',
+        'Φόροι αεροδρομίων.',
+        '3 διανυκτερεύσεις σε ένα από τα πιο πάνω ξενοδοχεία με πρόγευμα.',
+        'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ασφάλεια ταξιδιού.'
+      ],
+      notes: [
+        'Διαθέσιμο σε ζήτηση.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας.'
+      ],
+      itinerary: [],
+      program: yerevanChristmasPackage388Program,
+      gallery: [
+        '/images/christmas-packages/yerevan-christmas/yerevan-cover-christmas.webp',
+        '/images/christmas-packages/yerevan-christmas/yerevan-thumbnail.webp',
+        '/images/christmas-packages/yerevan-christmas/kantar-hotel-yerevan.webp',
+        '/images/christmas-packages/yerevan-christmas/holiday-inn-yerevan-republic-square.webp'
+      ]
+    }
+  },
+  {
+    id: 389,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΜΠΑΝΣΚΟ',
+    destination: 'Bulgaria',
+    category: 'Christmas Markets',
+    price: 299,
+    duration: '4 Μέρες',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στο Μπάνσκο από Λάρνακα με Wizz Air: χειμερινή ατμόσφαιρα στους πρόποδες του Πίριν, διαμονή σε Mountain View Aparthotel ή Grand Royale Apartment Complex & Spa. Αναχωρήσεις 20/11, 04/12, 11/12, 18/12. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Ανακαλύψτε τη μαγεία των Χριστουγέννων στο Μπάνσκο. Διαμονή στο Mountain View Aparthotel 3* (Room Only) ή στο Grand Royale Apartment Complex & Spa 4* (Bed & Breakfast). Παραδοσιακή πόλη, αλπικό τοπίο και γιορτινή ατμόσφαιρα.',
+    image: '🇧🇬🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-09-25T11:30:00+03:00',
+      departureDate: '20/11, 04/12, 11/12, 18/12',
+      departureDates: ['20/11', '04/12', '11/12', '18/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Bansko – Bulgaria',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Room Only / Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/bansko-sofia-christmas/bansko-cover.webp',
+      thumbnailImage: '/images/christmas-packages/bansko-sofia-christmas/bansko-thumbnail.webp',
+      note: 'Διαθέσιμο σε ζήτηση · Αναχωρήσεις: 20/11, 04/12, 11/12, 18/12 από Λάρνακα με Wizz Air · Διαμονή 3 νύχτες · Ξενοδοχεία: Mountain View Aparthotel 3* (Room Only) / Grand Royale Apartment Complex & Spa 4* (Bed & Breakfast)\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '20/11, 04/12, 11/12, 18/12',
+          route: 'Larnaca (LCA) → Sofia (SOF)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '22:55',
+              toCode: 'SOF',
+              toName: 'Sofia',
+              toCity: 'Sofia, Bulgaria',
+              arrive: '01:20',
+              flight: 'W6 4438',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '23/11, 07/12, 14/12, 21/12',
+          route: 'Sofia (SOF) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'SOF',
+              fromName: 'Sofia',
+              fromCity: 'Sofia, Bulgaria',
+              depart: '20:10',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '22:20',
+              flight: 'W6 4437',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: banskoChristmasPackage389Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Σόφια - Λάρνακα με πτήσεις της Wizz Air.',
+        'Φόροι αεροδρομίων.',
+        '3 διανυκτερεύσεις σε ένα από τα πιο πάνω ξενοδοχεία με πρόγευμα όπου αναγράφεται.',
+        'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ασφάλεια ταξιδιού.'
+      ],
+      notes: [
+        'Διαθέσιμο σε ζήτηση.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας.'
+      ],
+      itinerary: [],
+      program: banskoChristmasPackage389Program,
+      gallery: [
+        '/images/christmas-packages/bansko-sofia-christmas/bansko-cover.webp',
+        '/images/christmas-packages/bansko-sofia-christmas/bansko-thumbnail.webp',
+        '/images/christmas-packages/bansko-sofia-christmas/mountain-view-aparthotel-bansko.webp',
+        '/images/christmas-packages/bansko-sofia-christmas/grand-royale-apartment-complex-spa-bansko.webp'
+      ]
+    }
+  },
+  {
+    id: 390,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΓΚΝΤΑΝΣΚ',
+    destination: 'Poland',
+    category: 'Christmas Markets',
+    price: 379,
+    duration: '5 Μέρες',
+    description:
+      'Γιορτινή απόδραση 5 ημερών στο Γκντανσκ από Λάρνακα με Wizz Air: χριστουγεννιάτικες αγορές, Παλιά Πόλη και γιορτινή ατμόσφαιρα δίπλα στη Βαλτική. Αναχωρήσεις 30/11, 07/12, 14/12, 21/12. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Ανακαλύψτε τη μαγεία των Χριστουγέννων στο Γκντανσκ. Διαμονή στο B&B HOTEL Gdańsk Old Town 4* (Room Only) ή στο Holiday Inn Gdansk - City Centre 4* (Bed & Breakfast). Οδός Długa, Σιντριβάνι του Ποσειδώνα και χριστουγεννιάτικη αγορά.',
+    image: '🇵🇱🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-09-25T11:38:00+03:00',
+      departureDate: '30/11, 07/12, 14/12, 21/12',
+      departureDates: ['30/11', '07/12', '14/12', '21/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Gdansk – Poland',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Room Only / Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/gdansk-poland-christmas/gdansk-cover.webp',
+      thumbnailImage: '/images/christmas-packages/gdansk-poland-christmas/gdansk-thumbnail.webp',
+      note: 'Διαθέσιμο σε ζήτηση · Αναχωρήσεις: 30/11, 07/12, 14/12, 21/12 από Λάρνακα με Wizz Air · Διαμονή 4 νύχτες · Ξενοδοχεία: B&B HOTEL Gdańsk Old Town 4* (Room Only) / Holiday Inn Gdansk - City Centre 4* (Bed & Breakfast)\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '30/11, 07/12, 14/12, 21/12',
+          route: 'Larnaca (LCA) → Gdansk (GDN)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '22:55',
+              toCode: 'GDN',
+              toName: 'Lech Walesa',
+              toCity: 'Gdansk, Poland',
+              arrive: '01:55',
+              flight: 'W6 1792',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+              note: 'Αυτή η πτήση φθάνει την επόμενη μέρα'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '04/12, 11/12, 18/12, 25/12',
+          route: 'Gdansk (GDN) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'GDN',
+              fromName: 'Lech Walesa',
+              fromCity: 'Gdansk, Poland',
+              depart: '17:15',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '22:00',
+              flight: 'W6 1791',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: gdanskChristmasPackage390Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Γκντανσκ - Λάρνακα με πτήσεις της Wizz Air.',
+        'Φόροι αεροδρομίων.',
+        '4 διανυκτερεύσεις σε ένα από τα πιο πάνω ξενοδοχεία με πρόγευμα όπου αναγράφεται.',
+        'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ασφάλεια ταξιδιού.'
+      ],
+      notes: [
+        'Διαθέσιμο σε ζήτηση.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας.'
+      ],
+      itinerary: [],
+      program: gdanskChristmasPackage390Program,
+      gallery: [
+        '/images/christmas-packages/gdansk-poland-christmas/gdansk-cover.webp',
+        '/images/christmas-packages/gdansk-poland-christmas/gdansk-thumbnail.webp',
+        '/images/christmas-packages/gdansk-poland-christmas/bb-hotel-gdansk-old-town.webp',
+        '/images/christmas-packages/gdansk-poland-christmas/holiday-inn-gdansk-city-centre.webp'
+      ]
+    }
+  },
+  {
+    id: 391,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΗ ΡΙΓΑ',
+    destination: 'Latvia',
+    category: 'Christmas Markets',
+    price: 419,
+    duration: '4 Μέρες',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στη Ρίγα από Πάφο με Ryanair: χριστουγεννιάτικες αγορές, Παλιά Πόλη UNESCO και Art Nouveau. Αναχωρήσεις 29/11, 06/12, 13/12. Διαθέσιμο σε ζήτηση.',
+    longDescription:
+      'Ανακαλύψτε τη μαγεία των Χριστουγέννων στη Ρίγα. Διαμονή στο Boutique Hotel KRISTOFS 3* ή στο Hilton Garden Inn Riga Old Town 4* με πρόγευμα. Παλιά Πόλη, Art Nouveau και γιορτινή ατμόσφαιρα στη Βαλτική.',
+    image: '🇱🇻🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-09-25T11:45:00+03:00',
+      departureDate: '29/11, 06/12, 13/12',
+      departureDates: ['29/11', '06/12', '13/12'],
+      departureFrom: 'Paphos',
+      destinationFull: 'Riga – Latvia',
+      monthAvailability: 'November, December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Ryanair',
+      includedLuggage: 'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/riga-package-christmas/riga-christmas-cover.webp',
+      thumbnailImage: '/images/christmas-packages/riga-package-christmas/riga-thumbnail-christmas.webp',
+      note: 'Διαθέσιμο σε ζήτηση · Αναχωρήσεις: 29/11, 06/12, 13/12 από Πάφο με Ryanair · Διαμονή 3 νύχτες με πρωινό · Ξενοδοχεία: Boutique Hotel KRISTOFS 3* / Hilton Garden Inn Riga Old Town 4*\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '29/11, 06/12, 13/12',
+          route: 'Paphos (PFO) → Riga (RIX)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'PFO',
+              fromName: 'Paphos Intl',
+              fromCity: 'Paphos, Cyprus',
+              depart: '10:30',
+              toCode: 'RIX',
+              toName: 'Riga Intl',
+              toCity: 'Riga, Latvia',
+              arrive: '14:40',
+              flight: 'FR 3336',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        },
+        {
+          direction: 'Return',
+          date: '02/12, 09/12, 16/12',
+          route: 'Riga (RIX) → Paphos (PFO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'RIX',
+              fromName: 'Riga Intl',
+              fromCity: 'Riga, Latvia',
+              depart: '08:00',
+              toCode: 'PFO',
+              toName: 'Paphos Intl',
+              toCity: 'Paphos, Cyprus',
+              arrive: '12:05',
+              flight: 'FR 3337',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής'
+            }
+          ]
+        }
+      ],
+      hotels: rigaChristmasPackage391Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Πάφος – Ρίγα - Πάφος με πτήσεις της Ryanair.',
+        'Φόροι αεροδρομίων.',
+        '3 διανυκτερεύσεις σε ένα από τα πιο πάνω ξενοδοχεία με πρόγευμα όπου αναγράφεται.',
+        'Μια 10kg χειραποσκευή στην καμπίνα του αεροπλάνου και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.'
+      ],
+      notIncluded: [
+        'Ασφάλεια ταξιδιού.'
+      ],
+      notes: [
+        'Διαθέσιμο σε ζήτηση.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.'
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας.'
+      ],
+      itinerary: [],
+      program: rigaChristmasPackage391Program,
+      gallery: [
+        '/images/christmas-packages/riga-package-christmas/riga-christmas-cover.webp',
+        '/images/christmas-packages/riga-package-christmas/riga-thumbnail-christmas.webp',
+        '/images/christmas-packages/riga-package-christmas/boutique-hotel-kristofs-riga.webp',
+        '/images/christmas-packages/riga-package-christmas/hilton-garden-inn-riga-old-town.webp'
       ]
     }
   }
