@@ -1,7 +1,18 @@
 import { createLead } from './leads'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, FORM_TYPES } from './formConstants'
+import {
+  FORM_ERROR_MESSAGE,
+  FORM_SUCCESS_MESSAGE,
+  FORM_TURNSTILE_ERROR_MESSAGE,
+  FORM_TURNSTILE_FAILED_CODE,
+  FORM_TYPES,
+} from './formConstants'
 
-export { FORM_SUCCESS_MESSAGE, FORM_ERROR_MESSAGE }
+export {
+  FORM_SUCCESS_MESSAGE,
+  FORM_ERROR_MESSAGE,
+  FORM_TURNSTILE_ERROR_MESSAGE,
+  FORM_TURNSTILE_FAILED_CODE,
+}
 
 export function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim())
@@ -27,6 +38,16 @@ export function validateFormFields({ name, email, message, honeypot }) {
 }
 
 /**
+ * Prefer the translated Turnstile message when verification failed.
+ */
+export function formSubmitErrorMessage(result, t) {
+  if (result?.code === FORM_TURNSTILE_FAILED_CODE) {
+    return t('forms.turnstileError')
+  }
+  return result?.error || t('forms.error')
+}
+
+/**
  * Submit a public website form via /api/submit-form (Resend + website_submissions).
  * Optionally syncs to the leads table / Travel Hub CRM after a successful send.
  */
@@ -41,6 +62,7 @@ export async function submitWebsiteForm({
   message,
   pageUrl = typeof window !== 'undefined' ? window.location.href : '',
   honeypot = '',
+  turnstileToken = '',
   extraFields = {},
   leadData = null,
 }) {
@@ -50,6 +72,14 @@ export async function submitWebsiteForm({
   }
   if (validation.error) {
     return { ok: false, error: validation.error }
+  }
+
+  if (!String(turnstileToken || '').trim()) {
+    return {
+      ok: false,
+      code: FORM_TURNSTILE_FAILED_CODE,
+      error: FORM_TURNSTILE_ERROR_MESSAGE,
+    }
   }
 
   try {
@@ -67,6 +97,7 @@ export async function submitWebsiteForm({
         message: String(message).trim(),
         pageUrl,
         honeypot,
+        turnstileToken: String(turnstileToken).trim(),
         extraFields,
       }),
     })
@@ -74,7 +105,14 @@ export async function submitWebsiteForm({
     const data = await response.json().catch(() => ({}))
 
     if (!response.ok) {
-      return { ok: false, error: FORM_ERROR_MESSAGE }
+      if (data?.code === FORM_TURNSTILE_FAILED_CODE) {
+        return {
+          ok: false,
+          code: FORM_TURNSTILE_FAILED_CODE,
+          error: data.error || FORM_TURNSTILE_ERROR_MESSAGE,
+        }
+      }
+      return { ok: false, error: data?.error || FORM_ERROR_MESSAGE }
     }
 
     if (leadData) {
@@ -114,10 +152,11 @@ export async function submitGiftVoucherForm(voucherData) {
       amount: `€${voucherData.amount}`,
     },
     honeypot: voucherData.honeypot || '',
+    turnstileToken: voucherData.turnstileToken || '',
   })
 
   if (result.ok) {
     return { success: true }
   }
-  return { success: false, error: result.error }
+  return { success: false, error: result.error, code: result.code }
 }

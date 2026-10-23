@@ -1,17 +1,20 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './OurWorld.css'
 
 function OurWorld() {
   const { t } = useTranslation()
+  const turnstileRef = useRef(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [formStatus, setFormStatus] = useState(null)
   const [sending, setSending] = useState(false)
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const teamMembers = [
     { 
@@ -293,6 +296,7 @@ function OurWorld() {
                 email,
                 message,
                 honeypot,
+                turnstileToken,
                 extraFields: { Subject: subject },
                 leadData: {
                   full_name: String(name || '').trim(),
@@ -311,8 +315,10 @@ function OurWorld() {
                 setFormStatus({ type: 'success', message: t('forms.success') })
                 e.target.reset()
                 setHoneypot('')
+                setTurnstileToken('')
+                turnstileRef.current?.reset()
               } else {
-                setFormStatus({ type: 'error', message: t('forms.error') })
+                setFormStatus({ type: 'error', message: formSubmitErrorMessage(result, t) })
               }
               setSending(false)
             }}
@@ -368,6 +374,11 @@ function OurWorld() {
                 {formStatus.message}
               </p>
             )}
+            <TurnstileWidget
+              ref={turnstileRef}
+              theme="auto"
+              onTokenChange={setTurnstileToken}
+            />
             <button type="submit" className="submit-button" disabled={sending}>
               {sending ? t('common.sending') : t('common.sendMessage')}
             </button>

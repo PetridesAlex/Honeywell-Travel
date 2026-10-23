@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import HoneypotField from '../components/HoneypotField'
-import { submitGiftVoucherForm } from '../lib/submitWebsiteForm'
+import TurnstileWidget from '../components/TurnstileWidget'
+import { formSubmitErrorMessage, submitGiftVoucherForm } from '../lib/submitWebsiteForm'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import './GiftVoucher.css'
@@ -18,10 +19,13 @@ function GiftVoucher() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('')
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
   const [selectedService, setSelectedService] = useState('flights')
   const [openFaq, setOpenFaq] = useState(null)
   const formSectionRef = useRef(null)
+  const turnstileRef = useRef(null)
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -120,6 +124,7 @@ function GiftVoucher() {
 
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setSubmitErrorMessage('')
 
     try {
       const result = await submitGiftVoucherForm({
@@ -129,10 +134,14 @@ function GiftVoucher() {
         amount: formData.amount,
         message: formData.message,
         honeypot,
+        turnstileToken,
       })
 
       if (result.success) {
         setSubmitStatus('success')
+        setHoneypot('')
+        setTurnstileToken('')
+        turnstileRef.current?.reset()
         setTimeout(() => {
           setFormData({
             recipientName: '',
@@ -145,10 +154,12 @@ function GiftVoucher() {
         }, 5000)
       } else {
         setSubmitStatus('error')
+        setSubmitErrorMessage(formSubmitErrorMessage(result, t))
       }
     } catch (error) {
       console.error('Error submitting voucher:', error)
       setSubmitStatus('error')
+      setSubmitErrorMessage(t('forms.error'))
     } finally {
       setIsSubmitting(false)
     }
@@ -278,9 +289,15 @@ function GiftVoucher() {
 
               {submitStatus === 'error' && (
                 <div className="alert alert-error">
-                  {t('forms.error')}
+                  {submitErrorMessage || t('forms.error')}
                 </div>
               )}
+
+              <TurnstileWidget
+                ref={turnstileRef}
+                theme="auto"
+                onTokenChange={setTurnstileToken}
+              />
 
               <button 
                 type="submit" 

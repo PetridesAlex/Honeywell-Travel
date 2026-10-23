@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import HoneypotField from './HoneypotField'
+import TurnstileWidget from './TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './CruisesSection.css'
 
 const FEATURED_CHAINS = [
@@ -67,6 +68,8 @@ function CruisesSection() {
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef(null)
   const [form, setForm] = useState({
     hotelName: '',
     city: '',
@@ -129,6 +132,7 @@ function CruisesSection() {
       travelDates,
       message,
       honeypot,
+      turnstileToken,
       extraFields: {
         'Hotel name': form.hotelName || '—',
       },
@@ -148,8 +152,10 @@ function CruisesSection() {
     if (result.ok) {
       setSent(true)
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
     } else {
-      setError(result.error)
+      setError(formSubmitErrorMessage(result, t))
     }
     setSending(false)
   }
@@ -323,6 +329,11 @@ function CruisesSection() {
                     />
                   </label>
                   {error && <p className="hotel-quote-error">{error}</p>}
+                  <TurnstileWidget
+                    ref={turnstileRef}
+                    theme="auto"
+                    onTokenChange={setTurnstileToken}
+                  />
                   <div className="hotel-quote-actions">
                     <button type="button" className="hotel-quote-btn secondary" onClick={closeModal}>
                       {t('common.cancel')}

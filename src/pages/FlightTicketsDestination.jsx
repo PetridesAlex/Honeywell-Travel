@@ -1,11 +1,12 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getDestinationSummaries, getOffersByDestination } from '../data/flightTickets'
 import { localizeFlightOffers } from '../utils/flightTicketI18n'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './FlightTickets.css'
 
 function splitRoute(route) {
@@ -75,6 +76,8 @@ function FlightTicketsDestination() {
   const [formError, setFormError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef(null)
 
   const openBookingForm = (offer, departure) => {
     setSelectedDeparture({ offer, departure })
@@ -151,6 +154,7 @@ function FlightTicketsDestination() {
       travelDates,
       message,
       honeypot,
+      turnstileToken,
       extraFields: {
         Offer: offer.title,
         Airline: offer.airline,
@@ -172,9 +176,11 @@ function FlightTicketsDestination() {
     if (result.ok) {
       closeBookingForm()
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
       window.alert(t('forms.success'))
     } else {
-      setFormError(result.error || t('forms.error'))
+      setFormError(formSubmitErrorMessage(result, t))
     }
     setIsSubmitting(false)
   }
@@ -365,6 +371,12 @@ function FlightTicketsDestination() {
                   </div>
 
                   {formError ? <p className="flight-booking-form-error">{formError}</p> : null}
+
+                  <TurnstileWidget
+                    ref={turnstileRef}
+                    theme="auto"
+                    onTokenChange={setTurnstileToken}
+                  />
 
                   <div className="flight-booking-form-actions">
                     <button type="button" className="flight-booking-cancel-btn" onClick={closeBookingForm}>

@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './DmcCyprus.css'
 
 const BRAND_RED = '#c41230'
@@ -80,6 +81,8 @@ function DmcCyprus() {
   const [sending, setSending] = useState(false)
   const [status, setStatus] = useState(null)
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef(null)
   const [openServiceIndex, setOpenServiceIndex] = useState(null)
 
   const handleChange = (e) => {
@@ -113,6 +116,7 @@ function DmcCyprus() {
       passengers: formData.groupSize,
       message,
       honeypot,
+      turnstileToken,
       extraFields: {
         Company: formData.companyName,
         Country: formData.country,
@@ -144,8 +148,10 @@ function DmcCyprus() {
         message: '',
       })
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
     } else {
-      setStatus({ type: 'error', text: result.error || t('forms.error') })
+      setStatus({ type: 'error', text: formSubmitErrorMessage(result, t) })
     }
     setSending(false)
   }
@@ -308,6 +314,11 @@ function DmcCyprus() {
             {status && (
               <p className={`dmc-form-status ${status.type}`}>{status.text}</p>
             )}
+            <TurnstileWidget
+              ref={turnstileRef}
+              theme="auto"
+              onTokenChange={setTurnstileToken}
+            />
             <button type="submit" className="dmc-btn dmc-btn-primary dmc-btn-submit" disabled={sending}>
               {sending ? t('contact.sending') : t('dmc.submitRequest')}
             </button>

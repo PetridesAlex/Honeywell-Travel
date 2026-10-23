@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { PARIS_LAST_MINUTE_OFFER } from '../data/parisLastMinuteFlights'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './ParisLastMinuteFlights.css'
 
 const offer = PARIS_LAST_MINUTE_OFFER
@@ -14,6 +15,7 @@ function ParisLastMinuteFlights() {
   const { t } = useTranslation()
   const datesRef = useRef(null)
   const bookingRef = useRef(null)
+  const turnstileRef = useRef(null)
   const [selectedDate, setSelectedDate] = useState(null)
   const [bookingForm, setBookingForm] = useState({
     name: '',
@@ -26,6 +28,7 @@ function ParisLastMinuteFlights() {
   const [formSuccess, setFormSuccess] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   useLayoutEffect(() => {
     const resetTop = () => {
@@ -109,6 +112,7 @@ function ParisLastMinuteFlights() {
       passengers: travelers,
       message,
       honeypot,
+      turnstileToken,
       extraFields: {
         Offer: 'Paris Last-Minute Flights',
         Airline: offer.airline,
@@ -134,10 +138,12 @@ function ParisLastMinuteFlights() {
       setSelectedDate(null)
       setBookingForm({ name: '', surname: '', email: '', contactNumber: '', travelers: '1' })
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
       setFormSuccess(true)
       window.alert(t('forms.success'))
     } else {
-      setFormError(result.error || t('forms.error'))
+      setFormError(formSubmitErrorMessage(result, t))
     }
     setIsSubmitting(false)
   }
@@ -453,6 +459,12 @@ function ParisLastMinuteFlights() {
                   </div>
 
                   {formError ? <p className="paris-lm-form-error" role="alert">{formError}</p> : null}
+
+                  <TurnstileWidget
+                    ref={turnstileRef}
+                    theme="auto"
+                    onTokenChange={setTurnstileToken}
+                  />
 
                   <button
                     type="submit"

@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './HoneymoonTrips.css'
 
 const HONEYMOON_DESTINATIONS = [
@@ -116,6 +117,10 @@ function HoneymoonTrips() {
   const [message, setMessage] = useState('')
   const [heroHoneypot, setHeroHoneypot] = useState('')
   const [mainHoneypot, setMainHoneypot] = useState('')
+  const [heroTurnstileToken, setHeroTurnstileToken] = useState('')
+  const [mainTurnstileToken, setMainTurnstileToken] = useState('')
+  const heroTurnstileRef = useRef(null)
+  const mainTurnstileRef = useRef(null)
   const dropdownRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -195,6 +200,7 @@ function HoneymoonTrips() {
       travelDates,
       message: messageBody,
       honeypot: heroHoneypot,
+      turnstileToken: heroTurnstileToken,
       leadData: {
         full_name: fullName,
         phone: fullPhoneNumber,
@@ -221,9 +227,11 @@ function HoneymoonTrips() {
       })
       setHeroCountryCode('+357')
       setHeroHoneypot('')
+      setHeroTurnstileToken('')
+      heroTurnstileRef.current?.reset()
       setShowHeroForm(false)
     } else {
-      alert(result.error || t('forms.error'))
+      alert(formSubmitErrorMessage(result, t))
     }
   }
 
@@ -259,6 +267,7 @@ function HoneymoonTrips() {
       destination: selectedDestination,
       message: message.trim(),
       honeypot: mainHoneypot,
+      turnstileToken: mainTurnstileToken,
       leadData: {
         full_name: fullName.trim(),
         phone: fullPhoneNumber,
@@ -282,8 +291,10 @@ function HoneymoonTrips() {
       setMessage('')
       setCountryCode('+357')
       setMainHoneypot('')
+      setMainTurnstileToken('')
+      mainTurnstileRef.current?.reset()
     } else {
-      alert(result.error || t('forms.error'))
+      alert(formSubmitErrorMessage(result, t))
     }
   }
 
@@ -435,6 +446,11 @@ function HoneymoonTrips() {
                   ))}
                 </select>
               </label>
+              <TurnstileWidget
+                ref={heroTurnstileRef}
+                theme="auto"
+                onTokenChange={setHeroTurnstileToken}
+              />
               <button type="submit" className="hero-request-submit">
                 {t('common.sendRequest')}
               </button>
@@ -600,6 +616,11 @@ function HoneymoonTrips() {
                 required
               />
             </label>
+            <TurnstileWidget
+              ref={mainTurnstileRef}
+              theme="auto"
+              onTokenChange={setMainTurnstileToken}
+            />
             <button type="submit" className="honeymoon-request-button">
               {t('common.sendRequest')}
             </button>

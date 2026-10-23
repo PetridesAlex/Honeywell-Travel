@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Contact.css'
 
 function Contact() {
   const { t } = useTranslation()
+  const turnstileRef = useRef(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,6 +20,7 @@ function Contact() {
   const [status, setStatus] = useState(null) // { type: 'success' | 'error', message }
   const [sending, setSending] = useState(false)
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -37,6 +40,7 @@ function Contact() {
       phone: formData.phone || '',
       message: formData.message,
       honeypot,
+      turnstileToken,
       leadData: {
         full_name: formData.name,
         phone: formData.phone || '',
@@ -54,8 +58,10 @@ function Contact() {
       setStatus({ type: 'success', message: t('forms.success') })
       setFormData({ name: '', email: '', phone: '', message: '' })
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
     } else {
-      setStatus({ type: 'error', message: t('forms.error') })
+      setStatus({ type: 'error', message: formSubmitErrorMessage(result, t) })
     }
     setSending(false)
   }
@@ -200,6 +206,11 @@ function Contact() {
                 {status.message}
               </div>
             )}
+            <TurnstileWidget
+              ref={turnstileRef}
+              theme="auto"
+              onTokenChange={setTurnstileToken}
+            />
             <button type="submit" className="submit-button" disabled={sending}>
               <span>{sending ? t('common.sending') : t('contact.sendRequest')}</span>
               <span className="button-icon">→</span>

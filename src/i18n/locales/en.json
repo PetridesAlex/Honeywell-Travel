@@ -71,6 +71,7 @@
   "forms": {
     "success": "Thank you. Your request has been received and our team will contact you shortly.",
     "error": "Something went wrong. Please try again or contact us directly at limassol@honeywelltravel.com.cy.",
+    "turnstileError": "Please complete the security check and try again.",
     "name": "Name",
     "fullName": "Full Name",
     "email": "Email",

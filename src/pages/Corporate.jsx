@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RevealOnScroll from '../components/RevealOnScroll'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import './Corporate.css'
 
@@ -25,7 +26,10 @@ function Corporate() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'error' | null
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('')
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef(null)
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -38,6 +42,7 @@ function Corporate() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setSubmitErrorMessage('')
 
     const message = `Name: ${formData.name}\nCompany: ${formData.companyName}\nEmail: ${formData.email}\nContact: ${formData.contactNumber}\n\nMessage:\n${formData.message}`
 
@@ -49,6 +54,7 @@ function Corporate() {
       destination: formData.companyName,
       message,
       honeypot,
+      turnstileToken,
       extraFields: {
         Company: formData.companyName,
       },
@@ -69,12 +75,15 @@ function Corporate() {
       setSubmitStatus('success')
       setFormData({ name: '', companyName: '', email: '', contactNumber: '', message: '' })
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
       setTimeout(() => {
         setShowQuoteModal(false)
         setSubmitStatus(null)
       }, 2000)
     } else {
       setSubmitStatus('error')
+      setSubmitErrorMessage(formSubmitErrorMessage(result, t))
     }
     setIsSubmitting(false)
   }
@@ -206,9 +215,15 @@ function Corporate() {
 
               {submitStatus === 'error' && (
                 <div className="form-error">
-                  ✗ {t('forms.error')}
+                  ✗ {submitErrorMessage || t('forms.error')}
                 </div>
               )}
+
+              <TurnstileWidget
+                ref={turnstileRef}
+                theme="auto"
+                onTokenChange={setTurnstileToken}
+              />
 
               <div className="form-actions">
                 <button 

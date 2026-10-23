@@ -4,6 +4,11 @@ export const FORM_SUCCESS_MESSAGE =
 export const FORM_ERROR_MESSAGE =
   'Something went wrong. Please try again or contact us directly at limassol@honeywelltravel.com.cy.'
 
+export const FORM_TURNSTILE_ERROR_MESSAGE =
+  'Please complete the security check and try again.'
+
+export const FORM_TURNSTILE_FAILED_CODE = 'turnstile_failed'
+
 export const FORM_TYPES = {
   CONTACT: 'contact',
   OUR_WORLD: 'our_world',

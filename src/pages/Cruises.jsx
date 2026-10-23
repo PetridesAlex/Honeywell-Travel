@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { travelPackages } from '../data/packages'
@@ -6,8 +6,9 @@ import PackageCard from '../components/PackageCard'
 import RevealOnScroll from '../components/RevealOnScroll'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Cruises.css'
 
 const cruisePackagesData = [
@@ -2114,6 +2115,8 @@ function Cruises() {
   const [cruiseEnquirySent, setCruiseEnquirySent] = useState(false)
   const [cruiseEnquiryError, setCruiseEnquiryError] = useState('')
   const [cruiseEnquiryHoneypot, setCruiseEnquiryHoneypot] = useState('')
+  const [cruiseEnquiryTurnstileToken, setCruiseEnquiryTurnstileToken] = useState('')
+  const cruiseEnquiryTurnstileRef = useRef(null)
 
   useEffect(() => {
     if (!selectedCruiseId) return
@@ -2476,6 +2479,7 @@ function Cruises() {
                   destination: cruiseLineLabel,
                   message: messageLines || 'Cruise enquiry',
                   honeypot: cruiseEnquiryHoneypot,
+                  turnstileToken: cruiseEnquiryTurnstileToken,
                   leadData: {
                     full_name: cruiseEnquiryForm.name || 'Not provided',
                     phone: cruiseEnquiryForm.phone || '',
@@ -2493,8 +2497,10 @@ function Cruises() {
                   setCruiseEnquirySent(true)
                   setCruiseEnquiryForm({ cruiseLine: '', name: '', email: '', phone: '', message: '' })
                   setCruiseEnquiryHoneypot('')
+                  setCruiseEnquiryTurnstileToken('')
+                  cruiseEnquiryTurnstileRef.current?.reset()
                 } else {
-                  setCruiseEnquiryError(result.error || t('forms.error'))
+                  setCruiseEnquiryError(formSubmitErrorMessage(result, t))
                 }
                 setCruiseEnquirySending(false)
               }}
@@ -2577,6 +2583,11 @@ function Cruises() {
                   {cruiseEnquiryError}
                 </p>
               ) : null}
+              <TurnstileWidget
+                ref={cruiseEnquiryTurnstileRef}
+                theme="auto"
+                onTokenChange={setCruiseEnquiryTurnstileToken}
+              />
               <button
                 type="submit"
                 className="cruise-package-card-btn cruise-enquiry-submit"

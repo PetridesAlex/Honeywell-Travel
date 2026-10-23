@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SEO from '../components/SEO'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './BuildYourTrip.css'
 
 function ChoiceToggle({ name, value, checked, onChange, children }) {
@@ -17,9 +18,11 @@ function ChoiceToggle({ name, value, checked, onChange, children }) {
 
 function BuildYourTrip() {
   const { t } = useTranslation()
+  const turnstileRef = useRef(null)
   const [sending, setSending] = useState(false)
   const [status, setStatus] = useState(null)
   const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
   const [form, setForm] = useState({
     destination: '',
     hotelPreference: '',
@@ -110,6 +113,7 @@ function BuildYourTrip() {
       passengers: form.travelers || '',
       message: messageBody,
       honeypot,
+      turnstileToken,
       extraFields: {
         [t('buildYourTrip.messageHotel')]: form.hotelPreference || '—',
         [t('buildYourTrip.messageRentCar')]: form.rentCar || '—',
@@ -146,8 +150,10 @@ function BuildYourTrip() {
         message: '',
       })
       setHoneypot('')
+      setTurnstileToken('')
+      turnstileRef.current?.reset()
     } else {
-      setStatus({ type: 'error', message: result.error || t('forms.error') })
+      setStatus({ type: 'error', message: formSubmitErrorMessage(result, t) })
     }
     setSending(false)
   }
@@ -426,6 +432,12 @@ function BuildYourTrip() {
                   {status.message}
                 </div>
               )}
+
+              <TurnstileWidget
+                ref={turnstileRef}
+                theme="auto"
+                onTokenChange={setTurnstileToken}
+              />
 
               <div className="bytp-submit-wrap">
                 <button type="submit" className="bytp-submit" disabled={sending}>

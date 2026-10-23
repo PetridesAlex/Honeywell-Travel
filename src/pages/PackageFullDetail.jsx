@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect, useMemo, useId } from 'react'
+import { useState, useEffect, useMemo, useId, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Headphones, Mail, MapPin, Phone, Plane, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { getPackageById } from '../data/packages'
@@ -16,8 +16,9 @@ import {
   sortDepartureDateStrings,
 } from '../utils/packageDepartureDates'
 import HoneypotField from '../components/HoneypotField'
+import TurnstileWidget from '../components/TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, FORM_SUCCESS_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { FORM_ERROR_MESSAGE, formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import SEO from '../components/SEO'
 import FavoriteToggleButton from '../components/FavoriteToggleButton'
 import PackageBrochureCard from '../components/PackageBrochureCard'
@@ -964,6 +965,8 @@ function PackageFullDetail() {
   const [reserveSending, setReserveSending] = useState(false)
   const [reserveToast, setReserveToast] = useState(null) // { type: 'success' | 'error', message }
   const [reserveHoneypot, setReserveHoneypot] = useState('')
+  const [reserveTurnstileToken, setReserveTurnstileToken] = useState('')
+  const reserveTurnstileRef = useRef(null)
   const [selectedDepartureFilter, setSelectedDepartureFilter] = useState('')
   const [selectedHotelFilter, setSelectedHotelFilter] = useState('')
   const [relatedTours, setRelatedTours] = useState([])
@@ -2646,6 +2649,7 @@ This reservation request was submitted through the Honeywell Travel website.
                         passengers: peopleStr,
                         message: emailBody,
                         honeypot: reserveHoneypot,
+                        turnstileToken: reserveTurnstileToken,
                         extraFields: {
                           Hotel: reserveFormData.hotelName,
                           'Room type': selection.roomType,
@@ -2668,6 +2672,8 @@ This reservation request was submitted through the Honeywell Travel website.
                         setReserveToast({ type: 'success', message: result.message })
                         setShowReserveModal(false)
                         setReserveHoneypot('')
+                        setReserveTurnstileToken('')
+                        reserveTurnstileRef.current?.reset()
                         setReserveFormData({
                           name: '',
                           email: '',
@@ -2685,7 +2691,7 @@ This reservation request was submitted through the Honeywell Travel website.
                       } else {
                         setReserveToast({
                           type: 'error',
-                          message: result.error || FORM_ERROR_MESSAGE,
+                          message: formSubmitErrorMessage(result, t) || FORM_ERROR_MESSAGE,
                         })
                       }
                       setReserveSending(false)
@@ -2727,6 +2733,12 @@ This reservation request was submitted through the Honeywell Travel website.
                         placeholder={t('forms.emailPlaceholder')}
                       />
                     </div>
+
+                    <TurnstileWidget
+                      ref={reserveTurnstileRef}
+                      theme="auto"
+                      onTokenChange={setReserveTurnstileToken}
+                    />
 
                     <button type="submit" className="submit-reservation-btn" disabled={reserveSending}>
                       {reserveSending ? t('common.sending') : t('package.sendReservation')}

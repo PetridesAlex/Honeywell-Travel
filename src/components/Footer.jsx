@@ -1,17 +1,20 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import HoneypotField from './HoneypotField'
+import TurnstileWidget from './TurnstileWidget'
 import { FORM_TYPES } from '../lib/formConstants'
-import { FORM_ERROR_MESSAGE, submitWebsiteForm } from '../lib/submitWebsiteForm'
+import { formSubmitErrorMessage, submitWebsiteForm } from '../lib/submitWebsiteForm'
 import './Footer.css'
 
 function Footer() {
   const { t } = useTranslation()
+  const turnstileRef = useRef(null)
   const [phoneRevealed, setPhoneRevealed] = useState(false)
   const [newsletterStatus, setNewsletterStatus] = useState(null)
   const [newsletterSending, setNewsletterSending] = useState(false)
   const [newsletterHoneypot, setNewsletterHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   return (
     <footer className="footer">
@@ -143,6 +146,7 @@ function Footer() {
                 email,
                 message,
                 honeypot: newsletterHoneypot,
+                turnstileToken,
                 extraFields: {
                   'Agreed to terms': agreed,
                 },
@@ -152,8 +156,13 @@ function Footer() {
                 setNewsletterStatus({ type: 'success', message: result.message })
                 e.target.reset()
                 setNewsletterHoneypot('')
+                setTurnstileToken('')
+                turnstileRef.current?.reset()
               } else {
-                setNewsletterStatus({ type: 'error', message: result.error || FORM_ERROR_MESSAGE })
+                setNewsletterStatus({
+                  type: 'error',
+                  message: formSubmitErrorMessage(result, t),
+                })
               }
               setNewsletterSending(false)
             }}
@@ -170,6 +179,11 @@ function Footer() {
                 {newsletterStatus.message}
               </p>
             )}
+            <TurnstileWidget
+              ref={turnstileRef}
+              theme="dark"
+              onTokenChange={setTurnstileToken}
+            />
             <button type="submit" className="newsletter-button" disabled={newsletterSending}>
               {newsletterSending ? t('footer.subscribing') : t('footer.subscribe')}
             </button>
