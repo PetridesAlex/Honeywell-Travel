@@ -46,18 +46,7 @@ function HeaderUtilityControls() {
 }
 
 import FavoritesPanel from './FavoritesPanel'
-import { categoryToSlug, getCategoryLabel, getHoneymoonLabel } from '../utils/categoryI18n'
-
-/** Desktop vs mobile Holiday Types link modifiers for featured rows. */
-const holidayTypesLinkClass = (item, mode) => {
-  const base = mode === 'mobile' ? 'mobile-dropdown-item' : 'dropdown-item'
-  if (item === 'Exotic Packages' || item === 'Mary Specials Trips') return `${base} ${base}--exotic-premium`
-  if (item === 'Autumn Packages') return `${base} ${base}--autumn-premium`
-  if (item === 'Music & Sports') return `${base} ${base}--music-premium`
-  if (item === 'Christmas Packages') return `${base} ${base}--christmas-premium`
-  if (item === 'Christmas Markets') return `${base} ${base}--christmas-premium`
-  return `${base} ${base}--holiday-caps`
-}
+import { getHoneymoonLabel } from '../utils/categoryI18n'
 
 const TRAVEL_QUOTE_INTERVAL_MS = 5500
 const TRAVEL_QUOTE_FADE_MS = 450
@@ -127,22 +116,6 @@ function Header() {
   const [mobileMenuTop, setMobileMenuTop] = useState(103)
   const headerRef = useRef(null)
   const mobileMenuBodyRef = useRef(null)
-
-  const holidayTypes = [
-    'Autumn Packages',
-    'Exotic Packages',
-    'Christmas Packages',
-    'Christmas Markets',
-    'Music & Sports',
-    'Mary Specials Trips',
-    'Summer Packages',
-    'Summer Packages to Greece',
-    'Easter Packages',
-    'Winter Packages',
-    'Green Monday Packages',
-    'Cruises',
-    'City Breaks'
-  ]
 
   const honeymoonTypes = [
     'Honeymoon Trips',
@@ -364,38 +337,10 @@ function Header() {
 
         <nav className="nav" aria-label="Main navigation">
           <Link to="/ourworld/" className="nav-link">{t('header.ourWorld')}</Link>
-          
-          <div 
-            className="nav-dropdown"
-            onMouseEnter={() => handleDropdownEnter('holiday')}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <span className="nav-link dropdown-trigger">
-              {t('header.holidayTypes')}
-              <span className="dropdown-arrow">▼</span>
-            </span>
-            {activeDropdown === 'holiday' && (
-              <div className="dropdown-menu" onMouseEnter={() => handleDropdownEnter('holiday')} onMouseLeave={handleDropdownLeave}>
-                <div className="dropdown-arrow-top"></div>
-                {holidayTypes.map((item, index) => (
-                  <Link 
-                    key={index} 
-                    to={item === 'Cruises' ? '/cruises/' : `/tour-category/${categoryToSlug(item)}/`}
-                    className={holidayTypesLinkClass(item, 'desktop')}
-                    onClick={() => {
-                      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-                      if (document.documentElement) document.documentElement.scrollTop = 0
-                      if (document.body) document.body.scrollTop = 0
-                      setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0)
-                    }}
-                  >
-                    <span className="dropdown-item-icon">→</span>
-                    {getCategoryLabel(item, t)}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          <Link to="/travel-packages" className="nav-link nav-link-packages">
+            <span className="nav-link-packages-icon" aria-hidden="true">✦</span>
+            <span className="nav-link-packages-text">{t('header.travelPackages')}</span>
+          </Link>
 
           <div 
             className="nav-dropdown"
@@ -584,37 +529,15 @@ function Header() {
                   <span className="mobile-cruises-cta-arrow">→</span>
                 </Link>
                 <Link to="/ourworld/" className="mobile-link" onClick={closeMobileMenu}>{t('header.ourWorld')}</Link>
-
-                <div className="mobile-dropdown">
-                  <button
-                    className="mobile-link mobile-dropdown-trigger"
-                    onClick={() => toggleMobileDropdown('holiday')}
-                  >
-                    {t('header.holidayTypes')}
-                    <span className="mobile-dropdown-arrow">{activeMobileDropdown === 'holiday' ? '▲' : '▼'}</span>
-                  </button>
-                  {activeMobileDropdown === 'holiday' && (
-                    <div className="mobile-dropdown-menu">
-                      {holidayTypes.map((item, index) => (
-                        <Link
-                          key={index}
-                          to={item === 'Cruises' ? '/cruises/' : `/tour-category/${categoryToSlug(item)}/`}
-                          className={holidayTypesLinkClass(item, 'mobile')}
-                          onClick={() => {
-                            window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-                            if (document.documentElement) document.documentElement.scrollTop = 0
-                            if (document.body) document.body.scrollTop = 0
-                            setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0)
-                            closeMobileMenu()
-                          }}
-                        >
-                          <span className="dropdown-item-icon">→</span>
-                          {getCategoryLabel(item, t)}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <Link
+                  to="/travel-packages"
+                  className="mobile-link mobile-link-packages"
+                  onClick={closeMobileMenu}
+                >
+                  <span className="mobile-link-packages-icon" aria-hidden="true">✦</span>
+                  <span>{t('header.travelPackages')}</span>
+                  <span className="mobile-link-packages-arrow" aria-hidden="true">→</span>
+                </Link>
 
                 <div className="mobile-dropdown">
                   <button

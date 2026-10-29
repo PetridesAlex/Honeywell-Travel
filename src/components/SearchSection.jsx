@@ -28,16 +28,12 @@ function SearchSection() {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    const categorySlug = categoryToSlug(category)
     const params = new URLSearchParams()
+    if (category !== 'Any') params.set('category', category)
     if (destination !== 'Any') params.set('destination', destination)
+    if (travelers) params.set('travelers', travelers)
     const queryString = params.toString()
-
-    if (categorySlug) {
-      navigate(`/tour-category/${categorySlug}/${queryString ? `?${queryString}` : ''}`)
-    } else {
-      navigate(queryString ? `/packages?${queryString}` : '/packages')
-    }
+    navigate(queryString ? `/travel-packages?${queryString}` : '/travel-packages')
   }
 
   const getCategorySlug = (cat) => categoryToSlug(cat)

@@ -14,6 +14,7 @@ import Blog from './pages/Blog'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import Packages from './pages/Packages'
+import TravelPackages from './pages/travel-packages/TravelPackages'
 import AddPackage from './pages/AddPackage'
 import PackageDetail from './pages/PackageDetail'
 import PackageFullDetail from './pages/PackageFullDetail'
@@ -142,6 +143,8 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/contact/" element={<Contact />} />
           <Route path="/packages" element={<Packages />} />
+          <Route path="/travel-packages" element={<TravelPackages />} />
+          <Route path="/travel-packages/" element={<TravelPackages />} />
           <Route path="/tour-category/cruises" element={<Cruises />} />
           <Route path="/tour-category/cruises/" element={<Cruises />} />
           <Route path="/tour-category/:slug" element={<Packages />} />
