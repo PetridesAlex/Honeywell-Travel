@@ -1,20 +1,11 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://www.honeywelltravel.com.cy/sitemap.xml
-
-# Disallow admin/private pages if any
-Disallow: /add-package
+# Private and unfinished pages
 Disallow: /admin
+Disallow: /add-package
+Disallow: /car-hire
+Disallow: /insurance
 
-# Allow all other pages
-Allow: /
-Allow: /packages
-Allow: /tour-category/
-Allow: /honeymoon-trips
-Allow: /our-services
-Allow: /contact
-Allow: /our-blog
-Allow: /honeywell-travel-gallery
-Allow: /ourworld
+# Sitemap
+Sitemap: https://www.honeywelltravel.com.cy/sitemap.xml

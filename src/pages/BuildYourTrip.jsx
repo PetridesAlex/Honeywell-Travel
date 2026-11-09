@@ -164,6 +164,7 @@ function BuildYourTrip() {
         title={t('buildYourTrip.seoTitle')}
         description={t('buildYourTrip.seoDescription')}
         keywords={t('buildYourTrip.seoKeywords')}
+        url="https://www.honeywelltravel.com.cy/build-your-trip"
       />
       <div className="build-your-trip-page">
         <div className="bytp-hero">

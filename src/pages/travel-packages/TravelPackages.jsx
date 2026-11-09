@@ -112,6 +112,7 @@ function TravelPackages() {
       <SEO
         title={t('travelPackages.seoTitle')}
         description={t('travelPackages.seoDescription')}
+        url="https://www.honeywelltravel.com.cy/travel-packages"
       />
 
       <header className="tp-intro">

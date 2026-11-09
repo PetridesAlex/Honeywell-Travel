@@ -304,6 +304,7 @@ function HoneymoonTrips() {
         title={t('honeymoon.seoTitle')}
         description={t('honeymoon.seoDescription')}
         keywords={t('honeymoon.seoKeywords')}
+        url="https://www.honeywelltravel.com.cy/honeymoon-trips"
       />
       <div className="honeymoon-trips-page">
       {/* Hero */}

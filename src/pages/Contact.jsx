@@ -72,6 +72,7 @@ function Contact() {
         title="Contact Us - Honeywell Travel | Limassol & Nicosia, Cyprus"
         description="Get in touch with Honeywell Travel. Visit our offices in Limassol or Nicosia, call +357 25828848, or email info@honeywelltravel.com.cy. We're here to help plan your perfect getaway."
         keywords="Contact Honeywell Travel, Travel Agency Limassol, Travel Agency Nicosia, Cyprus Travel Contact"
+        url="https://www.honeywelltravel.com.cy/contact"
       />
       <div className="contact-page">
       <div className="contact-hero">
