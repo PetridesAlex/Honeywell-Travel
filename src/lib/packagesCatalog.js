@@ -138,7 +138,7 @@ export async function loadMergedPackages({ force = false } = {}) {
     const staticList = staticVisiblePackages()
 
     // Temporarily force static data to bypass CMS cache issues
-    // TODO: Remove this after CMS is updated with Christmas Markets category
+    // TODO: Re-enable CMS merge once published packages are ready for the new catalogue season
     cache = staticList
     cacheAt = Date.now()
     return cache

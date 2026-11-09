@@ -4,7 +4,12 @@ import { ArrowRight } from 'lucide-react'
 import { packageCardImageUrl } from '../../utils/packageCardImage'
 import { localizePackage } from '../../utils/packageTranslations'
 import { translatePackageDuration } from '../../utils/packageTitleI18n'
-import { getCategoryLabel, getDestinationLabel } from '../../utils/categoryI18n'
+import {
+  getCategoryIcon,
+  getCategoryLabel,
+  getDestinationFlag,
+  getDestinationLabel,
+} from '../../utils/categoryI18n'
 import { getPackageLeadPrice } from '../../utils/packageLeadPrice'
 import { getPackageDepartureDatesFromPkg } from '../../utils/packageDepartureDates'
 import { getPackageDepartureCity } from '../../pages/travel-packages/travelPackageFilters'
@@ -30,6 +35,8 @@ function PackageCard({ pkg, view = 'grid' }) {
     dateCount === 1
       ? t('travelPackages.departuresCountOne', { count: dateCount })
       : t('travelPackages.departuresCountMany', { count: dateCount })
+  const categoryIcon = getCategoryIcon(pkg.category)
+  const destinationFlag = getDestinationFlag(pkg.destination)
 
   return (
     <Link
@@ -58,6 +65,21 @@ function PackageCard({ pkg, view = 'grid' }) {
 
       <div className="tp-card__body">
         <div className="tp-card__top">
+          <div className="tp-card__flags" aria-hidden="true">
+            {categoryIcon ? (
+              <span className="tp-card__flag tp-card__flag--type" title={getCategoryLabel(pkg.category, t)}>
+                {categoryIcon}
+              </span>
+            ) : null}
+            {destinationFlag ? (
+              <span
+                className="tp-card__flag tp-card__flag--destination"
+                title={getDestinationLabel(pkg.destination, t)}
+              >
+                {destinationFlag}
+              </span>
+            ) : null}
+          </div>
           <p className="tp-card__meta">
             <span className="tp-card__category">{getCategoryLabel(pkg.category, t)}</span>
             {pkg.destination ? (

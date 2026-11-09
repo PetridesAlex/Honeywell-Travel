@@ -201,16 +201,69 @@ function Header() {
     <header ref={headerRef} className={`header${isMobileMenuOpen ? ' header--menu-open' : ''}`}>
       <FavoritesPanel />
       <div className="tagline-bar">
-        <div className="header-autumn-leaves" aria-hidden="true">
-          {Array.from({ length: 14 }, (_, index) => (
+        <div className="header-christmas-snow" aria-hidden="true">
+          {Array.from({ length: 24 }, (_, index) => (
             <span
-              key={`tagline-leaf-${index}`}
-              className={`header-autumn-leaf header-autumn-leaf--${(index % 5) + 1}`}
-              style={{ '--leaf-i': index }}
+              key={`tagline-flake-${index}`}
+              className={`header-christmas-flake header-christmas-flake--${(index % 4) + 1}${index % 4 === 0 ? ' header-christmas-flake--spark' : ''}`}
+              style={{ '--flake-i': index }}
             />
           ))}
         </div>
-        <span className="tagline-brand">Honeywell Travel</span>
+        <span className="tagline-brand">
+          <svg
+            className="tagline-christmas-tree"
+            width="22"
+            height="26"
+            viewBox="0 0 22 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="taglineTreeGreen" x1="11" y1="4" x2="11" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#4ADE80" />
+                <stop offset="0.45" stopColor="#16A34A" />
+                <stop offset="1" stopColor="#14532D" />
+              </linearGradient>
+              <linearGradient id="taglineTreeStar" x1="11" y1="0" x2="11" y2="5.5" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#FEF3C7" />
+                <stop offset="1" stopColor="#F59E0B" />
+              </linearGradient>
+              <filter id="taglineTreeGlow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="0.7" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              d="M11 4.2 L15.8 10.2 H13.9 L17.2 14.4 H14.8 L18.4 19.2 H3.6 L7.2 14.4 H4.8 L8.1 10.2 H6.2 Z"
+              fill="url(#taglineTreeGreen)"
+              filter="url(#taglineTreeGlow)"
+            />
+            <path
+              d="M11 4.2 L15.8 10.2 H13.9 L17.2 14.4 H14.8 L18.4 19.2 H3.6 L7.2 14.4 H4.8 L8.1 10.2 H6.2 Z"
+              fill="none"
+              stroke="rgba(255,255,255,0.22)"
+              strokeWidth="0.5"
+            />
+            <rect x="9.7" y="19.1" width="2.6" height="3.4" rx="0.4" fill="#92400E" />
+            <rect x="9.9" y="19.1" width="0.7" height="3.4" fill="rgba(255,255,255,0.18)" />
+            <path
+              d="M11 0.4 L11.85 2.2 L13.85 2.45 L12.4 3.8 L12.8 5.75 L11 4.8 L9.2 5.75 L9.6 3.8 L8.15 2.45 L10.15 2.2 Z"
+              fill="url(#taglineTreeStar)"
+              filter="url(#taglineTreeGlow)"
+            />
+            <circle cx="8.2" cy="12.1" r="0.85" fill="#F87171" />
+            <circle cx="13.6" cy="13.4" r="0.75" fill="#FBBF24" />
+            <circle cx="10.1" cy="16.2" r="0.7" fill="#60A5FA" />
+            <circle cx="14.4" cy="17.1" r="0.65" fill="#F87171" />
+            <circle cx="7.4" cy="17.6" r="0.6" fill="#FBBF24" />
+          </svg>
+          Honeywell Travel
+        </span>
         <span className="tagline-text">#LivetheExperience</span>
         <div className="tagline-right-controls">
           <div className="tagline-utility-controls">

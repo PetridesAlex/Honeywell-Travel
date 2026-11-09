@@ -28,10 +28,10 @@ function PackageFilters({
     search: true,
     price: true,
     category: true,
-    departure: false,
+    departure: true,
     destination: true,
-    duration: false,
-    season: false,
+    duration: true,
+    season: true,
   })
 
   const toggleSection = (key) => {

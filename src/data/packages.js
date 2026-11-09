@@ -132,6 +132,17 @@ import { gdanskChristmasPackage390Hotels } from './gdanskChristmasPackage390Hote
 import { gdanskChristmasPackage390Program } from './gdanskChristmasPackage390Program.js'
 import { rigaChristmasPackage391Hotels } from './rigaChristmasPackage391Hotels.js'
 import { rigaChristmasPackage391Program } from './rigaChristmasPackage391Program.js'
+import { athensChristmasPackage392Hotels } from './athensChristmasPackage392Hotels.js'
+import { athensChristmasPackage392Program } from './athensChristmasPackage392Program.js'
+import { athensNewYearPackage393Hotels } from './athensNewYearPackage393Hotels.js'
+import { athensNewYearPackage393Program } from './athensNewYearPackage393Program.js'
+import { viennaBudapestDanubePackage394Hotels } from './viennaBudapestDanubePackage394Hotels.js'
+import { viennaBudapestDanubePackage394Program } from './viennaBudapestDanubePackage394Program.js'
+import { munichStuttgartStrasbourgPackage395Hotels } from './munichStuttgartStrasbourgPackage395Hotels.js'
+import { munichStuttgartStrasbourgPackage395Program } from './munichStuttgartStrasbourgPackage395Program.js'
+import { wroclawChristmasPackage396Hotels } from './wroclawChristmasPackage396Hotels.js'
+import { wroclawChristmasPackage396Program } from './wroclawChristmasPackage396Program.js'
+import { springPackagesTopKinisis2027 } from './springPackagesTopKinisis2027.js'
 import { hasUpcomingPackageDepartures } from '../utils/packageDepartureDates.js'
 import { sortPackagesByLeadPriceAsc } from '../utils/packageLeadPrice.js'
 
@@ -24916,13 +24927,14 @@ export const travelPackages = [
     price: 995,
     duration: '4 Μέρες',
     description:
-      'Πρωτοχρονιά 4 ημερών στο Παρίσι από Λάρνακα με Cyprus Airways: πανοραμική ξενάγηση, Λούβρο, Μονμάρτη, Sacré-Cœur και κρουαζιέρα στον Σηκουάνα. Αναχώρηση 01/01. Διαθέσιμο σε ζήτηση.',
+      'Πρωτοχρονιά 4 ημερών στο Παρίσι από Λάρνακα με Cyprus Airways: πανοραμική ξενάγηση, Λούβρο, Μονμάρτη, Sacré-Cœur και κρουαζιέρα στον Σηκουάνα. Αναχώρηση 01/01.',
     longDescription:
-      'Υποδεχθείτε τη νέα χρονιά στην Πόλη του Φωτός. Διαμονή 3 βράδια σε ξενοδοχείο 4* με πρόγευμα, είσοδος στο Λούβρο, μίνι κρουαζιέρα στον Σηκουάνα και ξεναγήσεις όπως στο πρόγραμμα. Απευθείας πτήσεις Cyprus Airways Λάρνακα – Παρίσι – Λάρνακα. Διαθέσιμο σε ζήτηση.',
+      'Υποδεχθείτε τη νέα χρονιά στην Πόλη του Φωτός. Διαμονή 3 βράδια σε Novotel La Defense 4* με πρόγευμα, είσοδος στο Λούβρο, μίνι κρουαζιέρα στον Σηκουάνα και ξεναγήσεις όπως στο πρόγραμμα. Απευθείας πτήσεις Cyprus Airways Λάρνακα – Παρίσι – Λάρνακα.',
     image: '🇫🇷🎆',
     featured: true,
     packageType: 'group',
     details: {
+      codeUpdatedAt: '2026-11-09T11:15:00+02:00',
       departureDate: '01/01',
       departureYear: 2027,
       departureDates: ['01/01'],
@@ -24935,8 +24947,7 @@ export const travelPackages = [
       includedLuggage: 'Μια αποσκευή 23 κιλών και μια χειραποσκευή 10 κιλών',
       coverImage: '/images/christmas-packages/paris-luvro-christmas/paris-luvro-cover.webp',
       thumbnailImage: '/images/christmas-packages/paris-luvro-christmas/paris-luvro-thumb.webp',
-      note: 'Αναχώρηση: 01/01 από Λάρνακα με Cyprus Airways · Επιστροφή: 04/01 · Διαμονή 3 νύχτες σε ξενοδοχείο 4* με πρωινό · Διαθέσιμο σε ζήτηση\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
-      availabilityNote: 'Διαθέσιμο σε ζήτηση',
+      note: 'Αναχώρηση: 01/01 από Λάρνακα με Cyprus Airways · Επιστροφή: 04/01 · Διαμονή 3 νύχτες σε Novotel La Defense 4* με πρωινό · Είσοδος στο Λούβρο και μίνι κρουαζιέρα στον Σηκουάνα\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
       flights: [
         {
           direction: 'Departure',
@@ -25981,15 +25992,16 @@ export const travelPackages = [
     destination: 'Germany',
     category: 'Christmas Packages',
     price: 1059,
-    duration: '5 days / 4 nights',
+    duration: '5 Μέρες',
     description:
       'Μαγευτικό ταξίδι 5 ημερών στο Μόναχο και τις Αυστριακές Άλπεις. Ξενάγηση στο Μόναχο, εκδρομή στο Σάλτσμπουργκ, Swarovski Kristallwelten και Ίνσμπρουκ. Αναχωρήσεις 27/12, 30/12.',
     longDescription:
-      'Υποδεχθείτε τη νέα χρονιά στη Βαυαρική πρωτεύουσα. Ξενάγηση στο Μόναχο, ολοήμερη εκδρομή στο Σάλτσμπουργκ, επίσκεψη στους Swarovski Kristallwelten και περιήγηση στο Ίνσμπρουκ στις Αυστριακές Άλπεις. Διαμονή σε 4* ξενοδοχείο στο Μόναχο με πρωινό.',
+      'Υποδεχθείτε τη νέα χρονιά στη Βαυαρική πρωτεύουσα. Ξενάγηση στο Μόναχο, ολοήμερη εκδρομή στο Σάλτσμπουργκ, επίσκεψη στους Swarovski Kristallwelten και περιήγηση στο Ίνσμπρουκ στις Αυστριακές Άλπεις. Διαμονή 4 νύχτες σε Holiday Inn Munich City Centre 4* ή παρόμοιο με πρωινό.',
     image: '🇩🇪🇦🇹🎄',
     featured: true,
     packageType: 'group',
     details: {
+      codeUpdatedAt: '2026-11-09T11:20:00+02:00',
       departureDate: '27/12',
       departureDates: ['27/12', '30/12'],
       departureFrom: 'Larnaca',
@@ -26001,7 +26013,7 @@ export const travelPackages = [
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
       coverImage: '/images/christmas-packages/munich-afstriakes-alpis/munich-austrian-christmas-cover.webp',
       thumbnailImage: '/images/christmas-packages/munich-afstriakes-alpis/munich-austrian-thumb.webp',
-      note: 'Αναχωρήσεις: 27/12 (Cyprus Airways), 30/12 (Discover Airlines) από Λάρνακα · Διαμονή 4 νύχτες στο Μόναχο με πρωινό · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      note: 'Αναχωρήσεις: 27/12 (Cyprus Airways CY 371/372), 30/12 (Discover Airlines LH 4587/4586) από Λάρνακα · Επιστροφές: 31/12, 03/01 · Διαμονή 4 νύχτες σε Holiday Inn Munich City Centre 4* ή παρόμοιο με πρόγευμα · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
       flights: [
         {
           direction: 'Departure',
@@ -26128,16 +26140,17 @@ export const travelPackages = [
     title: 'ΜΑΓΙΚΑ ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΗΝ ΑΛΣΑΤΙΑ',
     destination: 'France',
     category: 'Christmas Packages',
-    price: 1269,
-    duration: '6 days / 5 nights',
+    price: 1259,
+    duration: '6 Μέρες',
     description:
       'Μαγικά Χριστούγεννα στην Αλσατία με επίσκεψη στο Στρασβούργο, Κολμάρ, Μέλανα Δρυμό, Μπάντεν-Μπάντεν και Ζυρίχη. Αναχώρηση 23/12.',
     longDescription:
-      'Υποδεχθείτε τα Χριστούγεννα στην Πρωτεύουσα των Χριστουγέννων! Ξενάγηση στο Στρασβούργο και την Παλιά Πόλη UNESCO, εκδρομή στο παραμυθένιο Κολμάρ, επίσκεψη στον Μέλανα Δρυμό και το Μπάντεν-Μπάντεν, και περιήγηση στη Ζυρίχη. Διαμονή 4 νύχτες στο Στρασβούργο και 1 νύχτα στη Ζυρίχη σε 4* ξενοδοχεία με πρωινό.',
+      'Υποδεχθείτε τα Χριστούγεννα στην Πρωτεύουσα των Χριστουγέννων! Ξενάγηση στο Στρασβούργο και την Παλιά Πόλη UNESCO, εκδρομή στο παραμυθένιο Κολμάρ, επίσκεψη στον Μέλανα Δρυμό και το Μπάντεν-Μπάντεν, και περιήγηση στη Ζυρίχη. Διαμονή 4 νύχτες σε Origami Strasbourg 4* και 1 νύχτα σε Mövenpick Zurich Airport 4* με πρωινό.',
     image: '🇫🇷🇨🇭🎄',
     featured: true,
     packageType: 'group',
     details: {
+      codeUpdatedAt: '2026-11-09T11:25:00+02:00',
       departureDate: '23/12',
       departureDates: ['23/12'],
       departureFrom: 'Larnaca',
@@ -26149,7 +26162,7 @@ export const travelPackages = [
       includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
       coverImage: '/images/christmas-packages/alsatia/alsatia-cover.webp',
       thumbnailImage: '/images/christmas-packages/alsatia/alsatia-thumbnail.webp',
-      note: 'Αναχώρηση: 23/12 από Λάρνακα με SWISS (Edelweiss Air) · Διαμονή 4 νύχτες στο Στρασβούργο και 1 νύχτα στη Ζυρίχη · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΣτο Στρασβούργο δεν διατίθενται τρίκλινα δωμάτια ή δίκλινα δωμάτια με επιπλέον κρεβάτι. Για οικογένεια 2 ενηλίκων και 1 παιδιού θα παρέχεται ένα δίκλινο και ένα μονόκλινο δωμάτιο χωρίς επιπλέον χρέωση.\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      note: 'Αναχώρηση: 23/12 από Λάρνακα με SWISS / Edelweiss Air (LX 8371) · Επιστροφή: 28/12 (LX 8370) · Διαμονή: Origami Strasbourg 4* (4 νύχτες) + Mövenpick Zurich Airport 4* (1 νύχτα) με πρόγευμα · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΣτο Στρασβούργο δεν διατίθενται τρίκλινα δωμάτια ή δίκλινα δωμάτια με επιπλέον κρεβάτι. Για οικογένεια 2 ενηλίκων και 1 παιδιού θα παρέχεται ένα δίκλινο και ένα μονόκλινο δωμάτιο χωρίς επιπλέον χρέωση.\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
       flights: [
         {
           direction: 'Departure',
@@ -27485,12 +27498,609 @@ export const travelPackages = [
         '/images/christmas-packages/riga-package-christmas/hilton-garden-inn-riga-old-town.webp'
       ]
     }
-  }
+  },
+  // Top Kinisis Christmas 2026 — details filled package-by-package
+  {
+    id: 392,
+    title: 'ΧΡΙΣΤΟΥΓΕΝΝΑ ΣΤΗΝ ΑΘΗΝΑ',
+    destination: 'Greece',
+    category: 'Christmas Packages',
+    price: 469,
+    duration: '4 Μέρες',
+    description:
+      'Χριστούγεννα 4 ημερών στην Αθήνα από Λάρνακα με Aegean: 3 διανυκτερεύσεις με πρόγευμα, μεταφορές αεροδρομίου και επιλογή ξενοδοχείου. Αναχώρηση 26/12.',
+    longDescription:
+      'Ζήστε τις πιο μαγευτικές μέρες του χρόνου στην Αθήνα. Διαμονή 3 νύχτες σε επιλεγμένο ξενοδοχείο με πρόγευμα, αεροπορικά εισιτήρια Λάρνακα – Αθήνα – Λάρνακα με Aegean και μεταφορές από/προς το αεροδρόμιο. Αναχώρηση 26/12.',
+    image: '🇬🇷🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-11-09T10:52:00+02:00',
+      departureDate: '26/12',
+      departureDates: ['26/12'],
+      departureYear: 2026,
+      departureFrom: 'Larnaca',
+      destinationFull: 'Athens – Greece',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Aegean Airlines',
+      includedLuggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/athens-christmas/athens-christmas-hero.webp',
+      thumbnailImage: '/images/christmas-packages/athens-christmas/athens-christmas-thumb.webp',
+      note: 'Αναχώρηση: 26/12 από Λάρνακα με Aegean · Επιστροφή: 29/12 · Διαμονή 3 νύχτες με πρωινό · Περιλαμβάνονται μεταφορές από και προς το αεροδρόμιο\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '26/12',
+          route: 'Larnaca (LCA) → Athens (ATH)',
+          luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '10:15',
+              toCode: 'ATH',
+              toName: 'Athens International Airport',
+              toCity: 'Athens, Greece',
+              arrive: '12:00',
+              flight: 'Aegean',
+              luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+            },
+          ],
+        },
+        {
+          direction: 'Return',
+          date: '29/12',
+          route: 'Athens (ATH) → Larnaca (LCA)',
+          luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens International Airport',
+              fromCity: 'Athens, Greece',
+              depart: '15:50',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '17:30',
+              flight: 'Aegean',
+              luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+            },
+          ],
+        },
+      ],
+      hotels: athensChristmasPackage392Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Αθήνα – Λάρνακα με πτήσεις της Aegean.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        '3 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Μεταφορές από και προς το αεροδρόμιο.',
+        'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.',
+      ],
+      notIncluded: [
+        'Τοπικός φόρος διαμονής (πληρώνεται στο ξενοδοχείο).',
+      ],
+      notes: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωσης των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.',
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωσης των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.',
+      ],
+      itinerary: [],
+      program: athensChristmasPackage392Program,
+      gallery: [
+        '/images/christmas-packages/athens-christmas/athens-christmas-hero.webp',
+        '/images/christmas-packages/athens-christmas/athens-christmas-thumb.webp',
+        '/images/christmas-packages/athens-christmas/the-alassia-hotel.webp',
+        '/images/christmas-packages/athens-christmas/the-stanley-hotel.webp',
+        '/images/christmas-packages/athens-christmas/athens-cypria-hotel.webp',
+        '/images/christmas-packages/athens-christmas/central-hotel.webp',
+        '/images/christmas-packages/athens-christmas/metis-urbane-living.webp',
+        '/images/christmas-packages/athens-christmas/amalia-hotel.webp',
+        '/images/christmas-packages/athens-christmas/electra-rhythm-hotel.webp',
+        '/images/christmas-packages/athens-christmas/elia-ermou-hotel.webp',
+        '/images/christmas-packages/athens-christmas/new-hotel.webp',
+        '/images/christmas-packages/athens-christmas/electra-metropolis-hotel.webp',
+      ],
+    },
+  },
+  {
+    id: 393,
+    title: 'ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΗΝ ΑΘΗΝΑ',
+    destination: 'Greece',
+    category: 'Christmas Packages',
+    price: 529,
+    duration: '5 Μέρες',
+    description:
+      'Πρωτοχρονιά 5 ημερών στην Αθήνα από Λάρνακα με Sky Express: 4 διανυκτερεύσεις με πρόγευμα, μεταφορές αεροδρομίου και επιλογή ξενοδοχείου. Αναχώρηση 30/12.',
+    longDescription:
+      'Υποδεχθείτε τη νέα χρονιά στην Αθήνα. Διαμονή 4 νύχτες σε επιλεγμένο ξενοδοχείο με πρόγευμα, αεροπορικά εισιτήρια Λάρνακα – Αθήνα – Λάρνακα με Sky Express και μεταφορές από/προς το αεροδρόμιο. Αναχώρηση 30/12.',
+    image: '🇬🇷🎆',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-11-09T11:35:00+02:00',
+      departureDate: '30/12',
+      departureDates: ['30/12'],
+      departureYear: 2026,
+      departureFrom: 'Larnaca',
+      destinationFull: 'Athens – Greece',
+      monthAvailability: 'December, January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Sky Express',
+      includedLuggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/athens-new-year/athens-new-year-hero.webp',
+      thumbnailImage: '/images/christmas-packages/athens-new-year/athens-new-year-thumb.webp',
+      note: 'Αναχώρηση: 30/12 από Λάρνακα με Sky Express · Επιστροφή: 03/01 · Διαμονή 4 νύχτες με πρωινό · Περιλαμβάνονται μεταφορές από και προς το αεροδρόμιο\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '30/12',
+          route: 'Larnaca (LCA) → Athens (ATH)',
+          luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '07:15',
+              toCode: 'ATH',
+              toName: 'Athens Int E Venizelos',
+              toCity: 'Athens, Greece',
+              arrive: '09:00',
+              flight: 'GQ 607',
+              luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+            },
+          ],
+        },
+        {
+          direction: 'Return',
+          date: '03/01',
+          route: 'Athens (ATH) → Larnaca (LCA)',
+          luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'ATH',
+              fromName: 'Athens Int E Venizelos',
+              fromCity: 'Athens, Greece',
+              depart: '22:10',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '23:50',
+              flight: 'GQ 606',
+              luggage: 'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών',
+            },
+          ],
+        },
+      ],
+      hotels: athensNewYearPackage393Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα – Αθήνα – Λάρνακα με πτήσεις της Sky Express.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        '4 διανυκτερεύσεις σε ένα από τα πάνω ξενοδοχεία με πρόγευμα.',
+        'Μεταφορές από και προς το αεροδρόμιο.',
+        'Μία αποσκευή 20 κιλών και μία χειραποσκευή 8 κιλών.',
+        'Υπηρεσίες των αντιπροσώπων μας.',
+      ],
+      notIncluded: [
+        'Τοπικός φόρος διαμονής (πληρώνεται στο ξενοδοχείο).',
+      ],
+      notes: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωσης των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.',
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Υπάρχει δυνατότητα ακύρωσης των ταξιδιωτικών πακέτων βάσει των όρων και κανονισμών.',
+      ],
+      itinerary: [],
+      program: athensNewYearPackage393Program,
+      gallery: [
+        '/images/christmas-packages/athens-new-year/athens-new-year-hero.webp',
+        '/images/christmas-packages/athens-new-year/athens-new-year-thumb.webp',
+        '/images/christmas-packages/athens-new-year/titania-hotel.webp',
+        '/images/christmas-packages/athens-new-year/arethusa-hotel.webp',
+        '/images/christmas-packages/athens-new-year/metis-urbane-living.webp',
+        '/images/christmas-packages/athens-new-year/central-hotel.webp',
+        '/images/christmas-packages/athens-new-year/classic-athens-prime.webp',
+        '/images/christmas-packages/athens-new-year/elia-ermou-hotel.webp',
+        '/images/christmas-packages/athens-new-year/athens-capital-center.webp',
+      ],
+    },
+  },
+  {
+    id: 394,
+    title: 'ΒΙΕΝΝΗ / ΒΟΥΔΑΠΕΣΤΗ / ΚΡΟΥΑΖΙΕΡΑ ΔΟΥΝΑΒΗ',
+    destination: 'Austria',
+    category: 'Christmas Packages',
+    price: 959,
+    duration: '5 Μέρες',
+    description:
+      'Χριστουγεννιάτικο ταξίδι 5 ημερών στη Βιέννη με κρουαζιέρα στον Δούναβη, εκδρομή στην κοιλάδα Βαχάου και ημερήσια εκδρομή στη Βουδαπέστη. Αναχωρήσεις 23/12, 26/12, 30/12, 02/01.',
+    longDescription:
+      'Η Βιέννη ντύνεται στα γιορτινά της: πανοραμική περιήγηση, κρουαζιέρα στον Δούναβη, εκδρομή Μέλκ – Ντύρνσταϊν – Κρεμς και επίσκεψη στη Βουδαπέστη. Διαμονή 4 νύχτες σε Citadines South Vienna 4* ή παρόμοιο με πρόγευμα. Πτήσεις Austrian Airlines από Λάρνακα.',
+    image: '🇦🇹🇭🇺🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      codeUpdatedAt: '2026-11-09T11:10:00+02:00',
+      departureDate: '23/12',
+      departureDates: ['23/12', '26/12', '30/12', '02/01/2027'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Vienna, Budapest – Austria & Hungary',
+      monthAvailability: 'December, January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Austrian Airlines',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/vienna-budapest-danube/vienna-budapest-danube-hero.webp',
+      thumbnailImage: '/images/christmas-packages/vienna-budapest-danube/vienna-budapest-danube-thumb.webp',
+      note: 'Αναχωρήσεις: 23/12, 26/12, 30/12, 02/01 από Λάρνακα με Austrian Airlines · Επιστροφές: 27/12, 30/12, 03/01, 06/01 · Διαμονή 4 νύχτες σε Citadines South Vienna 4* ή παρόμοιο με πρόγευμα · Ξενάγηση με ελληνόφωνο ξεναγό · Περιλαμβάνεται κρουαζιέρα στον Δούναβη\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '23/12, 26/12, 30/12, 02/01',
+          route: 'Larnaca (LCA) → Vienna (VIE)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '17:20',
+              toCode: 'VIE',
+              toName: 'Vienna Intl',
+              toCity: 'Vienna, Austria',
+              arrive: '19:40',
+              flight: 'OS 796',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+        {
+          direction: 'Return',
+          date: '27/12, 30/12, 03/01, 06/01',
+          route: 'Vienna (VIE) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'VIE',
+              fromName: 'Vienna Intl',
+              fromCity: 'Vienna, Austria',
+              depart: '12:30',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '16:35',
+              flight: 'OS 795',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+      ],
+      hotels: viennaBudapestDanubePackage394Hotels,
+      included: [
+        'Αεροπορικά εισιτήρια Λάρνακα - Βιέννη - Λάρνακα με Αυστριακές Αερογραμμές',
+        'Φόροι αεροδρομίων και επίναυλος καυσίμων',
+        'Διαμονή για 4 βράδια σε ξενοδοχείο 4* με πρόγευμα',
+        'Ξενάγηση της Βιέννης με επίσημο ελληνόφωνα ξεναγό',
+        'Το εισιτήριο για τη κρουαζιέρα στο Δούναβη.',
+        'Μεταφορές, ξεναγήσεις και περιηγήσεις όπως αναφέρονται στο πρόγραμμα με τοπικό ελληνόφωνα συνοδό',
+        'Μια αποσκευή 23 κιλών και μια χειραποσκευή 8 κιλών',
+        'Υπηρεσίες των αντιπροσώπων μας',
+      ],
+      notIncluded: [
+        'Αχθοφορικά και φιλοδωρήματα.',
+        'Είσοδοι σε μουσεία, μνημεία, ανάκτορα και λοιπά αξιοθέατα.',
+        'Ότι αναγράφεται ως προαιρετικό, προτεινόμενο.',
+      ],
+      notes: [
+        'Ενδέχεται να υπάρξουν αλλαγές στην σειρά του προγράμματος αλλά με παροχή όλων των υπηρεσιών .',
+        'Όλες οι πιο πάνω τιμές ισχύουν για κρατήσεις που θα γίνουν και θα πληρωθούν στο γραφείο μας.',
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+      ],
+      itinerary: [],
+      program: viennaBudapestDanubePackage394Program,
+      gallery: [
+        '/images/christmas-packages/vienna-budapest-danube/vienna-budapest-danube-hero.webp',
+        '/images/christmas-packages/vienna-budapest-danube/vienna-budapest-danube-thumb.webp',
+        '/images/christmas-packages/vienna-budapest-danube/citadines-south-vienna.webp',
+      ],
+    },
+  },
+  {
+    id: 395,
+    title: 'ΜΟΝΑΧΟ / ΣΤΟΥΤΓΑΡΔΗ / ΣΤΡΑΣΒΟΥΡΓΟ',
+    destination: 'Germany',
+    category: 'Christmas Packages',
+    price: 1059,
+    duration: '5 Μέρες',
+    description:
+      'Χριστουγεννιάτικο ταξίδι 5 ημερών στο Μόναχο, τη Στουτγάρδη και το Στρασβούργο. Ξενάγηση στο Μόναχο, περιήγηση στη Στουτγάρδη και ημερήσια εκδρομή στην πρωτεύουσα των Χριστουγέννων. Αναχωρήσεις 23/12, 26/12.',
+    longDescription:
+      'Ανακαλύψτε το γιορτινό Μόναχο, την κομψή Στουτγάρδη και το μαγευτικό Στρασβούργο. Διαμονή 2 νύχτες σε Holiday Inn Munich City Centre 4* ή παρόμοιο και 2 νύχτες σε Hampton by Hilton Stuttgart City Centre 3* με πρόγευμα. Πτήσεις Discover Airlines από Λάρνακα.',
+    image: '🇩🇪🇫🇷🎄',
+    featured: true,
+    packageType: 'group',
+    details: {
+      codeUpdatedAt: '2026-11-09T11:45:00+02:00',
+      departureDate: '23/12',
+      departureDates: ['23/12', '26/12'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Munich, Stuttgart, Strasbourg – Germany & France',
+      monthAvailability: 'December',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Discover Airlines (Lufthansa Group)',
+      includedLuggage: 'Μία αποσκευή 23 κιλών και μία χειραποσκευή 8 κιλών',
+      coverImage: '/images/christmas-packages/munich-stuttgart-strasbourg/munich-stuttgart-strasbourg-hero.webp',
+      thumbnailImage: '/images/christmas-packages/munich-stuttgart-strasbourg/munich-stuttgart-strasbourg-thumb.webp',
+      note: 'Αναχωρήσεις: 23/12, 26/12 από Λάρνακα με Discover Airlines (LH 4587/4586) · Επιστροφές: 27/12, 30/12 · Διαμονή: Μόναχο (2) + Στουτγάρδη (2) με πρόγευμα · Ξενάγηση με ελληνόφωνο αρχηγό/ξεναγό\n\nΟι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '23/12',
+          route: 'Larnaca (LCA) → Munich (MUC)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '17:10',
+              toCode: 'MUC',
+              toName: 'Munich International',
+              toCity: 'Munich, Germany',
+              arrive: '20:00',
+              flight: 'LH 4587',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+        {
+          direction: 'Return',
+          date: '27/12',
+          route: 'Munich (MUC) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'MUC',
+              fromName: 'Munich International',
+              fromCity: 'Munich, Germany',
+              depart: '15:10',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '19:30',
+              flight: 'LH 4586',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+        {
+          direction: 'Departure',
+          date: '26/12',
+          route: 'Larnaca (LCA) → Munich (MUC)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '17:10',
+              toCode: 'MUC',
+              toName: 'Munich International',
+              toCity: 'Munich, Germany',
+              arrive: '20:00',
+              flight: 'LH 4587',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+        {
+          direction: 'Return',
+          date: '30/12',
+          route: 'Munich (MUC) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'MUC',
+              fromName: 'Munich International',
+              fromCity: 'Munich, Germany',
+              depart: '12:00',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '16:20',
+              flight: 'LH 4586',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+      ],
+      hotels: munichStuttgartStrasbourgPackage395Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα – Μόναχο - Λάρνακα με πτήσεις της Discover Airlines, μέλος του Ομίλου Lufthansa.',
+        'Φόροι αεροδρομίων.',
+        'Διαμονή σε ξενοδοχεία 3* και 4* με πρόγευμα.',
+        'Μεταφορές, εκδρομές, περιηγήσεις, ξεναγήσεις όπως αναφέρονται στο πρόγραμμα με πολυτελή πούλμαν.',
+        'Έμπειρος τοπικός Ελληνόφωνος αρχηγός / ξεναγός.',
+        'Μια αποσκευή 23kg και μια χειραποσκευή 8 kg.',
+        'Υπηρεσίες των αντιπροσώπων μας.',
+      ],
+      notIncluded: [
+        'Είσοδοι σε μουσεία και επισκέψιμους χώρους, οι οποίες είναι προαιρετικές.',
+        'Ότι δεν αναφέρεται ρητά στο πρόγραμμα ή αναφέρεται ως προαιρετικό ή προτεινόμενο.',
+      ],
+      notes: [],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 45 ημέρες πριν την ημερομηνία άφιξης, 50 EUR ανά άτομο θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 45 ημέρες και μέχρι 30 ημέρες πριν την ημερομηνία άφιξης, 30 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 30 ημέρες και μέχρι 21 ημέρες πριν την ημερομηνία άφιξης, 50 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 21 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Οι τιμές των ταξιδιωτικών πακέτων δεν αλλάζουν κατά την ώρα της κράτησης τους.',
+        'Με την κράτηση των ταξιδιωτικών πακέτων δίνετε προκαταβολή 30% της αξίας των πακέτων και η εξόφληση τους γίνεται 21 μέρες περίπου πριν την αναχώρηση.',
+        'Ακύρωση συμμετοχής μέχρι 45 μέρες πριν την αναχώρηση, παρακράτηση ποσού 50.00 Ευρώ για λειτουργικά έξοδα.',
+        'Ακύρωση συμμετοχής μεταξύ [44] και [31] μέρες πριν την αναχώρηση, παρακράτηση 30% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής μεταξύ [30] και [21] μέρες πριν την αναχώρηση, παρακράτηση 50% της αξίας του ταξιδιού.',
+        'Ακύρωση συμμετοχής 20 μέρες πριν την αναχώρηση, παρακράτηση όλου του ποσού.',
+        'Για τα μέσα ολικής ναύλωσης (charter), κρουαζιέρες , σκι, εκθέσεις, συνέδρια και παρεμφερείς διεθνείς εκδηλώσεις, τα ακυρωτικά φθάνουν μέχρι 100% της αξίας τους ασχέτως της ημερομηνίας γνωστοποίησης της ακύρωσης.',
+      ],
+      itinerary: [],
+      program: munichStuttgartStrasbourgPackage395Program,
+      gallery: [
+        '/images/christmas-packages/munich-stuttgart-strasbourg/munich-stuttgart-strasbourg-hero.webp',
+        '/images/christmas-packages/munich-stuttgart-strasbourg/munich-stuttgart-strasbourg-thumb.webp',
+        '/images/christmas-packages/munich-afstriakes-alpis/munich-hotel.webp',
+      ],
+    },
+  },
+  {
+    id: 396,
+    title: 'ΓΙΟΡΤΙΝΗ ΑΠΟΔΡΑΣΗ ΣΤΟ ΒΡΟΤΣΛΑΒ',
+    destination: 'Poland',
+    category: 'Christmas Markets',
+    price: 459,
+    duration: '4 Μέρες',
+    description:
+      'Γιορτινή απόδραση 4 ημερών στο Βρότσλαβ από Λάρνακα με Wizz Air: χριστουγεννιάτικη αγορά στην πλατεία Rynek, παλιά πόλη και διαμονή Bed & Breakfast. Αναχωρήσεις 05/12, 19/12, 02/01.',
+    longDescription:
+      'Ζήστε τη μαγεία των γιορτών στο Βρότσλαβ. Διαμονή 3 νύχτες σε Wyndham Wroclaw Old Town 4* ή DoubleTree by Hilton Wroclaw 5* με πρόγευμα. Χριστουγεννιάτικη αγορά στο Rynek, λιθόστρωτα σοκάκια και οι διάσημοι νάνοι της πόλης.',
+    image: '🇵🇱🎄',
+    featured: true,
+    packageType: 'individual',
+    details: {
+      codeUpdatedAt: '2026-11-09T12:05:00+02:00',
+      departureDate: '05/12',
+      departureDates: ['05/12', '19/12', '02/01/2027'],
+      departureFrom: 'Larnaca',
+      destinationFull: 'Wroclaw – Poland',
+      monthAvailability: 'December, January',
+      roomType: 'Standard Room',
+      boardBasis: 'Bed & Breakfast',
+      airline: 'Wizz Air',
+      includedLuggage: 'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο',
+      coverImage: '/images/christmas-packages/wroclaw-christmas/wroclaw-christmas-hero.webp',
+      thumbnailImage: '/images/christmas-packages/wroclaw-christmas/wroclaw-christmas-thumb.webp',
+      note: 'Αναχωρήσεις: 05/12, 19/12, 02/01 από Λάρνακα με Wizz Air · Επιστροφές: 08/12, 22/12, 05/01 · Διαμονή 3 νύχτες με πρόγευμα · Ξενοδοχεία: Wyndham Wroclaw Old Town 4* / DoubleTree by Hilton Wroclaw 5*\n\nΟι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      flights: [
+        {
+          direction: 'Departure',
+          date: '05/12, 19/12, 02/01',
+          route: 'Larnaca (LCA) → Wroclaw (WRO)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'LCA',
+              fromName: 'Larnaca International Airport',
+              fromCity: 'Larnaca, Cyprus',
+              depart: '05:00',
+              toCode: 'WRO',
+              toName: 'Nicolaus Copernicus',
+              toCity: 'Wroclaw, Poland',
+              arrive: '07:45',
+              flight: 'W6 4581',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+        {
+          direction: 'Return',
+          date: '08/12, 22/12, 05/01',
+          route: 'Wroclaw (WRO) → Larnaca (LCA)',
+          luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+          legs: [
+            {
+              type: 'segment',
+              fromCode: 'WRO',
+              fromName: 'Nicolaus Copernicus',
+              fromCity: 'Wroclaw, Poland',
+              depart: '09:05',
+              toCode: 'LCA',
+              toName: 'Larnaca International Airport',
+              toCity: 'Larnaca, Cyprus',
+              arrive: '13:30',
+              flight: 'W6 4582',
+              luggage: 'Περιλαμβάνεται η μεταφορά 1 αποσκευής',
+            },
+          ],
+        },
+      ],
+      hotels: wroclawChristmasPackage396Hotels,
+      included: [
+        'Αεροπορικό εισιτήριο Λάρνακα - Βρότσλαβ - Λάρνακα με πτήσεις της Wizzair.',
+        'Φόροι αεροδρομίων και επίναυλο καυσίμων.',
+        'Διαμονή για τρία βράδια σε ξενοδοχείο της επιλογής σας με πρόγευμα.',
+        'Μία αποσκευή 10kg και ένα προσωπικό αντικείμενο.',
+        'Υπηρεσίες των αντιπροσώπων μας.',
+      ],
+      notIncluded: [
+        'Αχθοφορικά και Φιλοδωρήματα.',
+        'Ασφάλεια ταξιδιού.',
+        'Τοπικός φόρος του ξενοδοχείου, πληρώνεται επιτόπου.',
+      ],
+      notes: [
+        'Οι τιμές που αναγράφονται είναι βάση διαθεσιμότητας και ενδέχεται να αλλάξουν αναλόγως της ημέρας και της ώρας κράτησης σας.',
+      ],
+      cancellationPolicy:
+        'Σε περίπτωση ακύρωσης μέχρι 150 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση ακύρωσης μετά τις 150 ημέρες και μέχρι 0 ημέρες πριν την ημερομηνία άφιξης, 100 % της συνολικής τιμής θα χρεωθούν.\nΣε περίπτωση μη εμφάνισης 100 % της συνολικής τιμής θα χρεωθούν.',
+      termsAndConditions: [
+        'Τα πακέτα δεν ακυρώνονται και δεν επιστρέφονται χρήματα.',
+        'Οι τιμές των πακέτων ενδέχεται να αλλάζουν λόγω της διαθεσιμότητας την ώρα της κράτησης.',
+        'Πλήρης εξόφληση με την κράτηση είτε με πιστωτική κάρτα ή μεταφορά μετρητών στον λογαριασμό της εταιρίας μας ή μετρητά στο γραφείο μας.',
+      ],
+      itinerary: [],
+      program: wroclawChristmasPackage396Program,
+      gallery: [
+        '/images/christmas-packages/wroclaw-christmas/wroclaw-christmas-hero.webp',
+        '/images/christmas-packages/wroclaw-christmas/wroclaw-christmas-thumb.webp',
+        '/images/christmas-packages/wroclaw-christmas/wyndham-wroclaw-old-town.webp',
+        '/images/christmas-packages/wroclaw-christmas/doubletree-hilton-wroclaw.webp',
+      ],
+    },
+  },
+  ...springPackagesTopKinisis2027,
 ]
 
 // Helper functions
 // Seasonal categories hidden from listings until republished (remove from array to restore).
-export const EXPIRED_PACKAGE_CATEGORIES = ['Easter Packages']
+export const EXPIRED_PACKAGE_CATEGORIES = [
+  'Easter Packages',
+]
 
 /** Newer package ids supersede older duplicates (same tour, different id/category). */
 export const SUPERSEDED_PACKAGE_IDS = new Set([
@@ -27498,6 +28108,8 @@ export const SUPERSEDED_PACKAGE_IDS = new Set([
   // Removed exotic / long-haul listings (user request)
   26, 40, 43, 46, 48, 50, 52, 53, 54, 303, 323, 331,
   333, 334, 337, 338, 339, 341, 342, 343, 345, 346, 347,
+  // Previous Christmas Packages season — keep only Top Kinisis 2026 set (370, 379, 380, 392–395)
+  348, 349, 350, 367, 368, 369, 371, 372, 373, 374, 375, 376, 377, 378,
 ])
 
 function dedupePackagesByTitleDestination(packages) {

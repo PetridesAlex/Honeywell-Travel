@@ -192,12 +192,11 @@
 .tp-sidebar {
   position: sticky;
   top: calc(var(--header-height, 100px) + 0.85rem);
-  max-height: calc(100vh - var(--header-height, 100px) - 1.6rem);
-  overflow: auto;
-  padding-right: 0.2rem;
+  /* Keep the full filter panel visible — no nested sidebar scrollbar */
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
   animation: tp-rise 0.75s var(--tp-ease) 0.08s both;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(11, 31, 56, 0.25) transparent;
 }
 
 .tp-main {
@@ -262,12 +261,12 @@
 
 .tp-filters {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(250, 247, 242, 0.96) 100%);
   border: 1px solid rgba(11, 31, 56, 0.1);
-  border-radius: 18px;
-  padding: 0;
+  border-radius: 16px;
+  padding: 0 0 0.35rem;
   box-shadow:
     var(--tp-shadow-soft),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -287,8 +286,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 1.05rem 1.05rem 0.9rem;
+  gap: 0.55rem;
+  padding: 0.72rem 0.85rem 0.65rem;
   background:
     linear-gradient(160deg, rgba(11, 31, 56, 0.04) 0%, transparent 70%);
   border-bottom: 1px solid var(--tp-line);
@@ -311,7 +310,7 @@
 .tp-filters__heading {
   margin: 0;
   font-family: var(--font-serif, Georgia, serif);
-  font-size: 1.15rem;
+  font-size: 1.02rem;
   letter-spacing: -0.02em;
   color: var(--tp-navy);
   font-weight: 700;
@@ -337,20 +336,20 @@
 }
 
 .tp-filters > .tp-accordion {
-  margin: 0 0.85rem;
+  margin: 0 0.7rem;
 }
 
 .tp-filters > .tp-accordion:last-child {
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.25rem;
 }
 
 .tp-filters__search {
   width: 100%;
   border: 1px solid rgba(11, 31, 56, 0.12);
-  border-radius: 12px;
-  padding: 0.72rem 0.85rem;
+  border-radius: 10px;
+  padding: 0.5rem 0.7rem;
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   background: #fff;
   color: var(--tp-ink);
   box-shadow: inset 0 1px 2px rgba(11, 31, 56, 0.04);
@@ -376,8 +375,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.95rem 0.15rem;
+  gap: 0.5rem;
+  padding: 0.58rem 0.1rem;
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -385,7 +384,7 @@
   color: var(--tp-navy);
   font: inherit;
   font-weight: 700;
-  font-size: 0.84rem;
+  font-size: 0.74rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   transition: color 0.2s ease;
@@ -439,32 +438,32 @@
 }
 
 .tp-accordion__panel {
-  padding: 0 0 1rem;
+  padding: 0 0 0.55rem;
   animation: tp-panel-in 0.28s var(--tp-ease);
 }
 
 .tp-check-list {
   list-style: none;
   margin: 0;
-  padding: 0.15rem 0 0;
+  padding: 0.05rem 0 0;
   display: grid;
-  gap: 0.2rem;
-  max-height: 230px;
-  overflow: auto;
-  scrollbar-width: thin;
+  gap: 0.05rem;
+  /* Show every option — no nested scroll inside filters */
+  max-height: none;
+  overflow: visible;
 }
 
 .tp-check {
   display: flex;
   align-items: flex-start;
-  gap: 0.6rem;
-  font-size: 0.875rem;
+  gap: 0.45rem;
+  font-size: 0.8rem;
   font-weight: 550;
   color: var(--tp-ink);
   cursor: pointer;
-  line-height: 1.35;
-  padding: 0.38rem 0.45rem;
-  border-radius: 10px;
+  line-height: 1.25;
+  padding: 0.22rem 0.35rem;
+  border-radius: 8px;
   transition: background 0.18s ease, color 0.18s ease;
 }
 
@@ -490,21 +489,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+  gap: 0.4rem;
+  font-size: 0.8rem;
   font-weight: 750;
   color: var(--tp-navy);
-  margin-bottom: 0.7rem;
-  padding: 0.55rem 0.7rem;
-  border-radius: 10px;
+  margin-bottom: 0.4rem;
+  padding: 0.38rem 0.55rem;
+  border-radius: 8px;
   background: linear-gradient(135deg, rgba(11, 31, 56, 0.04), rgba(196, 18, 48, 0.05));
   border: 1px solid rgba(11, 31, 56, 0.06);
 }
 
 .tp-price__sliders {
   display: grid;
-  gap: 0.4rem;
-  padding: 0 0.15rem;
+  gap: 0.25rem;
+  padding: 0 0.1rem;
 }
 
 .tp-price__sliders input[type='range'] {
@@ -892,7 +891,35 @@
 .tp-card__top {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.5rem;
+}
+
+.tp-card__flags {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tp-card__flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  line-height: 1;
+  background: #fff;
+  border: 1px solid rgba(11, 31, 56, 0.1);
+  box-shadow: 0 2px 8px rgba(11, 31, 56, 0.06);
+}
+
+.tp-card__flag--type {
+  background: linear-gradient(145deg, rgba(196, 18, 48, 0.08), rgba(11, 31, 56, 0.05));
+}
+
+.tp-card__flag--destination {
+  background: linear-gradient(145deg, rgba(11, 31, 56, 0.06), rgba(201, 162, 39, 0.08));
 }
 
 .tp-card__meta {
@@ -902,7 +929,7 @@
   align-items: center;
   gap: 0.4rem 0.5rem;
   font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1.35;
 }
@@ -923,22 +950,22 @@
 .tp-card__destination {
   color: var(--tp-muted);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 }
 
 .tp-card__title {
   margin: 0;
-  font-family: var(--font-serif, Georgia, serif);
-  font-size: 1.08rem;
-  line-height: 1.32;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 1.02rem;
+  line-height: 1.35;
   color: var(--tp-navy);
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  font-weight: 650;
+  letter-spacing: -0.01em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: calc(1.32em * 2);
+  min-height: calc(1.35em * 2);
 }
 
 .tp-card__facts {
@@ -1169,7 +1196,8 @@
 .tp-card--list .tp-card__title {
   min-height: 0;
   -webkit-line-clamp: 3;
-  font-size: 1.2rem;
+  font-size: 1.08rem;
+  font-weight: 650;
 }
 
 .tp-card--list .tp-card__facts {

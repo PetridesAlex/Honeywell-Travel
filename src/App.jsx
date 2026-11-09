@@ -7,7 +7,7 @@ import Preloader from './components/Preloader'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import FloatingContactDock from './components/FloatingContactDock'
-import AutumnLeaves from './components/AutumnLeaves'
+import ChristmasSnow from './components/ChristmasSnow'
 import { FavoritesProvider } from './context/FavoritesContext'
 import Home from './pages/Home'
 import Blog from './pages/Blog'
@@ -288,7 +288,7 @@ function App() {
       <Preloader loading={loading}>
         <FavoritesProvider>
           <AppShell>
-            {!loading ? <AutumnLeaves /> : null}
+            {!loading ? <ChristmasSnow /> : null}
             <AppContent />
             {!loading ? <FloatingContactDock /> : null}
           </AppShell>

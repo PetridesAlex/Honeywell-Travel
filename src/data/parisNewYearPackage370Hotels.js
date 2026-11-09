@@ -1,11 +1,11 @@
-// Hotel inventory & tariffs for package 370 (ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΟ ΠΑΡΙΣΙ - ΛΟΥΒΡΟ ΜΟΝΜΑΡΤΗ)
+/** Hotel inventory & tariffs for package 370 (ΠΡΩΤΟΧΡΟΝΙΑ ΣΤΟ ΠΑΡΙΣΙ - ΛΟΥΒΡΟ ΜΟΝΜΑΡΤΗ) */
 const IMG = {
-  hotel: '/images/christmas-packages/paris-luvro-christmas/paris-luvro-hotel.webp'
+  hotel: '/images/christmas-packages/paris-luvro-christmas/paris-luvro-hotel.webp',
 }
 
 export const parisNewYearPackage370Hotels = [
   {
-    name: '4* Hotel - Paris',
+    name: 'Novotel La Defense 4*',
     stars: 4,
     roomType: 'Standard Room',
     image: IMG.hotel,
@@ -14,6 +14,6 @@ export const parisNewYearPackage370Hotels = [
     prices: { double: 995, single: 1239, child1: 829, child2: 829 },
     packagePrice: 1990,
     departureDate: '01/01',
-    nights: 3
-  }
+    nights: 3,
+  },
 ]

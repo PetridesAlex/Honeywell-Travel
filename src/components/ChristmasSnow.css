@@ -1,0 +1,234 @@
+.christmas-snow {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout style paint;
+}
+
+/* ---- Snowflakes ---- */
+.christmas-flake {
+  --flake-size: 8px;
+  --flake-delay: calc(var(--flake-i) * -0.42s);
+  --flake-duration: calc(7.2s + (var(--flake-i) * 0.22s));
+  --flake-x: calc((var(--flake-i) * 1.78%) + 0.4%);
+  --flake-drift: calc(28px + (var(--flake-i) * 2.1px));
+  --flake-spin: calc(160deg + (var(--flake-i) * 31deg));
+  --flake-fall: 115vh;
+
+  position: absolute;
+  top: -28px;
+  left: var(--flake-x);
+  width: var(--flake-size);
+  height: var(--flake-size);
+  opacity: 0;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  animation: christmasFlakeFall var(--flake-duration) linear var(--flake-delay) infinite;
+}
+
+.christmas-flake--powder {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #eef4fb 50%, rgba(226, 232, 240, 0.7) 100%);
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.85),
+    0 0 18px rgba(226, 232, 240, 0.35);
+}
+
+.christmas-flake--crystal {
+  background: transparent;
+  box-shadow: none;
+}
+
+.christmas-flake--crystal::before,
+.christmas-flake--crystal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #ffffff, rgba(186, 210, 240, 0.85));
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.65);
+}
+
+.christmas-flake--crystal::before {
+  width: 18%;
+  left: 41%;
+  top: 0;
+  bottom: 0;
+}
+
+.christmas-flake--crystal::after {
+  height: 18%;
+  top: 41%;
+  left: 0;
+  right: 0;
+}
+
+.christmas-flake--spark {
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #fff7ed 0%, #fbbf24 40%, #ef4444 100%);
+  box-shadow:
+    0 0 12px rgba(251, 191, 36, 0.85),
+    0 0 22px rgba(239, 68, 68, 0.35);
+  --flake-size: 5px;
+  --flake-duration: calc(6.2s + (var(--flake-i) * 0.18s));
+}
+
+.christmas-flake--near {
+  --flake-size: 12px;
+  filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.16));
+}
+
+.christmas-flake--mid {
+  --flake-size: 8px;
+}
+
+.christmas-flake--far {
+  --flake-size: 5px;
+  --flake-duration: calc(10.5s + (var(--flake-i) * 0.32s));
+  filter: blur(0.4px);
+}
+
+.christmas-flake--near.christmas-flake--crystal {
+  --flake-size: 14px;
+}
+
+.christmas-flake--far.christmas-flake--crystal {
+  --flake-size: 7px;
+}
+
+@keyframes christmasFlakeFall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.95;
+  }
+  30% {
+    transform: translate3d(var(--flake-drift), 28vh, 0) rotate(calc(var(--flake-spin) * 0.4)) scale(1.05);
+    opacity: 0.92;
+  }
+  62% {
+    transform: translate3d(calc(var(--flake-drift) * -0.7), 66vh, 0) rotate(calc(var(--flake-spin) * 1.1))
+      scale(1);
+    opacity: 0.78;
+  }
+  100% {
+    transform: translate3d(calc(var(--flake-drift) * 0.45), var(--flake-fall), 0)
+      rotate(calc(var(--flake-spin) * 1.75)) scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* ---- Christmas trees (CSS) ---- */
+.christmas-tree {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: 50% 100%;
+}
+
+.christmas-tree::before,
+.christmas-tree::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* layered cones */
+.christmas-tree::before {
+  width: 0;
+  height: 0;
+  border-left: calc(var(--tree-w) * 0.5) solid transparent;
+  border-right: calc(var(--tree-w) * 0.5) solid transparent;
+  border-bottom: calc(var(--tree-h) * 0.72) solid #166534;
+  top: 18%;
+  filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.22));
+  background:
+    radial-gradient(circle at 32% 42%, #fbbf24 0 2px, transparent 2.5px),
+    radial-gradient(circle at 68% 55%, #ef4444 0 2px, transparent 2.5px),
+    radial-gradient(circle at 48% 70%, #fde68a 0 1.8px, transparent 2.2px);
+}
+
+.christmas-tree::after {
+  width: calc(var(--tree-w) * 0.16);
+  height: calc(var(--tree-h) * 0.18);
+  background: linear-gradient(180deg, #92400e, #78350f);
+  bottom: 0;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(120, 53, 15, 0.25);
+}
+
+.christmas-tree--float {
+  --tree-w: 28px;
+  --tree-h: 40px;
+  top: -48px;
+  left: calc((var(--tree-i) * 18%) + 8%);
+  width: var(--tree-w);
+  height: var(--tree-h);
+  opacity: 0;
+  animation: christmasTreeFall calc(14s + (var(--tree-i) * 1.4s)) linear calc(var(--tree-i) * -2.1s) infinite;
+  filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.2));
+}
+
+.christmas-tree--float::before {
+  border-bottom-color: #16a34a;
+  top: 12%;
+}
+
+.christmas-tree--float-1 {
+  --tree-w: 26px;
+  --tree-h: 36px;
+}
+
+.christmas-tree--float-2 {
+  --tree-w: 32px;
+  --tree-h: 44px;
+  left: calc((var(--tree-i) * 18%) + 22%);
+}
+
+.christmas-tree--float-3 {
+  --tree-w: 24px;
+  --tree-h: 34px;
+  left: calc((var(--tree-i) * 18%) + 55%);
+}
+
+@keyframes christmasTreeFall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(-8deg) scale(0.9);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.88;
+  }
+  50% {
+    transform: translate3d(36px, 55vh, 0) rotate(10deg) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(-20px, 115vh, 0) rotate(-14deg) scale(0.85);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .christmas-flake--extra {
+    display: none;
+  }
+
+  .christmas-flake--near {
+    --flake-size: 9px;
+  }
+
+  .christmas-tree--float {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .christmas-snow {
+    display: none;
+  }
+}
