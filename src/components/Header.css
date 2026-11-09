@@ -2742,22 +2742,36 @@
   }
 
   .tagline-bar {
-    padding: 0.35rem 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
+    column-gap: 0.65rem;
+    row-gap: 0.15rem;
+    padding: 0.4rem max(0.75rem, env(safe-area-inset-right)) 0.4rem max(0.75rem, env(safe-area-inset-left));
   }
 
-  .tagline-brand {
+  .tagline-right-controls {
+    position: static;
+    top: auto;
+    right: auto;
+    transform: none;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .tagline-bar .tagline-brand {
     position: static;
     left: auto;
     top: auto;
     transform: none;
-    flex: 0 1 auto;
-    min-width: 0;
-    max-width: 48%;
+    flex: 0 0 auto;
+    min-width: max-content;
+    max-width: 100%;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+    letter-spacing: clamp(0.03em, 0.35vw, 0.08em);
   }
 
   .tagline-christmas-tree {
@@ -2765,14 +2779,17 @@
     height: 22px;
   }
 
-  .tagline-text {
-    margin-left: auto;
+  .tagline-bar .tagline-text {
+    margin-left: 0;
     text-align: right;
     flex: 0 1 auto;
-    min-width: 0;
-    max-width: 58%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    min-width: max-content;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-size: clamp(0.75rem, 2.35vw, 1.05rem);
+    letter-spacing: clamp(0.04em, 0.45vw, 0.16em);
   }
 
   .header-mobile-actions {
@@ -2816,37 +2833,43 @@
   }
 
   .tagline-bar {
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem max(0.75rem, env(safe-area-inset-right)) 0.4rem max(0.75rem, env(safe-area-inset-left));
     justify-content: space-between;
-    gap: 0.5rem;
+    column-gap: 0.55rem;
+    row-gap: 0.12rem;
   }
 
-  .tagline-text {
-    font-size: 1rem;
-    letter-spacing: 0.18em;
-    margin-left: auto;
+  .tagline-bar .tagline-text {
+    font-size: clamp(0.72rem, 3.1vw, 0.95rem);
+    letter-spacing: clamp(0.035em, 0.4vw, 0.1em);
+    margin-left: 0;
     text-align: right;
     white-space: nowrap;
     flex: 0 1 auto;
-    min-width: 0;
-    max-width: 58%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    min-width: max-content;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
   }
 
-  .tagline-brand {
-    font-size: 0.9375rem;
-    letter-spacing: 0.08em;
+  .tagline-bar .tagline-brand {
+    font-size: clamp(0.72rem, 3.35vw, 0.9rem);
+    letter-spacing: clamp(0.025em, 0.28vw, 0.06em);
     position: static;
     left: auto;
     top: auto;
     transform: none;
-    flex: 0 1 auto;
-    min-width: 0;
-    max-width: 42%;
+    flex: 0 0 auto;
+    min-width: max-content;
+    max-width: 100%;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .tagline-christmas-tree {
+    width: 16px;
+    height: 20px;
   }
 
   .header-container {
@@ -2924,24 +2947,39 @@
   }
 
   .tagline-bar {
-    padding: 0.3rem 0.65rem;
+    padding: 0.35rem max(0.65rem, env(safe-area-inset-right)) 0.35rem max(0.65rem, env(safe-area-inset-left));
     justify-content: space-between;
-    gap: 0.45rem;
+    column-gap: 0.4rem;
+    row-gap: 0.1rem;
   }
 
-  .tagline-text {
-    font-size: 0.8125rem;
-    letter-spacing: 0.1em;
+  .tagline-bar .tagline-text {
+    font-size: clamp(0.75rem, 3.2vw, 0.9rem);
+    letter-spacing: clamp(0.02em, 0.28vw, 0.05em);
     margin-left: auto;
+    padding-right: 0.12em;
     text-align: right;
     white-space: nowrap;
-    max-width: 62%;
+    flex: 0 1 auto;
+    min-width: max-content;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
   }
 
-  .tagline-brand {
-    font-size: 0.8125rem;
-    letter-spacing: 0.05em;
-    max-width: 38%;
+  .tagline-bar .tagline-brand {
+    font-size: clamp(0.78rem, 3.6vw, 0.92rem);
+    letter-spacing: clamp(0.02em, 0.25vw, 0.045em);
+    flex: 0 0 auto;
+    min-width: max-content;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .tagline-christmas-tree {
+    width: 16px;
+    height: 20px;
   }
 
   .header-container {
