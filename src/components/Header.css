@@ -548,9 +548,10 @@
 }
 
 .header-container {
+  --header-pad-x: 20px;
   max-width: none;
   margin: 0;
-  padding: 0.35rem 20px 0;
+  padding: 0.35rem var(--header-pad-x) 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -925,17 +926,17 @@
   flex: 0 0 auto;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 0;
-  width: 100%;
-  padding: 0.55rem 0.5rem 0.65rem;
+  margin: 0 calc(var(--header-pad-x) * -1);
+  width: auto;
+  padding: 0.62rem var(--header-pad-x) 0.68rem;
   max-width: none;
   min-width: 0;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.22) 0%, rgba(2, 6, 23, 0.08) 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, #16345a 0%, #0c2038 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 0;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 -10px 22px rgba(2, 6, 23, 0.18);
   overflow: visible;
   position: relative;
   z-index: 2;
@@ -1203,6 +1204,108 @@
   border-color: rgba(255, 255, 255, 0.5);
 }
 
+/* Black Friday – animated cruise campaign CTA */
+.nav-link-black-friday {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.44rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff !important;
+  background:
+    linear-gradient(135deg, #111827 0%, #1f2937 42%, #7f1d1d 100%);
+  border: 1px solid rgba(250, 204, 21, 0.55);
+  box-shadow:
+    0 6px 18px rgba(127, 29, 29, 0.35),
+    0 0 0 1px rgba(196, 18, 48, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.nav-link-black-friday::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 12%,
+    rgba(250, 204, 21, 0.28) 46%,
+    transparent 78%
+  );
+  transform: translateX(-130%);
+  animation: blackFridayShimmer 3.4s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nav-link-black-friday::after {
+  display: none;
+}
+
+.nav-link-black-friday-dot,
+.nav-link-black-friday-text {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-link-black-friday-dot {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.55);
+  animation: blackFridayPulse 1.8s ease-out infinite;
+}
+
+.nav-link-black-friday:hover {
+  transform: translateY(-2px);
+  color: #fff !important;
+  background:
+    linear-gradient(135deg, #0f172a 0%, #1e293b 36%, #c41230 100%);
+  border-color: rgba(250, 204, 21, 0.85);
+  box-shadow:
+    0 10px 26px rgba(127, 29, 29, 0.45),
+    0 0 0 1px rgba(196, 18, 48, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+@keyframes blackFridayShimmer {
+  0%,
+  18% {
+    transform: translateX(-130%);
+  }
+  48%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes blackFridayPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(250, 204, 21, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link-black-friday::before,
+  .nav-link-black-friday-dot,
+  .mobile-link-black-friday-dot {
+    animation: none;
+  }
+}
+
 .add-package-link {
   background: rgba(255, 255, 255, 0.2);
   padding: 0.4rem 0.8rem;
@@ -1286,8 +1389,7 @@
 
 @media (min-width: 1280px) {
   .header-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    --header-pad-x: 2rem;
   }
 
   .header-top-row {
@@ -1296,7 +1398,8 @@
 
   .nav {
     gap: 0.4rem 0.55rem;
-    padding: 0.6rem 0.75rem 0.7rem;
+    padding-top: 0.66rem;
+    padding-bottom: 0.72rem;
   }
 
   .nav-link {
@@ -1307,8 +1410,7 @@
 
 @media (max-width: 1500px) {
   .header-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    --header-pad-x: 1rem;
   }
 
   .header-top-row {
@@ -1381,7 +1483,8 @@
 
   .nav {
     gap: 0.3rem 0.4rem;
-    padding: 0.5rem 0.35rem 0.6rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.62rem;
   }
 
   .nav-link {
@@ -2225,6 +2328,62 @@
 }
 
 .mobile-link.mobile-cruises-cta:hover .mobile-cruises-cta-arrow {
+  transform: translateX(4px);
+}
+
+.mobile-link.mobile-link-black-friday {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.96) 0%, rgba(127, 29, 29, 0.92) 100%);
+  border: 1px solid rgba(250, 204, 21, 0.55);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 18px rgba(127, 29, 29, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-link.mobile-link-black-friday::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 15%, rgba(250, 204, 21, 0.22) 48%, transparent 78%);
+  transform: translateX(-130%);
+  animation: blackFridayShimmer 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.mobile-link.mobile-link-black-friday:hover {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(196, 18, 48, 0.95) 100%);
+  border-color: rgba(250, 204, 21, 0.8);
+  box-shadow: 0 12px 22px rgba(127, 29, 29, 0.38);
+}
+
+.mobile-link-black-friday-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.55);
+  animation: blackFridayPulse 1.8s ease-out infinite;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-link-black-friday-arrow {
+  margin-left: auto;
+  font-size: 1rem;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s ease;
+}
+
+.mobile-link.mobile-link-black-friday:hover .mobile-link-black-friday-arrow {
   transform: translateX(4px);
 }
 

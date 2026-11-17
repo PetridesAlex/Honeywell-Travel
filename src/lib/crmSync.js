@@ -1,6 +1,7 @@
 const SOURCE_TRAVEL_TYPE = {
   'Package Form': 'package',
   'Cruise Form': 'cruise',
+  'Black Friday Cruises': 'cruise',
   'Contact Form': 'other',
   'Book Online': 'flight',
   Website: 'other',

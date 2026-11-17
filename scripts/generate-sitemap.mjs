@@ -44,6 +44,7 @@ const FEATURED = [
   ['/honeymoon-trips', 'weekly', '0.9'],
   ['/dmc-cyprus', 'weekly', '0.9'],
   ['/cruises', 'weekly', '0.9'],
+  ['/black-friday-cruises', 'daily', '0.9'],
   ['/contact', 'weekly', '0.9'],
 ]
 

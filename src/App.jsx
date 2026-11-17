@@ -28,6 +28,7 @@ import BookOnline from './pages/BookOnline'
 import BuildYourTrip from './pages/BuildYourTrip'
 import ParisLastMinuteFlights from './pages/ParisLastMinuteFlights'
 import Cruises from './pages/Cruises'
+import BlackFridayCruises from './pages/BlackFridayCruises'
 import OurWorld from './pages/OurWorld'
 import BlogPostDetail from './pages/BlogPostDetail'
 import FlightTickets from './pages/FlightTickets'
@@ -152,6 +153,8 @@ function AppContent() {
           <Route path="/packages/:id" element={<PackageDetail />} />
           <Route path="/packages/:id/details" element={<PackageFullDetail />} />
           <Route path="/cruises" element={<Cruises />} />
+          <Route path="/black-friday-cruises" element={<BlackFridayCruises />} />
+          <Route path="/black-friday-cruises/" element={<BlackFridayCruises />} />
           <Route path="/add-package" element={<AddPackage />} />
           <Route path="/gift-vouchers" element={<GiftVoucher />} />
           <Route path="/holiday-types" element={<HolidayTypes />} />

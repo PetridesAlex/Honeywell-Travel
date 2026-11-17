@@ -481,6 +481,17 @@ function Header() {
             )}
           </div>
 
+          <Link
+            to="/black-friday-cruises"
+            className="nav-link nav-link-black-friday"
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+            }}
+          >
+            <span className="nav-link-black-friday-dot" aria-hidden="true" />
+            <span className="nav-link-black-friday-text">{t('header.blackFriday')}</span>
+          </Link>
+
           <div
             className="nav-dropdown nav-dropdown-right"
             onMouseEnter={() => handleDropdownEnter('inspiration')}
@@ -625,6 +636,15 @@ function Header() {
 
                 <Link to="/our-services/" className="mobile-link" onClick={closeMobileMenu}>{t('header.corporate')}</Link>
                 <Link to="/dmc-cyprus" className="mobile-link" onClick={closeMobileMenu}>{t('header.dmcServices')}</Link>
+                <Link
+                  to="/black-friday-cruises"
+                  className="mobile-link mobile-link-black-friday"
+                  onClick={closeMobileMenu}
+                >
+                  <span className="mobile-link-black-friday-dot" aria-hidden="true" />
+                  <span>{t('header.blackFriday')}</span>
+                  <span className="mobile-link-black-friday-arrow" aria-hidden="true">→</span>
+                </Link>
                 <a
                   href="https://summerautos.com/"
                   className="mobile-link"

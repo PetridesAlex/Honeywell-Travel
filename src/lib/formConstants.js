@@ -17,6 +17,7 @@ export const FORM_TYPES = {
   HONEYMOON: 'honeymoon',
   FLIGHT_BOOKING: 'flight_booking',
   CRUISE: 'cruise',
+  BLACK_FRIDAY_CRUISE: 'black_friday_cruise',
   DMC: 'dmc',
   CORPORATE: 'corporate',
   HOTEL_QUOTE: 'hotel_quote',
